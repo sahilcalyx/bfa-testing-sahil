@@ -1,0 +1,10 @@
+# MongoDB Connection
+MONGODB_URI=mongodb://localhost:27017/bfa_db
+
+# Zoho SMTP Configuration (Replace with your actual credentials)
+ZOHO_EMAIL=marketing@calyx-solutions.com
+ZOHO_PASSWORD=ZmVmzcDv7zUm
+
+
+# NextAuth Secret
+NEXTAUTH_SECRET=changeme_to_something_secure_random

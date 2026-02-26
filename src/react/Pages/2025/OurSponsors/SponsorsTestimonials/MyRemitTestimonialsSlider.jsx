@@ -1,0 +1,143 @@
+import React, { useRef } from "react";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+const MyRemitTestimonialsSlider = () => {
+  const sliderRef = useRef(null);
+
+  const testimonials = [
+    {
+      id: 1,
+      text: `MyRemit staff were very helpful. Everything was simple, website was easy to use and clear. It was recommended by a friend, and as she said the best exchange and fees around today. I received a text within minutes of the money paid out, which saves the costs of international call to see if my family received the money.`,
+      name: "Awa",
+      designation: "- UAE",
+    },
+    {
+      id: 2,
+      text: `Super easy and fast, my father received the money within minutes.`,
+      name: "Mohamed",
+      designation: "- UK",
+    },
+
+    {
+      id: 3,
+      text: `It was easy, fast and hassle free. I’d highly recommend it and I will be using MyRemit services more often.`,
+      name: "Ariana",
+      designation: "- UK",
+    },
+    
+  ];
+
+  const sliderSettings = {
+    autoplay: true,
+    autoplaySpeed: 3000,
+    infinite: true,
+    speed: 600,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+    dots: false,
+  };
+
+  return (
+    <div className="container">
+      <div className="row">
+        {/* Left Section */}
+        <div
+          className="col-lg-5 wow fadeIn"
+          data-wow-duration="1s"
+          data-wow-delay="0.2s"
+        >
+          <div className="cs-vertical_middle">
+            <div className="cs-vertical_middle_in">
+              <div
+                className="cs-section_heading cs-style2"
+                style={{ textAlign: "left" }}
+              >
+                <div className="cs-section_subtitle cs-primary_font cs-medium cs-accent_color">
+                  Our Testimonials
+                </div>
+                <h2 className="cs-section_title cs-extra_bold">
+                  What Our <br />
+                  <span>
+                    <b
+                      className="cs-extra_bold cs-accent_color"
+                      style={{ color: "#c8102e" }}
+                    >
+                      Customers
+                    </b>
+                  </span>
+                </h2>
+                <h2 className="cs-section_title cs-extra_bold">Say</h2>
+                <div className="cs-height_30 cs-height_lg_0"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Section with Slider */}
+        <div
+          className="col-lg-7 wow fadeIn"
+          data-wow-duration="1s"
+          data-wow-delay="0.3s"
+        >
+          <div className="cs-shape_bg cs-style1">
+            <div className="cs-height_100 cs-height_lg_10"></div>
+            <Slider {...sliderSettings} ref={sliderRef} className="cs-slider">
+              {testimonials.map((testimonial, index) => (
+                <div className="cs-slide" key={index}>
+                  <div
+                    className="cs-testimonial cs-style1"
+                    style={{ textAlign: "left" }}
+                  >
+                    <div
+                      className="cs-testimonial_icon cs-accent_color"
+                      style={{ rotate: "180deg" }}
+                    >
+                      <i className="fas fa-quote-left"></i>
+                    </div>
+                    <div className="cs-testimonial_info">
+                      <div className="cs-testimonial_meta">
+                        <h3 className="cs-testimonial_avatar_name">
+                          {testimonial.name}
+                        </h3>
+                        <div className="cs-testimonial_avatar_designation">
+                          {testimonial.designation}
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      style={{
+                        textDecoration: "none",
+                        textTransform: "capitalize",
+                      }}
+                      dangerouslySetInnerHTML={{ __html: testimonial.text }}
+                    ></div>
+                  </div>
+                </div>
+              ))}
+            </Slider>
+            {/* Custom arrow controls */}
+            <div className="cs-slider_arrows cs-style1 cs-type6 cs-center">
+              <div
+                className="cs-left_arrow cs-center cs-accent_color_2 slick-arrow"
+                onClick={() => sliderRef.current.slickPrev()} // Previous slide
+              >
+                <i className="fas fa-angle-left" />
+              </div>
+              <div
+                className="cs-right_arrow cs-center cs-accent_color_2 slick-arrow"
+                onClick={() => sliderRef.current.slickNext()} // Next slide
+              >
+                <i className="fas fa-angle-right" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default MyRemitTestimonialsSlider;

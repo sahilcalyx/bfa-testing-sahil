@@ -1,0 +1,710 @@
+﻿<!DOCTYPE html PUBLIC"- //W3C//DTD XHTML 1.0 Transitional //EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml"
+      xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+    <!--[if gte mso 9]>
+    <xml>
+        <o:OfficeDocumentSettings>
+        <o:AllowPNG/>
+        <o:PixelsPerInch>96</o:PixelsPerInch>
+        </o:OfficeDocumentSettings>
+    </xml>
+    <![endif]-->
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="format-detection" content="date=no" />
+    <meta name="format-detection" content="address=no" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="x-apple-disable-message-reformatting" />
+    <!--[if !mso]><!-->
+    <!--<![endif]-->
+    <title>Download Images</title>
+    <!--[if gte mso 9]>
+    <style type="text/css" media="all">
+        sup { font-size: 100% !important; }
+    </style>
+    <![endif]-->
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400&display=swap" rel="stylesheet" />
+    <style>
+        #outlook a {
+            padding: 0
+        }
+
+        .ReadMsgBody {
+            width: 100%
+        }
+
+        .ExternalClass {
+            width: 100%
+        }
+
+            .ExternalClass,
+            .ExternalClass div,
+            .ExternalClass font,
+            .ExternalClass p,
+            .ExternalClass span,
+            .ExternalClass td {
+                line-height: 100%
+            }
+
+        a,
+        body,
+        table,
+        td {
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%
+        }
+
+        table,
+        td {
+            mso-table-lspace: 0pt;
+            mso-table-rspace: 0pt
+        }
+
+        img {
+            -ms-interpolation-mode: bicubic;
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: pixelated;
+            -webkit-backface-visibility: hidden;
+            -ms-transform: translateZ(0);
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+            image-rendering: -webkit-optimize-contrast;
+            -ms-interpolation-mode: nearest-neighbor
+        }
+
+        body {
+            padding: 0 !important;
+            margin: 0 !important;
+            display: block !important;
+            min-width: 100% !important;
+            width: 100% !important;
+            background: #F2F2F2;
+            -webkit-text-size-adjust: none;
+            font-family: 'Roboto Condensed', sans-serif;
+        }
+
+        .mainbody {
+            padding: 0 !important;
+            margin: 0 !important;
+            display: block !important;
+            min-width: 100% !important;
+            width: 100% !important;
+            background: #F2F2F2;
+            -webkit-text-size-adjust: none;
+        }
+
+        a {
+            color: #010057;
+            text-decoration: none
+        }
+
+        p {
+            padding: 0 !important;
+            margin: 0 !important
+        }
+
+        img {
+            -ms-interpolation-mode: bicubic;
+            /* Allow smoother rendering of resized image in Internet Explorer */
+        }
+
+        .headertext {
+            color: #010057;
+            font-family: 'Roboto Condensed', sans-serif;
+            font-size: 14px;
+            line-height: 30px;
+            text-align: center;
+            padding: 5px 0px;
+            border-bottom: 1px solid #ebebeb;
+            background-color: #f7f9f9;
+        }
+
+        .firstmsgbox {
+            background-color: #F2F2F2;
+            padding: 20px 10px;
+            border-radius: 10px;
+            background-position: center center;
+            /* Center the image */
+            background-repeat: no-repeat;
+            /* Do not repeat the image */
+            background-size: cover;
+            /* Resize the background image to cover the entire container */
+        }
+
+        .bg {
+            /* background-color: #009223; */
+            /* border-radius: 0 0 10px 10px; */
+            background-position: center center;
+            /* Center the image */
+            background-repeat: no-repeat;
+            /* Do not repeat the image */
+            background-size: cover;
+            /* Resize the background image to cover the entire container */
+        }
+
+        .subheadertext {
+            color: #010057;
+            font-family: 'Roboto Condensed', sans-serif;
+            font-size: 16px;
+            line-height: 30px;
+            text-align: center;
+            padding-bottom: 20px;
+        }
+
+        .subtext {
+            font-size: 20px;
+            line-height: 30px;
+            text-align: center;
+        }
+
+        .mcnPreviewText {
+            display: none !important;
+        }
+
+        .text-footer2 a {
+            color: #ffffff;
+        }
+
+        .box {
+            display: inline-block;
+            position: relative;
+            vertical-align: middle;
+            padding-top: 20px;
+        }
+
+        .box_center {
+            display: inline-block;
+            position: relative;
+            padding-top: 5px;
+        }
+
+        .highlight-color {
+            color: #010057;
+            font-weight: bold;
+        }
+
+        .border {
+            border-radius: 10px 10px 0px 0px;
+        }
+
+        .valuehighlight {
+            color: #1e52bd;
+            font-family: 'Roboto Condensed', sans-serif;
+            font-size: 23px;
+            line-height: 30px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .tableborder {
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px solid #f8f8ff;
+            border-radius: 10px;
+            padding: 7px;
+            background-color: #f8f8ff;
+        }
+
+            .tableborder tr td {
+                padding: 10px;
+                border: 2px solid #fff;
+            }
+
+        .bgbox {
+            border: 1px solid #f8f8ff;
+            border-radius: 10px;
+            background-color: #f8f8ff;
+        }
+
+        .flaglogo {
+            width: 50px;
+            height: 50px;
+            border-radius: 100%;
+        }
+
+        .displaynone {
+            display: none;
+        }
+
+        .footer1 {
+            background-color: #f2f2f2;
+        }
+
+        .footer {
+            color: #000;
+            font-size: 10px;
+            line-height: 22px;
+            text-align: center;
+            /*text-transform: capitalize;*/
+        }
+
+            .footer a {
+                color: #e7e7fe;
+            }
+
+        .gridtitle {
+            background-color: #010057;
+            padding: 10px;
+            padding-bottom: 10px;
+            border-radius: 7px;
+        }
+
+        /* Mobile styles */
+
+        @media only screen and (max-device-width: 480px), only screen and (max-width: 480px) {
+            .subtext {
+                font-size: 16px;
+                line-height: 30px;
+                text-align: center;
+            }
+
+            .mobile-shell {
+                width: 100% !important;
+                min-width: 100% !important;
+            }
+
+            .m-center {
+                text-align: center !important;
+            }
+
+            .m-left {
+                text-align: left !important;
+                margin-right: auto !important;
+            }
+
+            .center {
+                margin: 0 auto !important;
+            }
+
+            .content2 {
+                padding: 8px 15px 12px !important;
+            }
+
+            .t-left {
+                float: left !important;
+                margin-right: 30px !important;
+            }
+
+            .t-left-2 {
+                float: left !important;
+            }
+
+            .td {
+                width: 100% !important;
+                min-width: 100% !important;
+            }
+
+            .content {
+                padding: 30px 15px !important;
+            }
+
+            .section {
+                padding: 30px 15px 0px !important;
+            }
+
+            .m-br-15 {
+                height: 15px !important;
+            }
+
+            .mpb5 {
+                padding-bottom: 5px !important;
+            }
+
+            .mpb15 {
+                padding-bottom: 15px !important;
+            }
+
+            .mpb20 {
+                padding-bottom: 20px !important;
+            }
+
+            .mpb30 {
+                padding-bottom: 30px !important;
+            }
+
+            .mp30 {
+                padding-bottom: 30px !important;
+            }
+
+            .m-padder {
+                padding: 0px 15px !important;
+            }
+
+            .m-padder2 {
+                padding-left: 15px !important;
+                padding-right: 15px !important;
+            }
+
+            .p70 {
+                padding: 30px 0px !important;
+            }
+
+            .pt70 {
+                padding-top: 30px !important;
+            }
+
+            .p0-15 {
+                padding: 0px 15px !important;
+            }
+
+            .p30-15 {
+                padding: 30px 15px !important;
+            }
+
+            .p30-15-0 {
+                padding: 10px 15px 0px 15px !important;
+            }
+
+            .p0-15-30 {
+                padding: 20px 15px 30px 15px !important;
+            }
+
+            .text-footer {
+                text-align: center !important;
+            }
+
+            .m-td,
+            .m-hide {
+                display: none !important;
+                width: 0 !important;
+                height: 0 !important;
+                font-size: 0 !important;
+                line-height: 0 !important;
+                min-height: 0 !important;
+            }
+
+            .m-block {
+                display: block !important;
+            }
+
+            .fluid-img img {
+                width: 100% !important;
+                max-width: 100% !important;
+                height: auto !important;
+            }
+
+            .column,
+            .column-dir,
+            .column-top,
+            .column-empty,
+            .column-top-30,
+            .column-top-60,
+            .column-empty2,
+            .column-bottom {
+                float: left !important;
+                width: 100% !important;
+                display: block !important;
+            }
+
+            .column-empty {
+                padding-bottom: 15px !important;
+            }
+
+            .column-empty2 {
+                padding-bottom: 30px !important;
+            }
+
+            .content-spacing {
+                width: 15px !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="body mainbody">
+    <table width="100%" style="width:100%;" height="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#FFF4F4">
+        <tr>
+            <td align="center" valign="top">
+                <!-- Main -->
+                <table width="700" border="0" cellspacing="0" cellpadding="0" class="mobile-shell">
+                    <tr>
+                        <td class="td"
+                            style="width:700px; min-width:700px; font-size:0pt; line-height:0pt; padding:0; margin:0; font-weight:normal;">
+                            <!-- Header -->
+                            <table width="100%" style="width:100%;" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td class="p30-15" style="padding: 20px 0px 20px 0px;">
+                                        <table width="100%" style="width:100%;" border="0" cellspacing="0" cellpadding="0">
+                                            <tr>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td bgcolor="#fff" class="p30-15 img-center bg" background="[company_website_src]bfa-sponsorship-bg.png"
+                                        style="padding: 0px; border-radius: 5px 5px 0px 0px; font-size:0pt; line-height:0pt; text-align:center;border-bottom:1px solid #ebebeb;">
+                                        <a href="#" target="_blank">
+                                            <!--<img src="[company_website_src]bfa-logo-white.png" editable="true" border="0" alt="" style="image-rendering: auto !important; max-width: 90px; -webkit-filter: brightness(10%) invert(100%); filter: brightness(10%) invert(100%);" />-->
+                                            <img src="[company_website_src]BFA-25-Email-Banner.png" editable="true" border="0" alt="" style="image-rendering: auto !important;" />
+                                        </a>
+                                    </td>
+                                </tr>
+                                <!--<tr>
+                                    <td class="text-nav-white headertext">
+                                        <h2><img src="new-login.png" editable="true" border="0" alt="" style="image-rendering:auto!important;max-width:25px;width:25px;"/>&ensp;New Login Detected</h2>
+                                    </td>
+                                </tr>-->
+                                <!-- END Nav -->
+                            </table>
+                            <!-- END Header -->
+
+                            <repeater>
+                                <!-- Section 2 -->
+                                <layout label="Section 2">
+                                    <table width="100%" style="width:100%;" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
+                                        <tr>
+                                            <td class="p30-15-0" style="padding: 20px 20px 0px;">
+                                                <table class="firstmsgbox pb20" width="100%" style="width:100%;" border="0" cellspacing="0" cellpadding="0">
+                                                    <tr>
+                                                        <td class="text-center"
+                                                            style="color:#000; font-family: 'Roboto Condensed', sans-serif; font-size: 30px; font-weight: bold; line-height: 35px; text-align: center; padding: 0 0 25px; ">
+                                                            <multiline>Your Photos are Ready</multiline>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-center subtext"
+                                                            style="color: #000; font-family: 'Roboto Condensed', sans-serif; padding-bottom: 10px; ">
+                                                            <multiline>
+                                                                Thank you for being a part of the Brit Fintech Awards! We are delighted to share that the event photos are now available for you to download.
+                                                            </multiline>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </layout>
+                                <!-- END Section 2 -->
+                                <!-- Section 2 -->
+                                <layout label="Section 1">
+                                    <table width="100%" style="width:100%;" border="0" cellspacing="0" cellpadding="0" bgcolor="#ebebeb">
+                                        <tr>
+                                            <td class="p30-15-0" style="padding: 10px 20px 0;" bgcolor="#ffffff">
+                                                <table width="100%" style="width:100%;" border="0" cellspacing="0" cellpadding="0">
+                                                    <tr>
+                                                        <td align="center">
+                                                            <table border="0" cellspacing="0" cellpadding="0" style="padding:10px 15px 10px">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="text-center pb20 "
+                                                                            style="color:#000; font-family: 'Roboto Condensed', sans-serif; font-size:14px; line-height:22px; text-align:center; padding:0px 0px 10px 0; ">
+                                                                            <multiline>
+                                                                                <p>
+                                                                                    You can access the photos by clicking the link below
+                                                                                </p>
+                                                                            </multiline>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-button-orange"
+                                                                            style="background: #000; color: #fff; font-family: 'Roboto Condensed', sans-serif; font-size: 20px;font-weight: 600; line-height: 18px; text-align: center; padding: 20px 30px; border-radius: 50px;">
+                                                                            <multiline>
+                                                                                <a href="https://drive.google.com/drive/folders/1UEjakkI7bm2jKGs12gG5bMvGXjlD6RCl"
+                                                                                   class="link-white"
+                                                                                   download=download
+                                                                                   style="color:#fff; text-decoration:none;">
+                                                                                    Download Images
+                                                                                </a>
+                                                                            </multiline>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-center pb20 "
+                                                            style="color:#000; font-family: 'Roboto Condensed', sans-serif; font-size:14px; line-height:22px; text-align:center; padding:0px 0px; ">
+                                                            <multiline>
+                                                                <p>
+                                                                    We hope these pictures help you relive the special moments from the event. Thank you once again for your participation and support.
+                                                                </p>
+                                                            </multiline>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="pb20"
+                                                            style="color: #000; font-family: 'Roboto Condensed', sans-serif; font-size: 14px; line-height: 22px; text-align: center; padding-top: 30px;">
+                                                            <multiline>
+                                                                <p [line_id1]=[line_id1]>
+                                                                    For further information, <span [contact_id1]=[contact_id1]>
+                                                                        call us on <span class="highlight-color">
+                                                                            <strong>[contact_no]</strong>
+                                                                        </span>
+                                                                    </span> <span [or1]=[or1]> or</span>
+                                                                    <span [email_id11]=[email_id11]>
+                                                                        email us at <a href="[email_id1]" class="highlight-color"><strong>[email_id]</strong></a>
+                                                                    </span>
+                                                                </p>
+                                                            </multiline>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+
+                                    </table>
+                                </layout>
+                                <!-- END Section 2 -->
+                                <!-- Section 5 -->
+                                <layout label="Section 5">
+                                    <table width="100%" style="width:100%;" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
+                                        <tr>
+                                            <td class="p30-15-0" style="padding: 20px 20px 0px;">
+                                                <table width="100%" style="width:100%;" border="0" cellspacing="0" cellpadding="0">
+                                                    <tr>
+                                                        <td class="text-center pb20" style="color:#000; font-family: 'Roboto Condensed', sans-serif; font-size:15px; line-height:22px; text-align:center; padding-bottom:20px;">
+                                                            <multiline>
+                                                                <p class="text-center" style="padding-top:20px;">
+                                                                    Warm regards,<br />Team <br />[company_name]
+                                                                </p>
+                                                            </multiline>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </layout>
+                                <!-- END Section 5 -->
+                                <!-- Blue Padder -->
+                                <layout label="White Padder">
+                                    <table width="100%" style="width:100%;" border="0" cellspacing="0" cellpadding="0" bgcolor="#fff">
+                                        <tr>
+                                            <td class="img" style="padding-top: 4px; font-size:0pt; line-height:0pt; text-align:left;">
+                                                <multiline>
+                                                    <hr style="height:1px;border:none;color:#333;background-color:[theme_color];margin-left: 15px; margin-right: 15px;" />
+                                                </multiline>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </layout>
+                                <!-- END Blue Padder -->
+                            </repeater>
+
+                            <!-- Footer -->
+                            <table class="footer1" width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td class="p30-15-0" style="padding: 20px 20px 0px;">
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                            <tr>
+                                                <td class="text-center pb20" style="color:#000; font-family: 'Roboto Condensed', sans-serif; font-size:10px; line-height:22px; text-align:justify; padding-bottom:10px;">
+                                                    <multiline>
+                                                        This email is intended for [Email_ID_of_enquirer] and may contain confidential and/or privileged information. If you are not the intended recipient (or have received this e-mail in error) please
+                                                        notify the sender immediately and destroy this e-mail. Any unauthorized copying, disclosure or distribution of the material in this e-mail is strictly forbidden.
+                                                    </multiline>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center pb20" style="color:#000; font-family: 'Roboto Condensed', sans-serif; font-size:12px;font-weight: bold; line-height:22px; text-align:justify; padding-bottom:0px;">
+                                                    <multiline> About Us</multiline>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center pb20" style="color:#000; font-family: 'Roboto Condensed', sans-serif; font-size:10px; line-height:22px; text-align:justify; padding-bottom:10px;">
+                                                    <multiline>
+                                                        <p>[company_name]</p>
+                                                        <p>Registered in England and Wales; Registration no.: [company_reg_no]</p>
+                                                        <p>Registered office: [company_reg_office]</p>
+                                                        <!--<p>We are registered with the Information Commissioner's Office (ICO), reference number [company_ref_no].</p>-->
+                                                    </multiline>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center pb20" style="color:#000; font-family: 'Roboto Condensed', sans-serif; font-size:12px;font-weight: bold; line-height:22px; text-align:justify; padding-bottom:10px;">
+                                                    <multiline><img alt="" src="[company_website_src]save-the-planet.png" width="25" style="max-width:25px;width:25px;display:inline-block;float: left;margin-top: -3px;padding-right: 5px;image-rendering:auto!important;" /> Think of our planet before you print!</multiline>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+
+
+                            <table class="footer1" width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td class="p30-15-0" style="padding: 20px 20px 0px;">
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                            <tr>
+                                                <td class="text-center pb20" style="color:#000; font-family:  'Open Sans', Arial, Helvetica, sans-serif; font-size:12px;font-weight: bold; line-height:22px; text-align:center; padding-bottom:10px;">
+                                                    <multiline>Get in Touch</multiline>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="img" style="font-size:0pt; line-height:0pt; text-align:center;">
+                                                    <a href="[Instagram-social]"><img src="[company_website_src]instagram-icon.png" border="0" alt="" style="padding-right: 5px; image-rendering: auto !important;" /></a>
+                                                    <a href="[facebook-social]"><img src="[company_website_src]fb-icon.png" border="0" alt="" style="padding-right: 5px; image-rendering: auto !important;" /></a>
+                                                    <a href="[Linkedin-social]"><img src="[company_website_src]linkdin-icon.png" border="0" alt="" style="padding-right: 5px; image-rendering: auto !important;" /></a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center pb20" style="color:#000; font-family:  'Open Sans', Arial, Helvetica, sans-serif; font-size:10px; line-height:22px; text-align:center; padding-bottom:10px;">
+                                                    <multiline>
+                                                        <p style="color:[theme_color];">[company_name]</p>
+                                                        <p style="color:#000;">For any questions please send to <a href="mailto:[email_id]" target="_blank" class="link-grey" style="color:[theme_color]; text-decoration:none;">[email_id]</a></p>
+                                                    </multiline>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+
+
+                            <!-- Blue Padder -->
+                            <layout label="White Padder">
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#010057">
+                                    <tr>
+                                        <td class="img" style="font-size:0pt; line-height:0pt; text-align:left;">
+                                            <multiline>
+                                                <hr style="height: 1px; border: none; color: #333; background-color: #010057; margin-left: 15px; margin-right: 15px;" />
+                                            </multiline>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </layout>
+                            <!-- END Blue Padder -->
+
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td class="p30-15-0" bgcolor="#000" style="border-radius: 0px 0px 5px 5px; padding: 10px 30px 10px 30px;">
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                            <tr>
+                                                <td class="footer" style="color:#fff;">
+                                                    <multiline>
+                                                        For <a style="color:[theme_color]" href=[privacy_policy]> terms & conditions</a> please visit our page.<br />©
+                                                        <script type="text/javascript">
+                                                            document.write(new Date().getFullYear());
+                                                        </script>
+                                                        <a href="[company_website]" style="color:[theme_color]">[company_website_nm]</a>. All rights reserved.
+                                                    </multiline>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td class="text-footer2 p30-15" style="padding: 30px 15px 50px 15px; color:#a9b6e0; font-size:12px; line-height:22px; text-align:center;">
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- END Footer -->
+                        </td>
+                    </tr>
+                </table>
+                <!-- END Main -->
+
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>

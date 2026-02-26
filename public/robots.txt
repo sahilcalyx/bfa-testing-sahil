@@ -1,0 +1,5 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://britfintechawards.com/sitemap.xml
+
