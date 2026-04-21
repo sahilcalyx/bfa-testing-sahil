@@ -71,185 +71,185 @@ return (
               innovation and transformation in finance.
             </div>
             <div className="cs-height_10 cs-height_lg_10" />
-            <div className="row">
-              <div className="col-lg-4 wow fadeIn">
-                <div className="cs-icon_box cs-style3 text-center">
+            <div className="row justify-content-center gy-4">
+              <div className="col-lg-4 wow fadeIn d-flex">
+                <div className="cs-icon_box cs-style3 text-center h-100 d-flex flex-column">
                   <div className="cs-center">
-                    <img src="../assets/img/Fintech/11.png" alt="Aword Image" />
+                    <img src="../assets/img/Fintech/awards-2026.png" alt="Aword Image" />
                   </div>
                   <h2 className="cs-icon_box_title cs-semi_bold">
                     <strong>Account 2 Account Payment Processor</strong> of the Year
                   </h2>
-                  <div className="cs-icon_box_subtitle mb-4">
+                  <div className="cs-icon_box_subtitle mb-4 flex-grow-1">
                     Excellence in facilitating seamless interbank transactions.
                   </div>
                   <NavLink to="/Account2Account-Payment-Processor-of-the-Year" className="btn-black">
                     Explore More
                   </NavLink>
                 </div>
-                <div className="cs-height_30 cs-height_lg_30" />
+                {/* <div className="cs-height_30 cs-height_lg_30" /> */}
               </div>
 
-              <div className="col-lg-4 wow fadeIn">
-                <div className="cs-icon_box cs-style3 text-center">
+              <div className="col-lg-4 wow fadeIn d-flex">
+                <div className="cs-icon_box cs-style3 text-center h-100 d-flex flex-column">
                   <div className="cs-center">
-                    <img src="../assets/img/Fintech/11.png" alt="Aword Image" />
+                    <img src="../assets/img/Fintech/awards-2026.png" alt="Aword Image" />
                   </div>
                   <h2 className="cs-icon_box_title cs-semi_bold">
                     <strong>Payment Innovator</strong> of the Year
                   </h2>
-                  <div className="cs-icon_box_subtitle mb-4">
+                  <div className="cs-icon_box_subtitle mb-4 flex-grow-1">
                     Praising the inventive minds shaping the new era of payments.
                   </div>
                   <NavLink to="/Payment-Innovator-of-the-Year" className="btn-black">
                     Explore More
                   </NavLink>
                 </div>
-                <div className="cs-height_30 cs-height_lg_30" />
+                {/* <div className="cs-height_30 cs-height_lg_30" /> */}
               </div>
 
-              <div className="col-lg-4 wow fadeIn">
-                <div className="cs-icon_box cs-style3 text-center">
+              <div className="col-lg-4 wow fadeIn d-flex">
+                <div className="cs-icon_box cs-style3 text-center h-100 d-flex flex-column">
                   <div className="cs-center">
-                    <img src="../assets/img/Fintech/11.png" alt="Aword Image" />
+                    <img src="../assets/img/Fintech/awards-2026.png" alt="Aword Image" />
                   </div>
                   <h2 className="cs-icon_box_title cs-semi_bold">
                     <strong>Pay-Out Innovator</strong> of the Year
                   </h2>
-                  <div className="cs-icon_box_subtitle mb-4">
+                  <div className="cs-icon_box_subtitle mb-4 flex-grow-1">
                     Praising the inventive minds shaping the new era of payments.
                   </div>
                   <NavLink to="/Pay-Out-Innovator-of-the-Year" className="btn-black">
                     Explore More
                   </NavLink>
                 </div>
-                <div className="cs-height_30 cs-height_lg_30" />
+                {/* <div className="cs-height_30 cs-height_lg_30" /> */}
               </div>
 
-              <div className="col-lg-4 wow fadeIn">
-                <div className="cs-icon_box cs-style3 text-center">
+              <div className="col-lg-4 wow fadeIn d-flex">
+                <div className="cs-icon_box cs-style3 text-center h-100 d-flex flex-column">
                   <div className="cs-center">
-                    <img src="../assets/img/Fintech/11.png" alt="Aword Image" />
+                    <img src="../assets/img/Fintech/awards-2026.png" alt="Aword Image" />
                   </div>
                   <h2 className="cs-icon_box_title cs-semi_bold">
                     <strong>B-A-A-S Innovator</strong> of the Year
                   </h2>
-                  <div className="cs-icon_box_subtitle mb-4">
+                  <div className="cs-icon_box_subtitle mb-4 flex-grow-1">
                     Recognising the champions of innovation in Banking-As-A-Service platforms.
                   </div>
                   <NavLink to="/B-A-A-S-Innovator-of-the-Year" className="btn-black">
                     Explore More
                   </NavLink>
                 </div>
-                <div className="cs-height_30 cs-height_lg_30" />
+                {/* <div className="cs-height_30 cs-height_lg_30" /> */}
               </div>
 
-              <div className="col-lg-4 wow fadeIn">
-                <div className="cs-icon_box cs-style3 text-center">
+              <div className="col-lg-4 wow fadeIn d-flex">
+                <div className="cs-icon_box cs-style3 text-center h-100 d-flex flex-column">
                   <div className="cs-center">
-                    <img src="../assets/img/Fintech/11.png" alt="Aword Image" />
+                    <img src="../assets/img/Fintech/awards-2026.png" alt="Aword Image" />
                   </div>
                   <h2 className="cs-icon_box_title cs-semi_bold">
                     <strong>Payment Acquirer</strong> of the Year
                   </h2>
-                  <div className="cs-icon_box_subtitle mb-4">
+                  <div className="cs-icon_box_subtitle mb-4 flex-grow-1">
                     Highlighting the industry leader in seamless payment solutions.
                   </div>
                   <NavLink to="/Payment-Acquirer-of-the-Year" className="btn-black">
                     Explore More
                   </NavLink>
                 </div>
-                <div className="cs-height_30 cs-height_lg_30" />
+                {/* <div className="cs-height_30 cs-height_lg_30" /> */}
               </div>
 
-              <div className="col-lg-4 wow fadeIn">
-                <div className="cs-icon_box cs-style3 text-center">
+              <div className="col-lg-4 wow fadeIn d-flex">
+                <div className="cs-icon_box cs-style3 text-center h-100 d-flex flex-column">
                   <div className="cs-center">
-                    <img src="../assets/img/Fintech/11.png" alt="Aword Image" />
+                    <img src="../assets/img/Fintech/awards-2026.png" alt="Aword Image" />
                   </div>
                   <h2 className="cs-icon_box_title cs-semi_bold mb-4">
                     <strong>Startup</strong> of the Year
                   </h2>
-                  <div className="cs-icon_box_subtitle mb-4">
+                  <div className="cs-icon_box_subtitle mb-4 flex-grow-1">
                     Celebrating promising startups in the fintech sector.
                   </div>
                   <NavLink to="/Startup-of-the-Year" className="btn-black">
                     Explore More
                   </NavLink>
                 </div>
-                <div className="cs-height_30 cs-height_lg_30" />
+                {/* <div className="cs-height_30 cs-height_lg_30" /> */}
               </div>
 
-              <div className="col-lg-4 wow fadeIn">
-                <div className="cs-icon_box cs-style3 text-center">
+              <div className="col-lg-4 wow fadeIn d-flex">
+                <div className="cs-icon_box cs-style3 text-center h-100 d-flex flex-column">
                   <div className="cs-center">
-                    <img src="../assets/img/Fintech/11.png" alt="Aword Image" />
+                    <img src="../assets/img/Fintech/awards-2026.png" alt="Aword Image" />
                   </div>
                   <h2 className="cs-icon_box_title cs-semi_bold">
                     <strong>Woman Entrepreneur in FinTech</strong> of the Year
                   </h2>
-                  <div className="cs-icon_box_subtitle mb-4">
+                  <div className="cs-icon_box_subtitle mb-4 flex-grow-1">
                     Celebrating the visionary women driving innovation in the FinTech industry.
                   </div>
                   <NavLink to="/Woman-Entrepreneur-in-FinTech-the-Year" className="btn-black">
                     Explore More
                   </NavLink>
                 </div>
-                <div className="cs-height_30 cs-height_lg_30" />
+                {/* <div className="cs-height_30 cs-height_lg_30" /> */}
               </div>
 
-              <div className="col-lg-4 wow fadeIn">
-                <div className="cs-icon_box cs-style3 text-center">
+              <div className="col-lg-4 wow fadeIn d-flex">
+                <div className="cs-icon_box cs-style3 text-center h-100 d-flex flex-column">
                   <div className="cs-center">
-                    <img src="../assets/img/Fintech/11.png" alt="Aword Image" />
+                    <img src="../assets/img/Fintech/awards-2026.png" alt="Aword Image" />
                   </div>
                   <h2 className="cs-icon_box_title cs-semi_bold">
                     <strong>Anti-Fraud Innovator</strong> of the Year
                   </h2>
-                  <div className="cs-icon_box_subtitle mb-4">
+                  <div className="cs-icon_box_subtitle mb-4 flex-grow-1">
                     Praising the visionaries driving transformative change in fraud prevention.
                   </div>
                   <NavLink to="/Anti-Fraud-Innovator-of-the-Year" className="btn-black">
                     Explore More
                   </NavLink>
                 </div>
-                <div className="cs-height_30 cs-height_lg_30" />
+                {/* <div className="cs-height_30 cs-height_lg_30" /> */}
               </div>
 
-              <div className="col-lg-4 wow fadeIn">
-                <div className="cs-icon_box cs-style3 text-center">
+              <div className="col-lg-4 wow fadeIn d-flex">
+                <div className="cs-icon_box cs-style3 text-center h-100 d-flex flex-column">
                   <div className="cs-center">
-                    <img src="../assets/img/Fintech/11.png" alt="Aword Image" />
+                    <img src="../assets/img/Fintech/awards-2026.png" alt="Aword Image" />
                   </div>
                   <h2 className="cs-icon_box_title cs-semi_bold">
                     <strong>ID Verification Innovator</strong> of the Year
                   </h2>
-                  <div className="cs-icon_box_subtitle mb-4">
+                  <div className="cs-icon_box_subtitle mb-4 flex-grow-1">
                     Recognising solutions related to fraud prevention and identity verification.
                   </div>
                   <NavLink to="/ID-Verification-Innovator-of-the-Year" className="btn-black">
                     Explore More
                   </NavLink>
                 </div>
-                <div className="cs-height_30 cs-height_lg_30" />
+                {/* <div className="cs-height_30 cs-height_lg_30" /> */}
               </div>
 
-              <div className="col-lg-4 wow fadeIn">
-                <div className="cs-icon_box cs-style3 text-center">
+              <div className="col-lg-4 wow fadeIn d-flex">
+                <div className="cs-icon_box cs-style3 text-center h-100 d-flex flex-column">
                   <div className="cs-center">
-                    <img src="../assets/img/Fintech/11.png" alt="Aword Image" />
+                    <img src="../assets/img/Fintech/awards-2026.png" alt="Aword Image" />
                   </div>
                   <h2 className="cs-icon_box_title cs-semi_bold">
                     <strong>FinTech</strong> of the Year
                   </h2>
-                  <div className="cs-icon_box_subtitle mb-4">
+                  <div className="cs-icon_box_subtitle mb-4 flex-grow-1">
                     Honouring the fintech pioneers driving the future of finance.
                   </div>
                   <NavLink to="/FinTech-of-the-Year" className="btn-black">
                     Explore More
                   </NavLink>
                 </div>
-                <div className="cs-height_30 cs-height_lg_30" />
+                {/* <div className="cs-height_30 cs-height_lg_30" /> */}
               </div>
             </div>
           </div>
@@ -280,106 +280,106 @@ return (
               business industry.
             </div>
             <div className="cs-height_10 cs-height_lg_10" />
-            <div className="row">
-              <div className="col-lg-4 wow fadeIn">
-                <div className="cs-icon_box cs-style3 text-center">
+            <div className="row justify-content-center gy-4">
+              <div className="col-lg-4 wow fadeIn d-flex">
+                <div className="cs-icon_box cs-style3 text-center h-100 d-flex flex-column">
                   <div className="cs-center">
-                    <img src="../assets/img/Fintech/11.png" alt="Aword Image" />
+                    <img src="../assets/img/Fintech/awards-2026.png" alt="Aword Image" />
                   </div>
                   <h2 className="cs-icon_box_title cs-semi_bold">
                     <strong>Compliance Innovator MSB</strong> of the Year
                   </h2>
-                  <div className="cs-icon_box_subtitle mb-4">
+                  <div className="cs-icon_box_subtitle mb-4 flex-grow-1">
                     Honouring the leaders shaping regulatory compliance standards in MSB and Fintech industry.
                   </div>
                   <NavLink to="/Compliance-Innovator" className="btn-black">
                     Explore More
                   </NavLink>
                 </div>
-                <div className="cs-height_30 cs-height_lg_30" />
+                {/* <div className="cs-height_30 cs-height_lg_30" /> */}
               </div>
 
-              <div className="col-lg-4 wow fadeIn">
-                <div className="cs-icon_box cs-style3 text-center">
+              <div className="col-lg-4 wow fadeIn d-flex">
+                <div className="cs-icon_box cs-style3 text-center h-100 d-flex flex-column">
                   <div className="cs-center">
-                    <img src="../assets/img/Fintech/11.png" alt="Aword Image" />
+                    <img src="../assets/img/Fintech/awards-2026.png" alt="Aword Image" />
                   </div>
                   <h2 className="cs-icon_box_title cs-semi_bold">
                     <strong>Best in Customer Service MSB</strong> of the Year
                   </h2>
-                  <div className="cs-icon_box_subtitle mb-4">
+                  <div className="cs-icon_box_subtitle mb-4 flex-grow-1">
                     Acknowledging the commitment to outstanding customer service in MSBs.
                   </div>
                   <NavLink to="/Best-in-Customer-Service-MSB" className="btn-black">
                     Explore More
                   </NavLink>
                 </div>
-                <div className="cs-height_30 cs-height_lg_30" />
+                {/* <div className="cs-height_30 cs-height_lg_30" /> */}
               </div>
 
-              <div className="col-lg-4 wow fadeIn">
-                <div className="cs-icon_box cs-style3 text-center">
+              <div className="col-lg-4 wow fadeIn d-flex">
+                <div className="cs-icon_box cs-style3 text-center h-100 d-flex flex-column">
                   <div className="cs-center">
-                    <img src="../assets/img/Fintech/11.png" alt="Aword Image" />
+                    <img src="../assets/img/Fintech/awards-2026.png" alt="Aword Image" />
                   </div>
                   <h2 className="cs-icon_box_title cs-semi_bold">
                     <strong>Remittance Innovator MSB</strong> of the Year
                   </h2>
-                  <div className="cs-icon_box_subtitle mb-4">
+                  <div className="cs-icon_box_subtitle mb-4 flex-grow-1">
                     Honouring the leaders in transformative remittance innovations.
                   </div>
                   <NavLink to="/Remittance-Innovator-MSB" className="btn-black">
                     Explore More
                   </NavLink>
                 </div>
-                <div className="cs-height_30 cs-height_lg_30" />
+                {/* <div className="cs-height_30 cs-height_lg_30" /> */}
               </div>
 
-              <div className="col-lg-4 wow fadeIn">
-                <div className="cs-icon_box cs-style3 text-center">
+              <div className="col-lg-4 wow fadeIn d-flex">
+                <div className="cs-icon_box cs-style3 text-center h-100 d-flex flex-column">
                   <div className="cs-center">
-                    <img src="../assets/img/Fintech/11.png" alt="Aword Image" />
+                    <img src="../assets/img/Fintech/awards-2026.png" alt="Aword Image" />
                   </div>
                   <h2 className="cs-icon_box_title cs-semi_bold">
                     <strong>Progressive Money Exchanger MSB</strong> of the Year
                   </h2>
-                  <div className="cs-icon_box_subtitle mb-4">
+                  <div className="cs-icon_box_subtitle mb-4 flex-grow-1">
                     Recognising the champions of innovation in the money/currency exchange sector.
                   </div>
                   <NavLink to="/Progressive-Money-Exchanger-MSB" className="btn-black">
                     Explore More
                   </NavLink>
                 </div>
-                <div className="cs-height_30 cs-height_lg_30" />
+                {/* <div className="cs-height_30 cs-height_lg_30" /> */}
               </div>
 
-              <div className="col-lg-4 wow fadeIn">
-                <div className="cs-icon_box cs-style3 text-center">
+              <div className="col-lg-4 wow fadeIn d-flex">
+                <div className="cs-icon_box cs-style3 text-center h-100 d-flex flex-column">
                   <div className="cs-center">
-                    <img src="../assets/img/Fintech/11.png" alt="Aword Image" />
+                    <img src="../assets/img/Fintech/awards-2026.png" alt="Aword Image" />
                   </div>
                   <h2 className="cs-icon_box_title cs-semi_bold mb-4">
                     <strong>MSB Disruptor</strong> of the Year
                   </h2>
-                  <div className="cs-icon_box_subtitle mb-4">
+                  <div className="cs-icon_box_subtitle mb-4 flex-grow-1">
                     Innovate, Disrupt, Dominate - Honoring the Masters of Disruption in the Money Service Businesses.
                   </div>
                   <NavLink to="/msb-disruptor-of-the-year" className="btn-black">
                     Explore More
                   </NavLink>
                 </div>
-                <div className="cs-height_30 cs-height_lg_30" />
+                {/* <div className="cs-height_30 cs-height_lg_30" /> */}
               </div>
 
-              <div className="col-lg-4 wow fadeIn">
-                <div className="cs-icon_box cs-style3 text-center">
+              <div className="col-lg-4 wow fadeIn d-flex">
+                <div className="cs-icon_box cs-style3 text-center h-100 d-flex flex-column">
                   <div className="cs-center">
-                    <img src="../assets/img/Fintech/11.png" alt="Aword Image" />
+                    <img src="../assets/img/Fintech/awards-2026.png" alt="Aword Image" />
                   </div>
                   <h2 className="cs-icon_box_title cs-semi_bold mb-2">
                     <strong>MSB Store</strong> of the Year
                   </h2>
-                  <div className="cs-icon_box_subtitle mb-4">
+                  <div className="cs-icon_box_subtitle mb-4 flex-grow-1">
                     Setting the Standard in Financial Excellence: Celebrating the Best Store in Money Services for
                     Outstanding Service and Innovation.
                   </div>
@@ -387,43 +387,43 @@ return (
                     Explore More
                   </NavLink>
                 </div>
-                <div className="cs-height_30 cs-height_lg_30" />
+                {/* <div className="cs-height_30 cs-height_lg_30" /> */}
               </div>
 
-              <div className="col-lg-4 wow fadeIn">
-                <div className="cs-icon_box cs-style3 text-center">
+              <div className="col-lg-4 wow fadeIn d-flex">
+                <div className="cs-icon_box cs-style3 text-center h-100 d-flex flex-column">
                   <div className="cs-center">
-                    <img src="../assets/img/Fintech/11.png" alt="Aword Image" />
+                    <img src="../assets/img/Fintech/awards-2026.png" alt="Aword Image" />
                   </div>
                   <h2 className="cs-icon_box_title cs-semi_bold mb-2">
                     <strong>MSB App</strong> of the Year
                   </h2>
-                  <div className="cs-icon_box_subtitle mb-4">
+                  <div className="cs-icon_box_subtitle mb-4 flex-grow-1">
                   Redefining Financial Innovation: Honoring the Best Application in Money Services for Unparalleled Excellence and Impact.
                   </div>
                   <NavLink to="/msb-app-of-the-year" className="btn-black">
                     Explore More
                   </NavLink>
                 </div>
-                <div className="cs-height_30 cs-height_lg_30" />
+                {/* <div className="cs-height_30 cs-height_lg_30" /> */}
               </div>
 
-              <div className="col-lg-4 wow fadeIn">
-                <div className="cs-icon_box cs-style3 text-center">
+              <div className="col-lg-4 wow fadeIn d-flex">
+                <div className="cs-icon_box cs-style3 text-center h-100 d-flex flex-column">
                   <div className="cs-center">
-                    <img src="../assets/img/Fintech/11.png" alt="Aword Image" />
+                    <img src="../assets/img/Fintech/awards-2026.png" alt="Aword Image" />
                   </div>
                   <h2 className="cs-icon_box_title cs-semi_bold">
                     <strong>MSB</strong> of the Year
                   </h2>
-                  <div className="cs-icon_box_subtitle mb-4">
+                  <div className="cs-icon_box_subtitle mb-4 flex-grow-1">
                     Recognising unparalleled excellence and innovation in Money Service Businesses
                   </div>
                   <NavLink to="/msb-of-year" className="btn-black">
                     Explore More
                   </NavLink>
                 </div>
-                <div className="cs-height_30 cs-height_lg_30" />
+                {/* <div className="cs-height_30 cs-height_lg_30" /> */}
               </div>
 
             </div>
@@ -454,42 +454,42 @@ return (
               making a global impact with their exceptional contributions.
             </div>
             <div className="cs-height_10 cs-height_lg_10" />
-            <div className="row">
+            <div className="row justify-content-center gy-4">
 
-              <div className="col-lg-4 wow fadeIn">
-                <div className="cs-icon_box cs-style3 text-center">
+              <div className="col-lg-4 wow fadeIn d-flex">
+                <div className="cs-icon_box cs-style3 text-center h-100 d-flex flex-column">
                   <div className="cs-center">
-                    <img src="../assets/img/Fintech/11.png" alt="Aword Image" />
+                    <img src="../assets/img/Fintech/awards-2026.png" alt="Aword Image" />
                   </div>
                   <h2 className="cs-icon_box_title cs-semi_bold">
                     <strong>FinTech</strong> of the Year
                   </h2>
-                  <div className="cs-icon_box_subtitle mb-4">
+                  <div className="cs-icon_box_subtitle mb-4 flex-grow-1">
                     Honouring the fintech pioneers driving the future of finance.
                   </div>
                   <NavLink to="/FinTech-global-of-the-Year" className="btn-black">
                     Explore More
                   </NavLink>
                 </div>
-                <div className="cs-height_30 cs-height_lg_30" />
+                {/* <div className="cs-height_30 cs-height_lg_30" /> */}
               </div>
 
-              <div className="col-lg-4 wow fadeIn">
-                <div className="cs-icon_box cs-style3 text-center">
+              <div className="col-lg-4 wow fadeIn d-flex">
+                <div className="cs-icon_box cs-style3 text-center h-100 d-flex flex-column">
                   <div className="cs-center">
-                    <img src="../assets/img/Fintech/11.png" alt="Aword Image" />
+                    <img src="../assets/img/Fintech/awards-2026.png" alt="Aword Image" />
                   </div>
                   <h2 className="cs-icon_box_title cs-semi_bold">
                     <strong>MSB</strong> of the Year
                   </h2>
-                  <div className="cs-icon_box_subtitle mb-4">
+                  <div className="cs-icon_box_subtitle mb-4 flex-grow-1">
                     Recognising unparalleled excellence and innovation in Money Service Businesses.
                   </div>
                   <NavLink to="/msb-global-of-year" className="btn-black">
                     Explore More
                   </NavLink>
                 </div>
-                <div className="cs-height_30 cs-height_lg_30" />
+                {/* <div className="cs-height_30 cs-height_lg_30" /> */}
               </div>
 
             </div>

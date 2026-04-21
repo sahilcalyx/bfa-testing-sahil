@@ -6,13 +6,36 @@ const Blog = () => {
   // ===== BLOG DATA =====
   const blogsData = [
     {
+      title: "The invisible financial bridge: How MSBs power migrant and cross-border communities",
+      slug: "the-invisible-financial-bridge-how-msbs-power-migrant-and-cross-border-communities",
+      img: "/assets/img/blogs/The-invisible-financial-bridge.jpg",
+      alt: "The invisible financial bridge",
+      date: "15 Apr, 2026",
+      excerpt: "Sending money home is more than a financial transaction...",
+    },
+    {
+      title: "AI-Powered risk & compliance: The next frontier for MSBs and Fintechs",
+      slug: "ai-powered-risk-compliance-the-next-frontier-for-msbs-and-fintechs",
+      img: "/assets/img/blogs/ai-powered-risk-compliance.jpg",
+      alt: "AI-Powered risk & compliance",
+      date: "24 Mar, 2026",
+      excerpt: "How machine learning and adaptive intelligence are...",
+    },
+    {
+      title: "Digital Wallets: The gateway to the future of financial services",
+      slug: "digital-wallets-the-gateway-to-the-future-of-financial-services",
+      img: "/assets/img/blogs/Digital-Wallets-blog.jpg",
+      alt: "Digital Wallets: The gateway to the future of financial services",
+      date: "04 Mar, 2026",
+      excerpt: "Why digital wallets are becoming the central hub for payments, identity, and financial access...",
+    },
+    {
       title: "Managing fraud risks in a real-time payments world",
       slug: "managing-fraud-risks-in-a-real-time-payments-world",
       img: "/assets/img/blogs/Managing-fraud-risks-in-a-real-time-payments-world.png",
       alt: "Managing fraud risks in a real-time payments world",
       date: "18 Feb, 2026",
-      excerpt:
-        "The payments landscape has changed dramatically...",
+      excerpt: "How fintechs are combating fraud as payments become faster and more ...",
     },
     {
       title: "How Instant Payments Are Changing Consumer Expectations Globally",

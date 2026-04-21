@@ -17,7 +17,7 @@ return (
     <meta property="og:title" content="Brit Fintech Awards | Woman Entrepreneur in FinTech of the Year" />
     <meta property="og:description"
       content="Recognizing exceptional women entrepreneurs in the financial technology sector for their innovation and leadership." />
-    <meta property="og:image" content="https://britfintechawards.com/assets/img/aword/Fintech/Woman-Entrepreneur-in-FinTech-the-Year.png" />
+    <meta property="og:image" content="https://britfintechawards.com/assets/img/aword/2026/Woman-Entrepreneur-in-FinTech-the-Year-2026.png" />
   </Helmet>
 
   <div className="cs-height_90 cs-height_lg_90" />
@@ -64,7 +64,7 @@ return (
                 display: "flex",
                 justifyContent: "end",
                 fontWeight: "600",
-                color: "#f40181",
+                color: "#c61633",
               }}>
           <i className="fas fa-chevron-circle-left fs-4" /> Back to Awards
         </NavLink>
@@ -79,7 +79,7 @@ return (
                 animationDelay: "0.3s",
                 animationName: "fadeIn",
               }}>
-          <img src="../assets/img/aword/Fintech/Woman-Entrepreneur-in-FinTech-the-Year.png"
+          <img src="../assets/img/aword/2026/Woman-Entrepreneur-in-FinTech-the-Year-2026.png"
             style={{ boxShadow: "3px 0 10px 0 #b3b3b3",borderRadius:'20px' }} alt="Woman Entrepreneur in FinTech of the year" />
         </div>
         <div className="cs-height_30 cs-height_lg_30" bis_skin_checked={1} />

@@ -608,7 +608,7 @@ box-shadow: none;
                   </div> */}
 
                   <NavLink
-                    to="/sponsorship-categories#next_section"
+                    to="/sponsorship-categories#sponsorship-form"
                     className={`btn-pro-2`}
                   >
                     <span style={{ color: "#fff" }}> Sponsor Now</span>

@@ -17,7 +17,7 @@ return (
     <meta property="og:title" content="Brit Fintech Awards | Anti-Fraud Innovator of the Year" />
     <meta property="og:description"
       content="Recognizing excellence and innovation in anti-fraud technologies and solutions within the financial technology sector." />
-    <meta property="og:image" content="https://britfintechawards.com/assets/img/aword/Fintech/Anti-Fraud-Innovator-of-the-Year.png" />
+    <meta property="og:image" content="https://britfintechawards.com/assets/img/aword/2026/Anti-Fraud-Innovator-of-the-Year-2026.png" />
   </Helmet>
 
   <div className="cs-height_90 cs-height_lg_90" />
@@ -63,7 +63,7 @@ return (
                 display: "flex",
                 justifyContent: "end",
                 fontWeight: "600",
-                color: "#f40181",
+                color: "#c61633",
               }}>
           <i className="fas fa-chevron-circle-left fs-4" /> Back to Awards
         </NavLink>
@@ -78,7 +78,7 @@ return (
                 animationDelay: "0.3s",
                 animationName: "fadeIn",
               }}>
-          <img src="../assets/img/aword/Fintech/Anti-Fraud-Innovator-of-the-Year.png"
+          <img src="../assets/img/aword/2026/Anti-Fraud-Innovator-of-the-Year-2026.png"
             style={{ boxShadow: "3px 0 10px 0 #b3b3b3",borderRadius:'20px' }} alt=" Anti-Fraud Innovator of the year" />
         </div>
         <div className="cs-height_30 cs-height_lg_30" bis_skin_checked={1} />

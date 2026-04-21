@@ -261,6 +261,26 @@ export const seoByPath = {
       images: ["/assets/img/blogs/will-2025-be-the-year-of-stablecoins.png"],
     },
   },
+  "/ai-powered-risk-compliance-the-next-frontier-for-msbs-and-fintechs": {
+    title: "AI-Powered Risk & Compliance: The Next Frontier for MSBs and Fintechs",
+    description: "How machine learning and adaptive intelligence are reshaping regulatory reporting, AML/KYC checks, and fraud mitigation in real time.",
+    openGraph: {
+      title: "AI-Powered Risk & Compliance: The Next Frontier for MSBs and Fintechs",
+      description: "How machine learning and adaptive intelligence are reshaping regulatory reporting, AML/KYC checks, and fraud mitigation in real time.",
+      url: `${siteBaseUrl}/ai-powered-risk-compliance-the-next-frontier-for-msbs-and-fintechs`,
+      siteName,
+      images: [
+        { url: "/assets/img/blogs/ai-powered-risk-compliance.png", width: 1200, height: 630, alt: "AI-Powered Risk & Compliance" },
+      ],
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "AI-Powered Risk & Compliance: The Next Frontier for MSBs and Fintechs",
+      description: "How machine learning and adaptive intelligence are reshaping regulatory reporting, AML/KYC checks, and fraud mitigation in real time.",
+      images: ["/assets/img/blogs/ai-powered-risk-compliance.png"],
+    },
+  },
   "/beyond-borders-brit-fintech-awards": {
     title: "Beyond Borders: Brit Fintech Awards",
     description: "How Brit Fintech Awards celebrates global innovation beyond borders.",

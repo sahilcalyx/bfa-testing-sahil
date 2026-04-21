@@ -1,8 +1,38 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { NavLink } from "react-router-dom";
+import confetti from "canvas-confetti"; // 🎉 Import confetti
 
 const Winner = () => {
+  // 🎊 Confetti Effect
+  useEffect(() => {
+    const colors = ["#c8102e", "#FFFACD", "#c8102e", "#fff", "#FFA500"];
+
+    // Ribbons burst (larger)
+    const interval = setInterval(() => {
+      confetti({
+        particleCount: 80,
+        angle: 10,
+        spread: 100,
+        origin: { x: 0 },
+        colors: ["#FFD700", "#c8102e", "#F9BB1D"],
+        ticks: 50,
+        scalar: 1.6,
+      });
+      confetti({
+        particleCount: 80,
+        angle: 180,
+        spread: 100,
+        origin: { x: 1 },
+        colors: ["#FFD700", "#c8102e", "#F9BB1D"],
+        ticks: 50,
+        scalar: 1.6,
+      });
+    }, 700);
+
+    // Stop after a few seconds
+    setTimeout(() => clearInterval(interval), 1500);
+  }, []);
   return (
     <div>
       <Helmet>

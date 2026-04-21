@@ -70,10 +70,10 @@ const Footer = () => {
                       Register For Startup Pitch
                     </NavLink>{" "}
                   </li> */}
-                  <li>
+                  {/* <li>
                     {" "}
                     <NavLink to="/awards">Awards</NavLink>{" "}
-                  </li>
+                  </li> */}
                   <li>
                     {" "}
                     <NavLink to="/our-keynote-speaker-2025/">Keynote Speakers</NavLink>{" "}

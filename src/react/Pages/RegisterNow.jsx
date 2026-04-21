@@ -613,9 +613,9 @@ const RegisterNow = () => {
         />
       </Helmet>
       <div>
-        {/* <div className="cs-height_90 cs-height_lg_90" /> */}
+        <div className="cs-height_90 cs-height_lg_90" />
         <div
-          className="cs-hero cs-style12 cs-type1 cs-center text-center cs-parallax cs-hobble"
+          className="cs-hero cs-style12 cs-type1 cs-center text-center cs-parallax cs-hobble d-none"
           style={{
             backgroundImage:
               'url("../assets/img/event-conference/hero-img.jpg")',
@@ -678,8 +678,8 @@ const RegisterNow = () => {
       </div>
       <NominationAnnouncement />
       {/* <div class="cs-height_60 cs-height_lg_75 "></div> */}
-      <div id="nominate-now" className="container" style={{ zIndex: 9999 }}>
-        <div className="cs-contact cs-style2 cs-white_bg justify-content-center">
+      <div id="nominate-now" className="container" style={{ zIndex: 9999 }} >
+        <div className="cs-contact cs-style2 cs-white_bg justify-content-center d-none">
           <div className="cs-contact_left cs-accent_bg position-relative">
             <h4 className="cs-contact_title cs-semi_bold cs-white">
               HOW TO NOMINATE:

@@ -3,7 +3,7 @@ import Modal from "react-bootstrap/Modal";
 
 import { Helmet } from "react-helmet";
 import { NavLink } from "react-router-dom";
-const AwardsCategory = () => {
+const   AwardsCategory = () => {
   return (
     <>
       <Helmet>

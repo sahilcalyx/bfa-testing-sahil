@@ -150,6 +150,9 @@ import AwardsCategory from "./Pages/AwardsCategory";
 import Cbdc_Central_bank_digital_currencies from "./Pages/Blogs/Cbdc_Central_bank_digital_currencies";
 import HowInstantPaymentsAreChangingConsumerExpectationsGlobally from "./Pages/Blogs/HowInstantPaymentsAreChangingConsumerExpectationsGlobally";
 import ManagingFraudRisksinaRealTime from "./Pages/Blogs/ManagingFraudRisksinaRealTime";
+import DigitalWallets from "./Pages/Blogs/DigitalWallets";
+import AiPoweredRiskCompliance from "./Pages/Blogs/AiPoweredRiskCompliance";
+import InvisibleFinancialBridge from "./Pages/Blogs/InvisibleFinancialBridge";
 
 function App() {
   const { pathname } = useLocation();
@@ -177,7 +180,8 @@ function App() {
         <Route path="/sponsors" element={<Sponsers />} />
         <Route path="/awards" element={<Awards />} />
       
-        <Route path="/awards-category" element={<AwardsCategory />} />
+        {/* <Route path="/awards-category" element={<AwardsCategory />} /> */}
+        <Route path="/awards-category" element={<Awards />} />
         <Route path="/registerfor-startup-pitch" element={<StartupPage />} />
         <Route path="/dinner-2024" element={<DinnerGallery />} />
         <Route path="/video-gallery-2024" element={<VideoGallery />} />
@@ -367,6 +371,18 @@ function App() {
         <Route
           path="/managing-fraud-risks-in-a-real-time-payments-world"
           element={<ManagingFraudRisksinaRealTime />}
+        />
+        <Route
+          path="/digital-wallets-the-gateway-to-the-future-of-financial-services"
+          element={<DigitalWallets />}
+        />
+        <Route
+          path="/ai-powered-risk-compliance-the-next-frontier-for-msbs-and-fintechs"
+          element={<AiPoweredRiskCompliance />}
+        />
+        <Route
+          path="/the-invisible-financial-bridge-how-msbs-power-migrant-and-cross-border-communities"
+          element={<InvisibleFinancialBridge />}
         />
 
         <Route

@@ -551,7 +551,7 @@ const Sponsors = () => {
       {/* SPONSOR FORM START */}
 
       <div
-        id="next_section"
+        id="sponsorship-form"
         className="cs-flying_img_wrap cs-style5 cs-parallax"
 
       >

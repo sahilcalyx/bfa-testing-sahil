@@ -15,7 +15,7 @@ return (
 
     <meta property="og:title" content="Brit Fintech Awards | MSB Disruptor of the Year" />
     <meta property="og:description" content="" />
-    <meta property="og:image" content="https://britfintechawards.com/assets/img/aword/MSB/msb-disruptor-of-the-year.png" />
+    <meta property="og:image" content="https://britfintechawards.com/assets/img/aword/2026/msb-disruptor-of-the-year-2026.png" />
   </Helmet>
 
   <div className="cs-height_90 cs-height_lg_90" />
@@ -61,7 +61,7 @@ return (
                 display: "flex",
                 justifyContent: "end",
                 fontWeight: "600",
-                color: "#f40181",
+                color: "#c61633",
               }}>
           <i className="fas fa-chevron-circle-left fs-4" /> Back to Awards
         </NavLink>
@@ -76,7 +76,7 @@ return (
                 animationDelay: "0.3s",
                 animationName: "fadeIn",
               }}>
-          <img src="../assets/img/aword/MSB/msb-disruptor-of-the-year.png"
+          <img src="../assets/img/aword/2026/msb-disruptor-of-the-year-2026.png"
             style={{ boxShadow: "3px 0 10px 0 #b3b3b3",borderRadius:'20px' }} alt=" MSB Disruptor of the year" />
         </div>
         <div className="cs-height_30 cs-height_lg_30"/>
