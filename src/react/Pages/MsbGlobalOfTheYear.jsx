@@ -135,7 +135,7 @@ return (
                 </em>
               </p>
             </div>
-            {/* <RegisterButton awardName="MSB of the year" /> */}
+            <RegisterButton awardName="MSB of the year" />
           </div>
         </div>
       </div>
