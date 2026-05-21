@@ -186,20 +186,31 @@ const InteractiveHero = () => {
               Celebrating Excellence in UK Financial Innovation
             </motion.p>
 
-            {/* Button */}
+            {/* Watch on YouTube Button */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.5, type: "spring", stiffness: 100 }}
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
+              className="mt-2"
             >
-              <NavLink
-                to="/nominate-now"
-                className="px-10 py-4.5 bg-white text-[#c8102e] font-semibold text-lg tracking-wider rounded-2xl uppercase transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.12)] hover:shadow-[0_15px_40px_rgba(200,16,46,0.35)] block"
+              <a
+                href="https://www.youtube.com/watch?v=syHZBHQIk4o"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-pro-1 uppercase tracking-wider flex items-center justify-center gap-3 text-center"
               >
-                Register Now
-              </NavLink>
+                {/* YouTube Icon */}
+                <svg
+                  className="w-5 h-5 fill-current flex-shrink-0"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.11C19.518 3.545 12 3.545 12 3.545s-7.518 0-9.388.508a3.003 3.003 0 0 0-2.11 2.11C0 8.033 0 12 0 12s0 3.967.502 5.837a3.003 3.003 0 0 0 2.11 2.11c1.87.508 9.388.508 9.388.508s7.518 0 9.388-.508a3.003 3.003 0 0 0 2.11-2.11C24 15.967 24 12 24 12s0-3.967-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                </svg>
+                <span className="whitespace-nowrap">Watch on YouTube</span>
+              </a>
             </motion.div>
           </div>
 
