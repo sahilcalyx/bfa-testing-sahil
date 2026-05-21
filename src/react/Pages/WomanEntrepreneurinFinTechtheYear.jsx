@@ -119,7 +119,7 @@ return (
                 </li>
                 <li>
                   <i className="fas fa-check cs-accent_color" />
-                  The Applicants must identify as a woman and be actively leading or founding a FinTech-related business or initiative.
+                  The applicants must identify as a woman and be actively leading or founding a FinTech-related business or initiative.
                 </li>
                 <li>
                   <i className="fas fa-check cs-accent_color" />
@@ -127,7 +127,7 @@ return (
                 </li>
                 <li>
                   <i className="fas fa-check cs-accent_color" />
-                  The Applicants must comply with all applicable laws and ethical standards.
+                  The applicants must comply with all applicable laws and ethical standards.
                 </li>
                 <li>
                   <i className="fas fa-check cs-accent_color" />

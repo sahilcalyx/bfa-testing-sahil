@@ -8,11 +8,18 @@ const RecentPosts = () => {
   // Dummy recent blog posts data (added 'url' property)
   const recentPosts = [
     {
+      title: "Financial inclusion in the UK: How fintech is bridging the gap for the underbanked",
+      date: "13 May, 2026",
+      image: "/assets/img/blogs/financial-inclusion-in-the-uk-how-fintech.jpg",
+      url: "/financial-inclusion-in-the-uk-how-fintech-is-bridging-the-gap-for-the-underbanked",
+    },
+    {
       title: "The invisible financial bridge: How MSBs power migrant and cross-border communities",
       date: "15 Apr, 2026",
       image: "../assets/img/blogs/The-invisible-financial-bridge.jpg",
       url: "/the-invisible-financial-bridge-how-msbs-power-migrant-and-cross-border-communities",
     },
+
     {
       title: "AI-Powered risk & compliance: The next frontier for MSBs and Fintechs",
       date: "24 Mar, 2026",
@@ -155,13 +162,26 @@ const RecentPosts = () => {
               {searchResults.map((post, index) => (
                 <li key={index}>
                   <div className="cs-recent_post">
-                    <a href={post.url} className="cs-recent_post_thumb">
-                      <img
-                        src={post.image}
-                        className="cs-recent_post_thumb_in cs-bg"
-                        alt={post.title}
-                      />
-                    </a>
+                    <NavLink to={post.url} className="cs-recent_post_thumb">
+                      {post.image ? (
+                        <img
+                          src={post.image}
+                          className="cs-recent_post_thumb_in cs-bg"
+                          alt={post.title}
+                        />
+                      ) : (
+                        <div 
+                          className="cs-recent_post_thumb_in" 
+                          style={{ 
+                            backgroundColor: '#000', 
+                            width: '100%', 
+                            height: '100%',
+                            border: '1px solid #222'
+                          }} 
+                        />
+                      )}
+                    </NavLink>
+
                     <div className="cs-recent_post_info">
                       <h3 className="cs-recent_post_title">
                         <NavLink to={post.url}>{post.title}</NavLink>

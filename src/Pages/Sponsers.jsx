@@ -31,25 +31,13 @@ const Sponsors = () => {
   const location = useLocation();
 
   useEffect(() => {
-    // If arriving with a hash, skip everything above and aggressively scroll to the form
-    const hash = window.location.hash;
-    if (hash === "#next_section" || hash === "#sponsorship-categories" || hash === "#sponsorship-form") {
-      const scrollToTarget = () => {
-        const targetElement = document.getElementById("next_section") || document.getElementById("sponsorship-form");
-        if (targetElement) {
-          // Calculate exact position minus any sticky navigation header
-          const y = targetElement.getBoundingClientRect().top + window.scrollY - 100;
-          window.scrollTo({ top: y, behavior: "smooth" });
-        }
-      };
-
-      // Fire the scroll immediately and again after React paints the PrcingTable chunk
-      scrollToTarget();
-      setTimeout(scrollToTarget, 100);
-      setTimeout(scrollToTarget, 500);
-      setTimeout(scrollToTarget, 1000);
+    if (location.hash === "#sponsorship-form") {
+      const mapElement = document.getElementById("sponsorship-form");
+      if (mapElement) {
+        mapElement.scrollIntoView({ behavior: "smooth" });
+      }
     }
-  }, [location.hash]);
+  }, [location]);
 
   const handleTitleChange = (e) => {
     const { value } = e.target;
@@ -449,7 +437,7 @@ const Sponsors = () => {
             <p className="pb-0 mb-0 text-left text-white">
               Invest in Innovation: Sponsor the Brit Fintech Awards.
             </p>
-            <div className="cs-height_10 cs-height_lg_0" />
+            <div className="cs-height_10 cs-height_lg_0" id="sponsorship-categories" />
           </div>
         </div>
         <div
@@ -554,7 +542,7 @@ const Sponsors = () => {
               <h5 className="text-white ">Sponsor us and</h5>
               <ul className="text-white">
                 <li>
-                  <span className="text-aqua">    
+                  <span className="text-aqua">
                     Showcase Your Brand to FinTech Leaders.
                   </span>{" "}
                   <br />

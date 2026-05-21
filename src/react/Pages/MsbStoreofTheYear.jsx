@@ -34,7 +34,7 @@ return (
           <strong>MSB Store</strong> <br />of the year
         </h1>
         <p className="pb-0 mb-0 text-left" style={{color:'#fff'}}>
-        Setting the Standard in Financial Excellence: Celebrating the Best Store in Money Services for Outstanding Service and Innovation.
+       Setting the standard in financial excellence: celebrating the best store in money services for outstanding service and innovation.
         </p>
         <div className="cs-height_10 cs-height_lg_0" />
       </div>

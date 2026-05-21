@@ -37,7 +37,7 @@ return (
           <strong>FinTech</strong> <br /> of the year
         </h1>
         <p className="pb-0 mb-0 text-left" style={{color:'#fff'}}>
-        Honouring the fintech pioneers driving the future of finance.
+        Honouring the FinTech pioneers driving the future of finance.
         </p>
         <div className="cs-height_10 cs-height_lg_0" />
       </div>

@@ -6,7 +6,7 @@ const AwardsTermsAndCondtion = () => {
     <>
         <div className="row">
               <div className="col-12">
-                <h4>Terms And Conditions</h4>
+                <h4>Terms and Conditions</h4>
                 <ul>
                   <li>
                   Each company can nominate up to 3 categories only.

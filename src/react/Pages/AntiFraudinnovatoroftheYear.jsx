@@ -118,7 +118,7 @@ return (
                 </li>
                 <li>
                   <i className="fas fa-check cs-accent_color" />
-                  The Applicants must be an individual, team, or organisation that has developed innovative solutions or initiatives to combat fraud.
+                  The applicants must be an individual, team, or organisation that has developed innovative solutions or initiatives to combat fraud.
                 </li>
                 <li>
                   <i className="fas fa-check cs-accent_color" />
@@ -126,11 +126,11 @@ return (
                 </li>
                 <li>
                   <i className="fas fa-check cs-accent_color" />
-                  The Applicants’s work must demonstrate measurable impact in preventing, detecting, or mitigating fraud.
+                  The applicants’s work must demonstrate measurable impact in preventing, detecting, or mitigating fraud.
                 </li>
                 <li>
                   <i className="fas fa-check cs-accent_color" />
-                  The Applicants must adhere to ethical and legal standards in their field.
+                  The applicants must adhere to ethical and legal standards in their field.
                 </li>
                 <li>
                   <i className="fas fa-check cs-accent_color" />

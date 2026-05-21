@@ -49,7 +49,7 @@ return (
           <strong>Progressive Money Exchanger</strong> <br /> MSB of the year
         </h1>
         <p className="pb-0 mb-0 text-left" style={{color:'#fff'}}>
-        Recognising the champions of innovation in the moneycurrency exchange sector.
+        Recognising the champions of innovation in the money and currency exchange sector.
         </p>
         <div className="cs-height_10 cs-height_lg_0" />
       </div>

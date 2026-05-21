@@ -59,7 +59,7 @@ const AnimatedStats = ({ stats }) => {
   };
 
   return (
-    <div className="stats-wrapper">
+    <div className="stats-wrapper" id="bfa-stats-section">
       {stats.map((stat, index) => (
         <div
           className="stat-card-modern"

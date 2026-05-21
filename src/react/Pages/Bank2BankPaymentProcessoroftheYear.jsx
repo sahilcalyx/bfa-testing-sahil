@@ -125,7 +125,7 @@ return (
                 <li>
                   <i className="fas fa-check cs-accent_color" />
                   Applicants must demonstrate significant contributions to the industry, innovation, and excellence in
-                  the field of OPEN Banking payments.
+                  the field of open banking payments.
                 </li>
                 <li>
                   <i className="fas fa-check cs-accent_color" />

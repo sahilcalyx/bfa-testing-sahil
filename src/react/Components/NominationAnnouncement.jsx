@@ -11,16 +11,10 @@ const NominationAnnouncement = () => {
         <div className="row justify-content-center">
           <div className="col-lg-11">
             <div className="announcement-box">
-              {/* Technical Corner Nodes (Squares) */}
-              <div className="node node-tl"></div>
-              <div className="node node-tr"></div>
-              <div className="node node-bl"></div>
-              <div className="node node-br"></div>
-              
               <div className="announcement-content text-start">
-                <p className="sub-label mb-3 fw-medium">Coming soon</p>
                 <h2 className="blueprint-headline mb-0">
-                  "Nominations to <span className="fw-bold text-dark">open soon.</span> <br /> <span className="fw-bold text-dark">Stay tuned</span>"
+                  Nominations to <span className="fw-bold text-dark">open soon.</span> <br /> 
+                  <span className="fw-bold text-dark">Stay tuned...</span>
                 </h2>
               </div>
             </div>
@@ -89,7 +83,6 @@ const NominationAnnouncement = () => {
         .announcement-box {
           position: relative;
           background: #ffffff;
-          border: 2px solid rgba(255, 0, 0, 0.4);
           padding: 80px 60px;
           border-radius: 0;
           animation: fadeInUp 1s ease-out forwards;
@@ -106,31 +99,12 @@ const NominationAnnouncement = () => {
           }
         }
 
-        /* Technical Corner Nodes - Red Squares */
-        .node {
-          position: absolute;
-          width: 12px;
-          height: 12px;
-          background-color: #ff0000;
-          z-index: 2;
-        }
-        .node-tl { top: -6px; left: -6px; }
-        .node-tr { top: -6px; right: -6px; }
-        .node-bl { bottom: -6px; left: -6px; }
-        .node-br { bottom: -6px; right: -6px; }
-
-        .sub-label {
-          color: #ff0000;
-          font-size: 1rem;
-          font-family: inherit;
-        }
-
         .blueprint-headline {
-          font-size: 4.5rem;
+          font-size: 3.5rem;
           line-height: 1.1;
           color: #333;
           font-weight: 300;
-          letter-spacing: -3px;
+          letter-spacing: -2px;
           font-family: inherit;
         }
 
@@ -153,11 +127,6 @@ const NominationAnnouncement = () => {
           .announcement-box {
              padding: 40px 20px;
           }
-           .node { width: 8px; height: 8px; }
-           .node-tl { top: -4px; left: -4px; }
-           .node-tr { top: -4px; right: -4px; }
-           .node-bl { bottom: -4px; left: -4px; }
-           .node-br { bottom: -4px; right: -4px; }
         }
       `}</style>
     </div>

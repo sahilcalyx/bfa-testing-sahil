@@ -153,6 +153,8 @@ import ManagingFraudRisksinaRealTime from "./Pages/Blogs/ManagingFraudRisksinaRe
 import DigitalWallets from "./Pages/Blogs/DigitalWallets";
 import AiPoweredRiskCompliance from "./Pages/Blogs/AiPoweredRiskCompliance";
 import InvisibleFinancialBridge from "./Pages/Blogs/InvisibleFinancialBridge";
+import FinancialInclusionUK from "./Pages/Blogs/FinancialInclusionUK";
+
 
 function App() {
   const { pathname } = useLocation();
@@ -684,7 +686,12 @@ function App() {
         />
 
         <Route path="/fintech-in-the-uk" element={<FinTechintheUK />} />
+        <Route
+          path="/financial-inclusion-in-the-uk-how-fintech-is-bridging-the-gap-for-the-underbanked"
+          element={<FinancialInclusionUK />}
+        />
       </Routes>
+
       {!hideHeaderFooter && <Footer />}
     </div>
   );

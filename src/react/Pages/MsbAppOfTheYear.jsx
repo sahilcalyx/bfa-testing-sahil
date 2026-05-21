@@ -34,7 +34,7 @@ return (
           <strong>MSB App</strong> <br /> of the year
         </h1>
         <p className="pb-0 mb-0 text-left" style={{color:'#fff'}}>
-        Redefining Financial Innovation: Honoring the Best Application in Money Services for Unparalleled Excellence and Impact.
+        Redefining financial innovation: honoring the best application in money services for unparalleled excellence and impact.
         </p>
         <div className="cs-height_10 cs-height_lg_0" />
       </div>

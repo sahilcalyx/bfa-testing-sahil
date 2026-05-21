@@ -118,7 +118,7 @@ return (
                 </li>
                 <li>
                   <i className="fas fa-check cs-accent_color" />
-                  Fintech and MSBs applying for this award should prove their innovative strategy to fight Money Laundering and Fraud by Compling with UK Regulations.
+                  Fintech and MSBs applying for this award should prove their innovative strategy to fight money laundering and fraud by complying with UK regulations.
                 </li>
                 <li>
                   <i className="fas fa-check cs-accent_color" />

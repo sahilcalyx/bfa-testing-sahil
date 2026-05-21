@@ -36,7 +36,7 @@ return (
           <strong> MSB Disruptor</strong> <br /> of the year
         </h1>
         <p className="pb-0 mb-0 text-left" style={{color:'#fff'}}>
-        Innovate, Disrupt, Dominate - Honoring the Masters of Disruption in the Money Service Businesses.
+        Innovate, disrupt, dominate - honoring the masters of disruption in the money service businesses.
         </p>
         <div className="cs-height_10 cs-height_lg_0" />
       </div>
@@ -116,11 +116,11 @@ return (
                 </li>
                 <li>
                   <i className="fas fa-check cs-accent_color" />
-                  The Applicants must be an individual or organisation actively operating as a Money Services Business.
+                 The applicants must be individuals or organisations actively operating as money services businesses.
                 </li>
                 <li>
                   <i className="fas fa-check cs-accent_color" />
-                  The Applicants disruption should be evidenced by innovative practices, technologies, or approaches introduced within the last two years.
+                  The applicants disruption should be evidenced by innovative practices, technologies, or approaches introduced within the last two years.
                 </li>
                 <li>
                   <i className="fas fa-check cs-accent_color" />

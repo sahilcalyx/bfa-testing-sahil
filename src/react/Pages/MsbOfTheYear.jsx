@@ -120,7 +120,7 @@ return (
                 </li>
                 <li>
                   <i className="fas fa-check cs-accent_color" />
-                  Currency Exchange, Money Remittance MSB busineses may have contributed via technological advancement for better accessibility of digitally ordering currencies or remittance products. 
+                  Currency exchange, money remittance MSB businesses may have contributed via technological advancement for better accessibility of digitally ordering currencies or remittance products. 
                 </li>
                 <li>
                   <i className="fas fa-check cs-accent_color" />

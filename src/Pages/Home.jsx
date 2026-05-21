@@ -12,7 +12,7 @@ import TestimonialSlider from "../Components/Testmonials/TestimonialSlider";
 import AnimatedStats from "../Components/AnimatedStats";
 import FlipBanner from "../Components/FlipBanner";
 import SponsorsSlider2025 from "../Components/SliderBigBan/SponsorsSlider2025";
-import DynamicSliderVideo from "../Components/SliderBigBan/DynamicSlider-1";
+import DynamicSliderSplit from "../Components/SliderBigBan/DynamicSliderSplit";
 
 
 const Home = () => {
@@ -260,7 +260,7 @@ Brit Fintech Awards 2025."
         {/* <div className="cs-height_75 cs-height_lg_75" /> */}
         {/* Start Hero Seciton */}
       
-        <DynamicSliderVideo/>
+        <DynamicSliderSplit />
         {/* <DynamicSlider/> */}
         <div className="cs-height_0 cs-height_lg_0" />
              <SponsorsSlider2025/>

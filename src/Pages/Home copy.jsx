@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet";
 
 import ErrorBoundary from "../Components/ErrorBoundary";
 import GallerySection from "../Components/GallerySection";
-import DynamicSlider from "../Components/SliderBigBan/DynamicSlider";
+import DynamicSlider from "../Components/SliderBigBan/DynamicSlider copy";
 import SponsorsSlider from "../Components/SliderBigBan/SponsorsSlider";
 import TestimonialsSlider from "../Components/TestimonialsSlider";
 import TestimonialSlider from "../Components/Testmonials/TestimonialSlider";

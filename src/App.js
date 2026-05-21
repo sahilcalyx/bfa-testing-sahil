@@ -71,9 +71,10 @@ import StartupPage from "./Pages/2025/StartupPage";
 // import Chatbot from "./Components/ChatForm";
 import MsbGlobalOfTheYear from "./Pages/MsbGlobalOfTheYear";
 import FinTechGlobaloftheYear from "./Pages/FinTechGlobaloftheYear";
-import Blogs from "./Pages/Blogs/Blogs";
-import BlogDetails from "./Pages/Blogs/BlogDetails";
-import FinTechintheUK from "./Pages/Blogs/FinTechintheUK";
+import Blogs from "./react/Pages/Blogs/Blogs";
+import BlogDetails from "./react/Pages/Blogs/BlogDetails";
+import FinTechintheUK from "./react/Pages/Blogs/FinTechintheUK";
+
 import TravelCashierDetails2025 from "./Pages/2025/OurSponsors/TravelCashierDetails2025";
 import TruslyPayDetails2025 from "./Pages/2025/OurSponsors/TruslyPayDetails2025";
 import MercuryDenatiDetails2025 from "./Pages/2025/OurSponsors/MercuryDenatiDetails2025";
@@ -85,7 +86,9 @@ import VolumePaySponsorDetails2025 from "./Pages/VolumePaySponsorDetails2025";
 import ScrollToHashElement from "./Components/SliderBigBan/ScrollToHashElement";
 import LeatherbackSponsorDetails from "./Pages/LeatherbackSponsorDetails";
 import KeyNoteDetails from "./Pages/KeyNoteDetails";
-import AiMsbBlog from "./Pages/Blogs/AiMsbBlog";
+import AiMsbBlog from "./react/Pages/Blogs/AiMsbBlog";
+import FinancialInclusionUK from "./react/Pages/Blogs/FinancialInclusionUK";
+
 
 function App() {
   const location = useLocation();
@@ -278,7 +281,9 @@ function App() {
         
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/fintech-in-the-uk" element={<FinTechintheUK />} />
+        <Route path="/financial-inclusion-in-the-uk-how-fintech-is-bridging-the-gap-for-the-underbanked" element={<FinancialInclusionUK />} />
       </Routes>
+
       {!hideHeaderFooter && <Footer />}
     </div>
   );

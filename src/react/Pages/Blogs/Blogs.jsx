@@ -6,6 +6,14 @@ const Blog = () => {
   // ===== BLOG DATA =====
   const blogsData = [
     {
+      title: "Financial inclusion in the UK: How fintech is bridging the gap for the underbanked",
+      slug: "financial-inclusion-in-the-uk-how-fintech-is-bridging-the-gap-for-the-underbanked",
+      img: "/assets/img/blogs/financial-inclusion-in-the-uk-how-fintech.jpg",
+      alt: "Financial inclusion in the UK",
+      date: "13 May, 2026",
+      excerpt: "In the UK, financial exclusion is no longer about not...",
+    },
+    {
       title: "The invisible financial bridge: How MSBs power migrant and cross-border communities",
       slug: "the-invisible-financial-bridge-how-msbs-power-migrant-and-cross-border-communities",
       img: "/assets/img/blogs/The-invisible-financial-bridge.jpg",
@@ -13,6 +21,7 @@ const Blog = () => {
       date: "15 Apr, 2026",
       excerpt: "Sending money home is more than a financial transaction...",
     },
+
     {
       title: "AI-Powered risk & compliance: The next frontier for MSBs and Fintechs",
       slug: "ai-powered-risk-compliance-the-next-frontier-for-msbs-and-fintechs",
@@ -192,13 +201,26 @@ const Blog = () => {
                   <div className="cs-icon_box cs-style3">
                     <div className="cs-center">
                       <NavLink to={`/${blog.slug}`}>
-                        <img
-                          className="rounded-3"
-                          src={blog.img}
-                          alt={blog.alt}
-                        />
+                        {blog.img ? (
+                          <img
+                            className="rounded-3"
+                            src={blog.img}
+                            alt={blog.alt}
+                          />
+                        ) : (
+                          <div 
+                            className="rounded-3" 
+                            style={{ 
+                              width: '100%', 
+                              height: '250px', 
+                              backgroundColor: '#000',
+                              border: '1px solid #222'
+                            }} 
+                          />
+                        )}
                       </NavLink>
                     </div>
+
                     <div className="cs-post_date pt-2">
                       <i className="far fa-calendar-alt" /> {blog.date}
                     </div>
