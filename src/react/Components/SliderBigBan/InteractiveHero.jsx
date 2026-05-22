@@ -63,7 +63,7 @@ const InteractiveHero = () => {
         {/* ================= LEFT HALF: BRAND & REGISTRATION ================= */}
         <div className={`relative bg-black flex flex-col justify-center overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] z-10 ${isExpanded
           ? "w-0 lg:w-0 h-0 lg:h-full min-h-0 lg:min-h-0 p-0 opacity-0 pointer-events-none"
-          : "w-full lg:w-1/2 min-h-[50vh] lg:min-h-0 pt-32 pb-12 px-6 md:p-12 lg:px-16 lg:pb-16 lg:pt-36 opacity-100"
+          : "w-full lg:w-1/2 min-h-[50vh] lg:min-h-0 pt-32 pb-12 px-6 md:p-12 lg:px-8 xl:px-16 lg:pb-16 lg:pt-36 opacity-100"
           }`}>
 
           {/* Animated decorative blobs in background */}
@@ -147,7 +147,7 @@ const InteractiveHero = () => {
           <div className={`flex-1 flex flex-col justify-center items-center text-center my-12 lg:my-0 z-10 max-w-2xl mx-auto transition-all duration-500 ${isExpanded ? "opacity-0 scale-95 pointer-events-none" : "opacity-100 scale-100"
             }`}>
             {/* Title */}
-            <h1 className="text-[2.8rem] sm:text-[4.5rem] md:text-[5.2rem] lg:text-[4.5rem] xl:text-[5.8rem] leading-[0.9] tracking-tight uppercase text-white font-outfit select-none">
+            <h1 className="text-[2.6rem] sm:text-[3.8rem] md:text-[4.5rem] lg:text-[3rem] xl:text-[3.8rem] 2xl:text-[4.8rem] leading-[0.9] tracking-tight uppercase text-white font-outfit select-none">
               <motion.span
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -178,7 +178,7 @@ const InteractiveHero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-white/80 text-sm sm:text-base font-light tracking-wide mt-6 mb-5 font-montserrat max-w-xl leading-relaxed text-center"
+              className="text-white/80 text-sm md:text-base lg:text-xs xl:text-sm 2xl:text-base font-light tracking-wide mt-6 mb-5 font-montserrat max-w-xl leading-relaxed text-center"
             >
               This year, <span className="font-semibold text-white">Brit FinTech Awards 2026</span> rises above London’s financial core for a night built for the people shaping the future of fintech.
             </motion.p>
@@ -188,7 +188,7 @@ const InteractiveHero = () => {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.45 }}
-              className="text-[#c8102e] font-bold uppercase tracking-[0.25em] text-[10px] sm:text-xs mb-6 select-none font-outfit"
+              className="text-[#c8102e] font-bold uppercase tracking-[0.25em] text-[10px] sm:text-xs lg:text-[10px] xl:text-xs mb-6 select-none font-outfit"
             >
               The next chapter starts here.
             </motion.p>
@@ -197,23 +197,23 @@ const InteractiveHero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5 }}
-              className="flex flex-col sm:flex-row items-start sm:items-start justify-center gap-4 sm:gap-8 w-fit sm:w-full mx-auto mt-2 mb-6 px-4"
+              className="flex flex-col sm:flex-row items-start justify-center gap-4 sm:gap-6 lg:gap-4 xl:gap-8 w-fit sm:w-full mx-auto mt-2 mb-6 px-4"
             >
               {/* Date Box */}
               <div className="flex flex-row items-start justify-start gap-3 w-fit shrink-0 text-left">
-                <Calendar className="text-white/95 shrink-0 mt-0.5 w-5 h-5 lg:w-6 lg:h-6" />
-                <p className="text-sm sm:text-base lg:text-lg xl:text-xl font-bold text-white font-outfit tracking-wide leading-none whitespace-nowrap">9th October 2026</p>
+                <Calendar className="text-white/95 shrink-0 mt-0.5 w-5 h-5 lg:w-4 lg:h-4 xl:w-5 xl:h-5 2xl:w-6 2xl:h-6" />
+                <p className="text-sm sm:text-base lg:text-sm xl:text-base 2xl:text-lg font-bold text-white font-outfit tracking-wide leading-none whitespace-nowrap">9th October 2026</p>
               </div>
 
               {/* Divider */}
-              <div className="hidden sm:block w-[1px] h-5 lg:h-6 bg-white/15 shrink-0 mt-0.5" />
+              <div className="hidden sm:block w-[1px] h-5 lg:h-4 xl:h-5 2xl:h-6 bg-white/15 shrink-0 mt-0.5" />
 
               {/* Venue Box */}
               <div className="flex flex-row items-start justify-start gap-3 w-fit shrink-0 text-left">
-                <MapPin className="text-white/95 shrink-0 mt-0.5 w-5 h-5 lg:w-6 lg:h-6" />
+                <MapPin className="text-white/95 shrink-0 mt-0.5 w-5 h-5 lg:w-4 lg:h-4 xl:w-5 xl:h-5 2xl:w-6 2xl:h-6" />
                 <div className="flex flex-col items-start justify-start">
-                  <p className="text-sm sm:text-base lg:text-lg xl:text-xl font-bold text-white font-outfit leading-none whitespace-nowrap">122 Leadenhall St, London</p>
-                  <p className="text-sm sm:text-base lg:text-lg xl:text-xl font-bold text-white font-outfit leading-none whitespace-nowrap -mt-1 md:-mt-1.5">Landing Forty-Two</p>
+                  <p className="text-sm sm:text-base lg:text-sm xl:text-base 2xl:text-lg font-bold text-white font-outfit leading-none whitespace-nowrap">122 Leadenhall St, London</p>
+                  <p className="text-sm sm:text-base lg:text-sm xl:text-base 2xl:text-lg font-bold text-white font-outfit leading-none whitespace-nowrap -mt-1 md:-mt-1.5 lg:-mt-0.5 xl:-mt-1">Landing Forty-Two</p>
                 </div>
               </div>
             </motion.div>
@@ -223,7 +223,7 @@ const InteractiveHero = () => {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.55 }}
-              className="text-[20px] sm:text-xs text-white/45 font-semibold tracking-[0.2em]  mt-2 mb-6 text-center select-none font-montserrat"
+              className="text-xs sm:text-sm lg:text-[10px] xl:text-xs 2xl:text-sm text-white/45 font-semibold tracking-[0.2em] mt-2 mb-6 text-center select-none font-montserrat"
             >
               London, we're just getting started Stay tuned <br />See you at Landing 42
             </motion.p>
