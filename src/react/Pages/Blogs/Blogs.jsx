@@ -5,14 +5,14 @@ import { NavLink } from "react-router-dom";
 const Blog = () => {
   // ===== BLOG DATA =====
   const blogsData = [
-    {
-      title: "Financial inclusion in the UK: How fintech is bridging the gap for the underbanked",
-      slug: "financial-inclusion-in-the-uk-how-fintech-is-bridging-the-gap-for-the-underbanked",
-      img: "/assets/img/blogs/financial-inclusion-in-the-uk-how-fintech.jpg",
-      alt: "Financial inclusion in the UK",
-      date: "13 May, 2026",
-      excerpt: "In the UK, financial exclusion is no longer about not...",
-    },
+    // {
+    //   title: "Financial inclusion in the UK: How fintech is bridging the gap for the underbanked",
+    //   slug: "financial-inclusion-in-the-uk-how-fintech-is-bridging-the-gap-for-the-underbanked",
+    //   img: "/assets/img/blogs/financial-inclusion-in-the-uk-how-fintech.jpg",
+    //   alt: "Financial inclusion in the UK",
+    //   date: "13 May, 2026",
+    //   excerpt: "In the UK, financial exclusion is no longer about not...",
+    // },
     {
       title: "The invisible financial bridge: How MSBs power migrant and cross-border communities",
       slug: "the-invisible-financial-bridge-how-msbs-power-migrant-and-cross-border-communities",
@@ -208,14 +208,14 @@ const Blog = () => {
                             alt={blog.alt}
                           />
                         ) : (
-                          <div 
-                            className="rounded-3" 
-                            style={{ 
-                              width: '100%', 
-                              height: '250px', 
+                          <div
+                            className="rounded-3"
+                            style={{
+                              width: '100%',
+                              height: '250px',
                               backgroundColor: '#000',
                               border: '1px solid #222'
-                            }} 
+                            }}
                           />
                         )}
                       </NavLink>

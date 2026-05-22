@@ -147,7 +147,7 @@ const InteractiveHero = () => {
           <div className={`flex-1 flex flex-col justify-center items-center text-center my-12 lg:my-0 z-10 max-w-2xl mx-auto transition-all duration-500 ${isExpanded ? "opacity-0 scale-95 pointer-events-none" : "opacity-100 scale-100"
             }`}>
             {/* Title */}
-            <h1 className="text-[2.6rem] sm:text-[3.8rem] md:text-[4.5rem] lg:text-[3rem] xl:text-[3.8rem] 2xl:text-[4.8rem] leading-[0.9] tracking-tight uppercase text-white font-outfit select-none">
+            <h1 className="text-[2.6rem] sm:text-[3.8rem] md:text-[4.5rem] lg:text-[2.2rem] xl:text-[2.8rem] 2xl:text-[3.6rem] leading-[0.9] tracking-tight uppercase text-white font-outfit select-none">
               <motion.span
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -172,23 +172,23 @@ const InteractiveHero = () => {
               >
                 Awards
               </motion.span>
+              <motion.span
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+                className="block font-semibold"
+              >
+                2026
+              </motion.span>
             </h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-white/80 text-sm md:text-base lg:text-xs xl:text-sm 2xl:text-base font-light tracking-wide mt-6 mb-5 font-montserrat max-w-xl leading-relaxed text-center"
-            >
-              This year, <span className="font-semibold text-white">Brit FinTech Awards 2026</span> rises above London’s financial core for a night built for the people shaping the future of fintech.
-            </motion.p>
 
             {/* Tagline */}
             <motion.p
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.45 }}
-              className="text-[#c8102e] font-bold uppercase tracking-[0.25em] text-[10px] sm:text-xs lg:text-[10px] xl:text-xs mb-6 select-none font-outfit"
+              className="text-[#c8102e] font-bold uppercase tracking-[0.25em] text-[14px] sm:text-[16px] lg:text-[14px] xl:text-[16px] 2xl:text-[18px] mb-6 select-none font-outfit"
             >
               The next chapter starts here.
             </motion.p>
@@ -197,36 +197,30 @@ const InteractiveHero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5 }}
-              className="flex flex-col sm:flex-row items-start justify-center gap-4 sm:gap-6 lg:gap-4 xl:gap-8 w-fit sm:w-full mx-auto mt-2 mb-6 px-4"
+              className="flex flex-col sm:grid sm:grid-cols-[1fr_auto_1fr] items-center sm:items-start justify-center gap-4 sm:gap-6 lg:gap-3 xl:gap-4 2xl:gap-6 w-fit sm:w-full mx-auto mt-2 mb-6 px-4"
             >
               {/* Date Box */}
-              <div className="flex flex-row items-start justify-start gap-3 w-fit shrink-0 text-left">
-                <Calendar className="text-white/95 shrink-0 mt-0.5 w-5 h-5 lg:w-4 lg:h-4 xl:w-5 xl:h-5 2xl:w-6 2xl:h-6" />
-                <p className="text-sm sm:text-base lg:text-sm xl:text-base 2xl:text-lg font-bold text-white font-outfit tracking-wide leading-none whitespace-nowrap">9th October 2026</p>
+              <div className="flex flex-row items-start gap-3 w-fit sm:ml-auto text-left sm:text-right">
+                <Calendar className="text-white/95 shrink-0 mt-0.5 w-5 h-5 lg:w-3.5 lg:h-3.5 xl:w-4 xl:h-4 2xl:w-5 2xl:h-5" />
+                <p className="text-xs sm:text-sm lg:text-[11px] xl:text-xs 2xl:text-sm font-bold text-white font-outfit tracking-wide leading-none whitespace-nowrap m-0">9th October 2026</p>
               </div>
 
               {/* Divider */}
-              <div className="hidden sm:block w-[1px] h-5 lg:h-4 xl:h-5 2xl:h-6 bg-white/15 shrink-0 mt-0.5" />
+              <div className="hidden sm:block w-[1px] h-5 lg:h-3.5 xl:h-4 2xl:h-5 bg-white/15 shrink-0 mt-0.5" />
 
               {/* Venue Box */}
-              <div className="flex flex-row items-start justify-start gap-3 w-fit shrink-0 text-left">
-                <MapPin className="text-white/95 shrink-0 mt-0.5 w-5 h-5 lg:w-4 lg:h-4 xl:w-5 xl:h-5 2xl:w-6 2xl:h-6" />
+              <div className="flex flex-row items-start gap-3 w-fit text-left">
+                <MapPin className="text-white/95 shrink-0 mt-0.5 w-5 h-5 lg:w-3.5 lg:h-3.5 xl:w-4 xl:h-4 2xl:w-5 2xl:h-5" />
                 <div className="flex flex-col items-start justify-start">
-                  <p className="text-sm sm:text-base lg:text-sm xl:text-base 2xl:text-lg font-bold text-white font-outfit leading-none whitespace-nowrap">122 Leadenhall St, London</p>
-                  <p className="text-sm sm:text-base lg:text-sm xl:text-base 2xl:text-lg font-bold text-white font-outfit leading-none whitespace-nowrap -mt-1 md:-mt-1.5 lg:-mt-0.5 xl:-mt-1">Landing Forty-Two</p>
+                  <p className="text-xs sm:text-sm lg:text-[11px] xl:text-xs 2xl:text-sm font-bold text-white font-outfit leading-none whitespace-nowrap m-0">Landing Forty-Two</p>
+                  <p className="text-xs sm:text-sm lg:text-[11px] xl:text-xs 2xl:text-sm font-bold text-white font-outfit leading-none whitespace-nowrap m-0 mt-0.5">122 Leadenhall Street,</p>
+                  <p className="text-xs sm:text-sm lg:text-[11px] xl:text-xs 2xl:text-sm font-bold text-white font-outfit leading-none whitespace-nowrap m-0 mt-0.5">London EC3V 4AB</p>
                 </div>
               </div>
             </motion.div>
 
             {/* Outro Footer Teaser */}
-            <motion.p
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.55 }}
-              className="text-xs sm:text-sm lg:text-[10px] xl:text-xs 2xl:text-sm text-white/45 font-semibold tracking-[0.2em] mt-2 mb-6 text-center select-none font-montserrat"
-            >
-              London, we're just getting started Stay tuned <br />See you at Landing 42
-            </motion.p>
+
 
             {/* Watch on YouTube Button */}
             <motion.div
@@ -241,11 +235,11 @@ const InteractiveHero = () => {
                 href="https://youtu.be/o6WjXbRSEFo?si=uPterkW0RdU1MlC4"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-pro-1 uppercase tracking-wider flex items-center justify-center gap-3 text-center"
+                className="btn-pro-1 uppercase tracking-wider flex items-center justify-center gap-3 text-center lg:!text-xs lg:!py-2 lg:!px-4 xl:!text-sm xl:!py-2.5 xl:!px-5 2xl:!text-base 2xl:!py-3 2xl:!px-6"
               >
                 {/* YouTube Icon */}
                 <svg
-                  className="w-5 h-5 fill-current flex-shrink-0"
+                  className="w-5 h-5 fill-current flex-shrink-0 lg:w-4 lg:h-4 xl:w-4.5 xl:h-4.5 2xl:w-5 2xl:h-5"
                   viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg"
                 >
