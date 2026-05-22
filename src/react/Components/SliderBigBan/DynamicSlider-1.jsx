@@ -6,7 +6,7 @@ const DynamicSliderVideo = () => {
   return (
     <ScrollExpandMedia
       mediaType="video"
-      mediaSrc="/assets/video/bfa-banner-videood.mp4"
+      mediaSrc="/assets/video/bfa-banner-video.mp4"
       titlePart1="The Brit"
       titlePart2="Fintech Awards"
       subtitle={
