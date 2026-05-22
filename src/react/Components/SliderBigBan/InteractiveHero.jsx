@@ -202,7 +202,7 @@ const InteractiveHero = () => {
               {/* Date Box */}
               <div className="flex flex-row items-start gap-3 w-fit sm:ml-auto text-left sm:text-right">
                 <Calendar className="text-white/95 shrink-0 mt-0.5 w-5 h-5 lg:w-3.5 lg:h-3.5 xl:w-4 xl:h-4 2xl:w-5 2xl:h-5" />
-                <p className="text-xs sm:text-sm lg:text-[11px] xl:text-xs 2xl:text-sm font-bold text-white font-outfit tracking-wide leading-none whitespace-nowrap m-0">9th October 2026</p>
+                <p className="text-sm sm:text-sm lg:text-[11px] xl:text-xs 2xl:text-sm font-bold text-white font-outfit tracking-wide leading-normal sm:leading-none whitespace-nowrap m-0">9th October 2026</p>
               </div>
 
               {/* Divider */}
@@ -212,9 +212,9 @@ const InteractiveHero = () => {
               <div className="flex flex-row items-start gap-3 w-fit text-left">
                 <MapPin className="text-white/95 shrink-0 mt-0.5 w-5 h-5 lg:w-3.5 lg:h-3.5 xl:w-4 xl:h-4 2xl:w-5 2xl:h-5" />
                 <div className="flex flex-col items-start justify-start">
-                  <p className="text-xs sm:text-sm lg:text-[11px] xl:text-xs 2xl:text-sm font-bold text-white font-outfit leading-none whitespace-nowrap m-0">Landing Forty-Two</p>
-                  <p className="text-xs sm:text-sm lg:text-[11px] xl:text-xs 2xl:text-sm font-bold text-white font-outfit leading-none whitespace-nowrap m-0 mt-0.5">122 Leadenhall Street,</p>
-                  <p className="text-xs sm:text-sm lg:text-[11px] xl:text-xs 2xl:text-sm font-bold text-white font-outfit leading-none whitespace-nowrap m-0 mt-0.5">London EC3V 4AB</p>
+                  <p className="text-sm sm:text-sm lg:text-[11px] xl:text-xs 2xl:text-sm font-bold text-white font-outfit leading-normal sm:leading-none whitespace-nowrap m-0">Landing Forty-Two</p>
+                  <p className="text-sm sm:text-sm lg:text-[11px] xl:text-xs 2xl:text-sm font-bold text-white font-outfit leading-normal sm:leading-none whitespace-nowrap m-0 mt-1 sm:mt-0.5">122 Leadenhall Street,</p>
+                  <p className="text-sm sm:text-sm lg:text-[11px] xl:text-xs 2xl:text-sm font-bold text-white font-outfit leading-normal sm:leading-none whitespace-nowrap m-0 mt-1 sm:mt-0.5">London EC3V 4AB</p>
                 </div>
               </div>
             </motion.div>
