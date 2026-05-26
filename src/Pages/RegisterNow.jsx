@@ -27,7 +27,7 @@ const RegisterNow = () => {
     email: "",
     uploadfile: null,
     uploadfileoptional: null,
-    howmanyperson: "",
+    howmanyperson: "0",
     companyregnumber: "",
     companynm: "",
     companyaddress: "",
@@ -85,75 +85,75 @@ const RegisterNow = () => {
     </Tooltip>
   );
 
-    const renderTooltipTwo = (props) => (
+  const renderTooltipTwo = (props) => (
     <Tooltip id="button-tooltip" {...props}>
-  For Brit FinTech Awards and MSB Industry applicants, uploading supporting documents can strengthen your submission.
+      For Brit FinTech Awards and MSB Industry applicants, uploading supporting documents can strengthen your submission.
     </Tooltip>
   );
-const handleTextAreaChange = (e) => {
-  const { id, value } = e.target;
+  const handleTextAreaChange = (e) => {
+    const { id, value } = e.target;
 
-  // Step 1: Ensure single space after commas
-  let formattedValue = value.replace(/,\s*/g, ", ");
+    // Step 1: Ensure single space after commas
+    let formattedValue = value.replace(/,\s*/g, ", ");
 
-  // Step 2: Trim leading space and capitalize only the first letter
-  formattedValue = formattedValue.trimStart();
-  if (formattedValue.length > 0) {
-    formattedValue =
-      formattedValue.charAt(0).toUpperCase() + formattedValue.slice(1);
-  }
+    // Step 2: Trim leading space and capitalize only the first letter
+    formattedValue = formattedValue.trimStart();
+    if (formattedValue.length > 0) {
+      formattedValue =
+        formattedValue.charAt(0).toUpperCase() + formattedValue.slice(1);
+    }
 
-  // Step 3: Set formatted value to form data
-  setFormData((prevData) => ({
-    ...prevData,
-    [id]: formattedValue,
-  }));
-
-  // Step 4: Word count validation
-  const wordCount = formattedValue.trim().split(/\s+/).length;
-  const maxWords = 150;
-
-  if (wordCount > maxWords) {
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      [id]: `Cannot exceed ${maxWords} words`,
+    // Step 3: Set formatted value to form data
+    setFormData((prevData) => ({
+      ...prevData,
+      [id]: formattedValue,
     }));
-  } else {
-    setErrors((prevErrors) => {
-      const newErrors = { ...prevErrors };
-      delete newErrors[id];
-      return newErrors;
-    });
-  }
-};
 
-const handleAboutAreaTextChange = (e) => {
-  const { id, value } = e.target;
+    // Step 4: Word count validation
+    const wordCount = formattedValue.trim().split(/\s+/).length;
+    const maxWords = 150;
 
-  // Capitalize only the first non-space letter
-  let formattedValue = value.charAt(0).toUpperCase() + value.slice(1);
+    if (wordCount > maxWords) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        [id]: `Cannot exceed ${maxWords} words`,
+      }));
+    } else {
+      setErrors((prevErrors) => {
+        const newErrors = { ...prevErrors };
+        delete newErrors[id];
+        return newErrors;
+      });
+    }
+  };
 
-  setFormData((prevData) => ({
-    ...prevData,
-    [id]: formattedValue,
-  }));
+  const handleAboutAreaTextChange = (e) => {
+    const { id, value } = e.target;
 
-  const wordCount = formattedValue.trim().split(/\s+/).length;
-  const maxWords = 500;
+    // Capitalize only the first non-space letter
+    let formattedValue = value.charAt(0).toUpperCase() + value.slice(1);
 
-  if (wordCount > maxWords) {
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      [id]: `Cannot exceed ${maxWords} words`,
+    setFormData((prevData) => ({
+      ...prevData,
+      [id]: formattedValue,
     }));
-  } else {
-    setErrors((prevErrors) => {
-      const newErrors = { ...prevErrors };
-      delete newErrors[id];
-      return newErrors;
-    });
-  }
-};
+
+    const wordCount = formattedValue.trim().split(/\s+/).length;
+    const maxWords = 500;
+
+    if (wordCount > maxWords) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        [id]: `Cannot exceed ${maxWords} words`,
+      }));
+    } else {
+      setErrors((prevErrors) => {
+        const newErrors = { ...prevErrors };
+        delete newErrors[id];
+        return newErrors;
+      });
+    }
+  };
 
 
   const handleSelectOpen = () => {
@@ -184,7 +184,7 @@ const handleAboutAreaTextChange = (e) => {
       newFormData[id] = value;
     }
 
-   if (id === "uploadfile") {
+    if (id === "uploadfile") {
       if (newFormData.uploadfile) {
         const file = newFormData.uploadfile;
         if (file.size > maxSize) {
@@ -285,36 +285,36 @@ const handleAboutAreaTextChange = (e) => {
         }
         break;
 
- case "websiteurl":
-  const urlPattern =
-    /^(https?:\/\/)?(www\.)?([a-zA-Z0-9-]{2,256}\.[a-z]{2,6})(\/[a-zA-Z0-9-._~:\/?#[\]@!$&'()*+,;=]*)?$/;
+      case "websiteurl":
+        const urlPattern =
+          /^(https?:\/\/)?(www\.)?([a-zA-Z0-9-]{2,256}\.[a-z]{2,6})(\/[a-zA-Z0-9-._~:\/?#[\]@!$&'()*+,;=]*)?$/;
 
-  if (!value) {
-    newErrors.websiteurl = "Website URL is required";
-  }  else {
-    delete newErrors.websiteurl;
-  }
-  break;
+        if (!value) {
+          newErrors.websiteurl = "Website URL is required";
+        } else {
+          delete newErrors.websiteurl;
+        }
+        break;
 
 
 
-  case "companyregnumber":
-  // Allow alphanumeric, minimum 6 and maximum 20 characters, no spaces
-  const regNumberPattern = /^[A-Za-z0-9]{6,20}$/;
+      case "companyregnumber":
+        // Allow alphanumeric, minimum 6 and maximum 20 characters, no spaces
+        const regNumberPattern = /^[A-Za-z0-9]{6,20}$/;
 
-  // Remove all spaces from input
-  const sanitizedValue = value.replace(/\s+/g, "");
+        // Remove all spaces from input
+        const sanitizedValue = value.replace(/\s+/g, "");
 
-  // Validate sanitized value
-  if (!regNumberPattern.test(sanitizedValue)) {
-    newErrors.companyregnumber = "Invalid company registration number";
-  } else {
-    delete newErrors.companyregnumber;
-  }
+        // Validate sanitized value
+        if (!regNumberPattern.test(sanitizedValue)) {
+          newErrors.companyregnumber = "Invalid company registration number";
+        } else {
+          delete newErrors.companyregnumber;
+        }
 
-  // Update form data with sanitized value
-  newFormData[id] = sanitizedValue;
-  break;
+        // Update form data with sanitized value
+        newFormData[id] = sanitizedValue;
+        break;
 
       case "amountingbp":
         const currencyText = value.replace(/[^a-zA-Z0-9.,£$ ]/g, "");
@@ -403,15 +403,12 @@ const handleAboutAreaTextChange = (e) => {
       "lastName",
       "phoneNo",
       "email",
-    
-      "howmanyperson",
       "companynm",
       "companyaddress",
       "amountingbp",
       "companysector",
       "companyregnumber",
       "serviceyouOffer",
-      "businesscorridors",
       "awardcate",
       "websiteurl",
       "aboutyourself",
@@ -420,9 +417,8 @@ const handleAboutAreaTextChange = (e) => {
     requiredFields.forEach((key) => {
       const value = formData[key];
       if (!value || (typeof value === "string" && !value.trim())) {
-        newErrors[key] = `${
-          key.charAt(0).toUpperCase() + key.slice(1)
-        } is required`;
+        newErrors[key] = `${key.charAt(0).toUpperCase() + key.slice(1)
+          } is required`;
       }
     });
 
@@ -456,10 +452,10 @@ const handleAboutAreaTextChange = (e) => {
       }
     }
 
-    if (!captchaToken) {
-      newErrors.recaptcha = "Captcha is required";
-    }
-    window.grecaptcha.reset()
+    // if (!captchaToken) {
+    //   newErrors.recaptcha = "Captcha is required";
+    // }
+    // window.grecaptcha.reset()
     // Validate optional file
     if (formData.uploadfileoptional) {
       const file = formData.uploadfileoptional;
@@ -485,73 +481,53 @@ const handleAboutAreaTextChange = (e) => {
       newErrors.titleid = "Please select a title";
     }
     setErrors(newErrors);
-    window.grecaptcha.reset()
+    if (Object.keys(newErrors).length > 0) {
+      console.log("❌ Frontend form validation failed. Errors:", newErrors);
+    }
+    // window.grecaptcha.reset()
     if (Object.keys(newErrors).length === 0) {
       const finalFormData = {
         ...formData, // Spread the formData fields
         reCaptcha: captchaToken, // Add the captcha token
-      
       };
+
       try {
-        const formDataToSend = new FormData();
-        Object.keys(formData).forEach((key) => {
-          formDataToSend.append(key, formData[key]);
-        });
+        const PAYMENT_API_BASE = (window.location.hostname.includes("britfintechawards.com") || window.location.hostname.includes("vercel.app")) ? "https://bfa-ticket-event.vercel.app" : "http://localhost:5000";
 
-        const response = await axios.post(
-          "https://www.britfintechawards.com/prod/api/britfin/saveawarddetails",
-          finalFormData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
-        );
 
-        console.log("Response from server:", response.data);
+        // Create stripe nomination payload
+        const paymentPayload = {
+          ...formData,
+          uploadfile: formData.uploadfile ? formData.uploadfile.name : "",
+          uploadfileoptional: formData.uploadfileoptional ? formData.uploadfileoptional.name : "",
+          title: formData.titleid || formData.title || "",
+          recaptchaToken: "bypassed_recaptcha_nomination",
+        };
 
-        if (response.status === 200) {
-          if (response.data.response === false) {
-            setErrorMessage(response?.data?.data);
-            Swal.fire({
-              title: "Error!",
-              text: response?.data?.data,
-              icon: "error",
-              confirmButtonText: "Close",
-            });
-          } else {
-            setFormData({
-              firstName: "",
-              titleid: "",
-              lastName: "",
-              phoneNo: "",
-              email: "",
-              uploadfile: null,
-              uploadfileoptional: null,
-              howmanyperson: "",
-              companyregnumber: "",
-              companynm: "",
-              companyaddress: "",
-              amountingbp: "",
-              companysector: "",
-              serviceyouOffer: "",
-              businesscorridors: "",
-              awardcate: [],
-              websiteurl: "",
-              aboutyourself: "",
-            });
-            setAgreePrivacyPolicy(false);
-            setShowModal(true);
-            setTimeout(() => {
-              window.location.reload();
-              setShowModal(false);
-            }, 7000);
-          }
+        // 1. Call payment API first to create checkout session
+        const checkoutRes = await axios.post(`${PAYMENT_API_BASE}/create-nomination-checkout-session`, paymentPayload);
+
+        if (checkoutRes.data?.url) {
+          // Redirect immediately to Stripe Checkout!
+          window.location.href = checkoutRes.data.url;
         } else {
+          Swal.fire({
+            title: "Error!",
+            text: "Failed to create payment session. Please try again.",
+            icon: "error",
+            confirmButtonText: "Close",
+          });
         }
       } catch (error) {
+        console.error("❌ Submission/Checkout error:", error.response?.data || error.message || error);
         setErrors({
-          form: "An error occurred while saving your data. Please try again later.",
+          form: error.response?.data?.error || "An error occurred while saving your data. Please try again later.",
+        });
+        Swal.fire({
+          title: "Error!",
+          text: error.response?.data?.error || "An error occurred while saving your data. Please try again later.",
+          icon: "error",
+          confirmButtonText: "Close",
         });
       }
     }
@@ -606,7 +582,7 @@ const handleAboutAreaTextChange = (e) => {
         {/* <div className="cs-height_90 cs-height_lg_90" /> */}
         <div
           className="cs-hero cs-style12 cs-type1 cs-center text-center  cs-parallax cs-hobble"
-          
+
           style={{
             backgroundImage:
               'url("../assets/img/event-conference/hero-img.jpg")',
@@ -616,8 +592,8 @@ const handleAboutAreaTextChange = (e) => {
           <div className="cs-hero_pattern cs-hover_layer3" style={{}}>
             <div
               className="cs-hero_pattern_in cs-bg_parallax"
-            
-             
+
+
             />
           </div>
           <div
@@ -672,10 +648,10 @@ const handleAboutAreaTextChange = (e) => {
           </div>
         </div>
       </div>
-<NominationAnnouncement/>
+      <NominationAnnouncement />
       {/* <div class="cs-height_60 cs-height_lg_75 "></div> */}
 
-      <div id="nominate-now"  className="container" style={{ zIndex: 9999 }}>
+      <div id="nominate-now" className="container" style={{ zIndex: 9999 }}>
         <div className="cs-contact cs-style2 cs-white_bg justify-content-center">
           <div className="cs-contact_left cs-accent_bg position-relative">
             <h4 className="cs-contact_title cs-semi_bold cs-white">
@@ -685,21 +661,21 @@ const handleAboutAreaTextChange = (e) => {
               <p>
                 Please read the award entry Terms and Conditions carefully before submitting your nomination.
               </p>
-              
+
               <li>
-              Fill in your company information and entrant details accurately.
-              </li>
-             <li>
-             Any Company registered in the UK or outside UK and operate within payments or banking sectors.
-             </li>
-             <li>
-             Global FintTech companies can apply for Fintech of the Year – Global.
-             </li>
-              <li>
-             Non-UK MSBs can enter the MSB of the Year – Global category.
+                Fill in your company information and entrant details accurately.
               </li>
               <li>
-              Annual turnover must exceed £2 million (this does not apply to startups).
+                Any Company registered in the UK or outside UK and operate within payments or banking sectors.
+              </li>
+              <li>
+                Global FintTech companies can apply for Fintech of the Year – Global.
+              </li>
+              <li>
+                Non-UK MSBs can enter the MSB of the Year – Global category.
+              </li>
+              <li>
+                Annual turnover must exceed £2 million (this does not apply to startups).
               </li>
 
               <li>Directors or Ultimate Beneficial Owners (UBOs) must have no criminal charges or penalties from any regulatory body.</li>
@@ -709,9 +685,9 @@ const handleAboutAreaTextChange = (e) => {
                 All nominations will be reviewed and judged by a panel of industry experts.
               </li>
 
-                  <li>Please note that each nomination incurs a fee.</li>
+              <li>Please note that each nomination incurs a fee.</li>
               <li > 1 free attendee with each nomination!
-Your first additional attendee joins at just £95, and every attendee thereafter at £195.</li>
+                Your first additional attendee joins at just £95, and every attendee thereafter at £195.</li>
               <li>
                 If your supporting photos or documents are not ready at the time of submission, you can email them later to kudos@britfintechawards.com.
               </li>
@@ -734,9 +710,8 @@ Your first additional attendee joins at just £95, and every attendee thereafter
                   <div className="input-container d-flex">
                     <select
                       id="titleid"
-                      className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color ${
-                        errors.titleid && "error-border"
-                      }`}
+                      className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color ${errors.titleid && "error-border"
+                        }`}
                       onChange={handleTitleChange}
                       value={formData.titleid}
                       style={{
@@ -756,9 +731,8 @@ Your first additional attendee joins at just £95, and every attendee thereafter
                     <input
                       type="text"
                       id="firstName"
-                      className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color ${
-                        errors.firstName && "error-border"
-                      }`}
+                      className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color ${errors.firstName && "error-border"
+                        }`}
                       placeholder="Enter Your First Name"
                       onChange={handleInputChange}
                       maxLength="130"
@@ -766,6 +740,11 @@ Your first additional attendee joins at just £95, and every attendee thereafter
                       style={{ borderRadius: "0 8px 8px 0" }}
                     />
                   </div>
+                  {errors.titleid && (
+                    <div className="error text-danger">
+                      Title is required
+                    </div>
+                  )}
                   {errors.firstName && (
                     <div className="error text-danger">
                       First name is required
@@ -778,9 +757,8 @@ Your first additional attendee joins at just £95, and every attendee thereafter
                     type="text"
                     id="lastName"
                     name="lastName"
-                    className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${
-                      errors.lastName && "error-border"
-                    }`}
+                    className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${errors.lastName && "error-border"
+                      }`}
                     placeholder="Enter Your Last Name"
                     value={formData.lastName}
                     maxLength="130"
@@ -798,9 +776,8 @@ Your first additional attendee joins at just £95, and every attendee thereafter
                     type="text"
                     id="phoneNo"
                     name="phoneNo"
-                    className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${
-                      errors.phoneNo && "error-border"
-                    }`}
+                    className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${errors.phoneNo && "error-border"
+                      }`}
                     maxLength="15"
                     placeholder="Enter Your Phone Number"
                     value={formData.phoneNo}
@@ -814,15 +791,14 @@ Your first additional attendee joins at just £95, and every attendee thereafter
                   )}
                   <div className="cs-height_20 cs-height_lg_20" />
                 </div>
-          
+
                 <div className="col-sm-6">
                   <input
                     type="email"
                     id="email"
                     name="email"
-                    className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${
-                      errors.email && "error-border"
-                    }`}
+                    className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${errors.email && "error-border"
+                      }`}
                     placeholder="Enter Your Email Address"
                     value={formData.email}
                     maxLength="100"
@@ -834,58 +810,10 @@ Your first additional attendee joins at just £95, and every attendee thereafter
                   <div className="cs-height_20 cs-height_lg_20" />
                 </div>
 
-            
-
-                <div className="col-sm-6 mb-3">
-                  <select
-                    id="howmanyperson"
-                    name="howmanyperson"
-                    className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${
-                      errors.howmanyperson && "error-border"
-                    }`}
-                    style={{ color: "rgb(102, 102, 102)" }}
-                    onChange={handleInputChange}
-                    value={formData.howmanyperson}
-                  >
-                    <option value="">Number of Attendees</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                  </select>
-                  {errors.howmanyperson && (
-                    <div className="error text-danger">
-                      Please select Number of Attendees
-                    </div>
-                  )}
-                </div>
-
-          
-          <div className="col-md-6">
-            <div
-  style={{
-  border: "1px solid #999999",           // Medium grey border
-  backgroundColor: "#f0f0f0",             // Light grey background
-  color: "#333333",                       // Dark grey text
-  padding: "15px",
-  borderRadius: "8px",
-  marginBottom: "10px",
-  marginTop: "1px",
-  fontSize: "14px",
-  boxShadow: "0 2px 6px rgba(0, 0, 0, 0.1)" // Already neutral grey shadow
-}}
-
->
- <strong>Note:</strong> Per nomination, <b>One Entry</b> is <b>Free</b>. <br />
-  First additional attendee: <strong>£95</strong>, thereafter every other additional attendee: <strong>£195</strong>.
 
 
- 
-</div>
-          </div>
                 <div className="col-sm-12">
-                  <label htmlFor="howmanyperson">
+                  <label htmlFor="category-checkbox">
                     Please Select Award Category
                     <OverlayTrigger
                       placement="right"
@@ -904,9 +832,8 @@ Your first additional attendee joins at just £95, and every attendee thereafter
                     <Select
                       labelId="category-checkbox"
                       id="category-checkbox"
-                      className={`cs-form_field p-0 cs-white_bg cs-accent_30_border cs-primary_color undefined ${
-                        errors.awardcate && "error-border"
-                      }`}
+                      className={`cs-form_field p-0 cs-white_bg cs-accent_30_border cs-primary_color undefined ${errors.awardcate && "error-border"
+                        }`}
                       style={{
                         outline: "none",
                         border: "none",
@@ -915,7 +842,7 @@ Your first additional attendee joins at just £95, and every attendee thereafter
                       multiple
                       value={formData.awardcate}
                       onChange={handleCategoryChange}
-                
+
                       renderValue={(selected) => (
                         <Box
                           sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}
@@ -966,7 +893,7 @@ Your first additional attendee joins at just £95, and every attendee thereafter
                             "B-A-A-S Innovator of the Year"
                           )}
                         />
-                       B-A-A-S Innovator of the Year
+                        B-A-A-S Innovator of the Year
                       </MenuItem>
                       <MenuItem value="Payment Acquirer of the Year">
                         <Checkbox
@@ -974,7 +901,7 @@ Your first additional attendee joins at just £95, and every attendee thereafter
                             "Payment Acquirer of the Year"
                           )}
                         />
-                      Payment Acquirer of the Year
+                        Payment Acquirer of the Year
                       </MenuItem>
                       <MenuItem value="Startup of the Year">
                         <Checkbox
@@ -992,7 +919,7 @@ Your first additional attendee joins at just £95, and every attendee thereafter
                         />
                         Woman Entrepreneur in FinTech of the Year
                       </MenuItem>
-                    
+
                       <MenuItem value="Anti-Fraud Innovator of the Year">
                         <Checkbox
                           checked={formData.awardcate.includes(
@@ -1007,16 +934,16 @@ Your first additional attendee joins at just £95, and every attendee thereafter
                             "ID Verification Innovator of the Year"
                           )}
                         />
-                       ID Verification Innovator of the Year
+                        ID Verification Innovator of the Year
                       </MenuItem>
 
-                         <MenuItem value="FinTech of the Year">
+                      <MenuItem value="FinTech of the Year">
                         <Checkbox
                           checked={formData.awardcate.includes(
                             "FinTech of the Year"
                           )}
                         />
-                       FinTech of the Year
+                        FinTech of the Year
                       </MenuItem>
                       {/* MSB Section options */}
                       <ListSubheader
@@ -1093,30 +1020,30 @@ Your first additional attendee joins at just £95, and every attendee thereafter
                         MSB Store of the Year
                       </MenuItem>
 
-                       <ListSubheader
+                      <ListSubheader
                         style={{
                           fontWeight: "bold",
                           fontSize: "17px",
                           textTransform: "uppercase",
                         }}
                       >
-                     GLOBAL AWARDS SECTION
+                        GLOBAL AWARDS SECTION
                       </ListSubheader>
-                       <MenuItem value="FinTech of the year">
+                      <MenuItem value="FinTech of the year">
                         <Checkbox
                           checked={formData.awardcate.includes(
                             "FinTech of the year"
                           )}
                         />
-                      FinTech of the Year
+                        FinTech of the Year
                       </MenuItem>
-                       <MenuItem value="MSB of the year">
+                      <MenuItem value="MSB of the year">
                         <Checkbox
                           checked={formData.awardcate.includes(
                             "MSB of the year"
                           )}
                         />
-                       MSB of the Year
+                        MSB of the Year
                       </MenuItem>
                     </Select>
                   </FormControl>
@@ -1133,9 +1060,8 @@ Your first additional attendee joins at just £95, and every attendee thereafter
                     type="text"
                     id="companynm"
                     name="companynm"
-                    className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${
-                      errors.companynm && "error-border"
-                    }`}
+                    className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${errors.companynm && "error-border"
+                      }`}
                     placeholder="Enter Your Company Name"
                     maxLength="120"
                     value={formData.companynm}
@@ -1155,9 +1081,8 @@ Your first additional attendee joins at just £95, and every attendee thereafter
                     type="text"
                     id="companyaddress"
                     name="companyaddress"
-                    className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${
-                      errors.companyaddress && "error-border"
-                    }`}
+                    className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${errors.companyaddress && "error-border"
+                      }`}
                     placeholder="Enter Your Company Address"
                     value={formData.companyaddress}
                     maxLength="120"
@@ -1179,9 +1104,8 @@ Your first additional attendee joins at just £95, and every attendee thereafter
                     id="companyregnumber"
                     name="companyregnumber"
                     maxLength="120"
-                    className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${
-                      errors.companyregnumber && "error-border"
-                    }`}
+                    className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${errors.companyregnumber && "error-border"
+                      }`}
                     placeholder="Enter Your Company Registration Number"
                     value={formData.companyregnumber}
                     onChange={handleInputChange}
@@ -1218,9 +1142,8 @@ Your first additional attendee joins at just £95, and every attendee thereafter
                     type="text"
                     id="amountingbp"
                     name="amountingbp"
-                    className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${
-                      errors.amountingbp && "error-border"
-                    }`}
+                    className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${errors.amountingbp && "error-border"
+                      }`}
                     placeholder="Turnover In GBP"
                     maxLength="25"
                     value={formData.amountingbp}
@@ -1240,9 +1163,8 @@ Your first additional attendee joins at just £95, and every attendee thereafter
                     type="text"
                     id="companysector"
                     name="companysector"
-                    className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${
-                      errors.companysector && "error-border"
-                    }`}
+                    className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${errors.companysector && "error-border"
+                      }`}
                     placeholder="Enter Your Company Sector"
                     value={formData.companysector}
                     onChange={handleInputChange}
@@ -1261,9 +1183,8 @@ Your first additional attendee joins at just £95, and every attendee thereafter
                     type=""
                     id="websiteurl"
                     name="websiteurl"
-                    className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${
-                      errors.websiteurl && "error-border"
-                    }`}
+                    className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${errors.websiteurl && "error-border"
+                      }`}
                     placeholder="Enter Your Website URL"
                     value={formData.websiteurl}
                     maxLength="80"
@@ -1279,9 +1200,8 @@ Your first additional attendee joins at just £95, and every attendee thereafter
                   <textarea
                     id="serviceyouOffer"
                     name="serviceyouOffer"
-                    className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${
-                      errors.serviceyouOffer && "error-border"
-                    }`}
+                    className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${errors.serviceyouOffer && "error-border"
+                      }`}
                     placeholder="Enter Service You Offer
                     (Max 150 words)"
                     value={formData.serviceyouOffer}
@@ -1308,9 +1228,8 @@ Your first additional attendee joins at just £95, and every attendee thereafter
                   <textarea
                     id="businesscorridors"
                     name="businesscorridors"
-                    className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${
-                      errors.businesscorridors && "error-border"
-                    }`}
+                    className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${errors.businesscorridors && "error-border"
+                      }`}
                     placeholder="Enter Your Business Corridors (Max 150 words)"
                     value={formData.businesscorridors}
                     onChange={handleTextAreaChange}
@@ -1330,16 +1249,15 @@ Your first additional attendee joins at just £95, and every attendee thereafter
                   <textarea
                     id="aboutyourself"
                     name="aboutyourself"
-                    className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${
-                      errors.aboutyourself && "error-border"
-                    }`}
+                    className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${errors.aboutyourself && "error-border"
+                      }`}
                     placeholder="Enter More Details About Your Company (Max 500 words)"
                     value={formData.aboutyourself}
                     onChange={handleAboutAreaTextChange}
                   />
                   {errors.aboutyourself && (
                     <div className="error text-danger">
-                     More Details About Your Company is required.
+                      More Details About Your Company is required.
                     </div>
                   )}
                   <div className="cs-height_20 cs-height_lg_20" />
@@ -1348,11 +1266,11 @@ Your first additional attendee joins at just £95, and every attendee thereafter
                   <label htmlFor="file">
                     {" "}
                     Upload More Details{" "}
-                    
+
                     <span className="text-danger" style={{ fontSize: "12px" }}>
-                       (Only JPG, JPEG, PNG, and PDF files are allowed)
+                      (Only JPG, JPEG, PNG, and PDF files are allowed)
                     </span>
-                     {/* <OverlayTrigger
+                    {/* <OverlayTrigger
                       placement="right"
                       delay={{ show: 250, hide: 400 }}
                       overlay={renderTooltipTwo}
@@ -1369,16 +1287,15 @@ Your first additional attendee joins at just £95, and every attendee thereafter
                     type="file"
                     id="uploadfile"
                     name="uploadfile"
-                    className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${
-                      errors.uploadfile && "error-border"
-                    }`}
+                    className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${errors.uploadfile && "error-border"
+                      }`}
                     onChange={handleInputChange}
                   />
                   {errors.uploadfile && (
                     <div className="error text-danger">{errors.uploadfile}</div>
                   )}
                 </div>
-              {/* <div className="col-sm-12 mt-3">
+                {/* <div className="col-sm-12 mt-3">
                   <label htmlFor="file">
                     {" "}
                     Additional attachment{" "}
@@ -1399,7 +1316,7 @@ Your first additional attendee joins at just £95, and every attendee thereafter
                     </div>
                   )}
                 </div>/* */}
-                <div className="cs-height_20 cs-height_lg_20" />  
+                <div className="cs-height_20 cs-height_lg_20" />
                 <div className="col-12 mt-3">
                   <div className="input-field">
                     <ReCAPTCHA
@@ -1426,7 +1343,7 @@ Your first additional attendee joins at just £95, and every attendee thereafter
                     I have read and agreed to the
                     <span
                       href="#"
-                      
+
                       className="a-hover"
                     >
                       {" "}

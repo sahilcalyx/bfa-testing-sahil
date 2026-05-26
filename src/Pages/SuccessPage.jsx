@@ -6,18 +6,28 @@ import { CheckCircle } from "@mui/icons-material";
 function SuccessPage() {
   const [params] = useSearchParams();
   const [sessionData, setSessionData] = useState(null);
+  const [loading, setLoading] = useState(true);
   const sessionId = params.get("session_id");
 
   useEffect(() => {
     if (sessionId) {
+      const PAYMENT_API_BASE = (window.location.hostname.includes("britfintechawards.com") || window.location.hostname.includes("vercel.app")) ? "https://bfa-ticket-event.vercel.app" : "http://localhost:5000";
       axios
-        .get(`https://bfa-ticket-event.vercel.app/checkout-session?session_id=${sessionId}`)
-        .then((res) => setSessionData(res.data))
-        .catch((err) => console.error("Failed to fetch session:", err));
+        .get(`${PAYMENT_API_BASE}/checkout-session?session_id=${sessionId}`)
+        .then((res) => {
+          setSessionData(res.data);
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.error("Failed to fetch session:", err);
+          setLoading(false);
+        });
+    } else {
+      setLoading(false);
     }
   }, [sessionId]);
 
-  if (!sessionData) {
+  if (loading) {
     return (
       <div style={{ textAlign: "center", marginTop: "200px", color: "#333" }}>
         Loading payment details...
@@ -80,21 +90,39 @@ function SuccessPage() {
               Payment Successful!
             </h1>
             <p style={{ fontSize: "1rem", color: "#555" }}>
-               Thank you for your payment. Please find below the payment details. We have sent you an email to confirm the purchase. One of our team member will be in touch with you shortly to discuss dietary requirements and access to the venue.
+               {sessionData?.metadata?.type === "nomination" ? (
+                 "Thank you for your award nomination. Please find below the payment details. A confirmation email has been sent to you. Our team will review your application and be in touch shortly."
+               ) : (
+                 "Thank you for your payment. Please find below the payment details. We have sent you an email to confirm the purchase. One of our team member will be in touch with you shortly to discuss dietary requirements and access to the venue."
+               )}
             </p>
           </div>
 
-          <div style={{ marginTop: "2rem", textAlign: "left" }}>
-            <InfoRow label="Transaction ID" value={sessionData.id.slice(0, 22)} />
-            <InfoRow label="Name" value={sessionData.metadata.fullName} />
-            <InfoRow label="Email" value={sessionData.customer_email} />
-            <InfoRow label="Phone" value={sessionData.metadata.phone} />
-            <InfoRow label="Tickets Booked" value={sessionData.metadata.tickets} />
-            <InfoRow
-              label="Amount Paid"
-              value={`£${(sessionData.amount_total / 100).toFixed(2)}`}
-            />
-          </div>
+          {sessionData ? (
+            <div style={{ marginTop: "2rem", textAlign: "left" }}>
+              <InfoRow label="Transaction ID" value={sessionData.id.slice(0, 22)} />
+              <InfoRow label="Name" value={sessionData.metadata?.fullName} />
+              <InfoRow label="Email" value={sessionData.customer_email} />
+              <InfoRow label="Phone" value={sessionData.metadata?.phone} />
+              {sessionData.metadata?.type === "nomination" ? (
+                <>
+                  <InfoRow label="Company Name" value={sessionData.metadata?.companyName} />
+                  <InfoRow label="Categories" value={sessionData.metadata?.awardcate} />
+                  <InfoRow label="Attendees" value={sessionData.metadata?.howmanyperson} />
+                </>
+              ) : (
+                <InfoRow label="Tickets Booked" value={sessionData.metadata?.tickets} />
+              )}
+              <InfoRow
+                label="Amount Paid"
+                value={`£${(sessionData.amount_total / 100).toFixed(2)}`}
+              />
+            </div>
+          ) : (
+            <p style={{ marginTop: "2rem", color: "#666", fontSize: "0.95rem" }}>
+              Your transaction was completed successfully, but the session details could not be retrieved.
+            </p>
+          )}
 
           <div style={{ marginTop: "2.5rem" }}>
             <a

@@ -7,24 +7,24 @@ const NominationAnnouncement = () => {
         <h2 className="headline mb-3">
           Nominations Open – <span className="highlight">Get Yours In Today!</span>
         </h2>
-        <p className="lead mb-5">Nominate. Recognise. Inspire.</p>
+        <p className="lead mb-5">Nominate. Celebrate. Inspire.</p>
 
         <div className="row justify-content-center gy-4">
           {/* Super Early Bird */}
           <div className="col-md-4">
-            <div className="offer-card gradient-pink">
+            <div className="offer-card gradient-theme">
               <h4 className="title">Super Early Bird</h4>
               <p className="date-range">2nd June – 15th June 2025</p>
-              <div className="price">£95</div>
+              <div className="price">£195</div>
             </div>
           </div>
 
           {/* Early Bird */}
           <div className="col-md-4">
-            <div className="offer-card gradient-aqua">
+            <div className="offer-card gradient-pink">
               <h4 className="title">Early Bird</h4>
               <p className="date-range">16th June – 31st July 2025</p>
-              <div className="price">£195</div>
+              <div className="price">£295</div>
             </div>
           </div>
 
@@ -44,8 +44,7 @@ const NominationAnnouncement = () => {
             Don’t miss your chance to nominate your business at the best rate.
           </p>
           <p className="fs-5 text-secondary">
-            The earlier you act, the more you save.<br />
-        Gear up — it’s time to nominate!
+            Early movers get the best rates — <strong>submit</strong> <br/> your nomination today.
           </p>
         </div>
       </div>
@@ -63,7 +62,11 @@ const NominationAnnouncement = () => {
         }
 
         .highlight {
-          color: #e60073;
+          background: linear-gradient(to right, #000000 0%, #c8102e 50%, #000000 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          color: transparent;
         }
 
         .offer-card {
@@ -96,7 +99,11 @@ const NominationAnnouncement = () => {
         .price {
           font-size: 1.75rem;
           font-weight: bold;
-          color: #e60073;
+          background: linear-gradient(to right, #000000 0%, #c8102e 50%, #000000 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          color: transparent;
         }
 
     .gradient-pink {
@@ -105,12 +112,12 @@ const NominationAnnouncement = () => {
 }
 
 
-   .gradient-aqua {
-  border-color: #00d4d4;
-
-  background: linear-gradient(135deg, #a8faff, #d0ffff);
-
-}
+    .gradient-theme {
+          border-color: #c8102e;
+          background: linear-gradient(135deg, #fff5f5, #ffebeb);
+          border-width: 3px;
+          box-shadow: 0 8px 20px rgba(200, 16, 46, 0.15);
+        }
 
 
         .gradient-purple {

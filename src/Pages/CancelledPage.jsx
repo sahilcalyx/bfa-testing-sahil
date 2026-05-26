@@ -6,18 +6,28 @@ import { Cancel } from "@mui/icons-material";
 function CancelPage() {
   const [params] = useSearchParams();
   const [sessionData, setSessionData] = useState(null);
+  const [loading, setLoading] = useState(true);
   const sessionId = params.get("session_id");
 
   useEffect(() => {
     if (sessionId) {
+      const PAYMENT_API_BASE = (window.location.hostname.includes("britfintechawards.com") || window.location.hostname.includes("vercel.app")) ? "https://bfa-ticket-event.vercel.app" : "http://localhost:5000";
       axios
-        .get(`https://bfa-ticket-event.vercel.app/checkout-session?session_id=${sessionId}`)
-        .then((res) => setSessionData(res.data))
-        .catch((err) => console.error("Failed to fetch session:", err));
+        .get(`${PAYMENT_API_BASE}/checkout-session?session_id=${sessionId}`)
+        .then((res) => {
+          setSessionData(res.data);
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.error("Failed to fetch session:", err);
+          setLoading(false);
+        });
+    } else {
+      setLoading(false);
     }
   }, [sessionId]);
 
-  if (!sessionData) {
+  if (loading) {
     return (
       <div style={{ textAlign: "center", marginTop: "200px", color: "#dc2626" }}>
         Loading session details...
@@ -84,13 +94,26 @@ function CancelPage() {
             </p>
           </div>
 
-          <div style={{ marginTop: "2rem", textAlign: "left" }}>
-            <InfoRow label="Session ID" value={sessionData.id.slice(0, 22)} />
-            <InfoRow label="Name" value={sessionData.metadata?.fullName || "N/A"} />
-            <InfoRow label="Email" value={sessionData.customer_email || "N/A"} />
-            <InfoRow label="Phone" value={sessionData.metadata?.phone || "N/A"} />
-            <InfoRow label="Tickets Attempted" value={sessionData.metadata?.tickets || "N/A"} />
-          </div>
+          {sessionData ? (
+            <div style={{ marginTop: "2rem", textAlign: "left" }}>
+              <InfoRow label="Session ID" value={sessionData.id.slice(0, 22)} />
+              <InfoRow label="Name" value={sessionData.metadata?.fullName || "N/A"} />
+              <InfoRow label="Email" value={sessionData.customer_email || "N/A"} />
+              <InfoRow label="Phone" value={sessionData.metadata?.phone || "N/A"} />
+              {sessionData.metadata?.type === "nomination" ? (
+                <>
+                  <InfoRow label="Company Name" value={sessionData.metadata?.companyName || "N/A"} />
+                  <InfoRow label="Categories" value={sessionData.metadata?.awardcate || "N/A"} />
+                </>
+              ) : (
+                <InfoRow label="Tickets Attempted" value={sessionData.metadata?.tickets || "N/A"} />
+              )}
+            </div>
+          ) : (
+            <p style={{ marginTop: "2rem", color: "#666", fontSize: "0.95rem" }}>
+              Your transaction session has ended, but your payment was not processed.
+            </p>
+          )}
 
           <div style={{ marginTop: "2.5rem" }}>
             <a

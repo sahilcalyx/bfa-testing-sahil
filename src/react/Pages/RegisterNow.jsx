@@ -13,11 +13,11 @@ import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import ReCAPTCHA from "react-google-recaptcha";
-import NominationAnnouncement from "../Components/NominationAnnouncement";
+import NominationAnnouncement from "../Components/NominationAnnouncement copy";
 
 const RegisterNow = () => {
   // Add a constant to control form disabled state
-  const NOMINATIONS_CLOSED = true;
+  const NOMINATIONS_CLOSED = false;
 
   const [captchaToken, setCaptchaToken] = useState("");
   const handleCaptchaChange = (token) => {
@@ -26,13 +26,13 @@ const RegisterNow = () => {
 
   const [formData, setFormData] = useState({
     firstName: "",
-    title: "",
+    titleid: "",
     lastName: "",
     phoneNo: "",
     email: "",
     uploadfile: null,
     uploadfileoptional: null,
-    howmanyperson: "",
+    howmanyperson: "0",
     companyregnumber: "",
     companynm: "",
     companyaddress: "",
@@ -54,6 +54,7 @@ const RegisterNow = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [agreePrivacyPolicy, setAgreePrivacyPolicy] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [showMoreTerms, setShowMoreTerms] = useState(false);
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -76,12 +77,12 @@ const RegisterNow = () => {
     const { value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      title: value,
+      titleid: value,
     }));
     if (value) {
       setErrors((prevErrors) => ({
         ...prevErrors,
-        title: "",
+        titleid: "",
       }));
     }
   };
@@ -409,18 +410,16 @@ const RegisterNow = () => {
     const newErrors = {};
     const requiredFields = [
       "firstName",
-      "title",
+      "titleid",
       "lastName",
       "phoneNo",
       "email",
-      "howmanyperson",
       "companynm",
       "companyaddress",
       "amountingbp",
       "companysector",
       "companyregnumber",
       "serviceyouOffer",
-      "businesscorridors",
       "awardcate",
       "websiteurl",
       "aboutyourself",
@@ -465,10 +464,10 @@ const RegisterNow = () => {
       }
     }
 
-    if (!captchaToken) {
-      newErrors.recaptcha = "Captcha is required";
-    }
-    window.grecaptcha.reset();
+    // if (!captchaToken) {
+    //   newErrors.recaptcha = "Captcha is required";
+    // }
+    // window.grecaptcha.reset();
 
     // Validate optional file
     if (formData.uploadfileoptional) {
@@ -491,12 +490,15 @@ const RegisterNow = () => {
       newErrors.agreePrivacyPolicy = "Please accept the terms and conditions.";
     }
 
-    if (!formData.title) {
-      newErrors.title = "Please select a title";
+    if (!formData.titleid) {
+      newErrors.titleid = "Please select a title";
     }
 
     setErrors(newErrors);
-    window.grecaptcha.reset();
+    if (Object.keys(newErrors).length > 0) {
+      console.log("❌ Frontend form validation failed. Errors:", newErrors);
+    }
+    // window.grecaptcha.reset();
 
     if (Object.keys(newErrors).length === 0) {
       const finalFormData = {
@@ -506,65 +508,41 @@ const RegisterNow = () => {
       };
 
       try {
-        const formDataToSend = new FormData();
-        Object.keys(formData).forEach((key) => {
-          formDataToSend.append(key, formData[key]);
-        });
+        const PAYMENT_API_BASE = (window.location.hostname.includes("britfintechawards.com") || window.location.hostname.includes("vercel.app")) ? "https://bfa-ticket-event.vercel.app" : "http://localhost:5000";
 
-        const response = await axios.post(
-          "https://www.britfintechawards.com/prod/api/britfin/saveawarddetails",
-          finalFormData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
-        );
+        // Create stripe nomination payload
+        const paymentPayload = {
+          ...formData,
+          uploadfile: formData.uploadfile ? formData.uploadfile.name : "",
+          uploadfileoptional: formData.uploadfileoptional ? formData.uploadfileoptional.name : "",
+          title: formData.titleid || formData.title || "",
+          recaptchaToken: "bypassed_recaptcha_nomination",
+        };
 
-        console.log("Response from server:", response.data);
+        // 1. Call payment API first to create checkout session
+        const checkoutRes = await axios.post(`${PAYMENT_API_BASE}/create-nomination-checkout-session`, paymentPayload);
 
-        if (response.status === 200) {
-          if (response.data.response === false) {
-            setErrorMessage(response?.data?.data);
-            Swal.fire({
-              title: "Error!",
-              text: response?.data?.data,
-              icon: "error",
-              confirmButtonText: "Close",
-            });
-          } else {
-            setFormData({
-              firstName: "",
-              title: "",
-              lastName: "",
-              phoneNo: "",
-              email: "",
-              uploadfile: null,
-              uploadfileoptional: null,
-              howmanyperson: "",
-              companyregnumber: "",
-              companynm: "",
-              companyaddress: "",
-              amountingbp: "",
-              companysector: "",
-              serviceyouOffer: "",
-              businesscorridors: "",
-              awardcate: [],
-              websiteurl: "",
-              aboutyourself: "",
-            });
-            setAgreePrivacyPolicy(false);
-            setShowModal(true);
-            setTimeout(() => {
-              window.location.reload();
-              setShowModal(false);
-            }, 7000);
-          }
+        if (checkoutRes.data?.url) {
+          // Redirect immediately to Stripe Checkout!
+          window.location.href = checkoutRes.data.url;
         } else {
+          Swal.fire({
+            title: "Error!",
+            text: "Failed to create payment session. Please try again.",
+            icon: "error",
+            confirmButtonText: "Close",
+          });
         }
       } catch (error) {
+        console.error("❌ Submission/Checkout error:", error.response?.data || error.message || error);
         setErrors({
-          form: "An error occurred while saving your data. Please try again later.",
+          form: error.response?.data?.error || "An error occurred while saving your data. Please try again later.",
+        });
+        Swal.fire({
+          title: "Error!",
+          text: error.response?.data?.error || "An error occurred while saving your data. Please try again later.",
+          icon: "error",
+          confirmButtonText: "Close",
         });
       }
     }
@@ -679,12 +657,12 @@ const RegisterNow = () => {
       <NominationAnnouncement />
       {/* <div class="cs-height_60 cs-height_lg_75 "></div> */}
       <div id="nominate-now" className="container" style={{ zIndex: 9999 }} >
-        <div className="cs-contact cs-style2 cs-white_bg justify-content-center d-none">
+        <div className="cs-contact cs-style2 cs-white_bg justify-content-center">
           <div className="cs-contact_left cs-accent_bg position-relative">
             <h4 className="cs-contact_title cs-semi_bold cs-white">
               HOW TO NOMINATE:
             </h4>
-            <ul className="text-white ">
+            <ul className="text-white" style={{ fontSize: '14px' }}>
               {NOMINATIONS_CLOSED ? (
                 <div>
                   <p>
@@ -750,6 +728,42 @@ const RegisterNow = () => {
                     process, please contact us at{" "}
                     <a href="tel:+442038283277">+44 20 3828 3277</a>
                   </li>
+                  <li style={{ listStyleType: "none", marginTop: "10px" }}>
+                    <span
+                      onClick={() => setShowMoreTerms(!showMoreTerms)}
+                      style={{
+                        cursor: "pointer",
+                        textDecoration: "underline",
+                        color: "#fff",
+                        fontWeight: "bold",
+                        userSelect: "none"
+                      }}
+                    >
+                      {showMoreTerms ? "Load Less" : "Load More"}
+                    </span>
+                  </li>
+                  {showMoreTerms && (
+                    <>
+                      <li>
+                        Invoices will be sent to the organisation’s registered email address.
+                      </li>
+                      <li>
+                        The Brit FinTech Awards authority reserves the right to disqualify any entry that does not comply with the terms and conditions or is deemed inappropriate, unethical, or fraudulent.
+                      </li>
+                      <li>
+                        All entries will be evaluated based on criteria set by the BFA.
+                      </li>
+                      <li>
+                        Incomplete nomination forms will be disqualified.
+                      </li>
+                      <li>
+                        All submitted information will remain confidential to the BFA team and judging panel. However, BFA may use applicants’ names and basic information for promotional purposes.
+                      </li>
+                      <li>
+                        BFA reserves the right to modify or cancel the awards in exceptional circumstances.
+                      </li>
+                    </>
+                  )}
                 </>
               )}
             </ul>
@@ -807,6 +821,11 @@ const RegisterNow = () => {
                       }}
                     />
                   </div>
+                  {errors.titleid && (
+                    <div className="error text-danger">
+                      Title is required
+                    </div>
+                  )}
                   {errors.firstName && (
                     <div className="error text-danger">
                       First name is required
@@ -885,57 +904,8 @@ const RegisterNow = () => {
                   )}
                   <div className="cs-height_20 cs-height_lg_20" />
                 </div>
-                <div className="col-sm-6 mb-3">
-                  <select
-                    id="howmanyperson"
-                    name="howmanyperson"
-                    className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${errors.howmanyperson && "error-border"
-                      }`}
-                    style={{
-                      color: "rgb(102, 102, 102)",
-                      opacity: NOMINATIONS_CLOSED ? 0.6 : 1,
-                      cursor: NOMINATIONS_CLOSED ? "not-allowed" : "default",
-                    }}
-                    onChange={handleInputChange}
-                    value={formData.howmanyperson}
-                    disabled={NOMINATIONS_CLOSED}
-                  >
-                    <option value="">Number of Attendees</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                  </select>
-                  {errors.howmanyperson && (
-                    <div className="error text-danger">
-                      Please select Number of Attendees
-                    </div>
-                  )}
-                </div>
-                <div className="col-md-6">
-                  <div
-                    style={{
-                      border: "1px solid #999999", // Medium grey border
-                      backgroundColor: "#f0f0f0", // Light grey background
-                      color: "#333333", // Dark grey text
-                      padding: "15px",
-                      borderRadius: "8px",
-                      marginBottom: "10px",
-                      marginTop: "1px",
-                      fontSize: "14px",
-                      boxShadow: "0 2px 6px rgba(0, 0, 0, 0.1)", // Already neutral grey shadow
-                      opacity: NOMINATIONS_CLOSED ? 0.6 : 1,
-                    }}
-                  >
-                    <strong>Note:</strong> Per nomination, <b>One Entry</b> is{" "}
-                    <b>Free</b>. <br />
-                    First additional attendee: <strong>£95</strong>, thereafter
-                    every other additional attendee: <strong>£195</strong>.
-                  </div>
-                </div>
                 <div className="col-sm-12">
-                  <label htmlFor="howmanyperson">
+                  <label htmlFor="category-checkbox">
                     Please Select Award Category
                     <OverlayTrigger
                       placement="right"

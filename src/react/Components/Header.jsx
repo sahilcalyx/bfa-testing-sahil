@@ -48,7 +48,9 @@ const Header = () => {
   const handleFormSubmit = () => {
     // Set the PDF link after form submission and countdown
 
-    setDownloadLink("../broucher/Brit-Fintech-Awards-2026-Sponsorship-Proposal.pdf  ");
+    setDownloadLink(
+      "../broucher/Brit-Fintech-Awards-2026-Sponsorship-Proposal.pdf  ",
+    );
   };
 
   useEffect(() => {
@@ -553,27 +555,36 @@ box-shadow: none;
                       onClick={handleShow}
                      
                     </NavLink> */}
-                    <div className="d-grid justify-content-start  align-items-center ps-3">
-
-                       <span className="d-none-sm mb-3 mt-4 " onClick={handleNavLinkClick}>
-                       <a className="btn-pro-1 " onClick={handleShow}>
-                    {/* <i className="fas fa-file-pdf"></i> */}
-                    <span>Download Brochure</span>
-                  </a>
-                      </span>
-                      {/* Ticket Booking to Winnner  */}
-                      <span className="d-none-sm" onClick={handleNavLinkClick}>
-                       <NavLink
-                    to="/sponsorship-categories#next_section"
-                    className={`btn-pro-2 text-center`}
-                  >
-                    <span style={{ color: "#fff" }}> Sponsor Now</span>
-                  </NavLink>
-                      </span>
-
-                    </div>
-
-                     
+                      <div className="d-grid justify-content-start  align-items-center ps-3">
+                        {/* <span
+                          className="d-none-sm mb-3 mt-4 "
+                          onClick={handleNavLinkClick}
+                        >
+                          <a className="btn-pro-1 " onClick={handleShow}>
+                            <span>Download Brochure</span>
+                          </a>
+                        </span> */}
+                        <span
+                          className="d-none-sm mb-3 mt-4 "
+                          onClick={handleNavLinkClick}
+                        >
+                          <NavLink to="/nominate-now" className="btn-pro-1">
+                            <span>Nominate For Awards</span>
+                          </NavLink>
+                        </span>
+                        {/* Ticket Booking to Winnner  */}
+                        <span
+                          className="d-none-sm"
+                          onClick={handleNavLinkClick}
+                        >
+                          <NavLink
+                            to="/sponsorship-categories#next_section"
+                            className={`btn-pro-2 text-center`}
+                          >
+                            <span style={{ color: "#fff" }}> Sponsor Now</span>
+                          </NavLink>
+                        </span>
+                      </div>
 
                       {/* <NavLink
                         className={`nav-link d-none-sm ${isSticky ? "text-white-navlink" : ""}`}
@@ -596,10 +607,13 @@ box-shadow: none;
 
               <div className="cs-main_header_right">
                 <div className="cs-toolbox">
-                  <a className="btn-pro-1 " onClick={handleShow}>
-                    {/* <i className="fas fa-file-pdf"></i> */}
+                  {/* <a className="btn-pro-1 " onClick={handleShow}>
                     <span>Download Brochure</span>
-                  </a>
+                  </a> */}
+
+                  <NavLink to="/nominate-now" className="btn-pro-1">
+                    <span>Nominate For Awards</span>
+                  </NavLink>
 
                   {/* <GalleryButton /> */}
 
@@ -647,7 +661,7 @@ box-shadow: none;
       {/* Modal Popup */}
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton>
-          <h5 className="mt-2 mb-0 pb-0" style={{color:"#000 !important"}}>
+          <h5 className="mt-2 mb-0 pb-0" style={{ color: "#000 !important" }}>
             Fill in the details below to download the Sponsorship Brochure.
           </h5>
         </Modal.Header>

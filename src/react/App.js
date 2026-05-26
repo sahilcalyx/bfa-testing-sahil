@@ -188,7 +188,7 @@ function App() {
         <Route path="/dinner-2024" element={<DinnerGallery />} />
         <Route path="/video-gallery-2024" element={<VideoGallery />} />
         <Route path="/video-gallery-2025" element={<VideoGallery2025 />} />
-        <Route path="/ticket-booking" element={<TicketBookingPage />} />
+        <Route path="/ticket-booking-test" element={<TicketBookingPage />} />
 
         {/* <Route path="/register-now" element={<RegisterNow />} /> */}
        
