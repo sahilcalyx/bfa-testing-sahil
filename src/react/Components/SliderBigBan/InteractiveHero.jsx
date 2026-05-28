@@ -534,7 +534,7 @@ const InteractiveHero = () => {
 
               .vc-address {
                 font-family: 'Outfit', sans-serif;
-                font-size: 9.5px;
+                font-size: 12px;
                 font-weight: 500;
                 color: rgba(255, 255, 255, 0.55);
                 letter-spacing: 0.01em;

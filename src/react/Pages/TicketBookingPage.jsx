@@ -496,7 +496,22 @@ function TicketBookingPage() {
                   }
                   formatOptionLabel={(option, { context }) => {
                     const countryName = option.label.split(" (+")[0];
-                    return context === "value" ? `+${option.value}` : `+${option.value} - ${countryName}`;
+                    if (context === "value") {
+                      return `+${option.value}`;
+                    }
+                    return (
+                      <div style={{ display: "flex", alignItems: "center" }}>
+                        <span style={{ display: "inline-block", width: "45px", flexShrink: 0 }}>
+                          +{option.value}
+                        </span>
+                        <span style={{ display: "inline-block", width: "20px", textAlign: "center", flexShrink: 0 }}>
+                          -
+                        </span>
+                        <span style={{ flex: 1, paddingLeft: "8px" }}>
+                          {countryName}
+                        </span>
+                      </div>
+                    );
                   }}
                   styles={{
                     control: (base) => ({ ...base, ...getInputStyle("countryCode") }),
@@ -631,7 +646,7 @@ function TicketBookingPage() {
             .ticket-info-card-title {
               font-size: 1.35rem;
               font-weight: 900;
-              text-transform: uppercase;
+              text-transform: capitalize;
               letter-spacing: 0.06em;
               margin-bottom: 0.6rem;
               background: linear-gradient(135deg, #c8102e 0%, #800615 100%);
@@ -673,28 +688,27 @@ function TicketBookingPage() {
               display: flex;
               align-items: center;
               justify-content: center;
-              width: 26px;
-              height: 26px;
-              background: rgba(200, 16, 46, 0.05);
-              border: 1px solid rgba(200, 16, 46, 0.15);
-              border-radius: 8px;
+              width: 28px;
+              height: 28px;
               color: #c8102e;
               flex-shrink: 0;
-              margin-top: 1.5px;
-              box-shadow: 0 4px 8px rgba(200, 16, 46, 0.03);
+              margin-top: 1px;
               transition: all 0.3s ease;
             }
 
+            .ticket-info-icon-wrapper svg {
+              width: 22px;
+              height: 22px;
+              display: block;
+            }
+
             .ticket-info-item:hover .ticket-info-icon-wrapper {
-              background: rgba(255, 215, 0, 0.15);
-              border-color: rgba(255, 215, 0, 0.4);
               color: #b89600;
-              box-shadow: 0 4px 10px rgba(255, 215, 0, 0.1);
-              transform: scale(1.08) rotate(5deg);
+              transform: scale(1.2) rotate(5deg);
             }
 
             .ticket-info-text {
-              font-size: 0.92rem;
+              font-size: 1rem;
               font-weight: 600;
               color: rgba(44, 44, 46, 0.85);
               line-height: 1.45;
@@ -709,10 +723,8 @@ function TicketBookingPage() {
           `}</style>
 
           <h3 className="ticket-info-card-title">
-            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'inline-block', verticalAlign: 'middle', width: '20px', height: '20px' }}>
-              <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
-            </svg>
-            An Evening You Won't Forget
+            
+            An Elevated BFA Experience Awaits
           </h3>
           <p className="ticket-info-card-subtitle">
             Your ticket is more than entry — it’s an experience.
@@ -722,7 +734,11 @@ function TicketBookingPage() {
             <div className="ticket-info-item">
               <div className="ticket-info-icon-wrapper">
                 <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: '14px', height: '14px' }}>
-                  <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+                  <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+                  <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+                  <path d="M4 22h16"/>
+                  <path d="M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34"/>
+                  <path d="M12 2a6 6 0 0 0-6 6v5a6 6 0 0 0 12 0V8a6 6 0 0 0-6-6z"/>
                 </svg>
               </div>
               <span className="ticket-info-text">Prestigious Awards Ceremony</span>
@@ -731,34 +747,46 @@ function TicketBookingPage() {
             <div className="ticket-info-item">
               <div className="ticket-info-icon-wrapper">
                 <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: '14px', height: '14px' }}>
-                  <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                  <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                 </svg>
               </div>
-              <span className="ticket-info-text">Connect with Global Fintech & MSB Leaders</span>
+              <span className="ticket-info-text">1-2-1 Exclusive Meetings with Industry Leaders</span>
             </div>
 
             <div className="ticket-info-item">
               <div className="ticket-info-icon-wrapper">
                 <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: '14px', height: '14px' }}>
-                  <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+                  <line x1="3" y1="22" x2="21" y2="22" />
+                  <line x1="6" y1="18" x2="6" y2="11" />
+                  <line x1="10" y1="18" x2="10" y2="11" />
+                  <line x1="14" y1="18" x2="14" y2="11" />
+                  <line x1="18" y1="18" x2="18" y2="11" />
+                  <path d="m12 2-8 5h16L12 2z" />
                 </svg>
               </div>
-              <span className="ticket-info-text">Build Meaningful Industry Relationships</span>
+              <span className="ticket-info-text">Fintech & MSB Exhibit Spaces</span>
             </div>
 
             <div className="ticket-info-item">
               <div className="ticket-info-icon-wrapper">
                 <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: '14px', height: '14px' }}>
-                  <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="2" y1="12" x2="22" y2="12" />
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
                 </svg>
               </div>
-              <span className="ticket-info-text">Celebrate with the Leaders Defining the Future of Finance</span>
+              <span className="ticket-info-text">Meaningful Networking with Global Fintech & MSB Leaders</span>
             </div>
 
             <div className="ticket-info-item">
               <div className="ticket-info-icon-wrapper">
                 <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: '14px', height: '14px' }}>
-                  <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+                  <path d="M6 3h12l4 6-10 13L2 9z"/>
+                  <path d="M11 3 8 9l4 13 4-13-3-6"/>
+                  <path d="M2 9h20"/>
                 </svg>
               </div>
               <span className="ticket-info-text">Exclusive Tech-Luxury Venue</span>
@@ -767,7 +795,11 @@ function TicketBookingPage() {
             <div className="ticket-info-item">
               <div className="ticket-info-icon-wrapper">
                 <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: '14px', height: '14px' }}>
-                  <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+                  <polyline points="20 12 20 22 4 22 4 12"/>
+                  <rect x="2" y="7" width="20" height="5"/>
+                  <line x1="12" y1="22" x2="12" y2="7"/>
+                  <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/>
+                  <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/>
                 </svg>
               </div>
               <span className="ticket-info-text">Premium Return Gifts</span>
@@ -776,7 +808,9 @@ function TicketBookingPage() {
             <div className="ticket-info-item">
               <div className="ticket-info-icon-wrapper">
                 <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: '14px', height: '14px' }}>
-                  <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+                  <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/>
+                  <path d="M7 2v20"/>
+                  <path d="M21 15V2v0a5 5 0 0 0-5 5v8c0 1.1.9 2 2 2h3Zm0 0v7"/>
                 </svg>
               </div>
               <span className="ticket-info-text">Elegant Buffet Dining Experience</span>
