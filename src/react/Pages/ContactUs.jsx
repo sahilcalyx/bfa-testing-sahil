@@ -11,7 +11,7 @@ const ContactUs = () => {
     title: "",
     firstName: "",
     lastName: "",
-    phone: "",
+    mobile: "",
     email: "",
     message: "",
     reCaptcha: "",
@@ -80,9 +80,9 @@ const ContactUs = () => {
         }
         break;
 
-      case "phone":
+      case "mobile":
         let numericValue = value;
-        // Check if the phone number starts with a "+"
+        // Check if the mobile number starts with a "+"
         if (numericValue.startsWith("+")) {
           // Remove all non-numeric characters except "+"
           numericValue = "+" + numericValue.slice(1).replace(/\D/g, "");
@@ -91,20 +91,20 @@ const ContactUs = () => {
           numericValue = numericValue.replace(/\D/g, "");
         }
 
-        // Update form data with cleaned phone number
+        // Update form data with cleaned mobile number
         setFormData((prevFormData) => ({
           ...prevFormData,
           [id]: numericValue,
         }));
 
-        // Check if the phone number is at least 10 digits (excluding the "+")
+        // Check if the mobile number is at least 10 digits (excluding the "+")
         if (
           numericValue.startsWith("+")
             ? numericValue.length < 15
             : numericValue.length < 10
         ) {
           updatedErrors.phone =
-            "Phone Number should be Min 10 digits and max 15 digits";
+            "Mobile Number should be Min 10 digits and max 15 digits";
         } else {
           delete updatedErrors.phone;
         }
@@ -135,9 +135,9 @@ const ContactUs = () => {
     }
 
     if (!formData.phone.trim()) {
-      newErrors.phone = "Phone is required";
+      newErrors.phone = "Mobile is required";
     } else if (!/^\+?[0-9]{10,15}$/.test(formData.phone)) {
-      newErrors.phone = "Phone is invalid";
+      newErrors.phone = "Mobile is invalid";
     }
     if (!formData.title) {
       newErrors.title = "Please select a title";
@@ -225,7 +225,7 @@ const ContactUs = () => {
       title: "",
       firstName: "",
       lastName: "",
-      phone: "",
+      mobile: "",
       email: "",
       message: "",
     });
@@ -411,7 +411,7 @@ const ContactUs = () => {
                           borderRight: "none"
                         }}
                       >
-                        <option value="">Select Title</option>
+                        <option value="">Title</option>
                         <option value="Mr">Mr</option>
                         <option value="Mrs">Mrs</option>
                         <option value="Miss">Miss</option>
@@ -460,11 +460,11 @@ const ContactUs = () => {
                   <div className="col-sm-6">
                     <input
                       type="text"
-                      id="phone"
+                      id="mobile"
                       className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color ${errors.phone && "error-border"
                         }`}
                       maxLength="15"
-                      placeholder="Phone"
+                      placeholder="Mobile"
                       onChange={handleChange}
                       value={formData.phone}
                     />

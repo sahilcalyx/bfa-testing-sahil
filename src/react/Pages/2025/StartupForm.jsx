@@ -193,7 +193,7 @@ const StartupForm = () => {
               name="businessname"
               className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${errors.businessname && "error-border"
                 }`}
-              placeholder="Enter your Business Name"
+              placeholder="Business Name"
               maxLength="120"
               value={formData.businessname}
               onChange={handleInputChange}
@@ -210,7 +210,7 @@ const StartupForm = () => {
               name="email"
               className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${errors.email && "error-border"
                 }`}
-              placeholder="Enter Your Email Address"
+              placeholder="Email Address"
               value={formData.email}
               maxLength="100"
               onChange={handleInputChange}
@@ -247,7 +247,7 @@ const StartupForm = () => {
               name="websiteurl"
               className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${errors.websiteurl && "error-border"
                 }`}
-              placeholder="Enter Your Website URL"
+              placeholder="Website URL"
               value={formData.websiteurl}
               maxLength="80"
               onChange={handleInputChange}
@@ -265,7 +265,7 @@ const StartupForm = () => {
               name="businesssector"
               className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${errors.businesssector && "error-border"
                 }`}
-              placeholder="Enter Your Business Sector"
+              placeholder="Business Sector"
               value={formData.businesssector}
               onChange={handleInputChange}
               maxLength="120"
@@ -283,7 +283,7 @@ const StartupForm = () => {
               name="businessdescription"
               className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${errors.businessdescription && "error-border"
                 }`}
-              placeholder="Enter Your Business Description (Max 150 words)"
+              placeholder="Business Description (Max 150 words)"
               value={formData.businessdescription}
               onChange={handleTextAreaChange}
             />

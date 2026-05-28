@@ -10,7 +10,7 @@ const BroucherPdfForm = ({ onFormSubmit, closeModal }) => {
     name: "",
     companyName: "",
     email: "",
-    phone: "",
+    mobile: "",
     // country: "",
     reCaptcha: "",
   });
@@ -77,7 +77,7 @@ const BroucherPdfForm = ({ onFormSubmit, closeModal }) => {
       errors.email = "Invalid email address";
     }
 
-    // Phone validation
+    // Mobile validation
     let numericValue = formData.phone || "";
     if (numericValue.startsWith("+")) {
       numericValue = "+" + numericValue.slice(1).replace(/\D/g, "");
@@ -90,7 +90,7 @@ const BroucherPdfForm = ({ onFormSubmit, closeModal }) => {
       (numericValue.startsWith("+") && numericValue.length > 15) ||
       numericValue.length < 10
     ) {
-      errors.phone = "Phone number should be between 10 and 15 digits";
+      errors.phone = "Mobile number should be between 10 and 15 digits";
     }
 
     if (!formData.country) errors.country = "Country is required";
@@ -132,7 +132,7 @@ const BroucherPdfForm = ({ onFormSubmit, closeModal }) => {
                   name: "",
                   companyName: "",
                   email: "",
-                  phone: "",
+                  mobile: "",
                   country: "",
                   reCaptcha: "",
                 });
@@ -290,7 +290,7 @@ const BroucherPdfForm = ({ onFormSubmit, closeModal }) => {
           </Form.Control.Feedback>
         </Form.Group>
 
-        <Form.Group controlId="phone">
+        <Form.Group controlId="mobile">
           <Form.Label>
             Phone{" "}
             <span
@@ -302,13 +302,13 @@ const BroucherPdfForm = ({ onFormSubmit, closeModal }) => {
           </Form.Label>
           <Form.Control
             type="text"
-            name="phone"
+            name="mobile"
             value={formData.phone}
             maxLength="15"
             onChange={(e) => {
               let value = e.target.value;
 
-              // Check if the phone number starts with a "+"
+              // Check if the mobile number starts with a "+"
               if (value.startsWith("+")) {
                 // Keep "+" at the start and remove all non-numeric characters after "+"
                 value = "+" + value.slice(1).replace(/\D/g, "");

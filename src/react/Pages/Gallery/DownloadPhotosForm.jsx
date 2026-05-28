@@ -10,7 +10,7 @@ const DownloadPhotosForm = () => {
     name: "",
     companyName: "",
     email: "",
-    phone: "",
+    mobile: "",
     experienceRating: "",
     reCaptcha: "",
     networkingBenefits: "",
@@ -52,11 +52,11 @@ const DownloadPhotosForm = () => {
       errors.email = "Invalid email address";
     }
 
-    // Validate Phone
+    // Validate Mobile
     let numericValue = formData.phone || "";
     numericValue = numericValue.replace(/\D/g, "");
     if (numericValue.length < 10 || numericValue.length > 15) {
-      errors.phone = "Phone number should be between 10 and 15 digits";
+      errors.phone = "Mobile number should be between 10 and 15 digits";
     }
 
     // Validate Experience Rating
@@ -112,7 +112,7 @@ const DownloadPhotosForm = () => {
                   name: "",
                   companyName: "",
                   email: "",
-                  phone: "",
+                  mobile: "",
                   experienceRating: "",
                   reCaptcha: "",
                   networkingBenefits: "",
@@ -300,13 +300,13 @@ const DownloadPhotosForm = () => {
               )}
             </Form.Group>
 
-            <Form.Group className="col-md-6 mt-2 mb-2" controlId="phone">
+            <Form.Group className="col-md-6 mt-2 mb-2" controlId="mobile">
               <Form.Label>
-                Phone <span className="text-danger">*</span>
+                Mobile <span className="text-danger">*</span>
               </Form.Label>
               <Form.Control
                 type="tel"
-                name="phone"
+                name="mobile"
                 maxLength="15"
                 value={formData.phone}
                 onChange={handleChange}

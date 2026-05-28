@@ -613,7 +613,7 @@ const Sponsors = () => {
                           paddingLeft: "2px",
                         }}
                       >
-                        <option value="">Select Title</option>
+                        <option value="">Titile</option>
                         <option value="1">Mr</option>
                         <option value="2">Mrs</option>
                         <option value="3">Miss</option>

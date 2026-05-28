@@ -230,7 +230,7 @@ const Sponsors = () => {
         break;
       case "phoneNo":
         let numericValue = value;
-        // Check if the phone number starts with a "+"
+        // Check if the mobile number starts with a "+"
         if (numericValue.startsWith("+")) {
           // Remove all non-numeric characters except "+"
           numericValue = "+" + numericValue.slice(1).replace(/\D/g, "");
@@ -239,20 +239,20 @@ const Sponsors = () => {
           numericValue = numericValue.replace(/\D/g, "");
         }
 
-        // Update form data with cleaned phone number
+        // Update form data with cleaned mobile number
         setFormData((prevFormData) => ({
           ...prevFormData,
           [id]: numericValue,
         }));
 
-        // Check if the phone number is at least 10 digits (excluding the "+")
+        // Check if the mobile number is at least 10 digits (excluding the "+")
         if (
           numericValue.startsWith("+")
             ? numericValue.length < 11
             : numericValue.length < 10
         ) {
           updatedErrors.phoneNo =
-            "Phone Number should be Min 10 digits and max 15 digits";
+            "Mobile Number should be Min 10 digits and max 15 digits";
         } else {
           delete updatedErrors.phoneNo;
         }
@@ -648,7 +648,7 @@ const Sponsors = () => {
                           borderRight: "none"
                         }}
                       >
-                        <option value="">Select Title</option>
+                        <option value="">Title</option>
                         <option value="Mr">Mr</option>
                         <option value="Mrs">Mrs</option>
                         <option value="Miss">Miss</option>
@@ -684,7 +684,7 @@ const Sponsors = () => {
                       id="lastName"
                       className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color ${errors.lastName && "error-border"
                         }`}
-                      placeholder="Enter Your Last name"
+                      placeholder="Last name"
                       onChange={handleChange}
                       value={formData.lastName}
                       maxLength="130"
@@ -700,7 +700,7 @@ const Sponsors = () => {
                       id="phoneNo"
                       className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color ${errors.phoneNo && "error-border"
                         }`}
-                      placeholder="Enter Your Mobile Number"
+                      placeholder="Mobile Number"
                       onChange={handleChange}
                       maxLength="15"
                       value={formData.phoneNo}
@@ -717,7 +717,7 @@ const Sponsors = () => {
                       id="email"
                       className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color ${errors.email && "error-border"
                         }`}
-                      placeholder="Enter Your Email Address"
+                      placeholder="Email Address"
                       onChange={handleChange}
                       value={formData.email}
                     />
@@ -733,7 +733,7 @@ const Sponsors = () => {
                       id="companyName"
                       className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color ${errors.companyName && "error-border"
                         }`}
-                      placeholder="Enter Your Company Name"
+                      placeholder="Company Name"
                       maxLength="130"
                       onChange={handleChange}
                       value={formData.companyName}
@@ -752,7 +752,7 @@ const Sponsors = () => {
                       id="role"
                       className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color ${errors.role && "error-border"
                         }`}
-                      placeholder="Enter Your Role in Company"
+                      placeholder="Role in Company"
                       onChange={handleChange}
                       value={formData.role}
                       maxLength="130"

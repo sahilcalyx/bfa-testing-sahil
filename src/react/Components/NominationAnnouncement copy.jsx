@@ -11,40 +11,30 @@ const NominationAnnouncement = () => {
 
         <div className="row justify-content-center gy-4">
           {/* Super Early Bird */}
-          <div className="col-md-4">
+          <div className="col-md-8 col-lg-6">
             <div className="offer-card gradient-theme">
               <h4 className="title">Super Early Bird</h4>
-              <p className="date-range">2nd June – 15th June 2025</p>
+              <p className="date-range">2nd June – 15th June 2026</p>
               <div className="price">£195</div>
             </div>
           </div>
-
-          {/* Early Bird */}
-          <div className="col-md-4">
-            <div className="offer-card gradient-pink">
-              <h4 className="title">Early Bird</h4>
-              <p className="date-range">16th June – 31st July 2025</p>
-              <div className="price">£295</div>
-            </div>
-          </div>
-
-          {/* Standard */}
-          <div className="col-md-4">
-            {/* gradient-purple */}
-            <div className="offer-card gradient-pink "> 
-              <h4 className="title">Standard Nomination</h4>
-              <p className="date-range">1st August – 31st August 2025</p>
-              <div className="price">£395</div>
-            </div>
-          </div>
         </div>
+
 
         <div className="mt-5">
           <p className="fs-5 fw-bold text-dark mb-2">
             Don’t miss your chance to nominate your business at the best rate.
           </p>
+
           <p className="fs-5 text-secondary">
-            Early movers get the best rates — <strong>submit</strong> <br/> your nomination today.
+            Early movers secure the best rates and maximize their opportunity to shine at the awards.
+            <br /><br />
+
+            <strong >
+
+              <span className="highlight">Submit Your Nomination Today.</span>
+            </strong>
+
           </p>
         </div>
       </div>

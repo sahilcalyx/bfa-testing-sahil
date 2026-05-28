@@ -15,7 +15,7 @@ const RedSeaMoneyTransferWinnerDetails2025 = () => {
     {
       icon: "fas fa-exchange-alt",
       title: "Multi-Channel Transfers",
-      desc: "Send funds via online banking, bank cards, phone calls, or in-person transactions.",
+      desc: "Send funds via online banking, bank cards, mobile calls, or in-person transactions.",
     },
     {
       icon: "fas fa-user-plus",

@@ -192,7 +192,7 @@ const IfePaySponsorDetails = () => {
               >
                 Contact Details :
               </span>{" "}
-              They are reachable via phone at{" "}
+              They are reachable via mobile at{" "}
               <a href="tel:02030061093" style={{ color: "#f40181" }}>
                 <strong>020 3006 1093</strong>
               </a>

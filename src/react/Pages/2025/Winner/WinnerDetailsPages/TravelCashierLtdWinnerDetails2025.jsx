@@ -60,7 +60,7 @@ const TravelCashierLtdWinnerDetails2025 = () => {
   {
     icon: "fas fa-headset",
     title: "Expert Customer Support",
-    desc: "Responsive assistance via website form, email, or phone at every step.",
+    desc: "Responsive assistance via website form, email, or mobile at every step.",
   },
   {
     icon: "fas fa-chart-line",

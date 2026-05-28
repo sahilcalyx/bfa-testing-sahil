@@ -146,7 +146,7 @@ const EmarchantPayWinnerDetails2025 = () => {
         <h4 className="mt-4">Overview</h4>
         
         <p>
-         <strong>emerchantpay</strong> is a <strong>leading global payment service provider and acquirer</strong> for online, mobile, in-store and over the phone payments. Its global payments solution is available through a simple integration, offering a diverse range of features, including global acquiring, global and local payment methods, advanced fraud management and performance optimisation. emerchantpay empowers businesses to design seamless and engaging payment experiences for their consumers.
+         <strong>emerchantpay</strong> is a <strong>leading global payment service provider and acquirer</strong> for online, mobile, in-store and over the mobile payments. Its global payments solution is available through a simple integration, offering a diverse range of features, including global acquiring, global and local payment methods, advanced fraud management and performance optimisation. emerchantpay empowers businesses to design seamless and engaging payment experiences for their consumers.
         </p>
         <p>
           With a robust global network and a commitment to innovation, emerchantpay ensures merchants can offer <strong>fast, reliable, and engaging payment journeys</strong> worldwide.

@@ -671,7 +671,7 @@ const RegisterNow = () => {
           </div>
         </div>
       </div>
-      <NominationAnnouncement />
+
       {/* <div class="cs-height_60 cs-height_lg_75 "></div> */}
 
       <div id="nominate-now" className="container" style={{ zIndex: 9999 }}>
@@ -709,8 +709,7 @@ const RegisterNow = () => {
               </li>
 
               <li>Please note that each nomination incurs a fee.</li>
-              <li > 1 free attendee with each nomination!
-                Your first additional attendee joins at just £95, and every attendee thereafter at £195.</li>
+
               <li>
                 If your supporting photos or documents are not ready at the time of submission, you can email them later to kudos@britfintechawards.com.
               </li>
@@ -744,7 +743,7 @@ const RegisterNow = () => {
                         paddingLeft: "2px",
                       }}
                     >
-                      <option value="">Select Title</option>
+                      <option value="">Title</option>
                       <option value="1">Mr</option>
                       <option value="2">Mrs</option>
                       <option value="3">Miss</option>
@@ -905,18 +904,24 @@ const RegisterNow = () => {
                         padding: "12px",
                       }}
                       multiple
+                      displayEmpty
                       value={formData.awardcate}
                       onChange={handleCategoryChange}
 
-                      renderValue={(selected) => (
-                        <Box
-                          sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}
-                        >
-                          {selected.map((value) => (
-                            <Chip key={value} label={value} />
-                          ))}
-                        </Box>
-                      )}
+                      renderValue={(selected) => {
+                        if (!selected || selected.length === 0) {
+                          return <span style={{ color: "#999999" }}>Select Award</span>;
+                        }
+                        return (
+                          <Box
+                            sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}
+                          >
+                            {selected.map((value) => (
+                              <Chip key={value} label={value} />
+                            ))}
+                          </Box>
+                        );
+                      }}
                     >
                       <ListSubheader
                         style={{
@@ -1440,6 +1445,7 @@ const RegisterNow = () => {
           </div>
         </div>
       </div>
+      <NominationAnnouncement />
       <div className="cs-height_60 cs-height_lg_75" />
       {showModal && (
         <div className="modal-overlay">

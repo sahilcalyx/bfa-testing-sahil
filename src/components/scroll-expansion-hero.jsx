@@ -356,7 +356,10 @@ const ScrollExpandMedia = ({
                       className='relative overflow-hidden border-none bg-gradient-to-r from-[#c8102e] to-[#a30b22] shadow-[0px_10px_35px_rgba(200,16,46,0.3)] hover:shadow-[0px_12px_40px_rgba(200,16,46,0.4)] hover:scale-105 active:scale-95 transition-all duration-300 rounded-full px-10 py-3.5 group'
                     >
                       {/* Gloss Shimmer sweeping light flash effect on hover */}
-                      <span className='absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/25 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-[1200ms] ease-out' />
+                      <span 
+                        className='absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/25 to-transparent -translate-x-full group-hover:translate-x-full transition-transform ease-out' 
+                        style={{ transitionDuration: '1200ms' }}
+                      />
                       
                       <span className='font-bold text-white uppercase tracking-widest text-xs md:text-sm relative z-10'>
                         {ctaText}

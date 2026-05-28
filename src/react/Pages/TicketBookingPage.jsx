@@ -7,10 +7,12 @@ import toast, { Toaster } from "react-hot-toast";
 // Country codes list (partial - you can extend it)
 // ====== Titles ======
 const titleOptions = [
+  { value: "", label: "Title" },
   { value: "Mr.", label: "Mr." },
-  { value: "Ms.", label: "Ms." },
-  { value: "Dr.", label: "Dr." },
   { value: "Mrs.", label: "Mrs." },
+  { value: "Miss", label: "Miss" },
+  { value: "Ms.", label: "Ms." },
+  { value: "Other", label: "Other" },
 ];
 
 // Sort alphabetically except keep Mr. first
@@ -199,13 +201,16 @@ const TICKET_PRICE = 195; // or the actual ticket price
 
 
 
-const ticketOptions = [...Array(MAX_TICKETS)].map((_, i) => {
-  const count = i + 1;
-  return {
-    value: count,
-    label: `${count} Ticket${count > 1 ? "s" : ""} – £${count * TICKET_PRICE}`,
-  };
-});
+const ticketOptions = [
+  { value: "", label: "Tickets" },
+  ...[...Array(MAX_TICKETS)].map((_, i) => {
+    const count = i + 1;
+    return {
+      value: count,
+      label: `${count} Ticket${count > 1 ? "s" : ""} – £${count * TICKET_PRICE}`,
+    };
+  }),
+];
 
 const countryCodeOptions = countryCodes.map((c) => ({
   value: c.code,
@@ -213,101 +218,101 @@ const countryCodeOptions = countryCodes.map((c) => ({
 }));
 
 function TicketBookingPage() {
-const [captchaToken, setCaptchaToken] = useState("");
-const [form, setForm] = useState({
-  title: "Mr.",
-  fullName: "",
-  companyName: "",
-  countryCode: "44",
-  phone: "",
-  email: "",
-  tickets: "",
-  recaptchaToken: ""
-});
+  const [captchaToken, setCaptchaToken] = useState("");
+  const [form, setForm] = useState({
+    title: "",
+    fullName: "",
+    companyName: "",
+    countryCode: "44",
+    phone: "",
+    email: "",
+    tickets: "",
+    recaptchaToken: ""
+  });
 
-const handleCaptchaChange = (token) => {
-  setCaptchaToken(token);
-  setForm((prev) => ({ ...prev, recaptchaToken: token })); // update form with token
-};
-
-const [errors, setErrors] = useState({});
-// Remove duplicate declarations of TICKET_PRICE and MAX_TICKETS
-
-const validate = () => {
-  const errs = {};
-  if (!form.fullName.trim()) errs.fullName = "Full name is required.";
-  if (!form.companyName.trim()) errs.companyName = "Company name is required.";
-  if (!form.countryCode) errs.countryCode = "Select your country code.";
-  if (!form.phone.trim()) errs.phone = "Phone number is required.";
-  else if (!/^\d{7,15}$/.test(form.phone)) errs.phone = "Phone number must be 7-15 digits.";
-  if (!form.email.trim()) errs.email = "Email is required.";
-  else if (!/\S+@\S+\.\S+/.test(form.email)) errs.email = "Invalid email address.";
-
-  if (!form.tickets || parseInt(form.tickets) < 1 || parseInt(form.tickets) > MAX_TICKETS)
-    errs.tickets = "You can book between 1 and 5 tickets.";
-  return errs;
-};
-
-const handleChange = (e) => {
-  const { name, value } = e.target;
-  setForm({ ...form, [name]: value });
-  setErrors({ ...errors, [name]: "" }); // Clear error for the field
-};
-
-const [isSubmitting, setIsSubmitting] = useState(false);
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  setIsSubmitting(true);
-
-  // Clear previous errors
-  setErrors({});
-
-  // Run validation
-  const validationErrors = validate();
-  if (Object.keys(validationErrors).length > 0) {
-    setErrors(validationErrors);
-    setIsSubmitting(false);
-    return;
-  }
-
-  // ✅ Correct phone interpolation
-  // ✅ Correct phone interpolation
-  const fullPhone = `${form.countryCode}${form.phone}`;
-
-  const formPayload = {
-    title: form.title,
-    fullName: form.fullName,
-    companyName: form.companyName,
-    email: form.email,
-    tickets: form.tickets,
-    phone: fullPhone,
-    recaptchaToken: form.recaptchaToken,
+  const handleCaptchaChange = (token) => {
+    setCaptchaToken(token);
+    setForm((prev) => ({ ...prev, recaptchaToken: token })); // update form with token
   };
 
-  try {
-    // ✅ Await first request so errors are caught
-    await axios.post("https://bfa-ticket-event.vercel.app/submit-form", formPayload);
+  const [errors, setErrors] = useState({});
+  // Remove duplicate declarations of TICKET_PRICE and MAX_TICKETS
 
-    // ✅ Await checkout request
-    const checkoutRes = await axios.post(
-      "https://bfa-ticket-event.vercel.app/create-checkout-session",
-      formPayload
-    );
+  const validate = () => {
+    const errs = {};
+    if (!form.fullName.trim()) errs.fullName = "Full name is required.";
+    if (!form.companyName.trim()) errs.companyName = "Company name is required.";
+    if (!form.countryCode) errs.countryCode = "Select your country code.";
+    if (!form.phone.trim()) errs.phone = "Phone number is required.";
+    else if (!/^\d{7,15}$/.test(form.phone)) errs.phone = "Phone number must be 7-15 digits.";
+    if (!form.email.trim()) errs.email = "Email is required.";
+    else if (!/\S+@\S+\.\S+/.test(form.email)) errs.email = "Invalid email address.";
 
-    // ✅ Stripe redirect
-    if (checkoutRes.data?.url) {
-      window.location.href = checkoutRes.data.url;
-    } else {
-      console.error("Checkout response missing URL:", checkoutRes.data);
-      toast.error(checkoutRes?.data?.message);
+    if (!form.tickets || parseInt(form.tickets) < 1 || parseInt(form.tickets) > MAX_TICKETS)
+      errs.tickets = "You can book between 1 and 5 tickets.";
+    return errs;
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
+    setErrors({ ...errors, [name]: "" }); // Clear error for the field
+  };
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    // Clear previous errors
+    setErrors({});
+
+    // Run validation
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      setIsSubmitting(false);
+      return;
     }
-  } catch (err) {
-    console.error("Checkout session error:", err.response?.data || err.message || err);
-    toast.error(err.response?.data?.message);
-  } finally {
-    setIsSubmitting(false);
-  }
-};
+
+    // ✅ Correct mobile interpolation
+    // ✅ Correct mobile interpolation
+    const fullPhone = `${form.countryCode}${form.phone}`;
+
+    const formPayload = {
+      title: form.title,
+      fullName: form.fullName,
+      companyName: form.companyName,
+      email: form.email,
+      tickets: form.tickets,
+      mobile: fullPhone,
+      recaptchaToken: form.recaptchaToken,
+    };
+
+    try {
+      // ✅ Await first request so errors are caught
+      await axios.post("https://bfa-ticket-event.vercel.app/submit-form", formPayload);
+
+      // ✅ Await checkout request
+      const checkoutRes = await axios.post(
+        "https://bfa-ticket-event.vercel.app/create-checkout-session",
+        formPayload
+      );
+
+      // ✅ Stripe redirect
+      if (checkoutRes.data?.url) {
+        window.location.href = checkoutRes.data.url;
+      } else {
+        console.error("Checkout response missing URL:", checkoutRes.data);
+        toast.error(checkoutRes?.data?.message);
+      }
+    } catch (err) {
+      console.error("Checkout session error:", err.response?.data || err.message || err);
+      toast.error(err.response?.data?.message);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
 
 
@@ -322,354 +327,361 @@ const handleSubmit = async (e) => {
   });
 
   return (
-<>
+    <>
 
- <div className="cs-height_90 cs-height_lg_80" />
-    <Helmet>
-  <title>Book Brit Awards Tickets</title>
-  <meta
-    name="description"
-    content="Secure your seat at the Brit Fintech Awards. Join industry leaders for an unforgettable evening."
-  />
-  <meta
-    name="keywords"
-    content="Buy Brit Awards Tickets, Brit Awards Guest, Brit Awards When"
-  />
-  <meta name="author" content="Brit Fintech Awards" />
+      <div className="cs-height_90 cs-height_lg_80" />
+      <Helmet>
+        <title>Book Brit Awards Tickets</title>
+        <meta
+          name="description"
+          content="Secure your seat at the Brit Fintech Awards. Join industry leaders for an unforgettable evening."
+        />
+        <meta
+          name="keywords"
+          content="Buy Brit Awards Tickets, Brit Awards Guest, Brit Awards When"
+        />
+        <meta name="author" content="Brit Fintech Awards" />
 
-  {/* Open Graph Meta Tags for Link Preview */}
-  <meta property="og:title" content="Book Brit Awards Tickets" />
-  <meta
-    property="og:description"
-    content="Secure your seat at the Brit Fintech Awards. Join industry leaders for an unforgettable evening."
-  />
-  <meta
-    property="og:image"
-    content="https://britfintechawards.com/assets/tickets-banner.jpg"
-  />
-  <meta property="og:url" content="https://britfintechawards.com/tickets" />
-  <meta property="og:type" content="website" />
+        {/* Open Graph Meta Tags for Link Preview */}
+        <meta property="og:title" content="Book Brit Awards Tickets" />
+        <meta
+          property="og:description"
+          content="Secure your seat at the Brit Fintech Awards. Join industry leaders for an unforgettable evening."
+        />
+        <meta
+          property="og:image"
+          content="https://britfintechawards.com/assets/tickets-banner.jpg"
+        />
+        <meta property="og:url" content="https://britfintechawards.com/tickets" />
+        <meta property="og:type" content="website" />
 
-  {/* Twitter Card (Optional) */}
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Book Brit Awards Tickets" />
-  <meta
-    name="twitter:description"
-    content="Secure your seat at the Brit Fintech Awards. Join industry leaders for an unforgettable evening."
-  />
-  <meta
-    name="twitter:image"
-    content="https://britfintechawards.com/assets/tickets-banner.jpg"
-  />
-</Helmet>
+        {/* Twitter Card (Optional) */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Book Brit Awards Tickets" />
+        <meta
+          name="twitter:description"
+          content="Secure your seat at the Brit Fintech Awards. Join industry leaders for an unforgettable evening."
+        />
+        <meta
+          name="twitter:image"
+          content="https://britfintechawards.com/assets/tickets-banner.jpg"
+        />
+      </Helmet>
 
-        <div
-          className="cs-hero cs-style12 cs-type1 cs-center text-center  cs-parallax cs-hobble"
-          
-          style={{
-            backgroundImage:
-              'url("../assets/img/event-conference/hero-img.jpg")',
-              height: "160px"
-          }}
-        >
-          {/* <div className="cs-hero_pattern cs-hover_layer3" style={{}}>
-         
-          </div> */}
-          <div
-            className="container wow fadeInDown"
-            data-wow-duration="1s"
-            data-wow-delay="0.2s"
-            style={{
-              visibility: "visible",
-              animationDuration: "1s",
-              animationDelay: "0.2s",
-              animationName: "fadeInDown",
-            }}
-          >
-            <div className="cs-hero_text text-left">
-             <h1
-  className="cs-hero_title cs-extra_bold cs-white text-uppercase pb-0 mb-2"
-  style={{ marginTop: "10px", lineHeight: '1.2' }}
->
-  
-
-  Book Your Tickets 
-</h1>
-
-              {/* <p className="pb-0 mb-0 text-left text-white"> Let’s celebrate innovation together. 
-            </p> */}
-
-              <div className="cs-height_10 cs-height_lg_0" />
-            </div>
-          </div>
-          <div
-            className="cs-hero_img cs-bg"
-            data-src="../assets/img/creative-agency/hero-img.jpg"
-            style={{
-              backgroundImage:
-                'url("../assets/img/creative-agency/hero-img.jpg")',
-            }}
-          >
-            <div className="cs-hero_img_circle" id="ticket-booking" />
-          </div>
-        </div>
-    <div
-    
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "flex-start",
-        padding: "3rem 1rem",
-      
-        fontFamily: "Segoe UI, sans-serif",
-        flexWrap: "wrap",
-        gap: "2rem",
-      }}
-    >
-      {/* Booking Form */}
       <div
+        className="cs-hero cs-style12 cs-type1 cs-center text-center  cs-parallax cs-hobble"
+
         style={{
-          backgroundColor: "#efefef",
-          padding: "2rem",
-          borderRadius: "15px",
-          boxShadow: "0 8px 20px rgba(0, 0, 0, 0.1)",
-          width: "500px",
+          backgroundImage:
+            'url("../assets/img/event-conference/hero-img.jpg")',
+          height: "160px"
         }}
       >
-        <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-       <div style={{ display: "flex", gap: "10px", alignItems: "flex-start" }}>
-  {/* Title Dropdown */}
-  <div style={{ flex: "0 0 100px" }}>
-    <Select
-    name="title"
-    options={titleOptions}
-    value={titleOptions.find((opt) => opt.value === form.title)}
-    onChange={(selected) =>
-      handleChange({ target: { name: "title", value: selected.value } })
-    }
-    styles={{ control: (base) => ({ ...base, ...getInputStyle("title") }) }}
-    isSearchable={false}
-  />
-  </div>
-
-  {/* Full Name Input */}
-  <div style={{ flex: "1" }}>
-    <input
-      name="fullName"
-      placeholder="Full Name"
-      value={form.fullName}
-      onChange={handleChange}
-      style={{ width: "100%", ...getInputStyle("fullName") }}
-    />
-    {errors.fullName && (
-      <p style={{ ...errorStyle, marginTop: "5px" }}>{errors.fullName}</p>
-    )}
-  </div>
-</div>
+        {/* <div className="cs-hero_pattern cs-hover_layer3" style={{}}>
+         
+          </div> */}
+        <div
+          className="container wow fadeInDown"
+          data-wow-duration="1s"
+          data-wow-delay="0.2s"
+          style={{
+            visibility: "visible",
+            animationDuration: "1s",
+            animationDelay: "0.2s",
+            animationName: "fadeInDown",
+          }}
+        >
+          <div className="cs-hero_text text-left">
+            <h1
+              className="cs-hero_title cs-extra_bold cs-white text-uppercase pb-0 mb-2"
+              style={{ marginTop: "10px", lineHeight: '1.2' }}
+            >
 
 
-          <div>
-            <input
-              name="companyName"
-              placeholder="Company Name"
-              value={form.companyName}
-              onChange={handleChange}
-              style={getInputStyle("companyName")}
-            />
-            {errors.companyName && <p style={errorStyle}>{errors.companyName}</p>}
+              Book Your Tickets
+            </h1>
+
+            {/* <p className="pb-0 mb-0 text-left text-white"> Let’s celebrate innovation together. 
+            </p> */}
+
+            <div className="cs-height_10 cs-height_lg_0" />
+          </div>
+        </div>
+        <div
+          className="cs-hero_img cs-bg"
+          data-src="../assets/img/creative-agency/hero-img.jpg"
+          style={{
+            backgroundImage:
+              'url("../assets/img/creative-agency/hero-img.jpg")',
+          }}
+        >
+          <div className="cs-hero_img_circle" id="ticket-booking" />
+        </div>
+      </div>
+      <div
+
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "flex-start",
+          padding: "3rem 1rem",
+
+          fontFamily: "Segoe UI, sans-serif",
+          flexWrap: "wrap",
+          gap: "2rem",
+        }}
+      >
+        {/* Booking Form */}
+        <div
+          style={{
+            backgroundColor: "#efefef",
+            padding: "2rem",
+            borderRadius: "15px",
+            boxShadow: "0 8px 20px rgba(0, 0, 0, 0.1)",
+            width: "500px",
+          }}
+        >
+          <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+            <div style={{ display: "flex", gap: "10px", alignItems: "flex-start" }}>
+              {/* Title Dropdown */}
+              <div style={{ flex: "0 0 100px" }}>
+                <Select
+                  name="title"
+                  options={titleOptions}
+                  value={titleOptions.find((opt) => opt.value === form.title)}
+                  onChange={(selected) =>
+                    handleChange({ target: { name: "title", value: selected.value } })
+                  }
+                  styles={{ control: (base) => ({ ...base, ...getInputStyle("title") }) }}
+                  isSearchable={false}
+                />
+              </div>
+
+              {/* Full Name Input */}
+              <div style={{ flex: "1" }}>
+                <input
+                  name="fullName"
+                  placeholder="Full Name"
+                  value={form.fullName}
+                  onChange={handleChange}
+                  style={{ width: "100%", ...getInputStyle("fullName") }}
+                />
+                {errors.fullName && (
+                  <p style={{ ...errorStyle, marginTop: "5px" }}>{errors.fullName}</p>
+                )}
+              </div>
+            </div>
+
+
+            <div>
+              <input
+                name="companyName"
+                placeholder="Company Name"
+                value={form.companyName}
+                onChange={handleChange}
+                style={getInputStyle("companyName")}
+              />
+              {errors.companyName && <p style={errorStyle}>{errors.companyName}</p>}
+            </div>
+
+            <div style={{ display: "flex", gap: "10px", alignItems: "flex-start" }}>
+              {/* Country Code Select */}
+              <div style={{ flex: "0 0 140px" }}>
+                <Select
+                  name="countryCode"
+                  options={countryCodeOptions}
+                  value={countryCodeOptions.find((opt) => opt.value === form.countryCode)}
+                  onChange={(selected) =>
+                    handleChange({ target: { name: "countryCode", value: selected.value } })
+                  }
+                  formatOptionLabel={(option, { context }) => {
+                    const countryName = option.label.split(" (+")[0];
+                    return context === "value" ? `+${option.value}` : `+${option.value} - ${countryName}`;
+                  }}
+                  styles={{
+                    control: (base) => ({ ...base, ...getInputStyle("countryCode") }),
+                    menu: (base) => ({ ...base, width: "300px", zIndex: 9999 })
+                  }}
+                  isSearchable={true}
+                />
+                {errors.countryCode && (
+                  <p style={{ ...errorStyle, marginTop: "5px" }}>{errors.countryCode}</p>
+                )}
+
+              </div>
+
+              {/* Phone Input */}
+              <div style={{ flex: "1" }}>
+                <input
+                  name="phone"
+                  placeholder="Phone"
+                  value={form.phone}
+                  onChange={handleChange}
+                  style={{ width: "100%", ...getInputStyle("phone") }}
+                />
+                {errors.phone && (
+                  <p style={{ ...errorStyle, marginTop: "5px" }}>{errors.phone}</p>
+                )}
+              </div>
+            </div>
+
+
+
+
+            <div>
+              <input
+                name="email"
+                placeholder="Email Address"
+                type="email"
+                value={form.email}
+                onChange={handleChange}
+                style={getInputStyle("email")}
+              />
+              {errors.email && <p style={errorStyle}>{errors.email}</p>}
+            </div>
+
+            <div>
+              <Select
+                name="tickets"
+                options={ticketOptions}
+                value={ticketOptions.find((opt) => opt.value === form.tickets)}
+                onChange={(selected) =>
+                  handleChange({ target: { name: "tickets", value: selected.value } })
+                }
+                styles={{ control: (base) => ({ ...base, ...getInputStyle("tickets") }) }}
+                isSearchable={false}
+              />
+              {errors.tickets && <p style={errorStyle}>{errors.tickets}</p>}
+            </div>
+
+            <div className="col-12 mt-3">
+              <div className="input-field">
+                <ReCAPTCHA
+                  sitekey="6LdxNigqAAAAAJ6jU9uuhEtrAw-s8J_qnsGCVvj5"
+                  onChange={handleCaptchaChange}
+                />
+                {errors.recaptchaToken && (
+                  <p style={{ ...errorStyle, marginTop: "5px" }}>{errors.recaptchaToken}</p>
+                )}
+              </div>
+            </div>
+            <button
+              type="submit"
+              style={{
+                background: "#000",
+                color: "white",
+                padding: "12px",
+                fontSize: "16px",
+                fontWeight: "600",
+                borderRadius: "10px",
+                border: "none",
+                cursor: "pointer",
+                transition: "background 0.3s",
+                marginTop: "10px",
+              }}
+              onMouseOver={(e) => (e.target.style.background = "#000")}
+              onMouseOut={(e) => (e.target.style.background = "#000")}
+              disabled={isSubmitting}
+            >
+
+              {isSubmitting ? "Processing..." : " Proceed to Pay "}
+            </button>
+
+
+          </form>
+        </div>
+
+        {/* Right Side Info */}
+        <div
+          style={{
+            width: "400px",
+            backgroundColor: "#fff",
+            padding: "2rem",
+            borderRadius: "15px",
+            boxShadow: "0 8px 20px rgba(0, 0, 0, 0.1)",
+            fontFamily: "Arial, sans-serif",
+            color: "#333",
+            lineHeight: "1.6",
+          }}
+        >
+          <p style={{ fontSize: "1.2rem", fontWeight: "bold", marginBottom: "1rem" }}>
+            ✨ An Evening You Won’t Forget
+          </p>
+          <p style={{ marginBottom: "1rem" }}>
+            Your ticket is more than entry — it’s an experience.
+            <br />
+
+          </p>
+
+
+          <div style={{ marginTop: "1.5rem", color: "#333", fontSize: "1rem", lineHeight: "1.8" }}>
+            <p style={{ marginBottom: "0px" }}>✅ A Dazzling Awards Ceremony</p>
+            <p style={{ marginBottom: "0px" }}>✅ 3-Course meal & Drinks</p>
+            <p style={{ marginBottom: "0px" }}>✅ Live Startup Pitches</p>
+            <p style={{ marginBottom: "0px" }}>✅  Networking with 150+ Fintech & MSB Professionals</p>
+            <p style={{ marginBottom: "0px" }}>✅ High Industry Visibility</p>
+            <p style={{ marginBottom: "0px" }}>✅ Explore a historic, elegant London venue</p>
+            <p style={{ marginBottom: "0px" }}>✅ Curated return gifts</p>
           </div>
 
-        <div style={{ display: "flex", gap: "10px", alignItems: "flex-start" }}>
-  {/* Country Code Select */}
-  <div style={{ flex: "0 0 140px" }}>
-<Select
-  name="countryCode"
-  options={countryCodeOptions}
-  value={countryCodeOptions.find((opt) => opt.value === form.countryCode)}
-  onChange={(selected) =>
-    handleChange({ target: { name: "countryCode", value: selected.value } })
-  }
-  styles={{ control: (base) => ({ ...base, ...getInputStyle("countryCode") }) }}
-  isSearchable={false}
-/>
-  {errors.countryCode && (
-    <p style={{ ...errorStyle, marginTop: "5px" }}>{errors.countryCode}</p>
-  )}
- 
-  </div>
-
-  {/* Phone Number Input */}
-  <div style={{ flex: "1" }}>
-    <input
-      name="phone"
-      placeholder="Phone Number"
-      value={form.phone}
-      onChange={handleChange}
-      style={{ width: "100%", ...getInputStyle("phone") }}
-    />
-    {errors.phone && (
-      <p style={{ ...errorStyle, marginTop: "5px" }}>{errors.phone}</p>
-    )}
-  </div>
-</div>
 
 
-        
+        </div>
 
-          <div>
-            <input
-              name="email"
-              placeholder="Email"
-              type="email"
-              value={form.email}
-              onChange={handleChange}
-              style={getInputStyle("email")}
-            />
-            {errors.email && <p style={errorStyle}>{errors.email}</p>}
-          </div>
 
-          <div>
-            <Select
-    name="tickets"
-    options={ticketOptions}
-    value={ticketOptions.find((opt) => opt.value === form.tickets)}
-    onChange={(selected) =>
-      handleChange({ target: { name: "tickets", value: selected.value } })
-    }
-    styles={{ control: (base) => ({ ...base, ...getInputStyle("tickets") }) }}
-    isSearchable={false}
-  />
-            {errors.tickets && <p style={errorStyle}>{errors.tickets}</p>}
-          </div>
+        <br />
 
-  <div className="col-12 mt-3">
-                    <div className="input-field">
-                      <ReCAPTCHA
-                        sitekey="6LdxNigqAAAAAJ6jU9uuhEtrAw-s8J_qnsGCVvj5"
-                        onChange={handleCaptchaChange}
-                      />
-                   {errors.recaptchaToken && (
-    <p style={{ ...errorStyle, marginTop: "5px" }}>{errors.recaptchaToken}</p>
-  )}
-                    </div>
-                  </div>
-          <button
-            type="submit"
-            style={{
-              background: "#000",
-              color: "white",
-              padding: "12px",
-              fontSize: "16px",
-              fontWeight: "600",
-              borderRadius: "10px",
-              border: "none",
-              cursor: "pointer",
-              transition: "background 0.3s",
-              marginTop: "10px",
-            }}
-            onMouseOver={(e) => (e.target.style.background = "#000")}
-            onMouseOut={(e) => (e.target.style.background = "#000")}
-            disabled={isSubmitting}
-          >
-           
-            {isSubmitting ? "Processing..." : " Proceed to Pay "}
-          </button>
 
-      
-        </form>
       </div>
 
-      {/* Right Side Info */}
       <div
-  style={{
-    width: "400px",
-    backgroundColor: "#fff",
-    padding: "2rem",
-    borderRadius: "15px",
-    boxShadow: "0 8px 20px rgba(0, 0, 0, 0.1)",
-    fontFamily: "Arial, sans-serif",
-    color: "#333",
-    lineHeight: "1.6",
-  }}
->
-  <p style={{ fontSize: "1.2rem", fontWeight: "bold", marginBottom: "1rem" }}>
-    ✨ An Evening You Won’t Forget 
-  </p>
-  <p style={{ marginBottom: "1rem" }}>
-    Your ticket is more than entry — it’s an experience.
-    <br />
-    
-  </p>
- 
-  
-<div style={{ marginTop: "1.5rem", color: "#333", fontSize: "1rem", lineHeight: "1.8" }}>
-  <p style={{marginBottom: "0px"}}>✅ A Dazzling Awards Ceremony</p>
-  <p style={{marginBottom: "0px"}}>✅ 3-Course meal & Drinks</p>
-  <p style={{marginBottom: "0px"}}>✅ Live Startup Pitches</p>
-  <p style={{marginBottom: "0px"}}>✅  Networking with 150+ Fintech & MSB Professionals</p>
-  <p style={{marginBottom: "0px"}}>✅ High Industry Visibility</p>
-  <p style={{marginBottom: "0px"}}>✅ Explore a historic, elegant London venue</p>
-  <p style={{marginBottom: "0px"}}>✅ Curated return gifts</p>
-</div>
+        className="card container bg-white"
+        style={{
+          maxWidth: "600px",
+          margin: "50px auto",
+          padding: "2rem",
+          borderRadius: "15px",
+          boxShadow: "0 8px 24px rgba(0, 0, 0, 0.1)",
+          textAlign: "center",
+          fontFamily: "Segoe UI, sans-serif",
+          color: "#333",
+          lineHeight: "1.6",
+        }}
+      >
+        <p style={{ fontSize: "1.1rem", marginBottom: "1rem" }}>
+          <strong style={{ fontSize: "1.3rem", color: "#2c3e50" }}>
+            Friday, 9th October 2025 |  6 PM Onwards
+          </strong>
+          <br />
+          <br />
+          📍 <span style={{ fontWeight: "500" }}>
+            Landing Forty-Two 122 Leadenhall Street, <br />London EC3V 4AB
+          </span>
+          <br />
 
+        </p>
 
- 
-</div>
+        <p
+          style={{
+            fontWeight: "500",
+            marginBottom: "1rem",
+            backgroundColor: "#ffc2e0",
+            padding: "1rem",
+            borderRadius: "10px",
+            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+            color: "#000",
+            fontSize: "1.05rem",
+            textAlign: "center",
+            transition: "all 0.3s ease",
+            marginTop: "8px"
+          }}
+        >
+          Reserve your ticket now and be part of something extraordinary.
+        </p>
 
-
-<br />
-
-
-    </div>
-
-    <div
-  className="card container bg-white"
-  style={{
-    maxWidth: "600px",
-    margin: "50px auto",
-    padding: "2rem",
-    borderRadius: "15px",
-    boxShadow: "0 8px 24px rgba(0, 0, 0, 0.1)",
-    textAlign: "center",
-    fontFamily: "Segoe UI, sans-serif",
-    color: "#333",
-    lineHeight: "1.6",
-  }}
->
-  <p style={{ fontSize: "1.1rem", marginBottom: "1rem" }}>
-    <strong style={{ fontSize: "1.3rem", color: "#2c3e50" }}>
-       Friday, 3rd October 2025 |  6 PM Onwards
-    </strong>
-    <br />
-     <br />
-    📍 <span style={{ fontWeight: "500" }}>
-      One Great George Street, London SW1P 3AA
-    </span>
-    <br />
-   
-  </p>
-
-  <p
-  style={{
-    fontWeight: "500",
-    marginBottom: "1rem",
-    backgroundColor: "#ffc2e0",
-    padding: "1rem",
-    borderRadius: "10px",
-    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
-    color: "#000",
-    fontSize: "1.05rem",
-    textAlign: "center",
-    transition: "all 0.3s ease",
-    marginTop: "8px"
-  }}
->
-   Reserve your ticket now and be part of something extraordinary.
-</p>
-
-</div>
-<Toaster position="bottom-center" reverseOrder={false} />
-</>
+      </div>
+      <Toaster position="bottom-center" reverseOrder={false} />
+    </>
   );
 }
 

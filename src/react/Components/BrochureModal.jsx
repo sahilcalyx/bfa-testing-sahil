@@ -13,7 +13,7 @@ const BrochureModal = ({ isOpen, onClose }) => {
         firstName: '',
         lastName: '',
         email: '',
-        phone: '',
+        mobile: '',
         companyName: '',
         role: ''
     });
@@ -47,7 +47,7 @@ const BrochureModal = ({ isOpen, onClose }) => {
                     firstName: '',
                     lastName: '',
                     email: '',
-                    phone: '',
+                    mobile: '',
                     companyName: '',
                     role: ''
                 });
@@ -101,8 +101,8 @@ const BrochureModal = ({ isOpen, onClose }) => {
                             <Input type="email" name="email" required value={formData.email} onChange={handleChange} placeholder="john@example.com" />
                         </FormGroup>
                         <FormGroup style={{ flex: 1 }}>
-                            <Label>Phone Number*</Label>
-                            <Input name="phone" required value={formData.phone} onChange={handleChange} placeholder="+44 123 456 7890" />
+                            <Label>Mobile Number*</Label>
+                            <Input name="mobile" required value={formData.phone} onChange={handleChange} placeholder="+44 123 456 7890" />
                         </FormGroup>
                     </Row>
 

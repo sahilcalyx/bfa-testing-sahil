@@ -34,7 +34,7 @@ const About = () => {
 
   return (
     <div className="body-profile ">
-      <div className="phone">
+      <div className="mobile">
         <div className="screen">
           <div className="cover" />
           <div className="content">

@@ -15,6 +15,8 @@ import SponsorsSlider2025 from "../Components/SliderBigBan/SponsorsSlider2025";
 import DynamicSliderVideo from "../Components/SliderBigBan/DynamicSlider-1";
 import DynamicSliderSplit from "../Components/SliderBigBan/DynamicSliderSplit";
 import InteractiveHero from "../Components/SliderBigBan/InteractiveHero";
+import StaticHero from "../Components/SliderBigBan/StaticHero";
+import ScrollRevealVideo from "../Components/SliderBigBan/ScrollRevealVideo";
 import KeynoteSpeakersSection from "./2025/Keynotes/KeynoteSpeakersSection";
 import DiscussionPannelSection from "./2025/DiscussionPannel/DiscussionPannelSection";
 import JudgesSection2025 from "./2025/JudgesSection/JudgeSection2025";
@@ -296,6 +298,8 @@ Brit Fintech Awards 2026."
         {/* <DynamicSliderSplit /> */}
         {/* <DynamicSliderVideo /> */}
         <InteractiveHero />
+        {/* <StaticHero />
+        <ScrollRevealVideo /> */}
         {/* <DynamicSlider/> */}
         {/* <WinnerBanner /> */}
         {/* <HeroImageSlider2025/> */}

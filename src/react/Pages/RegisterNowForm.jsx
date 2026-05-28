@@ -212,7 +212,7 @@ const RegisterNow = () => {
       case "phoneNo":
         let numericValue = value;
 
-        // Check if the phone number starts with a "+"
+        // Check if the mobile number starts with a "+"
         if (numericValue.startsWith("+")) {
           // Remove all non-numeric characters except "+"
           numericValue = "+" + numericValue.slice(1).replace(/\D/g, "");
@@ -223,14 +223,14 @@ const RegisterNow = () => {
 
         newFormData[id] = numericValue;
 
-        // Check if the phone number is at least 10 digits (excluding the "+")
+        // Check if the mobile number is at least 10 digits (excluding the "+")
         if (
           numericValue.startsWith("+")
             ? numericValue.length > 15
             : numericValue.length < 10
         ) {
           newErrors.phoneNo =
-            "Phone Number should be Min 10 digits and max 15 digits";
+            "Mobile Number should be Min 10 digits and max 15 digits";
         } else {
           delete newErrors.phoneNo;
         }
@@ -282,21 +282,14 @@ const RegisterNow = () => {
         break;
 
       case "companyregnumber":
-        // Regular expression to match valid company registration numbers
-        const regNumberPattern = /^([A-Za-z]{2}\d{6}|\d{8}|\w{12,})$/;
-
-        // Remove spaces from the input
-        const sanitizedValue = value.replace(/\s+/g, "");
-
-        // Validate the sanitized value
-        if (!regNumberPattern.test(sanitizedValue)) {
-          newErrors.companyregnumber = "Invalid company registration number";
+        // Allow letters, spaces, dots, hyphens (minimum 2 and maximum 60 characters)
+        const countryPattern = /^[A-Za-z\s.-]{2,60}$/;
+        if (!countryPattern.test(value.trim())) {
+          newErrors.companyregnumber = "Invalid company registration country";
         } else {
           delete newErrors.companyregnumber;
         }
-
-        // Update form data with sanitized value
-        newFormData[id] = sanitizedValue;
+        newFormData[id] = value;
         break;
 
       case "amountingbp":
@@ -412,7 +405,7 @@ const RegisterNow = () => {
       newErrors.awardcate = "At least one category is required";
     }
     if (!formData.phoneNo || formData.phoneNo.length < 10) {
-      newErrors.phoneNo = "Phone number must be at least 10 digits";
+      newErrors.phoneNo = "Mobile number must be at least 10 digits";
     }
 
     const supportedFormats = [
@@ -726,7 +719,7 @@ const RegisterNow = () => {
                         paddingLeft: "2px",
                       }}
                     >
-                      <option value="">Select Title</option>
+                      <option value="">Title</option>
                       <option value="1">Mr</option>
                       <option value="2">Mrs</option>
                       <option value="3">Miss</option>
@@ -738,7 +731,7 @@ const RegisterNow = () => {
                       id="firstName"
                       className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color ${errors.firstName && "error-border"
                         }`}
-                      placeholder="Enter Your First Name"
+                      placeholder="First Name"
                       onChange={handleInputChange}
                       maxLength="130"
                       value={formData.firstName}
@@ -759,7 +752,7 @@ const RegisterNow = () => {
                     name="lastName"
                     className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${errors.lastName && "error-border"
                       }`}
-                    placeholder="Enter Your Last Name"
+                    placeholder="Last Name"
                     value={formData.lastName}
                     maxLength="130"
                     onChange={handleInputChange}
@@ -779,14 +772,14 @@ const RegisterNow = () => {
                     className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${errors.phoneNo && "error-border"
                       }`}
                     maxLength="15"
-                    placeholder="Enter Your Phone Number"
+                    placeholder="Mobile Number"
                     value={formData.phoneNo}
                     onFocus={handleInputFocus}
                     onChange={handleInputChange}
                   />
                   {errors.phoneNo && (
                     <div className="error text-danger">
-                      Phone no is required
+                      Mobile no is required
                     </div>
                   )}
                   <div className="cs-height_20 cs-height_lg_20" />
@@ -799,7 +792,7 @@ const RegisterNow = () => {
                     name="email"
                     className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${errors.email && "error-border"
                       }`}
-                    placeholder="Enter Your Email Address"
+                    placeholder="Email Address"
                     value={formData.email}
                     maxLength="100"
                     onChange={handleInputChange}
@@ -865,18 +858,24 @@ const RegisterNow = () => {
                         padding: "12px",
                       }}
                       multiple
+                      displayEmpty
                       value={formData.awardcate}
                       onChange={handleCategoryChange}
 
-                      renderValue={(selected) => (
-                        <Box
-                          sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}
-                        >
-                          {selected.map((value) => (
-                            <Chip key={value} label={value} />
-                          ))}
-                        </Box>
-                      )}
+                      renderValue={(selected) => {
+                        if (!selected || selected.length === 0) {
+                          return <span style={{ color: "#999999" }}>Select Award</span>;
+                        }
+                        return (
+                          <Box
+                            sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}
+                          >
+                            {selected.map((value) => (
+                              <Chip key={value} label={value} />
+                            ))}
+                          </Box>
+                        );
+                      }}
                     >
                       <ListSubheader
                         style={{
@@ -1059,7 +1058,7 @@ const RegisterNow = () => {
                     name="companynm"
                     className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${errors.companynm && "error-border"
                       }`}
-                    placeholder="Enter Your Company Name"
+                    placeholder="Company Name"
                     maxLength="120"
                     value={formData.companynm}
                     onChange={handleInputChange}
@@ -1080,7 +1079,7 @@ const RegisterNow = () => {
                     name="companyaddress"
                     className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${errors.companyaddress && "error-border"
                       }`}
-                    placeholder="Enter Your Company Address"
+                    placeholder="Company Address"
                     value={formData.companyaddress}
                     maxLength="120"
                     onChange={handleInputChange}
@@ -1094,7 +1093,7 @@ const RegisterNow = () => {
                 </div>
                 <div className="col-sm-6">
                   {/* <label htmlFor="incorporation_details">
-                    Company registration number
+                    Company registration country
                   </label> */}
                   <input
                     type="text"
@@ -1103,13 +1102,13 @@ const RegisterNow = () => {
                     maxLength="120"
                     className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${errors.companyregnumber && "error-border"
                       }`}
-                    placeholder="Enter Your Company Registration Number"
+                    placeholder="Company Registration Country"
                     value={formData.companyregnumber}
                     onChange={handleInputChange}
                   />
                   {errors.companyregnumber && (
                     <div className="error text-danger">
-                      Company registration number is required
+                      Company registration country is required
                     </div>
                   )}
                   <div className="cs-height_20 cs-height_lg_20" />
@@ -1123,7 +1122,7 @@ const RegisterNow = () => {
                     className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${
                       errors.country && "error-border"
                     }`}
-                    placeholder="Enter Your Country Name"
+                    placeholder="Country Name"
                     value={formData.country}
                     onChange={handleInputChange}
                   />
@@ -1162,7 +1161,7 @@ const RegisterNow = () => {
                     name="companysector"
                     className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${errors.companysector && "error-border"
                       }`}
-                    placeholder="Enter Your Company Sector"
+                    placeholder="Company Sector"
                     value={formData.companysector}
                     onChange={handleInputChange}
                     maxLength="120"
@@ -1182,7 +1181,7 @@ const RegisterNow = () => {
                     name="websiteurl"
                     className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${errors.websiteurl && "error-border"
                       }`}
-                    placeholder="Enter Your Website URL"
+                    placeholder="Website URL"
                     value={formData.websiteurl}
                     maxLength="80"
                     onChange={handleInputChange}
@@ -1199,14 +1198,13 @@ const RegisterNow = () => {
                     name="serviceyouOffer"
                     className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${errors.serviceyouOffer && "error-border"
                       }`}
-                    placeholder="Enter Service You Offer
-                    (Max 150 words)"
+                    placeholder="Services Your Company Offers (Max 150 words)"
                     value={formData.serviceyouOffer}
                     onChange={handleTextAreaChange}
                   />
                   {errors.serviceyouOffer && (
                     <div className="error text-danger">
-                      Service you offer is required
+                      Services your company offer is required
                     </div>
                   )}
                   <div className="cs-height_20 cs-height_lg_20" />
@@ -1227,7 +1225,7 @@ const RegisterNow = () => {
                     name="businesscorridors"
                     className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${errors.businesscorridors && "error-border"
                       }`}
-                    placeholder="Enter Your Business Corridors (Max 150 words)"
+                    placeholder="Business Corridors (Max 150 words)"
                     value={formData.businesscorridors}
                     onChange={handleTextAreaChange}
                   />
@@ -1248,7 +1246,7 @@ const RegisterNow = () => {
                     name="aboutyourself"
                     className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${errors.aboutyourself && "error-border"
                       }`}
-                    placeholder="Enter More Details About Your Company (Max 500 words)"
+                    placeholder="More Details About Your Company (Max 500 words)"
                     value={formData.aboutyourself}
                     onChange={handleAboutAreaTextChange}
                   />

@@ -47,11 +47,11 @@ const Chatbot = () => {
         <form onSubmit={addChatResponse} className="p-3 border rounded shadow-sm" style={{ maxWidth: '500px', margin: 'auto' }}>
           <div className="mb-3">
             <label className="form-label">User Message</label>
-            <input type="text" className="form-control" style={{ borderBottom: "1px solid #333", background: "lightblue" }} value={userMessage} onChange={(e) => setUserMessage(e.target.value)} placeholder="Enter user message..." required />
+            <input type="text" className="form-control" style={{ borderBottom: "1px solid #333", background: "lightblue" }} value={userMessage} onChange={(e) => setUserMessage(e.target.value)} placeholder="User message..." required />
           </div>
           <div className="mb-3">
             <label className="form-label">Bot Response</label>
-            <input type="text" className="form-control" style={{ borderBottom: "1px solid #333", background: "lightblue" }} value={botResponse} onChange={(e) => setBotResponse(e.target.value)} placeholder="Enter bot response..." required />
+            <input type="text" className="form-control" style={{ borderBottom: "1px solid #333", background: "lightblue" }} value={botResponse} onChange={(e) => setBotResponse(e.target.value)} placeholder="Bot response..." required />
           </div>
           <button type="submit" className="btn btn-success w-100">Save Response</button>
         </form>

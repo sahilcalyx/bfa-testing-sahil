@@ -103,7 +103,7 @@ function SuccessPage() {
               <InfoRow label="Transaction ID" value={sessionData.id.slice(0, 22)} />
               <InfoRow label="Name" value={sessionData.metadata?.fullName} />
               <InfoRow label="Email" value={sessionData.customer_email} />
-              <InfoRow label="Phone" value={sessionData.metadata?.phone} />
+              <InfoRow label="Mobile" value={sessionData.metadata?.phone} />
               {sessionData.metadata?.type === "nomination" ? (
                 <>
                   <InfoRow label="Company Name" value={sessionData.metadata?.companyName} />

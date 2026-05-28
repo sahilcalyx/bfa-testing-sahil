@@ -99,7 +99,7 @@ function CancelPage() {
               <InfoRow label="Session ID" value={sessionData.id.slice(0, 22)} />
               <InfoRow label="Name" value={sessionData.metadata?.fullName || "N/A"} />
               <InfoRow label="Email" value={sessionData.customer_email || "N/A"} />
-              <InfoRow label="Phone" value={sessionData.metadata?.phone || "N/A"} />
+              <InfoRow label="Mobile" value={sessionData.metadata?.phone || "N/A"} />
               {sessionData.metadata?.type === "nomination" ? (
                 <>
                   <InfoRow label="Company Name" value={sessionData.metadata?.companyName || "N/A"} />

@@ -117,7 +117,7 @@ const Sponsors = () => {
     delete updatedErrors[id];
     setErrors(updatedErrors);
 
-    // Prepend "+44" to phone number if it's not already there
+    // Prepend "+44" to mobile number if it's not already there
     if (id === "phoneNo" && !value.startsWith("+44")) {
       updatedValue = value;
     }
@@ -590,7 +590,7 @@ const Sponsors = () => {
                       id="lastName"
                       className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color ${errors.lastName && "error-border"
                         }`}
-                      placeholder="Enter Your Last name"
+                      placeholder="Last name"
                       onChange={handleChange}
                       value={formData.lastName}
                     />
@@ -605,7 +605,7 @@ const Sponsors = () => {
                       id="phoneNo"
                       className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color ${errors.phoneNo && "error-border"
                         }`}
-                      placeholder="Enter Your Mobile No"
+                      placeholder="Mobile No"
                       onChange={handleChange}
                       value={formData.phoneNo}
                     />
@@ -621,7 +621,7 @@ const Sponsors = () => {
                       id="email"
                       className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color ${errors.email && "error-border"
                         }`}
-                      placeholder="Enter Your Email Address"
+                      placeholder="Email Address"
                       onChange={handleChange}
                       value={formData.email}
                     />
@@ -637,7 +637,7 @@ const Sponsors = () => {
                       id="companyName"
                       className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color ${errors.companyName && "error-border"
                         }`}
-                      placeholder="Enter Your Company Name"
+                      placeholder="Company Name"
                       onChange={handleChange}
                       value={formData.companyName}
                     />
@@ -655,7 +655,7 @@ const Sponsors = () => {
                       id="role"
                       className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color ${errors.role && "error-border"
                         }`}
-                      placeholder="Enter Your Role in Company"
+                      placeholder="Role in Company"
                       onChange={handleChange}
                       value={formData.role}
                     />

@@ -9,10 +9,10 @@ const About = () => {
 
       <div>
         <div className="cs-height_90 cs-height_lg_80" />
-       
+
         <div
           className="cs-hero cs-style12 cs-type1 cs-center text-center  cs-parallax cs-hobble"
-          
+
           style={{
             backgroundImage:
               'url("../assets/img/event-conference/hero-img.jpg")',
@@ -21,13 +21,13 @@ const About = () => {
           <div className="cs-hero_pattern cs-hover_layer3" style={{}}>
             <div
               className="cs-hero_pattern_in cs-bg_parallax"
-            
-             
+
+
             />
           </div>
           <div
             className="container wow fadeInDown"
-           
+
             data-wow-duration="1s"
             data-wow-delay="0.2s"
             style={{
@@ -37,21 +37,21 @@ const About = () => {
               animationName: "fadeInDown",
             }}
           >
-       
+
             <div className="cs-hero_text text-left" >
-            <h1 className="cs-hero_title cs-extra_bold cs-white text-uppercase pb-0 mb-2" style={{marginTop: '40px !important'}}>
-            About Brit Fintech Awards
-              
-            </h1>
-            <p className="pb-0 mb-0 text-left text-white"> Let’s celebrate innovation together. 
-            </p>
-         
-            <div className="cs-height_10 cs-height_lg_0" />
-          </div>
+              <h1 className="cs-hero_title cs-extra_bold cs-white text-uppercase pb-0 mb-2" style={{ marginTop: '40px !important' }}>
+                About Brit Fintech Awards
+
+              </h1>
+              <p className="pb-0 mb-0 text-left text-white"> Let’s celebrate innovation together.
+              </p>
+
+              <div className="cs-height_10 cs-height_lg_0" />
+            </div>
           </div>
           <div
             className="cs-hero_img cs-bg"
-           
+
             data-src="../assets/img/creative-agency/hero-img.jpg"
             style={{
               backgroundImage:
@@ -63,7 +63,7 @@ const About = () => {
         </div>
         {/* End Hero Seciton */}
         {/* Start About Seciton */}
-        <div  id="about" className="cs-height_140 cs-height_lg_75" />
+        <div id="about" className="cs-height_140 cs-height_lg_75" />
         <div className="container">
           <div className="row align-items-center" >
             <div
@@ -75,25 +75,25 @@ const About = () => {
                 <div className="cs-vertical_middle_in">
                   <div className="cs-text_box cs-style1 cs-type1">
                     <div className="cs-text_box_subtitle cs-medium cs-accent_color"  >
-                    Inception
+                      Inception
                     </div>
                     <br />
                     <h3 className="cs-text_box_title text-uppercase cs-bold fs-4">
-                    
+
                     </h3>
                     <h2 className="cs-text_box_title text-uppercase cs-bold">WHY BRIT FINTECH AWARDS?</h2>
                     <div className="cs-height_35 cs-height_lg_25" />
                     <div className="cs-text_box_text">
-                    Idea, implementation, and innovation are powerful forces driving change in the evolving financial industry. Financial institutions continue to innovate, offering better services to customers. Many new financial verticals have emerged as winners by embracing technology - diversifying products, going fully digital, or enhancing the user experience even with traditional models. <br />
-                    The key is to motivate these innovators. By launching the Brit FinTech Awards, we aim to Celebrate Innovation in the financial sector.
+                      Idea, implementation, and innovation are powerful forces driving change in the evolving financial industry. Financial institutions continue to innovate, offering better services to customers. Many new financial verticals have emerged as winners by embracing technology - diversifying products, going fully digital, or enhancing the user experience even with traditional models. <br />
+                      The key is to motivate these innovators. By launching the Brit FinTech Awards, we aim to Celebrate Innovation in the financial sector.
                     </div>
                     <div className="cs-height_35 cs-height_lg_25" />
                     <h3 className="cs-text_box_title text-uppercase cs-bold fs-4">
-                    How we are different
+                      How we are different
                     </h3>
                     <div className="cs-height_15 cs-height_lg_15" />
                     <div className="cs-text_box_text">
-                    As the hosts of the Brit FinTech Awards, we take great pride in our unparalleled expertise in the MSB and payments industry. Through our sister company, we have served over 1000 Money Service Businesses, giving us unrivaled insights into the challenges and opportunities within this dynamic sector.
+                      As the hosts of the Brit FinTech Awards, we take great pride in our unparalleled expertise in the MSB and payments industry. Through our sister company, we have served over 1000 Money Service Businesses, giving us unrivaled insights into the challenges and opportunities within this dynamic sector.
                     </div>
                     <div className="cs-height_45 cs-height_lg_30" />
                   </div>
@@ -123,7 +123,7 @@ const About = () => {
             {/* .col */}
           </div>
         </div>
-      
+
         <div className="cs-height_100 cs-height_lg_50" bis_skin_checked={1} />
         <div
           className="cs-bg1"

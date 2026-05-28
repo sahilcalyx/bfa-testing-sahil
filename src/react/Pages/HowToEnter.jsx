@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import { NavLink } from "react-router-dom";
+import BfaCtaSection from "../Components/BfaCtaSection";
 
 const HowToEnter = () => {
   const [activeAccordion, setActiveAccordion] = useState(0); // Set the initial active accordion to the first item
@@ -47,8 +48,7 @@ const HowToEnter = () => {
           </li>
 
           <li>Please note that each nomination incurs a fee.</li>
-          <li> 1 free attendee with each nomination!
-            Your first additional attendee joins at just £95, and every attendee thereafter at £195.</li>
+
           <li>
             If your supporting photos or documents are not ready at the time of submission, you can email them later to kudos@britfintechawards.com.
           </li>
@@ -173,8 +173,8 @@ const HowToEnter = () => {
                       <span className="cs-accordian_toggle cs-accent_color_2">
                         <i
                           className={`fa ${activeAccordion === index
-                              ? "fa-angle-up"
-                              : "fa-angle-down"
+                            ? "fa-angle-up"
+                            : "fa-angle-down"
                             }`}
                         />
                       </span>
@@ -197,6 +197,7 @@ const HowToEnter = () => {
       </div>
       {/* Counter and Newsletter Section */}
       <div className="cs-height_40 cs-height_lg_40" />
+      <BfaCtaSection />
       <div
         className="cs-bg"
         style={{

@@ -194,8 +194,8 @@ const Faq = () => {
                       <span className="cs-accordian_toggle cs-accent_color_2">
                         <i
                           className={`fa ${activeAccordion === index
-                              ? "fa-angle-up"
-                              : "fa-angle-down"
+                            ? "fa-angle-up"
+                            : "fa-angle-down"
                             }`}
                         />
                       </span>

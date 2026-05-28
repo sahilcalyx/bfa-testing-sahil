@@ -14,6 +14,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import ReCAPTCHA from "react-google-recaptcha";
 import NominationAnnouncement from "../Components/NominationAnnouncement copy";
+import { NavLink } from "react-router-dom";
+import { Calendar, MapPin, Ticket } from "lucide-react";
+import { motion } from "framer-motion";
 
 const RegisterNow = () => {
   // Add a constant to control form disabled state
@@ -235,7 +238,7 @@ const RegisterNow = () => {
 
       case "phoneNo":
         let numericValue = value;
-        // Check if the phone number starts with a "+"
+        // Check if the mobile number starts with a "+"
         if (numericValue.startsWith("+")) {
           // Remove all non-numeric characters except "+"
           numericValue = "+" + numericValue.slice(1).replace(/\D/g, "");
@@ -244,14 +247,14 @@ const RegisterNow = () => {
           numericValue = numericValue.replace(/\D/g, "");
         }
         newFormData[id] = numericValue;
-        // Check if the phone number is at least 10 digits (excluding the "+")
+        // Check if the mobile number is at least 10 digits (excluding the "+")
         if (
           numericValue.startsWith("+")
             ? numericValue.length > 15
             : numericValue.length < 10
         ) {
           newErrors.phoneNo =
-            "Phone Number should be Min 10 digits and max 15 digits";
+            "Mobile Number should be Min 10 digits and max 15 digits";
         } else {
           delete newErrors.phoneNo;
         }
@@ -302,18 +305,14 @@ const RegisterNow = () => {
         break;
 
       case "companyregnumber":
-        // Allow alphanumeric, minimum 6 and maximum 20 characters, no spaces
-        const regNumberPattern = /^[A-Za-z0-9]{6,20}$/;
-        // Remove all spaces from input
-        const sanitizedValue = value.replace(/\s+/g, "");
-        // Validate sanitized value
-        if (!regNumberPattern.test(sanitizedValue)) {
-          newErrors.companyregnumber = "Invalid company registration number";
+        // Allow letters, spaces, dots, hyphens (minimum 2 and maximum 60 characters)
+        const countryPattern = /^[A-Za-z\s.-]{2,60}$/;
+        if (!countryPattern.test(value.trim())) {
+          newErrors.companyregnumber = "Invalid company registration Number";
         } else {
           delete newErrors.companyregnumber;
         }
-        // Update form data with sanitized value
-        newFormData[id] = sanitizedValue;
+        newFormData[id] = value;
         break;
 
       case "amountingbp":
@@ -442,7 +441,7 @@ const RegisterNow = () => {
     }
 
     if (!formData.phoneNo || formData.phoneNo.length < 10) {
-      newErrors.phoneNo = "Phone number must be at least 10 digits";
+      newErrors.phoneNo = "Mobile number must be at least 10 digits";
     }
 
     const supportedFormats = [
@@ -508,7 +507,7 @@ const RegisterNow = () => {
       };
 
       try {
-        const PAYMENT_API_BASE = (window.location.hostname.includes("britfintechawards.com") || window.location.hostname.includes("vercel.app")) ? "https://bfa-ticket-event.vercel.app" : "http://localhost:5000";
+        const PAYMENT_API_BASE = (window.location.hostname.includes("britfintechawards.com") || window.location.hostname.includes("vercel.app")) ? "https://bfa-ticket-event.vercel.app" : "https://bfa-ticket-event.vercel.app";
 
         // Create stripe nomination payload
         const paymentPayload = {
@@ -523,6 +522,25 @@ const RegisterNow = () => {
         const checkoutRes = await axios.post(`${PAYMENT_API_BASE}/create-nomination-checkout-session`, paymentPayload);
 
         if (checkoutRes.data?.url) {
+          try {
+            const formDataToSend = new FormData();
+            Object.keys(formData).forEach((key) => {
+              formDataToSend.append(key, formData[key]);
+            });
+
+            await axios.post(
+              "https://www.britfintechawards.com/prod/api/britfin/saveawarddetails",
+              formDataToSend,
+              {
+                headers: {
+                  "Content-Type": "multipart/form-data",
+                },
+              }
+            );
+          } catch (saveError) {
+            console.error("⚠️ Failed to save award details:", saveError.response?.data || saveError.message);
+          }
+
           // Redirect immediately to Stripe Checkout!
           window.location.href = checkoutRes.data.url;
         } else {
@@ -593,11 +611,12 @@ const RegisterNow = () => {
       <div>
         <div className="cs-height_90 cs-height_lg_90" />
         <div
-          className="cs-hero cs-style12 cs-type1 cs-center text-center cs-parallax cs-hobble d-none"
+          className="cs-hero cs-style12 cs-type1 cs-center text-center cs-parallax cs-hobble"
           style={{
             backgroundImage:
               'url("../assets/img/event-conference/hero-img.jpg")',
             height: "300px",
+            position: "relative",
           }}
         >
           <div className="cs-hero_pattern cs-hover_layer3" style={{}}>
@@ -652,8 +671,189 @@ const RegisterNow = () => {
           >
             <div className="cs-hero_img_circle" />
           </div>
+
+          {/* Floating Premium Venue Address Card — Brushed Metal + Red Theme */}
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-30 pointer-events-auto w-[calc(100%-2rem)] sm:w-auto">
+            <style>{`
+              .venue-card-outer {
+                border-radius: 16px;
+                padding: 1px;
+                background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(200,16,46,0.2) 50%, rgba(0,0,0,0.4));
+                box-shadow: 
+                  0 20px 40px -6px rgba(0,0,0,0.8),
+                  inset 0 1px 0 rgba(255,255,255,0.1);
+              }
+              .venue-card-inner {
+                display: flex;
+                flex-direction: column; /* Mobile first: stacked */
+                border-radius: 15px;
+                overflow: hidden;
+                background: rgba(12, 10, 11, 0.9);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                border: 1px solid rgba(255, 255, 255, 0.03);
+              }
+              .venue-card-content {
+                flex: 1;
+                padding: 14px 16px;
+                display: flex;
+                flex-direction: column; /* Mobile first: stacked */
+                align-items: flex-start;
+                gap: 12px;
+              }
+              .venue-card-content .vc-divider {
+                width: 100%;
+                height: 1px;
+                background: linear-gradient(90deg, transparent, rgba(200,16,46,0.35), transparent);
+              }
+              .venue-card-btn {
+                display: flex;
+                flex-direction: row; /* Mobile first: horizontal layout */
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                padding: 12px 16px;
+                background: linear-gradient(135deg, #e8243e 0%, #c8102e 50%, #900b1d 100%);
+                border-top: 1px solid rgba(255,255,255,0.08);
+                cursor: pointer;
+                transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                width: 100%;
+                position: relative;
+                overflow: hidden;
+                text-decoration: none !important;
+              }
+              .venue-card-btn::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+                transform: translateX(-100%);
+                transition: transform 0.6s ease;
+              }
+              .venue-card-btn:hover::before {
+                transform: translateX(100%);
+              }
+              .venue-card-btn:hover {
+                background: linear-gradient(135deg, #ff3b57 0%, #e8243e 50%, #b00d23 100%);
+                box-shadow: 
+                  inset 0 0 15px rgba(255,255,255,0.25),
+                  0 0 25px rgba(200,16,46,0.5);
+              }
+              .vc-label-container {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                margin-bottom: 3px;
+              }
+              .vc-label {
+                font-family: 'Outfit', sans-serif;
+                font-size: 10px;
+                font-weight: 800;
+                letter-spacing: 0.18em;
+                text-transform: uppercase;
+                color: #ff3b57;
+                display: inline-block;
+              }
+              .vc-value {
+                font-family: 'Outfit', sans-serif;
+                font-size: 14px;
+                font-weight: 800;
+                color: #ffffff;
+                letter-spacing: 0.01em;
+                display: block;
+                line-height: 1.25;
+              }
+              .vc-address {
+                font-family: 'Outfit', sans-serif;
+                font-size: 10px;
+                font-weight: 500;
+                color: rgba(255,255,255,0.7);
+                letter-spacing: 0.01em;
+                display: block;
+                margin-top: 2px;
+                line-height: 1.35;
+              }
+              @media (min-width: 640px) {
+                .venue-card-inner {
+                  flex-direction: row; /* Desktop: side-by-side */
+                }
+                .venue-card-content {
+                  flex-direction: row;
+                  padding: 20px 28px;
+                  gap: 28px;
+                  align-items: center;
+                }
+                .venue-card-content .vc-divider {
+                  width: 1px;
+                  height: auto;
+                  align-self: stretch;
+                  background: linear-gradient(180deg, transparent, rgba(200,16,46,0.35), transparent);
+                }
+                .venue-card-btn {
+                  flex-direction: column; /* Desktop: vertical layout */
+                  padding: 16px 28px;
+                  min-width: 125px;
+                  width: auto;
+                  border-top: none;
+                  border-left: 1px solid rgba(255,255,255,0.08);
+                }
+                .vc-label {
+                  font-size: 11px;
+                }
+                .vc-value {
+                  font-size: 17px;
+                }
+                .vc-address {
+                  font-size: 11px;
+                  margin-top: 4px;
+                }
+              }
+            `}</style>
+            <motion.div
+              initial={{ opacity: 0, y: 30, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.2, type: "spring" }}
+              className="venue-card-outer"
+            >
+              <div className="venue-card-inner">
+                {/* Content — Date & Venue side by side */}
+                <div className="venue-card-content">
+                  {/* Date */}
+                  <div className="flex flex-col items-start">
+                    <div className="vc-label-container">
+                      <Calendar className="w-3.5 h-3.5 text-[#ff3b57]" />
+                      <span className="vc-label">Date</span>
+                    </div>
+                    <span className="vc-value">9th October 2026</span>
+                  </div>
+
+                  {/* Vertical divider */}
+                  <div className="vc-divider" />
+
+                  {/* Venue */}
+                  <div className="flex flex-col items-start">
+                    <div className="vc-label-container">
+                      <MapPin className="w-3.5 h-3.5 text-[#ffd700]" />
+                      <span className="vc-label" style={{ color: '#ffd700' }}>Venue</span>
+                    </div>
+                    <span className="vc-value">Landing Forty-Two</span>
+                    <span className="vc-address">122 Leadenhall St, London EC3V 4AB</span>
+                  </div>
+                </div>
+
+                {/* Right — Book Tickets button */}
+                <NavLink to="/ticket-booking" className="venue-card-btn group/book">
+                  <Ticket className="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover/book:scale-110 group-hover/book:rotate-3 transition-transform duration-300" />
+                  <span className="text-[9px] sm:text-[11px] font-black uppercase tracking-[0.18em] text-white leading-none whitespace-nowrap">
+                    Book Ticket Now
+                  </span>
+                </NavLink>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </div>
+      <div className="cs-height_40 cs-height_lg_40" />
       <NominationAnnouncement />
       {/* <div class="cs-height_60 cs-height_lg_75 "></div> */}
       <div id="nominate-now" className="container" style={{ zIndex: 9999 }} >
@@ -713,11 +913,7 @@ const RegisterNow = () => {
                     industry experts.
                   </li>
                   <li>Please note that each nomination incurs a fee.</li>
-                  <li>
-                    1 free attendee with each nomination! Your first additional
-                    attendee joins at just £95, and every attendee thereafter at
-                    £195.
-                  </li>
+
                   <li>
                     If your supporting photos or documents are not ready at the
                     time of submission, you can email them later to
@@ -797,7 +993,7 @@ const RegisterNow = () => {
                         cursor: NOMINATIONS_CLOSED ? "not-allowed" : "default",
                       }}
                     >
-                      <option value="">Select Title</option>
+                      <option value="">Title</option>
                       <option value="1">Mr</option>
                       <option value="2">Mrs</option>
                       <option value="3">Miss</option>
@@ -809,7 +1005,7 @@ const RegisterNow = () => {
                       id="firstName"
                       className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color ${errors.firstName && "error-border"
                         }`}
-                      placeholder="Enter Your First Name"
+                      placeholder="First Name"
                       onChange={handleInputChange}
                       maxLength="130"
                       value={formData.firstName}
@@ -840,7 +1036,7 @@ const RegisterNow = () => {
                     name="lastName"
                     className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${errors.lastName && "error-border"
                       }`}
-                    placeholder="Enter Your Last Name"
+                    placeholder="Last Name"
                     value={formData.lastName}
                     maxLength="130"
                     onChange={handleInputChange}
@@ -865,7 +1061,7 @@ const RegisterNow = () => {
                     className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${errors.phoneNo && "error-border"
                       }`}
                     maxLength="15"
-                    placeholder="Enter Your Phone Number"
+                    placeholder="Mobile Number"
                     value={formData.phoneNo}
                     onFocus={handleInputFocus}
                     onChange={handleInputChange}
@@ -877,7 +1073,7 @@ const RegisterNow = () => {
                   />
                   {errors.phoneNo && (
                     <div className="error text-danger">
-                      Phone no is required
+                      Mobile no is required
                     </div>
                   )}
                   <div className="cs-height_20 cs-height_lg_20" />
@@ -889,7 +1085,7 @@ const RegisterNow = () => {
                     name="email"
                     className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${errors.email && "error-border"
                       }`}
-                    placeholder="Enter Your Email Address"
+                    placeholder="Email Address"
                     value={formData.email}
                     maxLength="100"
                     onChange={handleInputChange}
@@ -933,18 +1129,24 @@ const RegisterNow = () => {
                         opacity: NOMINATIONS_CLOSED ? 0.6 : 1,
                       }}
                       multiple
+                      displayEmpty
                       value={formData.awardcate}
                       onChange={handleCategoryChange}
                       onOpen={handleSelectOpen}
                       onClose={handleSelectClose}
                       disabled={NOMINATIONS_CLOSED}
-                      renderValue={(selected) => (
-                        <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
-                          {selected.map((value) => (
-                            <Chip key={value} label={value} />
-                          ))}
-                        </Box>
-                      )}
+                      renderValue={(selected) => {
+                        if (!selected || selected.length === 0) {
+                          return <span style={{ color: "#999999" }}>Select Award</span>;
+                        }
+                        return (
+                          <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+                            {selected.map((value) => (
+                              <Chip key={value} label={value} />
+                            ))}
+                          </Box>
+                        );
+                      }}
                     >
                       <ListSubheader
                         style={{
@@ -1171,7 +1373,7 @@ const RegisterNow = () => {
                     name="companynm"
                     className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${errors.companynm && "error-border"
                       }`}
-                    placeholder="Enter Your Company Name"
+                    placeholder="Company Name"
                     maxLength="120"
                     value={formData.companynm}
                     onChange={handleInputChange}
@@ -1196,7 +1398,7 @@ const RegisterNow = () => {
                     name="companyaddress"
                     className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${errors.companyaddress && "error-border"
                       }`}
-                    placeholder="Enter Your Company Address"
+                    placeholder="Company Address"
                     value={formData.companyaddress}
                     maxLength="120"
                     onChange={handleInputChange}
@@ -1215,7 +1417,7 @@ const RegisterNow = () => {
                 </div>
                 <div className="col-sm-6">
                   {/* <label htmlFor="incorporation_details">
-                    Company registration number
+                    Company registration country
                   </label> */}
                   <input
                     type="text"
@@ -1224,7 +1426,7 @@ const RegisterNow = () => {
                     maxLength="120"
                     className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${errors.companyregnumber && "error-border"
                       }`}
-                    placeholder="Enter Your Company Registration Number"
+                    placeholder="Company Registration Number"
                     value={formData.companyregnumber}
                     onChange={handleInputChange}
                     disabled={NOMINATIONS_CLOSED}
@@ -1235,7 +1437,7 @@ const RegisterNow = () => {
                   />
                   {errors.companyregnumber && (
                     <div className="error text-danger">
-                      Company registration number is required
+                      Company registration Number is required
                     </div>
                   )}
                   <div className="cs-height_20 cs-height_lg_20" />
@@ -1273,7 +1475,7 @@ const RegisterNow = () => {
                     name="companysector"
                     className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${errors.companysector && "error-border"
                       }`}
-                    placeholder="Enter Your Company Sector"
+                    placeholder="Company Sector"
                     value={formData.companysector}
                     onChange={handleInputChange}
                     maxLength="120"
@@ -1298,7 +1500,7 @@ const RegisterNow = () => {
                     name="websiteurl"
                     className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${errors.websiteurl && "error-border"
                       }`}
-                    placeholder="Enter Your Website URL"
+                    placeholder="Website URL"
                     value={formData.websiteurl}
                     maxLength="80"
                     onChange={handleInputChange}
@@ -1320,7 +1522,7 @@ const RegisterNow = () => {
                     name="serviceyouOffer"
                     className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${errors.serviceyouOffer && "error-border"
                       }`}
-                    placeholder="Enter Service You Offer (Max 150 words)"
+                    placeholder="Services Your Company Offers (Max 150 words)"
                     value={formData.serviceyouOffer}
                     onChange={handleTextAreaChange}
                     disabled={NOMINATIONS_CLOSED}
@@ -1331,7 +1533,7 @@ const RegisterNow = () => {
                   />
                   {errors.serviceyouOffer && (
                     <div className="error text-danger">
-                      Service you offer is required
+                      Services your company offer is required
                     </div>
                   )}
                   <div className="cs-height_20 cs-height_lg_20" />
@@ -1342,7 +1544,7 @@ const RegisterNow = () => {
                     name="businesscorridors"
                     className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${errors.businesscorridors && "error-border"
                       }`}
-                    placeholder="Enter Your Business Corridors (Max 150 words)"
+                    placeholder="Company Registration Country (Max 150 words)"
                     value={formData.businesscorridors}
                     onChange={handleTextAreaChange}
                     disabled={NOMINATIONS_CLOSED}
@@ -1353,7 +1555,7 @@ const RegisterNow = () => {
                   />
                   {errors.businesscorridors && (
                     <div className="error text-danger">
-                      Business corridors is required
+                      Company Registration Country is required
                     </div>
                   )}
                 </div>
@@ -1364,7 +1566,7 @@ const RegisterNow = () => {
                     name="aboutyourself"
                     className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${errors.aboutyourself && "error-border"
                       }`}
-                    placeholder="Enter More Details About Your Company (Max 500 words)"
+                    placeholder="More Details About Your Company (Max 500 words)"
                     value={formData.aboutyourself}
                     onChange={handleAboutAreaTextChange}
                     disabled={NOMINATIONS_CLOSED}
@@ -1456,7 +1658,7 @@ const RegisterNow = () => {
                     backgroundColor: NOMINATIONS_CLOSED ? "#6c757d" : undefined,
                   }}
                 >
-                  <span className="cs-btn_text">
+                  <span className="cs-btn_text fw-bolder" style={{ fontSize: "18px" }}>
                     {NOMINATIONS_CLOSED
                       ? "Nominations Are Closed"
                       : loading

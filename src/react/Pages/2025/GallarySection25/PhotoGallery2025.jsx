@@ -70,11 +70,11 @@ const PhotoGallery = () => {
     { id: "winner-photos", label: "Winner Photos" },
     // { id: "candids", label: "Candids" },
     { id: "networking", label: "Networking" },
-     { id: "exhibit", label: "Exhibit Space" },
+    { id: "exhibit", label: "Exhibit Space" },
     { id: "food-drinks", label: "Food and Drinks" },
     // { id: "thankyou", label: "Thank You Gifts" },
     { id: "team", label: "Team" },
-    
+
   ];
 
   return (
@@ -192,9 +192,8 @@ const PhotoGallery = () => {
               <button
                 key={tab.id}
                 onClick={() => setActiveCategory(tab.id)}
-                className={`tab-button ${
-                  activeCategory === tab.id ? "active" : ""
-                }`}
+                className={`tab-button ${activeCategory === tab.id ? "active" : ""
+                  }`}
               >
                 {tab.label}
               </button>
@@ -209,11 +208,10 @@ const PhotoGallery = () => {
               <div className="cs-isotop_item" key={img.id}>
                 <a
                   href={img.src}
-                  className={`cs-gallery cs-style1 cs-bg ${
-                    activeCategory === "winner-photos"
+                  className={`cs-gallery cs-style1 cs-bg ${activeCategory === "winner-photos"
                       ? "cs-gallery_height8"
                       : "cs-gallery_height10"
-                  } cs-lightbox-item`}
+                    } cs-lightbox-item`}
                   data-sub-html={`<h4>${img.caption}</h4>`}
                 >
                   <img src={img.src} alt={img.caption} className="img-fluid" />
