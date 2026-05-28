@@ -221,7 +221,7 @@ const InteractiveHero = () => {
                   <div className="w-1.5 bg-gradient-to-b from-[#e8243e] via-[#c8102e] to-[#8a0b1f] shrink-0" />
 
                   {/* Price section */}
-                  <div className="flex items-center justify-center px-4 py-3 bg-[#c8102e]/10 group-hover:bg-[#c8102e]/20 border-r border-white/[0.06] transition-colors duration-500 min-w-[100px] sm:min-w-[120px] lg:min-w-[100px] xl:min-w-[120px]">
+                  <div className="flex items-center justify-center px-4 py-1.5 bg-[#c8102e]/10 group-hover:bg-[#c8102e]/20 border-r border-white/[0.06] transition-colors duration-500 min-w-[100px] sm:min-w-[120px] lg:min-w-[100px] xl:min-w-[120px]">
                     <AnimatePresence mode="wait">
                       <motion.div
                         key={selectedOffer + "-price-container"}
@@ -244,7 +244,7 @@ const InteractiveHero = () => {
                   </div>
 
                   {/* Details section */}
-                  <div className="flex flex-col justify-center items-center px-5 py-3 flex-1 bg-gradient-to-r from-[#c8102e] via-[#b80e28] to-[#980b20] group-hover:from-[#e8243e] group-hover:via-[#c8102e] group-hover:to-[#a00d24] transition-all duration-500">
+                  <div className="flex flex-col justify-center items-center px-5 py-1.5 flex-1 bg-gradient-to-r from-[#c8102e] via-[#b80e28] to-[#980b20] group-hover:from-[#e8243e] group-hover:via-[#c8102e] group-hover:to-[#a00d24] transition-all duration-500">
                     <AnimatePresence mode="wait">
                       <motion.div
                         key={selectedOffer + "-details-container"}
@@ -254,7 +254,7 @@ const InteractiveHero = () => {
                         transition={{ duration: 0.3 }}
                         className="flex flex-col items-center justify-center w-full"
                       >
-                        <span className="text-white text-[12px] sm:text-[13px] font-black uppercase tracking-[0.25em] leading-none group-hover:scale-[1.03] transition-transform duration-300 drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] text-center w-full block">
+                        <span className="text-white text-[15px] sm:text-[18px] lg:text-[16px] xl:text-[18px] font-black uppercase tracking-[0.25em] leading-none group-hover:scale-[1.03] transition-transform duration-300 drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] text-center w-full block whitespace-nowrap">
                           {offers.find((x) => x.id === selectedOffer).label}
                         </span>
                         {offers.find((x) => x.id === selectedOffer).dateRange && (
@@ -349,12 +349,12 @@ const InteractiveHero = () => {
             <style>{`
               @keyframes pulse-card-border {
                 0%, 100% {
-                  border-color: rgba(200, 16, 46, 0.35);
-                  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.7), 0 0 12px rgba(200, 16, 46, 0.15);
+                  border-color: rgba(200, 16, 46, 0.4);
+                  box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.7), 0 0 15px rgba(200, 16, 46, 0.15);
                 }
                 50% {
-                  border-color: rgba(255, 215, 0, 0.45);
-                  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 215, 0, 0.25);
+                  border-color: rgba(255, 215, 0, 0.5);
+                  box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.7), 0 0 25px rgba(255, 215, 0, 0.25);
                 }
               }
 
@@ -380,29 +380,34 @@ const InteractiveHero = () => {
               }
 
               .venue-card-outer {
-                border-radius: 16px;
-                padding: 1.5px;
-                background: linear-gradient(135deg, rgba(200, 16, 46, 0.4) 0%, rgba(20, 18, 19, 0.95) 50%, rgba(255, 215, 0, 0.25) 100%);
-                animation: pulse-card-border 6s infinite ease-in-out;
+                border-radius: 20px;
+                padding: 1px;
+                background: linear-gradient(135deg, rgba(200, 16, 46, 0.55) 0%, rgba(255, 255, 255, 0.08) 40%, rgba(255, 255, 255, 0.08) 60%, rgba(255, 215, 0, 0.35) 100%);
+                animation: pulse-card-border 8s infinite ease-in-out;
                 transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
               }
               
+              .venue-card-outer:hover {
+                transform: translateY(-4px) scale(1.02);
+                box-shadow: 0 30px 60px rgba(0, 0, 0, 0.9), 0 0 30px rgba(200, 16, 46, 0.25);
+              }
+
               .venue-card-inner {
                 display: flex;
                 flex-direction: column;
-                border-radius: 15px;
+                border-radius: 19px;
                 overflow: hidden;
-                background: rgba(10, 8, 9, 0.94);
-                backdrop-filter: blur(30px) saturate(190%);
-                -webkit-backdrop-filter: blur(30px) saturate(190%);
-                border: 1px solid rgba(255, 255, 255, 0.04);
+                background: rgba(10, 10, 12, 0.88);
+                backdrop-filter: blur(30px) saturate(200%);
+                -webkit-backdrop-filter: blur(30px) saturate(200%);
+                border: 1px solid rgba(255, 255, 255, 0.03);
               }
 
               .card-section-interactive {
                 display: flex;
                 align-items: center;
-                gap: 12px;
-                padding: 12px 16px;
+                gap: 14px;
+                padding: 16px 20px;
                 transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
                 cursor: default;
                 position: relative;
@@ -410,27 +415,28 @@ const InteractiveHero = () => {
               }
 
               .card-section-interactive:hover {
-                background: rgba(255, 255, 255, 0.03);
+                background: rgba(255, 255, 255, 0.02);
               }
 
-              .card-section-interactive::after {
+              .card-section-interactive::before {
                 content: '';
                 position: absolute;
-                bottom: 0;
-                left: 10%;
-                width: 80%;
-                height: 2px;
+                top: 0;
+                left: 0;
+                width: 3px;
+                height: 100%;
                 background: transparent;
-                transition: all 0.4s ease;
-                filter: blur(2px);
+                transition: all 0.3s ease;
               }
 
-              .card-section-interactive.section-date:hover::after {
-                background: radial-gradient(circle, rgba(200, 16, 46, 0.75) 0%, transparent 100%);
+              .card-section-interactive.section-date:hover::before {
+                background: #ff3b57;
+                box-shadow: 0 0 10px #ff3b57;
               }
 
-              .card-section-interactive.section-venue:hover::after {
-                background: radial-gradient(circle, rgba(255, 215, 0, 0.75) 0%, transparent 100%);
+              .card-section-interactive.section-venue:hover::before {
+                background: #ffd700;
+                box-shadow: 0 0 10px #ffd700;
               }
 
               .card-section-interactive:hover .icon-date {
@@ -442,30 +448,32 @@ const InteractiveHero = () => {
               }
 
               .vc-divider {
-                width: 100%;
+                width: 85%;
+                margin: 0 auto;
                 height: 1px;
-                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
               }
 
-              .venue-card-btn {
+              .venue-card-btn-pill {
                 display: flex;
                 flex-direction: row;
                 align-items: center;
                 justify-content: center;
-                gap: 8px;
-                padding: 12px 16px;
-                background: linear-gradient(135deg, #e8243e 0%, #c8102e 60%, #800615 100%);
+                gap: 10px;
+                padding: 11px 20px;
+                background: linear-gradient(135deg, #c8102e 0%, #e8243e 50%, #9e0c22 100%);
                 cursor: pointer;
-                transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+                transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
                 width: 100%;
                 position: relative;
                 overflow: hidden;
                 text-decoration: none !important;
-                border: none;
-                border-radius: 0 0 15px 15px;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 25px;
+                box-shadow: 0 4px 15px rgba(200, 16, 46, 0.3);
               }
 
-              .venue-card-btn::after {
+              .venue-card-btn-pill::after {
                 content: '';
                 position: absolute;
                 top: 0;
@@ -476,31 +484,37 @@ const InteractiveHero = () => {
                 transform: translateX(-100%);
               }
 
-              .venue-card-btn:hover::after {
-                animation: shimmer-sweep 1.2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+              .venue-card-btn-pill:hover::after {
+                animation: shimmer-sweep 1.4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
               }
 
-              .venue-card-btn:hover {
-                background: linear-gradient(135deg, #ff3653 0%, #e8243e 60%, #9c091b 100%);
-                box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.25), 0 0 25px rgba(200, 16, 46, 0.45);
+              .venue-card-btn-pill:hover {
+                background: linear-gradient(135deg, #e8243e 0%, #ff3b57 50%, #b30e28 100%);
+                box-shadow: 0 6px 20px rgba(200, 16, 46, 0.5), inset 0 0 10px rgba(255, 255, 255, 0.2);
+                transform: translateY(-1px);
               }
 
-              .venue-card-btn:hover .icon-ticket {
+              .venue-card-btn-pill:active {
+                transform: translateY(1px);
+                box-shadow: 0 2px 10px rgba(200, 16, 46, 0.4);
+              }
+
+              .venue-card-btn-pill:hover .icon-ticket {
                 animation: ticket-shake 0.4s ease-in-out infinite;
               }
 
               .vc-label-container {
                 display: flex;
                 align-items: center;
-                gap: 5px;
-                margin-bottom: 1.5px;
+                gap: 6px;
+                margin-bottom: 2px;
               }
 
               .vc-label {
                 font-family: 'Outfit', sans-serif;
-                font-size: 8.5px;
+                font-size: 9px;
                 font-weight: 900;
-                letter-spacing: 0.2em;
+                letter-spacing: 0.25em;
                 text-transform: uppercase;
                 color: #ff3b57;
                 display: inline-block;
@@ -509,7 +523,7 @@ const InteractiveHero = () => {
 
               .vc-value {
                 font-family: 'Outfit', sans-serif;
-                font-size: 13px;
+                font-size: 13.5px;
                 font-weight: 800;
                 color: #ffffff;
                 letter-spacing: 0.02em;
@@ -520,13 +534,13 @@ const InteractiveHero = () => {
 
               .vc-address {
                 font-family: 'Outfit', sans-serif;
-                font-size: 9px;
+                font-size: 9.5px;
                 font-weight: 500;
                 color: rgba(255, 255, 255, 0.55);
                 letter-spacing: 0.01em;
                 display: block;
-                margin-top: 2.5px;
-                line-height: 1.25;
+                margin-top: 3px;
+                line-height: 1.3;
                 white-space: normal;
               }
 
@@ -548,14 +562,14 @@ const InteractiveHero = () => {
               <div className="venue-card-inner">
                 {/* Date Area */}
                 <div className="card-section-interactive section-date">
-                  <div className="p-2 rounded-xl bg-[#ff3b57]/10 flex items-center justify-center shrink-0">
+                  <div className="p-2 rounded-xl bg-[#ff3b57]/8 border border-[#ff3b57]/20 flex items-center justify-center shrink-0 shadow-[0_4px_10px_rgba(255,59,87,0.05)] transition-colors duration-300">
                     <Calendar className="w-4 h-4 text-[#ff3b57] icon-date transition-transform duration-300" />
                   </div>
                   <div className="flex flex-col items-start text-left">
                     <div className="vc-label-container">
                       <span className="vc-label">Date</span>
                     </div>
-                    <span className="vc-value">9th October 2026</span>
+                    <span className="vc-value">9th October 2026 </span>
                   </div>
                 </div>
 
@@ -564,7 +578,7 @@ const InteractiveHero = () => {
 
                 {/* Venue Area */}
                 <div className="card-section-interactive section-venue">
-                  <div className="p-2 rounded-xl bg-[#ffd700]/10 flex items-center justify-center shrink-0">
+                  <div className="p-2 rounded-xl bg-[#ffd700]/8 border border-[#ffd700]/20 flex items-center justify-center shrink-0 shadow-[0_4px_10px_rgba(255,215,0,0.05)] transition-colors duration-300">
                     <MapPin className="w-4 h-4 text-[#ffd700] icon-venue transition-transform duration-300" />
                   </div>
                   <div className="flex flex-col items-start text-left">
@@ -576,13 +590,15 @@ const InteractiveHero = () => {
                   </div>
                 </div>
 
-                {/* Book Ticket Action Button */}
-                <NavLink to="/ticket-booking" className="venue-card-btn group/book">
-                  <Ticket className="w-4 h-4 text-white icon-ticket transition-transform duration-300" />
-                  <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.2em] text-white leading-none whitespace-nowrap">
-                    Book Ticket Now
-                  </span>
-                </NavLink>
+                {/* Book Ticket Action Button Wrapper */}
+                <div className="p-3.5 pt-1.5 pb-3.5 w-full">
+                  <NavLink to="/ticket-booking" className="venue-card-btn-pill group/book">
+                    <Ticket className="w-4 h-4 text-white icon-ticket transition-transform duration-300" />
+                    <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.2em] text-white leading-none whitespace-nowrap">
+                      Book Ticket Now
+                    </span>
+                  </NavLink>
+                </div>
               </div>
             </motion.div>
           </div>

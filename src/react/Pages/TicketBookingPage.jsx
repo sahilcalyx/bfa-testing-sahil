@@ -11,7 +11,7 @@ const titleOptions = [
   { value: "Mr.", label: "Mr." },
   { value: "Mrs.", label: "Mrs." },
   { value: "Miss", label: "Miss" },
-  { value: "Ms.", label: "Ms." },
+  // { value: "Ms.", label: "Ms." },
   { value: "Other", label: "Other" },
 ];
 
@@ -592,40 +592,196 @@ function TicketBookingPage() {
         </div>
 
         {/* Right Side Info */}
-        <div
-          style={{
-            width: "400px",
-            backgroundColor: "#fff",
-            padding: "2rem",
-            borderRadius: "15px",
-            boxShadow: "0 8px 20px rgba(0, 0, 0, 0.1)",
-            fontFamily: "Arial, sans-serif",
-            color: "#333",
-            lineHeight: "1.6",
-          }}
-        >
-          <p style={{ fontSize: "1.2rem", fontWeight: "bold", marginBottom: "1rem" }}>
-            ✨ An Evening You Won’t Forget
-          </p>
-          <p style={{ marginBottom: "1rem" }}>
+        {/* Right Side Info */}
+        <div className="ticket-info-card">
+          <style>{`
+            @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
+
+            .ticket-info-card {
+              width: 400px;
+              background: linear-gradient(135deg, #ffffff 0%, #fcfbfb 100%);
+              padding: 2.2rem 1.8rem;
+              border-radius: 20px;
+              box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05), 0 0 2px rgba(0, 0, 0, 0.05);
+              font-family: 'Outfit', 'Segoe UI', sans-serif;
+              color: #2c2c2e;
+              border: 1px solid rgba(0, 0, 0, 0.06);
+              position: relative;
+              overflow: hidden;
+              transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+
+            .ticket-info-card:hover {
+              transform: translateY(-6px);
+              box-shadow: 0 25px 45px rgba(0, 0, 0, 0.08), 0 0 25px rgba(200, 16, 46, 0.08);
+              border-color: rgba(200, 16, 46, 0.25);
+            }
+
+            .ticket-info-card::before {
+              content: '';
+              position: absolute;
+              top: -20%;
+              right: -20%;
+              width: 180px;
+              height: 180px;
+              background: radial-gradient(circle, rgba(200, 16, 46, 0.05) 0%, transparent 70%);
+              pointer-events: none;
+            }
+
+            .ticket-info-card-title {
+              font-size: 1.35rem;
+              font-weight: 900;
+              text-transform: uppercase;
+              letter-spacing: 0.06em;
+              margin-bottom: 0.6rem;
+              background: linear-gradient(135deg, #c8102e 0%, #800615 100%);
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+
+            .ticket-info-card-subtitle {
+              color: rgba(44, 44, 46, 0.65);
+              font-size: 0.9rem;
+              margin-bottom: 1.8rem;
+              font-weight: 500;
+              line-height: 1.5;
+              border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+              padding-bottom: 1.2rem;
+            }
+
+            .ticket-info-list {
+              display: flex;
+              flex-direction: column;
+              gap: 1.1rem;
+            }
+
+            .ticket-info-item {
+              display: flex;
+              align-items: flex-start;
+              gap: 12px;
+              transition: all 0.3s ease;
+            }
+
+            .ticket-info-item:hover {
+              transform: translateX(5px);
+            }
+
+            .ticket-info-icon-wrapper {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              width: 26px;
+              height: 26px;
+              background: rgba(200, 16, 46, 0.05);
+              border: 1px solid rgba(200, 16, 46, 0.15);
+              border-radius: 8px;
+              color: #c8102e;
+              flex-shrink: 0;
+              margin-top: 1.5px;
+              box-shadow: 0 4px 8px rgba(200, 16, 46, 0.03);
+              transition: all 0.3s ease;
+            }
+
+            .ticket-info-item:hover .ticket-info-icon-wrapper {
+              background: rgba(255, 215, 0, 0.15);
+              border-color: rgba(255, 215, 0, 0.4);
+              color: #b89600;
+              box-shadow: 0 4px 10px rgba(255, 215, 0, 0.1);
+              transform: scale(1.08) rotate(5deg);
+            }
+
+            .ticket-info-text {
+              font-size: 0.92rem;
+              font-weight: 600;
+              color: rgba(44, 44, 46, 0.85);
+              line-height: 1.45;
+              letter-spacing: 0.015em;
+              transition: color 0.3s ease;
+              text-align: left;
+            }
+
+            .ticket-info-item:hover .ticket-info-text {
+              color: #000000;
+            }
+          `}</style>
+
+          <h3 className="ticket-info-card-title">
+            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'inline-block', verticalAlign: 'middle', width: '20px', height: '20px' }}>
+              <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+            </svg>
+            An Evening You Won't Forget
+          </h3>
+          <p className="ticket-info-card-subtitle">
             Your ticket is more than entry — it’s an experience.
-            <br />
-
           </p>
 
+          <div className="ticket-info-list">
+            <div className="ticket-info-item">
+              <div className="ticket-info-icon-wrapper">
+                <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: '14px', height: '14px' }}>
+                  <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+                </svg>
+              </div>
+              <span className="ticket-info-text">Prestigious Awards Ceremony</span>
+            </div>
 
-          <div style={{ marginTop: "1.5rem", color: "#333", fontSize: "1rem", lineHeight: "1.8" }}>
-            <p style={{ marginBottom: "0px" }}>✅ A Dazzling Awards Ceremony</p>
-            <p style={{ marginBottom: "0px" }}>✅ 3-Course meal & Drinks</p>
-            <p style={{ marginBottom: "0px" }}>✅ Live Startup Pitches</p>
-            <p style={{ marginBottom: "0px" }}>✅  Networking with 150+ Fintech & MSB Professionals</p>
-            <p style={{ marginBottom: "0px" }}>✅ High Industry Visibility</p>
-            <p style={{ marginBottom: "0px" }}>✅ Explore a historic, elegant London venue</p>
-            <p style={{ marginBottom: "0px" }}>✅ Curated return gifts</p>
+            <div className="ticket-info-item">
+              <div className="ticket-info-icon-wrapper">
+                <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: '14px', height: '14px' }}>
+                  <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+                </svg>
+              </div>
+              <span className="ticket-info-text">Connect with Global Fintech & MSB Leaders</span>
+            </div>
+
+            <div className="ticket-info-item">
+              <div className="ticket-info-icon-wrapper">
+                <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: '14px', height: '14px' }}>
+                  <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+                </svg>
+              </div>
+              <span className="ticket-info-text">Build Meaningful Industry Relationships</span>
+            </div>
+
+            <div className="ticket-info-item">
+              <div className="ticket-info-icon-wrapper">
+                <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: '14px', height: '14px' }}>
+                  <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+                </svg>
+              </div>
+              <span className="ticket-info-text">Celebrate with the Leaders Defining the Future of Finance</span>
+            </div>
+
+            <div className="ticket-info-item">
+              <div className="ticket-info-icon-wrapper">
+                <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: '14px', height: '14px' }}>
+                  <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+                </svg>
+              </div>
+              <span className="ticket-info-text">Exclusive Tech-Luxury Venue</span>
+            </div>
+
+            <div className="ticket-info-item">
+              <div className="ticket-info-icon-wrapper">
+                <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: '14px', height: '14px' }}>
+                  <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+                </svg>
+              </div>
+              <span className="ticket-info-text">Premium Return Gifts</span>
+            </div>
+
+            <div className="ticket-info-item">
+              <div className="ticket-info-icon-wrapper">
+                <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: '14px', height: '14px' }}>
+                  <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+                </svg>
+              </div>
+              <span className="ticket-info-text">Elegant Buffet Dining Experience</span>
+            </div>
           </div>
-
-
-
         </div>
 
 
@@ -634,51 +790,46 @@ function TicketBookingPage() {
 
       </div>
 
-      <div
-        className="card container bg-white"
-        style={{
-          maxWidth: "600px",
-          margin: "50px auto",
-          padding: "2rem",
-          borderRadius: "15px",
-          boxShadow: "0 8px 24px rgba(0, 0, 0, 0.1)",
-          textAlign: "center",
-          fontFamily: "Segoe UI, sans-serif",
-          color: "#333",
-          lineHeight: "1.6",
-        }}
-      >
-        <p style={{ fontSize: "1.1rem", marginBottom: "1rem" }}>
-          <strong style={{ fontSize: "1.3rem", color: "#2c3e50" }}>
-            Friday, 9th October 2025 |  6 PM Onwards
-          </strong>
-          <br />
-          <br />
-          📍 <span style={{ fontWeight: "500" }}>
-            Landing Forty-Two 122 Leadenhall Street, <br />London EC3V 4AB
-          </span>
-          <br />
+      <div className="relative w-full max-w-[620px] mx-auto my-12 bg-white rounded-[24px] shadow-[0_20px_50px_rgba(0,0,0,0.06)] border border-neutral-100/85 font-sans overflow-hidden">
+        
 
-        </p>
+        <div className="p-10 pt-5">
+          {/* Date & Time Header */}
+          <h3 className="text-[22px] sm:text-[24px] font-bold text-black mb-4 text-left tracking-tight">
+            Friday, 9th October 2026 | 6 PM Onwards
+          </h3>
+          {/* Slanted Accent Strip */}
+          <div className="mb-8">
+            <div className="flex h-[9px] w-full overflow-hidden -skew-x-[25deg] rounded-[3px]">
+              <div className="w-[28%] bg-black" />
+              <div className="w-[72%] bg-[#c8102e]" />
+            </div>
+          </div>
+          {/* Location Details */}
+          <div className="flex items-center gap-4 mb-8 text-left">
+            <div className="flex-shrink-0">
+              <svg className="w-8 h-8 text-[#c8102e]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-[19px] font-extrabold text-black leading-tight">
+                Landing Forty-Two
+              </span>
+              <span className="text-[15px] sm:text-base text-neutral-600 mt-1.5 font-medium">
+                122 Leadenhall Street, London EC3V 4AB
+              </span>
+            </div>
+          </div>
 
-        <p
-          style={{
-            fontWeight: "500",
-            marginBottom: "1rem",
-            backgroundColor: "#ffc2e0",
-            padding: "1rem",
-            borderRadius: "10px",
-            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
-            color: "#000",
-            fontSize: "1.05rem",
-            textAlign: "center",
-            transition: "all 0.3s ease",
-            marginTop: "8px"
-          }}
-        >
-          Reserve your ticket now and be part of something extraordinary.
-        </p>
-
+          {/* Reservation Banner */}
+          <div className="max-w-[480px] mx-auto bg-[#c8102e] text-white px-6 py-[18px] rounded-2xl text-center shadow-sm">
+            <p className="text-[14.5px] sm:text-[15.5px] font-semibold tracking-wide leading-relaxed max-w-[340px] sm:max-w-[380px] mx-auto">
+              Reserve your ticket now and be part of something extraordinary.
+            </p>
+          </div>
+        </div>
       </div>
       <Toaster position="bottom-center" reverseOrder={false} />
     </>

@@ -817,7 +817,7 @@ const RegisterNow = () => {
                       <option value="1">Mr</option>
                       <option value="2">Mrs</option>
                       <option value="3">Miss</option>
-                      <option value="4">Ms</option>
+                      {/* <option value="4">Ms</option> */}
                       <option value="5">Other</option>
                     </select>
                     <input
@@ -1076,7 +1076,7 @@ const RegisterNow = () => {
                           textTransform: "uppercase",
                         }}
                       >
-                        MSB award section
+                        MSB awards section
                       </ListSubheader>
                       <MenuItem value="Compliance Innovator of the year">
                         <Checkbox
@@ -1085,7 +1085,7 @@ const RegisterNow = () => {
                           )}
                           disabled={NOMINATIONS_CLOSED}
                         />
-                        Compliance Innovator of the year
+                        Compliance Innovator of the Year
                       </MenuItem>
                       <MenuItem value="Best in Customer Service MSB of the Year">
                         <Checkbox
