@@ -245,8 +245,19 @@ function TicketBookingPage() {
     if (!form.countryCode) errs.countryCode = "Select your country code.";
     if (!form.phone.trim()) errs.phone = "Phone number is required.";
     else if (!/^\d{7,15}$/.test(form.phone)) errs.phone = "Phone number must be 7-15 digits.";
-    if (!form.email.trim()) errs.email = "Email is required.";
-    else if (!/\S+@\S+\.\S+/.test(form.email)) errs.email = "Invalid email address.";
+    if (!form.email.trim()) {
+      errs.email = "Email is required.";
+    } else if (/[A-Z]/.test(form.email)) {
+      errs.email = "Email must be strictly lowercase.";
+    } else if (!/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,6}$/.test(form.email) || form.email.includes(" ")) {
+      errs.email = "Invalid email address.";
+    } else if (
+      /@(gmail|yahoo|hotmail|outlook)\.[a-z]{4,}$/.test(form.email) ||
+      /@gamil\.com$/.test(form.email) ||
+      /@yaho\.com$/.test(form.email)
+    ) {
+      errs.email = "Invalid email address.";
+    }
 
     if (!form.tickets || parseInt(form.tickets) < 1 || parseInt(form.tickets) > MAX_TICKETS)
       errs.tickets = "You can book between 1 and 5 tickets.";
@@ -255,7 +266,11 @@ function TicketBookingPage() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setForm({ ...form, [name]: value });
+    let val = value;
+    if (name === "email") {
+      val = value.toLowerCase();
+    }
+    setForm({ ...form, [name]: val });
     setErrors({ ...errors, [name]: "" }); // Clear error for the field
   };
 

@@ -238,14 +238,11 @@ const RegisterNow = () => {
 
         newFormData[id] = numericValue;
 
-        // Check if the phone number is at least 10 digits (excluding the "+")
-        if (
-          numericValue.startsWith("+")
-            ? numericValue.length > 15
-            : numericValue.length < 10
-        ) {
+        // Count actual digits (excluding optional "+")
+        const digitCount = numericValue.replace(/\+/g, "").length;
+        if (digitCount < 7 || digitCount > 15) {
           newErrors.phoneNo =
-            "Phone Number should be Min 10 digits and max 15 digits";
+            "Mobile Number should be Min 7 digits and max 15 digits";
         } else {
           delete newErrors.phoneNo;
         }
@@ -429,8 +426,9 @@ const RegisterNow = () => {
     if (!formData.websiteurl) {
       newErrors.websiteurl = "Website Url is required";
     }
-    if (!formData.phoneNo || formData.phoneNo.length < 10) {
-      newErrors.phoneNo = "Phone number must be at least 10 digits";
+    const cleanPhone = (formData.phoneNo || "").replace(/\+/g, "");
+    if (!cleanPhone || cleanPhone.length < 7 || cleanPhone.length > 15) {
+      newErrors.phoneNo = "Mobile Number should be Min 7 digits and max 15 digits";
     }
 
     const supportedFormats = [
@@ -778,7 +776,7 @@ const RegisterNow = () => {
                     name="phoneNo"
                     className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${errors.phoneNo && "error-border"
                       }`}
-                    maxLength="15"
+                    maxLength="16"
                     placeholder="Enter Your Phone Number"
                     value={formData.phoneNo}
                     onFocus={handleInputFocus}
@@ -786,7 +784,7 @@ const RegisterNow = () => {
                   />
                   {errors.phoneNo && (
                     <div className="error text-danger">
-                      Phone no is required
+                      {errors.phoneNo}
                     </div>
                   )}
                   <div className="cs-height_20 cs-height_lg_20" />

@@ -68,7 +68,7 @@ const InteractiveHero = () => {
         }
       `}</style>
 
-      <section className="relative w-full min-h-screen lg:h-[100svh] flex flex-col lg:flex-row overflow-hidden bg-black text-white font-outfit select-none">
+      <section className="relative w-full min-h-screen lg:h-[100svh] flex flex-col lg:flex-row lg:overflow-hidden bg-black text-white font-outfit select-none">
 
         {/* ================= LEFT HALF: BRAND & REGISTRATION ================= */}
         <div className={`relative bg-black flex flex-col justify-center overflow-hidden hero-panel-slide z-10 ${isExpanded
@@ -209,7 +209,7 @@ const InteractiveHero = () => {
               transition={{ duration: 0.6, delay: 0.5 }}
               className="mt-2 lg:mt-2 xl:mt-2 2xl:mt-2 w-full"
             >
-              <div className="max-w-sm mx-auto">
+              <div className="max-w-sm mx-auto w-full">
                 {/* Small selector buttons */}
 
 
@@ -221,7 +221,7 @@ const InteractiveHero = () => {
                   <div className="w-1.5 bg-gradient-to-b from-[#e8243e] via-[#c8102e] to-[#8a0b1f] shrink-0" />
 
                   {/* Price section */}
-                  <div className="flex items-center justify-center px-4 py-1.5 bg-[#c8102e]/10 group-hover:bg-[#c8102e]/20 border-r border-white/[0.06] transition-colors duration-500 min-w-[100px] sm:min-w-[120px] lg:min-w-[100px] xl:min-w-[120px]">
+                  <div className="flex items-center justify-center px-2.5 sm:px-4 py-1.5 bg-[#c8102e]/10 group-hover:bg-[#c8102e]/20 border-r border-white/[0.06] transition-colors duration-500 min-w-[85px] sm:min-w-[120px] lg:min-w-[100px] xl:min-w-[120px]">
                     <AnimatePresence mode="wait">
                       <motion.div
                         key={selectedOffer + "-price-container"}
@@ -244,7 +244,7 @@ const InteractiveHero = () => {
                   </div>
 
                   {/* Details section */}
-                  <div className="flex flex-col justify-center items-center px-5 py-1.5 flex-1 bg-gradient-to-r from-[#c8102e] via-[#b80e28] to-[#980b20] group-hover:from-[#e8243e] group-hover:via-[#c8102e] group-hover:to-[#a00d24] transition-all duration-500">
+                  <div className="flex flex-col justify-center items-center px-3 sm:px-5 py-1.5 flex-1 bg-gradient-to-r from-[#c8102e] via-[#b80e28] to-[#980b20] group-hover:from-[#e8243e] group-hover:via-[#c8102e] group-hover:to-[#a00d24] transition-all duration-500">
                     <AnimatePresence mode="wait">
                       <motion.div
                         key={selectedOffer + "-details-container"}
@@ -254,7 +254,7 @@ const InteractiveHero = () => {
                         transition={{ duration: 0.3 }}
                         className="flex flex-col items-center justify-center w-full"
                       >
-                        <span className="text-white text-[15px] sm:text-[18px] lg:text-[16px] xl:text-[18px] font-black uppercase tracking-[0.25em] leading-none group-hover:scale-[1.03] transition-transform duration-300 drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] text-center w-full block whitespace-nowrap">
+                        <span className="text-white text-[12px] sm:text-[18px] lg:text-[16px] xl:text-[18px] font-black uppercase tracking-[0.12em] sm:tracking-[0.25em] leading-none group-hover:scale-[1.03] transition-transform duration-300 drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] text-center w-full block whitespace-nowrap">
                           {offers.find((x) => x.id === selectedOffer).label}
                         </span>
                         {offers.find((x) => x.id === selectedOffer).dateRange && (

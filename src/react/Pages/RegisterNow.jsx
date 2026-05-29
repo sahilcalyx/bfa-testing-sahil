@@ -247,14 +247,11 @@ const RegisterNow = () => {
           numericValue = numericValue.replace(/\D/g, "");
         }
         newFormData[id] = numericValue;
-        // Check if the mobile number is at least 10 digits (excluding the "+")
-        if (
-          numericValue.startsWith("+")
-            ? numericValue.length > 15
-            : numericValue.length < 10
-        ) {
+        // Count actual digits (excluding optional "+")
+        const digitCount = numericValue.replace(/\+/g, "").length;
+        if (digitCount < 7 || digitCount > 15) {
           newErrors.phoneNo =
-            "Mobile Number should be Min 10 digits and max 15 digits";
+            "Mobile Number should be Min 7 digits and max 15 digits";
         } else {
           delete newErrors.phoneNo;
         }
@@ -440,8 +437,9 @@ const RegisterNow = () => {
       newErrors.websiteurl = "Website Url is required";
     }
 
-    if (!formData.phoneNo || formData.phoneNo.length < 10) {
-      newErrors.phoneNo = "Mobile number must be at least 10 digits";
+    const cleanPhone = (formData.phoneNo || "").replace(/\+/g, "");
+    if (!cleanPhone || cleanPhone.length < 7 || cleanPhone.length > 15) {
+      newErrors.phoneNo = "Mobile Number should be Min 7 digits and max 15 digits";
     }
 
     const supportedFormats = [
@@ -785,7 +783,7 @@ const RegisterNow = () => {
             </ul>
             <div className="cs-height_10 cs-height_lg_10" />
             <span>
-              <em>* Terms and Condition Apply</em>
+              <em className="text-white">* Terms and Condition Apply</em>
             </span>
           </div>
           <div className="cs-contact_right cs-accent_10_bg">
@@ -880,7 +878,7 @@ const RegisterNow = () => {
                     name="phoneNo"
                     className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${errors.phoneNo && "error-border"
                       }`}
-                    maxLength="15"
+                    maxLength="16"
                     placeholder="Mobile Number"
                     value={formData.phoneNo}
                     onFocus={handleInputFocus}
@@ -893,7 +891,7 @@ const RegisterNow = () => {
                   />
                   {errors.phoneNo && (
                     <div className="error text-danger">
-                      Mobile no is required
+                      {errors.phoneNo}
                     </div>
                   )}
                   <div className="cs-height_20 cs-height_lg_20" />
@@ -1459,9 +1457,9 @@ const RegisterNow = () => {
                   />
                   <label htmlFor="privacyPolicy" style={{ marginLeft: "8px" }}>
                     I have read and agreed to the{" "}
-                    <span href="#" className="a-hover">
+                    <a href="/terms-and-conditions" target="_blank" className="a-hover">
                       Terms and Conditions
-                    </span>
+                    </a>
                   </label>
                 </div>
               </div>
