@@ -504,9 +504,6 @@ function TicketBookingPage() {
                         <span style={{ display: "inline-block", width: "45px", flexShrink: 0 }}>
                           +{option.value}
                         </span>
-                        <span style={{ display: "inline-block", width: "20px", textAlign: "center", flexShrink: 0 }}>
-                          -
-                        </span>
                         <span style={{ flex: 1, paddingLeft: "8px" }}>
                           {countryName}
                         </span>
@@ -835,9 +832,8 @@ function TicketBookingPage() {
             </div>
           </div>
 
-          {/* Reservation Banner */}
-          <div className="max-w-[480px] mx-auto bg-[#c8102e] text-white px-6 py-[18px] rounded-2xl text-center shadow-sm">
-            <p className="text-[14.5px] sm:text-[15.5px] font-semibold tracking-wide leading-relaxed max-w-[340px] sm:max-w-[380px] mx-auto">
+          <div className="max-w-[480px] mx-auto bg-[#c8102e] text-white px-6 py-[18px] rounded-2xl shadow-sm" style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center" }}>
+            <p className="text-[14.5px] sm:text-[15.5px] font-semibold tracking-wide leading-relaxed max-w-[340px] sm:max-w-[380px] mx-auto" style={{ textAlign: "center", margin: "0 auto" }}>
               Reserve your ticket now and be part of something extraordinary.
             </p>
           </div>

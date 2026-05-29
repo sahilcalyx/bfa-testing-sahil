@@ -63,7 +63,7 @@ const PrcingTable = () => {
                    <div className='col-10' style={{lineHeight: '1'}}>
                     <h6 className='mb-1 pb-0 fw-bolder' style={{fontSize: '16px'}}>Social Media Posts</h6>
                     <span className='mb-0 pb-0' style={{fontSize: '13px', lineHeight: '10px !important'}}>
-                    8 Social media promotion - 4 Paid Ad post total reach count 5,000 - 20,000
+                    8 Social media promotion - 5 Paid Ad post total reach count 5,000 - 20,000
                    
                     </span>
                    </div>

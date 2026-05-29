@@ -187,11 +187,11 @@ const TermsAndConditions = () => {
             The company logo will be featured on the event venue signage, digital display, event schedule, any event registration material and the thankyou note given to all the event attendees
           </li>
           <li>
-            Platinum: One individual pull-up banner or event space wall branding per sponsor.
+            Platinum: Depending on the venue space & options available, the single branding will be planned. If we have anything available within the venue, being the Platinum Sponsor, you will get the first preference. If we go ahead with the pull-up banners, your logo will be prominently displayed on event pull-up banner individually for maximum visibility.
             <br />
-            Gold: Shared pull-up banners; max 2 sponsors per banner.
+            Gold: Shared pull-up banners; max 2 sponsors per banner or priority 2 as per the event space.
             <br />
-            Silver: Shared pull-up banners; max 4 sponsors per banner.
+            Silver: Shared pull-up banners; max 4 sponsors per banner or priority 2 as per the event space.
           </li>
           <li>
             As Platinum sponsors receive first priority and Gold sponsors receive second priority, placement will depend on the number of sponsors and available lanyard space.

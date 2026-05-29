@@ -482,6 +482,7 @@ const InteractiveHero = () => {
                 height: 100%;
                 background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
                 transform: translateX(-100%);
+                animation: shimmer-sweep 2.2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
               }
 
               .venue-card-btn-pill:hover::after {
