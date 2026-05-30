@@ -157,10 +157,12 @@ const FinancialInclusionUK = lazy(() => import("./Pages/Blogs/FinancialInclusion
 
 
 function App() {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
   useLayoutEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+    if (!hash) {
+      window.scrollTo(0, 0);
+    }
+  }, [pathname, hash]);
 
   // Dispatch custom event when route changes for SEO updates
   useEffect(() => {

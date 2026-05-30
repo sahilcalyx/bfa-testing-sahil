@@ -180,7 +180,7 @@ const StaticHero = () => {
             className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6 w-full max-w-lg mx-auto"
           >
             <NavLink
-              to="/nominate-now"
+              to="/nominate-now#nominate-now"
               className="btn-pro-1 uppercase tracking-wider flex items-center justify-center gap-2.5 text-center w-full sm:w-auto text-xs py-3.5 px-6 sm:text-sm sm:py-4 sm:px-8 lg:text-sm lg:py-4 lg:px-8 xl:text-base xl:py-4.5 xl:px-10"
             >
 

@@ -568,7 +568,7 @@ box-shadow: none;
                           className="d-none-sm mb-3 mt-4 "
                           onClick={handleNavLinkClick}
                         >
-                          <NavLink to="/nominate-now" className="btn-pro-1">
+                          <NavLink to="/nominate-now#nominate-now" className="btn-pro-1">
                             <span>Nominate For Awards</span>
                           </NavLink>
                         </span>
@@ -611,7 +611,7 @@ box-shadow: none;
                     <span>Download Brochure</span>
                   </a> */}
 
-                  <NavLink to="/nominate-now" className="btn-pro-1">
+                  <NavLink to="/nominate-now#nominate-now" className="btn-pro-1">
                     <span>Nominate For Awards</span>
                   </NavLink>
 

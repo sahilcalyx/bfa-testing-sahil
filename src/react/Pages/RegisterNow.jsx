@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Helmet } from "react-helmet";
 import axios from "axios";
 import Checkbox from "@mui/material/Checkbox";
@@ -18,6 +18,29 @@ import { NavLink } from "react-router-dom";
 import { Calendar, MapPin, Ticket } from "lucide-react";
 import { motion } from "framer-motion";
 
+const countries = [
+  "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria",
+  "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan",
+  "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cabo Verde", "Cambodia",
+  "Cameroon", "Canada", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo (Congo-Brazzaville)", "Costa Rica",
+  "Croatia", "Cuba", "Cyprus", "Czechia (Czech Republic)", "Democratic Republic of the Congo", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador",
+  "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Fiji", "Finland", "France",
+  "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau",
+  "Guyana", "Haiti", "Holy See", "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq",
+  "Ireland", "Israel", "Italy", "Ivory Coast", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati",
+  "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania",
+  "Luxembourg", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius",
+  "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar (formerly Burma)", "Namibia",
+  "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea", "North Macedonia", "Norway",
+  "Oman", "Pakistan", "Palau", "Palestine State", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland",
+  "Portugal", "Qatar", "Romania", "Russia", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa", "San Marino",
+  "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands",
+  "Somalia", "South Africa", "South Korea", "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland",
+  "Syria", "Tajikistan", "Tanzania", "Thailand", "Timor-Leste", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey",
+  "Turkmenistan", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States of America", "Uruguay", "Uzbekistan", "Vanuatu",
+  "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"
+];
+
 const RegisterNow = () => {
   // Add a constant to control form disabled state
   const NOMINATIONS_CLOSED = false;
@@ -26,6 +49,10 @@ const RegisterNow = () => {
   const handleCaptchaChange = (token) => {
     setCaptchaToken(token);
   };
+
+  const [countryDropdownOpen, setCountryDropdownOpen] = useState(false);
+  const [countrySearchQuery, setCountrySearchQuery] = useState("");
+  const countryDropdownRef = useRef(null);
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -57,7 +84,7 @@ const RegisterNow = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [agreePrivacyPolicy, setAgreePrivacyPolicy] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [showMoreTerms, setShowMoreTerms] = useState(false);
+
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -73,6 +100,32 @@ const RegisterNow = () => {
       }));
     }
   }, [awardId]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (countryDropdownRef.current && !countryDropdownRef.current.contains(event.target)) {
+        setCountryDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (window.location.hash === "#nominate-now") {
+      const timer = setTimeout(() => {
+        const element = document.getElementById("nominate-now");
+        if (element) {
+          const yOffset = -100;
+          const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+          window.scrollTo({ top: y, behavior: "smooth" });
+        }
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, []);
 
   const handleTitleChange = (e) => {
     if (NOMINATIONS_CLOSED) return;
@@ -742,42 +795,6 @@ const RegisterNow = () => {
                     process, please contact us at{" "}
                     <a href="tel:+442038283277">+44 20 3828 3277</a>
                   </li>
-                  <li style={{ listStyleType: "none", marginTop: "10px" }}>
-                    <span
-                      onClick={() => setShowMoreTerms(!showMoreTerms)}
-                      style={{
-                        cursor: "pointer",
-                        textDecoration: "underline",
-                        color: "#fff",
-                        fontWeight: "bold",
-                        userSelect: "none"
-                      }}
-                    >
-                      {showMoreTerms ? "Load Less" : "Load More"}
-                    </span>
-                  </li>
-                  {showMoreTerms && (
-                    <>
-                      <li>
-                        Invoices will be sent to the organisation’s registered email address.
-                      </li>
-                      <li>
-                        The Brit FinTech Awards authority reserves the right to disqualify any entry that does not comply with the terms and conditions or is deemed inappropriate, unethical, or fraudulent.
-                      </li>
-                      <li>
-                        All entries will be evaluated based on criteria set by the BFA.
-                      </li>
-                      <li>
-                        Incomplete nomination forms will be disqualified.
-                      </li>
-                      <li>
-                        All submitted information will remain confidential to the BFA team and judging panel. However, BFA may use applicants’ names and basic information for promotional purposes.
-                      </li>
-                      <li>
-                        BFA reserves the right to modify or cancel the awards in exceptional circumstances.
-                      </li>
-                    </>
-                  )}
                 </>
               )}
             </ul>
@@ -1356,21 +1373,119 @@ const RegisterNow = () => {
                   )}
                   <div className="cs-height_20 cs-height_lg_20" />
                 </div>
-                <div className="col-sm-6">
-                  <textarea
-                    id="businesscorridors"
-                    name="businesscorridors"
-                    className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${errors.businesscorridors && "error-border"
-                      }`}
-                    placeholder="Company Registration Country (Max 150 words)"
-                    value={formData.businesscorridors}
-                    onChange={handleTextAreaChange}
-                    disabled={NOMINATIONS_CLOSED}
-                    style={{
-                      opacity: NOMINATIONS_CLOSED ? 0.6 : 1,
-                      cursor: NOMINATIONS_CLOSED ? "not-allowed" : "text",
+                <div className="col-sm-6" ref={countryDropdownRef} style={{ position: "relative" }}>
+                  <div 
+                    onClick={() => {
+                      if (NOMINATIONS_CLOSED) return;
+                      setCountryDropdownOpen(!countryDropdownOpen);
+                      setCountrySearchQuery("");
                     }}
-                  />
+                    className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color d-flex align-items-center justify-content-between cursor-pointer ${
+                      errors.businesscorridors ? "error-border" : ""
+                    }`}
+                    style={{ 
+                      minHeight: "55px", 
+                      padding: "10px 20px", 
+                      borderRadius: "10px",
+                      opacity: NOMINATIONS_CLOSED ? 0.6 : 1,
+                      cursor: NOMINATIONS_CLOSED ? "not-allowed" : "pointer",
+                      userSelect: "none"
+                    }}
+                  >
+                    <span style={{ color: formData.businesscorridors ? "#000" : "#a3a3a3", fontWeight: formData.businesscorridors ? "500" : "normal" }}>
+                      {formData.businesscorridors || "Company Registration Country"}
+                    </span>
+                    <span style={{ fontSize: "10px", color: "#a3a3a3" }}>▼</span>
+                  </div>
+
+                  {countryDropdownOpen && !NOMINATIONS_CLOSED && (
+                    <div 
+                      style={{ 
+                        position: "absolute",
+                        top: "100%",
+                        left: "15px",
+                        right: "15px",
+                        zIndex: 9999,
+                        background: "#fff",
+                        border: "1px solid rgba(0,0,0,0.15)",
+                        borderRadius: "10px",
+                        boxShadow: "0 10px 25px rgba(0,0,0,0.15)",
+                        marginTop: "5px",
+                        overflow: "hidden"
+                      }}
+                    >
+                      {/* Search box inside dropdown */}
+                      <div style={{ padding: "10px", borderBottom: "1px solid rgba(0,0,0,0.1)" }}>
+                        <input
+                          type="text"
+                          placeholder="Search country..."
+                          value={countrySearchQuery}
+                          onChange={(e) => setCountrySearchQuery(e.target.value)}
+                          autoFocus
+                          style={{
+                            width: "100%",
+                            padding: "8px 12px",
+                            background: "#f9f9f9",
+                            border: "1px solid rgba(0,0,0,0.1)",
+                            borderRadius: "6px",
+                            color: "#000",
+                            fontSize: "14px",
+                            outline: "none"
+                          }}
+                        />
+                      </div>
+
+                      {/* Country options list */}
+                      <div 
+                        style={{ 
+                          maxHeight: "220px",
+                          overflowY: "auto",
+                          padding: "5px 0"
+                        }}
+                      >
+                        {countries
+                          .filter((country) =>
+                            country.toLowerCase().includes(countrySearchQuery.toLowerCase())
+                          )
+                          .map((country, idx) => (
+                            <div
+                              key={idx}
+                              onClick={() => {
+                                setFormData((prevData) => ({
+                                  ...prevData,
+                                  businesscorridors: country
+                                }));
+                                setErrors((prevErrors) => {
+                                  const newErrors = { ...prevErrors };
+                                  delete newErrors.businesscorridors;
+                                  return newErrors;
+                                });
+                                setCountryDropdownOpen(false);
+                              }}
+                              style={{
+                                padding: "10px 20px",
+                                color: "#000",
+                                cursor: "pointer",
+                                fontSize: "14px",
+                                transition: "background 0.2s"
+                              }}
+                              onMouseEnter={(e) => e.target.style.background = "#f1f1f1"}
+                              onMouseLeave={(e) => e.target.style.background = "transparent"}
+                            >
+                              {country}
+                            </div>
+                          ))}
+                        {countries.filter((country) =>
+                          country.toLowerCase().includes(countrySearchQuery.toLowerCase())
+                        ).length === 0 && (
+                          <div style={{ padding: "10px 20px", color: "rgba(0,0,0,0.4)", fontSize: "14px" }}>
+                            No countries found
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )}
+
                   {errors.businesscorridors && (
                     <div className="error text-danger">
                       Company Registration Country is required

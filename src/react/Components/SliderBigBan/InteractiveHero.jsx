@@ -66,6 +66,75 @@ const InteractiveHero = () => {
         .hero-panel-slide {
           transition: all 700ms cubic-bezier(0.16, 1, 0.3, 1) !important;
         }
+        
+        @keyframes header-btn-flash {
+          0% {
+            left: -100%;
+            opacity: 0;
+          }
+          50% {
+            opacity: 1;
+          }
+          100% {
+            left: 120%;
+            opacity: 0;
+          }
+        }
+        
+        .btn-header-style {
+          height: 55px;
+          padding: 0 25px;
+          font-size: 18px;
+          font-weight: bold;
+          color: white !important;
+          text-decoration: none;
+          border: 2px solid #ff3b57;
+          border-radius: 12px;
+          background: transparent;
+          position: relative;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+          cursor: pointer;
+          z-index: 1;
+          transition: transform 0.2s ease-in-out, background-color 0.3s, color 0.3s;
+          box-shadow: 0 0 5px rgba(255, 59, 87, 0.7),
+                      0 0 5px rgba(255, 59, 87, 0.4),
+                      0 0 5px rgba(255, 59, 87, 0.2);
+          max-width: 220px;
+          width: 100%;
+          margin: 0 auto;
+        }
+
+        .btn-header-style::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: -100%;
+          height: 100%;
+          width: 60%;
+          background: linear-gradient(
+            120deg,
+            transparent,
+            rgba(255, 255, 255, 0.4),
+            transparent
+          );
+          transform: skewX(-20deg);
+          animation: header-btn-flash 2.5s ease-in-out infinite;
+          z-index: 0;
+        }
+
+        .btn-header-style:hover {
+          transform: scale(1.05);
+          background: rgba(255, 59, 87, 0.05);
+          box-shadow: 0 0 8px rgba(255, 59, 87, 0.8),
+                      0 0 12px rgba(255, 59, 87, 0.5);
+        }
+
+        .btn-header-style:active {
+          transform: scale(0.95);
+        }
       `}</style>
 
       <section className="relative w-full min-h-screen lg:h-[100svh] flex flex-col lg:flex-row lg:overflow-hidden bg-black text-white font-outfit select-none">
@@ -209,12 +278,12 @@ const InteractiveHero = () => {
               transition={{ duration: 0.6, delay: 0.5 }}
               className="mt-2 lg:mt-2 xl:mt-2 2xl:mt-2 w-full"
             >
-              <div className="max-w-sm mx-auto w-full">
+              <div className="max-w-sm mx-auto w-full flex flex-col gap-4">
                 {/* Small selector buttons */}
 
 
                 <NavLink
-                  to="/nominate-now"
+                  to="/nominate-now#nominate-now"
                   className="group flex items-stretch gap-0 rounded-lg lg:rounded-md xl:rounded-lg overflow-hidden border border-white/10 hover:border-[#c8102e]/40 bg-white/[0.04] backdrop-blur-sm shadow-[0_8px_30px_rgba(0,0,0,0.3)] hover:shadow-[0_12px_40px_rgba(200,16,46,0.25)] transition-all duration-500 cursor-pointer w-full text-left"
                 >
                   {/* Red accent bar */}
@@ -265,6 +334,13 @@ const InteractiveHero = () => {
                       </motion.div>
                     </AnimatePresence>
                   </div>
+                </NavLink>
+
+                <NavLink
+                  to="/ticket-booking"
+                  className="btn-header-style"
+                >
+                  Book Tickets Now
                 </NavLink>
               </div>
             </motion.div>
@@ -591,15 +667,7 @@ const InteractiveHero = () => {
                   </div>
                 </div>
 
-                {/* Book Ticket Action Button Wrapper */}
-                <div className="p-3.5 pt-1.5 pb-3.5 w-full">
-                  <NavLink to="/ticket-booking" className="venue-card-btn-pill group/book">
-                    <Ticket className="w-4 h-4 text-white icon-ticket transition-transform duration-300" />
-                    <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.2em] text-white leading-none whitespace-nowrap">
-                      Book Ticket Now
-                    </span>
-                  </NavLink>
-                </div>
+
               </div>
             </motion.div>
           </div>
