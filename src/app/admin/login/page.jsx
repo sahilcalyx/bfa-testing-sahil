@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
 import { Button } from "@/components/ui/button";
@@ -168,6 +168,13 @@ export default function AdminLogin() {
     const yellowRef = useRef(null);
     const orangeRef = useRef(null);
     const router = useRouter();
+    const { data: session, status } = useSession();
+
+    useEffect(() => {
+        if (status === "authenticated") {
+            router.push("/admin");
+        }
+    }, [status, router]);
 
     useEffect(() => {
         const handleMouseMove = (e) => {
@@ -297,6 +304,18 @@ export default function AdminLogin() {
             setLoading(false);
         }
     };
+
+    if (status === "loading" || status === "authenticated") {
+        return (
+            <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh", background: "#f7f9fc" }}>
+                <div style={{ textAlign: "center" }}>
+                    <div style={{ border: "4px solid #e3e8ee", borderTop: "4px solid #ad0b27", borderRadius: "50%", width: "40px", height: "40px", animation: "spin 1s linear infinite", margin: "0 auto 16px" }} />
+                    <p style={{ fontFamily: "'Inter', sans-serif", color: "#4f566b", fontWeight: "600", fontSize: "15px" }}>Checking authentication...</p>
+                    <style>{`@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }`}</style>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="min-h-screen grid lg:grid-cols-2 bg-background font-sans">

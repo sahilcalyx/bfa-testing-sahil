@@ -281,13 +281,26 @@ const RegisterNow = () => {
         const digitCount = numericValue.replace(/\+/g, "").length;
         if (digitCount < 7 || digitCount > 15) {
           newErrors.phoneNo =
-            "Mobile Number should be Min 7 digits and max 15 digits";
+            "Mobile Number should be Min 10 digits and max 15 digits";
         } else {
           delete newErrors.phoneNo;
         }
         break;
 
       case "companysector":
+        const capitalizedSector = value.replace(/\b\w/g, (char) =>
+          char.toUpperCase()
+        );
+        newFormData[id] = capitalizedSector;
+        if (capitalizedSector.trim() === "") {
+          newErrors.companysector = "Company Sector is required";
+        } else if (!/^[A-Za-z\s]+$/.test(capitalizedSector.trim())) {
+          newErrors.companysector = "Company Sector must contain only letters and spaces";
+        } else {
+          delete newErrors.companysector;
+        }
+        break;
+
       case "companynm":
       case "companyaddress":
         const capitalizedText = value.replace(/\b\w/g, (char) =>
@@ -333,10 +346,10 @@ const RegisterNow = () => {
         break;
 
       case "companyregnumber":
-        // Allow letters, spaces, dots, hyphens (minimum 2 and maximum 60 characters)
-        const countryPattern = /^[A-Za-z\s.-]{2,60}$/;
-        if (!countryPattern.test(value.trim())) {
-          newErrors.companyregnumber = "Invalid company registration country";
+        // Allow alphanumeric, spaces, dots, hyphens (minimum 2 and maximum 60 characters)
+        const registrationPattern = /^[A-Za-z0-9\s.-]{2,60}$/;
+        if (!registrationPattern.test(value.trim())) {
+          newErrors.companyregnumber = "Company Registration Number must be alphanumeric";
         } else {
           delete newErrors.companyregnumber;
         }
@@ -447,8 +460,14 @@ const RegisterNow = () => {
     requiredFields.forEach((key) => {
       const value = formData[key];
       if (!value || (typeof value === "string" && !value.trim())) {
-        newErrors[key] = `${key.charAt(0).toUpperCase() + key.slice(1)
-          } is required`;
+        if (key === "companyregnumber") {
+          newErrors[key] = "Company Registration Number is required";
+        } else if (key === "companysector") {
+          newErrors[key] = "Company Sector is required";
+        } else {
+          newErrors[key] = `${key.charAt(0).toUpperCase() + key.slice(1)
+            } is required`;
+        }
       }
     });
 
@@ -457,7 +476,7 @@ const RegisterNow = () => {
     }
     const cleanPhone = (formData.phoneNo || "").replace(/\+/g, "");
     if (!cleanPhone || cleanPhone.length < 7 || cleanPhone.length > 15) {
-      newErrors.phoneNo = "Mobile Number should be Min 7 digits and max 15 digits";
+      newErrors.phoneNo = "Mobile Number should be Min 10 digits and max 15 digits";
     }
 
     const supportedFormats = [
@@ -1258,7 +1277,7 @@ const RegisterNow = () => {
 
                   {errors.companyregnumber && (
                     <div className="error text-danger">
-                      Company registration country is required
+                      {errors.companyregnumber}
                     </div>
                   )}
                   <div className="cs-height_20 cs-height_lg_20" />
@@ -1318,7 +1337,7 @@ const RegisterNow = () => {
                   />
                   {errors.companysector && (
                     <div className="error text-danger">
-                      Company sector is required
+                      {errors.companysector}
                     </div>
                   )}
                   <div className="cs-height_20 cs-height_lg_20" />

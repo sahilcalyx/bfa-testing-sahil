@@ -346,6 +346,8 @@ const InteractiveHero = () => {
             </motion.div>
 
 
+
+
           </div>
 
         </div>
@@ -367,8 +369,8 @@ const InteractiveHero = () => {
               }`}
             src={
               isExpanded
-                ? "https://www.youtube.com/embed/o6WjXbRSEFo?autoplay=1&mute=0&controls=1&showinfo=0&rel=0&modestbranding=1"
-                : "https://www.youtube.com/embed/o6WjXbRSEFo?autoplay=1&mute=1&loop=1&playlist=o6WjXbRSEFo&controls=0&showinfo=0&rel=0&disablekb=1&modestbranding=1"
+                ? "https://www.youtube.com/embed/SYUSmWIlZ9o?autoplay=1&mute=0&controls=1&showinfo=0&rel=0&modestbranding=1"
+                : "https://www.youtube.com/embed/SYUSmWIlZ9o?autoplay=1&mute=1&loop=1&playlist=SYUSmWIlZ9o&controls=0&showinfo=0&rel=0&disablekb=1&modestbranding=1"
             }
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -707,7 +709,7 @@ const InteractiveHero = () => {
             >
               <iframe
                 className="w-full h-full"
-                src="https://www.youtube.com/embed/o6WjXbRSEFo?autoplay=1&mute=0&controls=1&showinfo=0&rel=0&modestbranding=1"
+                src="https://www.youtube.com/embed/SYUSmWIlZ9o?autoplay=1&mute=0&controls=1&showinfo=0&rel=0&modestbranding=1"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen

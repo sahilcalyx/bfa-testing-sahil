@@ -3,7 +3,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import connectToDatabase from "@/lib/db";
 import Admin from "@/lib/models/Admin";
 
-const handler = NextAuth({
+export const authOptions = {
     providers: [
         CredentialsProvider({
             name: "OTP",
@@ -61,6 +61,8 @@ const handler = NextAuth({
         strategy: "jwt",
     },
     secret: process.env.NEXTAUTH_SECRET || "fallback_secret_for_dev_only",
-});
+};
+
+const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };

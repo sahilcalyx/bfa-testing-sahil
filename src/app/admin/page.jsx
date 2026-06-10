@@ -1,12 +1,16 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Users, CreditCard, Activity, ArrowUpRight } from "lucide-react";
+import { Users, CreditCard, Activity, ArrowUpRight, Award, Ticket } from "lucide-react";
 
 export default function AdminPage() {
     const [stats, setStats] = useState({
         totalEnquiries: 0,
         totalSponsors: 0,
+        totalNominations: 0,
+        totalPaidNominations: 0,
+        totalBookings: 0,
+        totalPaidBookings: 0,
         enquiriesToday: 0
     });
     const [loading, setLoading] = useState(true);
@@ -62,6 +66,50 @@ export default function AdminPage() {
                             <CreditCard size={20} />
                         </div>
                         <p style={valueStyle}>{loading ? "..." : stats.totalSponsors}</p>
+                    </div>
+                </div>
+
+                {/* Stat Card 3: Total Nominations */}
+                <div style={cardStyle}>
+                    <h3 style={labelStyle}>Total Nominations</h3>
+                    <div style={{ display: "flex", alignItems: "center", gap: "12px", marginTop: "16px" }}>
+                        <div style={{ ...iconContainerStyle, backgroundColor: "#ecfdf5", color: "#047857" }}>
+                            <Award size={20} />
+                        </div>
+                        <p style={valueStyle}>{loading ? "..." : stats.totalNominations}</p>
+                    </div>
+                </div>
+
+                {/* Stat Card 4: Paid Nominations */}
+                <div style={cardStyle}>
+                    <h3 style={labelStyle}>Paid Nominations</h3>
+                    <div style={{ display: "flex", alignItems: "center", gap: "12px", marginTop: "16px" }}>
+                        <div style={{ ...iconContainerStyle, backgroundColor: "#fffbeb", color: "#b45309" }}>
+                            <Award size={20} />
+                        </div>
+                        <p style={valueStyle}>{loading ? "..." : stats.totalPaidNominations}</p>
+                    </div>
+                </div>
+
+                {/* Stat Card 5: Total Bookings */}
+                <div style={cardStyle}>
+                    <h3 style={labelStyle}>Total Bookings</h3>
+                    <div style={{ display: "flex", alignItems: "center", gap: "12px", marginTop: "16px" }}>
+                        <div style={{ ...iconContainerStyle, backgroundColor: "#eff6ff", color: "#2563eb" }}>
+                            <Ticket size={20} />
+                        </div>
+                        <p style={valueStyle}>{loading ? "..." : stats.totalBookings}</p>
+                    </div>
+                </div>
+
+                {/* Stat Card 6: Paid Bookings */}
+                <div style={cardStyle}>
+                    <h3 style={labelStyle}>Paid Bookings</h3>
+                    <div style={{ display: "flex", alignItems: "center", gap: "12px", marginTop: "16px" }}>
+                        <div style={{ ...iconContainerStyle, backgroundColor: "#faf5ff", color: "#7c3aed" }}>
+                            <Ticket size={20} />
+                        </div>
+                        <p style={valueStyle}>{loading ? "..." : stats.totalPaidBookings}</p>
                     </div>
                 </div>
 

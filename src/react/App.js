@@ -154,6 +154,7 @@ const DigitalWallets = lazy(() => import("./Pages/Blogs/DigitalWallets"));
 const AiPoweredRiskCompliance = lazy(() => import("./Pages/Blogs/AiPoweredRiskCompliance"));
 const InvisibleFinancialBridge = lazy(() => import("./Pages/Blogs/InvisibleFinancialBridge"));
 const FinancialInclusionUK = lazy(() => import("./Pages/Blogs/FinancialInclusionUK"));
+const TigrisPaySponsorDetails = lazy(() => import("./Pages/2026/OurSponsors/TigrisPaySponsorDetails"));
 
 
 function App() {
@@ -403,6 +404,10 @@ function App() {
         <Route
           path="/fast-track-money-sponsor-details-2025"
           element={<TruslyPayDetails2025 />}
+        />
+        <Route
+          path="/tigris-pay-sponsor-details-2026"
+          element={<TigrisPaySponsorDetails />}
         />
 
         <Route

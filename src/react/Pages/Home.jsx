@@ -27,6 +27,7 @@ import TestimonialSlider2025 from "../Components/Testmonials/TestimonialSlider20
 import WinnerBanner from "../Components/SliderBigBan/WinnerBanner";
 import TestimonialCommon from "../Components/Testmonials/TestimonialCommon";
 import BFA26Section from "../Components/BFA26Section";
+import SponsorSection2026 from "../Components/SponsorSection2026";
 import { color } from "framer-motion";
 
 const Home = () => {
@@ -309,10 +310,11 @@ Brit Fintech Awards 2026."
         {/* <SponsorsSlider2025 /> */}
 
         {/* <div className="cs-height_20 cs-height_lg_20" /> */}
-        <AnimatedStats stats={statsData} />
-        <BFA26Section />
-
-
+       
+        
+        <SponsorSection2026 />
+ <AnimatedStats stats={statsData} />
+<BFA26Section />
 
 
         {/* <div className="container">
@@ -401,7 +403,7 @@ Brit Fintech Awards 2026."
     </section> */}
         <ErrorBoundary>
           {/* <GallerySection /> */}
-          <GallarySection2025 />
+         
         </ErrorBoundary>
         {/* Keynote Speakers Section  */}
         {/* <KeynoteSpeakersSection /> */}
@@ -476,7 +478,7 @@ Brit Fintech Awards 2026."
                   className="cs-section_subtitle cs-primary_font cs-medium cs-accent_color text-white"
                   bis_skin_checked={1}
                 >
-                  <span style={{ color: "#c8102e" }}> <strong>VIDEO GALLERY 2025</strong></span>
+                  <span style={{ color: "#c8102e" }}> <strong>VIDEO GALLERY 2026</strong></span>
                 </div>
                 <h2
                   className="cs-section_title cs-extra_bold "
@@ -531,7 +533,7 @@ Brit Fintech Awards 2026."
               </div> */}
               <div className="col-lg-8">
                 <a
-                  href="https://youtu.be/x4S3vtaIR-0?si=QEHXLrHd1hC0Fryp"
+                  href="https://youtu.be/o6WjXbRSEFo?si=SXeVqu-AaT9Fz7yZ"
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -542,7 +544,7 @@ Brit Fintech Awards 2026."
                     <iframe
                       width="100%"
                       height="100%"
-                      src="https://www.youtube.com/embed/x4S3vtaIR-0?autoplay=1&mute=1&loop=1&playlist=x4S3vtaIR-0&controls=0&modestbranding=1&rel=0"
+                      src="https://www.youtube.com/embed/o6WjXbRSEFo?autoplay=1&mute=1&loop=1&playlist=o6WjXbRSEFo&controls=0&modestbranding=1&rel=0"
                       loading="lazy"
                       title="2 Minutes. 20 Winners. One Wave of Innovation."
                       frameBorder="0"
@@ -553,7 +555,7 @@ Brit Fintech Awards 2026."
                     />
                     <div className="cs-post_info">
                       <h2 className="cs-post_title cs-white cs-white_hover">
-                        2 Minutes. 20 Winners. One Wave of Innovation
+                        London's skyline is about to host something different.
                       </h2>
                     </div>
                   </div>
@@ -606,7 +608,7 @@ Brit Fintech Awards 2026."
           </div>
           <div className="cs-height_50 cs-height_lg_50" />
         </div>
-
+ <GallarySection2025 />
         {/* End Hero Seciton */}
 
         <div className="cs-height_60 cs-height_lg_45" />

@@ -240,38 +240,59 @@ function TicketBookingPage() {
 
   const validate = () => {
     const errs = {};
+    if (!form.title) errs.title = "Select your title.";
     if (!form.fullName.trim()) errs.fullName = "Full name is required.";
     if (!form.companyName.trim()) errs.companyName = "Company name is required.";
     if (!form.countryCode) errs.countryCode = "Select your country code.";
     if (!form.phone.trim()) errs.phone = "Phone number is required.";
-    else if (!/^\d{7,15}$/.test(form.phone)) errs.phone = "Phone number must be 7-15 digits.";
+    else if (!/^\d{10,15}$/.test(form.phone)) errs.phone = "Mobile Number should be Min 10 digits and max 15 digits";
     if (!form.email.trim()) {
       errs.email = "Email is required.";
-    } else if (/[A-Z]/.test(form.email)) {
-      errs.email = "Email must be strictly lowercase.";
-    } else if (!/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,6}$/.test(form.email) || form.email.includes(" ")) {
+    } else if (!/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(form.email) || form.email.includes(" ")) {
       errs.email = "Invalid email address.";
     } else if (
-      /@(gmail|yahoo|hotmail|outlook)\.[a-z]{4,}$/.test(form.email) ||
       /@gamil\.com$/.test(form.email) ||
       /@yaho\.com$/.test(form.email)
     ) {
       errs.email = "Invalid email address.";
     }
 
-    if (!form.tickets || parseInt(form.tickets) < 1 || parseInt(form.tickets) > MAX_TICKETS)
-      errs.tickets = "You can book between 1 and 5 tickets.";
+    if (!form.tickets) {
+      errs.tickets = "Select number of tickets.";
+    } else {
+      const ticketCount = parseInt(form.tickets);
+      if (isNaN(ticketCount) || ticketCount < 1 || ticketCount > MAX_TICKETS) {
+        errs.tickets = `You can book between 1 and ${MAX_TICKETS} tickets.`;
+      }
+    }
+
+    if (!form.recaptchaToken) {
+      errs.recaptchaToken = "Please verify you are not a robot.";
+    }
     return errs;
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     let val = value;
+    let newErrors = { ...errors };
+
     if (name === "email") {
       val = value.toLowerCase();
+      newErrors.email = "";
+    } else if (name === "phone") {
+      val = value.replace(/\D/g, "");
+      if (val.length > 0 && (val.length < 10 || val.length > 15)) {
+        newErrors.phone = "Mobile Number should be Min 10 digits and max 15 digits";
+      } else {
+        newErrors.phone = "";
+      }
+    } else {
+      newErrors[name] = "";
     }
+
     setForm({ ...form, [name]: val });
-    setErrors({ ...errors, [name]: "" }); // Clear error for the field
+    setErrors(newErrors);
   };
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -305,25 +326,38 @@ function TicketBookingPage() {
     };
 
     try {
-      // ✅ Await first request so errors are caught
-      await axios.post("https://bfa-ticket-event.vercel.app/submit-form", formPayload);
+      // 1. Save booking details locally (pre-inquiry)
+      const saveRes = await axios.post("/api/booking", formPayload);
 
-      // ✅ Await checkout request
-      const checkoutRes = await axios.post(
-        "https://bfa-ticket-event.vercel.app/create-checkout-session",
-        formPayload
-      );
+      if (saveRes.data?.response) {
+        const bookingId = saveRes.data.data.id;
 
-      // ✅ Stripe redirect
-      if (checkoutRes.data?.url) {
-        window.location.href = checkoutRes.data.url;
+        // 2. Prepare payment payload with booking ID
+        const paymentPayload = {
+          ...formPayload,
+          id: bookingId,
+          bookingId: bookingId,
+        };
+
+        // 3. Create Stripe checkout session
+        const checkoutRes = await axios.post(
+          "https://bfa-ticket-event.vercel.app/create-checkout-session",
+          paymentPayload
+        );
+
+        // 4. Redirect to Stripe Checkout
+        if (checkoutRes.data?.url) {
+          window.location.href = checkoutRes.data.url;
+        } else {
+          console.error("Checkout response missing URL:", checkoutRes.data);
+          toast.error(checkoutRes?.data?.message || "Failed to initiate payment session.");
+        }
       } else {
-        console.error("Checkout response missing URL:", checkoutRes.data);
-        toast.error(checkoutRes?.data?.message);
+        toast.error(saveRes.data?.data || "Failed to save booking details. Please try again.");
       }
     } catch (err) {
       console.error("Checkout session error:", err.response?.data || err.message || err);
-      toast.error(err.response?.data?.message);
+      toast.error(err.response?.data?.message || "An unexpected error occurred. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -470,6 +504,9 @@ function TicketBookingPage() {
                   styles={{ control: (base) => ({ ...base, ...getInputStyle("title") }) }}
                   isSearchable={false}
                 />
+                {errors.title && (
+                  <p style={{ ...errorStyle, marginTop: "5px" }}>{errors.title}</p>
+                )}
               </div>
 
               {/* Full Name Input */}

@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { LayoutDashboard, Users, CreditCard, Menu, LogOut, FileText } from "lucide-react";
+import { LayoutDashboard, Users, CreditCard, Menu, LogOut, FileText, Award, Ticket } from "lucide-react";
 import { SessionProvider, useSession, signOut } from "next-auth/react";
 
 function AdminLayoutContent({ children }) {
@@ -35,6 +35,8 @@ function AdminLayoutContent({ children }) {
         { name: "Dashboard", href: "/admin", icon: LayoutDashboard },
         { name: "Contacts", href: "/admin/contacts", icon: Users },
         { name: "Sponsors", href: "/admin/sponsors", icon: CreditCard },
+        { name: "Nominations", href: "/admin/nominations", icon: Award },
+        { name: "Ticket Bookings", href: "/admin/bookings", icon: Ticket },
         { name: "Brochure Requests", href: "/admin/brochures", icon: FileText },
     ];
 

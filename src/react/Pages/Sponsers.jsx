@@ -652,9 +652,9 @@ const Sponsors = () => {
                         <option value="Mr">Mr</option>
                         <option value="Mrs">Mrs</option>
                         <option value="Miss">Miss</option>
-                        <option value="Ms">Ms</option>
-                        <option value="Doc">Doc</option>
-                        <option value="Prof">Prof</option>
+                        {/* <option value="Ms">Ms</option> */}
+                        {/* <option value="Doc">Doc</option>
+                        <option value="Prof">Prof</option> */}
                         <option value="Other">Other</option>
 
                       </select>

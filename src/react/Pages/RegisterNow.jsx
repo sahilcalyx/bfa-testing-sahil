@@ -304,13 +304,26 @@ const RegisterNow = () => {
         const digitCount = numericValue.replace(/\+/g, "").length;
         if (digitCount < 7 || digitCount > 15) {
           newErrors.phoneNo =
-            "Mobile Number should be Min 7 digits and max 15 digits";
+            "Mobile Number should be Min 10 digits and max 15 digits";
         } else {
           delete newErrors.phoneNo;
         }
         break;
 
       case "companysector":
+        const capitalizedSector = value.replace(/\b\w/g, (char) =>
+          char.toUpperCase()
+        );
+        newFormData[id] = capitalizedSector;
+        if (capitalizedSector.trim() === "") {
+          newErrors.companysector = "Company Sector is required";
+        } else if (!/^[A-Za-z\s]+$/.test(capitalizedSector.trim())) {
+          newErrors.companysector = "Company Sector must contain only letters and spaces";
+        } else {
+          delete newErrors.companysector;
+        }
+        break;
+
       case "companynm":
       case "companyaddress":
         const capitalizedText = value.replace(/\b\w/g, (char) =>
@@ -355,10 +368,10 @@ const RegisterNow = () => {
         break;
 
       case "companyregnumber":
-        // Allow letters, spaces, dots, hyphens (minimum 2 and maximum 60 characters)
-        const countryPattern = /^[A-Za-z\s.-]{2,60}$/;
-        if (!countryPattern.test(value.trim())) {
-          newErrors.companyregnumber = "Invalid company registration Number";
+        // Allow alphanumeric, spaces, dots, hyphens (minimum 2 and maximum 60 characters)
+        const registrationPattern = /^[A-Za-z0-9\s.-]{2,60}$/;
+        if (!registrationPattern.test(value.trim())) {
+          newErrors.companyregnumber = "Company Registration Number should be alphanumeric or numric";
         } else {
           delete newErrors.companyregnumber;
         }
@@ -477,8 +490,14 @@ const RegisterNow = () => {
     requiredFields.forEach((key) => {
       const value = formData[key];
       if (!value || (typeof value === "string" && !value.trim())) {
-        newErrors[key] = `${key.charAt(0).toUpperCase() + key.slice(1)
-          } is required`;
+        if (key === "companyregnumber") {
+          newErrors[key] = "Company Registration Number is required";
+        } else if (key === "companysector") {
+          newErrors[key] = "Company Sector is required";
+        } else {
+          newErrors[key] = `${key.charAt(0).toUpperCase() + key.slice(1)
+            } is required`;
+        }
       }
     });
 
@@ -491,8 +510,8 @@ const RegisterNow = () => {
     }
 
     const cleanPhone = (formData.phoneNo || "").replace(/\+/g, "");
-    if (!cleanPhone || cleanPhone.length < 7 || cleanPhone.length > 15) {
-      newErrors.phoneNo = "Mobile Number should be Min 7 digits and max 15 digits";
+    if (!cleanPhone || cleanPhone.length < 10 || cleanPhone.length > 15) {
+      newErrors.phoneNo = "Mobile Number should be Min 10 digits and max 15 digits";
     }
 
     const supportedFormats = [
@@ -551,65 +570,84 @@ const RegisterNow = () => {
     // window.grecaptcha.reset();
 
     if (Object.keys(newErrors).length === 0) {
-      const finalFormData = {
-        ...formData,
-        // Spread the formData fields
-        reCaptcha: captchaToken, // Add the captcha token
-      };
-
       try {
-        const PAYMENT_API_BASE = (window.location.hostname.includes("britfintechawards.com") || window.location.hostname.includes("vercel.app")) ? "https://bfa-ticket-event.vercel.app" : "https://bfa-ticket-event.vercel.app";
-
-        // Create stripe nomination payload
-        const paymentPayload = {
-          ...formData,
-          uploadfile: formData.uploadfile ? formData.uploadfile.name : "",
-          uploadfileoptional: formData.uploadfileoptional ? formData.uploadfileoptional.name : "",
-          title: formData.titleid || formData.title || "",
-          recaptchaToken: "bypassed_recaptcha_nomination",
-        };
-
-        // 1. Call payment API first to create checkout session
-        const checkoutRes = await axios.post(`${PAYMENT_API_BASE}/create-nomination-checkout-session`, paymentPayload);
-
-        if (checkoutRes.data?.url) {
-          try {
-            const formDataToSend = new FormData();
-            Object.keys(formData).forEach((key) => {
-              formDataToSend.append(key, formData[key]);
+        // 1. Prepare FormData containing all inputs and the raw files
+        const formDataToSend = new FormData();
+        Object.keys(formData).forEach((key) => {
+          if (key === "awardcate") {
+            // awardcate is an array, append individual values
+            formData[key].forEach((val) => {
+              formDataToSend.append("awardcate", val);
             });
-
-            await axios.post(
-              "https://www.britfintechawards.com/prod/api/britfin/saveawarddetails",
-              formDataToSend,
-              {
-                headers: {
-                  "Content-Type": "multipart/form-data",
-                },
-              }
-            );
-          } catch (saveError) {
-            console.error("⚠️ Failed to save award details:", saveError.response?.data || saveError.message);
+          } else {
+            formDataToSend.append(key, formData[key]);
           }
+        });
+        formDataToSend.append("reCaptcha", captchaToken || "");
 
-          // Redirect immediately to Stripe Checkout!
-          window.location.href = checkoutRes.data.url;
+        // Show a loading feedback dialog while uploading and saving
+        Swal.fire({
+          title: "Saving Nomination...",
+          text: "Uploading your files and saving registration details. Please wait.",
+          allowOutsideClick: false,
+          didOpen: () => {
+            Swal.showLoading();
+          },
+        });
+
+        // 2. Call our local API endpoint to save the pre-inquiry first (and upload files to Cloudinary)
+        const saveRes = await axios.post("/api/nomination", formDataToSend, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+
+        if (saveRes.data?.response) {
+          const nominationId = saveRes.data.data.id;
+
+          // 3. Construct the payment session creation payload (including saved nomination ID)
+          const PAYMENT_API_BASE = "https://bfa-ticket-event.vercel.app";
+          const paymentPayload = {
+            ...formData,
+            id: nominationId,
+            nominationId: nominationId,
+            uploadfile: formData.uploadfile ? formData.uploadfile.name : "",
+            uploadfileoptional: formData.uploadfileoptional ? formData.uploadfileoptional.name : "",
+            title: formData.titleid || formData.title || "",
+            recaptchaToken: "bypassed_recaptcha_nomination",
+          };
+
+          // 4. Create the stripe payment checkout session
+          const checkoutRes = await axios.post(`${PAYMENT_API_BASE}/create-nomination-checkout-session`, paymentPayload);
+
+          if (checkoutRes.data?.url) {
+            // Redirect immediately to Stripe Checkout!
+            window.location.href = checkoutRes.data.url;
+          } else {
+            Swal.fire({
+              title: "Error!",
+              text: "Failed to create payment session. Please try again.",
+              icon: "error",
+              confirmButtonText: "Close",
+            });
+          }
         } else {
           Swal.fire({
             title: "Error!",
-            text: "Failed to create payment session. Please try again.",
+            text: saveRes.data?.data || "Failed to save nomination details. Please try again.",
             icon: "error",
             confirmButtonText: "Close",
           });
         }
       } catch (error) {
         console.error("❌ Submission/Checkout error:", error.response?.data || error.message || error);
+        const errMsg = error.response?.data?.data || error.response?.data?.error || "An error occurred while saving your data. Please try again later.";
         setErrors({
-          form: error.response?.data?.error || "An error occurred while saving your data. Please try again later.",
+          form: errMsg,
         });
         Swal.fire({
           title: "Error!",
-          text: error.response?.data?.error || "An error occurred while saving your data. Please try again later.",
+          text: errMsg,
           icon: "error",
           confirmButtonText: "Close",
         });
@@ -1272,7 +1310,7 @@ const RegisterNow = () => {
                   />
                   {errors.companyregnumber && (
                     <div className="error text-danger">
-                      Company registration Number is required
+                      {errors.companyregnumber}
                     </div>
                   )}
                   <div className="cs-height_20 cs-height_lg_20" />
@@ -1322,7 +1360,7 @@ const RegisterNow = () => {
                   />
                   {errors.companysector && (
                     <div className="error text-danger">
-                      Company sector is required
+                      {errors.companysector}
                     </div>
                   )}
                   <div className="cs-height_20 cs-height_lg_20" />
@@ -1374,18 +1412,17 @@ const RegisterNow = () => {
                   <div className="cs-height_20 cs-height_lg_20" />
                 </div>
                 <div className="col-sm-6" ref={countryDropdownRef} style={{ position: "relative" }}>
-                  <div 
+                  <div
                     onClick={() => {
                       if (NOMINATIONS_CLOSED) return;
                       setCountryDropdownOpen(!countryDropdownOpen);
                       setCountrySearchQuery("");
                     }}
-                    className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color d-flex align-items-center justify-content-between cursor-pointer ${
-                      errors.businesscorridors ? "error-border" : ""
-                    }`}
-                    style={{ 
-                      minHeight: "55px", 
-                      padding: "10px 20px", 
+                    className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color d-flex align-items-center justify-content-between cursor-pointer ${errors.businesscorridors ? "error-border" : ""
+                      }`}
+                    style={{
+                      minHeight: "55px",
+                      padding: "10px 20px",
                       borderRadius: "10px",
                       opacity: NOMINATIONS_CLOSED ? 0.6 : 1,
                       cursor: NOMINATIONS_CLOSED ? "not-allowed" : "pointer",
@@ -1399,8 +1436,8 @@ const RegisterNow = () => {
                   </div>
 
                   {countryDropdownOpen && !NOMINATIONS_CLOSED && (
-                    <div 
-                      style={{ 
+                    <div
+                      style={{
                         position: "absolute",
                         top: "100%",
                         left: "15px",
@@ -1436,8 +1473,8 @@ const RegisterNow = () => {
                       </div>
 
                       {/* Country options list */}
-                      <div 
-                        style={{ 
+                      <div
+                        style={{
                           maxHeight: "220px",
                           overflowY: "auto",
                           padding: "5px 0"
@@ -1478,10 +1515,10 @@ const RegisterNow = () => {
                         {countries.filter((country) =>
                           country.toLowerCase().includes(countrySearchQuery.toLowerCase())
                         ).length === 0 && (
-                          <div style={{ padding: "10px 20px", color: "rgba(0,0,0,0.4)", fontSize: "14px" }}>
-                            No countries found
-                          </div>
-                        )}
+                            <div style={{ padding: "10px 20px", color: "rgba(0,0,0,0.4)", fontSize: "14px" }}>
+                              No countries found
+                            </div>
+                          )}
                       </div>
                     </div>
                   )}

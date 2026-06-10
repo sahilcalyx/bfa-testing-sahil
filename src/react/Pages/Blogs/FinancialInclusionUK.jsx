@@ -99,7 +99,7 @@ const FinancialInclusionUK = () => {
                     </div>
                     <div className="cs-post_date">
                       <i className="far fa-calendar-alt" />
-                      13 May, 2026
+                      5 June, 2026
                     </div>
                   </div>
                   <div className="cs-height_25 cs-height_lg_25" />

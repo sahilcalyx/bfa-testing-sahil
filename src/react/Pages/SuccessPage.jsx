@@ -11,12 +11,33 @@ function SuccessPage() {
 
   useEffect(() => {
     if (sessionId) {
-      const PAYMENT_API_BASE = (window.location.hostname.includes("britfintechawards.com") || window.location.hostname.includes("vercel.app")) ? "https://bfa-ticket-event.vercel.app" : "http://localhost:5000";
+      const PAYMENT_API_BASE = (window.location.hostname.includes("britfintechawards.com") || window.location.hostname.includes("vercel.app")) ? "https://bfa-ticket-event.vercel.app" : "https://bfa-ticket-event.vercel.app";
       axios
         .get(`${PAYMENT_API_BASE}/checkout-session?session_id=${sessionId}`)
         .then((res) => {
           setSessionData(res.data);
           setLoading(false);
+
+          // Update local status (nomination or ticket booking) if payment was completed successfully
+          const metadata = res.data?.metadata;
+          const recordId = metadata?.nominationId || metadata?.bookingId || metadata?.id;
+          
+          if (recordId && res.data?.payment_status === "paid") {
+            const isNomination = metadata?.type === "nomination";
+            const endpoint = isNomination ? "/api/nomination" : "/api/booking";
+            
+            axios
+              .patch(endpoint, {
+                id: recordId,
+                paymentStatus: "paid"
+              })
+              .then(() => {
+                console.log(`Payment status marked as paid in local database for ${isNomination ? "nomination" : "booking"}.`);
+              })
+              .catch((err) => {
+                console.error("Failed to mark record as paid in local database:", err);
+              });
+          }
         })
         .catch((err) => {
           console.error("Failed to fetch session:", err);
