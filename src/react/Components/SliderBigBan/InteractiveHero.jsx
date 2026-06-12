@@ -648,7 +648,7 @@ const InteractiveHero = () => {
                     <div className="vc-label-container">
                       <span className="vc-label">Date</span>
                     </div>
-                    <span className="vc-value">9th October 2026 </span>
+                    <span className="vc-value">Friday - 9th Oct 2026 </span>
                   </div>
                 </div>
 

@@ -42,6 +42,16 @@ export async function POST(req) {
         const baseUrl = process.env.COMPANY_WEBSITE_URL || "https://britfintechawards.com";
         const totalAmount = booking.tickets * 195;
 
+        let attendeesTableRows = "";
+        if (booking.attendees && booking.attendees.length > 0) {
+            attendeesTableRows = booking.attendees.map((att, idx) => `
+                <tr style="border-top: 1px solid #f1f5f9;">
+                    <td style="padding: 6px 0; color: #697386;">Attendee ${idx + 2}</td>
+                    <td style="padding: 6px 0; text-align: right; font-weight: 600; color: #1a1f36;">${att.fullName} (${att.email})</td>
+                </tr>
+            `).join('');
+        }
+
         const mailContent = `
         <div style="font-family: 'Outfit', 'Inter', sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e3e8ee; border-radius: 16px; background-color: #f7f9fc;">
             <div style="background-color: #010057; padding: 30px; border-radius: 12px 12px 0 0; text-align: center; color: #ffffff;">
@@ -72,6 +82,7 @@ export async function POST(req) {
                             <td style="padding: 6px 0; color: #697386;">Tickets Booked</td>
                             <td style="padding: 6px 0; text-align: right; font-weight: 600; color: #1a1f36;">${booking.tickets} ${booking.tickets > 1 ? "Tickets" : "Ticket"}</td>
                         </tr>
+                        ${attendeesTableRows}
                         <tr style="border-top: 1px dashed #e2e8f0;">
                             <td style="padding: 12px 0 0 0; color: #010057; font-weight: 700; font-size: 16px;">Amount Paid</td>
                             <td style="padding: 12px 0 0 0; text-align: right; font-weight: 800; color: #010057; font-size: 18px;">£${totalAmount}.00</td>

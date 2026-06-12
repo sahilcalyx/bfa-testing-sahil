@@ -9,7 +9,7 @@ const SponsorSection2026 = () => {
     {
       name: "Tigris Pay",
       logo: "https://tigrispay.com/assets/TigrisPayLogo-BJ0NLp12.png",
-      video: "/assets/video/sponsors-logo-2026/Tigris-Platinum-sponsor.webm",
+      video: "/assets/video/sponsors-logo-2026/Tigrispay-logo-11.webm",
       link: "/tigris-pay-sponsor-details-2026",
       tier: "Platinum Sponsor"
     },
