@@ -13,13 +13,13 @@ const SponsorSection2026 = () => {
       link: "/tigris-pay-sponsor-details-2026",
       tier: "Platinum Sponsor"
     },
-    // {
-    //   name: "Tigris Pay",
-    //   logo: "https://tigrispay.com/assets/TigrisPayLogo-BJ0NLp12.png",
-    //   video: "/assets/video/sponsors-logo-2026/Tigris-Platinum-sponsor-2.webm",
-    //   link: "/tigris-pay-sponsor-details-2026",
-    //   tier: "Platinum Sponsor"
-    // }
+    {
+      name: "Tigris Pay",
+      logo: "https://tigrispay.com/assets/TigrisPayLogo-BJ0NLp12.png",
+      video: "/assets/video/sponsors-logo-2026/tigrispay-newianimated-logo-BFA.webm",
+      link: "/tigris-pay-sponsor-details-2026",
+      tier: "Platinum Sponsor"
+    }
   ];
 
   return (
