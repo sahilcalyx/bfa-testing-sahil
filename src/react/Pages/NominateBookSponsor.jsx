@@ -2018,7 +2018,7 @@ const NominateBookSponsor = () => {
               BFA 2026
             </h1>
             <p className="pb-0 mb-0 text-white" style={{ fontSize: '16px' }}>
-              One-stop portal to Nominate, Book Tickets, and Register for Sponsorship.
+              Nominate. Sponsor. Attend. Everything starts here.
             </p>
           </div>
         </div>
