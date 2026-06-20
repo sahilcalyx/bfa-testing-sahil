@@ -2095,6 +2095,105 @@ const NominateBookSponsor = () => {
           {activeTab === "tickets" && <TicketBookingForm />}
           {activeTab === "sponsorship" && <SponsorshipForm />}
         </div>
+
+        {/* Date, Time and Venue Details Strip (rendered after all forms) */}
+        <div 
+          style={{
+            width: "100%",
+            maxWidth: "620px",
+            margin: "40px auto 0 auto",
+            backgroundColor: "#ffffff",
+            borderRadius: "24px",
+            boxShadow: "0 20px 50px rgba(0,0,0,0.06)",
+            border: "1px solid rgba(0, 0, 0, 0.05)",
+            fontFamily: "'Poppins', sans-serif",
+            overflow: "hidden",
+            textAlign: "left"
+          }}
+        >
+          <div style={{ padding: "24px 32px 32px 32px" }}>
+            {/* Date & Time Header */}
+            <h3 
+              style={{
+                fontSize: "22px",
+                fontWeight: "700",
+                color: "#000000",
+                marginBottom: "16px",
+                textAlign: "left",
+                letterSpacing: "-0.5px",
+                fontFamily: "'Poppins', sans-serif"
+              }}
+            >
+              Friday, 9th October 2026 | 6 PM Onwards
+            </h3>
+            
+            {/* Slanted Accent Strip */}
+            <div style={{ marginBottom: "24px" }}>
+              <div 
+                style={{
+                  display: "flex",
+                  height: "8px",
+                  width: "100%",
+                  overflow: "hidden",
+                  transform: "skewX(-25deg)",
+                  borderRadius: "3px"
+                }}
+              >
+                <div style={{ width: "28%", backgroundColor: "#000000" }} />
+                <div style={{ width: "72%", backgroundColor: "#c8102e" }} />
+              </div>
+            </div>
+            
+            {/* Location Details */}
+            <div 
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "16px",
+                textAlign: "left"
+              }}
+            >
+              <div style={{ flexShrink: 0 }}>
+                <svg 
+                  style={{ width: "32px", height: "32px", color: "#c8102e" }} 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2.2" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round"
+                >
+                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+              </div>
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <span 
+                  style={{
+                    fontSize: "19px",
+                    fontWeight: "800",
+                    color: "#000000",
+                    lineHeight: 1.2,
+                    fontFamily: "'Poppins', sans-serif"
+                  }}
+                >
+                  Landing Forty-Two
+                </span>
+                <span 
+                  style={{
+                    fontSize: "15px",
+                    color: "#52525b",
+                    marginTop: "6px",
+                    fontWeight: "500",
+                    fontFamily: "'Poppins', sans-serif"
+                  }}
+                >
+                  122 Leadenhall Street, London EC3V 4AB
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Sticky Mobile Bottom Navigation Bar - Premium Floating Dock */}
