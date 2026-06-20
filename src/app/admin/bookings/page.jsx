@@ -483,23 +483,6 @@ export default function BookingsPage() {
                                 </div>
                             </div>
 
-                            {/* Additional Attendees */}
-                            {selectedBooking.attendees && selectedBooking.attendees.length > 0 && (
-                                <div style={{ background: "#fff", padding: "20px", borderRadius: "20px", border: "1px solid #e3e8ee" }}>
-                                    <div style={{ fontSize: "11px", fontWeight: "800", color: "#697386", textTransform: "uppercase", marginBottom: "16px", letterSpacing: "1px" }}>Additional Attendees</div>
-                                    <div style={{ display: "grid", gap: "16px" }}>
-                                        {selectedBooking.attendees.map((att, idx) => (
-                                            <div key={idx} style={{ display: "flex", flexDirection: "column", gap: "4px", paddingBottom: idx < selectedBooking.attendees.length - 1 ? "12px" : "0", borderBottom: idx < selectedBooking.attendees.length - 1 ? "1px solid #eff2f7" : "none" }}>
-                                                <div style={{ fontSize: "14px", fontWeight: "700", color: "#1a1f36" }}>Attendee {idx + 2}: {att.fullName}</div>
-                                                <div style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "13px", color: "#475569" }}>
-                                                    <Mail size={14} style={{ color: "#635bff" }} /> {att.email}
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            )}
-
                             {/* Company Details */}
                             <div style={{ background: "#fff", padding: "20px", borderRadius: "20px", border: "1px solid #e3e8ee" }}>
                                 <div style={{ fontSize: "11px", fontWeight: "800", color: "#697386", textTransform: "uppercase", marginBottom: "16px", letterSpacing: "1px" }}>Company Information</div>

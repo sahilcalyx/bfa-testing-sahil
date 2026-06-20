@@ -229,7 +229,6 @@ function TicketBookingPage() {
     tickets: "",
     recaptchaToken: ""
   });
-  const [attendees, setAttendees] = useState([]);
 
   const handleCaptchaChange = (token) => {
     setCaptchaToken(token);
@@ -267,24 +266,6 @@ function TicketBookingPage() {
       }
     }
 
-    // Validate additional attendees
-    attendees.forEach((att, index) => {
-      const attendeeNum = index + 2;
-      if (!att.fullName.trim()) {
-        errs[`attendee_${index}_fullName`] = `Attendee ${attendeeNum} full name is required.`;
-      }
-      if (!att.email.trim()) {
-        errs[`attendee_${index}_email`] = `Attendee ${attendeeNum} email is required.`;
-      } else if (!/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(att.email) || att.email.includes(" ")) {
-        errs[`attendee_${index}_email`] = `Invalid email address.`;
-      } else if (
-        /@gamil\.com$/.test(att.email) ||
-        /@yaho\.com$/.test(att.email)
-      ) {
-        errs[`attendee_${index}_email`] = `Invalid email address.`;
-      }
-    });
-
     if (!form.recaptchaToken) {
       errs.recaptchaToken = "Please verify you are not a robot.";
     }
@@ -310,43 +291,8 @@ function TicketBookingPage() {
       newErrors[name] = "";
     }
 
-    if (name === "tickets") {
-      const ticketCount = parseInt(val) || 0;
-      if (ticketCount > 1) {
-        setAttendees((prev) => {
-          const next = [...prev];
-          if (next.length < ticketCount - 1) {
-            while (next.length < ticketCount - 1) {
-              next.push({ fullName: "", email: "" });
-            }
-          } else if (next.length > ticketCount - 1) {
-            return next.slice(0, ticketCount - 1);
-          }
-          return next;
-        });
-      } else {
-        setAttendees([]);
-      }
-    }
-
     setForm({ ...form, [name]: val });
     setErrors(newErrors);
-  };
-
-  const handleAttendeeChange = (index, field, value) => {
-    let val = value;
-    if (field === "email") {
-      val = value.toLowerCase();
-    }
-    setAttendees((prev) => {
-      const next = [...prev];
-      next[index] = { ...next[index], [field]: val };
-      return next;
-    });
-    setErrors((prev) => ({
-      ...prev,
-      [`attendee_${index}_${field}`]: "",
-    }));
   };
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -377,7 +323,6 @@ function TicketBookingPage() {
       tickets: form.tickets,
       mobile: fullPhone,
       recaptchaToken: form.recaptchaToken,
-      attendees: attendees,
     };
 
     try {
@@ -672,82 +617,6 @@ function TicketBookingPage() {
               />
               {errors.tickets && <p style={errorStyle}>{errors.tickets}</p>}
             </div>
-
-            {attendees.map((attendee, index) => {
-              const attendeeNum = index + 2;
-              return (
-                <div
-                  key={index}
-                  style={{
-                    borderTop: "1px solid #dcdcdc",
-                    paddingTop: "1.5rem",
-                    marginTop: "0.5rem",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "12px",
-                  }}
-                >
-                  <h4
-                    style={{
-                      fontSize: "14px",
-                      fontWeight: "700",
-                      color: "#1a1f36",
-                      margin: "0 0 4px 0",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.5px",
-                    }}
-                  >
-                    Attendee {attendeeNum} Details
-                  </h4>
-
-                  {/* Attendee Name */}
-                  <div>
-                    <input
-                      placeholder={`Attendee ${attendeeNum} Full Name`}
-                      value={attendee.fullName}
-                      onChange={(e) => handleAttendeeChange(index, "fullName", e.target.value)}
-                      style={getInputStyle(`attendee_${index}_fullName`)}
-                    />
-                    {errors[`attendee_${index}_fullName`] && (
-                      <p style={errorStyle}>{errors[`attendee_${index}_fullName`]}</p>
-                    )}
-                  </div>
-
-                  {/* Attendee Email */}
-                  <div>
-                    <input
-                      placeholder={`Attendee ${attendeeNum} Email Address`}
-                      type="email"
-                      value={attendee.email}
-                      onChange={(e) => handleAttendeeChange(index, "email", e.target.value)}
-                      style={getInputStyle(`attendee_${index}_email`)}
-                    />
-                    {errors[`attendee_${index}_email`] && (
-                      <p style={errorStyle}>{errors[`attendee_${index}_email`]}</p>
-                    )}
-                  </div>
-                </div>
-              );
-            })}
-
-            {attendees.length > 0 && (
-              <div
-                style={{
-                  backgroundColor: "#fffbeb",
-                  borderLeft: "4px solid #d97706",
-                  padding: "10px 12px",
-                  borderRadius: "6px",
-                  marginTop: "5px",
-                  fontSize: "12px",
-                  color: "#b45309",
-                  fontWeight: "500",
-                  lineHeight: "1.4",
-                  textAlign: "left"
-                }}
-              >
-                * Note: The email address provided for each attendee will be used to log in to the BFA app.
-              </div>
-            )}
 
             <div className="col-12 mt-3">
               <div className="input-field">

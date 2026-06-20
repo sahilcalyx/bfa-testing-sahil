@@ -35,12 +35,6 @@ const BookingSchema = new mongoose.Schema(
             type: String,
             required: false,
         },
-        attendees: [
-            {
-                fullName: { type: String, required: true },
-                email: { type: String, required: true },
-            }
-        ],
     },
     { timestamps: true }
 );

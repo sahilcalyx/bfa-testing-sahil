@@ -262,10 +262,10 @@ const InteractiveHero = () => {
               className="flex flex-col items-center gap-1 mt-4 mb-1 select-none font-outfit text-center"
             >
               <span className="text-[14px] sm:text-xl font-black uppercase tracking-[0.25em] ">
-                Super Early Bird Offer
+                Super Early Bird Offer Extended
               </span>
               <p className="text-[12px] sm:text-[14px] font-bold text-[#ff4d6a] tracking-[0.2em] uppercase mt-1.5 leading-none">
-                2nd June 2026 – 15th June 2026
+                2nd June 2026 – 30th June 2026
               </p>
             </motion.div>
             {/* Urgency tagline */}

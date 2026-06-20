@@ -20,7 +20,6 @@ export async function POST(req) {
             tickets: parseInt(data.tickets),
             paymentStatus: "pending",
             reCaptcha: data.recaptchaToken || data.reCaptcha || "",
-            attendees: data.attendees || [],
         });
 
         // Send Notification Email to Admin
@@ -40,17 +39,6 @@ export async function POST(req) {
         const baseUrl = process.env.COMPANY_WEBSITE_URL || "https://britfintechawards.com";
 
         try {
-            let attendeesHtml = "";
-            if (data.attendees && data.attendees.length > 0) {
-                attendeesHtml = `
-                <div style="margin-bottom: 25px; border-bottom: 1px solid #e3e8ee; padding-bottom: 15px;">
-                    <span style="color: #697386; font-size: 14px; text-transform: uppercase; font-weight: 600;">Additional Attendees</span>
-                    ${data.attendees.map((att, idx) => `
-                        <p style="margin: 8px 0; font-size: 14px; color: #1a1f36;"><strong>Attendee ${idx + 2}:</strong> ${att.fullName} (<a href="mailto:${att.email}" style="color: #635bff; text-decoration: none;">${att.email}</a>)</p>
-                    `).join("")}
-                </div>`;
-            }
-
             const adminMailOptions = {
                 from: process.env.ZOHO_EMAIL,
                 to: process.env.ZOHO_EMAIL,
@@ -68,7 +56,6 @@ export async function POST(req) {
                             <p style="margin: 8px 0; font-size: 14px; color: #697386;"><strong>Email:</strong> <a href="mailto:${data.email}" style="color: #635bff; text-decoration: none;">${data.email}</a></p>
                             <p style="margin: 8px 0; font-size: 14px; color: #697386;"><strong>Phone:</strong> ${data.mobile || data.phone}</p>
                         </div>
-                        ${attendeesHtml}
                         <div style="margin-bottom: 25px;">
                             <span style="color: #697386; font-size: 14px; text-transform: uppercase; font-weight: 600;">Booking Details</span>
                             <p style="margin: 8px 0; font-size: 16px; color: #1a1f36; font-weight: 700;"><strong>Tickets:</strong> ${data.tickets}</p>

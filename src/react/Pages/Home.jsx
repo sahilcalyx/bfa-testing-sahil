@@ -27,7 +27,6 @@ import TestimonialSlider2025 from "../Components/Testmonials/TestimonialSlider20
 import WinnerBanner from "../Components/SliderBigBan/WinnerBanner";
 import TestimonialCommon from "../Components/Testmonials/TestimonialCommon";
 import BFA26Section from "../Components/BFA26Section";
-import SponsorSection2026 from "../Components/SponsorSection2026";
 import { color } from "framer-motion";
 
 const Home = () => {
@@ -310,11 +309,10 @@ Brit Fintech Awards 2026."
         {/* <SponsorsSlider2025 /> */}
 
         {/* <div className="cs-height_20 cs-height_lg_20" /> */}
-       
-        
-        <SponsorSection2026 />
- <AnimatedStats stats={statsData} />
-<BFA26Section />
+        <AnimatedStats stats={statsData} />
+        <BFA26Section />
+
+
 
 
         {/* <div className="container">

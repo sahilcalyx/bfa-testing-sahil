@@ -240,9 +240,9 @@ const RegisterNow = () => {
 
         // Count actual digits (excluding optional "+")
         const digitCount = numericValue.replace(/\+/g, "").length;
-        if (digitCount < 7 || digitCount > 15) {
+        if (digitCount < 10 || digitCount > 15) {
           newErrors.phoneNo =
-            "Mobile Number should be Min 7 digits and max 15 digits";
+            "Mobile Number should be Min 10 digits and max 15 digits";
         } else {
           delete newErrors.phoneNo;
         }
@@ -427,8 +427,8 @@ const RegisterNow = () => {
       newErrors.websiteurl = "Website Url is required";
     }
     const cleanPhone = (formData.phoneNo || "").replace(/\+/g, "");
-    if (!cleanPhone || cleanPhone.length < 7 || cleanPhone.length > 15) {
-      newErrors.phoneNo = "Mobile Number should be Min 7 digits and max 15 digits";
+    if (!cleanPhone || cleanPhone.length < 10 || cleanPhone.length > 15) {
+      newErrors.phoneNo = "Mobile Number should be Min 10 digits and max 15 digits";
     }
 
     const supportedFormats = [

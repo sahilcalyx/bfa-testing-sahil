@@ -381,6 +381,26 @@ export const seoByPath = {
       images: ["/assets/img/og/sponsor-categories.jpg"],
     },
   },
+  "/nominate-booking-sponsorship": {
+    title: "Nominate, Book Tickets & Sponsorship Portal | Brit Fintech Awards",
+    description: "Unified BFA portal: Nominate for awards, book tickets, or register interest for sponsorship.",
+    openGraph: {
+      title: "Nominate, Book Tickets & Sponsorship Portal | Brit Fintech Awards",
+      description: "Unified BFA portal: Nominate for awards, book tickets, or register interest for sponsorship.",
+      url: `${siteBaseUrl}/nominate-booking-sponsorship`,
+      siteName,
+      images: [
+        { url: "/assets/img/og/sponsor-categories.jpg", width: 1200, height: 630, alt: "BFA Portal" },
+      ],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Nominate, Book Tickets & Sponsorship Portal | Brit Fintech Awards",
+      description: "Unified BFA portal: Nominate for awards, book tickets, or register interest for sponsorship.",
+      images: ["/assets/img/og/sponsor-categories.jpg"],
+    },
+  },
   "/photo-gallery-2025": {
     title: "Photo Gallery 2025 | Brit Fintech Awards 2025 ",
     description: "How Brit Fintech Awards celebrates global innovation beyond borders.",
@@ -1310,15 +1330,42 @@ export const seoByPath = {
       images: ["/assets/img/winners2025-logs-banner/AYORemit-winner25-banner.png"],
     },  
   },
-
-
-
-
-
-
-
-
-  
+  "/success": {
+    title: "Payment Successful | Brit Fintech Awards",
+    description: "Your payment was processed successfully. Thank you for your ticket booking / award nomination at the Brit Fintech Awards.",
+    openGraph: {
+      title: "Payment Successful | Brit Fintech Awards",
+      description: "Your payment was processed successfully. Thank you for your ticket booking / award nomination at the Brit Fintech Awards.",
+      url: `${siteBaseUrl}/success`,
+      siteName,
+      images: [{ url: "/assets/img/og/home.jpg", width: 1200, height: 630, alt: "Payment Successful" }],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Payment Successful | Brit Fintech Awards",
+      description: "Your payment was processed successfully. Thank you for your ticket booking / award nomination.",
+      images: ["/assets/img/og/home.jpg"],
+    },
+  },
+  "/cancel": {
+    title: "Payment Cancelled | Brit Fintech Awards",
+    description: "Your transaction was cancelled. If you encountered any issues during checkout, please try again or get in touch with our team.",
+    openGraph: {
+      title: "Payment Cancelled | Brit Fintech Awards",
+      description: "Your transaction was cancelled. If you encountered any issues during checkout, please try again or get in touch with our team.",
+      url: `${siteBaseUrl}/cancel`,
+      siteName,
+      images: [{ url: "/assets/img/og/home.jpg", width: 1200, height: 630, alt: "Payment Cancelled" }],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Payment Cancelled | Brit Fintech Awards",
+      description: "Your transaction was cancelled. If you encountered any issues during checkout, please try again or get in touch with our team.",
+      images: ["/assets/img/og/home.jpg"],
+    },
+  },
 };
 
 function selectOgImage(path) {

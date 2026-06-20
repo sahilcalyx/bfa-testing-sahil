@@ -163,45 +163,18 @@ export async function POST(req) {
                         <h2 style="color: #ffffff; margin: 0; font-size: 22px;">New Award Nomination (Pre-Inquiry)</h2>
                     </div>
                      <div style="padding: 30px; background-color: #ffffff; border-radius: 0 0 8px 8px;">
+                         <p style="font-size: 16px; color: #1a1f36; line-height: 1.6; margin-bottom: 25px; font-weight: 500;">
+                             A new nomination has been submitted. Please log in to the admin panel to check all details.
+                         </p>
                          <div style="margin-bottom: 25px; border-bottom: 1px solid #e3e8ee; padding-bottom: 15px;">
-                             <span style="color: #697386; font-size: 14px; text-transform: uppercase; font-weight: 600;">Nominated Company</span>
-                             <p style="margin: 8px 0; font-size: 18px; color: #1a1f36; font-weight: 700;">${companynm}</p>
-                             <p style="margin: 8px 0; font-size: 14px; color: #697386;"><strong>Sector:</strong> ${companysector}</p>
-                             <p style="margin: 8px 0; font-size: 14px; color: #697386;"><strong>Reg No:</strong> ${companyregnumber}</p>
-                             <p style="margin: 8px 0; font-size: 14px; color: #697386;"><strong>Reg Country:</strong> ${businesscorridors}</p>
-                             <p style="margin: 8px 0; font-size: 14px; color: #697386;"><strong>Address:</strong> ${companyaddress}</p>
-                             <p style="margin: 8px 0; font-size: 14px; color: #697386;"><strong>Website:</strong> <a href="${websiteurl}" target="_blank" style="color: #635bff; text-decoration: none;">${websiteurl}</a></p>
+                             <span style="color: #697386; font-size: 14px; text-transform: uppercase; font-weight: 600;">Nomination Overview</span>
+                             <p style="margin: 8px 0; font-size: 15px; color: #1a1f36;"><strong>Name:</strong> ${title} ${firstName} ${lastName}</p>
+                             <p style="margin: 8px 0; font-size: 15px; color: #1a1f36;"><strong>Email:</strong> <a href="mailto:${email}" style="color: #635bff; text-decoration: none;">${email}</a></p>
+                             <p style="margin: 8px 0; font-size: 15px; color: #1a1f36;"><strong>Company Name:</strong> ${companynm}</p>
+                             <p style="margin: 8px 0; font-size: 15px; color: #1a1f36;"><strong>Company Email:</strong> <a href="mailto:${email}" style="color: #635bff; text-decoration: none;">${email}</a></p>
                          </div>
-                         <div style="margin-bottom: 25px; border-bottom: 1px solid #e3e8ee; padding-bottom: 15px;">
-                             <span style="color: #697386; font-size: 14px; text-transform: uppercase; font-weight: 600;">Nomination Details</span>
-                             <p style="margin: 8px 0; font-size: 15px; color: #1a1f36; font-weight: 600;">${awardcate.join(", ")}</p>
-                             <p style="margin: 8px 0; font-size: 14px; color: #697386;"><strong>Amount (GBP):</strong> ${amountingbp}</p>
-                             <p style="margin: 8px 0; font-size: 14px; color: #697386;"><strong>Attendees/Seats:</strong> ${howmanyperson}</p>
-                         </div>
-                        <div style="margin-bottom: 25px; border-bottom: 1px solid #e3e8ee; padding-bottom: 15px;">
-                            <span style="color: #697386; font-size: 14px; text-transform: uppercase; font-weight: 600;">Entrant / Contact Person</span>
-                            <p style="margin: 8px 0; font-size: 15px; color: #1a1f36; font-weight: 600;">${title} ${firstName} ${lastName}</p>
-                            <p style="margin: 8px 0; font-size: 14px; color: #1a1f36;"><strong>Email:</strong> <a href="mailto:${email}" style="color: #635bff; text-decoration: none;">${email}</a></p>
-                            <p style="margin: 8px 0; font-size: 14px; color: #1a1f36;"><strong>Phone:</strong> ${phoneNo}</p>
-                        </div>
-                        <div style="margin-bottom: 25px; border-bottom: 1px solid #e3e8ee; padding-bottom: 15px;">
-                            <span style="color: #697386; font-size: 14px; text-transform: uppercase; font-weight: 600;">Attachments (Cloudinary)</span>
-                            <p style="margin: 8px 0; font-size: 14px;">
-                                <strong>File 1:</strong> ${nominationData.uploadfile ? `<a href="${nominationData.uploadfile}" target="_blank" style="color: #635bff; text-decoration: none;">View File</a>` : "None"}
-                            </p>
-                            <p style="margin: 8px 0; font-size: 14px;">
-                                <strong>File 2 (Optional):</strong> ${nominationData.uploadfileoptional ? `<a href="${nominationData.uploadfileoptional}" target="_blank" style="color: #635bff; text-decoration: none;">View File</a>` : "None"}
-                            </p>
-                        </div>
-                        <div style="margin-bottom: 25px;">
-                            <span style="color: #697386; font-size: 14px; text-transform: uppercase; font-weight: 600;">Submission Detail</span>
-                            <p style="margin: 8px 0; font-size: 14px; color: #4f566b; line-height: 1.6; background: #f7f9fc; padding: 15px; border-radius: 8px;">
-                                <strong>Service Offered:</strong><br/>${serviceyouOffer}<br/><br/>
-                                <strong>About Entrant/Company:</strong><br/>${aboutyourself}
-                            </p>
-                        </div>
                         <div style="margin-top: 30px; text-align: center;">
-                            <a href="${baseUrl}/admin/nominations" style="background-color: #635bff; color: white; padding: 12px 25px; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 14px; display: inline-block;">View Nominations in Admin</a>
+                            <a href="${baseUrl}/admin/nominations" style="background-color: #635bff; color: white; padding: 12px 25px; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 14px; display: inline-block;">Login to View Nominations</a>
                         </div>
                     </div>
                     <p style="text-align: center; color: #8792a2; font-size: 12px; margin-top: 20px;">

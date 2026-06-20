@@ -9,88 +9,8 @@ const OurSponsors = () => {
     setActiveAccordion(activeAccordion === index ? null : index);
   };
 
+  // Example FAQ Data
   const faqData = [
-    {
-      question: "2026 Sponsors",
-      answer: (
-        <div className="container py-5">
-          {/* Section Heading */}
-
-
-          {/* Platinum / Brand Sponsors */}
-          <div className="row justify-content-center g-4">
-            {[
-              {
-                link: "/tigris-pay-sponsor-details-2026",
-                img: "https://tigrispay.com/assets/TigrisPayLogo-BJ0NLp12.png",
-                alt: "Tigris Pay",
-                title: "Tigris Pay",
-                description: "Fast. Secure. Reliable. UK-based Authorised Payment Institution committed to simple, secure international transfers."
-              }
-            ].map((s, index) => (
-              <div className="col-lg-5 col-md-6 col-12" key={index}>
-                <div
-                  style={{
-                    backgroundColor: "#ffffff",
-                    borderRadius: "20px",
-                    border: "1px solid #e2e8f0",
-                    padding: "35px 25px",
-                    boxShadow: "0 10px 30px rgba(0,0,0,0.05)",
-                    textAlign: "center",
-                    height: "100%",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    transition: "all 0.3s ease"
-                  }}
-                  className="sponsor-card-2026"
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = "translateY(-8px)";
-                    e.currentTarget.style.boxShadow = "0 15px 35px rgba(200, 16, 46, 0.15)";
-                    e.currentTarget.style.borderColor = "#c8102e";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = "translateY(0)";
-                    e.currentTarget.style.boxShadow = "0 10px 30px rgba(0,0,0,0.05)";
-                    e.currentTarget.style.borderColor = "#e2e8f0";
-                  }}
-                >
-                  <NavLink to={s.link} style={{ display: "block", marginBottom: "20px" }}>
-                    <img
-                      src={s.img}
-                      alt={s.alt}
-                      style={{
-                        maxHeight: "75px",
-                        objectFit: "contain"
-                      }}
-                    />
-                  </NavLink>
-                  <div style={{ flex: 1, marginBottom: "20px" }}>
-
-
-                  </div>
-                  <NavLink
-                    to={s.link}
-                    style={{
-                      textDecoration: "none",
-                      color: "#c8102e",
-                      fontWeight: "700",
-                      fontSize: "14px",
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: "5px"
-                    }}
-                  >
-                    View Details <i className="fas fa-arrow-right" style={{ fontSize: "12px" }} />
-                  </NavLink>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      ),
-    },
     {
       question: "2025 Sponsors",
       answer: (
@@ -138,13 +58,13 @@ const OurSponsors = () => {
                 img: "../assets/img/sponsor-logo/leatherback-logo.png",
                 alt: "Leatherback",
               },
-
+             
               {
                 link: "/volume-pay-sponsor-details-2025",
                 img: "../assets/img/sponsor-logo/volume-silver-2025.png",
                 alt: "volume-pay",
               },
-              {
+               {
                 link: "/travel-cashier-details-2025",
                 img: "../assets/img/sponsor-logo/travel-cashier-2025.png",
                 alt: "Travel Cashier",
@@ -159,7 +79,7 @@ const OurSponsors = () => {
                 img: "../assets/img/sponsor-logo/disbuz-logo-2025.png",
                 alt: "Endoz Disbuz",
               },
-              {
+               {
                 link: "/ecex-sponsor-details-2025",
                 img: "../assets/img/sponsor-logo/ECEX-logo.png",
                 alt: "ECEX",
@@ -169,17 +89,17 @@ const OurSponsors = () => {
                 img: "../assets/img/sponsor-logo/Leftover-currency-logo.png",
                 alt: "leftover currency",
               },
-              {
+               {
                 link: "/qfremit-sponsor-details-2025",
                 img: "../assets/img/sponsor-logo/qfremit-sponsor-Logo.png",
                 alt: "qfremit",
               },
-              {
+               {
                 link: "/lumine-solicitors-sponsor-details-2025",
                 img: "../assets/img/sponsor-logo/Luminelaw-sponsor-Logo.png",
                 alt: "Luminelaw",
               },
-
+             
               {
                 link: "/clear-junction-sponsor-details-2025",
                 img: "../assets/img/sponsor-logo/clear-junction-logo-2025.png",
@@ -195,7 +115,7 @@ const OurSponsors = () => {
                 img: "../assets/img/sponsor-logo/Myremit-sponsor-Logo.png",
                 alt: "MyRemit",
               },
-              {
+               {
                 link: "/kmbal-sponsor-details-2025",
                 img: "../assets/img/sponsor-logo/kmbal-sponsor-Logo.png",
                 alt: "kmbal ",
@@ -205,12 +125,12 @@ const OurSponsors = () => {
                 img: "../assets/img/sponsor-logo/red-sea-sponsor-logo.png",
                 alt: "red sea ",
               },
-              {
+                 {
                 link: "/chrisborough-sponsor-details-2025",
                 img: "../assets/img/sponsor-logo/chrisborough-sponsor-logo.png",
                 alt: "chrisborough",
               },
-              {
+                 {
                 link: "/purse-baas-sponsor-details-2025",
                 img: "../assets/img/sponsor-logo/Purse-Baas-sponsor-logo.png",
                 alt: "Purse Baas",
@@ -231,8 +151,8 @@ const OurSponsors = () => {
                 img: "../assets/img/sponsor-logo/finestPay-sponsor-Logo.png",
                 alt: "leftover currency",
               },
-
-
+             
+             
               {
                 link: "/belyfted-sponsor-details-2025",
                 img: "../assets/img/sponsor-logo/Belyfted-sponsor-Logo.png",
@@ -248,13 +168,13 @@ const OurSponsors = () => {
                 img: "../assets/img/sponsor-logo/KMoney-Sponsor-Logo.png",
                 alt: "KMoney",
               },
+              
 
+              
+              
+           
 
-
-
-
-
-
+            
 
 
 
@@ -572,8 +492,9 @@ const OurSponsors = () => {
               <div className="cs-accordians cs-style1">
                 {faqData.map((faq, index) => (
                   <div
-                    className={`cs-accordian ${activeAccordion === index ? "active" : ""
-                      }`}
+                    className={`cs-accordian ${
+                      activeAccordion === index ? "active" : ""
+                    }`}
                     key={index}
                   >
                     <div
@@ -583,10 +504,11 @@ const OurSponsors = () => {
                       <h2 className="cs-accordian_title">{faq.question}</h2>
                       <span className="cs-accordian_toggle cs-accent_color_2">
                         <i
-                          className={`fa ${activeAccordion === index
-                            ? "fa-angle-up"
-                            : "fa-angle-down"
-                            }`}
+                          className={`fa ${
+                            activeAccordion === index
+                              ? "fa-angle-up"
+                              : "fa-angle-down"
+                          }`}
                         />
                       </span>
                     </div>

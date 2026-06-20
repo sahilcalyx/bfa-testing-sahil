@@ -78,6 +78,7 @@ const TravelCashierDetails2025 = lazy(() => import("./Pages/2025/OurSponsors/Tra
 const TruslyPayDetails2025 = lazy(() => import("./Pages/2025/OurSponsors/TruslyPayDetails2025"));
 const MercuryDenatiDetails2025 = lazy(() => import("./Pages/2025/OurSponsors/MercuryDenatiDetails2025"));
 const TicketBookingPage = lazy(() => import("./Pages/TicketBookingPage"));
+const NominateBookSponsor = lazy(() => import("./Pages/NominateBookSponsor"));
 const SuccessPage = lazy(() => import("./Pages/SuccessPage"));
 const CancelPage = lazy(() => import("./Pages/CancelledPage"));
 const TeeparamExchangeDetails2025 = lazy(() => import("./Pages/2025/OurSponsors/TeeparamExchangeDetails2025"));
@@ -154,7 +155,6 @@ const DigitalWallets = lazy(() => import("./Pages/Blogs/DigitalWallets"));
 const AiPoweredRiskCompliance = lazy(() => import("./Pages/Blogs/AiPoweredRiskCompliance"));
 const InvisibleFinancialBridge = lazy(() => import("./Pages/Blogs/InvisibleFinancialBridge"));
 const FinancialInclusionUK = lazy(() => import("./Pages/Blogs/FinancialInclusionUK"));
-const TigrisPaySponsorDetails = lazy(() => import("./Pages/2026/OurSponsors/TigrisPaySponsorDetails"));
 
 
 function App() {
@@ -194,6 +194,7 @@ function App() {
         <Route path="/video-gallery-2025" element={<VideoGallery2025 />} />
         <Route path="/ticket-booking" element={<TicketBookingPage />} />
         <Route path="/ticket-booking-test" element={<TicketBookingPage />} />
+        <Route path="/nominate-booking-sponsorship" element={<NominateBookSponsor />} />
 
         {/* <Route path="/register-now" element={<RegisterNow />} /> */}
        
@@ -404,10 +405,6 @@ function App() {
         <Route
           path="/fast-track-money-sponsor-details-2025"
           element={<TruslyPayDetails2025 />}
-        />
-        <Route
-          path="/tigris-pay-sponsor-details-2026"
-          element={<TigrisPaySponsorDetails />}
         />
 
         <Route
