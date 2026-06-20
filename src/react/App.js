@@ -155,6 +155,7 @@ const DigitalWallets = lazy(() => import("./Pages/Blogs/DigitalWallets"));
 const AiPoweredRiskCompliance = lazy(() => import("./Pages/Blogs/AiPoweredRiskCompliance"));
 const InvisibleFinancialBridge = lazy(() => import("./Pages/Blogs/InvisibleFinancialBridge"));
 const FinancialInclusionUK = lazy(() => import("./Pages/Blogs/FinancialInclusionUK"));
+const HowFintechAwardsDriveGrowth = lazy(() => import("./Pages/Blogs/HowFintechAwardsDriveGrowth"));
 
 
 function App() {
@@ -691,6 +692,10 @@ function App() {
           element={<Beyond_borders_how_brit_fintech />}
         />
 
+        <Route
+          path="/how-fintech-awards-drive-growth-trust-market-credibility"
+          element={<HowFintechAwardsDriveGrowth />}
+        />
         <Route path="/fintech-in-the-uk" element={<FinTechintheUK />} />
         <Route
           path="/financial-inclusion-in-the-uk-how-fintech-is-bridging-the-gap-for-the-underbanked"

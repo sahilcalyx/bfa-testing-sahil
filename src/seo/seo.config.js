@@ -241,6 +241,26 @@ export const seoByPath = {
       images: ["/assets/img/og/keynotes.jpg"],
     },
   },
+  "/how-fintech-awards-drive-growth-trust-market-credibility": {
+    title: "How Fintech Awards Drive Growth, Trust & Market Credibility",
+    description: "Why recognition builds confidence among customers, partners, and investors.",
+    openGraph: {
+      title: "How Fintech Awards Drive Growth, Trust & Market Credibility",
+      description: "Why recognition builds confidence among customers, partners, and investors.",
+      url: `${siteBaseUrl}/how-fintech-awards-drive-growth-trust-market-credibility`,
+      siteName,
+      images: [
+        { url: "/assets/img/blogs/How-Fintech-Awards-Drive-Growth-Trust-Market-Credibility.jpg", width: 1200, height: 630, alt: "How Fintech Awards Drive Growth, Trust & Market Credibility" },
+      ],
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "How Fintech Awards Drive Growth, Trust & Market Credibility",
+      description: "Why recognition builds confidence among customers, partners, and investors.",
+      images: ["/assets/img/blogs/How-Fintech-Awards-Drive-Growth-Trust-Market-Credibility.jpg"],
+    },
+  },
   "/will-2025-be-the-year-of-stablecoins": {
     title: "Will 2025 Be the Year of Stablecoins?",
     description: "Exploring the potential mainstream adoption of stablecoins in 2025.",

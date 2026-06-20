@@ -2001,107 +2001,14 @@ const NominateBookSponsor = () => {
       `}</style>
 
       <div className="cs-height_90 cs-height_lg_80" />
-      <div
-        className="cs-hero cs-style12 cs-type1 cs-center text-center cs-parallax cs-hobble"
-        style={{
-          backgroundImage: 'url("../assets/img/event-conference/hero-img.jpg")',
-          height: "220px",
-          position: "relative",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center"
-        }}
-      >
-        <div className="container">
-          <div className="cs-hero_text text-left">
-            <h1 className="cs-hero_title cs-extra_bold cs-white text-uppercase pb-2 mb-0" style={{ lineHeight: '1.2' }}>
-              BFA 2026
-            </h1>
-            <p className="pb-0 mb-0 text-white" style={{ fontSize: '16px' }}>
-              Nominate. Sponsor. Attend. Everything starts here.
-            </p>
-          </div>
-        </div>
-      </div>
 
       <div className="container mt-4">
-        {/* Dynamic Glassmorphic Tab Selector */}
-        <div className="portal-tabs-container" style={{ display: "flex", justifyContent: "center", margin: "20px 0" }}>
-          <div
-            className="portal-tabs"
-            style={{
-              display: "inline-flex",
-              background: "#efefef",
-              padding: "6px",
-              borderRadius: "30px",
-              boxShadow: "0 4px 15px rgba(0,0,0,0.05)",
-              border: "1px solid rgba(0,0,0,0.08)"
-            }}
-          >
-            <button
-              onClick={() => setActiveTab("nominate")}
-              style={{
-                padding: "10px 24px",
-                border: "none",
-                borderRadius: "25px",
-                fontSize: "15px",
-                fontWeight: "600",
-                cursor: "pointer",
-                transition: "all 0.3s ease",
-                background: activeTab === "nominate" ? "#c8102e" : "transparent",
-                color: activeTab === "nominate" ? "#fff" : "#555"
-              }}
-            >
-              Award Nomination
-            </button>
-            <button
-              onClick={() => setActiveTab("tickets")}
-              style={{
-                padding: "10px 24px",
-                border: "none",
-                borderRadius: "25px",
-                fontSize: "15px",
-                fontWeight: "600",
-                cursor: "pointer",
-                transition: "all 0.3s ease",
-                background: activeTab === "tickets" ? "#c8102e" : "transparent",
-                color: activeTab === "tickets" ? "#fff" : "#555"
-              }}
-            >
-              Book Tickets
-            </button>
-            <button
-              onClick={() => setActiveTab("sponsorship")}
-              style={{
-                padding: "10px 24px",
-                border: "none",
-                borderRadius: "25px",
-                fontSize: "15px",
-                fontWeight: "600",
-                cursor: "pointer",
-                transition: "all 0.3s ease",
-                background: activeTab === "sponsorship" ? "#c8102e" : "transparent",
-                color: activeTab === "sponsorship" ? "#fff" : "#555"
-              }}
-            >
-              Sponsorship Categories
-            </button>
-          </div>
-        </div>
-
-        {/* Tab Contents */}
-        <div className="portal-tab-content" style={{ minHeight: "400px" }}>
-          {activeTab === "nominate" && <NominationForm />}
-          {activeTab === "tickets" && <TicketBookingForm />}
-          {activeTab === "sponsorship" && <SponsorshipForm />}
-        </div>
-
-        {/* Date, Time and Venue Details Strip (rendered after all forms) */}
+        {/* Date, Time and Venue Details Box (rendered at the top in place of header banner) */}
         <div 
           style={{
             width: "100%",
             maxWidth: "620px",
-            margin: "40px auto 0 auto",
+            margin: "0 auto 30px auto",
             backgroundColor: "#ffffff",
             borderRadius: "24px",
             boxShadow: "0 20px 50px rgba(0,0,0,0.06)",
@@ -2194,6 +2101,78 @@ const NominateBookSponsor = () => {
             </div>
           </div>
         </div>
+        {/* Dynamic Glassmorphic Tab Selector */}
+        <div className="portal-tabs-container" style={{ display: "flex", justifyContent: "center", margin: "20px 0" }}>
+          <div
+            className="portal-tabs"
+            style={{
+              display: "inline-flex",
+              background: "#efefef",
+              padding: "6px",
+              borderRadius: "30px",
+              boxShadow: "0 4px 15px rgba(0,0,0,0.05)",
+              border: "1px solid rgba(0,0,0,0.08)"
+            }}
+          >
+            <button
+              onClick={() => setActiveTab("nominate")}
+              style={{
+                padding: "10px 24px",
+                border: "none",
+                borderRadius: "25px",
+                fontSize: "15px",
+                fontWeight: "600",
+                cursor: "pointer",
+                transition: "all 0.3s ease",
+                background: activeTab === "nominate" ? "#c8102e" : "transparent",
+                color: activeTab === "nominate" ? "#fff" : "#555"
+              }}
+            >
+              Award Nomination
+            </button>
+            <button
+              onClick={() => setActiveTab("tickets")}
+              style={{
+                padding: "10px 24px",
+                border: "none",
+                borderRadius: "25px",
+                fontSize: "15px",
+                fontWeight: "600",
+                cursor: "pointer",
+                transition: "all 0.3s ease",
+                background: activeTab === "tickets" ? "#c8102e" : "transparent",
+                color: activeTab === "tickets" ? "#fff" : "#555"
+              }}
+            >
+              Book Tickets
+            </button>
+            <button
+              onClick={() => setActiveTab("sponsorship")}
+              style={{
+                padding: "10px 24px",
+                border: "none",
+                borderRadius: "25px",
+                fontSize: "15px",
+                fontWeight: "600",
+                cursor: "pointer",
+                transition: "all 0.3s ease",
+                background: activeTab === "sponsorship" ? "#c8102e" : "transparent",
+                color: activeTab === "sponsorship" ? "#fff" : "#555"
+              }}
+            >
+              Sponsorship Categories
+            </button>
+          </div>
+        </div>
+
+        {/* Tab Contents */}
+        <div className="portal-tab-content" style={{ minHeight: "400px" }}>
+          {activeTab === "nominate" && <NominationForm />}
+          {activeTab === "tickets" && <TicketBookingForm />}
+          {activeTab === "sponsorship" && <SponsorshipForm />}
+        </div>
+
+
       </div>
 
       {/* Sticky Mobile Bottom Navigation Bar - Premium Floating Dock */}

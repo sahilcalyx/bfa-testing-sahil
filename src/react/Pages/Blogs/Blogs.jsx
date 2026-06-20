@@ -6,6 +6,14 @@ const Blog = () => {
   // ===== BLOG DATA =====
   const blogsData = [
     {
+      title: "How Fintech Awards Drive Growth, Trust & Market Credibility",
+      slug: "how-fintech-awards-drive-growth-trust-market-credibility",
+      img: "/assets/img/blogs/How-Fintech-Awards-Drive-Growth-Trust-Market-Credibility.jpg",
+      alt: "How Fintech Awards Drive Growth, Trust & Market Credibility",
+      date: "20 Jun, 2026",
+      excerpt: "In fintech, innovation is important—but trust is everything...",
+    },
+    {
       title: "Financial inclusion in the UK: How fintech is bridging the gap for the underbanked",
       slug: "financial-inclusion-in-the-uk-how-fintech-is-bridging-the-gap-for-the-underbanked",
       img: "/assets/img/blogs/financial-inclusion-in-the-uk-how-fintech.jpg",
