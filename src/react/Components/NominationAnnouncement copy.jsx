@@ -1,6 +1,6 @@
 import React from 'react';
 
-const NominationAnnouncement = () => {
+const NominationAnnouncement = ({ showFooter = true }) => {
   return (
     <div className="nomination-wrapper py-5 px-3">
       <div className="container text-center">
@@ -21,22 +21,24 @@ const NominationAnnouncement = () => {
         </div>
 
 
-        <div className="mt-5">
-          <p className="fs-5 fw-bold text-dark mb-2">
-            Don’t miss your chance to nominate your business at the best rate.
-          </p>
+        {showFooter && (
+          <div className="mt-5">
+            <p className="fs-5 fw-bold text-dark mb-2">
+              Don’t miss your chance to nominate your business at the best rate.
+            </p>
 
-          <p className="fs-5 text-secondary">
-            Early movers secure the best rates and maximize their opportunity to shine at the awards.
-            <br /><br />
+            <p className="fs-5 text-secondary">
+              Early movers secure the best rates and maximize their opportunity to shine at the awards.
+              <br /><br />
 
-            <strong >
+              <strong >
 
-              <span className="highlight">Submit Your Nomination Today.</span>
-            </strong>
+                <span className="highlight">Submit Your Nomination Today.</span>
+              </strong>
 
-          </p>
-        </div>
+            </p>
+          </div>
+        )}
       </div>
 
       {/* Internal CSS */}

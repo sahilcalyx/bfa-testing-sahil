@@ -713,7 +713,7 @@ const NominationForm = () => {
 
   return (
     <>
-      <NominationAnnouncement />
+      <NominationAnnouncement showFooter={false} />
       <div id="nominate-now" className="container mt-4" style={{ zIndex: 9999 }}>
         <div className="cs-contact cs-style2 cs-white_bg justify-content-center">
           <div className="cs-contact_left cs-accent_bg position-relative">
