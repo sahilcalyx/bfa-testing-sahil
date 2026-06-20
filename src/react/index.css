@@ -135,3 +135,18 @@ code {
     transform: scale(1.02);
   }
 }
+
+/* Hide Tawk.to Chatbot on Mobile Views */
+@media (max-width: 768px) {
+  #tawkchat-iframe-container,
+  .tawk-min-container,
+  .tawk-button,
+  iframe[src*="tawk.to"],
+  iframe[title="chat widget"],
+  #tawkchat-container {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+}

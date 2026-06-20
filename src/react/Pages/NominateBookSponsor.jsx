@@ -18,7 +18,7 @@ import { Box, Chip, ListSubheader } from "@mui/material";
 // Icon Imports
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
-import { Calendar, MapPin, Ticket } from "lucide-react";
+import { Calendar, MapPin, Ticket, Award, Coins } from "lucide-react";
 
 // Sub-components
 import NominationAnnouncement from "../Components/NominationAnnouncement copy";
@@ -1871,6 +1871,54 @@ const NominateBookSponsor = () => {
     }
   }, [location]);
 
+  useEffect(() => {
+    let checkInterval;
+    
+    const toggleChatbot = () => {
+      const isMobile = window.innerWidth <= 768;
+      if (window.Tawk_API && typeof window.Tawk_API.hideWidget === "function") {
+        if (isMobile) {
+          window.Tawk_API.hideWidget();
+        } else {
+          window.Tawk_API.showWidget();
+        }
+        return true;
+      }
+      return false;
+    };
+
+    // Try hiding immediately
+    const success = toggleChatbot();
+    
+    // If API is not fully loaded, check periodically
+    if (!success) {
+      checkInterval = setInterval(() => {
+        const done = toggleChatbot();
+        if (done) clearInterval(checkInterval);
+      }, 300);
+    }
+
+    // Adapt to window resize
+    const handleResize = () => {
+      toggleChatbot();
+    };
+    window.addEventListener("resize", handleResize);
+
+    // If Tawk_API defines onLoad callback
+    if (window.Tawk_API) {
+      window.Tawk_API.onLoad = toggleChatbot;
+    }
+
+    // Clean up: restore chatbot visibility when unmounting this portal page
+    return () => {
+      if (checkInterval) clearInterval(checkInterval);
+      window.removeEventListener("resize", handleResize);
+      if (window.Tawk_API && typeof window.Tawk_API.showWidget === "function") {
+        window.Tawk_API.showWidget();
+      }
+    };
+  }, []);
+
   return (
     <>
       <Helmet>
@@ -1880,6 +1928,77 @@ const NominateBookSponsor = () => {
           content="Unified portal for Brit Fintech Awards: Nominate a company, book tickets, or register interest for sponsorship."
         />
       </Helmet>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .portal-tabs-container {
+            display: none !important;
+          }
+          .mobile-bottom-nav {
+            display: flex !important;
+          }
+          /* Add bottom padding to body so fixed bottom nav doesn't overlap form elements */
+          body {
+            padding-bottom: 110px !important;
+          }
+          /* Hide Next.js Dev Overlay and other debug elements on mobile view */
+          nextjs-portal,
+          #nextjs-portal,
+          .nextjs-container,
+          [id*="nextjs-portal"],
+          #webpack-hot-middleware-clientOverlay,
+          #react-devtools-anchor {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+          }
+          /* Fallback stylesheet rule to hide Tawk.to chatbot container on mobile */
+          iframe[src*="tawk.to"],
+          iframe[title*="chat"],
+          iframe[id*="tawk"],
+          div[id*="tawk"],
+          [class*="tawk"],
+          #tawkchat-iframe-container,
+          .tawk-min-container,
+          .tawk-button {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+          }
+          /* Professional dock button resets - remove default outline boxes and tap flash */
+          .mobile-bottom-nav button {
+            outline: none !important;
+            box-shadow: none !important;
+            -webkit-tap-highlight-color: transparent !important;
+            background: none;
+            border: none;
+          }
+          .mobile-bottom-nav button:focus,
+          .mobile-bottom-nav button:active,
+          .mobile-bottom-nav button:focus-visible {
+            outline: none !important;
+            box-shadow: none !important;
+            border: none !important;
+          }
+          @keyframes fadeIn {
+            from {
+              opacity: 0;
+              transform: translateX(-6px);
+            }
+            to {
+              opacity: 1;
+              transform: translateX(0);
+            }
+          }
+        }
+        @media (min-width: 769px) {
+          .mobile-bottom-nav {
+            display: none !important;
+          }
+        }
+      `}</style>
 
       <div className="cs-height_90 cs-height_lg_80" />
       <div
@@ -1896,7 +2015,7 @@ const NominateBookSponsor = () => {
         <div className="container">
           <div className="cs-hero_text text-left">
             <h1 className="cs-hero_title cs-extra_bold cs-white text-uppercase pb-2 mb-0" style={{ lineHeight: '1.2' }}>
-              BFA Portal
+              BFA 2026
             </h1>
             <p className="pb-0 mb-0 text-white" style={{ fontSize: '16px' }}>
               One-stop portal to Nominate, Book Tickets, and Register for Sponsorship.
@@ -1976,6 +2095,221 @@ const NominateBookSponsor = () => {
           {activeTab === "tickets" && <TicketBookingForm />}
           {activeTab === "sponsorship" && <SponsorshipForm />}
         </div>
+      </div>
+
+      {/* Sticky Mobile Bottom Navigation Bar - Premium Floating Dock */}
+      <div
+        className="mobile-bottom-nav"
+        style={{
+          position: "fixed",
+          bottom: "20px",
+          left: "20px",
+          right: "20px",
+          height: "68px",
+          backgroundColor: "#ffffff",
+          border: "1px solid rgba(0, 0, 0, 0.08)",
+          borderRadius: "34px",
+          display: "none",
+          justifyContent: "space-around",
+          alignItems: "center",
+          zIndex: 99999,
+          boxShadow: "0 10px 30px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.02)",
+          margin: "0 auto",
+          maxWidth: "480px",
+          padding: "0 12px"
+        }}
+      >
+        <button
+          onClick={() => setActiveTab("nominate")}
+          style={{
+            background: "none",
+            border: "none",
+            outline: "none",
+            boxShadow: "none",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "100%",
+            padding: "0 8px",
+            cursor: "pointer",
+            flex: activeTab === "nominate" ? 1.6 : 1,
+            transition: "all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)",
+            position: "relative",
+            WebkitTapHighlightColor: "transparent"
+          }}
+        >
+          <div style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            gap: "6px",
+            color: activeTab === "nominate" ? "#c8102e" : "#71717a",
+            transition: "all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)",
+            transform: activeTab === "nominate" ? "scale(1.05)" : "scale(1)"
+          }}>
+            <Award 
+              size={22} 
+              strokeWidth={activeTab === "nominate" ? 2.5 : 2}
+              style={{
+                color: activeTab === "nominate" ? "#c8102e" : "#71717a",
+                transition: "all 0.3s ease"
+              }} 
+            />
+            {activeTab === "nominate" && (
+              <span style={{
+                fontSize: "13px",
+                fontWeight: "700",
+                color: "#c8102e",
+                whiteSpace: "nowrap",
+                letterSpacing: "0.2px",
+                animation: "fadeIn 0.2s cubic-bezier(0.25, 0.8, 0.25, 1)"
+              }}>
+                Nominate
+              </span>
+            )}
+          </div>
+          {activeTab === "nominate" && (
+            <div style={{
+              position: "absolute",
+              bottom: "10px",
+              height: "3px",
+              left: "14px",
+              right: "14px",
+              backgroundColor: "#c8102e",
+              borderRadius: "2px",
+              animation: "fadeIn 0.2s cubic-bezier(0.25, 0.8, 0.25, 1)"
+            }} />
+          )}
+        </button>
+
+        <button
+          onClick={() => setActiveTab("tickets")}
+          style={{
+            background: "none",
+            border: "none",
+            outline: "none",
+            boxShadow: "none",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "100%",
+            padding: "0 8px",
+            cursor: "pointer",
+            flex: activeTab === "tickets" ? 1.6 : 1,
+            transition: "all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)",
+            position: "relative",
+            WebkitTapHighlightColor: "transparent"
+          }}
+        >
+          <div style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            gap: "6px",
+            color: activeTab === "tickets" ? "#c8102e" : "#71717a",
+            transition: "all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)",
+            transform: activeTab === "tickets" ? "scale(1.05)" : "scale(1)"
+          }}>
+            <Ticket 
+              size={22} 
+              strokeWidth={activeTab === "tickets" ? 2.5 : 2}
+              style={{
+                color: activeTab === "tickets" ? "#c8102e" : "#71717a",
+                transition: "all 0.3s ease"
+              }} 
+            />
+            {activeTab === "tickets" && (
+              <span style={{
+                fontSize: "13px",
+                fontWeight: "700",
+                color: "#c8102e",
+                whiteSpace: "nowrap",
+                letterSpacing: "0.2px",
+                animation: "fadeIn 0.2s cubic-bezier(0.25, 0.8, 0.25, 1)"
+              }}>
+                Tickets
+              </span>
+            )}
+          </div>
+          {activeTab === "tickets" && (
+            <div style={{
+              position: "absolute",
+              bottom: "10px",
+              height: "3px",
+              left: "14px",
+              right: "14px",
+              backgroundColor: "#c8102e",
+              borderRadius: "2px",
+              animation: "fadeIn 0.2s cubic-bezier(0.25, 0.8, 0.25, 1)"
+            }} />
+          )}
+        </button>
+
+        <button
+          onClick={() => setActiveTab("sponsorship")}
+          style={{
+            background: "none",
+            border: "none",
+            outline: "none",
+            boxShadow: "none",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "100%",
+            padding: "0 8px",
+            cursor: "pointer",
+            flex: activeTab === "sponsorship" ? 1.6 : 1,
+            transition: "all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)",
+            position: "relative",
+            WebkitTapHighlightColor: "transparent"
+          }}
+        >
+          <div style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            gap: "6px",
+            color: activeTab === "sponsorship" ? "#c8102e" : "#71717a",
+            transition: "all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)",
+            transform: activeTab === "sponsorship" ? "scale(1.05)" : "scale(1)"
+          }}>
+            <Coins 
+              size={22} 
+              strokeWidth={activeTab === "sponsorship" ? 2.5 : 2}
+              style={{
+                color: activeTab === "sponsorship" ? "#c8102e" : "#71717a",
+                transition: "all 0.3s ease"
+              }} 
+            />
+            {activeTab === "sponsorship" && (
+              <span style={{
+                fontSize: "13px",
+                fontWeight: "700",
+                color: "#c8102e",
+                whiteSpace: "nowrap",
+                letterSpacing: "0.2px",
+                animation: "fadeIn 0.2s cubic-bezier(0.25, 0.8, 0.25, 1)"
+              }}>
+                Sponsorship
+              </span>
+            )}
+          </div>
+          {activeTab === "sponsorship" && (
+            <div style={{
+              position: "absolute",
+              bottom: "10px",
+              height: "3px",
+              left: "14px",
+              right: "14px",
+              backgroundColor: "#c8102e",
+              borderRadius: "2px",
+              animation: "fadeIn 0.2s cubic-bezier(0.25, 0.8, 0.25, 1)"
+            }} />
+          )}
+        </button>
       </div>
     </>
   );
