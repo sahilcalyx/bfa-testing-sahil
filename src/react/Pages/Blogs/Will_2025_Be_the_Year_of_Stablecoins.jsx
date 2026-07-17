@@ -1,4 +1,5 @@
-import React from "react";
+﻿import React from "react";
+import { NavLink } from "react-router-dom";
 import RecentPosts from "../../Components/RecentPost";
 
 const Will_2025_Be_the_Year_of_Stablecoins = () => {
@@ -37,6 +38,10 @@ const Will_2025_Be_the_Year_of_Stablecoins = () => {
                     alt="FinTech in the UK: 3 Trends to Watch Right Now"
                   />
                 </div>
+                <div className="cs-height_20 cs-height_lg_20" />
+                <NavLink to="/blogs" className="btn-black">
+                  ← Back to Blogs
+                </NavLink>
                 <p>
                   Last ten years have transformed how we use money. From <strong>mobile
                   wallets</strong> to <strong>instant payments,</strong> fintech has made every day
@@ -47,7 +52,7 @@ const Will_2025_Be_the_Year_of_Stablecoins = () => {
                 <br />
                 <h4>Why Is Everyone Talking About Stablecoins?</h4>
                 <p>
-                 <strong> Stablecoins </strong>aren’t brand-new, but they’re having their <strong>big
+                 <strong> Stablecoins </strong>aren't brand-new, but they're having their <strong>big
                   moment now.</strong> These are <strong>digital currencies</strong> tied to something
                   stable, like pounds or dollars. That means they move like
                   <strong>crypto - fast and borderless—without the wild price swings.</strong> 
@@ -64,14 +69,14 @@ const Will_2025_Be_the_Year_of_Stablecoins = () => {
                 </ul>
 
                 <p>
-                  This isn’t just theory - <strong>companies worldwide are already testing
+                  This isn't just theory - <strong>companies worldwide are already testing
                   stablecoin solutions.</strong> And here in the UK, the spotlight is
                   brighter than ever.
                 </p>
                 <br />
                 <h4>Why Could 2025 Be a Turning Point?</h4>
                 <p>
-                  <strong>The real game-changer isn’t just the technology-it’s
+                  <strong>The real game-changer isn't just the technology-it's
                   regulation.</strong> 
                 </p>
                 <p>The UK government, the Bank of England, and the
@@ -89,7 +94,7 @@ const Will_2025_Be_the_Year_of_Stablecoins = () => {
                 </ul>
                 <p>
                   But if the rules are too strict or too vague, will progress
-                  stall? That’s why <strong>2025 feels like a make-or-break year.</strong>
+                  stall? That's why <strong>2025 feels like a make-or-break year.</strong>
                 </p>
                 <br />
                 <h4>Why Does It Matter to the Brit Fintech Awards?</h4>
@@ -126,7 +131,7 @@ const Will_2025_Be_the_Year_of_Stablecoins = () => {
                   
                 <p><strong>Stablecoins are no longer just an experiment.</strong> They are becoming a serious part of the financial system. And as UK innovators continue to push boundaries, the <strong>Brit Fintech Awards will be here to spotlight the people and companies making it happen.</strong></p>
                 <br/>
-                <h6 className="text-center">Because in 2025, the question isn't just <strong>“what's next?”</strong> - it's <strong>“what will last?”</strong></h6>
+                <h6 className="text-center">Because in 2025, the question isn't just <strong>"what's next?"</strong> - it's <strong>"what will last?"</strong></h6>
               </div>
             </div>
             <RecentPosts />

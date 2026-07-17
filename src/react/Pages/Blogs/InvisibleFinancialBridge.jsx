@@ -1,4 +1,5 @@
-import React from "react";
+﻿import React from "react";
+import { NavLink } from "react-router-dom";
 import RecentPosts from "../../Components/RecentPost";
 import {
   Link2,
@@ -110,6 +111,10 @@ const InvisibleFinancialBridge = () => {
                     alt="The invisible financial bridge"
                   />
                 </div>
+                <div className="cs-height_20 cs-height_lg_20" />
+                <NavLink to="/blogs" className="btn-black">
+                  ← Back to Blogs
+                </NavLink>
 
                 <div className="cs-height_35 cs-height_lg_25" />
 

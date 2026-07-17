@@ -92,6 +92,9 @@ const Footer = () => {
                   <li>
                     <NavLink to="/judges">Judges </NavLink>
                   </li>
+                  <li>
+                    <NavLink to="/download-app">Download App</NavLink>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -182,6 +185,59 @@ const Footer = () => {
                     <i className="fab fa-twitter" />
                   </NavLink>
                 </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Download App Buttons */}
+          <div className="row" style={{ borderTop: "1px solid rgba(255,255,255,0.1)", paddingTop: "30px", marginTop: "20px", paddingBottom: "20px" }}>
+            <div className="col-12 text-center">
+              <h2 className="cs-widget_title text-white mb-3" style={{ fontWeight: "600", fontSize: "18px" }}>Download Our App</h2>
+              <div style={{ display: "flex", justifyContent: "center", gap: "16px", flexWrap: "wrap", alignItems: "center" }}>
+                <a
+                  href="https://apps.apple.com/ng/app/brit-fintech-awards/id6779879087"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: "inline-block",
+                    transition: "transform 0.3s ease",
+                    border: "1px solid rgba(255, 255, 255, 0.8)",
+                    borderRadius: "8px",
+                    background: "#000",
+                    padding: "1px",
+                    lineHeight: 0
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.transform = "translateY(-3px)")}
+                  onMouseLeave={(e) => (e.currentTarget.style.transform = "translateY(0)")}
+                >
+                  <img
+                    src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                    alt="Download on the App Store"
+                    style={{ height: "50px" }}
+                  />
+                </a>
+                <a
+                  href="https://play.google.com/store/apps/details?id=com.bfa.fintechapp"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: "inline-block",
+                    transition: "transform 0.3s ease",
+                    border: "1px solid rgba(255, 255, 255, 0.8)",
+                    borderRadius: "8px",
+                    background: "#000",
+                    padding: "1px",
+                    lineHeight: 0
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.transform = "translateY(-3px)")}
+                  onMouseLeave={(e) => (e.currentTarget.style.transform = "translateY(0)")}
+                >
+                  <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
+                    alt="Get it on Google Play"
+                    style={{ height: "50px" }}
+                  />
+                </a>
               </div>
             </div>
           </div>

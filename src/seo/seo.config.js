@@ -201,6 +201,24 @@ export const seoByPath = {
       images: ["/assets/img/og/home.jpg"],
     },
   },
+  "/download-app": {
+    title: "Download the BFA App | Brit FinTech Awards 2026",
+    description: "Download the official Brit FinTech Awards app. Access event schedules, networking tools, live updates, and more.",
+    openGraph: {
+      title: "Download the BFA App | Brit FinTech Awards 2026",
+      description: "Get the official BFA event app for schedules, networking, live updates and more.",
+      url: `${siteBaseUrl}/download-app`,
+      siteName,
+      images: [{ url: "/assets/img/og/home.jpg", width: 1200, height: 630, alt: "Download BFA App" }],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Download the BFA App | Brit FinTech Awards 2026",
+      description: "Get the official BFA event app for schedules, networking, live updates and more.",
+      images: ["/assets/img/og/home.jpg"],
+    },
+  },
   "/blogs": {
     title: "Brit Fintech Awards | Blogs",
     description: "Insights and stories from the Brit Fintech Awards community.",
@@ -239,6 +257,26 @@ export const seoByPath = {
       title: "Brit Fintech Awards | Keynotes",
       description: "Insights and stories from the Brit Fintech Awards community.",
       images: ["/assets/img/og/keynotes.jpg"],
+    },
+  },
+  "/licensing-in-multiple-jurisdictions-scaling-without-compliance-chaos": {
+    title: "Licensing in Multiple Jurisdictions: Scaling Without Compliance Chaos | Brit FinTech Awards",
+    description: "Learn how fintech firms can expand globally across multiple jurisdictions without creating compliance chaos—covering licensing, AML, KYC, and regulatory strategy.",
+    openGraph: {
+      title: "Licensing in Multiple Jurisdictions: Scaling Without Compliance Chaos",
+      description: "Learn how fintech firms can expand globally across multiple jurisdictions without creating compliance chaos—covering licensing, AML, KYC, and regulatory strategy.",
+      url: `${siteBaseUrl}/licensing-in-multiple-jurisdictions-scaling-without-compliance-chaos`,
+      siteName,
+      images: [
+        { url: "/assets/img/blogs/licensing-in-multiple-jurisdictions.png", width: 1200, height: 630, alt: "Licensing in Multiple Jurisdictions: Scaling Without Compliance Chaos" },
+      ],
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Licensing in Multiple Jurisdictions: Scaling Without Compliance Chaos",
+      description: "Learn how fintech firms can expand globally across multiple jurisdictions without creating compliance chaos—covering licensing, AML, KYC, and regulatory strategy.",
+      images: ["/assets/img/blogs/licensing-in-multiple-jurisdictions.png"],
     },
   },
   "/how-fintech-awards-drive-growth-trust-market-credibility": {

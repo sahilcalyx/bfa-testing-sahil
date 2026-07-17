@@ -37,6 +37,19 @@ const countries = [
   "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"
 ];
 
+const turnoverOptions = [
+  "Under £100K",
+  "£100K - £500K",
+  "£500K - £1M",
+  "£1M - £5M",
+  "£5M - £10M",
+  "£10M - £50M",
+  "£50M - £100M",
+  "£100M - £500M",
+  "£500M - £1B",
+  "Over £1B"
+];
+
 const RegisterNow = () => {
   const [captchaToken, setCaptchaToken] = useState("");
   const handleCaptchaChange = (token) => {
@@ -45,6 +58,9 @@ const RegisterNow = () => {
   const [countryDropdownOpen, setCountryDropdownOpen] = useState(false);
   const [countrySearchQuery, setCountrySearchQuery] = useState("");
   const countryDropdownRef = useRef(null);
+
+  const [turnoverDropdownOpen, setTurnoverDropdownOpen] = useState(false);
+  const turnoverDropdownRef = useRef(null);
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -96,6 +112,9 @@ const RegisterNow = () => {
     const handleClickOutside = (event) => {
       if (countryDropdownRef.current && !countryDropdownRef.current.contains(event.target)) {
         setCountryDropdownOpen(false);
+      }
+      if (turnoverDropdownRef.current && !turnoverDropdownRef.current.contains(event.target)) {
+        setTurnoverDropdownOpen(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -357,40 +376,9 @@ const RegisterNow = () => {
         break;
 
       case "amountingbp":
-        const currencyText = value.replace(/[^a-zA-Z0-9.,£$ ]/g, "");
-        const numericAmount = currencyText.replace(/[^0-9.]/g, "");
-        const formattedValue = numericAmount.replace(
-          /\B(?=(\d{3})+(?!\d))/g,
-          ","
-        );
-
-        let finalValue = formattedValue;
-        if (currencyText.toUpperCase().includes("GBP")) {
-          finalValue = `GBP ${formattedValue}`;
-        } else if (
-          currencyText.startsWith("£") ||
-          currencyText.toUpperCase().includes("POUND")
-        ) {
-          finalValue = `£ ${formattedValue}`;
-        } else if (currencyText.toUpperCase().includes("USD")) {
-          finalValue = `USD ${formattedValue}`;
-        } else {
-          // Default to starting with "£ " if no specific currency is mentioned
-          finalValue = `£ ${formattedValue}`;
-        }
-
-        // Ensure the final value starts with "£ "
-        if (!finalValue.startsWith("£ ")) {
-          finalValue = `£ ${formattedValue}`;
-        }
-
-        // Remove any additional spaces within the amount part
-        finalValue = finalValue.replace(/\s+/g, " ");
-
-        newFormData[id] = finalValue;
-
-        if (formattedValue === "" || isNaN(parseFloat(numericAmount))) {
-          newErrors.amountingbp = "Invalid amount";
+        newFormData[id] = value;
+        if (value === "") {
+          newErrors.amountingbp = "Turnover is required";
         } else {
           delete newErrors.amountingbp;
         }
@@ -1301,22 +1289,87 @@ const RegisterNow = () => {
                   <div className="cs-height_20 cs-height_lg_20" />
                 </div> */}
 
-                <div className="col-sm-6">
+                <div className="col-sm-6" ref={turnoverDropdownRef} style={{ position: "relative" }}>
                   {/* <label htmlFor="assets">Annual Turnover</label> */}
-                  <input
-                    type="text"
-                    id="amountingbp"
-                    name="amountingbp"
-                    className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${errors.amountingbp && "error-border"
+                  <div
+                    onClick={() => {
+                      setTurnoverDropdownOpen(!turnoverDropdownOpen);
+                    }}
+                    className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color d-flex align-items-center justify-content-between cursor-pointer ${errors.amountingbp ? "error-border" : ""
                       }`}
-                    placeholder="Turnover In GBP"
-                    maxLength="25"
-                    value={formData.amountingbp}
-                    onChange={handleInputChange}
-                  />
+                    style={{
+                      minHeight: "55px",
+                      padding: "10px 20px",
+                      borderRadius: "10px",
+                      cursor: "pointer",
+                      userSelect: "none"
+                    }}
+                  >
+                    <span style={{ color: formData.amountingbp ? "#000" : "#a3a3a3", fontWeight: formData.amountingbp ? "500" : "normal" }}>
+                      {formData.amountingbp || "Select Annual Turnover (GBP)"}
+                    </span>
+                    <span style={{ fontSize: "10px", color: "#a3a3a3" }}>▼</span>
+                  </div>
+
+                  {turnoverDropdownOpen && (
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: "100%",
+                        left: "15px",
+                        right: "15px",
+                        zIndex: 9999,
+                        background: "#fff",
+                        border: "1px solid rgba(0,0,0,0.15)",
+                        borderRadius: "10px",
+                        boxShadow: "0 10px 25px rgba(0,0,0,0.15)",
+                        marginTop: "5px",
+                        overflow: "hidden"
+                      }}
+                    >
+                      <div
+                        style={{
+                          maxHeight: "280px",
+                          overflowY: "auto",
+                          padding: "5px 0"
+                        }}
+                      >
+                        {turnoverOptions.map((option, idx) => (
+                          <div
+                            key={idx}
+                            onClick={() => {
+                              setFormData((prevData) => ({
+                                ...prevData,
+                                amountingbp: option
+                              }));
+                              setErrors((prevErrors) => {
+                                const newErrors = { ...prevErrors };
+                                delete newErrors.amountingbp;
+                                return newErrors;
+                              });
+                              setTurnoverDropdownOpen(false);
+                            }}
+                            style={{
+                              padding: "12px 20px",
+                              color: "#000",
+                              cursor: "pointer",
+                              fontSize: "15px",
+                              fontWeight: "500",
+                              transition: "background 0.2s"
+                            }}
+                            onMouseEnter={(e) => e.target.style.background = "#f1f1f1"}
+                            onMouseLeave={(e) => e.target.style.background = "transparent"}
+                          >
+                            {option}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
                   {errors.amountingbp && (
                     <div className="error text-danger">
-                      Amount in GBP is required
+                      Turnover is required
                     </div>
                   )}
                   <div className="cs-height_20 cs-height_lg_20" />

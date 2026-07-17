@@ -1,4 +1,5 @@
-import React from "react";
+﻿import React from "react";
+import { NavLink } from "react-router-dom";
 import RecentPosts from "../../Components/RecentPost";
 
 const From_cash_counters_to_super_apps_the_evolution_of_msbs = () => {
@@ -37,6 +38,10 @@ const From_cash_counters_to_super_apps_the_evolution_of_msbs = () => {
                     alt="FinTech in the UK: 3 Trends to Watch Right Now"
                   />
                 </div>
+                <div className="cs-height_20 cs-height_lg_20" />
+                <NavLink to="/blogs" className="btn-black">
+                  ← Back to Blogs
+                </NavLink>
                 <p>
                   Once upon a time,
                   <strong> Money Service Businesses (MSBs) </strong>were all

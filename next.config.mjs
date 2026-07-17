@@ -9,6 +9,12 @@ const nextConfig = {
     styledComponents: true,
   },
   outputFileTracingRoot: __dirname,
+  turbopack: {
+    resolveAlias: {
+      "react-router-dom": "./lib/react-router-dom-shim.js",
+      "react-helmet": "./lib/react-helmet-proxy.js",
+    },
+  },
   webpack: (config, { isServer }) => {
     config.resolve.alias = {
       ...(config.resolve.alias || {}),

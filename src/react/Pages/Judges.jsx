@@ -2,237 +2,225 @@ import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import { NavLink } from "react-router-dom";
 import JudgesSection2025 from "./2025/JudgesSection/JudgeSection2025";
+import JudgesSection2026 from "./2026/JudgesSection/JudgeSection2026";
 
 const Judges = () => {
-const [activeAccordion, setActiveAccordion] = useState(0); // Set the initial active accordion to the first item
+  const [activeTab, setActiveTab] = useState("2026");
 
-const toggleAccordion = (index) => {
-setActiveAccordion(activeAccordion === index ? null : index);
-};
+  return (
+    <div className="bg-white min-h-screen">
+      <Helmet>
+        <title>Fintech Awards Judges | Financial Experts UK</title>
+        <meta
+          name="description"
+          content="Meet the Fintech Awards judges - leading financial experts in the UK who will recognise outstanding innovations in the finance industry."
+        />
+        <meta
+          name="keywords"
+          content="Brit Fintech Awards, Judges, Financial Technology Experts, Fintech Leaders, Judges Panel"
+        />
+        <meta name="author" content="Brit Fintech Awards" />
+        <meta property="og:title" content="Fintech Awards Judges | Financial Experts UK" />
+        <meta
+          property="og:description"
+          content="Meet the Fintech Awards judges - leading financial experts in the UK who will recognise outstanding innovations in the finance industry."
+        />
+        <meta property="og:image" content="https://britfintechawards.com/assets/img/judges.png" />
+      </Helmet>
 
-// Example FAQ Data
-const faqData = [
-{
-question: "2025 Judges",
-answer: (
-<>
-  {/* Watch this space for more updates */}
-   <section
-      id="judges-section"
-      style={{
-        width: "100%",
-        // background: "linear-gradient(180deg, #fdfdfd, #f7f7f7)",
-        backgroundImage: 'url("../assets/img/event-conference/counter_bg3.webp")',
-        backgroundPosition: "center center",
-        backgroundSize: "cover",
-        paddingTop: "40px",   
-      }}
-    >
-      <div style={{padding:"88px"}}>
-      <JudgesSection2025 />
-      </div>
-    </section>
-
-</>
-),
-},
-{
-question: "2024 Judges",
-answer: (
-<div className="row">
-  <div className="col-lg-12">
-    <div className="cs-accordians cs-style1">
-      <div className="cs-accordian active">
-        <div className="cs-accordian-body" style={{ display: "block" }}>
-          <div className="row justify-content-center align-items-center">
-            <div className="col-lg-4">
-              <div className="cs-team_member cs-style8 text-center cs-white_bg">
-                <div
-                  className="cs-team_member_in cs-accent_5_bg cs-accent_5_bg_2_hover cs-transition_3 cs-accent_border cs-accent_border_2_hover">
-                  <div className="cs-member_image position-relative">
-                    <NavLink to="/judges/giordano-cortese">
-                      <img src="../assets/img/event-conference/bfa-jurry1.png" alt="Member"
-                        className="cs-accent_border cs-transition_3" />
-                    </NavLink>
-                  </div>
-                  <div className="cs-member_info">
-                    <h2 className="cs-member_name cs-semi_bold text-uppercase">
-                      <NavLink to="/judges/giordano-cortese">
-                        Mr. Giordano Cortese{" "}
-                      </NavLink>
-                    </h2>
-                    <div className="cs-member_designation cs-primary_color">
-                      Senior Manager of Partnerships & Client
-                      Acquisition <br />
-                      <strong>First Rate Exchange Services Ltd</strong>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="cs-height_40 cs-height_lg_30" />
-            </div>
-            <div className="col-lg-4">
-              <div className="cs-team_member cs-style8 text-center cs-white_bg">
-                <div
-                  className="cs-team_member_in cs-accent_5_bg cs-accent_5_bg_2_hover cs-transition_3 cs-accent_border cs-accent_border_2_hover">
-                  <div className="cs-member_image position-relative">
-                    <NavLink to="/judges/bharat-rai
-">
-                      <img src="../assets/img/event-conference/bfa-jurry2.png" alt="Member"
-                        className="cs-accent_border cs-transition_3" />
-                    </NavLink>
-                  </div>
-                  <div className="cs-member_info">
-                    <h2 className="cs-member_name cs-semi_bold text-uppercase">
-                      <NavLink to="/judges/bharat-rai">
-                        Mr. Bharat Rai{" "}
-                      </NavLink>
-                    </h2>
-
-                    <div className="cs-member_designation cs-primary_color">
-                      Regional Workplace Manager
-                      <br /> <strong> CBRe</strong>
-                      <br />
-                      <br />
-                      <br />
-                      <br />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="cs-height_40 cs-height_lg_30" />
-            </div>
+      {/* Hero Banner Section */}
+      <div>
+        <div className="cs-height_90 cs-height_lg_80" />
+        <div
+          className="cs-hero cs-style12 cs-type1 cs-center text-center cs-parallax cs-hobble"
+          style={{
+            backgroundImage: 'url("../assets/img/event-conference/hero-img.jpg")',
+          }}
+        >
+          <div className="cs-hero_pattern cs-hover_layer3">
+            <div className="cs-hero_pattern_in cs-bg_parallax" />
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-),
-},
-];
-return (
-<div>
-  <Helmet>
-    <title>Fintech Awards Judges | Financial Experts UK</title>
-    <meta name="description"
-      content="Meet the Fintech Awards judges- leading financial experts in the UK who will recognise outstanding innovations in the finance industry." />
-    <meta name="keywords"
-      content="Brit Fintech Awards, Judges, Financial Technology Experts, Fintech Leaders, Judges Panel" />
-    <meta name="author" content="Brit Fintech Awards" />
-    <meta property="og:title" content="Fintech Awards Judges | Financial Experts UK" />
-    <meta property="og:description"
-      content="Meet the Fintech Awards judges- leading financial experts in the UK who will recognise outstanding innovations in the finance industry." />
-    <meta property="og:image" content="https://britfintechawards.com/assets/img/judges.png" />
-  </Helmet>
-
-  <div>
-    <div className="cs-height_90 cs-height_lg_80" />
-    <div className="cs-hero cs-style12 cs-type1 cs-center text-center  cs-parallax cs-hobble" style={{
-            backgroundImage:
-              'url("../assets/img/event-conference/hero-img.jpg")',
-          }}>
-      <div className="cs-hero_pattern cs-hover_layer3" style={{}}>
-        <div className="cs-hero_pattern_in cs-bg_parallax" />
-      </div>
-      <div className="container wow fadeInDown" data-wow-duration="1s" data-wow-delay="0.2s" style={{
+          <div
+            className="container wow fadeInDown"
+            data-wow-duration="1s"
+            data-wow-delay="0.2s"
+            style={{
               visibility: "visible",
               animationDuration: "1s",
               animationDelay: "0.2s",
               animationName: "fadeInDown",
-            }}>
-        <div className="cs-hero_text text-left">
-          <h1 className="cs-hero_title cs-extra_bold cs-white text-uppercase pb-3 mb-0"
-            style={{ marginTop: "40px !important" }}>
-            Judges
-          </h1>
-          <p className="pb-0 mb-0 text-left text-white">
-            Meet Our FinTech Jury: Experts in Action
-          </p>
-          <div className="cs-height_10 cs-height_lg_0" />
-        </div>
-      </div>
-      <div className="cs-hero_img cs-bg" data-src="../assets/img/creative-agency/hero-img.jpg" style={{
-              backgroundImage:
-                'url("../assets/img/creative-agency/hero-img.jpg")',
-            }}>
-        <div className="cs-hero_img_circle" />
-      </div>
-    </div>
-
-    <div className="cs-height_90 cs-height_lg_80" />
-    <div className="container">
-      <div className="row">
-        <div className="col-lg-12">
-          <div className="cs-accordians cs-style1">
-            {faqData.map((faq, index) => (
-            <div className={`cs-accordian ${ activeAccordion===index ? "active" : "" }`} key={index}>
-              <div className="cs-accordian_head cs-accent_border_2 cs-white_bg" onClick={()=> toggleAccordion(index)}
-                >
-                <h2 className="cs-accordian_title">{faq.question}</h2>
-                <span className="cs-accordian_toggle cs-accent_color_2">
-                  <i className={`fa ${ activeAccordion===index ? "fa-angle-up" : "fa-angle-down" }`} />
-                </span>
-              </div>
-              <div className="cs-accordian-body" style={{
-                        display: activeAccordion === index ? "block" : "none",
-                      }}>
-                {faq.answer}
-              </div>
-            </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-  <div className="cs-height_40 cs-height_lg_40" />
-  <div className="cs-bg" style={{
-          backgroundImage:
-            'url("../assets/img/event-conference/newsletter-bg.jpg")',
-        }}>
-    {/* <div className="cs-bg" data-src="../assets/img/event-conference/newsletter-particel.png" style={{
-            backgroundImage:
-              'url("../assets/img/event-conference/newsletter-particel.png")',
-          }}>
-      <div className="cs-height_135 cs-height_lg_75" />
-      <div className="container">
-        <div className="row">
-          <div className="col-lg-8 offset-lg-2 wow fadeInDown" data-wow-duration="1s" data-wow-delay="0.2s" style={{
-                  visibility: "visible",
-                  animationDuration: "1s",
-                  animationDelay: "0.2s",
-                  animationName: "fadeInDown",
-                }}>
-            <div className="cs-section_heading cs-style2 cs-size3 text-center text-uppercase">
-              <div className="cs-section_subtitle cs-primary_font cs-medium cs-white_80">
-                BRIT FINTECH AWARDS 2024
-              </div>
-              <h2 className="cs-section_title cs-extra_bold cs-white">
-                Are you ready to enter?
-              </h2>
-              <p className="text-white mt-2">
-                Join us in celebrating the best and brightest in UK Fintech
-                Industry.
+            }}
+          >
+            <div className="cs-hero_text text-left">
+              <h1
+                className="cs-hero_title cs-extra_bold cs-white text-uppercase pb-3 mb-0"
+                style={{ marginTop: "40px !important" }}
+              >
+                Judges
+              </h1>
+              <p className="pb-0 mb-0 text-left text-white">
+                Meet Our FinTech Jury: Experts in Action
               </p>
+              <div className="cs-height_10 cs-height_lg_0" />
             </div>
-            <div className="cs-height_40 cs-height_lg_30" />
-            <div className="cs-toolbox text-center">
-              <NavLink to="/register-now"
-                className="cs-btn cs-style1 cs-btn_lg cs-medium text_uppercase cs-primary_font cs-accent_bg cs-accent_border cs-white cs-accent_bg_2_hover  text-white">
-                <span className="cs-btn_text">Register For Awards</span>
-              </NavLink>
-            </div>
+          </div>
+          <div
+            className="cs-hero_img cs-bg"
+            data-src="../assets/img/creative-agency/hero-img.jpg"
+            style={{
+              backgroundImage: 'url("../assets/img/creative-agency/hero-img.jpg")',
+            }}
+          >
+            <div className="cs-hero_img_circle" />
           </div>
         </div>
       </div>
-      <div className="cs-height_140 cs-height_lg_80" />
-    </div> */}
-  </div>
-</div>
-);
+
+      {/* Tab Switcher & Content Wrapper */}
+      <div className="py-16 md:py-24 bg-white">
+        <div className="container">
+          {/* Section Header */}
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <span className="text-[10px] font-black uppercase tracking-[0.25em] text-[#c8102e]">
+              BRIT FINTECH JURY
+            </span>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-zinc-900 tracking-tight mt-2">
+              Meet Our Esteemed Judges
+            </h2>
+            <p className="mt-3 text-sm text-zinc-500 max-w-md mx-auto leading-relaxed">
+              Leading financial technology experts in the UK committed to recognizing and celebrating pioneering industry innovations.
+            </p>
+          </div>
+
+          {/* Premium Segmented Tab Control */}
+          <div className="flex justify-center mb-16 px-4">
+            <div className="inline-flex p-1 bg-zinc-100 rounded-full border border-zinc-200/50 shadow-inner z-10 relative">
+              {["2026", "2025", "2024"].map((year) => (
+                <button
+                  key={year}
+                  onClick={() => setActiveTab(year)}
+                  className={`px-5 sm:px-8 py-2.5 sm:py-3 rounded-full font-bold text-[10px] sm:text-xs uppercase tracking-widest transition-all duration-300 ${
+                    activeTab === year
+                      ? "bg-[#c8102e] text-white shadow-lg shadow-[#c8102e]/25"
+                      : "text-zinc-600 hover:text-zinc-900 hover:bg-zinc-200/40"
+                  }`}
+                >
+                  {year}
+                  <span className="hidden sm:inline"> JURY</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Tab Panels */}
+          <div className="transition-all duration-500 ease-in-out">
+            {activeTab === "2026" && (
+              <div className="animate-fadeIn">
+                <section
+                  id="judges-section-2026"
+                  style={{
+                    width: "100%",
+                    backgroundColor: "#ffffff",
+                  }}
+                >
+                  <JudgesSection2026 />
+                </section>
+              </div>
+            )}
+
+            {activeTab === "2025" && (
+              <div className="animate-fadeIn">
+                <section
+                  id="judges-section-2025"
+                  className="rounded-3xl overflow-hidden shadow-xl"
+                  style={{
+                    width: "100%",
+                    backgroundImage: 'url("../assets/img/event-conference/counter_bg3.webp")',
+                    backgroundPosition: "center center",
+                    backgroundSize: "cover",
+                  }}
+                >
+                  <div style={{ padding: "88px 24px" }}>
+                    <JudgesSection2025 />
+                  </div>
+                </section>
+              </div>
+            )}
+
+            {activeTab === "2024" && (
+              <div className="animate-fadeIn">
+                <div className="row justify-content-center align-items-center bg-white py-12 rounded-3xl border border-stone-100 shadow-sm max-w-4xl mx-auto px-4">
+                  <div className="col-lg-12">
+                    <div className="row justify-content-center align-items-center">
+                      {/* Mr. Giordano Cortese (2024) */}
+                      <div className="col-lg-5 col-md-6 mb-8 md:mb-0">
+                        <div className="cs-team_member cs-style8 text-center cs-white_bg">
+                          <div className="cs-team_member_in cs-accent_5_bg cs-accent_5_bg_2_hover cs-transition_3 cs-accent_border cs-accent_border_2_hover rounded-2xl p-4 shadow-sm border border-stone-200/60">
+                            <div className="cs-member_image position-relative overflow-hidden rounded-xl">
+                              <NavLink to="/judges/giordano-cortese">
+                                <img
+                                  src="../assets/img/event-conference/bfa-jurry1.png"
+                                  alt="Mr. Giordano Cortese"
+                                  className="cs-accent_border cs-transition_3 w-full object-cover h-[260px]"
+                                />
+                              </NavLink>
+                            </div>
+                            <div className="cs-member_info mt-4">
+                              <h3 className="text-lg font-bold text-zinc-950 uppercase tracking-wide">
+                                <NavLink to="/judges/giordano-cortese">
+                                  Mr. Giordano Cortese
+                                </NavLink>
+                              </h3>
+                              <div className="text-xs text-zinc-500 font-semibold mt-1">
+                                Senior Manager of Partnerships & Client Acquisition
+                              </div>
+                              <div className="text-xs font-bold text-[#c8102e] mt-1.5">
+                                First Rate Exchange Services Ltd
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Mr. Bharat Rai (2024) */}
+                      <div className="col-lg-5 col-md-6">
+                        <div className="cs-team_member cs-style8 text-center cs-white_bg">
+                          <div className="cs-team_member_in cs-accent_5_bg cs-accent_5_bg_2_hover cs-transition_3 cs-accent_border cs-accent_border_2_hover rounded-2xl p-4 shadow-sm border border-stone-200/60">
+                            <div className="cs-member_image position-relative overflow-hidden rounded-xl">
+                              <NavLink to="/judges/bharat-rai">
+                                <img
+                                  src="../assets/img/event-conference/bfa-jurry2.png"
+                                  alt="Mr. Bharat Rai"
+                                  className="cs-accent_border cs-transition_3 w-full object-cover h-[260px]"
+                                />
+                              </NavLink>
+                            </div>
+                            <div className="cs-member_info mt-4">
+                              <h3 className="text-lg font-bold text-zinc-950 uppercase tracking-wide">
+                                <NavLink to="/judges/bharat-rai">
+                                  Mr. Bharat Rai
+                                </NavLink>
+                              </h3>
+                              <div className="text-xs text-zinc-500 font-semibold mt-1">
+                                Regional Workplace Manager
+                              </div>
+                              <div className="text-xs font-bold text-[#c8102e] mt-1.5">
+                                CBRe
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Judges;

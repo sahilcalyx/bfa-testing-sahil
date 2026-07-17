@@ -1,6 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import { NavLink } from "react-router-dom";
+import DownloadCTASection from "../Components/DownloadCTASection";
 
 const About = () => {
   return (
@@ -443,6 +444,8 @@ const About = () => {
           <div className="cs-height_50 cs-height_lg_50" bis_skin_checked={1} />
         </div>
 
+        {/* Download CTA Section */}
+        <DownloadCTASection />
       </div>
     </div>
   );

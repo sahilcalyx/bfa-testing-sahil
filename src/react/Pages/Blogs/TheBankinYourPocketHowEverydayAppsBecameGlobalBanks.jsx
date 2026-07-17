@@ -1,4 +1,5 @@
-import React from "react";
+﻿import React from "react";
+import { NavLink } from "react-router-dom";
 import RecentPosts from "../../Components/RecentPost";
 
 const TheBankinYourPocketHowEverydayAppsBecameGlobalBanks = () => {
@@ -38,6 +39,10 @@ const TheBankinYourPocketHowEverydayAppsBecameGlobalBanks = () => {
                     alt="Inside the BFA Experience: Networking, Energy & Innovation"
                   />
                 </div>
+                <div className="cs-height_20 cs-height_lg_20" />
+                <NavLink to="/blogs" className="btn-black">
+                  ← Back to Blogs
+                </NavLink>
                 <p>
                   Once upon a time, banking meant stepping into a branch. Today,
                   it fits neatly into your pocket — faster, sleeker, and more

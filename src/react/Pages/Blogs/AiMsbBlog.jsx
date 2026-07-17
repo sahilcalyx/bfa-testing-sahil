@@ -1,4 +1,5 @@
-import React from "react";
+﻿import React from "react";
+import { NavLink } from "react-router-dom";
 import RecentPosts from "../../Components/RecentPost";
 
 const AiMsbBlog = () => {
@@ -37,6 +38,10 @@ const AiMsbBlog = () => {
                     alt="FinTech in the UK: 3 Trends to Watch Right Now"
                   />
                 </div>
+                <div className="cs-height_20 cs-height_lg_20" />
+                <NavLink to="/blogs" className="btn-black">
+                  ← Back to Blogs
+                </NavLink>
                 <p>
                   Artificial Intelligence (AI) has become one of the most
                   talked-about innovations in the financial world. But for Money

@@ -116,6 +116,10 @@ const Beyond_borders_how_brit_fintech = lazy(() => import("./Pages/Blogs/Beyond_
 const Winner2025 = lazy(() => import("./Pages/2025/Winner/Winner2025"));
 const From_cash_counters_to_super_apps_the_evolution_of_msbs = lazy(() => import("./Pages/Blogs/From_cash_counters_to_super_apps_the_evolution_of_msbs"));
 const NikhilSapreJudgeDetails2025 = lazy(() => import("./Pages/2025/JudgesSection/NikhilSapreJudgeDetails2025"));
+const NikhilSapreJudgeDetails2026 = lazy(() => import("./Pages/2026/JudgesSection/NikhilSapreJudgeDetails2026"));
+const JamesBorleyJudgeDetails2026 = lazy(() => import("./Pages/2026/JudgesSection/JamesBorleyJudgeDetails2026"));
+const DavidPodestaJudgeDetails2026 = lazy(() => import("./Pages/2026/JudgesSection/DavidPodestaJudgeDetails2026"));
+const GiordanoCorteseJudgeDetails2026 = lazy(() => import("./Pages/2026/JudgesSection/GiordanoCorteseJudgeDetails2026"));
 const ECEXSponsorDetails = lazy(() => import("./Pages/2025/OurSponsors/ECEXSponsorDetails"));
 const VolumeWinnerDetails25 = lazy(() => import("./Pages/2025/Winner/WinnerDetailsPages/VolumeWinnerDetails25"));
 const FastTrackWinnerDetails25 = lazy(() => import("./Pages/2025/Winner/WinnerDetailsPages/FastTrackWinnerDetails25"));
@@ -156,6 +160,8 @@ const AiPoweredRiskCompliance = lazy(() => import("./Pages/Blogs/AiPoweredRiskCo
 const InvisibleFinancialBridge = lazy(() => import("./Pages/Blogs/InvisibleFinancialBridge"));
 const FinancialInclusionUK = lazy(() => import("./Pages/Blogs/FinancialInclusionUK"));
 const HowFintechAwardsDriveGrowth = lazy(() => import("./Pages/Blogs/HowFintechAwardsDriveGrowth"));
+const LicensingInMultipleJurisdictions = lazy(() => import("./Pages/Blogs/LicensingInMultipleJurisdictions"));
+const DownloadApp = lazy(() => import("./Pages/DownloadApp"));
 
 
 function App() {
@@ -653,6 +659,7 @@ function App() {
 
         
 
+        <Route path="/download-app" element={<DownloadApp />} />
         <Route path="/blogs" element={<Blogs />} />
          <Route
           path="/inside-the-bfa-experience-networking-energy-innovation"
@@ -688,10 +695,30 @@ function App() {
           element={<NikhilSapreJudgeDetails2025 />}
         />
         <Route
+          path="/nikhil-sapre-judge-details-2026"
+          element={<NikhilSapreJudgeDetails2026 />}
+        />
+        <Route
+          path="/james-borley-judge-details-2026"
+          element={<JamesBorleyJudgeDetails2026 />}
+        />
+        <Route
+          path="/david-podesta-judge-details-2026"
+          element={<DavidPodestaJudgeDetails2026 />}
+        />
+        <Route
+          path="/giordano-cortese-judge-details-2026"
+          element={<GiordanoCorteseJudgeDetails2026 />}
+        />
+        <Route
           path="/beyond-borders-brit-fintech-awards"
           element={<Beyond_borders_how_brit_fintech />}
         />
 
+        <Route
+          path="/licensing-in-multiple-jurisdictions-scaling-without-compliance-chaos"
+          element={<LicensingInMultipleJurisdictions />}
+        />
         <Route
           path="/how-fintech-awards-drive-growth-trust-market-credibility"
           element={<HowFintechAwardsDriveGrowth />}

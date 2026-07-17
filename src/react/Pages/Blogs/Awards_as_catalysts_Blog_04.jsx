@@ -1,4 +1,5 @@
-import React from "react";
+﻿import React from "react";
+import { NavLink } from "react-router-dom";
 import RecentPosts from "../../Components/RecentPost";
 
 const Awards_as_catalysts_Blog_04 = () => {
@@ -38,6 +39,10 @@ const Awards_as_catalysts_Blog_04 = () => {
                     alt="FinTech in the UK: 3 Trends to Watch Right Now"
                   />
                 </div>
+                <div className="cs-height_20 cs-height_lg_20" />
+                <NavLink to="/blogs" className="btn-black">
+                  ← Back to Blogs
+                </NavLink>
                 <p>
                   In science, a <strong>catalyst</strong> is something that
                   sparks a reaction and makes it happen faster. In Fintech &

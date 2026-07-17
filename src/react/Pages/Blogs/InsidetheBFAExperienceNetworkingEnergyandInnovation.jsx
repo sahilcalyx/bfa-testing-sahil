@@ -1,4 +1,5 @@
-import React from "react";
+﻿import React from "react";
+import { NavLink } from "react-router-dom";
 import RecentPosts from "../../Components/RecentPost";
 
 const InsidetheBFAExperienceNetworkingEnergyandInnovation = () => {
@@ -37,6 +38,10 @@ const InsidetheBFAExperienceNetworkingEnergyandInnovation = () => {
                     alt="Inside the BFA Experience: Networking, Energy & Innovation"
                   />
                 </div>
+                <div className="cs-height_20 cs-height_lg_20" />
+                <NavLink to="/blogs" className="btn-black">
+                  ← Back to Blogs
+                </NavLink>
                 <p>
                   Some nights you remember. This one you felt.
                 </p>

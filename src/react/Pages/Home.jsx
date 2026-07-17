@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Odometer from "odometer";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import JudgesSection2026 from "./2026/JudgesSection/JudgeSection2026";
 
 import ErrorBoundary from "../Components/ErrorBoundary";
 import GallerySection from "../Components/GallerySection";
@@ -408,41 +409,25 @@ Brit Fintech Awards 2026."
 
         {/* Discussion Pannel Section  */}
 
+        {/* Jury 2026 Section */}
         <section
           id="judges-section"
-          className="d-none"
-          style={{
-            width: "100%",
-            // background: "linear-gradient(180deg, #fdfdfd, #f7f7f7)",
-            backgroundImage:
-              'url("../assets/img/event-conference/counter_bg3.webp")',
-            backgroundPosition: "center center",
-            backgroundSize: "cover",
-          }}
+          className="py-16 bg-zinc-50"
         >
-          <h2
-            className="mb-5"
-            style={{
-              textAlign: "center",
-              fontSize: "36px",
-              fontWeight: "800",
-              color: "#fff",
-              paddingTop: "50px",
-            }}
-          >
-            Meet Our Judges
-            <span
-              style={{
-                display: "block",
-                width: "90px",
-                height: "4px",
-                margin: "15px auto 0",
-                borderRadius: "3px",
-                background: "linear-gradient( #ff2e63)",
-              }}
-            ></span>
-          </h2>
-          {/* <JudgesSection2025 /> */}
+          <div className="container">
+            <div className="text-center max-w-2xl mx-auto mb-12">
+              <span className="text-[10px] font-black uppercase tracking-[0.25em] text-[#c8102e]">
+                BRIT FINTECH JURY
+              </span>
+              <h2 className="text-3xl md:text-4xl font-extrabold text-zinc-900 tracking-tight mt-2">
+                Meet Our 2026 Jury
+              </h2>
+              <p className="mt-3 text-sm text-zinc-500 max-w-md mx-auto leading-relaxed">
+                Leading financial technology experts in the UK committed to recognizing and celebrating pioneering industry innovations.
+              </p>
+            </div>
+            <JudgesSection2026 />
+          </div>
         </section>
 
         {/* <DiscussionPannelSection /> */}

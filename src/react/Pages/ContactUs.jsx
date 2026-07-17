@@ -4,6 +4,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { Helmet } from "react-helmet";
 import { NavLink } from "react-router-dom";
 import Swal from "sweetalert2";
+import DownloadCTASection from "../Components/DownloadCTASection";
 
 const ContactUs = () => {
   const [captchaToken, setCaptchaToken] = useState("");
@@ -611,6 +612,8 @@ const ContactUs = () => {
           <div className="cs-height_140 cs-height_lg_80" />
         </div> */}
       </div>
+      {/* Download CTA Section */}
+      <DownloadCTASection />
       {/* Modal */}
       {showModal && (
         <div className="modal-overlay">

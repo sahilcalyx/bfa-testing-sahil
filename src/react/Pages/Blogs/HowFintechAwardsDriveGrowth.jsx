@@ -1,4 +1,5 @@
-import React from "react";
+﻿import React from "react";
+import { NavLink } from "react-router-dom";
 import RecentPosts from "../../Components/RecentPost";
 import {
   Award,
@@ -108,6 +109,10 @@ const HowFintechAwardsDriveGrowth = () => {
                     alt="How Fintech Awards Drive Growth, Trust & Market Credibility"
                   />
                 </div>
+                <div className="cs-height_20 cs-height_lg_20" />
+                <NavLink to="/blogs" className="btn-black">
+                  ← Back to Blogs
+                </NavLink>
 
                 <p className="text-center">
                   <strong>

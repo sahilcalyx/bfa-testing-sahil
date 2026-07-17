@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import RecentPosts from '../../Components/RecentPost'
 
 const FinTechintheUK = () => {
@@ -29,6 +30,10 @@ const FinTechintheUK = () => {
               <div className="cs-height_25 cs-height_lg_25" />
             <img className='rounded-3' src="../assets/img/blogs/fintech-in-the-uk.jpg" alt="FinTech in the UK: 3 Trends to Watch Right Now" />
           </div>
+          <div className="cs-height_20 cs-height_lg_20" />
+          <NavLink to="/blogs" className="btn-black">
+            ← Back to Blogs
+          </NavLink>
           <p>
           The UK fintech scene is heating up with three major trends leading the charge: <strong>AI-Powered Everything</strong>, where artificial intelligence is transforming customer service, fraud detection, and personalised banking; <strong>Embedded Finance</strong>, which is reshaping how consumers access financial services by integrating payments and lending into everyday platforms; and <strong>RegTech on the Rise</strong>, as firms turn to technology to navigate stricter regulatory frameworks with speed and confidence.
           </p>

@@ -1,4 +1,5 @@
-import React from "react";
+﻿import React from "react";
+import { NavLink } from "react-router-dom";
 import RecentPosts from "../../Components/RecentPost";
 
 const Cbdc_Central_bank_digital_currencies = () => {
@@ -39,6 +40,10 @@ const Cbdc_Central_bank_digital_currencies = () => {
                     alt="FinTech in the UK: 3 Trends to Watch Right Now"
                   />
                 </div>
+                <div className="cs-height_20 cs-height_lg_20" />
+                <NavLink to="/blogs" className="btn-black">
+                  ← Back to Blogs
+                </NavLink>
 
                 <p>
                   As more than 134 countries actively explore, pilot, or develop

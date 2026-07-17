@@ -6,19 +6,27 @@ const Blog = () => {
   // ===== BLOG DATA =====
   const blogsData = [
     {
+      title: "Licensing in multiple jurisdictions: Scaling without compliance chaos",
+      slug: "licensing-in-multiple-jurisdictions-scaling-without-compliance-chaos",
+      img: "/assets/img/blogs/licensing-in-multiple-jurisdictions.png",
+      alt: "Licensing in multiple jurisdictions: Scaling without compliance chaos",
+      date: "02 Jul, 2026",
+      excerpt: "Expanding into new markets brings enormous opportunities—but every jurisdiction comes with its...",
+    },
+    {
       title: "How Fintech Awards Drive Growth, Trust & Market Credibility",
       slug: "how-fintech-awards-drive-growth-trust-market-credibility",
       img: "/assets/img/blogs/How-Fintech-Awards-Drive-Growth-Trust-Market-Credibility.jpg",
       alt: "How Fintech Awards Drive Growth, Trust & Market Credibility",
       date: "20 Jun, 2026",
-      excerpt: "In fintech, innovation is important—but trust is everything...",
+      excerpt: "In fintech, innovation is important-but trust is everything. Whether you're a payments...",
     },
     {
       title: "Financial inclusion in the UK: How fintech is bridging the gap for the underbanked",
       slug: "financial-inclusion-in-the-uk-how-fintech-is-bridging-the-gap-for-the-underbanked",
       img: "/assets/img/blogs/financial-inclusion-in-the-uk-how-fintech.jpg",
       alt: "Financial inclusion in the UK",
-      date: "5 Jun, 2026",
+      date: "05 Jun, 2026",
       excerpt: "In the UK, financial exclusion is no longer about not...",
     },
     {
