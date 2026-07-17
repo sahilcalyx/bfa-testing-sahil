@@ -84,6 +84,7 @@ const CancelPage = lazy(() => import("./Pages/CancelledPage"));
 const TeeparamExchangeDetails2025 = lazy(() => import("./Pages/2025/OurSponsors/TeeparamExchangeDetails2025"));
 const VolumePaySponsorDetails2025 = lazy(() => import("./Pages/2025/OurSponsors/VolumePaySponsorDetails2025"));
 import ScrollToHashElement from "./Components/SliderBigBan/ScrollToHashElement";
+import TigrisPaySponsorDetails from "./Pages/2026/OurSponsors/TigrisPaySponsorDetails";
 const LeatherbackSponsorDetails = lazy(() => import("./Pages/2025/OurSponsors/LeatherbackSponsorDetails"));
 const AiMsbBlog = lazy(() => import("./Pages/Blogs/AiMsbBlog"));
 const ClearJunctionDetails2025 = lazy(() => import("./Pages/2025/OurSponsors/ClearJunctionDetails2025"));
@@ -644,7 +645,11 @@ function App() {
         />
         
         {/* End Winner 2025 Details Pages */}
-
+        {/*  Sponsor 2026 Details Pages */}
+        <Route
+          path="/tigris-pay-sponsor-details-2026"
+          element={<TigrisPaySponsorDetails />}
+        />
 
 
         {/* Gallary 2025 Pages Start */}

@@ -6,13 +6,13 @@ const SponsorSection2026 = () => {
   const navigate = useNavigate();
   // Array of 2026 sponsors - easy to add multiple sponsors in the future!
   const sponsors = [
-    {
-      name: "Tigris Pay",
-      logo: "https://tigrispay.com/assets/TigrisPayLogo-BJ0NLp12.png",
-      video: "/assets/video/sponsors-logo-2026/Tigrispay-logo-11.webm",
-      link: "/tigris-pay-sponsor-details-2026",
-      tier: "Platinum Sponsor"
-    },
+    // {
+    //   name: "Tigris Pay",
+    //   logo: "https://tigrispay.com/assets/TigrisPayLogo-BJ0NLp12.png",
+    //   video: "/assets/video/sponsors-logo-2026/Tigrispay-logo-11.webm",
+    //   link: "/tigris-pay-sponsor-details-2026",
+    //   tier: "Platinum Sponsor"
+    // },
     {
       name: "Tigris Pay",
       logo: "https://tigrispay.com/assets/TigrisPayLogo-BJ0NLp12.png",
