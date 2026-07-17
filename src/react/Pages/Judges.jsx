@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import { NavLink } from "react-router-dom";
 import JudgesSection2025 from "./2025/JudgesSection/JudgeSection2025";
-import JudgesSection2026 from "./2026/JudgesSection/JudgeSection2026";
+// import JudgesSection2026 from "./2026/JudgesSection/JudgeSection2026";
 
 const Judges = () => {
-  const [activeTab, setActiveTab] = useState("2026");
+  const [activeTab, setActiveTab] = useState("2025");
 
   return (
     <div className="bg-white min-h-screen">
@@ -95,7 +95,9 @@ const Judges = () => {
           {/* Premium Segmented Tab Control */}
           <div className="flex justify-center mb-16 px-4">
             <div className="inline-flex p-1 bg-zinc-100 rounded-full border border-zinc-200/50 shadow-inner z-10 relative">
-              {["2026", "2025", "2024"].map((year) => (
+              {/* Jury 2026 hidden for now */}
+              {/* {["2026", "2025", "2024"].map((year) => ( */}
+              {["2025", "2024"].map((year) => (
                 <button
                   key={year}
                   onClick={() => setActiveTab(year)}
@@ -114,6 +116,7 @@ const Judges = () => {
 
           {/* Tab Panels */}
           <div className="transition-all duration-500 ease-in-out">
+            {/* Jury 2026 hidden for now
             {activeTab === "2026" && (
               <div className="animate-fadeIn">
                 <section
@@ -127,6 +130,7 @@ const Judges = () => {
                 </section>
               </div>
             )}
+            */}
 
             {activeTab === "2025" && (
               <div className="animate-fadeIn">

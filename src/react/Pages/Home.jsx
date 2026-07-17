@@ -412,7 +412,7 @@ Brit Fintech Awards 2026."
         {/* Discussion Pannel Section  */}
 
         {/* Jury 2026 Section */}
-        <section
+        {/* <section
           id="judges-section"
           className="py-16 bg-zinc-50"
         >
@@ -430,7 +430,7 @@ Brit Fintech Awards 2026."
             </div>
             <JudgesSection2026 />
           </div>
-        </section>
+        </section> */}
         <BFA26Section />
         {/* <DiscussionPannelSection /> */}
 

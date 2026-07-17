@@ -7,7 +7,7 @@ const judges2026List = [
     name: "Mr. James Borley",
     role: "Director for Payment Services",
     company: "Complyport Limited",
-    img: "../assets/img/judges2026/james-borley.jpg",
+    img: "/assets/img/judges2026/james-borley.jpg",
     linkedin: "https://www.linkedin.com/company/complyport-limited",
     tagline: "Elevating Industry Standards",
     highlights: [
@@ -21,7 +21,7 @@ const judges2026List = [
     name: "Mr. Nikhil Sapre",
     role: "Lecturer in Finance & Programme Director",
     company: "University of Bristol Business School",
-    img: "../assets/img/judges2026/nikhil-sapre.jpg",
+    img: "/assets/img/judges2026/nikhil-sapre.jpg",
     linkedin: "https://www.linkedin.com/in/nikhilsapre?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
     tagline: "Setting the Benchmark",
     highlights: [
@@ -35,7 +35,7 @@ const judges2026List = [
     name: "Mr. David Podesta",
     role: "Associate Director, Trust & Safety (Fraud)",
     company: "Viator",
-    img: "../assets/img/judges2026/david-podesta.jpg",
+    img: "/assets/img/judges2026/david-podesta.jpg",
     linkedin: "https://www.linkedin.com/in/david-christian-podesta-6677661/",
     tagline: "Championing Innovation",
     highlights: [
@@ -49,7 +49,7 @@ const judges2026List = [
     name: "Mr. Giordano Cortese",
     role: "Senior Product Manager - Cash",
     company: "First Rate Exchange Services Ltd",
-    img: "../assets/img/judges2026/giordano-cortese.jpg",
+    img: "/assets/img/judges2026/giordano-cortese.jpg",
     linkedin: "https://www.linkedin.com/in/giordanocortese1",
     tagline: "Senior Product Manager - Cash",
     highlights: [
@@ -79,7 +79,7 @@ const JudgesSection2026 = () => {
             className="w-full flex flex-col sm:flex-row gap-6 p-6 rounded-[28px] bg-white border border-zinc-100 shadow-[0_8px_30px_rgb(0,0,0,0.015)] transition-all duration-500 hover:shadow-[0_25px_60px_rgba(200,16,46,0.06)] hover:border-[#c8102e]/15 group relative"
           >
             {/* Image Column */}
-            <div className="relative w-full sm:w-[170px] md:w-[190px] h-[350px] sm:h-auto rounded-[20px] overflow-hidden bg-zinc-50 flex-shrink-0">
+            <div className="relative w-full sm:w-[210px] md:w-[240px] h-[350px] sm:h-auto rounded-[20px] overflow-hidden bg-zinc-50 flex-shrink-0">
               {/* Image with Grayscale & Zoom */}
               <img
                 src={judge.img}

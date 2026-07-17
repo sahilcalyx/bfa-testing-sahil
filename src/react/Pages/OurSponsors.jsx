@@ -21,12 +21,19 @@ const OurSponsors = () => {
           <div className="row justify-content-center g-4">
             {[
               {
+                link: "https://calyx-solutions.com/",
+                external: true,
+                video: "/assets/video/sponsors-logo-2026/sposnsor-logo-2026-Calyx-solutions.mp4",
+                alt: "Calyx Solutions",
+                title: "Calyx Solutions",
+              },
+              {
                 link: "/tigris-pay-sponsor-details-2026",
-                video: "/assets/video/sponsors-logo-2026/tigrispay-newianimated-logo-BFA.webm",
+                external: false,
+                video: "/assets/video/sponsors-logo-2026/sposnsor-logo-2026-Tigris-pay.mp4",
                 alt: "Tigris Pay",
                 title: "Tigris Pay",
-                description: "Fast. Secure. Reliable. UK-based Authorised Payment Institution committed to simple, secure international transfers."
-              }
+              },
             ].map((s, index) => (
               <div className="col-lg-5 col-md-6 col-12" key={index}>
                 <div
@@ -34,7 +41,7 @@ const OurSponsors = () => {
                     backgroundColor: "#ffffff",
                     borderRadius: "20px",
                     border: "none",
-                    padding: s.video ? "8px" : "35px 25px",
+                    padding: "8px",
                     boxShadow: "0 10px 30px rgba(0,0,0,0.05)",
                     textAlign: "center",
                     height: "100%",
@@ -56,38 +63,29 @@ const OurSponsors = () => {
                 >
                   <NavLink
                     to={s.link}
+                    target={s.external ? "_blank" : undefined}
+                    rel={s.external ? "noopener noreferrer" : undefined}
                     style={{
                       display: "block",
                       width: "100%",
                     }}
                   >
-                    {s.video ? (
-                      <video
-                        src={s.video}
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        aria-label={s.alt}
-                        style={{
-                          width: "100%",
-                          height: "auto",
-                          display: "block",
-                          objectFit: "contain",
-                          borderRadius: "14px",
-                          pointerEvents: "none",
-                        }}
-                      />
-                    ) : (
-                      <img
-                        src={s.img}
-                        alt={s.alt}
-                        style={{
-                          maxHeight: "75px",
-                          objectFit: "contain"
-                        }}
-                      />
-                    )}
+                    <video
+                      src={s.video}
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      aria-label={s.alt}
+                      style={{
+                        width: "100%",
+                        height: "auto",
+                        display: "block",
+                        objectFit: "contain",
+                        borderRadius: "14px",
+                        pointerEvents: "none",
+                      }}
+                    />
                   </NavLink>
                 </div>
               </div>

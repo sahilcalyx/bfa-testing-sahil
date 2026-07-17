@@ -4,22 +4,21 @@ import { NavLink, useNavigate } from "react-router-dom";
 
 const SponsorSection2026 = () => {
   const navigate = useNavigate();
-  // Array of 2026 sponsors - easy to add multiple sponsors in the future!
   const sponsors = [
-    // {
-    //   name: "Tigris Pay",
-    //   logo: "https://tigrispay.com/assets/TigrisPayLogo-BJ0NLp12.png",
-    //   video: "/assets/video/sponsors-logo-2026/Tigrispay-logo-11.webm",
-    //   link: "/tigris-pay-sponsor-details-2026",
-    //   tier: "Platinum Sponsor"
-    // },
+    {
+      name: "Calyx Solutions",
+      video: "/assets/video/sponsors-logo-2026/sposnsor-logo-2026-Calyx-solutions.mp4",
+      link: "https://calyx-solutions.com/",
+      external: true,
+      tier: "Hosted By",
+    },
     {
       name: "Tigris Pay",
-      logo: "https://tigrispay.com/assets/TigrisPayLogo-BJ0NLp12.png",
-      video: "/assets/video/sponsors-logo-2026/tigrispay-newianimated-logo-BFA.webm",
+      video: "/assets/video/sponsors-logo-2026/sposnsor-logo-2026-Tigris-pay.mp4",
       link: "/tigris-pay-sponsor-details-2026",
-      tier: "Platinum Sponsor"
-    }
+      external: false,
+      tier: "Platinum Sponsor",
+    },
   ];
 
   return (
@@ -40,34 +39,31 @@ const SponsorSection2026 = () => {
             <SponsorCard
               key={index}
               to={sponsor.link}
+              target={sponsor.external ? "_blank" : undefined}
+              rel={sponsor.external ? "noopener noreferrer" : undefined}
               onClick={(e) => {
-                e.preventDefault();
-                navigate(sponsor.link);
+                if (!sponsor.external) {
+                  e.preventDefault();
+                  navigate(sponsor.link);
+                }
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = "translateY(-8px)";
-                e.currentTarget.style.boxShadow = "0 15px 35px rgba(200, 16, 46, 0.15)";
-                e.currentTarget.style.borderColor = "#c8102e";
+                e.currentTarget.style.boxShadow = "0 15px 35px rgba(0, 0, 0, 0.08)";
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = "translateY(0)";
                 e.currentTarget.style.boxShadow = "0 10px 30px rgba(0,0,0,0.05)";
-                e.currentTarget.style.borderColor = "#e2e8f0";
               }}
             >
-              {sponsor.video ? (
-                <LogoVideo
-                  src={sponsor.video}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                />
-              ) : (
-                <LogoContainer>
-                  <LogoImage src={sponsor.logo} alt={sponsor.name} />
-                </LogoContainer>
-              )}
+              <LogoVideo
+                src={sponsor.video}
+                autoPlay
+                loop
+                muted
+                playsInline
+                aria-label={sponsor.name}
+              />
             </SponsorCard>
           ))}
         </SponsorsGrid>
