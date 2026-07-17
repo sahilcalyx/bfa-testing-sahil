@@ -69,7 +69,7 @@ const TigrisPaySponsorDetails = () => {
         rel="noopener noreferrer"
         className="cs-hero sponsor-banner cs-style12 cs-type1 cs-center text-center cs-parallax cs-hobble"
         style={{
-          backgroundImage: 'url("../assets/img/sponsor-logo/Fast-track-money-banner.png")',
+          backgroundImage: 'url("/assets/img/sponsor-logo/sponsor-banner-strip-2026/tigrispay-details-banner-2026.png")',
           height: "300px",
         }}
       >

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { FaLinkedin } from "react-icons/fa";
 
 const judgeData = {
-  name: "James Borley",
+  name: "Mr. James Borley",
   role: "Director for Payment Services",
   company: "Complyport Limited",
   img: "../assets/img/judges2026/james-borley.jpg",
