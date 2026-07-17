@@ -23,14 +23,14 @@ const OurSponsors = () => {
               {
                 link: "https://calyx-solutions.com/",
                 external: true,
-                video: "/assets/video/sponsors-logo-2026/sposnsor-logo-2026-Calyx-solutions.mp4",
+                video: "/assets/video/sponsors-logo-2026/sposnsor-logo-2026-Calyx-solutions.webm",
                 alt: "Calyx Solutions",
                 title: "Calyx Solutions",
               },
               {
                 link: "/tigris-pay-sponsor-details-2026",
                 external: false,
-                video: "/assets/video/sponsors-logo-2026/sposnsor-logo-2026-Tigris-pay.mp4",
+                video: "/assets/video/sponsors-logo-2026/sposnsor-logo-2026-Tigris-pay.webm",
                 alt: "Tigris Pay",
                 title: "Tigris Pay",
               },

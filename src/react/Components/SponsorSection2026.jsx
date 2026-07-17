@@ -7,14 +7,14 @@ const SponsorSection2026 = () => {
   const sponsors = [
     {
       name: "Calyx Solutions",
-      video: "/assets/video/sponsors-logo-2026/sposnsor-logo-2026-Calyx-solutions.mp4",
+      video: "/assets/video/sponsors-logo-2026/sposnsor-logo-2026-Calyx-solutions.webm",
       link: "https://calyx-solutions.com/",
       external: true,
       tier: "Hosted By",
     },
     {
       name: "Tigris Pay",
-      video: "/assets/video/sponsors-logo-2026/sposnsor-logo-2026-Tigris-pay.mp4",
+      video: "/assets/video/sponsors-logo-2026/sposnsor-logo-2026-Tigris-pay.webm",
       link: "/tigris-pay-sponsor-details-2026",
       external: false,
       tier: "Platinum Sponsor",
