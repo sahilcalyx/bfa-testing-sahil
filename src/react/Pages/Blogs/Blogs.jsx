@@ -8,10 +8,10 @@ const Blog = () => {
     {
       title: "Licensing in multiple jurisdictions: Scaling without compliance chaos",
       slug: "licensing-in-multiple-jurisdictions-scaling-without-compliance-chaos",
-      img: "/assets/img/blogs/licensing-in-multiple-jurisdictions.png",
+      img: "/assets/img/blogs/Licensing-in-Multiple-Jurisdictions-Scaling-Without%20-Compliance.png",
       alt: "Licensing in multiple jurisdictions: Scaling without compliance chaos",
-      date: "02 Jul, 2026",
-      excerpt: "Expanding into new markets brings enormous opportunities—but every jurisdiction comes with its...",
+      date: "20 Jul, 2026",
+      excerpt: "For many UK-authorised remittance businesses, growth means expanding beyond the UK...",
     },
     {
       title: "How Fintech Awards Drive Growth, Trust & Market Credibility",

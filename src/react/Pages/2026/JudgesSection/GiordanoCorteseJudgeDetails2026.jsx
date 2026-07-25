@@ -5,23 +5,23 @@ import { FaLinkedin } from "react-icons/fa";
 
 const judgeData = {
   name: "Mr. Giordano Cortese",
-  role: "Senior Product Manager - Cash",
-  company: "First Rate Exchange Services Ltd",
+  role: "Senior Product Manager – Cash",
+  company: "First Rate Exchange Services Ltd.",
   img: "../assets/img/judges2026/giordano-cortese.jpg",
   linkedin: "https://www.linkedin.com/in/giordanocortese1",
-  tagline: "Senior Product Manager - Cash",
+  tagline: "Senior Product Manager – Cash",
   highlights: [
-    "20+ years of leading growth in financial services",
-    "Strategic leadership at Eurochange, iBAN-X & Retail FSL",
-    "Pioneer in currency exchange & ATM enhancement systems",
-    "Expertise in forming high-profile partnerships and market-entry strategies"
+    "20+ years across payments, FX, product & commercial leadership",
+    "Senior roles at Eurochange, First Rate Exchange Services, iBAN-X & Retail FSL",
+    "Leads cash product development with a focus on customer value",
+    "Champion of emerging tech, currency exchange systems & ATM innovation",
   ],
   bioParagraphs: [
-    "With over two decades of experience in the financial services industry, Giordano brings a wealth of knowledge and expertise to our panel. His impressive career includes leading strategic initiatives and driving growth and innovation at esteemed organizations such as <strong>Eurochange, First Rate Exchange Services, iBAN-X, and Retail FSL</strong>.",
-    "Giordano’s leadership has been instrumental in forming high-profile partnerships and shaping effective go-to-market strategies, significantly expanding market presence. Known for his forward-thinking approach, he has consistently explored how emerging technologies can enhance business results, operations, and customer experiences.",
-    "From his early academic work on online grocery shopping to his recent advancements in currency exchange systems and ATM enhancements, Giordano’s passion for innovation is evident throughout his career.",
-    "We are confident that Giordano’s extensive expertise and commitment to innovation make him an exceptional choice to evaluate and celebrate the groundbreaking contributions in the fintech industry."
-  ]
+    "With more than 20 years of experience in financial services, Giordano Cortese has built an extensive career spanning product management, strategic partnerships, business development, acquisitions, and innovation across the payments and foreign exchange sectors. His professional journey includes senior roles at <strong>Eurochange, First Rate Exchange Services, iBAN-X, and Retail FSL</strong>, where he has led initiatives that have strengthened commercial partnerships, expanded market reach, and supported long-term business growth. In his current role as Senior Product Manager – Cash at First Rate Exchange Services, he leads the development and evolution of cash products and services, with a focus on continuous improvement, operational excellence, and customer value.",
+    "Throughout his career, Giordano has played a key role in developing go-to-market strategies, identifying commercial opportunities, and fostering partnerships that deliver value for businesses and customers. He has consistently championed the adoption of emerging technologies to improve operational efficiency, enhance customer experience, and drive transformation within financial services.",
+    "His longstanding interest in innovation dates back to his academic research into online grocery shopping and continues through his work on advancing currency exchange systems and ATM technologies. Combining strategic product leadership with extensive commercial expertise and a forward-looking perspective on technology, Giordano brings valuable insight into the evolving fintech landscape.",
+    "His breadth of industry experience, strategic product expertise, and commitment to innovation make him well qualified to serve as a jury member, recognising excellence and impactful contributions across the fintech sector.",
+  ],
 };
 
 const GiordanoCorteseJudgeDetails2026 = () => {

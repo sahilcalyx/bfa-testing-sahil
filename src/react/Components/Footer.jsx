@@ -93,8 +93,11 @@ const Footer = () => {
                     <NavLink to="/judges">Judges </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/download-app">Download App</NavLink>
+                    <NavLink to="/bfa-legacy">BFA Legacy</NavLink>
                   </li>
+                  {/* <li>
+                    <NavLink to="/download-app">Download App</NavLink>
+                  </li> */}
                 </ul>
               </div>
             </div>
@@ -190,7 +193,7 @@ const Footer = () => {
           </div>
 
           {/* Download App Buttons */}
-          <div className="row" style={{ borderTop: "1px solid rgba(255,255,255,0.1)", paddingTop: "30px", marginTop: "20px", paddingBottom: "20px" }}>
+          {/* <div className="row" style={{ borderTop: "1px solid rgba(255,255,255,0.1)", paddingTop: "30px", marginTop: "20px", paddingBottom: "20px" }}>
             <div className="col-12 text-center">
               <h2 className="cs-widget_title text-white mb-3" style={{ fontWeight: "600", fontSize: "18px" }}>Download Our App</h2>
               <div style={{ display: "flex", justifyContent: "center", gap: "16px", flexWrap: "wrap", alignItems: "center" }}>
@@ -240,7 +243,7 @@ const Footer = () => {
                 </a>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
         <div className="mb-0 pb-0" style={{ background: "#191919" }}>
           <p

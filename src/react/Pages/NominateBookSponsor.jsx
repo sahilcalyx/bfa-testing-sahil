@@ -297,6 +297,7 @@ const NominationForm = () => {
   const [errors, setErrors] = useState({});
   const [agreePrivacyPolicy, setAgreePrivacyPolicy] = useState(false);
   const [loading, setLoading] = useState(false);
+  const submitLockRef = useRef(false);
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -545,6 +546,9 @@ const NominationForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    e.stopPropagation();
+    if (submitLockRef.current || loading) return;
+
     if (NOMINATIONS_CLOSED) {
       Swal.fire({
         title: "Nominations Closed!",
@@ -555,6 +559,7 @@ const NominationForm = () => {
       return;
     }
 
+    submitLockRef.current = true;
     setLoading(true);
     const newErrors = {};
     const requiredFields = [
@@ -626,15 +631,21 @@ const NominationForm = () => {
 
     setErrors(newErrors);
 
-    if (Object.keys(newErrors).length === 0) {
-      try {
+    if (Object.keys(newErrors).length > 0) {
+      setLoading(false);
+      submitLockRef.current = false;
+      return;
+    }
+
+    let redirectedToCheckout = false;
+    try {
         const formDataToSend = new FormData();
         Object.keys(formData).forEach((key) => {
           if (key === "awardcate") {
             formData[key].forEach((val) => {
               formDataToSend.append("awardcate", val);
             });
-          } else {
+          } else if (formData[key] != null && formData[key] !== "") {
             formDataToSend.append(key, formData[key]);
           }
         });
@@ -644,6 +655,8 @@ const NominationForm = () => {
           title: "Saving Nomination...",
           text: "Uploading your files and saving registration details. Please wait.",
           allowOutsideClick: false,
+          allowEscapeKey: false,
+          showConfirmButton: false,
           didOpen: () => {
             Swal.showLoading();
           },
@@ -651,6 +664,7 @@ const NominationForm = () => {
 
         const saveRes = await axios.post("/api/nomination", formDataToSend, {
           headers: { "Content-Type": "multipart/form-data" },
+          timeout: 120000,
         });
 
         if (saveRes.data?.response) {
@@ -666,10 +680,16 @@ const NominationForm = () => {
             recaptchaToken: "bypassed_recaptcha_nomination",
           };
 
-          const checkoutRes = await axios.post(`${PAYMENT_API_BASE}/create-nomination-checkout-session`, paymentPayload);
+          const checkoutRes = await axios.post(
+            `${PAYMENT_API_BASE}/create-nomination-checkout-session`,
+            paymentPayload,
+            { timeout: 60000 }
+          );
 
           if (checkoutRes.data?.url) {
+            redirectedToCheckout = true;
             window.location.href = checkoutRes.data.url;
+            return;
           } else {
             Swal.fire({
               title: "Error!",
@@ -696,9 +716,12 @@ const NominationForm = () => {
           icon: "error",
           confirmButtonText: "Close",
         });
+      } finally {
+        if (!redirectedToCheckout) {
+          setLoading(false);
+          submitLockRef.current = false;
+        }
       }
-    }
-    setLoading(false);
   };
 
   const handleCheckboxChange = (e) => {

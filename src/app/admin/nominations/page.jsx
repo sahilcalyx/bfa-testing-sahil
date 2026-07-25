@@ -3,8 +3,38 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Search, Calendar, ChevronLeft, ChevronRight, Mail, Phone, Building2, X, Briefcase, Globe, Award, Trash2, FileDown, CheckCircle, AlertTriangle, HelpCircle } from "lucide-react";
 import Swal from "sweetalert2";
+import { useSession } from "next-auth/react";
+import JuryReviewView from "./JuryReviewView";
+
+/** Ensure website links open as external sites, not relative app routes. */
+function toExternalUrl(url = "") {
+    const raw = String(url || "").trim();
+    if (!raw || raw.toLowerCase() === "null" || raw.toLowerCase() === "undefined") return "";
+    if (/^https?:\/\//i.test(raw)) return raw;
+    if (/^\/\//.test(raw)) return `https:${raw}`;
+    return `https://${raw.replace(/^\/+/, "")}`;
+}
 
 export default function NominationsPage() {
+    const { data: session, status } = useSession();
+
+    if (status === "loading") {
+        return (
+            <div style={{ padding: 48, textAlign: "center", color: "#64748b" }}>
+                Loading…
+            </div>
+        );
+    }
+
+    if (session?.user?.role === "jury") {
+        return <JuryReviewView />;
+    }
+
+    return <AdminNominationsPage />;
+}
+
+function AdminNominationsPage() {
+    const isJury = false;
     const [nominations, setNominations] = useState([]);
     const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState("");
@@ -19,6 +49,7 @@ export default function NominationsPage() {
         limit: 10
     });
     const [sendingEmail, setSendingEmail] = useState(false);
+    const [deduping, setDeduping] = useState(false);
 
     useEffect(() => {
         const delayDebounceFn = setTimeout(() => {
@@ -50,35 +81,92 @@ export default function NominationsPage() {
         }
     };
 
-    const handleDelete = async (id) => {
+    const handleRemoveDuplicates = async () => {
         const result = await Swal.fire({
-            title: 'Are you sure?',
-            text: "This nomination record will be permanently deleted.",
-            icon: 'warning',
+            title: "Remove duplicate nominations?",
+            text: "Keeps one entry per email + company (prefers paid, otherwise oldest). Extra copies will be deleted.",
+            icon: "warning",
             showCancelButton: true,
-            confirmButtonColor: '#635bff',
-            cancelButtonColor: '#ff4d4d',
-            confirmButtonText: 'Yes, delete it!',
-            background: '#fff',
-            borderRadius: '20px'
+            confirmButtonColor: "#c8102e",
+            confirmButtonText: "Yes, remove duplicates",
+        });
+        if (!result.isConfirmed) return;
+
+        setDeduping(true);
+        try {
+            const res = await axios.post("/api/nomination/dedupe");
+            if (res.data.response) {
+                const { deletedCount, remaining, duplicateGroups } = res.data.data || {};
+                await Swal.fire({
+                    icon: "success",
+                    title: deletedCount ? "Duplicates removed" : "All clean",
+                    text:
+                        deletedCount > 0
+                            ? `Removed ${deletedCount} duplicate(s) from ${duplicateGroups} group(s). ${remaining} nomination(s) remain.`
+                            : "No duplicate nominations were found.",
+                    confirmButtonColor: "#635bff",
+                });
+                fetchNominations(1);
+            } else {
+                throw new Error(res.data.data || "Cleanup failed");
+            }
+        } catch (error) {
+            Swal.fire(
+                "Error",
+                error.response?.data?.data || error.message || "Failed to remove duplicates",
+                "error"
+            );
+        } finally {
+            setDeduping(false);
+        }
+    };
+
+    const handleDelete = async (id, e) => {
+        if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        const result = await Swal.fire({
+            title: "Delete nomination?",
+            text: "This nomination record will be permanently deleted.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#c8102e",
+            cancelButtonColor: "#64748b",
+            confirmButtonText: "Yes, delete it",
+            background: "#fff",
         });
 
-        if (result.isConfirmed) {
-            try {
-                const response = await axios.delete(`/api/nomination?id=${id}`);
-                if (response.data.response) {
-                    Swal.fire({
-                        title: 'Deleted!',
-                        text: 'Nomination record removed.',
-                        icon: 'success',
-                        confirmButtonColor: '#635bff'
-                    });
-                    setSelectedNomination(null);
-                    fetchNominations(pagination.currentPage);
-                }
-            } catch (error) {
-                Swal.fire('Error', 'Failed to delete nomination.', 'error');
+        if (!result.isConfirmed) return;
+
+        try {
+            const response = await axios.delete(`/api/nomination?id=${id}`);
+            if (response.data.response) {
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "Nomination record removed.",
+                    icon: "success",
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 2500,
+                });
+                if (selectedNomination?._id === id) setSelectedNomination(null);
+                // If last item on page, go back a page when possible
+                const nextPage =
+                    nominations.length === 1 && pagination.currentPage > 1
+                        ? pagination.currentPage - 1
+                        : pagination.currentPage;
+                fetchNominations(nextPage);
+            } else {
+                Swal.fire("Error", response.data.data || "Failed to delete nomination.", "error");
             }
+        } catch (error) {
+            Swal.fire(
+                "Error",
+                error.response?.data?.data || "Failed to delete nomination.",
+                "error"
+            );
         }
     };
 
@@ -192,9 +280,31 @@ export default function NominationsPage() {
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "32px" }}>
                 <div>
                     <h1 style={{ fontSize: "28px", fontWeight: "800", color: "#1a1f36", letterSpacing: "-0.5px", marginBottom: "4px" }}>Award Nominations</h1>
-                    <p style={{ color: "#697386", fontSize: "15px" }}>Manage and view submissions, documents, and payments for the Brit Fintech Awards.</p>
+                    <p style={{ color: "#697386", fontSize: "15px" }}>
+                        {isJury
+                            ? "View nominations assigned to you (read-only)."
+                            : "Manage and view submissions, documents, and payments for the Brit Fintech Awards."}
+                    </p>
                 </div>
-                <div style={{ display: "flex", gap: "12px" }}>
+                <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
+                    <button
+                        type="button"
+                        onClick={handleRemoveDuplicates}
+                        disabled={deduping}
+                        style={{
+                            padding: "12px 16px",
+                            borderRadius: "12px",
+                            border: "1px solid #fecaca",
+                            background: "#fff5f5",
+                            color: "#b91c1c",
+                            fontWeight: 700,
+                            fontSize: "13px",
+                            cursor: deduping ? "not-allowed" : "pointer",
+                            opacity: deduping ? 0.7 : 1,
+                        }}
+                    >
+                        {deduping ? "Removing duplicates…" : "Remove duplicates"}
+                    </button>
                     <div style={{ background: "#fff", padding: "10px 16px", borderRadius: "12px", border: "1px solid #e3e8ee", boxShadow: "0 2px 4px rgba(0,0,0,0.02)" }}>
                         <div style={{ fontSize: "11px", fontWeight: "700", color: "#697386", textTransform: "uppercase", letterSpacing: "0.5px" }}>Total Nominations</div>
                         <div style={{ fontSize: "20px", fontWeight: "800", color: "#1a1f36" }}>{pagination.totalCount}</div>
@@ -229,28 +339,28 @@ export default function NominationsPage() {
                             border: "1px solid #e3e8ee",
                             fontSize: "14px",
                             outline: "none",
-                            background: "#fcfcfd",
+                            background: "#ffffff",
                             transition: "all 0.2s"
                         }}
-                        onFocus={(e) => { e.target.style.borderColor = "#635bff"; e.target.style.background = "#fff"; e.target.style.boxShadow = "0 0 0 4px #635bff10"; }}
-                        onBlur={(e) => { e.target.style.borderColor = "#e3e8ee"; e.target.style.background = "#fcfcfd"; e.target.style.boxShadow = "none"; }}
+                        onFocus={(e) => { e.target.style.borderColor = "#635bff"; e.target.style.background = "#ffffff"; e.target.style.boxShadow = "0 0 0 4px #635bff10"; }}
+                        onBlur={(e) => { e.target.style.borderColor = "#e3e8ee"; e.target.style.background = "#ffffff"; e.target.style.boxShadow = "none"; }}
                     />
                 </div>
 
-                <div style={{ background: "#f7f9fc", padding: "6px", borderRadius: "12px", border: "1px solid #e3e8ee", display: "flex", alignItems: "center" }}>
+                <div style={{ background: "#ffffff", padding: "6px", borderRadius: "12px", border: "1px solid #e3e8ee", display: "flex", alignItems: "center" }}>
                     <Calendar size={16} style={{ marginLeft: "8px", color: "#697386" }} />
                     <input
                         type="date"
                         value={startDate}
                         onChange={(e) => setStartDate(e.target.value)}
-                        style={{ padding: "6px 8px", borderRadius: "8px", border: "none", background: "transparent", fontSize: "13px", color: "#1a1f36", outline: "none" }}
+                        style={{ padding: "6px 8px", borderRadius: "8px", border: "none", background: "#ffffff", fontSize: "13px", color: "#1a1f36", outline: "none" }}
                     />
                     <span style={{ color: "#c1c7d0" }}>—</span>
                     <input
                         type="date"
                         value={endDate}
                         onChange={(e) => setEndDate(e.target.value)}
-                        style={{ padding: "6px 8px", borderRadius: "8px", border: "none", background: "transparent", fontSize: "13px", color: "#1a1f36", outline: "none" }}
+                        style={{ padding: "6px 8px", borderRadius: "8px", border: "none", background: "#ffffff", fontSize: "13px", color: "#1a1f36", outline: "none" }}
                     />
                 </div>
 
@@ -265,7 +375,7 @@ export default function NominationsPage() {
                             fontSize: "13px",
                             color: "#1a1f36",
                             outline: "none",
-                            background: "#f7f9fc",
+                            background: "#ffffff",
                             cursor: "pointer",
                             fontWeight: "600"
                         }}
@@ -306,7 +416,7 @@ export default function NominationsPage() {
                             <th style={{ padding: "16px 24px", textAlign: "left", fontSize: "12px", fontWeight: "700", color: "#697386", textTransform: "uppercase", letterSpacing: "1px", borderBottom: "1px solid #e3e8ee" }}>Award Categories</th>
                             <th style={{ padding: "16px 24px", textAlign: "left", fontSize: "12px", fontWeight: "700", color: "#697386", textTransform: "uppercase", letterSpacing: "1px", borderBottom: "1px solid #e3e8ee" }}>Turnover</th>
                             <th style={{ padding: "16px 24px", textAlign: "left", fontSize: "12px", fontWeight: "700", color: "#697386", textTransform: "uppercase", letterSpacing: "1px", borderBottom: "1px solid #e3e8ee" }}>Payment</th>
-                            <th style={{ padding: "16px 24px", textAlign: "right", borderBottom: "1px solid #e3e8ee" }}></th>
+                            <th style={{ padding: "16px 24px", textAlign: "right", fontSize: "12px", fontWeight: "700", color: "#697386", textTransform: "uppercase", letterSpacing: "1px", borderBottom: "1px solid #e3e8ee" }}>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -372,7 +482,38 @@ export default function NominationsPage() {
                                             </span>
                                         </td>
                                         <td style={{ padding: "16px 24px", borderBottom: "1px solid #f7f9fc", textAlign: "right" }}>
-                                            <ChevronRight size={20} style={{ color: "#cbd5e1" }} />
+                                            <div style={{ display: "inline-flex", alignItems: "center", gap: "8px" }}>
+                                                <button
+                                                    type="button"
+                                                    title="Delete nomination"
+                                                    aria-label={`Delete ${nomination.companynm}`}
+                                                    onClick={(e) => handleDelete(nomination._id, e)}
+                                                    style={{
+                                                        width: "36px",
+                                                        height: "36px",
+                                                        borderRadius: "10px",
+                                                        border: "1px solid #fecaca",
+                                                        background: "#fff5f5",
+                                                        color: "#c8102e",
+                                                        display: "inline-flex",
+                                                        alignItems: "center",
+                                                        justifyContent: "center",
+                                                        cursor: "pointer",
+                                                        transition: "all 0.2s",
+                                                    }}
+                                                    onMouseEnter={(e) => {
+                                                        e.currentTarget.style.background = "#c8102e";
+                                                        e.currentTarget.style.color = "#fff";
+                                                    }}
+                                                    onMouseLeave={(e) => {
+                                                        e.currentTarget.style.background = "#fff5f5";
+                                                        e.currentTarget.style.color = "#c8102e";
+                                                    }}
+                                                >
+                                                    <Trash2 size={16} />
+                                                </button>
+                                                <ChevronRight size={20} style={{ color: "#cbd5e1" }} />
+                                            </div>
                                         </td>
                                     </tr>
                                 );
@@ -431,6 +572,7 @@ export default function NominationsPage() {
 
                         <div style={{ display: "grid", gap: "20px" }}>
                             {/* Action Buttons to Update Status */}
+                            {!isJury && (
                             <div style={{ background: "#f8fafc", padding: "16px", borderRadius: "16px", border: "1px solid #e2e8f0" }}>
                                 <div style={{ fontSize: "11px", fontWeight: "800", color: "#64748b", textTransform: "uppercase", marginBottom: "12px", letterSpacing: "1px" }}>Set Payment Status</div>
                                 <div style={{ display: "flex", gap: "8px" }}>
@@ -454,8 +596,10 @@ export default function NominationsPage() {
                                     </button>
                                 </div>
                             </div>
+                            )}
 
                             {/* Communication Actions */}
+                            {!isJury && (
                             <div style={{ background: "#f8fafc", padding: "16px", borderRadius: "16px", border: "1px solid #e2e8f0" }}>
                                 <div style={{ fontSize: "11px", fontWeight: "800", color: "#64748b", textTransform: "uppercase", marginBottom: "12px", letterSpacing: "1px" }}>Communications</div>
                                 <button 
@@ -466,6 +610,7 @@ export default function NominationsPage() {
                                     <Mail size={16} /> {sendingEmail ? "Sending Welcome Email..." : "Send Welcome Email"}
                                 </button>
                             </div>
+                            )}
 
                             {/* Entrant Details */}
                             <div style={{ background: "#fff", padding: "20px", borderRadius: "20px", border: "1px solid #e3e8ee" }}>
@@ -508,9 +653,18 @@ export default function NominationsPage() {
                                     <div style={{ display: "flex", justifyContent: "space-between" }}>
                                         <span style={{ color: "#697386" }}>Website</span>
                                         <span>
-                                            <a href={selectedNomination.websiteurl} target="_blank" style={{ color: "#635bff", textDecoration: "none", fontWeight: "600", display: "flex", alignItems: "center", gap: "4px" }}>
+                                            {toExternalUrl(selectedNomination.websiteurl) ? (
+                                            <a
+                                                href={toExternalUrl(selectedNomination.websiteurl)}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                style={{ color: "#635bff", textDecoration: "none", fontWeight: "600", display: "flex", alignItems: "center", gap: "4px" }}
+                                            >
                                                 <Globe size={14} /> Visit Link
                                             </a>
+                                            ) : (
+                                                <span style={{ color: "#94a3b8", fontWeight: 600 }}>—</span>
+                                            )}
                                         </span>
                                     </div>
                                     <div style={{ borderTop: "1px solid #eff2f7", paddingTop: "12px", display: "flex", flexDirection: "column", gap: "4px" }}>
@@ -535,12 +689,14 @@ export default function NominationsPage() {
                                 </div>
                             </div>
 
-                            {/* Cloudinary Documents */}
+                            {/* Uploaded Files — primary only */}
+                            {selectedNomination.uploadfile &&
+                              String(selectedNomination.uploadfile).trim() &&
+                              !["null", "undefined"].includes(String(selectedNomination.uploadfile).trim().toLowerCase()) && (
                             <div style={{ background: "#fff", padding: "20px", borderRadius: "20px", border: "1px solid #e3e8ee" }}>
-                                <div style={{ fontSize: "11px", fontWeight: "800", color: "#697386", textTransform: "uppercase", marginBottom: "12px" }}>Uploaded Files (Cloudinary)</div>
+                                <div style={{ fontSize: "11px", fontWeight: "800", color: "#697386", textTransform: "uppercase", marginBottom: "12px" }}>Uploaded Files</div>
                                 <div style={{ display: "grid", gap: "10px" }}>
-                                    {selectedNomination.uploadfile ? (
-                                        <a href={selectedNomination.uploadfile} target="_blank" style={{
+                                        <a href={selectedNomination.uploadfile} target="_blank" rel="noopener noreferrer" style={{
                                             padding: "12px", borderRadius: "12px", border: "1px solid #e2e8f0", background: "#f8fafc",
                                             color: "#1a1f36", textDecoration: "none", fontSize: "13px", fontWeight: "600",
                                             display: "flex", alignItems: "center", justifyContent: "space-between", transition: "all 0.2s"
@@ -551,31 +707,9 @@ export default function NominationsPage() {
                                             <span style={{ display: "flex", alignItems: "center", gap: "8px" }}><FileDown size={18} style={{ color: "#635bff" }} /> Primary Supporting Document</span>
                                             <span style={{ color: "#635bff", fontSize: "11px" }}>Download/View</span>
                                         </a>
-                                    ) : (
-                                        <div style={{ padding: "12px", borderRadius: "12px", border: "1px dotted #e2e8f0", color: "#697386", fontSize: "13px", textAlign: "center" }}>
-                                            No primary document uploaded.
-                                        </div>
-                                    )}
-
-                                    {selectedNomination.uploadfileoptional ? (
-                                        <a href={selectedNomination.uploadfileoptional} target="_blank" style={{
-                                            padding: "12px", borderRadius: "12px", border: "1px solid #e2e8f0", background: "#f8fafc",
-                                            color: "#1a1f36", textDecoration: "none", fontSize: "13px", fontWeight: "600",
-                                            display: "flex", alignItems: "center", justifyContent: "space-between", transition: "all 0.2s"
-                                        }}
-                                        onMouseEnter={(e) => e.currentTarget.style.borderColor = "#cbd5e1"}
-                                        onMouseLeave={(e) => e.currentTarget.style.borderColor = "#e2e8f0"}
-                                        >
-                                            <span style={{ display: "flex", alignItems: "center", gap: "8px" }}><FileDown size={18} style={{ color: "#635bff" }} /> Optional Supporting Document</span>
-                                            <span style={{ color: "#635bff", fontSize: "11px" }}>Download/View</span>
-                                        </a>
-                                    ) : (
-                                        <div style={{ padding: "12px", borderRadius: "12px", border: "1px dotted #e2e8f0", color: "#697386", fontSize: "13px", textAlign: "center" }}>
-                                            No optional document uploaded.
-                                        </div>
-                                    )}
                                 </div>
                             </div>
+                            )}
 
                             {/* Service Offered & Description */}
                             <div style={{ background: "#fcfcfd", padding: "20px", borderRadius: "20px", border: "1px solid #e3e8ee" }}>
@@ -602,12 +736,14 @@ export default function NominationsPage() {
                         >
                             Email Entrant
                         </button>
+                        {!isJury && (
                         <button
                             onClick={() => handleDelete(selectedNomination._id)}
                             style={{ padding: "16px", borderRadius: "16px", background: "#fee2e2", border: "1px solid #fecaca", color: "#dc2626", cursor: "pointer", display: "flex", alignItems: "center", gap: "8px" }}
                         >
                             <Trash2 size={20} /> Delete Nomination
                         </button>
+                        )}
                     </div>
                 </div>
             )}

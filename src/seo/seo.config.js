@@ -261,22 +261,32 @@ export const seoByPath = {
   },
   "/licensing-in-multiple-jurisdictions-scaling-without-compliance-chaos": {
     title: "Licensing in Multiple Jurisdictions: Scaling Without Compliance Chaos | Brit FinTech Awards",
-    description: "Learn how fintech firms can expand globally across multiple jurisdictions without creating compliance chaos—covering licensing, AML, KYC, and regulatory strategy.",
+    description:
+      "For UK-authorised remittance businesses expanding abroad: licence vs agent routes across the EU, Canada and UAE—and how to scale without compliance chaos.",
     openGraph: {
       title: "Licensing in Multiple Jurisdictions: Scaling Without Compliance Chaos",
-      description: "Learn how fintech firms can expand globally across multiple jurisdictions without creating compliance chaos—covering licensing, AML, KYC, and regulatory strategy.",
+      description:
+        "Should you obtain a new licence, or is there a faster route to market? A practical guide for UK remittance firms expanding into Europe, Canada and the UAE.",
       url: `${siteBaseUrl}/licensing-in-multiple-jurisdictions-scaling-without-compliance-chaos`,
       siteName,
       images: [
-        { url: "/assets/img/blogs/licensing-in-multiple-jurisdictions.png", width: 1200, height: 630, alt: "Licensing in Multiple Jurisdictions: Scaling Without Compliance Chaos" },
+        {
+          url: "/assets/img/blogs/Licensing-in-Multiple-Jurisdictions-Scaling-Without%20-Compliance.png",
+          width: 1200,
+          height: 630,
+          alt: "Licensing in Multiple Jurisdictions: Scaling Without Compliance Chaos",
+        },
       ],
       type: "article",
     },
     twitter: {
       card: "summary_large_image",
       title: "Licensing in Multiple Jurisdictions: Scaling Without Compliance Chaos",
-      description: "Learn how fintech firms can expand globally across multiple jurisdictions without creating compliance chaos—covering licensing, AML, KYC, and regulatory strategy.",
-      images: ["/assets/img/blogs/licensing-in-multiple-jurisdictions.png"],
+      description:
+        "Should you obtain a new licence, or is there a faster route to market? A practical guide for UK remittance firms expanding into Europe, Canada and the UAE.",
+      images: [
+        "/assets/img/blogs/Licensing-in-Multiple-Jurisdictions-Scaling-Without%20-Compliance.png",
+      ],
     },
   },
   "/how-fintech-awards-drive-growth-trust-market-credibility": {
@@ -417,6 +427,164 @@ export const seoByPath = {
       title: "Our Sponsors | Brit Fintech Awards 2025 ",
       description: "How Brit Fintech Awards celebrates global innovation beyond borders.",
       images: ["/assets/img/og/sponsors.jpg"],
+    },
+  },
+  "/tigris-pay-sponsor-details-2026": {
+    title: "Tigris Pay | Platinum Sponsor | Brit FinTech Awards 2026",
+    description:
+      "Tigris Pay is a UK-based Authorised Payment Institution committed to making international money transfers simple, fast, secure, and affordable.",
+    openGraph: {
+      title: "Tigris Pay - Fast. Secure. Reliable. | Brit FinTech Awards 2026",
+      description:
+        "Tigris Pay is a UK-based Authorised Payment Institution committed to making international money transfers simple, fast, secure, and affordable.",
+      url: `${siteBaseUrl}/tigris-pay-sponsor-details-2026`,
+      siteName,
+      images: [
+        {
+          url: "/assets/img/sponsor-logo/sponsor-banner-strip-2026/tigrispay-details-banner-2026.png",
+          width: 1200,
+          height: 630,
+          alt: "Tigris Pay - Platinum Sponsor | Brit FinTech Awards 2026",
+        },
+      ],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Tigris Pay - Fast. Secure. Reliable. | Brit FinTech Awards 2026",
+      description:
+        "Tigris Pay is a UK-based Authorised Payment Institution committed to making international money transfers simple, fast, secure, and affordable.",
+      images: [
+        "/assets/img/sponsor-logo/sponsor-banner-strip-2026/tigrispay-details-banner-2026.png",
+      ],
+    },
+  },
+  "/sends-sponsor-details-2026": {
+    title: "Sends | Silver Sponsor | Brit FinTech Awards 2026",
+    description:
+      "Sends is a UK-based fintech platform by Smartflow Payments Limited offering multi-currency accounts, international payments, cards, and payment acceptance in one secure ecosystem.",
+    openGraph: {
+      title: "Sends — Modern Payments for a Borderless Economy | Brit FinTech Awards 2026",
+      description:
+        "Sends combines multi-currency accounts, international payments, card solutions, and payment acceptance in a single secure ecosystem.",
+      url: `${siteBaseUrl}/sends-sponsor-details-2026`,
+      siteName,
+      images: [
+        {
+          url: "/assets/img/sponsor-logo/sponsor-banner-strip-2026/sends-details-banner-2026.png",
+          width: 1200,
+          height: 630,
+          alt: "Sends - Silver Sponsor | Brit FinTech Awards 2026",
+        },
+      ],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Sends — Modern Payments for a Borderless Economy | Brit FinTech Awards 2026",
+      description:
+        "Sends combines multi-currency accounts, international payments, card solutions, and payment acceptance in a single secure ecosystem.",
+      images: [
+        "/assets/img/sponsor-logo/sponsor-banner-strip-2026/sends-details-banner-2026.png",
+      ],
+    },
+  },
+  "/mercury-danati-sponsor-details-2026": {
+    title:
+      "Mercury Danati | London's Trusted Currency Exchange | Brit FinTech Awards 2026",
+    description:
+      "Mercury Danati continues to redefine foreign currency exchange in London with competitive rates, regulatory excellence, and exceptional customer care. MSB Store of the Year 2025.",
+    openGraph: {
+      title:
+        "Mercury Danati: London's Trusted Currency Exchange Specialist | Brit FinTech Awards 2026",
+      description:
+        "Recognised as MSB Store of the Year 2025 — competitive rates, 80+ currencies, and trusted FX services across London.",
+      url: `${siteBaseUrl}/mercury-danati-sponsor-details-2026`,
+      siteName,
+      images: [
+        {
+          url: "/assets/img/sponsor-logo/sponsor-banner-strip-2026/sponsor-banner-strip-2026-mercury-danati-details-banner-2026.png",
+          width: 1920,
+          height: 430,
+          alt: "Mercury Danati - Gold Sponsor | Brit FinTech Awards 2026",
+        },
+      ],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Mercury Danati: London's Trusted Currency Exchange Specialist",
+      description:
+        "Recognised as MSB Store of the Year 2025 — competitive rates, 80+ currencies, and trusted FX services across London.",
+      images: [
+        "/assets/img/sponsor-logo/sponsor-banner-strip-2026/sponsor-banner-strip-2026-mercury-danati-details-banner-2026.png",
+      ],
+    },
+  },
+  "/bfa-legacy": {
+    title: "BFA Legacy | Our Legacy of Excellence | Brit FinTech Awards",
+    description:
+      "Explore the Brit FinTech Awards legacy — celebrating excellence across 2024 and 2025 editions.",
+    openGraph: {
+      title: "BFA Legacy | Brit FinTech Awards",
+      description:
+        "From pioneering startups to industry leaders — explore past Brit FinTech Awards editions.",
+      url: `${siteBaseUrl}/bfa-legacy`,
+      siteName,
+      images: [
+        { url: "/assets/img/og/about.jpg", width: 1200, height: 630, alt: "BFA Legacy" },
+      ],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "BFA Legacy | Brit FinTech Awards",
+      description:
+        "From pioneering startups to industry leaders — explore past Brit FinTech Awards editions.",
+      images: ["/assets/img/og/about.jpg"],
+    },
+  },
+  "/bfa-legacy/2025": {
+    title: "Brit FinTech Awards 2025 Legacy | BFA",
+    description:
+      "Relive Brit FinTech Awards 2025 at One Great George Street — keynotes, panel, judges, winners and highlights.",
+    openGraph: {
+      title: "Brit FinTech Awards 2025 Legacy",
+      description:
+        "More than an awards night — where innovation met recognition.",
+      url: `${siteBaseUrl}/bfa-legacy/2025`,
+      siteName,
+      images: [
+        { url: "/assets/img/og/about.jpg", width: 1200, height: 630, alt: "BFA 2025" },
+      ],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Brit FinTech Awards 2025 Legacy",
+      description: "More than an awards night — where innovation met recognition.",
+      images: ["/assets/img/og/about.jpg"],
+    },
+  },
+  "/bfa-legacy/2024": {
+    title: "Brit FinTech Awards 2024 Legacy | BFA",
+    description:
+      "Relive the inaugural Brit FinTech Awards 2024 at Level39 — keynotes, panel, judges, winners and highlights.",
+    openGraph: {
+      title: "Brit FinTech Awards 2024 Legacy",
+      description: "Where innovation met recognition at Level39, Canary Wharf.",
+      url: `${siteBaseUrl}/bfa-legacy/2024`,
+      siteName,
+      images: [
+        { url: "/assets/img/og/about.jpg", width: 1200, height: 630, alt: "BFA 2024" },
+      ],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Brit FinTech Awards 2024 Legacy",
+      description: "Where innovation met recognition at Level39, Canary Wharf.",
+      images: ["/assets/img/og/about.jpg"],
     },
   },
   "/sponsorship-categories": {

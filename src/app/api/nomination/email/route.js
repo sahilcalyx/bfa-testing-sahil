@@ -10,8 +10,11 @@ import { authOptions } from "../../auth/[...nextauth]/route";
 export async function POST(req) {
     try {
         const session = await getServerSession(authOptions);
-        if (!session) {
+        if (!session?.user?.id || session?.error === "SessionInvalid") {
             return NextResponse.json({ response: false, data: "Unauthorized" }, { status: 401 });
+        }
+        if (session.user?.role === "jury") {
+            return NextResponse.json({ response: false, data: "Forbidden — read-only access" }, { status: 403 });
         }
         await connectToDatabase();
         const data = await req.json();

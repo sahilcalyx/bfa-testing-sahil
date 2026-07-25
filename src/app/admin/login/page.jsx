@@ -171,10 +171,25 @@ export default function AdminLogin() {
     const { data: session, status } = useSession();
 
     useEffect(() => {
-        if (status === "authenticated") {
-            router.push("/admin");
+        if (typeof window === "undefined") return;
+        const params = new URLSearchParams(window.location.search);
+        if (params.get("reason") === "removed") {
+            Swal.fire({
+                icon: "info",
+                title: "Signed out",
+                text: "Your access was removed or disabled by an administrator.",
+                confirmButtonColor: "#c8102e",
+            });
+            router.replace("/admin/login");
         }
-    }, [status, router]);
+    }, [router]);
+
+    useEffect(() => {
+        if (status === "authenticated" && session?.user?.id && !session?.error) {
+            const role = session?.user?.role;
+            router.push(role === "jury" ? "/jury/nominations" : "/admin");
+        }
+    }, [status, router, session]);
 
     useEffect(() => {
         const handleMouseMove = (e) => {
@@ -469,8 +484,18 @@ export default function AdminLogin() {
                             {step === 1 ? "Admin Access" : "Verify OTP"}
                         </h1>
                         <p className="text-muted-foreground text-sm">
-                            {step === 1 ? "Please enter your details to continue" : `Enter the code sent to ${email}`}
+                            {step === 1
+                                ? "Please enter your details to continue"
+                                : `Enter the code sent to ${email}`}
                         </p>
+                        {step === 1 && (
+                            <p className="text-xs text-muted-foreground mt-3">
+                                Jury members use{" "}
+                                <a href="/jury-login" className="text-[#ad0b27] font-semibold hover:underline">
+                                    /jury-login
+                                </a>
+                            </p>
+                        )}
                     </div>
 
                     {step === 1 ? (
@@ -489,7 +514,7 @@ export default function AdminLogin() {
                                 </div>
                             </div>
                             <Button type="submit" className="w-full h-12 text-base font-semibold bg-[#ad0b27] hover:bg-[#8e091f] text-white shadow-lg shadow-[#ad0b27]/20" disabled={loading}>
-                                {loading ? "Authenticating..." : "Continue"}
+                                {loading ? "Sending OTP..." : "Continue"}
                             </Button>
                         </form>
                     ) : (

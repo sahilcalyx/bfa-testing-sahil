@@ -30,34 +30,34 @@ const judges2026List = [
       "Co-founder of an industrial startup and former teacher at Coventry University"
     ]
   },
-  {
-    id: "/david-podesta-judge-details-2026",
-    name: "Mr. David Podesta",
-    role: "Associate Director, Trust & Safety (Fraud)",
-    company: "Viator",
-    img: "/assets/img/judges2026/david-podesta.jpg",
-    linkedin: "https://www.linkedin.com/in/david-christian-podesta-6677661/",
-    tagline: "Championing Innovation",
-    highlights: [
-      "Specialist in day-zero payment & compliance setups",
-      "Expertise in online gambling, finance & marketplaces",
-      "Builder of robust risk & operational safety frameworks"
-    ]
-  },
+  // {
+  //   id: "/david-podesta-judge-details-2026",
+  //   name: "Mr. David Podesta",
+  //   role: "Associate Director, Trust & Safety (Fraud)",
+  //   company: "Viator",
+  //   img: "/assets/img/judges2026/david-podesta.jpg",
+  //   linkedin: "https://www.linkedin.com/in/david-christian-podesta-6677661/",
+  //   tagline: "Championing Innovation",
+  //   highlights: [
+  //     "Specialist in day-zero payment & compliance setups",
+  //     "Expertise in online gambling, finance & marketplaces",
+  //     "Builder of robust risk & operational safety frameworks"
+  //   ]
+  // },
   {
     id: "/giordano-cortese-judge-details-2026",
     name: "Mr. Giordano Cortese",
-    role: "Senior Product Manager - Cash",
-    company: "First Rate Exchange Services Ltd",
+    role: "Senior Product Manager – Cash",
+    company: "First Rate Exchange Services Ltd.",
     img: "/assets/img/judges2026/giordano-cortese.jpg",
     linkedin: "https://www.linkedin.com/in/giordanocortese1",
-    tagline: "Senior Product Manager - Cash",
+    tagline: "Senior Product Manager – Cash",
     highlights: [
-      "20+ years of leading growth in financial services",
-      "Strategic leadership at Eurochange, iBAN-X & Retail FSL",
-      "Pioneer in currency exchange & ATM enhancement systems"
-    ]
-  }
+      "20+ years across payments, FX, product & commercial leadership",
+      "Senior roles at Eurochange, First Rate Exchange Services, iBAN-X & Retail FSL",
+      "Leads cash product development with a focus on customer value",
+    ],
+  },
 ];
 
 const JudgesSection2026 = () => {
@@ -65,14 +65,32 @@ const JudgesSection2026 = () => {
 
   return (
     <div 
-      className="w-full max-w-6xl mx-auto py-12 px-4 rounded-3xl"
+      className="w-full max-w-6xl mx-auto py-8 sm:py-12 px-4 rounded-3xl"
       style={{
         backgroundColor: "#ffffff",
         backgroundImage: "radial-gradient(#e4e4e7 1.5px, transparent 1.5px)",
         backgroundSize: "24px 24px",
       }}
     >
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto items-stretch">
+        {/* Title Block - Unboxed Typography */}
+        <div className="w-full flex flex-col justify-center p-2 sm:p-6 text-left my-auto">
+          <div>
+            <span className="text-xs sm:text-sm font-black uppercase tracking-[0.22em] text-zinc-900">
+              BRIT FINTECH JURY <span className="text-[#c8102e]">2026</span>
+            </span>
+            
+            <h2 className="text-3xl sm:text-4xl md:text-[44px] font-black text-zinc-950 tracking-tight leading-[1.08] uppercase mt-3">
+              MEET OUR <br className="hidden sm:inline" />
+              <span className="text-[#c8102e]">2026 JURY</span>
+            </h2>
+
+            <p className="mt-4 text-sm sm:text-base text-zinc-500 font-medium leading-relaxed max-w-md">
+              Leading financial technology experts in the UK committed to recognizing and celebrating pioneering industry innovations.
+            </p>
+          </div>
+        </div>
+
         {judges2026List.map((judge, index) => (
           <div
             key={index}

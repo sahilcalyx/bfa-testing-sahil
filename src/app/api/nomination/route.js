@@ -57,8 +57,8 @@ export async function POST(req) {
         const firstName = formData.get("firstName") || "";
         const lastName = formData.get("lastName") || "";
         const phoneNo = formData.get("phoneNo") || "";
-        const email = formData.get("email") || "";
-        const companynm = formData.get("companynm") || "";
+        const email = String(formData.get("email") || "").toLowerCase().trim();
+        const companynm = String(formData.get("companynm") || "").trim();
         const companyaddress = formData.get("companyaddress") || "";
         const amountingbp = formData.get("amountingbp") || "";
         const companysector = formData.get("companysector") || "";
@@ -69,6 +69,51 @@ export async function POST(req) {
         const howmanyperson = formData.get("howmanyperson") || "0";
         const businesscorridors = formData.get("businesscorridors") || "";
         const reCaptcha = formData.get("reCaptcha") || formData.get("recaptchaToken") || "";
+
+        if (!email || !companynm || !firstName || !lastName) {
+            return NextResponse.json(
+                { response: false, data: "Missing required nomination fields" },
+                { status: 400 }
+            );
+        }
+
+        // Serialize concurrent submits for same email+company (stops parallel duplicates)
+        const lockKey = `${email}|${companynm.toLowerCase()}`;
+        const locks = globalThis.__nominationSubmitLocks || new Map();
+        globalThis.__nominationSubmitLocks = locks;
+        if (locks.has(lockKey)) {
+            return await locks.get(lockKey);
+        }
+
+        let resolveLock;
+        const lockPromise = new Promise((resolve) => {
+            resolveLock = resolve;
+        });
+        locks.set(lockKey, lockPromise);
+
+        try {
+        const result = await (async () => {
+        // Prevent duplicate entries + duplicate admin emails from multi-submit
+        const recentDuplicate = await Nomination.findOne({
+            email,
+            companynm,
+            createdAt: { $gte: new Date(Date.now() - 15 * 60 * 1000) },
+        }).sort({ createdAt: -1 });
+
+        if (recentDuplicate) {
+            return NextResponse.json(
+                {
+                    response: true,
+                    data: {
+                        id: recentDuplicate._id,
+                        nomination: recentDuplicate,
+                        duplicate: true,
+                    },
+                    message: "Nomination already received. Continuing with existing entry.",
+                },
+                { status: 200 }
+            );
+        }
 
         // Parse award categories array
         let awardcate = [];
@@ -197,6 +242,20 @@ export async function POST(req) {
             },
             message: "Award nomination details saved successfully!"
         }, { status: 200 });
+        })();
+
+        resolveLock(result);
+        return result;
+        } catch (lockError) {
+            const failRes = NextResponse.json(
+                { response: false, data: lockError.message || "Internal Server Error" },
+                { status: 500 }
+            );
+            resolveLock(failRes);
+            throw lockError;
+        } finally {
+            locks.delete(lockKey);
+        }
 
     } catch (error) {
         console.error("Error in Nomination POST API:", error);
@@ -207,7 +266,7 @@ export async function POST(req) {
 export async function GET(req) {
     try {
         const session = await getServerSession(authOptions);
-        if (!session) {
+        if (!session?.user?.id || session?.error === "SessionInvalid") {
             return NextResponse.json({ response: false, data: "Unauthorized" }, { status: 401 });
         }
         await connectToDatabase();
@@ -219,31 +278,62 @@ export async function GET(req) {
         const startDate = searchParams.get("startDate");
         const endDate = searchParams.get("endDate");
         const paymentStatus = searchParams.get("paymentStatus") || "";
+        const listAll = searchParams.get("listAll") === "1";
 
-        const query = {};
+        const filters = [];
+
+        // Jury: only explicitly assigned nominations (or categories if none picked)
+        if (session.user?.role === "jury") {
+            const { getJuryAccess, buildJuryNominationQuery } = await import("@/lib/authHelpers");
+            const access = await getJuryAccess(session.user.id);
+            filters.push(buildJuryNominationQuery(access));
+        }
 
         if (search) {
-            query.$or = [
-                { firstName: { $regex: search, $options: "i" } },
-                { lastName: { $regex: search, $options: "i" } },
-                { email: { $regex: search, $options: "i" } },
-                { companynm: { $regex: search, $options: "i" } },
-                { awardcate: { $regex: search, $options: "i" } },
-            ];
+            filters.push({
+                $or: [
+                    { firstName: { $regex: search, $options: "i" } },
+                    { lastName: { $regex: search, $options: "i" } },
+                    { email: { $regex: search, $options: "i" } },
+                    { companynm: { $regex: search, $options: "i" } },
+                    { awardcate: { $regex: search, $options: "i" } },
+                ],
+            });
         }
 
         if (paymentStatus) {
-            query.paymentStatus = paymentStatus;
+            filters.push({ paymentStatus });
         }
 
         if (startDate || endDate) {
-            query.createdAt = {};
-            if (startDate) query.createdAt.$gte = new Date(startDate);
+            const createdAt = {};
+            if (startDate) createdAt.$gte = new Date(startDate);
             if (endDate) {
                 const end = new Date(endDate);
                 end.setHours(23, 59, 59, 999);
-                query.createdAt.$lte = end;
+                createdAt.$lte = end;
             }
+            filters.push({ createdAt });
+        }
+
+        const query = filters.length ? { $and: filters } : {};
+
+        // Admin assigning nominations to jury: lightweight list
+        if (listAll && session.user?.role === "admin") {
+            const nominations = await Nomination.find(query)
+                .select("firstName lastName companynm awardcate email paymentStatus createdAt")
+                .sort({ createdAt: -1 })
+                .limit(500);
+            return NextResponse.json({
+                response: true,
+                data: nominations,
+                pagination: {
+                    totalCount: nominations.length,
+                    totalPages: 1,
+                    currentPage: 1,
+                    limit: nominations.length,
+                },
+            });
         }
 
         const totalCount = await Nomination.countDocuments(query);
@@ -254,15 +344,56 @@ export async function GET(req) {
             .skip((page - 1) * limit)
             .limit(limit);
 
+        const isJury = session.user?.role === "jury";
+        const data = isJury
+            ? nominations.map((n) => {
+                const obj = n.toObject();
+                const kindFromUrl = (url) => {
+                    const lower = (url || "").toLowerCase().split("?")[0];
+                    if (/\.(png|jpe?g|webp|gif)$/.test(lower)) return "image";
+                    if (lower.endsWith(".pdf") || lower.includes("/raw/upload/")) return "pdf";
+                    if (/\.(docx?|xlsx?|pptx?)$/.test(lower)) return "office";
+                    return "pdf";
+                };
+                const isValidDoc = (url) => {
+                    const s = url == null ? "" : String(url).trim();
+                    return Boolean(
+                        s &&
+                        !["null", "undefined"].includes(s.toLowerCase()) &&
+                        /^https?:\/\//i.test(s)
+                    );
+                };
+                const hasPrimary = isValidDoc(obj.uploadfile);
+                return {
+                    ...obj,
+                    // Never expose raw Cloudinary URLs to jury clients
+                    hasPrimaryDocument: hasPrimary,
+                    primaryDocumentKind: hasPrimary ? kindFromUrl(obj.uploadfile) : null,
+                    uploadfile: hasPrimary
+                        ? `/api/nomination/document?id=${obj._id}&type=primary`
+                        : "",
+                    // Optional documents are hidden from jury
+                    hasOptionalDocument: false,
+                    optionalDocumentKind: null,
+                    uploadfileoptional: "",
+                    // Hide payment admin fields + team size from jury review surface
+                    paymentStatus: undefined,
+                    reCaptcha: undefined,
+                    howmanyperson: undefined,
+                };
+            })
+            : nominations;
+
         return NextResponse.json({
             response: true,
-            data: nominations,
+            data,
             pagination: {
                 totalCount,
                 totalPages,
                 currentPage: page,
-                limit
-            }
+                limit,
+            },
+            readOnly: isJury,
         }, { status: 200 });
     } catch (error) {
         console.error("Error in Nomination GET API:", error);
@@ -272,6 +403,13 @@ export async function GET(req) {
 
 export async function PATCH(req) {
     try {
+        const session = await getServerSession(authOptions);
+        if (!session?.user?.id || session?.error === "SessionInvalid") {
+            return NextResponse.json({ response: false, data: "Unauthorized" }, { status: 401 });
+        }
+        if (session.user?.role === "jury") {
+            return NextResponse.json({ response: false, data: "Forbidden — read-only access" }, { status: 403 });
+        }
         await connectToDatabase();
         const data = await req.json();
         const { id, paymentStatus } = data;
@@ -300,8 +438,11 @@ export async function PATCH(req) {
 export async function DELETE(req) {
     try {
         const session = await getServerSession(authOptions);
-        if (!session) {
+        if (!session?.user?.id || session?.error === "SessionInvalid") {
             return NextResponse.json({ response: false, data: "Unauthorized" }, { status: 401 });
+        }
+        if (session.user?.role === "jury") {
+            return NextResponse.json({ response: false, data: "Forbidden — read-only access" }, { status: 403 });
         }
         await connectToDatabase();
         const { searchParams } = new URL(req.url);

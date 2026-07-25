@@ -85,6 +85,8 @@ const TeeparamExchangeDetails2025 = lazy(() => import("./Pages/2025/OurSponsors/
 const VolumePaySponsorDetails2025 = lazy(() => import("./Pages/2025/OurSponsors/VolumePaySponsorDetails2025"));
 import ScrollToHashElement from "./Components/SliderBigBan/ScrollToHashElement";
 import TigrisPaySponsorDetails from "./Pages/2026/OurSponsors/TigrisPaySponsorDetails";
+import SendsSponsorDetails2026 from "./Pages/2026/OurSponsors/SendsSponsorDetails2026";
+import MercuryDanatiSponsorDetails2026 from "./Pages/2026/OurSponsors/MercuryDanatiSponsorDetails2026";
 const LeatherbackSponsorDetails = lazy(() => import("./Pages/2025/OurSponsors/LeatherbackSponsorDetails"));
 const AiMsbBlog = lazy(() => import("./Pages/Blogs/AiMsbBlog"));
 const ClearJunctionDetails2025 = lazy(() => import("./Pages/2025/OurSponsors/ClearJunctionDetails2025"));
@@ -163,6 +165,9 @@ const FinancialInclusionUK = lazy(() => import("./Pages/Blogs/FinancialInclusion
 const HowFintechAwardsDriveGrowth = lazy(() => import("./Pages/Blogs/HowFintechAwardsDriveGrowth"));
 const LicensingInMultipleJurisdictions = lazy(() => import("./Pages/Blogs/LicensingInMultipleJurisdictions"));
 const DownloadApp = lazy(() => import("./Pages/DownloadApp"));
+const BfaLegacy = lazy(() => import("./Pages/Legacy/BfaLegacy"));
+const BfaLegacy2025 = lazy(() => import("./Pages/Legacy/BfaLegacy2025"));
+const BfaLegacy2024 = lazy(() => import("./Pages/Legacy/BfaLegacy2024"));
 
 
 function App() {
@@ -650,6 +655,19 @@ function App() {
           path="/tigris-pay-sponsor-details-2026"
           element={<TigrisPaySponsorDetails />}
         />
+        <Route
+          path="/sends-sponsor-details-2026"
+          element={<SendsSponsorDetails2026 />}
+        />
+        <Route
+          path="/mercury-danati-sponsor-details-2026"
+          element={<MercuryDanatiSponsorDetails2026 />}
+        />
+
+        {/* BFA Legacy */}
+        <Route path="/bfa-legacy" element={<BfaLegacy />} />
+        <Route path="/bfa-legacy/2025" element={<BfaLegacy2025 />} />
+        <Route path="/bfa-legacy/2024" element={<BfaLegacy2024 />} />
 
 
         {/* Gallary 2025 Pages Start */}
@@ -664,7 +682,7 @@ function App() {
 
         
 
-        <Route path="/download-app" element={<DownloadApp />} />
+        {/* <Route path="/download-app" element={<DownloadApp />} /> */}
         <Route path="/blogs" element={<Blogs />} />
          <Route
           path="/inside-the-bfa-experience-networking-energy-innovation"

@@ -48,6 +48,8 @@ const TigrisPaySponsorDetails = () => {
           content="Tigris Pay, Tigris Pay money transfer, UK authorised payment institution, international money transfer UK, send money from UK, Brit FinTech Awards sponsor 2026"
         />
         <meta name="author" content="Brit Fintech Award" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://britfintechawards.com/tigris-pay-sponsor-details-2026" />
         <meta
           property="og:title"
           content="Tigris Pay - Fast. Secure. Reliable. | Brit FinTech Awards 2026"
@@ -58,40 +60,51 @@ const TigrisPaySponsorDetails = () => {
         />
         <meta
           property="og:image"
-          content="https://tigrispay.com/assets/TigrisPayLogo-BJ0NLp12.png"
+          content="https://britfintechawards.com/assets/img/sponsor-logo/sponsor-banner-strip-2026/tigrispay-details-banner-2026.png?v=2"
+        />
+        <meta property="og:image:width" content="1920" />
+        <meta property="og:image:height" content="430" />
+        <meta
+          property="og:image:alt"
+          content="Tigris Pay - Platinum Sponsor | Brit FinTech Awards 2026"
+        />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="Tigris Pay - Fast. Secure. Reliable. | Brit FinTech Awards 2026"
+        />
+        <meta
+          name="twitter:description"
+          content="Tigris Pay is a UK-based Authorised Payment Institution committed to making international money transfers simple, fast, secure, and affordable."
+        />
+        <meta
+          name="twitter:image"
+          content="https://britfintechawards.com/assets/img/sponsor-logo/sponsor-banner-strip-2026/tigrispay-details-banner-2026.png?v=2"
         />
       </Helmet>
 
-      {/* Banner */}
+      {/* Banner — mild zoom on mobile; full strip on desktop (same as Mercury) */}
       <div className="cs-height_90 cs-height_lg_80" />
       <a
+        href="https://tigrispay.com/"
         target="_blank"
         rel="noopener noreferrer"
-        className="cs-hero sponsor-banner cs-style12 cs-type1 cs-center text-center cs-parallax cs-hobble"
-        style={{
-          backgroundImage: 'url("/assets/img/sponsor-logo/sponsor-banner-strip-2026/tigrispay-details-banner-2026.png")',
-          height: "300px",
-        }}
+        aria-label="Visit Tigris Pay website"
+        className="sponsor-banner-2026 relative block w-full overflow-hidden bg-[#2a0a10] h-[130px] sm:h-[160px] md:h-auto"
+        style={{ lineHeight: 0 }}
       >
-        <div className="cs-hero_pattern cs-hover_layer3" />
-        <div
-          className="container wow fadeInDown"
-          data-wow-duration="1s"
-          data-wow-delay="0.2s"
+        <img
+          src="/assets/img/sponsor-logo/sponsor-banner-strip-2026/tigrispay-details-banner-2026.png?v=3"
+          alt="Tigris Pay — Platinum Sponsor | Brit FinTech Awards 2026"
+          width={1920}
+          height={430}
+          decoding="async"
+          className="block w-full h-full md:h-auto object-cover object-center md:object-contain scale-[1.35] sm:scale-[1.25] md:scale-100 origin-center"
           style={{
-            visibility: "visible",
-            animationDuration: "1s",
-            animationDelay: "0.2s",
-            animationName: "fadeInDown",
+            width: "100%",
+            display: "block",
           }}
-        >
-          <div className="cs-hero_text text-left">
-            <div className="cs-height_10 cs-height_lg_0" />
-          </div>
-        </div>
-        <div className="cs-hero_img cs-bg">
-          <div className="cs-hero_img_circle" />
-        </div>
+        />
       </a>
 
       {/* Content */}

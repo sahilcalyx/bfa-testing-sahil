@@ -100,6 +100,7 @@ const RegisterNow = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [agreePrivacyPolicy, setAgreePrivacyPolicy] = useState(false);
   const [loading, setLoading] = useState(false);
+  const submitLockRef = useRef(false);
 
 
   useEffect(() => {
@@ -447,6 +448,10 @@ const RegisterNow = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    e.stopPropagation();
+
+    // Block double / multi submits (rapid clicks create duplicate rows + emails)
+    if (submitLockRef.current || loading) return;
 
     // If nominations are closed, show message and return
     if (NOMINATIONS_CLOSED) {
@@ -459,6 +464,7 @@ const RegisterNow = () => {
       return;
     }
 
+    submitLockRef.current = true;
     setLoading(true);
 
     // Rest of the submit logic remains the same...
@@ -559,11 +565,13 @@ const RegisterNow = () => {
     setErrors(newErrors);
     if (Object.keys(newErrors).length > 0) {
       console.log("❌ Frontend form validation failed. Errors:", newErrors);
+      setLoading(false);
+      submitLockRef.current = false;
+      return;
     }
-    // window.grecaptcha.reset();
 
-    if (Object.keys(newErrors).length === 0) {
-      try {
+    let redirectedToCheckout = false;
+    try {
         // 1. Prepare FormData containing all inputs and the raw files
         const formDataToSend = new FormData();
         Object.keys(formData).forEach((key) => {
@@ -572,7 +580,7 @@ const RegisterNow = () => {
             formData[key].forEach((val) => {
               formDataToSend.append("awardcate", val);
             });
-          } else {
+          } else if (formData[key] != null && formData[key] !== "") {
             formDataToSend.append(key, formData[key]);
           }
         });
@@ -583,6 +591,8 @@ const RegisterNow = () => {
           title: "Saving Nomination...",
           text: "Uploading your files and saving registration details. Please wait.",
           allowOutsideClick: false,
+          allowEscapeKey: false,
+          showConfirmButton: false,
           didOpen: () => {
             Swal.showLoading();
           },
@@ -593,6 +603,7 @@ const RegisterNow = () => {
           headers: {
             "Content-Type": "multipart/form-data",
           },
+          timeout: 120000,
         });
 
         if (saveRes.data?.response) {
@@ -611,11 +622,15 @@ const RegisterNow = () => {
           };
 
           // 4. Create the stripe payment checkout session
-          const checkoutRes = await axios.post(`${PAYMENT_API_BASE}/create-nomination-checkout-session`, paymentPayload);
+          const checkoutRes = await axios.post(`${PAYMENT_API_BASE}/create-nomination-checkout-session`, paymentPayload, {
+            timeout: 60000,
+          });
 
           if (checkoutRes.data?.url) {
             // Redirect immediately to Stripe Checkout!
+            redirectedToCheckout = true;
             window.location.href = checkoutRes.data.url;
+            return;
           } else {
             Swal.fire({
               title: "Error!",
@@ -644,9 +659,12 @@ const RegisterNow = () => {
           icon: "error",
           confirmButtonText: "Close",
         });
+      } finally {
+        if (!redirectedToCheckout) {
+          setLoading(false);
+          submitLockRef.current = false;
+        }
       }
-    }
-    setLoading(false);
   };
 
   const closeModal = () => {

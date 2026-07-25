@@ -8,6 +8,13 @@ const RecentPosts = () => {
   // Dummy recent blog posts data (added 'url' property)
   const recentPosts = [
     {
+      title: "Licensing in multiple jurisdictions: Scaling without compliance chaos",
+      date: "20 Jul, 2026",
+      image:
+        "/assets/img/blogs/Licensing-in-Multiple-Jurisdictions-Scaling-Without%20-Compliance.png",
+      url: "/licensing-in-multiple-jurisdictions-scaling-without-compliance-chaos",
+    },
+    {
       title: "Financial inclusion in the UK: How fintech is bridging the gap for the underbanked",
       date: "13 May, 2026",
       image: "/assets/img/blogs/financial-inclusion-in-the-uk-how-fintech.jpg",

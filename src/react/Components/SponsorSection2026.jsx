@@ -19,6 +19,20 @@ const SponsorSection2026 = () => {
       external: false,
       tier: "Platinum Sponsor",
     },
+    {
+      name: "Sends",
+      video: "/assets/video/sponsors-logo-2026/sposnsor-logo-2026-Sends.webm",
+      link: "/sends-sponsor-details-2026",
+      external: false,
+      tier: "Silver Sponsor",
+    },
+    {
+      name: "Mercury Danati",
+      video: "/assets/video/sponsors-logo-2026/sposnsor-logo-2026-mercury-Danati.webm",
+      link: "/mercury-danati-sponsor-details-2026",
+      external: false,
+      tier: "Sponsor Partner",
+    },
   ];
 
   return (
@@ -56,20 +70,28 @@ const SponsorSection2026 = () => {
                 e.currentTarget.style.boxShadow = "0 10px 30px rgba(0,0,0,0.05)";
               }}
             >
-              <LogoVideo
-                src={sponsor.video}
-                autoPlay
-                loop
-                muted
-                playsInline
-                aria-label={sponsor.name}
-              />
+              {sponsor.video ? (
+                <LogoVideo
+                  src={sponsor.video}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  aria-label={sponsor.name}
+                />
+              ) : (
+                <LogoImage
+                  src={sponsor.image}
+                  alt={sponsor.name}
+                  style={{ maxHeight: 120, padding: 24 }}
+                />
+              )}
             </SponsorCard>
           ))}
         </SponsorsGrid>
 
         <PastSponsorsButton to="/our-sponsors">
-          Explore Past Sponsors
+        View Sponsors
         </PastSponsorsButton>
       </ContentContainer>
     </SectionContainer>

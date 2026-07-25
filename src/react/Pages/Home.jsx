@@ -19,6 +19,7 @@ import InteractiveHero from "../Components/SliderBigBan/InteractiveHero";
 import StaticHero from "../Components/SliderBigBan/StaticHero";
 import ScrollRevealVideo from "../Components/SliderBigBan/ScrollRevealVideo";
 import KeynoteSpeakersSection from "./2025/Keynotes/KeynoteSpeakersSection";
+import KeynoteSpeaker2026 from "./2026/KeynoteSpeaker2026/KeynoteSpeaker2026";
 import DiscussionPannelSection from "./2025/DiscussionPannel/DiscussionPannelSection";
 import JudgesSection2025 from "./2025/JudgesSection/JudgeSection2025";
 import HeroImageSlider2025 from "../Components/SliderBigBan/HeroImageSlider2025";
@@ -406,31 +407,21 @@ Brit Fintech Awards 2026."
           {/* <GallerySection /> */}
          
         </ErrorBoundary>
-        {/* Keynote Speakers Section  */}
-        {/* <KeynoteSpeakersSection /> */}
+        {/* Keynote Speakers Section 2026 */}
+        {/* <KeynoteSpeaker2026 /> */}
 
         {/* Discussion Pannel Section  */}
 
         {/* Jury 2026 Section */}
-        {/* <section
+        <section
           id="judges-section"
           className="py-16 bg-zinc-50"
         >
           <div className="container">
-            <div className="text-center max-w-2xl mx-auto mb-12">
-              <span className="text-[10px] font-black uppercase tracking-[0.25em] text-[#c8102e]">
-                BRIT FINTECH JURY
-              </span>
-              <h2 className="text-3xl md:text-4xl font-extrabold text-zinc-900 tracking-tight mt-2">
-                Meet Our 2026 Jury
-              </h2>
-              <p className="mt-3 text-sm text-zinc-500 max-w-md mx-auto leading-relaxed">
-                Leading financial technology experts in the UK committed to recognizing and celebrating pioneering industry innovations.
-              </p>
-            </div>
             <JudgesSection2026 />
           </div>
-        </section> */}
+        </section>
+        
         <BFA26Section />
         {/* <DiscussionPannelSection /> */}
 

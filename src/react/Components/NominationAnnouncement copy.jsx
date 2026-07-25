@@ -13,8 +13,8 @@ const NominationAnnouncement = ({ showFooter = true }) => {
           {/* Super Early Bird */}
           <div className="col-md-8 col-lg-6">
             <div className="offer-card gradient-theme">
-              <h4 className="title">Early Bird</h4>
-              <p className="date-range">1st July – 15th July 2026</p>
+              <h4 className="title">Early Bird Offer Extended</h4>
+              <p className="date-range">1st July – 31st July 2026</p>
               <div className="price">£295</div>
             </div>
           </div>

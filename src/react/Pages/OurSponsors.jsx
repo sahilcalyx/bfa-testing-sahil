@@ -34,6 +34,20 @@ const OurSponsors = () => {
                 alt: "Tigris Pay",
                 title: "Tigris Pay",
               },
+              {
+                link: "/sends-sponsor-details-2026",
+                external: false,
+                video: "/assets/video/sponsors-logo-2026/sposnsor-logo-2026-Sends.webm",
+                alt: "Sends",
+                title: "Sends",
+              },
+              {
+                link: "/mercury-danati-sponsor-details-2026",
+                external: false,
+                video: "/assets/video/sponsors-logo-2026/sposnsor-logo-2026-mercury-Danati.webm",
+                alt: "Mercury Danati",
+                title: "Mercury Danati",
+              },
             ].map((s, index) => (
               <div className="col-lg-5 col-md-6 col-12" key={index}>
                 <div
@@ -70,22 +84,39 @@ const OurSponsors = () => {
                       width: "100%",
                     }}
                   >
-                    <video
-                      src={s.video}
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      aria-label={s.alt}
-                      style={{
-                        width: "100%",
-                        height: "auto",
-                        display: "block",
-                        objectFit: "contain",
-                        borderRadius: "14px",
-                        pointerEvents: "none",
-                      }}
-                    />
+                    {s.video ? (
+                      <video
+                        src={s.video}
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        aria-label={s.alt}
+                        style={{
+                          width: "100%",
+                          height: "auto",
+                          display: "block",
+                          objectFit: "contain",
+                          borderRadius: "14px",
+                          pointerEvents: "none",
+                        }}
+                      />
+                    ) : (
+                      <img
+                        src={s.image}
+                        alt={s.alt}
+                        style={{
+                          width: "100%",
+                          height: "auto",
+                          maxHeight: "180px",
+                          display: "block",
+                          objectFit: "contain",
+                          borderRadius: "14px",
+                          padding: "24px",
+                          pointerEvents: "none",
+                        }}
+                      />
+                    )}
                   </NavLink>
                 </div>
               </div>
