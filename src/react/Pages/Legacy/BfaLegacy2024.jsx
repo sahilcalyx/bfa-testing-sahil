@@ -114,7 +114,7 @@ function Avatar({ name, img, sizeClass = "w-28 h-28 md:w-32 md:h-32" }) {
 const keynotes = [
   {
     name: "Mr. Vishal Patil",
-    role: "Founder",
+    role: "Founder & CEO",
     company: "Calyx Solutions, Brit FinTech Awards & MSB Association",
     img: "",
     quote:

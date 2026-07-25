@@ -78,7 +78,7 @@ const years = [
 const founders = [
   {
     name: "Mr. Vishal Patil",
-    role: "Founder, Calyx Solutions, Brit Fintech Awards & MSB Association.",
+    role: "Founder & CEO, Calyx Solutions, Brit Fintech Awards & MSB Association.",
     bio: "With deep roots across fintech, payments, and financial services, Vishal founded Brit FinTech Awards with a clear mission to recognise excellence and strengthen the industry's connections. His vision continues to drive the growth and impact of BFA year after year.",
   },
   {
