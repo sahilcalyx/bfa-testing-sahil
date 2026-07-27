@@ -20,19 +20,20 @@ const SponsorSection2026 = () => {
       tier: "Platinum Sponsor",
     },
     {
-      name: "Sends",
-      video: "/assets/video/sponsors-logo-2026/sposnsor-logo-2026-Sends.webm",
-      link: "/sends-sponsor-details-2026",
-      external: false,
-      tier: "Silver Sponsor",
-    },
-    {
       name: "Mercury Danati",
       video: "/assets/video/sponsors-logo-2026/sposnsor-logo-2026-mercury-Danati.webm",
       link: "/mercury-danati-sponsor-details-2026",
       external: false,
       tier: "Sponsor Partner",
     },
+    {
+      name: "Sends",
+      video: "/assets/video/sponsors-logo-2026/sposnsor-logo-2026-Sends.webm",
+      link: "/sends-sponsor-details-2026",
+      external: false,
+      tier: "Silver Sponsor",
+    },
+    
   ];
 
   return (

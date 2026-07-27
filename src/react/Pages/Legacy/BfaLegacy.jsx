@@ -162,7 +162,7 @@ const BfaLegacy = () => {
             <SectionTitle
               tag="Select a Year"
               title="Past Editions"
-              subtitle="Choose an edition to explore speakers, panels, judges, winners, and partners."
+              subtitle="Choose an edition to explore Brit FinTech Awards"
               icon={Trophy}
             />
 

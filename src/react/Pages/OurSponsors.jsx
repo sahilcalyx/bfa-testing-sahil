@@ -35,19 +35,20 @@ const OurSponsors = () => {
                 title: "Tigris Pay",
               },
               {
-                link: "/sends-sponsor-details-2026",
-                external: false,
-                video: "/assets/video/sponsors-logo-2026/sposnsor-logo-2026-Sends.webm",
-                alt: "Sends",
-                title: "Sends",
-              },
-              {
                 link: "/mercury-danati-sponsor-details-2026",
                 external: false,
                 video: "/assets/video/sponsors-logo-2026/sposnsor-logo-2026-mercury-Danati.webm",
                 alt: "Mercury Danati",
                 title: "Mercury Danati",
               },
+              {
+                link: "/sends-sponsor-details-2026",
+                external: false,
+                video: "/assets/video/sponsors-logo-2026/sposnsor-logo-2026-Sends.webm",
+                alt: "Sends",
+                title: "Sends",
+              },
+             
             ].map((s, index) => (
               <div className="col-lg-5 col-md-6 col-12" key={index}>
                 <div
