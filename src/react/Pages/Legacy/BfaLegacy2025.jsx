@@ -691,7 +691,16 @@ const BfaLegacy2025 = () => {
             </div>
           </section>
 
-          {/* Section 2: Keynotes */}
+          </div>
+
+          {/* Section 2: Award Winners */}
+          <AwardWinnersParallax />
+
+          <div className="max-w-6xl mx-auto px-4 md:px-8">
+          {/* Section 3: Sponsors */}
+          <SponsorsShowcase />
+
+          {/* Section 4: Keynote Speakers */}
           <section className="mb-20 md:mb-28">
             <SectionTitle
               tag="Keynote Speakers"
@@ -839,7 +848,7 @@ const BfaLegacy2025 = () => {
             </div>
           </section>
 
-          {/* Section 3: Discussion Panel */}
+          {/* Section 5: Industry Discussion Panel */}
           <section className="mb-20 md:mb-28">
             <SectionTitle
               tag="Industry Discussion Panel"
@@ -947,7 +956,28 @@ const BfaLegacy2025 = () => {
             </div>
           </section>
 
-          {/* Section 4: Judges */}
+          {/* Section 6: Event Highlights */}
+          <section className="mb-20 md:mb-28">
+            <SectionTitle
+              tag="Event Highlights"
+              title="A Night of Recognition & Connection"
+              icon={Sparkles}
+            />
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {highlights.map(({ icon: Icon, label }) => (
+                <div
+                  key={label}
+                  className="flex gap-4 items-center p-4 sm:p-5 rounded-2xl bg-white border border-zinc-200/80 text-xs md:text-sm font-bold text-zinc-900 shadow-sm transition-all duration-300 hover:border-[#f40181] hover:-translate-y-0.5 hover:shadow-md"
+                >
+                  <Icon size={24} strokeWidth={2.25} className="text-[#f40181] shrink-0" />
+                  <span>{label}</span>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* Section 7: Judges */}
           <section className="mb-20 md:mb-28">
             <SectionTitle
               tag="Judging Panel"
@@ -1020,36 +1050,6 @@ const BfaLegacy2025 = () => {
               <NavLink to="/judges" className={CTA_PRIMARY}>
                 View all judges
               </NavLink>
-            </div>
-          </section>
-
-        </div>
-
-          {/* Section 5: Award Winners — Framer Motion scroll parallax */}
-          <AwardWinnersParallax />
-
-          <div className="max-w-6xl mx-auto px-4 md:px-8">
-          {/* Section 6: Sponsors */}
-          <SponsorsShowcase />
-
-          {/* Section 7: Event Highlights */}
-          <section className="mb-20 md:mb-28">
-            <SectionTitle
-              tag="Event Highlights"
-              title="A Night of Recognition & Connection"
-              icon={Sparkles}
-            />
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {highlights.map(({ icon: Icon, label }) => (
-                <div
-                  key={label}
-                  className="flex gap-4 items-center p-4 sm:p-5 rounded-2xl bg-white border border-zinc-200/80 text-xs md:text-sm font-bold text-zinc-900 shadow-sm transition-all duration-300 hover:border-[#f40181] hover:-translate-y-0.5 hover:shadow-md"
-                >
-                  <Icon size={24} strokeWidth={2.25} className="text-[#f40181] shrink-0" />
-                  <span>{label}</span>
-                </div>
-              ))}
             </div>
           </section>
 

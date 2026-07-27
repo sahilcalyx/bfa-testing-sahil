@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect, Children, cloneElement, isValidElement } from "react";
 import { Helmet } from "react-helmet";
 import { NavLink } from "react-router-dom";
+import { motion, useMotionValue, useAnimationFrame } from "framer-motion";
 import {
   Award,
   Calendar,
@@ -108,6 +109,438 @@ function Avatar({ name, img, sizeClass = "w-28 h-28 md:w-32 md:h-32" }) {
     >
       {initials(name)}
     </div>
+  );
+}
+
+const AWARD_GALLERY_2024 = Array.from({ length: 17 }, (_, i) => ({
+  src: `/assets/img/gallery/awards/${i + 1}.jpg`,
+  alt: `Brit FinTech Awards 2024 moment ${i + 1}`,
+}));
+
+/**
+ * Framer Motion marquee — GPU transform only.
+ * Pauses when off-screen or hovered to avoid scroll jank.
+ */
+function FramerMarqueeRow({ children, speed = 55, reverse = false }) {
+  const x = useMotionValue(0);
+  const rootRef = useRef(null);
+  const trackRef = useRef(null);
+  const widthRef = useRef(0);
+  const hoverPaused = useRef(false);
+  const inView = useRef(false);
+
+  useEffect(() => {
+    const root = rootRef.current;
+    const track = trackRef.current;
+    if (!root || !track) return undefined;
+
+    const measure = () => {
+      widthRef.current = track.scrollWidth / 2;
+    };
+    measure();
+
+    const ro = new ResizeObserver(measure);
+    ro.observe(track);
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        inView.current = entry.isIntersecting;
+      },
+      { rootMargin: "80px 0px", threshold: 0 }
+    );
+    io.observe(root);
+
+    return () => {
+      ro.disconnect();
+      io.disconnect();
+    };
+  }, []);
+
+  useAnimationFrame((_, delta) => {
+    if (!inView.current || hoverPaused.current) return;
+    const width = widthRef.current;
+    if (!width) return;
+
+    const dt = Math.min(delta, 24);
+    let next = x.get();
+    if (reverse && next === 0) {
+      x.set(-width);
+      return;
+    }
+    const move = (speed * dt) / 1000;
+    next += reverse ? move : -move;
+    if (!reverse && next <= -width) next += width;
+    if (reverse && next >= 0) next -= width;
+    x.set(next);
+  });
+
+  const cloneSet = (suffix) =>
+    Children.map(children, (child, i) => {
+      if (!isValidElement(child)) return child;
+      return cloneElement(child, { key: `${String(child.key ?? i)}-${suffix}` });
+    });
+
+  return (
+    <div
+      ref={rootRef}
+      className="overflow-hidden"
+      onMouseEnter={() => {
+        hoverPaused.current = true;
+      }}
+      onMouseLeave={() => {
+        hoverPaused.current = false;
+      }}
+      onTouchStart={() => {
+        hoverPaused.current = true;
+      }}
+      onTouchEnd={() => {
+        hoverPaused.current = false;
+      }}
+    >
+      <motion.div
+        ref={trackRef}
+        style={{ x, willChange: "transform" }}
+        className="flex w-max gap-3 sm:gap-3.5"
+      >
+        <div className="flex shrink-0 gap-3 sm:gap-3.5">{cloneSet("a")}</div>
+        <div className="flex shrink-0 gap-3 sm:gap-3.5" aria-hidden="true">
+          {cloneSet("b")}
+        </div>
+      </motion.div>
+    </div>
+  );
+}
+
+function AwardsMarqueeRow({ items, speed = 55, reverse = false }) {
+  return (
+    <FramerMarqueeRow speed={speed} reverse={reverse}>
+      {items.map((photo) => (
+        <div
+          key={photo.src}
+          className="shrink-0 w-[180px] sm:w-[220px] md:w-[250px] aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden border-2 border-[#b49966] bg-zinc-900"
+        >
+          <img
+            src={photo.src}
+            alt={photo.alt}
+            loading="lazy"
+            decoding="async"
+            width={250}
+            height={188}
+            draggable={false}
+            className="h-full w-full object-cover select-none pointer-events-none"
+          />
+        </div>
+      ))}
+    </FramerMarqueeRow>
+  );
+}
+
+function AwardWinnersShowcase() {
+  const mid = Math.ceil(AWARD_GALLERY_2024.length / 2);
+  const rowA = AWARD_GALLERY_2024.slice(0, mid);
+  const rowB = AWARD_GALLERY_2024.slice(mid);
+
+  return (
+    <section className="mb-20 md:mb-28">
+      <div className="relative overflow-hidden rounded-[28px] md:rounded-[36px] bg-[#000132] border-2 border-[#b49966] shadow-2xl shadow-[#000132]/20">
+        <div className="relative z-10 flex flex-col items-center text-center px-6 sm:px-8 md:px-12 pt-8 md:pt-12 lg:pt-14 pb-6 md:pb-8">
+          <span className="inline-flex items-center gap-2 rounded-full border border-[#b49966]/40 bg-[#b49966]/10 px-4 py-1.5 text-xs font-black uppercase tracking-[0.22em] text-[#b49966] mb-4">
+            <Trophy size={14} strokeWidth={2.5} className="text-[#b49966]" />
+            Inaugural Award Ceremony
+          </span>
+          <h2 className="m-0 text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white">
+            Award Winners 2024
+          </h2>
+          <p className="mt-3 md:mt-4 text-base md:text-lg text-zinc-300 font-medium leading-relaxed m-0 max-w-2xl mx-auto">
+            See who took home the industry’s most coveted honours at the inaugural Brit FinTech Awards.
+          </p>
+          <div className="mt-6 md:mt-7">
+            <NavLink to="/award-winners-2024" className={CTA_PRIMARY}>
+              <Trophy size={18} strokeWidth={2.5} className="shrink-0" />
+              <span>View Award Winners 2024</span>
+              <ArrowUpRight size={18} strokeWidth={2.5} className="shrink-0" />
+            </NavLink>
+          </div>
+        </div>
+
+        <div className="relative z-10 pb-8 md:pb-12 space-y-3 sm:space-y-3.5">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-y-0 left-0 z-20 w-10 sm:w-16 md:w-24 bg-gradient-to-r from-[#000132] to-transparent"
+          />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-y-0 right-0 z-20 w-10 sm:w-16 md:w-24 bg-gradient-to-l from-[#000132] to-transparent"
+          />
+          <AwardsMarqueeRow items={rowA} speed={58} />
+          <AwardsMarqueeRow items={rowB} speed={48} reverse />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+let marqueeCssReady = false;
+function ensureMarqueeCss() {
+  if (marqueeCssReady || typeof document === "undefined") return;
+  marqueeCssReady = true;
+  const style = document.createElement("style");
+  style.setAttribute("data-bfa-marquee", "true");
+  style.textContent = `
+@keyframes bfa-marquee-x {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+.bfa-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: bfa-marquee-x var(--bfa-marquee-duration, 30s) linear infinite;
+  animation-direction: var(--bfa-marquee-direction, normal);
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+.bfa-marquee-paused .bfa-marquee-track {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .bfa-marquee-track { animation: none !important; }
+}
+`;
+  document.head.appendChild(style);
+}
+
+/** CSS marquee for lighter logo strips — pauses on hover / off-screen */
+function InfiniteMarqueeRow({ children, duration = 28, reverse = false }) {
+  const rootRef = useRef(null);
+  const [hoverPaused, setHoverPaused] = useState(false);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    ensureMarqueeCss();
+    const el = rootRef.current;
+    if (!el) return undefined;
+    const io = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { rootMargin: "120px 0px", threshold: 0 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  const paused = hoverPaused || !inView;
+
+  const cloneSet = (suffix) =>
+    Children.map(children, (child, i) => {
+      if (!isValidElement(child)) return child;
+      return cloneElement(child, { key: `${String(child.key ?? i)}-${suffix}` });
+    });
+
+  return (
+    <div
+      ref={rootRef}
+      className={`overflow-hidden ${paused ? "bfa-marquee-paused" : ""}`}
+      onMouseEnter={() => setHoverPaused(true)}
+      onMouseLeave={() => setHoverPaused(false)}
+      onTouchStart={() => setHoverPaused(true)}
+      onTouchEnd={() => setHoverPaused(false)}
+    >
+      <div
+        className="bfa-marquee-track gap-3 sm:gap-3.5"
+        style={{
+          ["--bfa-marquee-duration"]: `${duration}s`,
+          ["--bfa-marquee-direction"]: reverse ? "reverse" : "normal",
+        }}
+      >
+        <div className="flex shrink-0 gap-3 sm:gap-3.5">{cloneSet("a")}</div>
+        <div className="flex shrink-0 gap-3 sm:gap-3.5" aria-hidden="true">
+          {cloneSet("b")}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const SPONSORS_2024 = [
+  {
+    link: "https://www.calyx-solutions.com",
+    img: "/assets/img/sponsor-logo/calyx.png",
+    alt: "Calyx Solutions",
+    external: true,
+  },
+  {
+    link: "/vyne-gold-sponsor",
+    img: "/assets/img/sponsor-logo/Vyne.png",
+    alt: "Vyne",
+  },
+  {
+    link: "https://www.gbgplc.com/",
+    img: "/assets/img/sponsor-logo/gbg.png",
+    alt: "GBG",
+    external: true,
+  },
+  {
+    link: "/volume-payments-sponsor",
+    img: "/assets/img/sponsor-logo/Volume.png",
+    alt: "Volume",
+  },
+  {
+    link: "/travel-cashier-silver-sponsor",
+    img: "/assets/img/sponsor-logo/travel-cashier.png",
+    alt: "Travel Cashier",
+  },
+  {
+    link: "/mtbs-silver-sponsor",
+    img: "/assets/img/sponsor-logo/mtbs.png",
+    alt: "MTBS",
+  },
+  {
+    link: "https://baazmoneytransfer.co.uk/",
+    img: "/assets/img/sponsor-logo/baaz.png",
+    alt: "Baaz Money",
+    external: true,
+  },
+  {
+    link: "https://fxcurrencyltd.co.uk/",
+    img: "/assets/img/sponsor-logo/fx-cuurency.png",
+    alt: "FX Currency",
+    external: true,
+  },
+  {
+    link: "https://kmoney.co.uk/",
+    img: "/assets/img/sponsor-logo/kmoney.png",
+    alt: "KMoney",
+    external: true,
+  },
+  {
+    link: "https://redseamoneytransfer.co.uk/",
+    img: "/assets/img/sponsor-logo/redsea.png",
+    alt: "Red Sea Money Transfer",
+    external: true,
+  },
+  {
+    link: "https://supertransfer.co.uk/",
+    img: "/assets/img/sponsor-logo/super-transfer.png",
+    alt: "Super Transfer",
+    external: true,
+  },
+  {
+    link: "https://sumsub.com/",
+    img: "/assets/img/sponsor-logo/sumsub.png",
+    alt: "Sumsub",
+    external: true,
+  },
+  {
+    link: "https://teeparamexchange.co.uk/",
+    img: "/assets/img/sponsor-logo/teeparam.png",
+    alt: "Teeparam Exchange",
+    external: true,
+  },
+  {
+    link: "https://transferrocket.co.uk/",
+    img: "/assets/img/sponsor-logo/transfer-rocket.png",
+    alt: "Transfer Rocket",
+    external: true,
+  },
+  {
+    link: "https://mathbeecom.co.uk/",
+    img: "/assets/img/sponsor-logo/mathbeecom.png",
+    alt: "Mathbeecom",
+    external: true,
+  },
+  {
+    link: "https://www.webuyanycurrency.com/",
+    img: "/assets/img/sponsor-logo/Mercury-Danati.png",
+    alt: "Mercury Danati",
+    external: true,
+  },
+];
+
+function SponsorLogoLink({ sponsor }) {
+  const className =
+    "shrink-0 w-[140px] sm:w-[160px] md:w-[170px] h-[84px] sm:h-[92px] md:h-[96px] rounded-2xl bg-white border border-zinc-200/80 shadow-sm flex items-center justify-center px-3 transition-colors duration-200 hover:border-[#b49966]/50";
+
+  const img = (
+    <img
+      src={sponsor.img}
+      alt={sponsor.alt}
+      loading="lazy"
+      decoding="async"
+      draggable={false}
+      className="max-h-[60px] sm:max-h-[64px] max-w-full object-contain pointer-events-none"
+    />
+  );
+
+  if (sponsor.external) {
+    return (
+      <a
+        href={sponsor.link}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={className}
+        title={sponsor.alt}
+      >
+        {img}
+      </a>
+    );
+  }
+
+  return (
+    <NavLink to={sponsor.link} className={className} title={sponsor.alt}>
+      {img}
+    </NavLink>
+  );
+}
+
+function SponsorMarqueeRow({ items, duration = 28, reverse = false }) {
+  return (
+    <InfiniteMarqueeRow duration={duration} reverse={reverse}>
+      {items.map((sponsor) => (
+        <SponsorLogoLink key={sponsor.alt} sponsor={sponsor} />
+      ))}
+    </InfiniteMarqueeRow>
+  );
+}
+
+function SponsorsShowcase2024() {
+  const mid = Math.ceil(SPONSORS_2024.length / 2);
+  const rowA = SPONSORS_2024.slice(0, mid);
+  const rowB = SPONSORS_2024.slice(mid);
+
+  return (
+    <section className="relative mb-20 md:mb-28 overflow-hidden">
+      <div className="relative z-10 flex flex-col items-center text-center mb-8 md:mb-10">
+        <span className="inline-flex items-center gap-2 rounded-full border border-[#b49966]/30 bg-[#b49966]/5 px-4 py-1.5 text-xs font-extrabold uppercase tracking-[0.22em] text-[#b49966] mb-4">
+          <Handshake size={14} strokeWidth={2.5} className="text-[#b49966]" />
+          Supporting Partners
+        </span>
+        <h2 className="m-0 text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-zinc-950">
+          Supporting FinTech Excellence
+        </h2>
+        <p className="mt-3 md:mt-4 text-base md:text-lg text-zinc-600 font-medium leading-relaxed m-0 max-w-2xl mx-auto">
+          Brit FinTech Awards 2024 was supported by organisations committed to fostering innovation, excellence, and collaboration across financial services.
+        </p>
+        <div className="mt-6 md:mt-7">
+          <NavLink to="/our-sponsors" className={CTA_PRIMARY}>
+            <span>View 2024 sponsors</span>
+            <ArrowUpRight size={18} strokeWidth={2.5} />
+          </NavLink>
+        </div>
+      </div>
+
+      <div className="relative space-y-3 sm:space-y-3.5">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-y-0 left-0 z-20 w-16 sm:w-28 md:w-40 bg-gradient-to-r from-zinc-50 via-zinc-50/85 to-transparent"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-y-0 right-0 z-20 w-16 sm:w-28 md:w-40 bg-gradient-to-l from-zinc-50 via-zinc-50/85 to-transparent"
+        />
+        <SponsorMarqueeRow items={rowA} duration={26} />
+        <SponsorMarqueeRow items={rowB} duration={30} reverse />
+      </div>
+    </section>
   );
 }
 
@@ -324,7 +757,13 @@ const BfaLegacy2024 = () => {
             </div>
           </section>
 
-          {/* Section 2: Keynote Speakers */}
+          {/* Section 2: Award Winners 2024 */}
+          <AwardWinnersShowcase />
+
+          {/* Section 3: Sponsors */}
+          <SponsorsShowcase2024 />
+
+          {/* Section 4: Keynote Speakers */}
           <section className="mb-20 md:mb-28">
             <SectionTitle
               tag="Keynote Speakers"
@@ -411,7 +850,7 @@ const BfaLegacy2024 = () => {
             </div>
           </section>
 
-          {/* Section 3: Industry Discussion Panel */}
+          {/* Section 5: Industry Discussion Panel */}
           <section className="mb-20 md:mb-28">
             <SectionTitle
               tag="Industry Discussion Panel"
@@ -487,7 +926,28 @@ const BfaLegacy2024 = () => {
             </div>
           </section>
 
-          {/* Section 4: Judges */}
+          {/* Section 6: Event Highlights */}
+          <section className="mb-20 md:mb-28">
+            <SectionTitle
+              tag="Event Highlights"
+              title="Celebrating Innovation Across Financial Services"
+              icon={Sparkles}
+            />
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {highlights.map(({ icon: Icon, label }) => (
+                <div
+                  key={label}
+                  className="flex gap-4 items-center p-4 sm:p-5 rounded-2xl bg-white border border-zinc-200/80 text-xs md:text-sm font-bold text-zinc-900 shadow-sm transition-all duration-300 hover:border-[#b49966]/40 hover:-translate-y-0.5 hover:shadow-md"
+                >
+                  <Icon size={24} strokeWidth={2.25} className="text-[#b49966] shrink-0" />
+                  <span>{label}</span>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* Section 7: Judges */}
           <section className="mb-20 md:mb-28">
             <SectionTitle
               tag="Judging Panel"
@@ -560,101 +1020,6 @@ const BfaLegacy2024 = () => {
               <NavLink to="/judges" className={CTA_PRIMARY}>
                 View all judges
               </NavLink>
-            </div>
-          </section>
-
-          {/* Section 5: Award Winners 2024 */}
-          <section className="mb-20 md:mb-28">
-            <div className="relative overflow-hidden rounded-[36px] bg-gradient-to-br from-zinc-950 via-[#000132] to-zinc-950 p-8 md:p-14 lg:p-16 border border-[#b49966]/40 shadow-2xl text-center md:text-left flex flex-col md:flex-row items-center justify-between gap-8">
-              {/* Background Glow */}
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute -top-24 -right-24 w-96 h-96 bg-gradient-to-br from-[#b49966]/30 via-[#b49966]/20 to-transparent rounded-full blur-3xl"
-              />
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute -bottom-24 -left-24 w-96 h-96 bg-gradient-to-tr from-[#000132]/50 to-transparent rounded-full blur-3xl"
-              />
-
-              <div className="relative z-10 max-w-2xl">
-                <span className="inline-flex items-center gap-2 rounded-full border border-[#b49966]/40 bg-[#b49966]/10 px-4 py-1.5 text-xs font-black uppercase tracking-[0.22em] text-[#b49966] mb-4">
-                  <Trophy size={14} strokeWidth={2.5} className="text-[#b49966]" />
-                  Inaugural Award Ceremony
-                </span>
-                <h2 className="m-0 text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white">
-                  Award Winners 2024
-                </h2>
-                <p className="mt-4 text-base md:text-lg text-zinc-300 font-medium leading-relaxed m-0">
-                  See who took home the industry’s most coveted honours at the inaugural Brit FinTech Awards.
-                </p>
-              </div>
-
-              <div className="relative z-10 shrink-0">
-                <NavLink
-                  to="/award-winners-2024"
-                  className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl font-black text-base no-underline transition-all duration-300 hover:scale-[1.05] bg-[#b49966] text-[#000132] shadow-xl shadow-[#b49966]/25 hover:shadow-2xl hover:shadow-[#b49966]/35"
-                >
-                  <Trophy size={20} strokeWidth={2.5} className="text-[#000132]" />
-                  <span>View Award Winners 2024</span>
-                  <ArrowUpRight size={20} strokeWidth={2.5} />
-                </NavLink>
-              </div>
-            </div>
-          </section>
-
-          {/* Section 6: Sponsors */}
-          <section className="mb-20 md:mb-28">
-            <div className="relative overflow-hidden rounded-[36px] border border-zinc-200/90 bg-white p-8 md:p-14 lg:p-16 shadow-[0_20px_50px_rgba(0,0,0,0.04)] text-center md:text-left flex flex-col md:flex-row items-center justify-between gap-8">
-              {/* Background Gradient Blobs */}
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute -top-20 -right-20 w-80 h-80 bg-gradient-to-br from-[#b49966]/15 to-transparent rounded-full blur-3xl"
-              />
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute -bottom-20 -left-20 w-80 h-80 bg-gradient-to-tr from-[#b49966]/30 to-transparent rounded-full blur-3xl"
-              />
-
-              <div className="relative z-10 max-w-2xl">
-                <span className="inline-flex items-center gap-2 rounded-full border border-[#b49966]/30 bg-[#b49966]/5 px-4 py-1.5 text-xs font-extrabold uppercase tracking-[0.22em] text-[#b49966] mb-4">
-                  <Handshake size={14} strokeWidth={2.5} className="text-[#b49966]" />
-                  Supporting Partners
-                </span>
-                <h2 className="m-0 text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-zinc-950">
-                  Supporting FinTech Excellence
-                </h2>
-                <p className="mt-4 text-base md:text-lg text-zinc-600 font-medium leading-relaxed m-0">
-                  Brit FinTech Awards 2024 was supported by organisations committed to fostering innovation, excellence, and collaboration across financial services.
-                </p>
-              </div>
-
-              <div className="relative z-10 shrink-0">
-                <NavLink to="/our-sponsors" className={CTA_PRIMARY}>
-                  <span>View 2024 sponsors</span>
-                  <ArrowUpRight size={18} strokeWidth={2.5} />
-                </NavLink>
-              </div>
-            </div>
-          </section>
-
-          {/* Section 7: Event Highlights */}
-          <section className="mb-20 md:mb-28">
-            <SectionTitle
-              tag="Event Highlights"
-              title="Celebrating Innovation Across Financial Services"
-              icon={Sparkles}
-            />
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {highlights.map(({ icon: Icon, label }) => (
-                <div
-                  key={label}
-                  className="flex gap-4 items-center p-4 sm:p-5 rounded-2xl bg-white border border-zinc-200/80 text-xs md:text-sm font-bold text-zinc-900 shadow-sm transition-all duration-300 hover:border-[#b49966]/40 hover:-translate-y-0.5 hover:shadow-md"
-                >
-                  <Icon size={24} strokeWidth={2.25} className="text-[#b49966] shrink-0" />
-                  <span>{label}</span>
-                </div>
-              ))}
             </div>
           </section>
 
