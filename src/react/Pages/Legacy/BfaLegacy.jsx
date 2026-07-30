@@ -11,6 +11,24 @@ import {
   Users,
 } from "lucide-react";
 
+const LinkedinIcon = ({ size = 16, className = "" }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.25"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+    <rect x="2" y="9" width="4" height="12" />
+    <circle cx="4" cy="4" r="2" />
+  </svg>
+);
+
 function SectionTitle({ tag, title, subtitle, icon: Icon }) {
   return (
     <div className="mb-10 md:mb-14 text-center relative z-10">
@@ -72,12 +90,14 @@ const founders = [
     role: "Founder & CEO, Calyx Solutions, Brit Fintech Awards & MSB Association.",
     bio: "With deep roots across fintech, payments, and financial services, Vishal founded Brit FinTech Awards with a clear mission to recognise excellence and strengthen the industry's connections. His vision continues to drive the growth and impact of BFA year after year.",
     img: "/assets/img/bfa-legacy/vishal-patil-main.png",
+    linkedin: "https://www.linkedin.com/in/vishal-patil-78181914",
   },
   {
     name: "Ms. Renu Nimbalkar",
     role: "COO, Calyx Solutions",
     bio: "A driving force behind the growth of the BFA community. Working closely alongside the founder's vision, Renu has played a vital role in cultivating partnerships, engaging stakeholders, and expanding the BFA community.",
     img: "/assets/img/bfa-legacy/renu-nimbalkar.png",
+    linkedin: "https://www.linkedin.com/in/renu-nimbalkar-63a70436",
   },
 ];
 
@@ -297,9 +317,23 @@ const BfaLegacy = () => {
                       alt={person.name}
                       className="h-40 w-40 sm:h-48 sm:w-48 md:h-52 md:w-52 rounded-3xl object-cover object-top border-[3px] border-[#b49966] shadow-xl shadow-[#b49966]/20"
                     />
-                    <h3 className="mt-6 mb-0 text-xl md:text-2xl font-black tracking-tight text-zinc-950">
-                      {person.name}
-                    </h3>
+                    <div className="mt-6 inline-flex items-center justify-center gap-2.5">
+                      <h3 className="m-0 text-xl md:text-2xl font-black tracking-tight text-zinc-950">
+                        {person.name}
+                      </h3>
+                      {person.linkedin && (
+                        <a
+                          href={person.linkedin}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          title={`${person.name}'s LinkedIn`}
+                          aria-label={`${person.name} on LinkedIn`}
+                          className="h-8 w-8 grid place-items-center rounded-lg bg-[#0077b5] text-white hover:scale-110 transition-transform shadow-sm shrink-0"
+                        >
+                          <LinkedinIcon size={15} />
+                        </a>
+                      )}
+                    </div>
                     <p className="mt-2 mb-0 text-xs md:text-sm font-bold leading-relaxed text-[#c8102e] max-w-sm">
                       {person.role}
                     </p>
