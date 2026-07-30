@@ -48,7 +48,13 @@ const OurSponsors = () => {
                 alt: "Sends",
                 title: "Sends",
               },
-             
+              {
+                link: "/kmbal-sponsor-details-2026",
+                external: false,
+                image: "/assets/img/sponsor-logo/kmbal-sponsor-Logo.png",
+                alt: "Kmbal",
+                title: "Kmbal",
+              },
             ].map((s, index) => (
               <div className="col-lg-5 col-md-6 col-12" key={index}>
                 <div

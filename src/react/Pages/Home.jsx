@@ -31,6 +31,8 @@ import TestimonialCommon from "../Components/Testmonials/TestimonialCommon";
 import BFA26Section from "../Components/BFA26Section";
 import { color } from "framer-motion";
 import SponsorSection2026 from "../Components/SponsorSection2026";
+import WhoAttendsBfaSection from "../Components/WhoAttendsBfaSection";
+import WhoAttendsBfaTabsSection from "../Components/WhoAttendsBfaTabsSection";
 
 const Home = () => {
   const deadline = new Date("2025-08-31"); // change date here
@@ -314,6 +316,8 @@ Brit Fintech Awards 2026."
 
         {/* <div className="cs-height_20 cs-height_lg_20" /> */}
         <AnimatedStats stats={statsData} />
+        <WhoAttendsBfaSection />
+        <WhoAttendsBfaTabsSection />
        
 
 

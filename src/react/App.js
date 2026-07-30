@@ -87,6 +87,7 @@ import ScrollToHashElement from "./Components/SliderBigBan/ScrollToHashElement";
 import TigrisPaySponsorDetails from "./Pages/2026/OurSponsors/TigrisPaySponsorDetails";
 import SendsSponsorDetails2026 from "./Pages/2026/OurSponsors/SendsSponsorDetails2026";
 import MercuryDanatiSponsorDetails2026 from "./Pages/2026/OurSponsors/MercuryDanatiSponsorDetails2026";
+import KmbalSponsorDetails2026 from "./Pages/2026/OurSponsors/KmbalSponsorDetails2026";
 const LeatherbackSponsorDetails = lazy(() => import("./Pages/2025/OurSponsors/LeatherbackSponsorDetails"));
 const AiMsbBlog = lazy(() => import("./Pages/Blogs/AiMsbBlog"));
 const ClearJunctionDetails2025 = lazy(() => import("./Pages/2025/OurSponsors/ClearJunctionDetails2025"));
@@ -662,6 +663,10 @@ function App() {
         <Route
           path="/mercury-danati-sponsor-details-2026"
           element={<MercuryDanatiSponsorDetails2026 />}
+        />
+        <Route
+          path="/kmbal-sponsor-details-2026"
+          element={<KmbalSponsorDetails2026 />}
         />
 
         {/* BFA Legacy */}

@@ -33,7 +33,13 @@ const SponsorSection2026 = () => {
       external: false,
       tier: "Silver Sponsor",
     },
-    
+    {
+      name: "Kmbal",
+      image: "/assets/img/sponsor-logo/kmbal-sponsor-Logo.png",
+      link: "/kmbal-sponsor-details-2026",
+      external: false,
+      tier: "Silver Sponsor",
+    },
   ];
 
   return (
