@@ -47,15 +47,6 @@ function SectionTitle({ tag, title, subtitle, icon: Icon }) {
   );
 }
 
-function initials(name = "") {
-  const parts = String(name)
-    .replace(/^Mr\.?\s*|^Ms\.?\s*|^Dr\.?\s*/i, "")
-    .trim()
-    .split(/\s+/);
-  if (parts.length >= 2) return (parts[0][0] + parts[1][0]).toUpperCase();
-  return (parts[0] || "?").slice(0, 2).toUpperCase();
-}
-
 const years = [
   {
     to: "/bfa-legacy/2025",
@@ -80,11 +71,13 @@ const founders = [
     name: "Mr. Vishal Patil",
     role: "Founder & CEO, Calyx Solutions, Brit Fintech Awards & MSB Association.",
     bio: "With deep roots across fintech, payments, and financial services, Vishal founded Brit FinTech Awards with a clear mission to recognise excellence and strengthen the industry's connections. His vision continues to drive the growth and impact of BFA year after year.",
+    img: "/assets/img/bfa-legacy/vishal-patil-main.png",
   },
   {
     name: "Ms. Renu Nimbalkar",
     role: "COO, Calyx Solutions",
     bio: "A driving force behind the growth of the BFA community. Working closely alongside the founder's vision, Renu has played a vital role in cultivating partnerships, engaging stakeholders, and expanding the BFA community.",
+    img: "/assets/img/bfa-legacy/renu-nimbalkar.png",
   },
 ];
 
@@ -108,7 +101,7 @@ const BfaLegacy = () => {
       <div>
         <div className="cs-height_90 cs-height_lg_80" />
         <div
-          className="cs-hero cs-style12 cs-type1 cs-center text-center cs-parallax cs-hobble"
+          className="cs-hero cs-style12 cs-type1 cs-center text-center cs-parallax cs-hobble bfa-legacy-hero"
           style={{
             backgroundImage:
               'url("/assets/img/event-conference/hero-img.jpg")',
@@ -287,9 +280,8 @@ const BfaLegacy = () => {
               {founders.map((person) => (
                 <article
                   key={person.name}
-                  className="relative overflow-hidden rounded-[32px] border border-zinc-200/80 bg-white p-8 md:p-10 shadow-[0_16px_40px_rgba(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_28px_60px_-15px_rgba(0,0,0,0.12)] hover:border-zinc-300"
+                  className="relative overflow-hidden rounded-[32px] border-2 border-[#b49966]/70 bg-white p-8 md:p-10 shadow-[0_16px_40px_rgba(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_28px_60px_-15px_rgba(180,153,102,0.25)] hover:border-[#b49966] text-center"
                 >
-                  {/* Diagonal Gradient Blobs */}
                   <div
                     aria-hidden="true"
                     className="pointer-events-none absolute -top-12 -right-12 w-48 h-48 bg-gradient-to-br from-[#c8102e]/10 to-transparent rounded-full blur-2xl"
@@ -299,24 +291,19 @@ const BfaLegacy = () => {
                     className="pointer-events-none absolute -bottom-12 -left-12 w-48 h-48 bg-gradient-to-tr from-[#f2d8ac]/20 to-transparent rounded-full blur-2xl"
                   />
 
-                  <div className="relative z-10">
-                    <div className="flex items-start gap-5 mb-6">
-                      <div
-                        aria-hidden="true"
-                        className="h-16 w-16 md:h-20 md:w-20 shrink-0 grid place-items-center rounded-2xl bg-gradient-to-br from-[#c8102e] via-[#900a20] to-[#50000e] text-[#f2d8ac] text-2xl font-black tracking-wider shadow-lg shadow-[#c8102e]/25 border border-white/20"
-                      >
-                        {initials(person.name)}
-                      </div>
-                      <div className="pt-1">
-                        <h3 className="m-0 text-xl md:text-2xl font-black tracking-tight text-zinc-950">
-                          {person.name}
-                        </h3>
-                        <p className="mt-2 mb-0 text-xs md:text-sm font-bold leading-relaxed text-[#c8102e]">
-                          {person.role}
-                        </p>
-                      </div>
-                    </div>
-                    <p className="m-0 text-sm md:text-base leading-[1.8] text-zinc-600">
+                  <div className="relative z-10 flex flex-col items-center">
+                    <img
+                      src={person.img}
+                      alt={person.name}
+                      className="h-40 w-40 sm:h-48 sm:w-48 md:h-52 md:w-52 rounded-3xl object-cover object-top border-[3px] border-[#b49966] shadow-xl shadow-[#b49966]/20"
+                    />
+                    <h3 className="mt-6 mb-0 text-xl md:text-2xl font-black tracking-tight text-zinc-950">
+                      {person.name}
+                    </h3>
+                    <p className="mt-2 mb-0 text-xs md:text-sm font-bold leading-relaxed text-[#c8102e] max-w-sm">
+                      {person.role}
+                    </p>
+                    <p className="mt-5 mb-0 text-sm md:text-base leading-[1.8] text-zinc-600">
                       {person.bio}
                     </p>
                   </div>

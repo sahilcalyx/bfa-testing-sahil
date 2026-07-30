@@ -5,6 +5,8 @@ const __dirname = path.dirname(__filename);
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactCompiler: true,
+  // Hide the floating Next.js "N / Issues" badge (clutters mobile preview)
+  devIndicators: false,
   compiler: {
     styledComponents: true,
   },

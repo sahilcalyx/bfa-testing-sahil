@@ -139,14 +139,55 @@ code {
 /* Hide Tawk.to Chatbot on Mobile Views */
 @media (max-width: 768px) {
   #tawkchat-iframe-container,
+  #tawkchat-container,
+  #tawkchat-minified-iframe-wrapper,
+  #tawkchat-minified-box,
   .tawk-min-container,
   .tawk-button,
+  .tawk-button-circle,
+  .tawk-mobile,
+  .tawk-custom-color,
   iframe[src*="tawk.to"],
-  iframe[title="chat widget"],
-  #tawkchat-container {
+  iframe[title*="chat"],
+  iframe[title*="Chat"],
+  div[class*="tawk-"],
+  div[id*="tawk"],
+  div[class*="Tawk_"],
+  a[href*="tawk.to"] {
     display: none !important;
     visibility: hidden !important;
     opacity: 0 !important;
     pointer-events: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    z-index: -1 !important;
+  }
+}
+
+/* Legacy page heroes: title was clipped on mobile (global height:200px + 80px title) */
+@media screen and (max-width: 991px) {
+  .bfa-legacy-hero.cs-hero.cs-style12.cs-type1 {
+    height: auto !important;
+    min-height: 0 !important;
+    padding-top: 28px !important;
+    padding-bottom: 36px !important;
+    overflow: visible;
+  }
+
+  .bfa-legacy-hero.cs-hero.cs-style12 .cs-hero_title {
+    font-size: clamp(26px, 7vw, 36px) !important;
+    line-height: 1.15 !important;
+    margin: 0 0 12px !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    color: #fff !important;
+  }
+
+  .bfa-legacy-hero .cs-hero_text {
+    position: relative;
+    z-index: 2;
   }
 }

@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect, Children, cloneElement, isValidElement } from "react";
 import { Helmet } from "react-helmet";
 import { NavLink } from "react-router-dom";
-import { motion, useMotionValue, useAnimationFrame } from "framer-motion";
 import {
   Award,
   Calendar,
@@ -20,6 +19,8 @@ import {
   ArrowUpRight,
   ShieldCheck,
   MessageSquare,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 
 const CTA_PRIMARY =
@@ -117,62 +118,55 @@ const AWARD_GALLERY_2024 = Array.from({ length: 17 }, (_, i) => ({
   alt: `Brit FinTech Awards 2024 moment ${i + 1}`,
 }));
 
-/**
- * Framer Motion marquee — GPU transform only.
- * Pauses when off-screen or hovered to avoid scroll jank.
- */
-function FramerMarqueeRow({ children, speed = 55, reverse = false }) {
-  const x = useMotionValue(0);
+let marqueeCssReady = false;
+function ensureMarqueeCss() {
+  if (marqueeCssReady || typeof document === "undefined") return;
+  marqueeCssReady = true;
+  const style = document.createElement("style");
+  style.setAttribute("data-bfa-marquee", "true");
+  style.textContent = `
+@keyframes bfa-marquee-x {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+.bfa-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: bfa-marquee-x var(--bfa-marquee-duration, 30s) linear infinite;
+  animation-direction: var(--bfa-marquee-direction, normal);
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+.bfa-marquee-paused .bfa-marquee-track {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .bfa-marquee-track { animation: none !important; }
+}
+`;
+  document.head.appendChild(style);
+}
+
+/** CSS GPU marquee — pauses on hover / off-screen to avoid scroll jank */
+function InfiniteMarqueeRow({ children, duration = 28, reverse = false }) {
   const rootRef = useRef(null);
-  const trackRef = useRef(null);
-  const widthRef = useRef(0);
-  const hoverPaused = useRef(false);
-  const inView = useRef(false);
+  const [hoverPaused, setHoverPaused] = useState(false);
+  const [inView, setInView] = useState(false);
 
   useEffect(() => {
-    const root = rootRef.current;
-    const track = trackRef.current;
-    if (!root || !track) return undefined;
-
-    const measure = () => {
-      widthRef.current = track.scrollWidth / 2;
-    };
-    measure();
-
-    const ro = new ResizeObserver(measure);
-    ro.observe(track);
-
+    ensureMarqueeCss();
+    const el = rootRef.current;
+    if (!el) return undefined;
     const io = new IntersectionObserver(
-      ([entry]) => {
-        inView.current = entry.isIntersecting;
-      },
+      ([entry]) => setInView(entry.isIntersecting),
       { rootMargin: "80px 0px", threshold: 0 }
     );
-    io.observe(root);
-
-    return () => {
-      ro.disconnect();
-      io.disconnect();
-    };
+    io.observe(el);
+    return () => io.disconnect();
   }, []);
 
-  useAnimationFrame((_, delta) => {
-    if (!inView.current || hoverPaused.current) return;
-    const width = widthRef.current;
-    if (!width) return;
-
-    const dt = Math.min(delta, 24);
-    let next = x.get();
-    if (reverse && next === 0) {
-      x.set(-width);
-      return;
-    }
-    const move = (speed * dt) / 1000;
-    next += reverse ? move : -move;
-    if (!reverse && next <= -width) next += width;
-    if (reverse && next >= 0) next -= width;
-    x.set(next);
-  });
+  const paused = hoverPaused || !inView;
 
   const cloneSet = (suffix) =>
     Children.map(children, (child, i) => {
@@ -183,55 +177,50 @@ function FramerMarqueeRow({ children, speed = 55, reverse = false }) {
   return (
     <div
       ref={rootRef}
-      className="overflow-hidden"
-      onMouseEnter={() => {
-        hoverPaused.current = true;
-      }}
-      onMouseLeave={() => {
-        hoverPaused.current = false;
-      }}
-      onTouchStart={() => {
-        hoverPaused.current = true;
-      }}
-      onTouchEnd={() => {
-        hoverPaused.current = false;
-      }}
+      className={`overflow-hidden ${paused ? "bfa-marquee-paused" : ""}`}
+      onMouseEnter={() => setHoverPaused(true)}
+      onMouseLeave={() => setHoverPaused(false)}
+      onTouchStart={() => setHoverPaused(true)}
+      onTouchEnd={() => setHoverPaused(false)}
     >
-      <motion.div
-        ref={trackRef}
-        style={{ x, willChange: "transform" }}
-        className="flex w-max gap-3 sm:gap-3.5"
+      <div
+        className="bfa-marquee-track gap-3 sm:gap-3.5"
+        style={{
+          ["--bfa-marquee-duration"]: `${duration}s`,
+          ["--bfa-marquee-direction"]: reverse ? "reverse" : "normal",
+        }}
       >
         <div className="flex shrink-0 gap-3 sm:gap-3.5">{cloneSet("a")}</div>
         <div className="flex shrink-0 gap-3 sm:gap-3.5" aria-hidden="true">
           {cloneSet("b")}
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }
 
-function AwardsMarqueeRow({ items, speed = 55, reverse = false }) {
+function AwardsMarqueeRow({ items, duration = 32, reverse = false }) {
   return (
-    <FramerMarqueeRow speed={speed} reverse={reverse}>
+    <InfiniteMarqueeRow duration={duration} reverse={reverse}>
       {items.map((photo) => (
         <div
           key={photo.src}
-          className="shrink-0 w-[180px] sm:w-[220px] md:w-[250px] aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden border-2 border-[#b49966] bg-zinc-900"
+          className="shrink-0 w-[160px] sm:w-[200px] md:w-[220px] aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden border-2 border-[#b49966] bg-zinc-900"
+          style={{ contain: "layout paint style" }}
         >
           <img
             src={photo.src}
             alt={photo.alt}
             loading="lazy"
             decoding="async"
-            width={250}
-            height={188}
+            width={220}
+            height={165}
             draggable={false}
             className="h-full w-full object-cover select-none pointer-events-none"
           />
         </div>
       ))}
-    </FramerMarqueeRow>
+    </InfiniteMarqueeRow>
   );
 }
 
@@ -272,92 +261,11 @@ function AwardWinnersShowcase() {
             aria-hidden="true"
             className="pointer-events-none absolute inset-y-0 right-0 z-20 w-10 sm:w-16 md:w-24 bg-gradient-to-l from-[#000132] to-transparent"
           />
-          <AwardsMarqueeRow items={rowA} speed={58} />
-          <AwardsMarqueeRow items={rowB} speed={48} reverse />
+          <AwardsMarqueeRow items={rowA} duration={28} />
+          <AwardsMarqueeRow items={rowB} duration={34} reverse />
         </div>
       </div>
     </section>
-  );
-}
-
-let marqueeCssReady = false;
-function ensureMarqueeCss() {
-  if (marqueeCssReady || typeof document === "undefined") return;
-  marqueeCssReady = true;
-  const style = document.createElement("style");
-  style.setAttribute("data-bfa-marquee", "true");
-  style.textContent = `
-@keyframes bfa-marquee-x {
-  from { transform: translate3d(0, 0, 0); }
-  to { transform: translate3d(-50%, 0, 0); }
-}
-.bfa-marquee-track {
-  display: flex;
-  width: max-content;
-  animation: bfa-marquee-x var(--bfa-marquee-duration, 30s) linear infinite;
-  animation-direction: var(--bfa-marquee-direction, normal);
-  will-change: transform;
-  backface-visibility: hidden;
-  transform: translateZ(0);
-}
-.bfa-marquee-paused .bfa-marquee-track {
-  animation-play-state: paused;
-}
-@media (prefers-reduced-motion: reduce) {
-  .bfa-marquee-track { animation: none !important; }
-}
-`;
-  document.head.appendChild(style);
-}
-
-/** CSS marquee for lighter logo strips — pauses on hover / off-screen */
-function InfiniteMarqueeRow({ children, duration = 28, reverse = false }) {
-  const rootRef = useRef(null);
-  const [hoverPaused, setHoverPaused] = useState(false);
-  const [inView, setInView] = useState(false);
-
-  useEffect(() => {
-    ensureMarqueeCss();
-    const el = rootRef.current;
-    if (!el) return undefined;
-    const io = new IntersectionObserver(
-      ([entry]) => setInView(entry.isIntersecting),
-      { rootMargin: "120px 0px", threshold: 0 }
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
-
-  const paused = hoverPaused || !inView;
-
-  const cloneSet = (suffix) =>
-    Children.map(children, (child, i) => {
-      if (!isValidElement(child)) return child;
-      return cloneElement(child, { key: `${String(child.key ?? i)}-${suffix}` });
-    });
-
-  return (
-    <div
-      ref={rootRef}
-      className={`overflow-hidden ${paused ? "bfa-marquee-paused" : ""}`}
-      onMouseEnter={() => setHoverPaused(true)}
-      onMouseLeave={() => setHoverPaused(false)}
-      onTouchStart={() => setHoverPaused(true)}
-      onTouchEnd={() => setHoverPaused(false)}
-    >
-      <div
-        className="bfa-marquee-track gap-3 sm:gap-3.5"
-        style={{
-          ["--bfa-marquee-duration"]: `${duration}s`,
-          ["--bfa-marquee-direction"]: reverse ? "reverse" : "normal",
-        }}
-      >
-        <div className="flex shrink-0 gap-3 sm:gap-3.5">{cloneSet("a")}</div>
-        <div className="flex shrink-0 gap-3 sm:gap-3.5" aria-hidden="true">
-          {cloneSet("b")}
-        </div>
-      </div>
-    </div>
   );
 }
 
@@ -549,7 +457,7 @@ const keynotes = [
     name: "Mr. Vishal Patil",
     role: "Founder & CEO",
     company: "Calyx Solutions, Brit FinTech Awards & MSB Association",
-    img: "",
+    img: "/assets/img/bfa-legacy/vishal-patil-2.png",
     quote:
       "From industry solutions to industry recognition: the journey behind Calyx, the MSB Association UK, and the creation of Brit FinTech Awards.",
     points: [
@@ -563,7 +471,7 @@ const keynotes = [
     name: "Mr. Tomer Shavit",
     role: "VP Revenue & Country Manager",
     company: "Vyne",
-    img: "",
+    img: "/assets/img/bfa-legacy/Tomer-Shavit.png",
     quote:
       "Reimagining international money transfers through Open Banking and digital innovation.",
     points: [
@@ -580,21 +488,15 @@ const panelists = [
     name: "Mr. Richard Spink",
     role: "Director of Channel & Partnerships, IDV & Fraud",
     company: "GBG",
-    img: "",
+    img: "/assets/img/bfa-legacy/Richard-Spink.png",
     bio: "Shared insights on digital identity, fraud prevention, and building trust in an increasingly cashless world.",
-  },
-  {
-    name: "Mr. Musa Jammeh",
-    role: "Co-Founder & CEO",
-    company: "MTBS",
-    img: "",
-    bio: "Discussed banking challenges for MSBs, risk management, and the importance of industry collaboration.",
+    linkedin: "https://www.linkedin.com/in/richardspink/",
   },
   {
     name: "Mr. Simone Martinelli",
     role: "Co-Founder & CEO",
     company: "Volume",
-    img: "/assets/img/keynotes/Simone-logo.png",
+    img: "/assets/img/bfa-legacy/Simone-Martinelli-2024.png",
     bio: "Spoke on the shift towards digital payments and the future of banking infrastructure for MSBs.",
     cta: "/simone-martinelli-volume",
     linkedin: "https://www.linkedin.com/in/simonem88/",
@@ -606,7 +508,7 @@ const judges = [
     name: "Mr. Giordano Cortese",
     role: "Partnerships & Acquisition Senior Manager",
     company: "First Rate Exchange Services Ltd",
-    img: "/assets/img/judges2025/giordano-cortese.jpg",
+    img: "/assets/img/event-conference/bfa-jurry1.png",
     cta: "/judges/giordano-cortese",
     linkedin: "https://www.linkedin.com/in/giordano-cortese-b5a86a11/",
   },
@@ -614,7 +516,7 @@ const judges = [
     name: "Mr. Bharat Rai",
     role: "Regional Workplace Manager",
     company: "CBRe",
-    img: "/assets/img/judges2025/Bharat-Rai.png",
+    img: "/assets/img/event-conference/bfa-jurry2.png",
     cta: "/judges/bharat-rai",
     linkedin: "https://www.linkedin.com/in/bharat-rai-9a674512/",
   },
@@ -651,7 +553,7 @@ const BfaLegacy2024 = () => {
       <div>
         <div className="cs-height_90 cs-height_lg_80" />
         <div
-          className="cs-hero cs-style12 cs-type1 cs-center text-center cs-parallax cs-hobble"
+          className="cs-hero cs-style12 cs-type1 cs-center text-center cs-parallax cs-hobble bfa-legacy-hero"
           style={{
             backgroundImage:
               'url("/assets/img/event-conference/hero-img.jpg")',
@@ -697,10 +599,12 @@ const BfaLegacy2024 = () => {
         <div className="relative z-10 max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
           <div className="flex flex-wrap justify-center gap-3.5 mb-14">
             <NavLink to="/bfa-legacy" className={CTA_GHOST}>
-              ← Back to Legacy
+              <ChevronLeft size={18} strokeWidth={2.5} className="shrink-0" />
+              Back to Legacy
             </NavLink>
             <NavLink to="/bfa-legacy/2025" className={CTA_GHOST}>
-              View 2025 →
+              View 2025
+              <ChevronRight size={18} strokeWidth={2.5} className="shrink-0" />
             </NavLink>
           </div>
 
@@ -779,13 +683,13 @@ const BfaLegacy2024 = () => {
                   className="group relative overflow-hidden rounded-[36px] border border-zinc-200/90 bg-white p-7 sm:p-9 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:border-zinc-300 flex flex-col justify-between"
                 >
                   <div>
-                    {/* Top Speaker Image Container */}
-                    <div className="relative mb-6 mx-auto w-full max-w-[280px]">
-                      <div className="relative overflow-hidden rounded-3xl border-2 border-[#b49966]/60 bg-zinc-100 shadow-xl aspect-[4/4] flex items-center justify-center">
+                    {/* Top Speaker Image Container — square photos fill 1:1 frame */}
+                    <div className="relative mb-6 mx-auto w-full max-w-[300px] sm:max-w-[320px]">
+                      <div className="relative overflow-hidden rounded-3xl border-[3px] border-[#b49966] bg-[#000132] shadow-xl shadow-[#b49966]/20 aspect-square ring-1 ring-[#b49966]/40">
                         <Avatar
                           name={person.name}
                           img={person.img}
-                          sizeClass="w-full h-full object-cover object-top"
+                          sizeClass="absolute inset-0 w-full h-full object-cover object-center !rounded-none !border-0 !shadow-none hover:!scale-105"
                         />
                       </div>
                     </div>
@@ -860,7 +764,7 @@ const BfaLegacy2024 = () => {
             />
 
             {/* Theme-Colored Framed Speaker Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-10 max-w-4xl mx-auto justify-items-center">
               {panelists.map((person) => (
                 <article
                   key={person.name}
@@ -868,11 +772,11 @@ const BfaLegacy2024 = () => {
                 >
                   {/* Top Image Container */}
                   <div className="relative mb-6 mx-auto w-full max-w-[260px]">
-                    <div className="relative overflow-hidden rounded-2xl border border-zinc-200/80 bg-zinc-100 shadow-md aspect-[4/4] flex items-center justify-center">
+                    <div className="relative overflow-hidden rounded-2xl border-[3px] border-[#b49966] bg-[#000132] shadow-md shadow-[#b49966]/20 aspect-square flex items-center justify-center">
                       <Avatar
                         name={person.name}
                         img={person.img}
-                        sizeClass="w-full h-full object-cover object-top"
+                        sizeClass="w-full h-full object-cover object-top !rounded-none !border-0 !shadow-none"
                       />
                     </div>
                   </div>
@@ -956,38 +860,38 @@ const BfaLegacy2024 = () => {
               icon={ShieldCheck}
             />
 
-            <div className="flex flex-wrap justify-center gap-8 max-w-4xl mx-auto mb-10">
+            <div className="flex flex-wrap justify-center gap-8 max-w-5xl mx-auto mb-10">
               {judges.map((person) => (
                 <article
                   key={person.name}
-                  className="group relative overflow-hidden rounded-[32px] border border-zinc-200/90 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:border-zinc-300 flex flex-col justify-between w-full sm:w-[320px] md:w-[350px] shrink-0"
+                  className="group relative overflow-hidden rounded-[32px] border border-zinc-200/90 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:border-zinc-300 flex flex-col justify-between w-full sm:w-[360px] md:w-[400px] shrink-0"
                 >
                   {/* Executive Header Banner Accent */}
-                  <div className="h-24 bg-[#000132] relative overflow-hidden border-b-2 border-[#b49966]">
+                  <div className="h-28 md:h-32 bg-[#000132] relative overflow-hidden border-b-2 border-[#b49966]">
                     <div
                       aria-hidden="true"
                       className="pointer-events-none absolute -top-12 -right-12 w-32 h-32 bg-white/10 rounded-full blur-xl"
                     />
                   </div>
 
-                  <div className="px-6 pb-6 pt-0 text-center flex-1 flex flex-col justify-between">
+                  <div className="px-6 pb-7 pt-0 text-center flex-1 flex flex-col justify-between">
                     {/* Centered Avatar Overlapping Header */}
-                    <div className="relative -mt-14 mb-4 flex justify-center">
+                    <div className="relative -mt-16 md:-mt-[4.5rem] mb-5 flex justify-center">
                       <Avatar
                         name={person.name}
                         img={person.img}
-                        sizeClass="w-28 h-28 md:w-30 md:h-30 rounded-full border-4 border-white shadow-xl ring-4 ring-[#b49966]/20"
+                        sizeClass="w-36 h-36 md:w-44 md:h-44 rounded-full border-4 border-white shadow-xl ring-[3px] ring-[#b49966] object-cover object-top"
                       />
                     </div>
 
                     <div className="flex-1 flex flex-col justify-center">
-                      <h3 className="m-0 text-lg font-black text-zinc-950 group-hover:text-[#b49966] transition-colors">
+                      <h3 className="m-0 text-xl md:text-2xl font-black text-zinc-950 group-hover:text-[#b49966] transition-colors">
                         {person.name}
                       </h3>
-                      <p className="mt-1.5 mb-0 text-xs font-extrabold leading-tight text-[#b49966] uppercase tracking-wider">
+                      <p className="mt-2 mb-0 text-xs md:text-sm font-extrabold leading-tight text-[#b49966] uppercase tracking-wider">
                         {person.role}
                       </p>
-                      <p className="mt-1 mb-0 text-xs font-medium text-zinc-500">
+                      <p className="mt-1.5 mb-0 text-xs md:text-sm font-medium text-zinc-500">
                         {person.company}
                       </p>
                     </div>

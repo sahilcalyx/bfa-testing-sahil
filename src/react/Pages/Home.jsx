@@ -422,7 +422,7 @@ Brit Fintech Awards 2026."
           </div>
         </section>
         
-        <BFA26Section />
+       
         {/* <DiscussionPannelSection /> */}
 
         <div
@@ -475,9 +475,9 @@ Brit Fintech Awards 2026."
             data-wow-delay="0.3s"
           >
             <div className="row justify-content-center">
-              {/* <div className="col-lg-6">
+              <div className="col-lg-6">
                 <a
-                  href="https://youtu.be/efNlqln3hH8?si=9Ryc2Apn59-vtHxk"
+                  href="https://youtu.be/JEpncdxVGMg?si=03nr6SXJ1c36QeXj"
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -488,9 +488,9 @@ Brit Fintech Awards 2026."
                     <iframe
                       width="100%"
                       height="100%"
-                      src="https://www.youtube.com/embed/efNlqln3hH8?autoplay=1&mute=1&loop=1&playlist=efNlqln3hH8&controls=0&modestbranding=1&rel=0"
+                      src="https://www.youtube.com/embed/JEpncdxVGMg?autoplay=1&mute=1&loop=1&playlist=JEpncdxVGMg&controls=0&modestbranding=1&rel=0"
                       loading="lazy"
-                      title="Brit FinTech Awards 2025 - Behind the Scenes"
+                      title="Brit FinTech Awards 2026"
                       frameBorder="0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                       referrerPolicy="strict-origin-when-cross-origin"
@@ -499,15 +499,15 @@ Brit Fintech Awards 2026."
                     />
                     <div className="cs-post_info">
                       <h2 className="cs-post_title cs-white cs-white_hover">
-                        The Visionary Behind the Brit Fintech Awards - Mr.
-                        Vishal Patil
+                       
+Who decided the BFA26 stage? | Meet our Jury
                       </h2>
                     </div>
                   </div>
                 </a>
                 <div className="cs-height_30 cs-height_lg_30" />
-              </div> */}
-              <div className="col-lg-8">
+              </div>
+              <div className="col-lg-6">
                 <a
                   href="https://youtu.be/o6WjXbRSEFo?si=SXeVqu-AaT9Fz7yZ"
                   target="_blank"
@@ -584,6 +584,7 @@ Brit Fintech Awards 2026."
           </div>
           <div className="cs-height_50 cs-height_lg_50" />
         </div>
+        <BFA26Section />
  <GallarySection2025 />
         {/* End Hero Seciton */}
 

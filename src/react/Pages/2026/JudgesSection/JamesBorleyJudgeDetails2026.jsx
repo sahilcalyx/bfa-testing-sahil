@@ -47,13 +47,7 @@ const JamesBorleyJudgeDetails2026 = () => {
         <div className="max-w-6xl mx-auto">
           {/* Elegant Back Button */}
           <button
-            onClick={() => {
-              if (window.history.state && window.history.state.idx > 0) {
-                navigate(-1);
-              } else {
-                navigate("/judges");
-              }
-            }}
+            onClick={() => navigate("/judges")}
             className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-zinc-200 bg-white text-zinc-600 hover:text-[#c8102e] hover:border-[#c8102e]/25 shadow-sm transition-all duration-300 text-xs font-black uppercase tracking-wider mb-10 cursor-pointer"
           >
             <span className="transition-transform duration-300 group-hover:-translate-x-1">←</span>
@@ -103,7 +97,7 @@ const JamesBorleyJudgeDetails2026 = () => {
                   </div>
                   <div className="flex justify-between items-center text-xs">
                     <span className="text-zinc-400 font-medium">Experience</span>
-                    <span className="text-zinc-800 font-bold">25+ Years</span>
+                    <span className="text-zinc-800 font-bold">23 Years</span>
                   </div>
                 </div>
 

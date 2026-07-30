@@ -26,6 +26,8 @@ import {
   MessageSquare,
   Camera,
   LayoutGrid,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 
 const CTA_PRIMARY =
@@ -591,7 +593,7 @@ const BfaLegacy2025 = () => {
       <div>
         <div className="cs-height_90 cs-height_lg_80" />
         <div
-          className="cs-hero cs-style12 cs-type1 cs-center text-center cs-parallax cs-hobble"
+          className="cs-hero cs-style12 cs-type1 cs-center text-center cs-parallax cs-hobble bfa-legacy-hero"
           style={{
             backgroundImage:
               'url("/assets/img/event-conference/hero-img.jpg")',
@@ -635,10 +637,12 @@ const BfaLegacy2025 = () => {
           {/* Navigation Bar */}
           <div className="flex flex-wrap gap-3 mb-12">
             <NavLink to="/bfa-legacy" className={CTA_GHOST}>
-              ← Back to Legacy
+              <ChevronLeft size={18} strokeWidth={2.5} className="shrink-0" />
+              Back to Legacy
             </NavLink>
             <NavLink to="/bfa-legacy/2024" className={CTA_GHOST}>
-              View 2024 →
+              View 2024
+              <ChevronRight size={18} strokeWidth={2.5} className="shrink-0" />
             </NavLink>
           </div>
 
