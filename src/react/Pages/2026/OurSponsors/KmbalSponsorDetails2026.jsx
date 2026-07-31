@@ -23,7 +23,7 @@ import {
 /* TODO: replace with Kmbal 2026 banner when available */
 /* TODO: replace with Kmbal 2026 banner when available */
 const BANNER_IMG =
-  "/assets/img/sponsor-logo/sponsor-banner-strip-2026/sends-details-banner-2026.png";
+  "/assets/img/sponsor-logo/sponsor-banner-strip-2026/kmbal-details-banner-2026.png";
 const SITE_URL = "https://en.kmbal.com/";
 const PAGE_PATH = "/kmbal-sponsor-details-2026";
 const OG_IMAGE = `https://britfintechawards.com${BANNER_IMG}`;

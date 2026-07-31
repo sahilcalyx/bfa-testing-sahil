@@ -76,9 +76,9 @@ function LogoCard({ item }) {
   const showPlaceholder = !item.logo || failed;
 
   return (
-    <div className="flex h-[84px] sm:h-[96px] w-[152px] sm:w-[172px] shrink-0 items-center justify-center rounded-2xl bg-white px-4 border border-zinc-100 shadow-[0_8px_24px_rgba(15,23,42,0.05)] transition-all duration-300 hover:-translate-y-1 hover:border-[#c8102e]/20 hover:shadow-[0_14px_32px_rgba(200,16,46,0.12)]">
+    <div className="flex h-[76px] sm:h-[96px] w-[calc(50%-0.3125rem)] sm:w-[168px] md:w-[172px] shrink-0 items-center justify-center rounded-2xl bg-white px-3 sm:px-4 border border-zinc-100 shadow-[0_8px_24px_rgba(15,23,42,0.05)] transition-all duration-300 hover:-translate-y-1 hover:border-[#c8102e]/20 hover:shadow-[0_14px_32px_rgba(200,16,46,0.12)]">
       {showPlaceholder ? (
-        <span className="text-[11px] font-bold uppercase tracking-wide text-[#c8102e] text-center leading-tight">
+        <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wide text-[#c8102e] text-center leading-tight">
           {item.name}
         </span>
       ) : (
@@ -88,7 +88,7 @@ function LogoCard({ item }) {
           loading="lazy"
           decoding="async"
           onError={() => setFailed(true)}
-          className="max-h-[46px] sm:max-h-[54px] w-auto max-w-[140px] object-contain"
+          className="max-h-[40px] sm:max-h-[54px] w-auto max-w-full object-contain"
         />
       )}
     </div>
@@ -137,17 +137,11 @@ const WhoAttendsBfaTabsSection = () => {
       <div className="container relative z-10">
         {/* Title block */}
         <div className="mx-auto max-w-3xl text-center mb-10 md:mb-12">
-          <p className="m-0 mb-3 text-[11px] font-bold uppercase tracking-[0.28em] text-[#c8102e]/70">
-            Design Option B — Tabs Layout
-          </p>
+         
           <h2 className="m-0 text-3xl sm:text-4xl md:text-[2.75rem] font-black uppercase tracking-tight text-[#c8102e]">
             Who Attends BFA?
           </h2>
-          <div className="mx-auto mt-4 flex items-center justify-center gap-3">
-            <span className="h-[2px] w-10 sm:w-14 rounded-full bg-[#c8102e]/70" />
-            <span className="h-1.5 w-1.5 rounded-full bg-[#c8102e]" />
-            <span className="h-[2px] w-10 sm:w-14 rounded-full bg-[#c8102e]/70" />
-          </div>
+          
           <p className="mx-auto mt-5 mb-0 max-w-2xl text-[15px] sm:text-base text-zinc-600 font-medium leading-relaxed">
             Every year, BFA brings senior decision-makers from across financial services.
             Explore attendee brands across banking, payments, acquiring, payouts, and more.
@@ -156,56 +150,45 @@ const WhoAttendsBfaTabsSection = () => {
 
         <div className="mx-auto max-w-6xl">
           {/* Tabs bar */}
-          <div className="mb-8 md:mb-10 rounded-2xl border border-zinc-200/80 bg-zinc-50/80 p-2 sm:p-2.5 shadow-[0_8px_30px_rgba(15,23,42,0.04)]">
-            <div
-              className="flex gap-1.5 sm:gap-2 overflow-x-auto pb-1 sm:pb-0 sm:flex-wrap sm:justify-center scrollbar-thin"
-              style={{ scrollbarWidth: "thin" }}
-            >
-              {tabs.map((tab) => {
-                const isActive = activeTab === tab;
-                return (
-                  <button
-                    key={tab}
-                    type="button"
-                    onClick={() => setActiveTab(tab)}
-                    className={`relative shrink-0 rounded-xl px-3.5 py-2.5 sm:px-4 sm:py-2.5 text-[11px] sm:text-sm font-bold tracking-wide transition-all duration-300 whitespace-nowrap ${
-                      isActive
-                        ? "bg-[#c8102e] text-white shadow-lg shadow-[#c8102e]/30"
-                        : "bg-transparent text-zinc-600 hover:bg-white hover:text-[#c8102e] hover:shadow-sm"
-                    }`}
-                  >
-                    {tab}
-                    {isActive && (
-                      <span
-                        aria-hidden="true"
-                        className="absolute inset-x-3 -bottom-0.5 mx-auto h-[2px] rounded-full bg-white/50 sm:hidden"
-                      />
-                    )}
-                  </button>
-                );
-              })}
-            </div>
+          <div className="mb-6 md:mb-10 grid grid-cols-2 xs:grid-cols-2 sm:flex sm:flex-wrap sm:justify-center gap-2">
+            {tabs.map((tab) => {
+              const isActive = activeTab === tab;
+              return (
+                <button
+                  key={tab}
+                  type="button"
+                  onClick={() => setActiveTab(tab)}
+                  className={`rounded-xl px-3 py-2.5 sm:px-4 sm:py-2.5 text-[11px] sm:text-sm font-bold tracking-wide transition-colors duration-200 whitespace-nowrap border text-center ${
+                    isActive
+                      ? "bg-[#c8102e] text-white border-[#c8102e] shadow-md shadow-[#c8102e]/25"
+                      : "bg-white text-zinc-600 border-zinc-200 hover:border-[#c8102e]/40 hover:text-[#c8102e]"
+                  }`}
+                >
+                  {tab}
+                </button>
+              );
+            })}
           </div>
 
           {/* Active panel */}
-          <div className="rounded-[28px] border border-zinc-200/70 bg-zinc-50/60 px-4 py-8 sm:px-8 sm:py-10 md:px-10">
-            <div className="mb-7 text-center">
-              <h3 className="m-0 text-lg sm:text-xl md:text-2xl font-black uppercase tracking-[0.06em] text-[#c8102e]">
+          <div className="rounded-[24px] sm:rounded-[28px] border border-zinc-200/70 bg-zinc-50/60 px-3 py-6 sm:px-8 sm:py-10 md:px-10">
+            <div className="mb-5 sm:mb-7 text-center">
+              <h3 className="m-0 text-base sm:text-xl md:text-2xl font-black uppercase tracking-[0.06em] text-[#c8102e]">
                 {activeTab === ALL_TAB ? "All Categories" : activeTab}
               </h3>
-              <p className="mx-auto mt-2.5 mb-0 max-w-xl text-sm text-zinc-500 font-medium leading-relaxed">
+              <p className="mx-auto mt-2 mb-0 max-w-xl text-xs sm:text-sm text-zinc-500 font-medium leading-relaxed">
                 {subtitle}
               </p>
             </div>
 
-            <div className="flex flex-wrap justify-center gap-3.5 sm:gap-4">
+            <div className="flex flex-wrap justify-center gap-2.5 sm:gap-4">
               {visibleItems.map((item) => (
                 <LogoCard key={item.key} item={item} />
               ))}
             </div>
 
             {activeTab === ALL_TAB && (
-              <p className="mt-7 mb-0 text-center text-xs sm:text-sm text-zinc-400 font-medium">
+              <p className="mt-5 sm:mt-7 mb-0 text-center text-xs sm:text-sm text-zinc-400 font-medium">
                 Showing all {visibleItems.length} attendee brands
               </p>
             )}

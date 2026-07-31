@@ -116,7 +116,7 @@ function Avatar({ name, img, sizeClass = "w-28 h-28 md:w-32 md:h-32" }) {
 const AWARD_GALLERY_2024 = Array.from({ length: 17 }, (_, i) => ({
   src: `/assets/img/gallery/awards/${i + 1}.jpg`,
   alt: `Brit FinTech Awards 2024 moment ${i + 1}`,
-}));
+})).filter((photo) => !photo.src.endsWith("/4.jpg"));
 
 let marqueeCssReady = false;
 function ensureMarqueeCss() {
@@ -296,11 +296,6 @@ const SPONSORS_2024 = [
     link: "/travel-cashier-silver-sponsor",
     img: "/assets/img/sponsor-logo/travel-cashier.png",
     alt: "Travel Cashier",
-  },
-  {
-    link: "/mtbs-silver-sponsor",
-    img: "/assets/img/sponsor-logo/mtbs.png",
-    alt: "MTBS",
   },
   {
     link: "https://baazmoneytransfer.co.uk/",

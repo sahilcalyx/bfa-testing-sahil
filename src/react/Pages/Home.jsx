@@ -316,7 +316,7 @@ Brit Fintech Awards 2026."
 
         {/* <div className="cs-height_20 cs-height_lg_20" /> */}
         <AnimatedStats stats={statsData} />
-        <WhoAttendsBfaSection />
+        
         <WhoAttendsBfaTabsSection />
        
 

@@ -51,7 +51,7 @@ const OurSponsors = () => {
               {
                 link: "/kmbal-sponsor-details-2026",
                 external: false,
-                image: "/assets/img/sponsor-logo/kmbal-sponsor-Logo.png",
+                video: "/assets/video/sponsors-logo-2026/sposnsor-logo-2026-Kmbal.webm",
                 alt: "Kmbal",
                 title: "Kmbal",
               },
