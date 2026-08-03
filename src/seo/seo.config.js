@@ -55,6 +55,42 @@ export const seoByPath = {
       images: ["/assets/img/og/home.jpg"],
     },
   },
+  "/event-host-2026": {
+    title: "Stephen Simmons - Official Host | Brit FinTech Awards 2026",
+    description: "Award-winning magician and corporate entertainer Stephen Simmons will host the Brit FinTech Awards 2026 in London.",
+    openGraph: {
+      title: "Stephen Simmons - Official Host | Brit FinTech Awards 2026",
+      description: "Award-winning magician and corporate entertainer Stephen Simmons will host the Brit FinTech Awards 2026 in London.",
+      url: `${siteBaseUrl}/event-host-2026`,
+      siteName,
+      images: [{ url: "/assets/img/stephen-simmons-host.png", width: 1200, height: 630, alt: "Stephen Simmons Official Host BFA 2026" }],
+      type: "profile",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Stephen Simmons - Official Host | Brit FinTech Awards 2026",
+      description: "Award-winning magician and corporate entertainer Stephen Simmons will host the Brit FinTech Awards 2026 in London.",
+      images: ["/assets/img/stephen-simmons-host.png"],
+    },
+  },
+  "/event-host": {
+    title: "Stephen Simmons - Official Host | Brit FinTech Awards 2026",
+    description: "Award-winning magician and corporate entertainer Stephen Simmons will host the Brit FinTech Awards 2026 in London.",
+    openGraph: {
+      title: "Stephen Simmons - Official Host | Brit FinTech Awards 2026",
+      description: "Award-winning magician and corporate entertainer Stephen Simmons will host the Brit FinTech Awards 2026 in London.",
+      url: `${siteBaseUrl}/event-host`,
+      siteName,
+      images: [{ url: "/assets/img/stephen-simmons-host.png", width: 1200, height: 630, alt: "Stephen Simmons Official Host BFA 2026" }],
+      type: "profile",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Stephen Simmons - Official Host | Brit FinTech Awards 2026",
+      description: "Award-winning magician and corporate entertainer Stephen Simmons will host the Brit FinTech Awards 2026 in London.",
+      images: ["/assets/img/stephen-simmons-host.png"],
+    },
+  },
   "/about": {
     title: "About Brit Fintech Awards 2026",
     description: "Learn about our mission and the team behind the awards.",

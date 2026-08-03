@@ -10,9 +10,12 @@ const InteractiveHero = () => {
 
   // Offer types for the compact offer card
   const offers = [
-    { id: "early", label: "Nominate Now", price: "£295", originalPrice: "£395", subtitle: "Limited time" },
-    { id: "standard", label: "Standard Admission", price: "£250", originalPrice: "£495", subtitle: "Best value" },
-    { id: "vip", label: "VIP Package", price: "£495", originalPrice: "£895", subtitle: "Includes perks" },
+    {
+      id: "standard",
+      label: "Nominate Now",
+      price: "£395",
+      subtitle: "Now open",
+    },
   ];
   const [selectedOffer, setSelectedOffer] = useState(offers[0].id);
   // Lock scroll when video is expanded or mobile video popup is open
@@ -262,10 +265,10 @@ const InteractiveHero = () => {
               className="flex flex-col items-center gap-1 mt-4 mb-1 select-none font-outfit text-center"
             >
               <span className="text-base sm:text-2xl font-black uppercase tracking-[0.25em] ">
-                 Early Bird Offer Extended
+                 Standard Nomination
               </span>
               <p className="text-[12px] sm:text-[14px] font-bold text-[#ff4d6a] tracking-[0.2em] uppercase mt-1.5 leading-none">
-                1st July 2026 – 31st July 2026
+                1st Aug 2026 – 31st Aug 2026
               </p>
             </motion.div>
             {/* Urgency tagline */}

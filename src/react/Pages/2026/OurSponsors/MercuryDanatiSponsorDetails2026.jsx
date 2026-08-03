@@ -271,6 +271,33 @@ const MercuryDanatiSponsorDetails2026 = () => {
             </div>
           </div>
         </section>
+
+        {/* Video — muted autoplay; tap opens YouTube */}
+        <section className="mt-12 mb-5">
+          <h2 className="m-0 mb-5 text-[22px] md:text-[26px] font-extrabold tracking-tight text-zinc-950 text-center">
+            Watch Mercury Danati
+          </h2>
+          <a
+            href="https://youtu.be/Zl0_bcYDJPA?si=4jBSG_p6FBtdo3ge"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Watch Mercury Danati video on YouTube"
+            className="relative block w-full overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-950 shadow-[0_15px_35px_rgba(0,0,0,0.08)]"
+            style={{ paddingTop: "56.25%" }}
+          >
+            <iframe
+              title="Mercury Danati video"
+              src="https://www.youtube.com/embed/Zl0_bcYDJPA?autoplay=1&mute=1&loop=1&playlist=Zl0_bcYDJPA&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="absolute inset-0 h-full w-full border-0 pointer-events-none"
+            />
+            <span aria-hidden="true" className="absolute inset-0 z-[2]" />
+          </a>
+          <p className="mt-3 mb-0 text-center text-[14px] text-zinc-500">
+            Tap the video to watch on YouTube
+          </p>
+        </section>
       </div>
     </div>
   );

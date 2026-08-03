@@ -196,10 +196,16 @@ console.log(sortedTitleOptions);
 console.log(sortedCountryCodes);
 
 
-const MAX_TICKETS = 5; // or whatever max limit you want
-const TICKET_PRICE = 195; // or the actual ticket price
+const MAX_TICKETS = 5;
+const ACTIVE_TICKET_PRICE = 195;
+const ORIGINAL_TICKET_PRICE = 395;
 
-
+const SUPER_EARLY_BIRD = {
+  title: "Super Early Bird Ticket Extended",
+  dateRange: "2nd June – 15th August 2026",
+  price: ACTIVE_TICKET_PRICE,
+  originalPrice: ORIGINAL_TICKET_PRICE,
+};
 
 const ticketOptions = [
   { value: "", label: "Tickets" },
@@ -207,7 +213,7 @@ const ticketOptions = [
     const count = i + 1;
     return {
       value: count,
-      label: `${count} Ticket${count > 1 ? "s" : ""} – £${count * TICKET_PRICE}`,
+      label: `${count} Ticket${count > 1 ? "s" : ""} – £${count * ACTIVE_TICKET_PRICE}`,
     };
   }),
 ];
@@ -236,7 +242,6 @@ function TicketBookingPage() {
   };
 
   const [errors, setErrors] = useState({});
-  // Remove duplicate declarations of TICKET_PRICE and MAX_TICKETS
 
   const validate = () => {
     const errs = {};
@@ -468,18 +473,133 @@ function TicketBookingPage() {
         </div>
       </div>
       <div
-
         style={{
           display: "flex",
-          justifyContent: "center",
-          alignItems: "flex-start",
+          flexDirection: "column",
+          alignItems: "center",
           padding: "3rem 1rem",
-
           fontFamily: "Segoe UI, sans-serif",
-          flexWrap: "wrap",
           gap: "2rem",
+          width: "100%",
         }}
       >
+        {/* Ticket pricing tier */}
+        <div className="ticket-tiers-wrap">
+          <div className="ticket-tiers-row">
+            <div className="ticket-tier-card ticket-tier-active">
+              <span className="ticket-tier-badge ticket-tier-badge-active">Active</span>
+              <h4 className="ticket-tier-title">{SUPER_EARLY_BIRD.title}</h4>
+              <p className="ticket-tier-dates">{SUPER_EARLY_BIRD.dateRange}</p>
+              <div className="ticket-tier-price-row">
+                <span className="ticket-tier-price-original">
+                  £{SUPER_EARLY_BIRD.originalPrice}
+                </span>
+                <span className="ticket-tier-price">£{SUPER_EARLY_BIRD.price}</span>
+              </div>
+            </div>
+          </div>
+          <style>{`
+            .ticket-tiers-wrap {
+              width: 100%;
+              max-width: 420px;
+            }
+
+            .ticket-tiers-row {
+              display: grid;
+              grid-template-columns: 1fr;
+              gap: 1rem;
+            }
+
+            .ticket-tier-card {
+              position: relative;
+              background: #fff;
+              border-radius: 18px;
+              padding: 28px 18px 24px;
+              text-align: center;
+              border: 2px solid transparent;
+              box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
+              transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+
+            .ticket-tier-badge {
+              position: absolute;
+              top: 0;
+              right: 0;
+              padding: 5px 12px;
+              border-radius: 0 16px 0 12px;
+              font-size: 0.7rem;
+              font-weight: 700;
+              letter-spacing: 0.04em;
+              text-transform: uppercase;
+              line-height: 1.2;
+            }
+
+            .ticket-tier-badge-active {
+              background: #c8102e;
+              color: #fff;
+              box-shadow: 0 4px 10px rgba(200, 16, 46, 0.25);
+            }
+
+            .ticket-tier-title {
+              font-size: 1.1rem;
+              font-weight: 600;
+              margin: 0 0 8px;
+              color: #222;
+            }
+
+            .ticket-tier-dates {
+              font-size: 0.92rem;
+              color: #666;
+              margin: 0 0 12px;
+            }
+
+            .ticket-tier-price-row {
+              display: flex;
+              align-items: baseline;
+              justify-content: center;
+              gap: 10px;
+            }
+
+            .ticket-tier-price-original {
+              font-size: 1.15rem;
+              font-weight: 600;
+              color: #999;
+              text-decoration: line-through;
+            }
+
+            .ticket-tier-price {
+              font-size: 1.7rem;
+              font-weight: 700;
+              background: linear-gradient(to right, #000000 0%, #c8102e 50%, #000000 100%);
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+              background-clip: text;
+              color: transparent;
+            }
+
+            .ticket-tier-active {
+              border-color: #c8102e;
+              border-width: 3px;
+              background: linear-gradient(135deg, #fff5f5, #ffebeb);
+              box-shadow: 0 8px 20px rgba(200, 16, 46, 0.15);
+            }
+
+            .ticket-tier-active:hover {
+              transform: translateY(-4px);
+            }
+          `}</style>
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "flex-start",
+            flexWrap: "wrap",
+            gap: "2rem",
+            width: "100%",
+          }}
+        >
         {/* Booking Form */}
         <div
           style={{
@@ -844,11 +964,7 @@ function TicketBookingPage() {
             </div>
           </div>
         </div>
-
-
-        <br />
-
-
+        </div>
       </div>
 
       <div className="relative w-full max-w-[620px] mx-auto my-12 bg-white rounded-[24px] shadow-[0_20px_50px_rgba(0,0,0,0.06)] border border-neutral-100/85 font-sans overflow-hidden">

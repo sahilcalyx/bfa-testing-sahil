@@ -1,4 +1,3 @@
-import { Geist, Geist_Mono } from "next/font/google";
 import { defaultSeo } from "../seo/seo.config";
 import "./globals.css";
 import "../react/index.css";
@@ -9,24 +8,10 @@ export const metadata = {
   ...defaultSeo,
 };
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-  
-// Global metadata can be defined here if needed; per-route SEO comes from
-// route-specific head.js or layouts.
-
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        {/* Google Tag Manager */}
         <script dangerouslySetInnerHTML={{ __html: `
           (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
           new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -41,8 +26,6 @@ export default function RootLayout({ children }) {
           'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
           })(window,document,'script','dataLayer','GTM-5RQ73JH6');
         `}} />
-        {/* End Google Tag Manager */}
-        {/* Global legacy styles from public/assets */}
         <link rel="stylesheet" href="/assets/css/plugins/bootstrap.min.css" />
         <link rel="stylesheet" href="/assets/css/plugins/fontawesome.min.css" />
         <link rel="stylesheet" href="/assets/css/plugins/animate.css" />
@@ -51,11 +34,9 @@ export default function RootLayout({ children }) {
         <link rel="stylesheet" href="/assets/css/style.css" />
         <link rel="stylesheet" href="/assets/css/theme_12.css" />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {/* Google Tag Manager (noscript) */}
+      <body className="font-sans antialiased">
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WKBV6SRT" height="0" width="0" style={{display:'none',visibility:'hidden'}}></iframe></noscript>
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5RQ73JH6" height="0" width="0" style={{display:'none',visibility:'hidden'}}></iframe></noscript>
-        {/* Google Analytics 4 */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-49BRLNZQ4P"
           strategy="afterInteractive"

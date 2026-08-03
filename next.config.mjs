@@ -4,7 +4,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactCompiler: true,
+  // reactCompiler temporarily disabled — was hanging webpack compile of the large SPA shell
+  // reactCompiler: true,
   // Hide the floating Next.js "N / Issues" badge (clutters mobile preview)
   devIndicators: false,
   compiler: {

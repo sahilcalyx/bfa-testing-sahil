@@ -228,7 +228,7 @@ background-color: #c8102e;
                 <p>Transfer Rocket </p>
               </div>
             </NavLink>
-            <NavLink to="/award-winners-2024/mtbs-banking-as-a-service-innovator-of-the-year-2024" className="item">
+            {/* <NavLink to="/award-winners-2024/mtbs-banking-as-a-service-innovator-of-the-year-2024" className="item">
               <img
                 src="../assets/img/winner-logo/mtbs.png"
                 alt="MTBS"
@@ -238,7 +238,7 @@ background-color: #c8102e;
              
                 <p>MTBS</p>
               </div>
-            </NavLink>
+            </NavLink> */}
             <NavLink to="/award-winners-2024/blessed-exchange-ltd-woman-entrepreneur-in-fintech-2024" className="item">
               <img
                 src="../assets/img/winner-logo/BlessedExchange.png"

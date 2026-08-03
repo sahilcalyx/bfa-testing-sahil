@@ -602,6 +602,73 @@ const SendsSponsorDetails2026 = () => {
             </a>
           </p>
         </div>
+
+        {/* Video — muted autoplay; tap opens YouTube */}
+        <div style={{ marginTop: "45px", marginBottom: "20px" }}>
+          <h3
+            style={{
+              fontWeight: "850",
+              fontSize: "1.8rem",
+              marginBottom: "20px",
+              color: "#0f172a",
+              textAlign: "center",
+            }}
+          >
+            Watch Sends
+          </h3>
+          <a
+            href="https://youtu.be/aJVQa_SnnMY?si=HY3Y-pPi-ttXawxZ"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Watch Sends video on YouTube"
+            style={{
+              display: "block",
+              position: "relative",
+              width: "100%",
+              paddingTop: "56.25%",
+              borderRadius: "16px",
+              overflow: "hidden",
+              backgroundColor: "#0f172a",
+              boxShadow: "0 15px 35px rgba(0,0,0,0.08)",
+              border: "1px solid #e2e8f0",
+              cursor: "pointer",
+            }}
+          >
+            <iframe
+              title="Sends video"
+              src="https://www.youtube.com/embed/aJVQa_SnnMY?autoplay=1&mute=1&loop=1&playlist=aJVQa_SnnMY&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              style={{
+                position: "absolute",
+                inset: 0,
+                width: "100%",
+                height: "100%",
+                border: 0,
+                pointerEvents: "none",
+              }}
+            />
+            <span
+              aria-hidden="true"
+              style={{
+                position: "absolute",
+                inset: 0,
+                zIndex: 2,
+                background: "transparent",
+              }}
+            />
+          </a>
+          <p
+            style={{
+              textAlign: "center",
+              marginTop: "12px",
+              fontSize: "0.9rem",
+              color: "#64748b",
+            }}
+          >
+            Tap the video to watch on YouTube
+          </p>
+        </div>
       </div>
     </div>
   );

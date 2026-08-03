@@ -416,14 +416,14 @@ const OurSponsors = () => {
             </div>
             <div className="cs-height_50 cs-height_lg_30" />
           </div>
-          <div className="col-lg-3 col-sm-6">
+          {/* <div className="col-lg-3 col-sm-6">
             <div className="cs-logo_carousel cs-style3 cs-sponsor-logo cs-center cs-transition_3">
               <NavLink to="/mtbs-silver-sponsor">
                 <img src="../assets/img/sponsor-logo/mtbs.png" alt="Sponsor" />
               </NavLink>
             </div>
             <div className="cs-height_50 cs-height_lg_30" />
-          </div>
+          </div> */}
 
           <div className="col-lg-3 col-sm-6">
             <div className="cs-logo_carousel cs-style3 cs-center cs-sponsor-logo cs-transition_3">

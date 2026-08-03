@@ -1,6 +1,6 @@
 import { Route, Routes, useLocation } from "react-router-dom";
-import Home from "./Pages/Home";
 import Header from "./Components/Header";
+const Home = lazy(() => import("./Pages/Home"));
 const About = lazy(() => import("./Pages/About"));
 import Footer from "./Components/Footer";
 const Sponsers = lazy(() => import("./Pages/Sponsers"));
@@ -169,6 +169,8 @@ const DownloadApp = lazy(() => import("./Pages/DownloadApp"));
 const BfaLegacy = lazy(() => import("./Pages/Legacy/BfaLegacy"));
 const BfaLegacy2025 = lazy(() => import("./Pages/Legacy/BfaLegacy2025"));
 const BfaLegacy2024 = lazy(() => import("./Pages/Legacy/BfaLegacy2024"));
+const EventHostDetails2026 = lazy(() => import("./Pages/2026/host/EventHostDetails2026"));
+
 
 
 function App() {
@@ -196,6 +198,9 @@ function App() {
       <Suspense fallback={null}>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/event-host-2026" element={<EventHostDetails2026 />} />
+        <Route path="/event-host" element={<EventHostDetails2026 />} />
+        <Route path="/host/stephen-simmons" element={<EventHostDetails2026 />} />
         <Route path="/sponsorship-categories" element={<Sponsers />} />
         <Route path="/sponsors" element={<Sponsers />} />
         <Route path="/awards" element={<Awards />} />
@@ -687,7 +692,7 @@ function App() {
 
         
 
-        {/* <Route path="/download-app" element={<DownloadApp />} /> */}
+        <Route path="/download-app" element={<DownloadApp />} />
         <Route path="/blogs" element={<Blogs />} />
          <Route
           path="/inside-the-bfa-experience-networking-energy-innovation"

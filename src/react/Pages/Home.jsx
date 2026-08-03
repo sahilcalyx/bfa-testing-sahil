@@ -33,6 +33,8 @@ import { color } from "framer-motion";
 import SponsorSection2026 from "../Components/SponsorSection2026";
 import WhoAttendsBfaSection from "../Components/WhoAttendsBfaSection";
 import WhoAttendsBfaTabsSection from "../Components/WhoAttendsBfaTabsSection";
+import GlobalConnectivitySection from "../Components/GlobalConnectivitySection";
+import EventHostSection from "./2026/host/EventHostSection";
 
 const Home = () => {
   const deadline = new Date("2025-08-31"); // change date here
@@ -304,6 +306,7 @@ Brit Fintech Awards 2026."
         {/* <DynamicSliderVideo /> */}
         <InteractiveHero />
         <SponsorSection2026 />
+        <EventHostSection />
         {/* <StaticHero />
         <ScrollRevealVideo /> */}
         {/* <DynamicSlider/> */}
@@ -318,6 +321,7 @@ Brit Fintech Awards 2026."
         <AnimatedStats stats={statsData} />
         
         <WhoAttendsBfaTabsSection />
+        <GlobalConnectivitySection />
        
 
 
