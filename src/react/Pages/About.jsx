@@ -445,7 +445,7 @@ const About = () => {
         </div>
 
         {/* Download CTA Section */}
-        <DownloadCTASection />
+        {/* <DownloadCTASection /> */}
       </div>
     </div>
   );

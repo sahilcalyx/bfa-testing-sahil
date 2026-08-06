@@ -17,7 +17,7 @@ const hostData = {
     "Regular appearances on BBC radio stations",
     "Entertainer of choice for leading global brands",
     "Member of The Magic Circle",
-    "Bloody nice bloke"
+   
   ],
   clients: [
     "Adidas",

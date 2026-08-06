@@ -613,7 +613,7 @@ const ContactUs = () => {
         </div> */}
       </div>
       {/* Download CTA Section */}
-      <DownloadCTASection />
+      {/* <DownloadCTASection /> */}
       {/* Modal */}
       {showModal && (
         <div className="modal-overlay">

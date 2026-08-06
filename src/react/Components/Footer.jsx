@@ -95,9 +95,9 @@ const Footer = () => {
                   <li>
                     <NavLink to="/bfa-legacy">BFA Legacy</NavLink>
                   </li>
-                  <li>
+                  {/* <li>
                     <NavLink to="/download-app">Download App</NavLink>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
             </div>

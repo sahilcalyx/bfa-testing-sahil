@@ -667,7 +667,7 @@ const InteractiveHero = () => {
                     <div className="vc-label-container">
                       <span className="vc-label" style={{ color: '#ffd700' }}>Venue</span>
                     </div>
-                    <span className="vc-value">Landing Forty-Two</span>
+                    <span className="vc-value">Landing Forty Two</span>
                     <span className="vc-address">122 Leadenhall St, London EC3V 4AB</span>
                   </div>
                 </div>

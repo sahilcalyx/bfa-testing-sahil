@@ -124,7 +124,7 @@ const WhoAttendsBfaTabsSection = () => {
 
   const subtitle =
     activeTab === ALL_TAB
-      ? "Explore the full network of brands attending BFA across every category."
+      ? "Featuring some of the leading names that have been part of the Brit FinTech Awards."
       : activeCategory?.subtitle;
 
   return (
@@ -189,7 +189,7 @@ const WhoAttendsBfaTabsSection = () => {
 
             {activeTab === ALL_TAB && (
               <p className="mt-5 sm:mt-7 mb-0 text-center text-xs sm:text-sm text-zinc-400 font-medium">
-                Showing all {visibleItems.length} attendee brands
+               And many more.
               </p>
             )}
           </div>
