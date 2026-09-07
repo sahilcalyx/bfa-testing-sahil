@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 import { Helmet } from "react-helmet";
 import axios from "axios";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
@@ -19,6 +19,8 @@ import { Box, Chip, ListSubheader } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { Calendar, MapPin, Ticket, Award, Coins } from "lucide-react";
+import CouponCodeInput from "@/components/CouponCodeInput";
+import { PAYMENT_API_BASE, fetchPricing } from "@/lib/paymentApi";
 
 // Sub-components
 import NominationAnnouncement from "../Components/NominationAnnouncement copy";
@@ -244,15 +246,16 @@ const countryCodeOptions = countryCodes.map((c) => ({
 }));
 
 const MAX_TICKETS = 5;
+// Fallback only — the live price comes from the admin Pricing page.
 const TICKET_PRICE = 295;
 
-const ticketOptions = [
+const buildTicketOptions = (unitPrice) => [
   { value: "", label: "Tickets" },
   ...[...Array(MAX_TICKETS)].map((_, i) => {
     const count = i + 1;
     return {
       value: count,
-      label: `${count} Ticket${count > 1 ? "s" : ""} – £${count * TICKET_PRICE}`,
+      label: `${count} Ticket${count > 1 ? "s" : ""} – £${count * unitPrice}`,
     };
   }),
 ];
@@ -297,6 +300,7 @@ const NominationForm = () => {
   const [errors, setErrors] = useState({});
   const [agreePrivacyPolicy, setAgreePrivacyPolicy] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [appliedCoupon, setAppliedCoupon] = useState(null);
   const submitLockRef = useRef(false);
 
   useEffect(() => {
@@ -669,7 +673,6 @@ const NominationForm = () => {
 
         if (saveRes.data?.response) {
           const nominationId = saveRes.data.data.id;
-          const PAYMENT_API_BASE = "https://bfa-ticket-event.vercel.app";
           const paymentPayload = {
             ...formData,
             id: nominationId,
@@ -678,6 +681,7 @@ const NominationForm = () => {
             uploadfileoptional: formData.uploadfileoptional ? formData.uploadfileoptional.name : "",
             title: formData.titleid || formData.title || "",
             recaptchaToken: "bypassed_recaptcha_nomination",
+            couponCode: appliedCoupon?.code || "",
           };
 
           const checkoutRes = await axios.post(
@@ -1186,6 +1190,16 @@ const NominationForm = () => {
                 </div>
 
                 <div className="col-12 mt-3">
+                  <CouponCodeInput
+                    type="nomination"
+                    quantity={formData.awardcate.length || 1}
+                    email={formData.email}
+                    onApplied={setAppliedCoupon}
+                    disabled={loading}
+                  />
+                </div>
+
+                <div className="col-12 mt-3">
                   <ReCAPTCHA
                     sitekey="6LdxNigqAAAAAJ6jU9uuhEtrAw-s8J_qnsGCVvj5"
                     onChange={handleCaptchaChange}
@@ -1243,6 +1257,21 @@ const TicketBookingForm = () => {
   });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [appliedCoupon, setAppliedCoupon] = useState(null);
+
+  // Live ticket price set by the admin Pricing page.
+  const [ticketPrice, setTicketPrice] = useState(TICKET_PRICE);
+  useEffect(() => {
+    let cancelled = false;
+    fetchPricing().then((p) => {
+      if (!cancelled && p?.ticket) setTicketPrice(p.ticket);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const ticketOptions = useMemo(() => buildTicketOptions(ticketPrice), [ticketPrice]);
 
   const handleCaptchaChange = (token) => {
     setCaptchaToken(token);
@@ -1316,6 +1345,7 @@ const TicketBookingForm = () => {
       tickets: form.tickets,
       mobile: fullPhone,
       recaptchaToken: form.recaptchaToken,
+      couponCode: appliedCoupon?.code || "",
     };
 
     try {
@@ -1327,10 +1357,11 @@ const TicketBookingForm = () => {
           ...formPayload,
           id: bookingId,
           bookingId: bookingId,
+          couponCode: appliedCoupon?.code || "",
         };
 
         const checkoutRes = await axios.post(
-          "https://bfa-ticket-event.vercel.app/create-checkout-session",
+          `${PAYMENT_API_BASE}/create-checkout-session`,
           paymentPayload
         );
 
@@ -1344,7 +1375,11 @@ const TicketBookingForm = () => {
       }
     } catch (err) {
       console.error("Checkout session error:", err);
-      toast.error(err.response?.data?.message || "An unexpected error occurred. Please try again.");
+      toast.error(
+        err.response?.data?.error ||
+        err.response?.data?.message ||
+        "An unexpected error occurred. Please try again."
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -1462,6 +1497,16 @@ const TicketBookingForm = () => {
               isSearchable={false}
             />
             {errors.tickets && <p style={errorStyle}>{errors.tickets}</p>}
+          </div>
+
+          <div className="col-12 mt-3">
+            <CouponCodeInput
+              type="ticket"
+              quantity={form.tickets || 1}
+              email={form.email}
+              onApplied={setAppliedCoupon}
+              disabled={isSubmitting}
+            />
           </div>
 
           <div className="col-12 mt-3">

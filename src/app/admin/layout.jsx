@@ -12,6 +12,8 @@ import {
   Award,
   Ticket,
   Scale,
+  TicketPercent,
+  BadgePoundSterling,
 } from "lucide-react";
 import { SessionProvider, useSession, signOut } from "next-auth/react";
 
@@ -92,6 +94,8 @@ function AdminLayoutContent({ children }) {
     { name: "Nominations", href: "/admin/nominations", icon: Award },
     { name: "Jury Users", href: "/admin/jury", icon: Scale },
     { name: "Ticket Bookings", href: "/admin/bookings", icon: Ticket },
+    { name: "Pricing", href: "/admin/pricing", icon: BadgePoundSterling },
+    { name: "Coupon Codes", href: "/admin/coupons", icon: TicketPercent },
     { name: "Brochure Requests", href: "/admin/brochures", icon: FileText },
   ];
 

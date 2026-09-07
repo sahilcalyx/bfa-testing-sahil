@@ -10,7 +10,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: `
           (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -34,7 +34,7 @@ export default function RootLayout({ children }) {
         <link rel="stylesheet" href="/assets/css/style.css" />
         <link rel="stylesheet" href="/assets/css/theme_12.css" />
       </head>
-      <body className="font-sans antialiased">
+      <body className="font-sans antialiased" suppressHydrationWarning>
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WKBV6SRT" height="0" width="0" style={{display:'none',visibility:'hidden'}}></iframe></noscript>
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5RQ73JH6" height="0" width="0" style={{display:'none',visibility:'hidden'}}></iframe></noscript>
         <Script

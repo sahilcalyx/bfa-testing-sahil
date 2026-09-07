@@ -194,13 +194,14 @@ const RegisterNow = () => {
       [id]: formattedValue,
     }));
 
-    const wordCount = formattedValue.trim().split(/\s+/).length;
+    const words = formattedValue.trim() ? formattedValue.trim().split(/\s+/).filter(Boolean) : [];
+    const wordCount = words.length;
     const maxWords = 500; // Set the maximum word limit
 
     if (wordCount > maxWords) {
       setErrors((prevErrors) => ({
         ...prevErrors,
-        [id]: `Cannot exceed ${maxWords} words`,
+        [id]: `More Details About Your Company cannot exceed ${maxWords} words (currently ${wordCount} words)`,
       }));
     } else {
       setErrors((prevErrors) => {
@@ -1468,13 +1469,13 @@ const RegisterNow = () => {
                     name="aboutyourself"
                     className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${errors.aboutyourself && "error-border"
                       }`}
-                    placeholder="More Details About Your Company (Max 500 words)"
+                    placeholder="More Details About Your Company (Max 500 words) sahl"
                     value={formData.aboutyourself}
                     onChange={handleAboutAreaTextChange}
                   />
                   {errors.aboutyourself && (
                     <div className="error text-danger">
-                      More Details About Your Company is required.
+                      {errors.aboutyourself}
                     </div>
                   )}
                   <div className="cs-height_20 cs-height_lg_20" />

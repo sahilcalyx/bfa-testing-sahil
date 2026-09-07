@@ -320,7 +320,10 @@ export default function BookingsPage() {
                             bookings.map((booking) => {
                                 const statusStyle = getStatusStyle(booking.paymentStatus);
                                 const StatusIcon = statusStyle.icon;
-                                const totalCost = (booking.tickets || 0) * 195;
+                                const totalCost =
+                                    booking.amount != null
+                                        ? Number(booking.amount)
+                                        : (booking.tickets || 0) * (booking.unitPrice || 195);
                                 return (
                                     <tr
                                         key={booking._id}
@@ -359,6 +362,11 @@ export default function BookingsPage() {
                                         </td>
                                         <td style={{ padding: "16px 24px", borderBottom: "1px solid #f7f9fc", fontSize: "14px", fontWeight: "700", color: "#1a1f36" }}>
                                             £{totalCost}
+                                            {booking.couponCode ? (
+                                                <div style={{ fontSize: "11px", fontWeight: 600, color: "#22874e", marginTop: "2px" }}>
+                                                    {booking.couponCode}
+                                                </div>
+                                            ) : null}
                                         </td>
                                         <td style={{ padding: "16px 24px", borderBottom: "1px solid #f7f9fc" }}>
                                             <span style={{
@@ -422,7 +430,8 @@ export default function BookingsPage() {
                                     {selectedBooking.paymentStatus || "PENDING"}
                                 </span>
                                 <span style={{ fontSize: "14px", fontWeight: "700", color: "#4f566b" }}>
-                                    Amount: £{selectedBooking.tickets * 195}
+                                    Amount: £{selectedBooking.amount != null ? selectedBooking.amount : selectedBooking.tickets * (selectedBooking.unitPrice || 195)}
+                                    {selectedBooking.couponCode ? ` · ${selectedBooking.couponCode}` : ""}
                                 </span>
                             </div>
                         </div>
@@ -482,6 +491,36 @@ export default function BookingsPage() {
                                     <div style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "14px", color: "#475569" }}><Phone size={16} /> {selectedBooking.phone || "N/A"}</div>
                                 </div>
                             </div>
+
+                            {/* Additional Attendees List */}
+                            {selectedBooking.attendees && selectedBooking.attendees.length > 0 && (
+                                <div style={{ background: "#fff", padding: "20px", borderRadius: "20px", border: "1px solid #e3e8ee" }}>
+                                    <div style={{ fontSize: "11px", fontWeight: "800", color: "#697386", textTransform: "uppercase", marginBottom: "16px", letterSpacing: "1px" }}>
+                                        All Ticket Attendees ({selectedBooking.attendees.length})
+                                    </div>
+                                    <div style={{ display: "grid", gap: "12px" }}>
+                                        {selectedBooking.attendees.map((att, idx) => (
+                                            <div key={idx} style={{ padding: "14px", background: "#f8fafc", borderRadius: "14px", border: "1px solid #e2e8f0" }}>
+                                                <div style={{ fontSize: "11px", fontWeight: "800", color: "#635bff", textTransform: "uppercase", marginBottom: "4px" }}>
+                                                    Attendee #{idx + 1} {idx === 0 ? "(Primary)" : ""}
+                                                </div>
+                                                <div style={{ fontSize: "15px", fontWeight: "700", color: "#1a1f36" }}>
+                                                    {att.title || ""} {att.fullName}
+                                                </div>
+                                                <div style={{ fontSize: "13px", color: "#475569", marginTop: "4px" }}>
+                                                    <strong>Company:</strong> {att.companyName || "N/A"}
+                                                </div>
+                                                <div style={{ fontSize: "13px", color: "#475569" }}>
+                                                    <strong>Email:</strong> {att.email || "N/A"}
+                                                </div>
+                                                <div style={{ fontSize: "13px", color: "#475569" }}>
+                                                    <strong>Phone:</strong> {att.phone || "N/A"}
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
 
                             {/* Company Details */}
                             <div style={{ background: "#fff", padding: "20px", borderRadius: "20px", border: "1px solid #e3e8ee" }}>

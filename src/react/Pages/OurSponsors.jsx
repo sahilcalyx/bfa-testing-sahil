@@ -55,6 +55,70 @@ const OurSponsors = () => {
                 alt: "Kmbal",
                 title: "Kmbal",
               },
+              {
+                name: "Leatherback",
+                video: "/assets/video/sponsors-logo-2026/leatherback-logo-sponsor-2026.webm",
+                link: "/leatherback-sponsor-details-2026",
+                external: false,
+                tier: "Silver Sponsor",
+                alt: "Leatherback",
+                title: "Leatherback",
+              },
+              {
+                name: "Grants Payments",
+                video: "/assets/video/sponsors-logo-2026/grants-payments-sponsor-details-2026.webm",
+                link: "/grants-payments-sponsor-details-2026",
+                external: false,
+                tier: "Silver Sponsor",
+                alt: "Grants Payments",
+                title: "Grants Payments",
+              },
+              {
+                name: "ECEX",
+                video: "/assets/video/sponsors-logo-2026/ecex-sponsor-details-2026.webm",
+                link: "/ecex-sponsor-details-2026",
+                external: false,
+                tier: "Silver Sponsor",
+                alt: "ECEX",
+                title: "ECEX",
+              },
+              {
+                name: "Peratera",
+                video: "/assets/video/sponsors-logo-2026/peratera-sponsor-details-2026.webm",
+                link: "/peratera-sponsor-details-2026",
+                external: false,
+                tier: "Silver Sponsor",
+                alt: "Peratera",
+                title: "Peratera",
+              },
+              {
+                name: "Leftover Currency",
+                video: "/assets/video/sponsors-logo-2026/sposnsor-logo-2026-leftover-currency.webm",
+                link: "/leftover-currency-sponsor-details-2026",
+                external: false,
+                tier: "Innovation Sponsor",
+              },
+              {
+                name: "MyRemit",
+                video: "/assets/video/sponsors-logo-2026/myremit-sponsor-details-2026.webm",
+                link: "/myremit-sponsor-details-2026",
+                external: false,
+                tier: "Strategic Sponsor",
+                alt: "MyRemit",
+                title: "MyRemit",
+              },
+              {
+                name: "Teeparam",
+                video: "/assets/video/sponsors-logo-2026/Teeparam-logo-sponsor-details-2026.webm",
+                link: "/teeparam-sponsor-details-2026",
+                external: false,
+                tier: "Logistics Sponsor",
+                alt: "Teeparam",
+                title: "Teeparam",
+              },
+              
+              
+             
             ].map((s, index) => (
               <div className="col-lg-5 col-md-6 col-12" key={index}>
                 <div

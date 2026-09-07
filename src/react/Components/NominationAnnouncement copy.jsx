@@ -11,7 +11,7 @@ const NominationAnnouncement = ({ showFooter = true }) => {
 
         <div className="row justify-content-center gy-4">
           {/* Super Early Bird — expired */}
-          <div className="col-md-8 col-lg-4">
+          {/* <div className="col-md-8 col-lg-4">
             <div className="offer-card gradient-expired">
               <span className="offer-badge offer-badge-expired">Expired</span>
               <h4 className="title">Super Early Bird Offer </h4>
@@ -21,10 +21,10 @@ const NominationAnnouncement = ({ showFooter = true }) => {
                 <span className="price">£195</span>
               </div>
             </div>
-          </div>
-
+          </div> */}
+  
           {/* Early Bird — expired */}
-          <div className="col-md-8 col-lg-4">
+          {/* <div className="col-md-8 col-lg-4">
             <div className="offer-card gradient-expired">
               <span className="offer-badge offer-badge-expired">Expired</span>
               <h4 className="title">Early Bird Offer Extended</h4>
@@ -34,14 +34,14 @@ const NominationAnnouncement = ({ showFooter = true }) => {
                 <span className="price">£295</span>
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* Standard Nomination — active */}
           <div className="col-md-8 col-lg-4">
             <div className="offer-card gradient-theme">
               <span className="offer-badge offer-badge-active">Active</span>
-              <h4 className="title">Standard Nomination</h4>
-              <p className="date-range">1st August – 31st August 2026</p>
+              <h4 className="title">Standard Nomination Extended </h4>
+              <p className="date-range">1st August – 7th September 2026</p>
               <div className="price">£395</div>
             </div>
           </div>

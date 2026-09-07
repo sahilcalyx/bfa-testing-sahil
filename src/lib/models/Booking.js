@@ -26,6 +26,21 @@ const BookingSchema = new mongoose.Schema(
             type: Number,
             required: true,
         },
+        // Snapshot of the quote at form submit — so admin never hardcodes £195
+        unitPrice: { type: Number, default: null },
+        baseAmount: { type: Number, default: null },
+        discount: { type: Number, default: 0 },
+        amount: { type: Number, default: null },
+        couponCode: { type: String, default: "" },
+        attendees: [
+            {
+                title: { type: String },
+                fullName: { type: String },
+                companyName: { type: String },
+                email: { type: String },
+                phone: { type: String },
+            }
+        ],
         paymentStatus: {
             type: String,
             enum: ["pending", "paid", "failed"],

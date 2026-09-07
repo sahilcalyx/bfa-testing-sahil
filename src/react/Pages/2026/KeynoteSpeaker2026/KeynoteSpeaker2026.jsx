@@ -1,42 +1,15 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
-
-/**
- * Keynote Speakers 2026
- * Placeholders ready — replace name / designation / company / logo / img
- * when speakers are announced. Logo expects PNG paths.
- */
-const speakers = [
-  {
-    id: "tba-1",
-    name: "John Doe",
-    designation: "Chief Executive Officer",
-    company: "Company Name",
-    logo: "", // e.g. "/assets/img/keynotes/company-logo.png"
-    img: "", // e.g. "/assets/img/keynotes/john-doe.png"
-    placeholder: true,
-  },
-  {
-    id: "tba-2",
-    name: "John Doe",
-    designation: "Chief Executive Officer",
-    company: "Company Name",
-    logo: "",
-    img: "",
-    placeholder: true,
-  },
-  {
-    id: "tba-3",
-    name: "John Doe",
-    designation: "Chief Executive Officer",
-    company: "Company Name",
-    logo: "",
-    img: "",
-    placeholder: true,
-  },
-];
+import { useNavigate } from "react-router-dom";
+import { speakers2026 } from "./speakers2026";
 
 const KeynoteSpeaker2026 = () => {
+  const navigate = useNavigate();
+
+  const openSpeaker = (speaker) => {
+    if (speaker.slug) navigate(speaker.slug);
+  };
+
   return (
     <Section aria-labelledby="keynote-speakers-heading">
       <link
@@ -51,9 +24,20 @@ const KeynoteSpeaker2026 = () => {
         </Title>
 
         <StageGrid>
-          {speakers.map((speaker, index) => (
+          {speakers2026.map((speaker, index) => (
             <SpeakerCard key={speaker.id} style={{ animationDelay: `${index * 0.12}s` }}>
-              <Frame>
+              <Frame
+                $clickable={Boolean(speaker.slug)}
+                onClick={() => openSpeaker(speaker)}
+                role={speaker.slug ? "link" : undefined}
+                tabIndex={speaker.slug ? 0 : undefined}
+                onKeyDown={(event) => {
+                  if (speaker.slug && (event.key === "Enter" || event.key === " ")) {
+                    event.preventDefault();
+                    openSpeaker(speaker);
+                  }
+                }}
+              >
                 {speaker.img && !speaker.placeholder ? (
                   <Portrait
                     src={speaker.img}
@@ -62,7 +46,9 @@ const KeynoteSpeaker2026 = () => {
                   />
                 ) : (
                   <PlaceholderPortrait aria-hidden="true">
-                    <PlaceholderMark>BFA</PlaceholderMark>
+                    <PlaceholderMark>
+                      {speaker.initials || "BFA"}
+                    </PlaceholderMark>
                     <PlaceholderHint>2026</PlaceholderHint>
                   </PlaceholderPortrait>
                 )}
@@ -70,29 +56,36 @@ const KeynoteSpeaker2026 = () => {
                 <CardScrim aria-hidden="true" />
 
                 <CardInfo>
-                  <InfoTop>
-                    <InfoText>
-                      <NameText>{speaker.name}</NameText>
-                      <Designation>{speaker.designation}</Designation>
+                  <InfoText>
+                    <NameText>{speaker.name}</NameText>
+                    <Designation>{speaker.designation}</Designation>
+                    {speaker.logo ? (
+                      <CompanyLogo
+                        src={speaker.logo}
+                        alt={speaker.company}
+                        loading="lazy"
+                        $onDark={Boolean(speaker.logoOnDark)}
+                      />
+                    ) : (
                       <Company>{speaker.company}</Company>
-                    </InfoText>
-
-                    <LogoWrap title={speaker.company || "Company logo"}>
-                      {speaker.logo ? (
-                        <LogoImg
-                          src={speaker.logo}
-                          alt={`${speaker.company || speaker.name} logo`}
-                          loading="lazy"
-                        />
-                      ) : (
-                        <LogoPlaceholder>
-                          <LogoPlaceholderMark>LOGO</LogoPlaceholderMark>
-                          <LogoPlaceholderHint>PNG</LogoPlaceholderHint>
-                        </LogoPlaceholder>
-                      )}
-                    </LogoWrap>
-                  </InfoTop>
+                    )}
+                  </InfoText>
                 </CardInfo>
+
+                {speaker.slug && (
+                  <ArrowBtn
+                    type="button"
+                    aria-label={`View ${speaker.name} profile`}
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      openSpeaker(speaker);
+                    }}
+                  >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4">
+                      <path d="M7 17L17 7M17 7H7M17 7V17" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </ArrowBtn>
+                )}
               </Frame>
             </SpeakerCard>
           ))}
@@ -161,10 +154,10 @@ const TitleMain = styled.span`
 const StageGrid = styled.div`
   position: relative;
   z-index: 1;
-  max-width: 1080px;
+  max-width: 760px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(14px, 2.5vw, 28px);
   align-items: stretch;
 
@@ -187,6 +180,7 @@ const Frame = styled.div`
   overflow: hidden;
   box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
   transition: transform 0.35s ease, box-shadow 0.35s ease;
+  cursor: ${(props) => (props.$clickable ? "pointer" : "default")};
 
   &:hover {
     transform: translateY(-6px);
@@ -261,32 +255,25 @@ const CardInfo = styled.div`
   padding: 16px 16px 18px;
 `;
 
-const InfoTop = styled.div`
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 12px;
-`;
-
 const InfoText = styled.div`
   min-width: 0;
-  flex: 1;
   display: grid;
-  gap: 4px;
+  justify-items: start;
+  gap: 5px;
 `;
 
 const NameText = styled.span`
-  display: block;
   font-family: "Bebas Neue", "Oswald", sans-serif;
   font-weight: 400;
-  font-size: clamp(24px, 2.8vw, 34px);
+  font-size: clamp(22px, 2.5vw, 32px);
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: #f2d8ac;
   line-height: 0.95;
-  white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 `;
 
 const Designation = styled.span`
@@ -312,52 +299,45 @@ const Company = styled.span`
   text-overflow: ellipsis;
 `;
 
-const LogoWrap = styled.div`
-  flex-shrink: 0;
-  width: 56px;
-  height: 56px;
-  border-radius: 12px;
-  border: 1px solid rgba(242, 216, 172, 0.45);
-  background: rgba(255, 255, 255, 0.96);
+const CompanyLogo = styled.img`
+  display: block;
+  height: 32px;
+  width: auto;
+  max-width: 168px;
+  object-fit: contain;
+  object-position: left center;
+  background: ${(p) => (p.$onDark ? "#000" : "transparent")};
+  border-radius: ${(p) => (p.$onDark ? "6px" : "0")};
+  padding: ${(p) => (p.$onDark ? "0" : "0")};
+  margin-top: 2px;
+`;
+
+const ArrowBtn = styled.button`
+  position: absolute;
+  right: 14px;
+  bottom: 16px;
+  z-index: 3;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(242, 216, 172, 0.7);
+  border-radius: 999px;
+  background: linear-gradient(135deg, #c8102e 0%, #680014 100%);
+  color: #f2d8ac;
   display: grid;
   place-items: center;
-  overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-`;
+  cursor: pointer;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.35);
+  transition: transform 0.25s ease, background 0.25s ease;
 
-const LogoImg = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  padding: 6px;
-  display: block;
-`;
+  svg {
+    width: 16px;
+    height: 16px;
+  }
 
-const LogoPlaceholder = styled.div`
-  width: 100%;
-  height: 100%;
-  display: grid;
-  place-content: center;
-  gap: 2px;
-  background: linear-gradient(145deg, #f7f2ea, #ebe3d6);
-`;
-
-const LogoPlaceholderMark = styled.span`
-  font-family: "Oswald", sans-serif;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  color: #8a6d4a;
-  text-align: center;
-`;
-
-const LogoPlaceholderHint = styled.span`
-  font-family: "Outfit", sans-serif;
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  color: rgba(138, 109, 74, 0.7);
-  text-align: center;
+  &:hover {
+    transform: scale(1.08);
+    background: linear-gradient(135deg, #e01438 0%, #c8102e 100%);
+  }
 `;
 
 export default KeynoteSpeaker2026;

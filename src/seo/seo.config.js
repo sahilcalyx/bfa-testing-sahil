@@ -55,6 +55,42 @@ export const seoByPath = {
       images: ["/assets/img/og/home.jpg"],
     },
   },
+  "/daljit-young-keynote-speaker-2026": {
+    title: "Daljit Young - Keynote Speaker | Brit FinTech Awards 2026",
+    description: "Daljit Young, Chief Financial Officer of Peratera UK Ltd, is a keynote speaker at the Brit FinTech Awards 2026.",
+    openGraph: {
+      title: "Daljit Young - Keynote Speaker | Brit FinTech Awards 2026",
+      description: "Daljit Young, Chief Financial Officer of Peratera UK Ltd, is a keynote speaker at the Brit FinTech Awards 2026.",
+      url: `${siteBaseUrl}/daljit-young-keynote-speaker-2026`,
+      siteName,
+      images: [{ url: "/assets/img/og/home.jpg", width: 1200, height: 630, alt: "Daljit Young Keynote Speaker BFA 2026" }],
+      type: "profile",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Daljit Young - Keynote Speaker | Brit FinTech Awards 2026",
+      description: "Daljit Young, Chief Financial Officer of Peratera UK Ltd, is a keynote speaker at the Brit FinTech Awards 2026.",
+      images: ["/assets/img/og/home.jpg"],
+    },
+  },
+  "/ochebhoya-ekpete-keynote-speaker-2026": {
+    title: "Ochebhoya Ekpete - Keynote Speaker | Brit FinTech Awards 2026",
+    description: "Ochebhoya Ekpete, CEO of Leatherback UK, is a keynote speaker at the Brit FinTech Awards 2026.",
+    openGraph: {
+      title: "Ochebhoya Ekpete - Keynote Speaker | Brit FinTech Awards 2026",
+      description: "Ochebhoya Ekpete, CEO of Leatherback UK, is a keynote speaker at the Brit FinTech Awards 2026.",
+      url: `${siteBaseUrl}/ochebhoya-ekpete-keynote-speaker-2026`,
+      siteName,
+      images: [{ url: "/assets/img/keynotes/Ochebhoya Ekpete.png", width: 1200, height: 630, alt: "Ochebhoya Ekpete Keynote Speaker BFA 2026" }],
+      type: "profile",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Ochebhoya Ekpete - Keynote Speaker | Brit FinTech Awards 2026",
+      description: "Ochebhoya Ekpete, CEO of Leatherback UK, is a keynote speaker at the Brit FinTech Awards 2026.",
+      images: ["/assets/img/keynotes/Ochebhoya Ekpete.png"],
+    },
+  },
   "/event-host-2026": {
     title: "Stephen Simmons - Official Host | Brit FinTech Awards 2026",
     description: "Award-winning magician and corporate entertainer Stephen Simmons will host the Brit FinTech Awards 2026 in London.",
@@ -554,6 +590,36 @@ export const seoByPath = {
         "Recognised as MSB Store of the Year 2025 — competitive rates, 80+ currencies, and trusted FX services across London.",
       images: [
         "/assets/img/sponsor-logo/sponsor-banner-strip-2026/sponsor-banner-strip-2026-mercury-danati-details-banner-2026.png",
+      ],
+    },
+  },
+  "/peratera-sponsor-details-2026": {
+    title: "Peratera | Silver Sponsor | Brit FinTech Awards 2026",
+    description:
+      "Peratera is a modern financial platform designed to help businesses manage global banking, payments, currencies, and financial operations from one place.",
+    openGraph: {
+      title: "Peratera — Powering Borderless Business Banking & Payments | Brit FinTech Awards 2026",
+      description:
+        "Peratera — Modern financial platform designed to help businesses manage global banking, payments, and financial operations from one place. Silver Sponsor of Brit FinTech Awards 2026.",
+      url: `${siteBaseUrl}/peratera-sponsor-details-2026`,
+      siteName,
+      images: [
+        {
+          url: "/assets/img/sponsor-logo/sponsor-banner-strip-2026/peratera-details-banner-2026.png",
+          width: 1920,
+          height: 430,
+          alt: "Peratera - Silver Sponsor | Brit FinTech Awards 2026",
+        },
+      ],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Peratera — Powering Borderless Business Banking & Payments | Brit FinTech Awards 2026",
+      description:
+        "Peratera — Modern financial platform designed to help businesses manage global banking, payments, and financial operations from one place. Silver Sponsor of Brit FinTech Awards 2026.",
+      images: [
+        "/assets/img/sponsor-logo/sponsor-banner-strip-2026/peratera-details-banner-2026.png",
       ],
     },
   },

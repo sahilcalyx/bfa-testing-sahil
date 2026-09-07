@@ -5,12 +5,15 @@ import {
   Award,
   BadgeCheck,
   Building2,
+  Calendar,
   CheckCircle2,
   Coins,
   ExternalLink,
   Globe2,
   Handshake,
+  MapPin,
   Medal,
+  Play,
   ShieldCheck,
   Sparkles,
   UserCheck,
@@ -19,7 +22,7 @@ import {
 } from "lucide-react";
 
 const BANNER_IMG =
-  "/assets/img/sponsor-logo/sponsor-banner-strip-2026/kmbal-details-banner-2026.png";
+  "/assets/img/sponsor-logo/sponsor-banner-strip-2026/leftovercurrency-details-banner-2026.png";
 const SITE_URL = "https://www.leftovercurrency.com/";
 const PAGE_PATH = "/leftover-currency-sponsor-details-2026";
 const OG_IMAGE = `https://britfintechawards.com${BANNER_IMG}`;
@@ -263,19 +266,91 @@ const LeftoverCurrencySponsorDetails2026 = () => {
         </section>
 
         {/* Vision */}
-        <section className="mb-12 rounded-2xl border-l-[3px] border-[#c8102e] bg-white px-6 py-6 md:px-8 md:py-7 shadow-[0_4px_20px_rgba(15,23,42,0.04)]">
+        <section className="mb-14 rounded-2xl border-l-[3px] border-[#c8102e] bg-white px-6 py-6 md:px-8 md:py-7 shadow-[0_4px_20px_rgba(15,23,42,0.04)]">
           <div className="flex items-center gap-2.5 mb-3">
             <Globe2 size={20} strokeWidth={2.25} className="text-[#c8102e]" />
             <h2 className="m-0 text-[22px] md:text-[26px] font-extrabold tracking-tight text-zinc-950">
               Our Vision
             </h2>
           </div>
-          <p className="m-0 mb-4 text-[15px] md:text-[16px] leading-[1.8] text-zinc-600">
+          <p className="m-0 text-[15px] md:text-[16px] leading-[1.8] text-zinc-600">
             Leftover Currency is committed to making every coin and banknote count by providing an innovative, transparent, and trusted currency exchange service. Through continuous innovation and customer-focused solutions, the company is transforming the way people recover value from unused foreign currency.
           </p>
-          <p className="m-0 text-[15px] md:text-[16px] leading-[1.8] text-zinc-600 font-semibold">
-            We are proud to welcome Leftover Currency back as an Innovation Sponsor and thank them for their continued support of the Brit FinTech Awards 2026.
+        </section>
+
+        {/* Leftover Currency at BFA 2026 */}
+        <section className="mb-14 rounded-2xl border-l-[4px] border-[#c8102e] bg-white p-6 md:p-8 shadow-[0_4px_20px_rgba(15,23,42,0.04)]">
+          <div className="flex items-center gap-3 mb-4">
+            <Medal size={22} strokeWidth={2.25} className="text-[#c8102e] shrink-0" />
+            <h2 className="m-0 text-[22px] md:text-[26px] font-extrabold tracking-tight text-zinc-950">
+              Leftover Currency at BFA 2026
+            </h2>
+          </div>
+          <p className="m-0 mb-6 text-[16px] md:text-[17px] leading-[1.8] text-zinc-600">
+            We are proud to welcome Leftover Currency back to the Brit FinTech Awards 2026 as an Innovation Sponsor and look forward to celebrating their continued support and innovative currency exchange solutions.
           </p>
+
+          {/* Event Details Light Banner */}
+          <div className="rounded-2xl bg-zinc-50/80 p-6 md:p-7 border border-zinc-200/80 shadow-sm">
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-start md:justify-around gap-6 md:gap-10">
+              {/* Date Item */}
+              <div className="flex items-center gap-4">
+                <Calendar size={32} strokeWidth={2} className="text-[#c8102e] shrink-0" />
+                <div className="flex flex-col text-left">
+                  <span className="text-[17px] md:text-[19px] font-bold text-zinc-800 leading-snug">
+                    Friday
+                  </span>
+                  <span className="text-[17px] md:text-[19px] font-extrabold text-zinc-950 leading-snug">
+                    9<sup>th</sup> October 2026
+                  </span>
+                </div>
+              </div>
+
+              {/* Divider */}
+              <div className="hidden md:block h-12 w-px bg-zinc-200" />
+
+              {/* Venue Item */}
+              <div className="flex items-center gap-4">
+                <MapPin size={32} strokeWidth={2} className="text-[#c8102e] shrink-0" />
+                <div className="flex flex-col text-left">
+                  <span className="text-[17px] md:text-[19px] font-bold text-zinc-950 leading-snug">
+                    Landing FortyTwo,
+                  </span>
+                  <span className="text-[16px] md:text-[18px] font-bold text-zinc-800 leading-snug">
+                    122 Leadenhall Street,
+                  </span>
+                  <span className="text-[16px] md:text-[18px] font-bold text-zinc-800 leading-snug">
+                    London EC3V 4AB
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Video Section */}
+        <section className="mb-14">
+          <div className="text-center mb-6 md:mb-8">
+            <span className="inline-flex items-center gap-2 text-[11px] font-extrabold uppercase tracking-[0.2em] text-[#c8102e]">
+              <Play size={13} strokeWidth={2.5} fill="currentColor" />
+              Featured Video
+            </span>
+            <h2 className="mt-2 text-[24px] md:text-[30px] font-extrabold tracking-tight text-zinc-950">
+              Watch Leftover Currency
+            </h2>
+          </div>
+
+          <div className="relative w-full overflow-hidden rounded-2xl md:rounded-3xl border border-zinc-200/80 bg-zinc-950 shadow-[0_12px_36px_rgba(0,0,0,0.12)]">
+            <div className="relative w-full aspect-video">
+              <iframe
+                src="https://www.youtube.com/embed/i9FH1IP1ZUQ"
+                title="Leftover Currency - Brit FinTech Awards"
+                className="absolute top-0 left-0 w-full h-full rounded-2xl md:rounded-3xl border-0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
+            </div>
+          </div>
         </section>
 
         {/* CTA */}

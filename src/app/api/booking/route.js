@@ -4,11 +4,50 @@ import Booking from "@/lib/models/Booking";
 import nodemailer from "nodemailer";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]/route";
+import { quoteOrder, fetchLivePricing } from "@/lib/quoteOrder";
 
 export async function POST(req) {
     try {
         await connectToDatabase();
         const data = await req.json();
+
+        const attendeesList = data.attendees && Array.isArray(data.attendees) && data.attendees.length > 0
+            ? data.attendees
+            : [{
+                title: data.title,
+                fullName: data.fullName,
+                companyName: data.companyName,
+                email: data.email,
+                phone: data.mobile || data.phone
+            }];
+
+        const validateFullName = (name) => {
+            const trimmed = String(name || "").trim();
+            return trimmed && trimmed.split(/\s+/).filter(Boolean).length >= 2;
+        };
+
+        if (!data.fullName || !validateFullName(data.fullName)) {
+            return NextResponse.json(
+                { response: false, data: "Full name must include both name and surname (e.g. John Smith)." },
+                { status: 400 }
+            );
+        }
+
+        for (const att of attendeesList) {
+            if (!att.fullName || !validateFullName(att.fullName)) {
+                return NextResponse.json(
+                    { response: false, data: "All attendee full names must include both name and surname (e.g. John Smith)." },
+                    { status: 400 }
+                );
+            }
+        }
+
+        const quote = await quoteOrder({
+            type: "ticket",
+            quantity: parseInt(data.tickets) || 1,
+            email: data.email,
+            couponCode: data.couponCode,
+        });
 
         // Save pre-inquiry booking to MongoDB
         const newBooking = await Booking.create({
@@ -18,8 +57,14 @@ export async function POST(req) {
             email: data.email,
             phone: data.mobile || data.phone,
             tickets: parseInt(data.tickets),
+            attendees: attendeesList,
             paymentStatus: "pending",
             reCaptcha: data.recaptchaToken || data.reCaptcha || "",
+            unitPrice: quote.unitPrice,
+            baseAmount: quote.baseAmount,
+            discount: quote.discount,
+            amount: quote.amount,
+            couponCode: quote.couponCode,
         });
 
         // Send Notification Email to Admin
@@ -50,16 +95,31 @@ export async function POST(req) {
                     </div>
                     <div style="padding: 30px; background-color: #ffffff; border-radius: 0 0 8px 8px;">
                         <div style="margin-bottom: 25px; border-bottom: 1px solid #e3e8ee; padding-bottom: 15px;">
-                            <span style="color: #697386; font-size: 14px; text-transform: uppercase; font-weight: 600;">Attendee details</span>
+                            <span style="color: #697386; font-size: 14px; text-transform: uppercase; font-weight: 600;">Primary Attendee details</span>
                             <p style="margin: 8px 0; font-size: 18px; color: #1a1f36; font-weight: 700;">${data.title} ${data.fullName}</p>
                             <p style="margin: 8px 0; font-size: 14px; color: #697386;"><strong>Company:</strong> ${data.companyName}</p>
                             <p style="margin: 8px 0; font-size: 14px; color: #697386;"><strong>Email:</strong> <a href="mailto:${data.email}" style="color: #635bff; text-decoration: none;">${data.email}</a></p>
                             <p style="margin: 8px 0; font-size: 14px; color: #697386;"><strong>Phone:</strong> ${data.mobile || data.phone}</p>
                         </div>
+                        ${attendeesList.length > 1 ? `
+                        <div style="margin-bottom: 25px; border-bottom: 1px solid #e3e8ee; padding-bottom: 15px;">
+                            <span style="color: #697386; font-size: 14px; text-transform: uppercase; font-weight: 600;">All Ticket Attendees (${attendeesList.length})</span>
+                            ${attendeesList.map((att, i) => `
+                                <div style="margin-top: 10px; padding: 10px; background: #f8fafc; border-radius: 6px; border: 1px solid #e3e8ee;">
+                                    <strong style="color: #1a1f36;">Attendee ${i + 1}: ${att.title || ""} ${att.fullName || ""}</strong>
+                                    <div style="font-size: 13px; color: #697386;">Company: ${att.companyName || "N/A"}</div>
+                                    <div style="font-size: 13px; color: #697386;">Email: ${att.email || "N/A"}</div>
+                                    <div style="font-size: 13px; color: #697386;">Phone: ${att.phone || "N/A"}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                        ` : ''}
                         <div style="margin-bottom: 25px;">
                             <span style="color: #697386; font-size: 14px; text-transform: uppercase; font-weight: 600;">Booking Details</span>
                             <p style="margin: 8px 0; font-size: 16px; color: #1a1f36; font-weight: 700;"><strong>Tickets:</strong> ${data.tickets}</p>
-                            <p style="margin: 8px 0; font-size: 14px; color: #697386;"><strong>Total Amount:</strong> £${parseInt(data.tickets) * 195}</p>
+                            <p style="margin: 8px 0; font-size: 14px; color: #697386;"><strong>Unit price:</strong> £${quote.unitPrice}</p>
+                            ${quote.couponCode ? `<p style="margin: 8px 0; font-size: 14px; color: #697386;"><strong>Coupon:</strong> ${quote.couponCode} (−£${quote.discount})</p>` : ""}
+                            <p style="margin: 8px 0; font-size: 14px; color: #697386;"><strong>Total Amount:</strong> £${quote.amount}</p>
                             <p style="margin: 8px 0; font-size: 14px; color: #697386;"><strong>Payment Status:</strong> Pending</p>
                         </div>
                         <div style="margin-top: 30px; text-align: center;">
@@ -139,11 +199,30 @@ export async function GET(req) {
         const bookings = await Booking.find(query)
             .sort({ createdAt: -1 })
             .skip((page - 1) * limit)
-            .limit(limit);
+            .limit(limit)
+            .lean();
+
+        const pricing = await fetchLivePricing();
+        const data = bookings.map((booking) => {
+            const qty = Number(booking.tickets) || 0;
+            const stored = booking.amount != null && booking.amount !== "" ? Number(booking.amount) : null;
+            // Never rewrite history: use the amount saved at submit/payment time.
+            // Rows from before we stored amount keep the original £195 unit price.
+            const amount =
+                stored != null
+                    ? stored
+                    : qty * Number(booking.unitPrice || 195);
+
+            return {
+                ...booking,
+                amount,
+            };
+        });
 
         return NextResponse.json({
             response: true,
-            data: bookings,
+            data,
+            pricing: { ticket: pricing.ticket },
             pagination: {
                 totalCount,
                 totalPages,
@@ -161,15 +240,20 @@ export async function PATCH(req) {
     try {
         await connectToDatabase();
         const data = await req.json();
-        const { id, paymentStatus } = data;
+        const { id, paymentStatus, amount, couponCode, discount } = data;
 
         if (!id || !paymentStatus) {
             return NextResponse.json({ response: false, data: "ID and paymentStatus are required" }, { status: 400 });
         }
 
+        const patch = { paymentStatus };
+        if (amount != null && amount !== "") patch.amount = Number(amount);
+        if (couponCode) patch.couponCode = String(couponCode).toUpperCase();
+        if (discount != null && discount !== "") patch.discount = Number(discount);
+
         const updatedBooking = await Booking.findByIdAndUpdate(
             id,
-            { paymentStatus },
+            patch,
             { new: true }
         );
 

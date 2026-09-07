@@ -1321,7 +1321,7 @@ const RegisterNow = () => {
                     name="aboutyourself"
                     className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color undefined ${errors.aboutyourself && "error-border"
                       }`}
-                    placeholder="Enter More Details About Your Company (Max 500 words)"
+                    placeholder="Enter More Details About Your Company (Max 500 words) "
                     value={formData.aboutyourself}
                     onChange={handleAboutAreaTextChange}
                   />

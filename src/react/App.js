@@ -89,6 +89,12 @@ import SendsSponsorDetails2026 from "./Pages/2026/OurSponsors/SendsSponsorDetail
 import MercuryDanatiSponsorDetails2026 from "./Pages/2026/OurSponsors/MercuryDanatiSponsorDetails2026";
 import KmbalSponsorDetails2026 from "./Pages/2026/OurSponsors/KmbalSponsorDetails2026";
 import LeftoverCurrencySponsorDetails2026 from "./Pages/2026/OurSponsors/LeftoverCurrencySponsorDetails2026";
+import MyRemitSponsorDetails2026 from "./Pages/2026/OurSponsors/MyRemitSponsorDetails2026";
+import GrantsPaymentsSponsorDetails2026 from "./Pages/2026/OurSponsors/GrantsPaymentsSponsorDetails2026";
+import LeatherbackSponsorDetails2026 from "./Pages/2026/OurSponsors/LeatherbackSponsorDetails2026";
+import EcexSponsorDetails2026 from "./Pages/2026/OurSponsors/EcexSponsorDetails2026";
+import PerateraSponsorDetails2026 from "./Pages/2026/OurSponsors/PerateraSponsorDetails2026";
+import TeeparamSponsorDetails2026 from "./Pages/2026/OurSponsors/TeeparamSponsorDetails2026";
 const LeatherbackSponsorDetails = lazy(() => import("./Pages/2025/OurSponsors/LeatherbackSponsorDetails"));
 const AiMsbBlog = lazy(() => import("./Pages/Blogs/AiMsbBlog"));
 const ClearJunctionDetails2025 = lazy(() => import("./Pages/2025/OurSponsors/ClearJunctionDetails2025"));
@@ -171,6 +177,8 @@ const BfaLegacy = lazy(() => import("./Pages/Legacy/BfaLegacy"));
 const BfaLegacy2025 = lazy(() => import("./Pages/Legacy/BfaLegacy2025"));
 const BfaLegacy2024 = lazy(() => import("./Pages/Legacy/BfaLegacy2024"));
 const EventHostDetails2026 = lazy(() => import("./Pages/2026/host/EventHostDetails2026"));
+const DaljitYoungKeynoteDetails2026 = lazy(() => import("./Pages/2026/KeynoteSpeaker2026/DaljitYoungKeynoteDetails2026"));
+const OchebhoyaEkpeteKeynoteDetails2026 = lazy(() => import("./Pages/2026/KeynoteSpeaker2026/OchebhoyaEkpeteKeynoteDetails2026"));
 
 
 
@@ -678,6 +686,30 @@ function App() {
           path="/leftover-currency-sponsor-details-2026"
           element={<LeftoverCurrencySponsorDetails2026 />}
         />
+        <Route
+          path="/myremit-sponsor-details-2026"
+          element={<MyRemitSponsorDetails2026 />}
+        />
+        <Route
+          path="/grants-payments-sponsor-details-2026"
+          element={<GrantsPaymentsSponsorDetails2026 />}
+        />
+        <Route
+          path="/leatherback-sponsor-details-2026"
+          element={<LeatherbackSponsorDetails2026 />}
+        />
+        <Route
+          path="/ecex-sponsor-details-2026"
+          element={<EcexSponsorDetails2026 />}
+        />
+        <Route
+          path="/peratera-sponsor-details-2026"
+          element={<PerateraSponsorDetails2026 />}
+        />
+        <Route
+          path="/teeparam-sponsor-details-2026"
+          element={<TeeparamSponsorDetails2026 />}
+        />
 
         {/* BFA Legacy */}
         <Route path="/bfa-legacy" element={<BfaLegacy />} />
@@ -747,6 +779,14 @@ function App() {
         <Route
           path="/giordano-cortese-judge-details-2026"
           element={<GiordanoCorteseJudgeDetails2026 />}
+        />
+        <Route
+          path="/daljit-young-keynote-speaker-2026"
+          element={<DaljitYoungKeynoteDetails2026 />}
+        />
+        <Route
+          path="/ochebhoya-ekpete-keynote-speaker-2026"
+          element={<OchebhoyaEkpeteKeynoteDetails2026 />}
         />
         <Route
           path="/beyond-borders-brit-fintech-awards"

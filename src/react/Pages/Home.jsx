@@ -308,6 +308,9 @@ Brit Fintech Awards 2026."
         <DownloadAppStrip />
         <InteractiveHero />
         <SponsorSection2026 />
+
+        <KeynoteSpeaker2026 /> 
+        <AnimatedStats stats={statsData} />
         <EventHostSection />
         {/* <StaticHero />
         <ScrollRevealVideo /> */}
@@ -320,7 +323,7 @@ Brit Fintech Awards 2026."
         {/* <SponsorsSlider2025 /> */}
 
         {/* <div className="cs-height_20 cs-height_lg_20" /> */}
-        <AnimatedStats stats={statsData} />
+       
         
         <WhoAttendsBfaTabsSection />
         <GlobalConnectivitySection />
@@ -418,7 +421,7 @@ Brit Fintech Awards 2026."
          
         </ErrorBoundary>
         {/* Keynote Speakers Section 2026 */}
-        {/* <KeynoteSpeaker2026 /> */}
+         
 
         {/* Discussion Pannel Section  */}
 
@@ -485,7 +488,39 @@ Brit Fintech Awards 2026."
             data-wow-delay="0.3s"
           >
             <div className="row justify-content-center">
-              <div className="col-lg-6">
+              <div className="col-lg-4">
+                <a
+                  href="https://youtu.be/HfSIeOrDXWc"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <div
+                    className="cs-post cs-style10 position-relative"
+                    style={{ height: "400px" }}
+                  >
+                    <iframe
+                      width="100%"
+                      height="100%"
+                      src="https://www.youtube.com/embed/HfSIeOrDXWc?autoplay=1&mute=1&loop=1&playlist=HfSIeOrDXWc&controls=0&modestbranding=1&rel=0"
+                      loading="lazy"
+                      title="Brit FinTech Awards 2026"
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      referrerPolicy="strict-origin-when-cross-origin"
+                      allowFullScreen
+                      className="cs-post_thumb cs-bg"
+                    />
+                    <div className="cs-post_info">
+                      <h2 className="cs-post_title cs-white cs-white_hover">
+                        
+Download the BFA app and start networking.
+                      </h2>
+                    </div>
+                  </div>
+                </a>
+                <div className="cs-height_30 cs-height_lg_30" />
+              </div>
+              <div className="col-lg-4">
                 <a
                   href="https://youtu.be/JEpncdxVGMg?si=03nr6SXJ1c36QeXj"
                   target="_blank"
@@ -500,7 +535,7 @@ Brit Fintech Awards 2026."
                       height="100%"
                       src="https://www.youtube.com/embed/JEpncdxVGMg?autoplay=1&mute=1&loop=1&playlist=JEpncdxVGMg&controls=0&modestbranding=1&rel=0"
                       loading="lazy"
-                      title="Brit FinTech Awards 2026"
+                      title="Who decided the BFA26 stage? | Meet our Jury"
                       frameBorder="0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                       referrerPolicy="strict-origin-when-cross-origin"
@@ -509,15 +544,14 @@ Brit Fintech Awards 2026."
                     />
                     <div className="cs-post_info">
                       <h2 className="cs-post_title cs-white cs-white_hover">
-                       
-Who decided the BFA26 stage? | Meet our Jury
+                        Who decided the BFA26 stage? | Meet our Jury
                       </h2>
                     </div>
                   </div>
                 </a>
                 <div className="cs-height_30 cs-height_lg_30" />
               </div>
-              <div className="col-lg-6">
+              <div className="col-lg-4">
                 <a
                   href="https://youtu.be/o6WjXbRSEFo?si=SXeVqu-AaT9Fz7yZ"
                   target="_blank"
@@ -532,7 +566,7 @@ Who decided the BFA26 stage? | Meet our Jury
                       height="100%"
                       src="https://www.youtube.com/embed/o6WjXbRSEFo?autoplay=1&mute=1&loop=1&playlist=o6WjXbRSEFo&controls=0&modestbranding=1&rel=0"
                       loading="lazy"
-                      title="2 Minutes. 20 Winners. One Wave of Innovation."
+                      title="London's skyline is about to host something different."
                       frameBorder="0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                       referrerPolicy="strict-origin-when-cross-origin"
@@ -548,39 +582,6 @@ Who decided the BFA26 stage? | Meet our Jury
                 </a>
                 <div className="cs-height_30 cs-height_lg_30" />
               </div>
-
-              {/* <div className="col-lg-4">
-                <a
-                  href="https://youtu.be/U3hWVuR_r_I?si=d2XxZMjJIKM0xh5h"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <div
-                    className="cs-post cs-style10 position-relative"
-                    style={{ height: "400px" }}
-                  >
-                    <iframe
-                      width="100%"
-                      height="100%"
-                      src="https://www.youtube.com/embed/U3hWVuR_r_I?autoplay=1&mute=1&loop=1&playlist=U3hWVuR_r_I&start=15&controls=0&modestbranding=1&rel=0"
-                      loading="lazy"
-                      title="Top FinTechs in the UK comes together - Brit FinTech Awards 2025"
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                      referrerPolicy="strict-origin-when-cross-origin"
-                      allowFullScreen
-                      className="cs-post_thumb cs-bg"
-                    />
-                    <div className="cs-post_info">
-                      <h2 className="cs-post_title cs-white cs-white_hover">
-                        Top FinTechs in the UK comes together - Brit FinTech
-                        Awards 2025
-                      </h2>
-                    </div>
-                  </div>
-                </a>
-                <div className="cs-height_30 cs-height_lg_30" />
-              </div> */}
             </div>
             <div className="text-center" bis_skin_checked="1">
               <NavLink
@@ -594,8 +595,8 @@ Who decided the BFA26 stage? | Meet our Jury
           </div>
           <div className="cs-height_50 cs-height_lg_50" />
         </div>
-        <BFA26Section />
- <GallarySection2025 />
+        {/* <BFA26Section />
+ <GallarySection2025 /> */}
         {/* End Hero Seciton */}
 
         <div className="cs-height_60 cs-height_lg_45" />

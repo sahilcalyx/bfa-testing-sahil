@@ -568,8 +568,8 @@ box-shadow: none;
                           className="d-none-sm mb-3 mt-4 "
                           onClick={handleNavLinkClick}
                         >
-                          <NavLink to="/nominate-now#nominate-now" className="btn-pro-1">
-                            <span>Nominate For Awards</span>
+                          <NavLink to="/sponsorship-categories#sponsorship-categories" className="btn-pro-1">
+                            <span>Sponsor Now</span>
                           </NavLink>
                         </span>
                         {/* Ticket Booking to Winnner  */}
@@ -581,7 +581,7 @@ box-shadow: none;
                             to="/sponsorship-categories#next_section"
                             className={`btn-pro-2 text-center`}
                           >
-                            <span style={{ color: "#fff" }}> Sponsor Now</span>
+                            <span style={{ color: "#fff" }}> Book Tickets Now</span>
                           </NavLink>
                         </span>
                       </div>
@@ -611,8 +611,8 @@ box-shadow: none;
                     <span>Download Brochure</span>
                   </a> */}
 
-                  <NavLink to="/nominate-now#nominate-now" className="btn-pro-1">
-                    <span>Nominate For Awards</span>
+                  <NavLink to="/sponsorship-categories#sponsorship-categories" className="btn-pro-1">
+                    <span>Sponsor Now</span>
                   </NavLink>
 
                   {/* <GalleryButton /> */}
@@ -622,10 +622,10 @@ box-shadow: none;
                   </div> */}
 
                   <NavLink
-                    to="/sponsorship-categories#sponsorship-form"
+                    to="/ticket-booking"
                     className={`btn-pro-2`}
                   >
-                    <span style={{ color: "#fff" }}> Sponsor Now</span>
+                    <span style={{ color: "#fff" }}> Book Tickets Now</span>
                   </NavLink>
                 </div>
               </div>

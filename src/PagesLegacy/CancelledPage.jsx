@@ -11,7 +11,7 @@ function CancelPage() {
 
   useEffect(() => {
     if (sessionId) {
-      const PAYMENT_API_BASE = (window.location.hostname.includes("britfintechawards.com") || window.location.hostname.includes("vercel.app")) ? "https://bfa-ticket-event.vercel.app" : "http://localhost:5000";
+      const PAYMENT_API_BASE = (window.location.hostname.includes("britfintechawards.com") || window.location.hostname.includes("vercel.app")) ? "https://bfa-ticket-event.vercel.app" : "https://bfa-ticket-event.vercel.app";
       axios
         .get(`${PAYMENT_API_BASE}/checkout-session?session_id=${sessionId}`)
         .then((res) => {

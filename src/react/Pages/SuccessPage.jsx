@@ -3,16 +3,43 @@ import { useSearchParams } from "react-router-dom";
 import axios from "axios";
 import { CheckCircle, ArrowBack } from "@mui/icons-material";
 import confetti from "canvas-confetti";
+import { PAYMENT_API_BASE } from "@/lib/paymentApi";
 
 function SuccessPage() {
   const [params] = useSearchParams();
   const [sessionData, setSessionData] = useState(null);
   const [loading, setLoading] = useState(true);
   const sessionId = params.get("session_id");
+  const isFree = params.get("free") === "1";
+  const freeType = params.get("type") || "ticket";
+  const freeRecordId = params.get("id");
 
   useEffect(() => {
+    if (isFree) {
+      setSessionData({
+        id: "complimentary",
+        payment_status: "paid",
+        amount_total: 0,
+        customer_email: "",
+        metadata: {
+          type: freeType === "nomination" ? "nomination" : "ticket",
+          complimentary: "true",
+        },
+      });
+      setLoading(false);
+
+      if (freeRecordId) {
+        const endpoint = freeType === "nomination" ? "/api/nomination" : "/api/booking";
+        axios
+          .patch(endpoint, { id: freeRecordId, paymentStatus: "paid" })
+          .catch((err) => {
+            console.error("Failed to mark complimentary record as paid:", err);
+          });
+      }
+      return;
+    }
+
     if (sessionId) {
-      const PAYMENT_API_BASE = (window.location.hostname.includes("britfintechawards.com") || window.location.hostname.includes("vercel.app")) ? "https://bfa-ticket-event.vercel.app" : "https://bfa-ticket-event.vercel.app";
       axios
         .get(`${PAYMENT_API_BASE}/checkout-session?session_id=${sessionId}`)
         .then((res) => {
@@ -26,11 +53,18 @@ function SuccessPage() {
           if (recordId && res.data?.payment_status === "paid") {
             const isNomination = metadata?.type === "nomination";
             const endpoint = isNomination ? "/api/nomination" : "/api/booking";
+            const paidAmount =
+              res.data.amount_total != null
+                ? res.data.amount_total / 100
+                : Number(metadata?.amountPaid);
             
             axios
               .patch(endpoint, {
                 id: recordId,
-                paymentStatus: "paid"
+                paymentStatus: "paid",
+                amount: paidAmount,
+                couponCode: metadata?.couponCode || "",
+                discount: Number(metadata?.couponDiscount) || 0,
               })
               .then(() => {
                 console.log(`Payment status marked as paid in local database for ${isNomination ? "nomination" : "booking"}.`);
@@ -47,7 +81,7 @@ function SuccessPage() {
     } else {
       setLoading(false);
     }
-  }, [sessionId]);
+  }, [sessionId, isFree, freeType, freeRecordId]);
 
   // Run confetti when loaded successfully
   useEffect(() => {
@@ -109,6 +143,7 @@ function SuccessPage() {
   }
 
   const isNomination = sessionData?.metadata?.type === "nomination";
+  const isComplimentary = isFree || sessionData?.metadata?.complimentary === "true";
 
   return (
     <>
@@ -304,14 +339,16 @@ function SuccessPage() {
             <CheckCircle style={{ fontSize: "42px", color: "#16a34a" }} />
           </div>
 
-          <h1 className="success-title">Payment Successful</h1>
+          <h1 className="success-title">{isComplimentary ? "Booking Confirmed" : "Payment Successful"}</h1>
           
           <p className="success-description">
-            {isNomination ? (
-              "Thank you for your award nomination. A confirmation email has been sent to you. Our team will review your application and be in touch shortly."
-            ) : (
-              "Thank you for your booking purchase! We have sent a confirmation email. One of our team members will contact you shortly regarding dietary requirements and venue access."
-            )}
+            {isComplimentary
+              ? isNomination
+                ? "Your award nomination has been submitted at no charge with a complimentary coupon. A confirmation will follow shortly."
+                : "Your ticket booking has been confirmed at no charge with a complimentary coupon. A confirmation will follow shortly."
+              : isNomination
+              ? "Thank you for your award nomination. A confirmation email has been sent to you. Our team will review your application and be in touch shortly."
+              : "Thank you for your booking purchase! We have sent a confirmation email. One of our team members will contact you shortly regarding dietary requirements and venue access."}
           </p>
 
           <div className="receipt-details">
@@ -337,7 +374,7 @@ function SuccessPage() {
 
                 <InfoRow 
                   label="Amount Paid" 
-                  value={sessionData.amount_total ? `£${(sessionData.amount_total / 100).toFixed(2)}` : "N/A"} 
+                  value={isComplimentary ? "£0.00 (Complimentary)" : (sessionData.amount_total ? `£${(sessionData.amount_total / 100).toFixed(2)}` : "N/A")} 
                 />
               </>
             ) : (

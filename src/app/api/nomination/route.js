@@ -70,9 +70,17 @@ export async function POST(req) {
         const businesscorridors = formData.get("businesscorridors") || "";
         const reCaptcha = formData.get("reCaptcha") || formData.get("recaptchaToken") || "";
 
-        if (!email || !companynm || !firstName || !lastName) {
+        if (!email || !companynm || !firstName || !lastName || !aboutyourself) {
             return NextResponse.json(
                 { response: false, data: "Missing required nomination fields" },
+                { status: 400 }
+            );
+        }
+
+        const aboutWords = aboutyourself.trim() ? aboutyourself.trim().split(/\s+/).filter(Boolean) : [];
+        if (aboutWords.length > 500) {
+            return NextResponse.json(
+                { response: false, data: `More Details About Your Company cannot exceed 500 words (currently ${aboutWords.length} words)` },
                 { status: 400 }
             );
         }

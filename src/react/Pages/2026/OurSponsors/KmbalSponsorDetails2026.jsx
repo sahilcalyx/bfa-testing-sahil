@@ -5,6 +5,7 @@ import {
   Award,
   BadgeCheck,
   Building2,
+  Calendar,
   Clock,
   ExternalLink,
   Eye,
@@ -400,6 +401,59 @@ const KmbalSponsorDetails2026 = () => {
             strategic partners who share our vision of delivering secure and accessible
             financial services worldwide.
           </p>
+        </section>
+
+        {/* Kmbal Ltd at BFA 2026 */}
+        <section className="mb-14 rounded-2xl border-l-[4px] border-[#c8102e] bg-white p-6 md:p-8 shadow-[0_4px_20px_rgba(15,23,42,0.04)]">
+          <div className="flex items-center gap-3 mb-4">
+            <Medal size={22} strokeWidth={2.25} className="text-[#c8102e] shrink-0" />
+            <h2 className="m-0 text-[22px] md:text-[26px] font-extrabold tracking-tight text-zinc-950">
+              Kmbal Ltd at BFA 2026
+            </h2>
+          </div>
+          <p className="m-0 mb-4 text-[16px] md:text-[17px] leading-[1.8] text-zinc-600">
+            Recognised as the <strong>Compliance Innovator of the Year 2025</strong>, Kmbal Ltd returns to the Brit FinTech Awards 2026 as a Silver Sponsor.
+          </p>
+          <p className="m-0 mb-6 text-[16px] md:text-[17px] leading-[1.8] text-zinc-600">
+            As a Silver Sponsor, Kmbal Ltd joins leading financial institutions and innovators in supporting an evening that celebrates excellence, trust, and technological advancement in global payments and remittance.
+          </p>
+
+          {/* Event Details Light Banner */}
+          <div className="rounded-2xl bg-zinc-50/80 p-6 md:p-7 border border-zinc-200/80 shadow-sm">
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-start md:justify-around gap-6 md:gap-10">
+              {/* Date Item */}
+              <div className="flex items-center gap-4">
+                <Calendar size={32} strokeWidth={2} className="text-[#c8102e] shrink-0" />
+                <div className="flex flex-col text-left">
+                  <span className="text-[17px] md:text-[19px] font-bold text-zinc-800 leading-snug">
+                    Friday
+                  </span>
+                  <span className="text-[17px] md:text-[19px] font-extrabold text-zinc-950 leading-snug">
+                    9<sup>th</sup> October 2026
+                  </span>
+                </div>
+              </div>
+
+              {/* Divider */}
+              <div className="hidden md:block h-12 w-px bg-zinc-200" />
+
+              {/* Venue Item */}
+              <div className="flex items-center gap-4">
+                <MapPin size={32} strokeWidth={2} className="text-[#c8102e] shrink-0" />
+                <div className="flex flex-col text-left">
+                  <span className="text-[17px] md:text-[19px] font-bold text-zinc-950 leading-snug">
+                    Landing FortyTwo,
+                  </span>
+                  <span className="text-[16px] md:text-[18px] font-bold text-zinc-800 leading-snug">
+                    122 Leadenhall Street,
+                  </span>
+                  <span className="text-[16px] md:text-[18px] font-bold text-zinc-800 leading-snug">
+                    London EC3V 4AB
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
 
         {/* CTA */}

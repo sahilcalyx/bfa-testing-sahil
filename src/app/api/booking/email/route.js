@@ -40,7 +40,8 @@ export async function POST(req) {
         });
 
         const baseUrl = process.env.COMPANY_WEBSITE_URL || "https://britfintechawards.com";
-        const totalAmount = booking.tickets * 195;
+        const totalAmount =
+            booking.amount != null ? Number(booking.amount) : booking.tickets * (booking.unitPrice || 295);
 
         const mailContent = `
         <div style="font-family: 'Outfit', 'Inter', sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e3e8ee; border-radius: 16px; background-color: #f7f9fc;">
@@ -72,6 +73,12 @@ export async function POST(req) {
                             <td style="padding: 6px 0; color: #697386;">Tickets Booked</td>
                             <td style="padding: 6px 0; text-align: right; font-weight: 600; color: #1a1f36;">${booking.tickets} ${booking.tickets > 1 ? "Tickets" : "Ticket"}</td>
                         </tr>
+                        ${booking.couponCode ? `
+                        <tr>
+                            <td style="padding: 6px 0; color: #697386;">Coupon</td>
+                            <td style="padding: 6px 0; text-align: right; font-weight: 600; color: #1a1f36;">${booking.couponCode}${booking.discount ? ` (−£${booking.discount})` : ""}</td>
+                        </tr>
+                        ` : ""}
                         <tr style="border-top: 1px dashed #e2e8f0;">
                             <td style="padding: 12px 0 0 0; color: #010057; font-weight: 700; font-size: 16px;">Amount Paid</td>
                             <td style="padding: 12px 0 0 0; text-align: right; font-weight: 800; color: #010057; font-size: 18px;">£${totalAmount}.00</td>

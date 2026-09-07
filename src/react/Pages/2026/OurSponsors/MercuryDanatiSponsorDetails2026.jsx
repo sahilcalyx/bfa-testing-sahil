@@ -5,6 +5,7 @@ import {
   ArrowLeft,
   Award,
   BadgePercent,
+  Calendar,
   Coins,
   ExternalLink,
   MapPin,
@@ -219,6 +220,45 @@ const MercuryDanatiSponsorDetails2026 = () => {
               </p>
             </div>
           ))}
+        </section>
+
+        {/* Event Details Light Banner */}
+        <section className="mb-14">
+          <div className="rounded-2xl bg-zinc-50/80 p-6 md:p-7 border border-zinc-200/80 shadow-sm">
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-start md:justify-around gap-6 md:gap-10">
+              {/* Date Item */}
+              <div className="flex items-center gap-4">
+                <Calendar size={32} strokeWidth={2} className="text-[#c8102e] shrink-0" />
+                <div className="flex flex-col text-left">
+                  <span className="text-[17px] md:text-[19px] font-bold text-zinc-800 leading-snug">
+                    Friday
+                  </span>
+                  <span className="text-[17px] md:text-[19px] font-extrabold text-zinc-950 leading-snug">
+                    9<sup>th</sup> October 2026
+                  </span>
+                </div>
+              </div>
+
+              {/* Divider */}
+              <div className="hidden md:block h-12 w-px bg-zinc-200" />
+
+              {/* Venue Item */}
+              <div className="flex items-center gap-4">
+                <MapPin size={32} strokeWidth={2} className="text-[#c8102e] shrink-0" />
+                <div className="flex flex-col text-left">
+                  <span className="text-[17px] md:text-[19px] font-bold text-zinc-950 leading-snug">
+                    Landing FortyTwo,
+                  </span>
+                  <span className="text-[16px] md:text-[18px] font-bold text-zinc-800 leading-snug">
+                    122 Leadenhall Street,
+                  </span>
+                  <span className="text-[16px] md:text-[18px] font-bold text-zinc-800 leading-snug">
+                    London EC3V 4AB
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
 
         {/* Vision */}

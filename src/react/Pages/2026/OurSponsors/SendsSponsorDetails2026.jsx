@@ -1,3 +1,4 @@
+import { Medal, Calendar, MapPin } from "lucide-react";
 import { Helmet } from "react-helmet";
 import React from "react";
 import { NavLink } from "react-router-dom";
@@ -543,6 +544,66 @@ const SendsSponsorDetails2026 = () => {
                 </p>
               </div>
             ))}
+          </div>
+        </div>
+
+        {/* Sends at BFA 2026 */}
+        <div
+          style={{
+            backgroundColor: "#ffffff",
+            padding: "30px",
+            borderRadius: "16px",
+            boxShadow: "0 4px 20px rgba(0,0,0,0.04)",
+            marginBottom: "45px",
+            border: "1px solid #e2e8f0",
+            borderLeft: "4px solid #c8102e",
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "16px" }}>
+            <Medal size={22} strokeWidth={2.25} style={{ color: "#c8102e", flexShrink: 0 }} />
+            <h3 style={{ fontWeight: "800", fontSize: "1.6rem", margin: 0, color: "#0f172a" }}>
+              Sends at BFA 2026
+            </h3>
+          </div>
+          <p style={{ fontSize: "1.05rem", lineHeight: "1.8", color: "#475569", marginBottom: "20px" }}>
+            We are delighted to welcome Sends (operated by Smartflow Payments Limited) to the Brit FinTech Awards 2026 as a Silver Sponsor and look forward to celebrating their contribution to modern multi-currency accounts, payment acceptance, and international money movement.
+          </p>
+
+          {/* Event Details Light Banner */}
+          <div className="rounded-2xl bg-zinc-50/80 p-6 md:p-7 border border-zinc-200/80 shadow-sm">
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-start md:justify-around gap-6 md:gap-10">
+              {/* Date Item */}
+              <div className="flex items-center gap-4">
+                <Calendar size={32} strokeWidth={2} className="text-[#c8102e] shrink-0" />
+                <div className="flex flex-col text-left">
+                  <span className="text-[17px] md:text-[19px] font-bold text-zinc-800 leading-snug">
+                    Friday
+                  </span>
+                  <span className="text-[17px] md:text-[19px] font-extrabold text-zinc-950 leading-snug">
+                    9<sup>th</sup> October 2026
+                  </span>
+                </div>
+              </div>
+
+              {/* Divider */}
+              <div className="hidden md:block h-12 w-px bg-zinc-200" />
+
+              {/* Venue Item */}
+              <div className="flex items-center gap-4">
+                <MapPin size={32} strokeWidth={2} className="text-[#c8102e] shrink-0" />
+                <div className="flex flex-col text-left">
+                  <span className="text-[17px] md:text-[19px] font-bold text-zinc-950 leading-snug">
+                    Landing FortyTwo,
+                  </span>
+                  <span className="text-[16px] md:text-[18px] font-bold text-zinc-800 leading-snug">
+                    122 Leadenhall Street,
+                  </span>
+                  <span className="text-[16px] md:text-[18px] font-bold text-zinc-800 leading-snug">
+                    London EC3V 4AB
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 

@@ -12,6 +12,8 @@ import "./iicon.css";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import CouponCodeInput from "@/components/CouponCodeInput";
+import { PAYMENT_API_BASE } from "@/lib/paymentApi";
 import ReCAPTCHA from "react-google-recaptcha";
 import NominationAnnouncement from "../Components/NominationAnnouncement copy";
 import { NavLink } from "react-router-dom";
@@ -100,6 +102,7 @@ const RegisterNow = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [agreePrivacyPolicy, setAgreePrivacyPolicy] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [appliedCoupon, setAppliedCoupon] = useState(null);
   const submitLockRef = useRef(false);
 
 
@@ -219,12 +222,13 @@ const RegisterNow = () => {
       ...prevData,
       [id]: formattedValue,
     }));
-    const wordCount = formattedValue.trim().split(/\s+/).length;
+    const words = formattedValue.trim() ? formattedValue.trim().split(/\s+/).filter(Boolean) : [];
+    const wordCount = words.length;
     const maxWords = 500;
     if (wordCount > maxWords) {
       setErrors((prevErrors) => ({
         ...prevErrors,
-        [id]: `Cannot exceed ${maxWords} words`,
+        [id]: `More Details About Your Company cannot exceed ${maxWords} words (currently ${wordCount} words)`,
       }));
     } else {
       setErrors((prevErrors) => {
@@ -504,6 +508,11 @@ const RegisterNow = () => {
       newErrors.awardcate = "At least one category is required";
     }
 
+    const aboutWords = (formData.aboutyourself || "").trim() ? (formData.aboutyourself || "").trim().split(/\s+/).filter(Boolean) : [];
+    if (aboutWords.length > 500) {
+      newErrors.aboutyourself = `More Details About Your Company cannot exceed 500 words (currently ${aboutWords.length} words)`;
+    }
+
     if (!formData.websiteurl) {
       newErrors.websiteurl = "Website Url is required";
     }
@@ -565,6 +574,14 @@ const RegisterNow = () => {
     setErrors(newErrors);
     if (Object.keys(newErrors).length > 0) {
       console.log("❌ Frontend form validation failed. Errors:", newErrors);
+      if (newErrors.aboutyourself) {
+        Swal.fire({
+          title: "Error!",
+          text: newErrors.aboutyourself,
+          icon: "error",
+          confirmButtonText: "Close",
+        });
+      }
       setLoading(false);
       submitLockRef.current = false;
       return;
@@ -609,19 +626,23 @@ const RegisterNow = () => {
         if (saveRes.data?.response) {
           const nominationId = saveRes.data.data.id;
 
-          // 3. Construct the payment session creation payload (including saved nomination ID)
-          const PAYMENT_API_BASE = "https://bfa-ticket-event.vercel.app";
+          // 3. Construct the payment session creation payload (safely truncate Stripe metadata fields to under 500 chars)
           const paymentPayload = {
             ...formData,
+            aboutyourself: formData.aboutyourself ? formData.aboutyourself.substring(0, 490) : "",
+            serviceyouOffer: formData.serviceyouOffer ? formData.serviceyouOffer.substring(0, 490) : "",
+            companyaddress: formData.companyaddress ? formData.companyaddress.substring(0, 490) : "",
+            companynm: formData.companynm ? formData.companynm.substring(0, 490) : "",
             id: nominationId,
             nominationId: nominationId,
             uploadfile: formData.uploadfile ? formData.uploadfile.name : "",
             uploadfileoptional: formData.uploadfileoptional ? formData.uploadfileoptional.name : "",
             title: formData.titleid || formData.title || "",
             recaptchaToken: "bypassed_recaptcha_nomination",
+            couponCode: appliedCoupon?.code || "",
           };
 
-          // 4. Create the stripe payment checkout session
+          // 4. Create the stripe payment checkout session (the coupon is re-validated server-side)
           const checkoutRes = await axios.post(`${PAYMENT_API_BASE}/create-nomination-checkout-session`, paymentPayload, {
             timeout: 60000,
           });
@@ -1620,7 +1641,7 @@ const RegisterNow = () => {
                   />
                   {errors.aboutyourself && (
                     <div className="error text-danger">
-                      More Details About Your Company is required.
+                      {errors.aboutyourself}
                     </div>
                   )}
                   <div className="cs-height_20 cs-height_lg_20" />
@@ -1648,6 +1669,16 @@ const RegisterNow = () => {
                   {errors.uploadfile && (
                     <div className="error text-danger">{errors.uploadfile}</div>
                   )}
+                </div>
+                <div className="cs-height_20 cs-height_lg_20" />
+                <div className="col-12 mt-3">
+                  <CouponCodeInput
+                    type="nomination"
+                    quantity={formData.awardcate.length || 1}
+                    email={formData.email}
+                    onApplied={setAppliedCoupon}
+                    disabled={loading || NOMINATIONS_CLOSED}
+                  />
                 </div>
                 <div className="cs-height_20 cs-height_lg_20" />
                 <div className="col-12 mt-3">

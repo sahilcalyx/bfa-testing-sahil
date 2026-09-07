@@ -217,7 +217,7 @@ const RedSeaMoneyTransferWinnerDetails2025 = () => {
           approach. Its multi-channel transfer options, real-time tracking, and
           transparent pricing meet the practical needs of a diverse global user
           base. Handling over{" "}
-          <strong>120,000 transactions totaling £33M+ in 2024</strong>, the
+          <strong>120,000 transactions totaling £29M+ in 2024</strong>, the
           platform demonstrates reliability, efficiency, and trustworthiness,
           while promoting financial inclusion and economic empowerment across
           diaspora communities.

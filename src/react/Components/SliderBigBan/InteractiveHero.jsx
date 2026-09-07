@@ -1,23 +1,21 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Play, X, Sparkles, Rocket, Calendar, MapPin, Ticket } from "lucide-react";
+import { Play, X, Calendar, MapPin, Ticket } from "lucide-react";
 import { NavLink } from "react-router-dom";
+
+const VENUE_MAPS_URL = "https://maps.app.goo.gl/HTmvq2hv7HkHbqNX9";
 
 const InteractiveHero = () => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isMobileVideoOpen, setIsMobileVideoOpen] = useState(false);
+  const [ctaIndex, setCtaIndex] = useState(0);
   const videoRef = useRef(null);
 
-  // Offer types for the compact offer card
-  const offers = [
-    {
-      id: "standard",
-      label: "Nominate Now",
-      price: "£395",
-      subtitle: "Now open",
-    },
-  ];
-  const [selectedOffer, setSelectedOffer] = useState(offers[0].id);
+  useEffect(() => {
+    const delay = ctaIndex === 0 ? 3400 : 2200;
+    const id = setTimeout(() => setCtaIndex((i) => (i + 1) % 2), delay);
+    return () => clearTimeout(id);
+  }, [ctaIndex]);
   // Lock scroll when video is expanded or mobile video popup is open
   useEffect(() => {
     if (isExpanded || isMobileVideoOpen) {
@@ -70,79 +68,246 @@ const InteractiveHero = () => {
           transition: all 700ms cubic-bezier(0.16, 1, 0.3, 1) !important;
         }
         
-        @keyframes header-btn-flash {
-          0% {
-            left: -100%;
-            opacity: 0;
-          }
-          50% {
-            opacity: 1;
-          }
-          100% {
-            left: 120%;
-            opacity: 0;
-          }
-        }
-        
-        .btn-header-style {
-          height: 55px;
-          padding: 0 25px;
-          font-size: 18px;
-          font-weight: bold;
-          color: white !important;
-          text-decoration: none;
-          border: 2px solid #ff3b57;
-          border-radius: 12px;
-          background: transparent;
-          position: relative;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          overflow: hidden;
-          cursor: pointer;
-          z-index: 1;
-          transition: transform 0.2s ease-in-out, background-color 0.3s, color 0.3s;
-          box-shadow: 0 0 5px rgba(255, 59, 87, 0.7),
-                      0 0 5px rgba(255, 59, 87, 0.4),
-                      0 0 5px rgba(255, 59, 87, 0.2);
-          max-width: 220px;
-          width: 100%;
-          margin: 0 auto;
+        @keyframes cta-border-spin {
+          to { transform: rotate(360deg); }
         }
 
-        .btn-header-style::after {
+        @keyframes cta-sheen {
+          0% { transform: translateX(-130%) skewX(-18deg); }
+          100% { transform: translateX(240%) skewX(-18deg); }
+        }
+
+        @keyframes cta-live {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.35; }
+        }
+
+        .hero-cta {
+          position: relative;
+          display: inline-flex;
+          isolation: isolate;
+          max-width: 280px;
+          width: 100%;
+          margin: 0 auto;
+          padding: 2px;
+          border-radius: 14px;
+          text-decoration: none;
+          color: #fff !important;
+          overflow: hidden;
+          cursor: pointer;
+          transform: translateY(-2px);
+          box-shadow: 0 0 0 1px rgba(255, 215, 0, 0.18),
+                      0 8px 22px rgba(200, 16, 46, 0.35);
+          transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
+        }
+
+        .hero-cta::before {
+          content: "";
+          position: absolute;
+          z-index: 0;
+          inset: -80%;
+          background: conic-gradient(
+            from 0deg,
+            #7a0a18 0deg,
+            #ffd700 70deg,
+            #ffffff 110deg,
+            #ffd700 150deg,
+            #c8102e 220deg,
+            #7a0a18 280deg,
+            #ffd700 330deg,
+            #7a0a18 360deg
+          );
+          animation: cta-border-spin 4.2s linear infinite;
+        }
+
+        .hero-cta-inner {
+          position: relative;
+          z-index: 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          height: 56px;
+          border-radius: 12px;
+          background:
+            linear-gradient(90deg, transparent 32%, rgba(0, 0, 0, 0.42) 72%, rgba(0, 0, 0, 0.92) 100%),
+            linear-gradient(180deg, #d41430 0%, #c8102e 55%, #9e0c22 100%);
+          overflow: hidden;
+          transition: background 0.35s ease;
+        }
+
+        .hero-cta-inner::after {
           content: "";
           position: absolute;
           top: 0;
-          left: -100%;
+          left: 0;
           height: 100%;
-          width: 60%;
+          width: 42%;
           background: linear-gradient(
-            120deg,
-            transparent,
-            rgba(255, 255, 255, 0.4),
-            transparent
+            105deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.16) 45%,
+            transparent 100%
           );
-          transform: skewX(-20deg);
-          animation: header-btn-flash 2.5s ease-in-out infinite;
-          z-index: 0;
+          animation: cta-sheen 4.8s ease-in-out infinite;
+          pointer-events: none;
         }
 
-        .btn-header-style:hover {
-          transform: scale(1.05);
-          background: rgba(255, 59, 87, 0.05);
-          box-shadow: 0 0 8px rgba(255, 59, 87, 0.8),
-                      0 0 12px rgba(255, 59, 87, 0.5);
+        .hero-cta:hover {
+          transform: translateY(0);
+          box-shadow: 0 0 0 1px rgba(255, 215, 0, 0.28),
+                      0 10px 26px rgba(0, 0, 0, 0.35);
         }
 
-        .btn-header-style:active {
-          transform: scale(0.95);
+        .hero-cta:hover .hero-cta-inner {
+          background: #0b0b0c;
+        }
+
+        .hero-cta:active {
+          transform: translateY(1px);
+        }
+
+        .hero-cta-label {
+          position: relative;
+          z-index: 1;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 9px;
+          font-family: 'Outfit', sans-serif;
+          font-size: 15px;
+          font-weight: 800;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          line-height: 1;
+          white-space: nowrap;
+        }
+
+        .hero-cta-live {
+          width: 7px;
+          height: 7px;
+          border-radius: 999px;
+          background: #ff4d6a;
+          animation: cta-live 1.6s ease-in-out infinite;
+          box-shadow: 0 0 8px rgba(255, 77, 106, 0.7);
+          flex-shrink: 0;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .hero-cta::before,
+          .hero-cta-inner::after,
+          .hero-cta-live {
+            animation: none;
+          }
+        }
+
+        .hero-meta {
+          width: 100%;
+          background: #ffffff;
+          border-radius: 14px;
+          padding: 20px 24px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: left;
+          box-shadow: 0 10px 32px rgba(0, 0, 0, 0.28);
+        }
+
+        .hero-meta-col {
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          gap: 12px;
+          flex: 0 1 auto;
+          min-width: 0;
+          text-decoration: none;
+          color: inherit;
+        }
+
+        .hero-meta-col.hero-meta-venue {
+          cursor: pointer;
+          border-radius: 8px;
+          transition: background-color 0.2s ease;
+        }
+
+        .hero-meta-col.hero-meta-venue:hover {
+          background: rgba(200, 16, 46, 0.04);
+        }
+
+        .hero-meta-icon {
+          color: #c8102e;
+          flex-shrink: 0;
+        }
+
+        .hero-meta-copy {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          min-width: 0;
+        }
+
+        .hero-meta-weekday {
+          font-family: 'Outfit', sans-serif;
+          font-size: 17px;
+          font-weight: 600;
+          color: #1a1a1a;
+          line-height: 1.25;
+        }
+
+        .hero-meta-date {
+          font-family: 'Outfit', sans-serif;
+          font-size: 17px;
+          font-weight: 800;
+          color: #111111;
+          line-height: 1.3;
+        }
+
+        .hero-meta-date sup {
+          font-size: 0.62em;
+          font-weight: 800;
+          vertical-align: super;
+          line-height: 0;
+        }
+
+        .hero-meta-line {
+          font-family: 'Outfit', sans-serif;
+          font-size: 16px;
+          font-weight: 700;
+          color: #111111;
+          line-height: 1.35;
+        }
+
+        .hero-meta-divider {
+          width: 1px;
+          align-self: stretch;
+          background: #e4e4e4;
+          margin: 0 28px;
+          flex-shrink: 0;
+        }
+
+        @media (max-width: 520px) {
+          .hero-meta {
+            flex-direction: column;
+            padding: 16px 18px;
+            gap: 14px;
+          }
+
+          .hero-meta-col {
+            justify-content: center;
+            width: 100%;
+          }
+
+          .hero-meta-divider {
+            width: 60%;
+            height: 1px;
+            margin: 0 auto;
+          }
         }
       `}</style>
 
       <section className="relative w-full min-h-screen lg:h-[100svh] flex flex-col lg:flex-row lg:overflow-hidden bg-black text-white font-outfit select-none">
 
-        {/* ================= LEFT HALF: BRAND & REGISTRATION ================= */}
+        {/* ================= LEFT HALF: TICKET BOOKING ================= */}
         <div className={`relative bg-black flex flex-col justify-center overflow-hidden hero-panel-slide z-10 ${isExpanded
           ? "w-0 lg:w-0 h-0 lg:h-full min-h-0 lg:min-h-0 p-0 opacity-0 pointer-events-none"
           : "w-full lg:w-1/2 min-h-[50vh] lg:min-h-0 pt-32 pb-12 px-6 md:p-12 lg:px-8 xl:px-16 lg:pb-16 lg:pt-36 opacity-100"
@@ -219,23 +384,30 @@ const InteractiveHero = () => {
 
           {/* Central content container */}
           <div
-            className={`flex-1 flex flex-col justify-center items-center text-center my-12 lg:my-0 z-10 max-w-2xl mx-auto transition-all duration-500 ${isExpanded
+            className={`flex-1 flex flex-col justify-center items-center text-center my-6 lg:my-0 z-10 max-w-2xl mx-auto transition-all duration-500 ${isExpanded
               ? "opacity-0 scale-95 pointer-events-none"
               : "opacity-100 scale-100"
               }`}
           >
 
 
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
+              className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.28em] text-white/70 mb-3 select-none"
+            >
+              Final days to join the community
+            </motion.p>
+
             <h1 className="leading-[0.95] tracking-tight uppercase text-white font-outfit select-none">
-
-
               <motion.span
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
                 className="block text-[2.2rem] sm:text-[3.4rem] md:text-[4.2rem] lg:text-[2.1rem] xl:text-[2.8rem] 2xl:text-[3.5rem] font-black"
               >
-                Award Nominations
+                Secure Your
               </motion.span>
 
               <motion.span
@@ -244,7 +416,7 @@ const InteractiveHero = () => {
                 transition={{ duration: 0.6, delay: 0.35, ease: "easeOut" }}
                 className="block text-[2rem] sm:text-[3rem] md:text-[3.8rem] lg:text-[1.9rem] xl:text-[2.5rem] 2xl:text-[3.2rem] font-light"
               >
-                Open For
+                Seat At
               </motion.span>
 
               <motion.span
@@ -253,104 +425,96 @@ const InteractiveHero = () => {
                 transition={{ duration: 0.6, delay: 0.45, ease: "easeOut" }}
                 className="block text-[2.8rem] sm:text-[4.4rem] md:text-[5.5rem] lg:text-[2.8rem] xl:text-[3.6rem] 2xl:text-[4.5rem] font-black text-[#c8102e]"
               >
-                2026
+                BFA26
               </motion.span>
             </h1>
-            {/* Nomination Open Announcement */}
-            {/* Simple, Clean and Highly Understandable Super Early Bird Block */}
+
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
               className="flex flex-col items-center gap-1 mt-4 mb-1 select-none font-outfit text-center"
             >
-              <span className="text-base sm:text-2xl font-black uppercase tracking-[0.25em] ">
-                 Standard Nomination
+              <span className="text-base sm:text-2xl font-black uppercase tracking-[0.25em]">
+                Early Bird Ticket Extended
               </span>
               <p className="text-[12px] sm:text-[14px] font-bold text-[#ff4d6a] tracking-[0.2em] uppercase mt-1.5 leading-none">
-                1st Aug 2026 – 31st Aug 2026
+                16th August – 10th September 2026
               </p>
             </motion.div>
-            {/* Urgency tagline */}
 
-
-            {/* OFFERS: animated switcher shown in same compact space */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="mt-2 lg:mt-2 xl:mt-2 2xl:mt-2 w-full"
+              transition={{ duration: 0.6, delay: 0.55 }}
+              className="mt-3 w-full"
             >
-              <div className="max-w-sm mx-auto w-full flex flex-col gap-4">
-                {/* Small selector buttons */}
-
-
-                <NavLink
-                  to="/nominate-now#nominate-now"
-                  className="group flex items-stretch gap-0 rounded-lg lg:rounded-md xl:rounded-lg overflow-hidden border border-white/10 hover:border-[#c8102e]/40 bg-white/[0.04] backdrop-blur-sm shadow-[0_8px_30px_rgba(0,0,0,0.3)] hover:shadow-[0_12px_40px_rgba(200,16,46,0.25)] transition-all duration-500 cursor-pointer w-full text-left"
-                >
-                  {/* Red accent bar */}
-                  <div className="w-1.5 bg-gradient-to-b from-[#e8243e] via-[#c8102e] to-[#8a0b1f] shrink-0" />
-
-                  {/* Price section */}
-                  <div className="flex items-center justify-center px-2.5 sm:px-4 py-1.5 bg-[#c8102e]/10 group-hover:bg-[#c8102e]/20 border-r border-white/[0.06] transition-colors duration-500 min-w-[85px] sm:min-w-[120px] lg:min-w-[100px] xl:min-w-[120px]">
-                    <AnimatePresence mode="wait">
-                      <motion.div
-                        key={selectedOffer + "-price-container"}
-                        initial={{ opacity: 0, y: 8 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -8 }}
-                        transition={{ duration: 0.3 }}
-                        className="flex flex-col items-center justify-center"
-                      >
-                        {offers.find((x) => x.id === selectedOffer).originalPrice && (
-                          <span className="text-[11px] sm:text-xs lg:text-[10px] xl:text-xs font-semibold text-white/50 line-through tracking-wider mb-0.5 select-none">
-                            {offers.find((x) => x.id === selectedOffer).originalPrice}
-                          </span>
-                        )}
-                        <span className="text-[1.8rem] sm:text-[2.2rem] lg:text-[1.5rem] xl:text-[1.8rem] 2xl:text-[2.2rem] font-black text-white leading-none tracking-tight">
-                          {offers.find((x) => x.id === selectedOffer).price}
-                        </span>
-                      </motion.div>
-                    </AnimatePresence>
-                  </div>
-
-                  {/* Details section */}
-                  <div className="flex flex-col justify-center items-center px-3 sm:px-5 py-1.5 flex-1 bg-gradient-to-r from-[#c8102e] via-[#b80e28] to-[#980b20] group-hover:from-[#e8243e] group-hover:via-[#c8102e] group-hover:to-[#a00d24] transition-all duration-500">
-                    <AnimatePresence mode="wait">
-                      <motion.div
-                        key={selectedOffer + "-details-container"}
-                        initial={{ opacity: 0, x: -8 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: 8 }}
-                        transition={{ duration: 0.3 }}
-                        className="flex flex-col items-center justify-center w-full"
-                      >
-                        <span className="text-white text-[12px] sm:text-[18px] lg:text-[16px] xl:text-[18px] font-black uppercase tracking-[0.12em] sm:tracking-[0.25em] leading-none group-hover:scale-[1.03] transition-transform duration-300 drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] text-center w-full block whitespace-nowrap">
-                          {offers.find((x) => x.id === selectedOffer).label}
-                        </span>
-                        {offers.find((x) => x.id === selectedOffer).dateRange && (
-                          <span className="text-white/80 text-[8.5px] sm:text-[9.5px] lg:text-[8px] xl:text-[9.5px] uppercase tracking-[0.15em] font-extrabold mt-1.5 text-center w-full block select-none">
-                            {offers.find((x) => x.id === selectedOffer).dateRange}
-                          </span>
-                        )}
-                      </motion.div>
-                    </AnimatePresence>
-                  </div>
-                </NavLink>
-
+              <div className="w-full max-w-xl mx-auto flex flex-col items-center gap-5">
                 <NavLink
                   to="/ticket-booking"
-                  className="btn-header-style"
+                  className="hero-cta"
                 >
-                  Book Tickets Now
+                  <span className="hero-cta-inner">
+                    <AnimatePresence mode="wait">
+                      {ctaIndex === 0 ? (
+                        <motion.span
+                          key="book"
+                          className="hero-cta-label"
+                          initial={{ y: 16, opacity: 0 }}
+                          animate={{ y: 0, opacity: 1 }}
+                          exit={{ y: -16, opacity: 0 }}
+                          transition={{ duration: 0.42, ease: [0.16, 1, 0.3, 1] }}
+                        >
+                          <Ticket className="w-4 h-4" strokeWidth={2.4} />
+                          Book Tickets Now
+                        </motion.span>
+                      ) : (
+                        <motion.span
+                          key="fast"
+                          className="hero-cta-label"
+                          initial={{ y: 16, opacity: 0 }}
+                          animate={{ y: 0, opacity: 1 }}
+                          exit={{ y: -16, opacity: 0 }}
+                          transition={{ duration: 0.42, ease: [0.16, 1, 0.3, 1] }}
+                        >
+                          <span className="hero-cta-live" aria-hidden="true" />
+                          Limited seats left
+                        </motion.span>
+                      )}
+                    </AnimatePresence>
+                  </span>
                 </NavLink>
+
+                <div className="hero-meta mt-1">
+                  <div className="hero-meta-col">
+                    <Calendar className="hero-meta-icon w-6 h-6" strokeWidth={1.75} />
+                    <div className="hero-meta-copy">
+                      <span className="hero-meta-weekday">Friday</span>
+                      <span className="hero-meta-date">
+                        9<sup>th</sup> October 2026
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="hero-meta-divider" aria-hidden="true" />
+
+                  <a
+                    href={VENUE_MAPS_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hero-meta-col hero-meta-venue"
+                    aria-label="Open venue location in Google Maps"
+                  >
+                    <MapPin className="hero-meta-icon w-6 h-6" strokeWidth={1.75} />
+                    <div className="hero-meta-copy">
+                      <span className="hero-meta-line">Landing FortyTwo,</span>
+                      <span className="hero-meta-line">122 Leadenhall Street,</span>
+                      <span className="hero-meta-line">London EC3V 4AB</span>
+                    </div>
+                  </a>
+                </div>
               </div>
             </motion.div>
-
-
-
-
           </div>
 
         </div>
@@ -372,8 +536,8 @@ const InteractiveHero = () => {
               }`}
             src={
               isExpanded
-                ? "https://www.youtube.com/embed/SYUSmWIlZ9o?autoplay=1&mute=0&controls=1&showinfo=0&rel=0&modestbranding=1"
-                : "https://www.youtube.com/embed/SYUSmWIlZ9o?autoplay=1&mute=1&loop=1&playlist=SYUSmWIlZ9o&controls=0&showinfo=0&rel=0&disablekb=1&modestbranding=1"
+                ? "https://www.youtube.com/embed/o6WjXbRSEFo?autoplay=1&mute=0&controls=1&showinfo=0&rel=0&modestbranding=1"
+                : "https://www.youtube.com/embed/o6WjXbRSEFo?autoplay=1&mute=1&loop=1&playlist=o6WjXbRSEFo&controls=0&showinfo=0&rel=0&disablekb=1&modestbranding=1"
             }
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -423,260 +587,6 @@ const InteractiveHero = () => {
           )}
 
         </div>
-
-        {/* Floating Premium Venue Address Card — Brushed Metal + Red Theme */}
-        {!isExpanded && (
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 sm:translate-x-0 sm:left-auto sm:bottom-6 sm:right-6 md:bottom-8 md:right-8 z-30 pointer-events-auto w-[calc(100%-2rem)] sm:w-[290px]">
-            <style>{`
-              @keyframes pulse-card-border {
-                0%, 100% {
-                  border-color: rgba(200, 16, 46, 0.4);
-                  box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.7), 0 0 15px rgba(200, 16, 46, 0.15);
-                }
-                50% {
-                  border-color: rgba(255, 215, 0, 0.5);
-                  box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.7), 0 0 25px rgba(255, 215, 0, 0.25);
-                }
-              }
-
-              @keyframes bounce-icon {
-                0%, 100% { transform: translateY(0); }
-                50% { transform: translateY(-2px); }
-              }
-
-              @keyframes float-icon {
-                0%, 100% { transform: translateY(0); }
-                50% { transform: translateY(-1.5px); }
-              }
-
-              @keyframes ticket-shake {
-                0%, 100% { transform: rotate(0deg) scale(1); }
-                25% { transform: rotate(-5deg) scale(1.03); }
-                75% { transform: rotate(5deg) scale(1.03); }
-              }
-
-              @keyframes shimmer-sweep {
-                0% { transform: translateX(-100%) skewX(-15deg); }
-                100% { transform: translateX(100%) skewX(-15deg); }
-              }
-
-              .venue-card-outer {
-                border-radius: 20px;
-                padding: 1px;
-                background: linear-gradient(135deg, rgba(200, 16, 46, 0.55) 0%, rgba(255, 255, 255, 0.08) 40%, rgba(255, 255, 255, 0.08) 60%, rgba(255, 215, 0, 0.35) 100%);
-                animation: pulse-card-border 8s infinite ease-in-out;
-                transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-              }
-              
-              .venue-card-outer:hover {
-                transform: translateY(-4px) scale(1.02);
-                box-shadow: 0 30px 60px rgba(0, 0, 0, 0.9), 0 0 30px rgba(200, 16, 46, 0.25);
-              }
-
-              .venue-card-inner {
-                display: flex;
-                flex-direction: column;
-                border-radius: 19px;
-                overflow: hidden;
-                background: rgba(10, 10, 12, 0.88);
-                backdrop-filter: blur(30px) saturate(200%);
-                -webkit-backdrop-filter: blur(30px) saturate(200%);
-                border: 1px solid rgba(255, 255, 255, 0.03);
-              }
-
-              .card-section-interactive {
-                display: flex;
-                align-items: center;
-                gap: 14px;
-                padding: 16px 20px;
-                transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-                cursor: default;
-                position: relative;
-                width: 100%;
-              }
-
-              .card-section-interactive:hover {
-                background: rgba(255, 255, 255, 0.02);
-              }
-
-              .card-section-interactive::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 3px;
-                height: 100%;
-                background: transparent;
-                transition: all 0.3s ease;
-              }
-
-              .card-section-interactive.section-date:hover::before {
-                background: #ff3b57;
-                box-shadow: 0 0 10px #ff3b57;
-              }
-
-              .card-section-interactive.section-venue:hover::before {
-                background: #ffd700;
-                box-shadow: 0 0 10px #ffd700;
-              }
-
-              .card-section-interactive:hover .icon-date {
-                animation: bounce-icon 0.8s infinite ease-in-out;
-              }
-
-              .card-section-interactive:hover .icon-venue {
-                animation: float-icon 1s infinite ease-in-out;
-              }
-
-              .vc-divider {
-                width: 85%;
-                margin: 0 auto;
-                height: 1px;
-                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
-              }
-
-              .venue-card-btn-pill {
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                justify-content: center;
-                gap: 10px;
-                padding: 11px 20px;
-                background: linear-gradient(135deg, #c8102e 0%, #e8243e 50%, #9e0c22 100%);
-                cursor: pointer;
-                transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-                width: 100%;
-                position: relative;
-                overflow: hidden;
-                text-decoration: none !important;
-                border: 1px solid rgba(255, 255, 255, 0.1);
-                border-radius: 25px;
-                box-shadow: 0 4px 15px rgba(200, 16, 46, 0.3);
-              }
-
-              .venue-card-btn-pill::after {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
-                transform: translateX(-100%);
-                animation: shimmer-sweep 2.2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
-              }
-
-              .venue-card-btn-pill:hover::after {
-                animation: shimmer-sweep 1.4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
-              }
-
-              .venue-card-btn-pill:hover {
-                background: linear-gradient(135deg, #e8243e 0%, #ff3b57 50%, #b30e28 100%);
-                box-shadow: 0 6px 20px rgba(200, 16, 46, 0.5), inset 0 0 10px rgba(255, 255, 255, 0.2);
-                transform: translateY(-1px);
-              }
-
-              .venue-card-btn-pill:active {
-                transform: translateY(1px);
-                box-shadow: 0 2px 10px rgba(200, 16, 46, 0.4);
-              }
-
-              .venue-card-btn-pill:hover .icon-ticket {
-                animation: ticket-shake 0.4s ease-in-out infinite;
-              }
-
-              .vc-label-container {
-                display: flex;
-                align-items: center;
-                gap: 6px;
-                margin-bottom: 2px;
-              }
-
-              .vc-label {
-                font-family: 'Outfit', sans-serif;
-                font-size: 9px;
-                font-weight: 900;
-                letter-spacing: 0.25em;
-                text-transform: uppercase;
-                color: #ff3b57;
-                display: inline-block;
-                line-height: 1;
-              }
-
-              .vc-value {
-                font-family: 'Outfit', sans-serif;
-                font-size: 13.5px;
-                font-weight: 800;
-                color: #ffffff;
-                letter-spacing: 0.02em;
-                display: block;
-                line-height: 1.2;
-                white-space: normal;
-              }
-
-              .vc-address {
-                font-family: 'Outfit', sans-serif;
-                font-size: 12px;
-                font-weight: 500;
-                color: rgba(255, 255, 255, 0.55);
-                letter-spacing: 0.01em;
-                display: block;
-                margin-top: 3px;
-                line-height: 1.3;
-                white-space: normal;
-              }
-
-              @media (min-width: 640px) {
-                .vc-value {
-                  white-space: nowrap;
-                }
-                .vc-address {
-                  white-space: nowrap;
-                }
-              }
-            `}</style>
-            <motion.div
-              initial={{ opacity: 0, y: 30, scale: 0.9 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.8, type: "spring" }}
-              className="venue-card-outer"
-            >
-              <div className="venue-card-inner">
-                {/* Date Area */}
-                <div className="card-section-interactive section-date">
-                  <div className="p-2 rounded-xl bg-[#ff3b57]/8 border border-[#ff3b57]/20 flex items-center justify-center shrink-0 shadow-[0_4px_10px_rgba(255,59,87,0.05)] transition-colors duration-300">
-                    <Calendar className="w-4 h-4 text-[#ff3b57] icon-date transition-transform duration-300" />
-                  </div>
-                  <div className="flex flex-col items-start text-left">
-                    <div className="vc-label-container">
-                      <span className="vc-label">Date</span>
-                    </div>
-                    <span className="vc-value">Friday - 9th Oct 2026 </span>
-                  </div>
-                </div>
-
-                {/* Horizontal Divider */}
-                <div className="vc-divider" />
-
-                {/* Venue Area */}
-                <div className="card-section-interactive section-venue">
-                  <div className="p-2 rounded-xl bg-[#ffd700]/8 border border-[#ffd700]/20 flex items-center justify-center shrink-0 shadow-[0_4px_10px_rgba(255,215,0,0.05)] transition-colors duration-300">
-                    <MapPin className="w-4 h-4 text-[#ffd700] icon-venue transition-transform duration-300" />
-                  </div>
-                  <div className="flex flex-col items-start text-left">
-                    <div className="vc-label-container">
-                      <span className="vc-label" style={{ color: '#ffd700' }}>Venue</span>
-                    </div>
-                    <span className="vc-value">Landing Forty Two</span>
-                    <span className="vc-address">122 Leadenhall St, London EC3V 4AB</span>
-                  </div>
-                </div>
-
-
-              </div>
-            </motion.div>
-          </div>
-        )}
       </section>
 
       {/* ================= MOBILE VIEW ONLY: VIDEO POPUP LIGHTBOX ================= */}
@@ -712,7 +622,7 @@ const InteractiveHero = () => {
             >
               <iframe
                 className="w-full h-full"
-                src="https://www.youtube.com/embed/JEpncdxVGMg?autoplay=1&mute=0&controls=1&showinfo=0&rel=0&modestbranding=1"
+                src="https://www.youtube.com/embed/o6WjXbRSEFo?autoplay=1&mute=0&controls=1&showinfo=0&rel=0&modestbranding=1"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen

@@ -129,7 +129,7 @@ const DownloadAppStrip = () => {
                     <img
                       src="/assets/img/downloadapp-logos/app store.png"
                       alt="Download on the App Store"
-                      className="h-7 sm:h-9 md:h-11 w-auto object-contain rounded-lg border border-white/15 shadow-[0_6px_18px_rgba(0,0,0,0.4)] group-hover:border-white/40 transition-colors"
+                      className="h-10 sm:h-9 md:h-11 w-auto object-contain rounded-lg border border-white/15 shadow-[0_6px_18px_rgba(0,0,0,0.4)] group-hover:border-white/40 transition-colors"
                     />
                   </a>
 
@@ -142,7 +142,7 @@ const DownloadAppStrip = () => {
                     <img
                       src="/assets/img/downloadapp-logos/play store.png"
                       alt="Get it on Google Play"
-                      className="h-7 sm:h-9 md:h-11 w-auto object-contain rounded-lg border border-white/15 shadow-[0_6px_18px_rgba(0,0,0,0.4)] group-hover:border-white/40 transition-colors"
+                      className="h-10 sm:h-9 md:h-11 w-auto object-contain rounded-lg border border-white/15 shadow-[0_6px_18px_rgba(0,0,0,0.4)] group-hover:border-white/40 transition-colors"
                     />
                   </a>
                 </div>

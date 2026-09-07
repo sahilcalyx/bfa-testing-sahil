@@ -36,7 +36,7 @@ const Chatbot = () => {
     setIsThinking(true);
 
     try {
-      const response = await axios.post('http://localhost:5000/chat', { message: input });
+      const response = await axios.post('https://bfa-ticket-event.vercel.app/chat', { message: input });
 
       setTimeout(() => {
         const botMessage = { text: response.data.botResponse, sender: 'bot' };
