@@ -39,7 +39,7 @@ const KeynoteSpeaker2026 = () => {
               className="cs-section_title cs-extra_bold"
               style={{ color: "#c8102e" }}
             >
-              Keynote Speakers 2026
+              Keynote Speaker 2026
             </h2>
           </div>
         </Header>

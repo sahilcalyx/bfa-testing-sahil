@@ -330,153 +330,6 @@ const InteractiveHero = () => {
           }
         }
 
-        /* Laptop / short viewports: compact so nothing sits under the bridge */
-        @media (min-width: 1024px) and (max-width: 1399px) {
-          .hero-cta {
-            max-width: 260px;
-          }
-
-          .hero-cta-inner {
-            height: 48px;
-          }
-
-          .hero-cta-label {
-            font-size: 13px;
-            letter-spacing: 0.1em;
-          }
-
-          .hero-app-download {
-            gap: 8px;
-          }
-
-          .hero-app-download-line {
-            font-size: 13px;
-          }
-
-          .hero-app-row {
-            gap: 12px;
-          }
-
-          .hero-app-qr {
-            padding: 3px;
-          }
-
-          .hero-app-qr img {
-            width: 72px;
-            height: 72px;
-          }
-
-          .hero-app-stores {
-            gap: 6px;
-          }
-
-          .hero-app-store img {
-            height: 34px;
-          }
-
-          .hero-attendees {
-            justify-content: center;
-            padding: 6.5rem 0.85rem 5.5rem;
-          }
-
-          .hero-attendees-inner {
-            gap: 0.65rem;
-            max-width: 100%;
-            padding: 0 0.25rem;
-            margin-top: 0;
-          }
-
-          .hero-attendees-title {
-            font-size: clamp(1.15rem, 2vw, 1.45rem);
-          }
-
-          .hero-attendees-grid {
-            gap: 7px;
-          }
-
-          .hero-attendee-card {
-            min-height: 46px;
-            padding: 6px 6px;
-            border-radius: 9px;
-          }
-
-          .hero-attendee-card img {
-            max-height: 24px;
-          }
-
-          .hero-attendees-cta {
-            padding: 0.15rem 0.25rem 0;
-          }
-
-          .hero-attendees-cta span {
-            font-size: clamp(1.45rem, 2vw, 1.75rem);
-            letter-spacing: 0.05em;
-          }
-
-          .hero-meta--bridge {
-            bottom: 0.85rem;
-            width: min(560px, calc(100% - 2.5rem));
-            max-width: 560px;
-            padding: 12px 16px;
-          }
-
-          .hero-meta--bridge .hero-meta-divider {
-            margin: 0 14px;
-          }
-
-          .hero-meta--bridge .hero-meta-weekday {
-            font-size: 11px;
-          }
-
-          .hero-meta--bridge .hero-meta-date {
-            font-size: 13px;
-          }
-
-          .hero-meta--bridge .hero-meta-line {
-            font-size: 11px;
-            line-height: 1.2;
-          }
-        }
-
-        @media (min-width: 1024px) and (max-height: 860px) {
-          .hero-attendees {
-            justify-content: center;
-            padding-top: 5.5rem;
-            padding-bottom: 5.25rem;
-          }
-
-          .hero-attendees-inner {
-            gap: 0.5rem;
-            margin-top: 0;
-          }
-
-          .hero-attendee-card {
-            min-height: 42px;
-            padding: 5px 5px;
-          }
-
-          .hero-attendee-card img {
-            max-height: 22px;
-          }
-
-          .hero-attendees-cta span {
-            font-size: 1.4rem;
-          }
-
-          .hero-app-qr img {
-            width: 64px;
-            height: 64px;
-          }
-
-          .hero-app-store img {
-            height: 30px;
-          }
-
-          .hero-cta-inner {
-            height: 44px;
-          }
-        }
-
         .hero-meta {
           width: 100%;
           background: #ffffff;
@@ -770,12 +623,27 @@ const InteractiveHero = () => {
           width: calc(100% - 2rem);
           max-width: 720px;
           margin: 1rem auto 1.25rem;
-          padding: 16px 20px;
+          padding: 10px 14px;
+          border-radius: 12px;
           box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
         }
 
+        .hero-meta--bridge .hero-meta-col {
+          gap: 8px;
+        }
+
+        .hero-meta--bridge .hero-meta-copy {
+          gap: 0;
+        }
+
         .hero-meta--bridge .hero-meta-divider {
-          margin: 0 20px;
+          margin: 0 12px;
+          height: 36px;
+        }
+
+        .hero-meta--bridge .hero-meta-icon {
+          width: 18px;
+          height: 18px;
         }
 
         .hero-attendees-cta {
@@ -839,12 +707,12 @@ const InteractiveHero = () => {
           .hero-attendees {
             justify-content: center;
             /* Match left panel: nav clearance top + meta bridge clearance bottom */
-            padding: 7rem 1rem 5.75rem;
+            padding: 7rem 1.25rem 6rem;
           }
 
           .hero-attendees-inner {
-            gap: 0.75rem;
-            max-width: min(560px, 100%);
+            gap: 0.7rem;
+            max-width: min(540px, 100%);
             margin-top: 0;
             width: 100%;
           }
@@ -855,25 +723,25 @@ const InteractiveHero = () => {
           }
 
           .hero-attendee-card {
-            min-height: 52px;
-            padding: 8px 6px;
+            min-height: 50px;
+            padding: 7px 6px;
             border-radius: 10px;
           }
 
           .hero-attendee-card img {
-            max-height: 28px;
+            max-height: 26px;
           }
 
           .hero-attendees-cta {
-            padding-top: 0.45rem;
-            gap: 6px;
-            min-height: 5.5rem;
+            padding-top: 0.4rem;
+            gap: 4px;
+            min-height: 0;
           }
 
           .hero-attendees-cta span {
-            font-size: clamp(1.7rem, 2.35vw, 2.15rem);
-            letter-spacing: 0.055em;
-            line-height: 1.05;
+            font-size: clamp(1.45rem, 2.1vw, 1.9rem);
+            letter-spacing: 0.05em;
+            line-height: 1.08;
           }
 
           /* True center across both halves — no transform (avoids Framer conflict) */
@@ -881,28 +749,30 @@ const InteractiveHero = () => {
             position: absolute;
             left: 0;
             right: 0;
-            bottom: 1rem;
-            width: min(600px, calc(100% - 2.5rem));
-            max-width: 600px;
+            bottom: 1.35rem;
+            width: min(560px, calc(100% - 3rem));
+            max-width: 560px;
             margin-left: auto;
             margin-right: auto;
-            padding: 14px 18px;
+            padding: 8px 14px;
           }
 
           .hero-meta--bridge .hero-meta-divider {
-            margin: 0 18px;
+            margin: 0 12px;
+            height: 34px;
           }
 
           .hero-meta--bridge .hero-meta-weekday {
-            font-size: 12px;
+            font-size: 11px;
           }
 
           .hero-meta--bridge .hero-meta-date {
-            font-size: 14px;
+            font-size: 13px;
           }
 
           .hero-meta--bridge .hero-meta-line {
-            font-size: 12px;
+            font-size: 11px;
+            line-height: 1.15;
           }
         }
 
@@ -939,14 +809,15 @@ const InteractiveHero = () => {
           }
 
           .hero-meta--bridge {
-            width: min(680px, calc(100% - 4rem));
-            max-width: 680px;
+            width: min(620px, calc(100% - 4rem));
+            max-width: 620px;
             bottom: 1.5rem;
-            padding: 18px 24px;
+            padding: 10px 16px;
           }
 
           .hero-meta--bridge .hero-meta-divider {
-            margin: 0 24px;
+            margin: 0 14px;
+            height: 36px;
           }
 
           .hero-meta--bridge .hero-meta-weekday {
@@ -975,12 +846,216 @@ const InteractiveHero = () => {
             font-size: clamp(2.15rem, 2.2vw, 2.65rem);
           }
         }
+
+        /* Laptop overrides LAST so they beat the 1024+/1400+ rules above */
+        @media (min-width: 1024px) and (max-width: 1399px) {
+          .hero-cta {
+            max-width: 240px;
+          }
+
+          .hero-cta-inner {
+            height: 46px;
+          }
+
+          .hero-cta-label {
+            font-size: 12.5px;
+            letter-spacing: 0.1em;
+          }
+
+          .hero-app-download {
+            gap: 7px;
+          }
+
+          .hero-app-download-line {
+            font-size: 12.5px;
+          }
+
+          .hero-app-row {
+            gap: 10px;
+          }
+
+          .hero-app-qr {
+            padding: 3px;
+          }
+
+          .hero-app-qr img {
+            width: 68px;
+            height: 68px;
+          }
+
+          .hero-app-stores {
+            gap: 6px;
+          }
+
+          .hero-app-store img {
+            height: 32px;
+          }
+
+          /* Clear date/venue strip above store buttons */
+          .hero-left-panel {
+            padding-bottom: 9.25rem !important;
+          }
+
+          .hero-attendees {
+            justify-content: center;
+            padding: 5.75rem 1.35rem 7.25rem;
+          }
+
+          .hero-attendees-inner {
+            gap: 0.5rem;
+            max-width: min(500px, 94%);
+            width: 100%;
+            padding: 0;
+            margin-top: 0;
+          }
+
+          .hero-attendees-title {
+            font-size: clamp(1.05rem, 1.7vw, 1.3rem);
+            letter-spacing: 0.07em;
+          }
+
+          .hero-attendees-grid {
+            gap: 6px;
+          }
+
+          .hero-attendee-card {
+            min-height: 40px;
+            padding: 4px 5px;
+            border-radius: 8px;
+          }
+
+          .hero-attendee-card img {
+            max-height: 20px;
+          }
+
+          .hero-attendees-cta {
+            padding: 0.35rem 0.25rem 0;
+            gap: 2px;
+            min-height: 0;
+          }
+
+          .hero-attendees-cta span {
+            font-size: clamp(1.15rem, 1.85vw, 1.4rem);
+            letter-spacing: 0.045em;
+            line-height: 1.08;
+          }
+
+          .hero-meta--bridge {
+            bottom: 0.75rem;
+            width: min(480px, calc(100% - 3rem));
+            max-width: 480px;
+            padding: 6px 12px;
+          }
+
+          .hero-meta--bridge .hero-meta-divider {
+            margin: 0 10px;
+            height: 30px;
+          }
+
+          .hero-meta--bridge .hero-meta-icon {
+            width: 16px;
+            height: 16px;
+          }
+
+          .hero-meta--bridge .hero-meta-weekday {
+            font-size: 10px;
+          }
+
+          .hero-meta--bridge .hero-meta-date {
+            font-size: 12px;
+          }
+
+          .hero-meta--bridge .hero-meta-line {
+            font-size: 10px;
+            line-height: 1.15;
+          }
+        }
+
+        @media (min-width: 1024px) and (max-height: 860px) {
+          .hero-left-panel {
+            padding-bottom: 8.5rem !important;
+          }
+
+          .hero-attendees {
+            justify-content: center;
+            padding: 5.25rem 1.15rem 6.75rem;
+          }
+
+          .hero-attendees-inner {
+            gap: 0.4rem;
+            max-width: min(480px, 92%);
+            margin-top: 0;
+          }
+
+          .hero-attendees-title {
+            font-size: 1.05rem;
+          }
+
+          .hero-attendees-grid {
+            gap: 5px;
+          }
+
+          .hero-attendee-card {
+            min-height: 36px;
+            padding: 3px 4px;
+            border-radius: 7px;
+          }
+
+          .hero-attendee-card img {
+            max-height: 18px;
+          }
+
+          .hero-attendees-cta {
+            padding-top: 0.25rem;
+            min-height: 0;
+          }
+
+          .hero-attendees-cta span {
+            font-size: 1.15rem;
+            letter-spacing: 0.04em;
+          }
+
+          .hero-app-download {
+            gap: 6px;
+          }
+
+          .hero-app-download-line {
+            font-size: 12px;
+          }
+
+          .hero-app-qr img {
+            width: 60px;
+            height: 60px;
+          }
+
+          .hero-app-store img {
+            height: 28px;
+          }
+
+          .hero-cta {
+            max-width: 220px;
+          }
+
+          .hero-cta-inner {
+            height: 42px;
+          }
+
+          .hero-cta-label {
+            font-size: 12px;
+          }
+
+          .hero-meta--bridge {
+            bottom: 0.55rem;
+            padding: 5px 10px;
+            width: min(460px, calc(100% - 2.5rem));
+          }
+        }
       `}</style>
 
       <section className="relative w-full min-h-screen lg:h-[100svh] flex flex-col lg:flex-row lg:overflow-hidden bg-black text-white font-outfit select-none">
 
         {/* ================= LEFT HALF: TICKET BOOKING ================= */}
-        <div className="relative bg-black flex flex-col justify-center overflow-hidden hero-panel-slide z-10 w-full lg:w-1/2 min-h-[50vh] lg:min-h-0 pt-28 pb-10 px-5 sm:px-6 md:p-10 lg:px-6 xl:px-12 2xl:px-16 lg:pb-[5.75rem] xl:pb-24 lg:pt-28 xl:pt-32">
+        <div className="hero-left-panel relative bg-black flex flex-col justify-center overflow-hidden hero-panel-slide z-10 w-full lg:w-1/2 min-h-[50vh] lg:min-h-0 pt-28 pb-10 px-5 sm:px-6 md:p-10 lg:px-6 xl:px-12 2xl:px-16 lg:pb-[6.5rem] xl:pb-24 lg:pt-28 xl:pt-32">
 
           {/* Animated decorative blobs in background */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
