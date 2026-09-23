@@ -1,57 +1,71 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Play, X, Calendar, MapPin, Ticket } from "lucide-react";
+import { Calendar, MapPin, Ticket } from "lucide-react";
 import { NavLink } from "react-router-dom";
 
 const VENUE_MAPS_URL = "https://maps.app.goo.gl/HTmvq2hv7HkHbqNX9";
+const APP_STORE_URL =
+  "https://apps.apple.com/ng/app/brit-fintech-awards/id6779879087";
+const PLAY_STORE_URL =
+  "https://play.google.com/store/apps/details?id=com.bfa.fintechapp";
+
+const ATTENDEE_LOGOS = [
+  { name: "Axcess", logo: "/assets/img/attendee-logos/axcessms.com logo13.png" },
+  { name: "Bank of London", logo: "/assets/img/attendee-logos/Frame.png" },
+  { name: "Chrisborough", logo: "/assets/img/attendee-logos/chrisborough.png" },
+  { name: "Clear Junction", logo: "/assets/img/attendee-logos/clear-junction.png" },
+  { name: "Complyport", logo: "/assets/img/attendee-logos/COMPLYPORT_Logo.png" },
+  { name: "ECEX Group", logo: "/assets/img/attendee-logos/ecex.png" },
+  { name: "Ecommpay", logo: "/assets/img/attendee-logos/ecommpay.png" },
+  { name: "eMerchantPay", logo: "/assets/img/attendee-logos/Emarchantpay.png" },
+  { name: "Fena", logo: "/assets/img/attendee-logos/fena.png" },
+  { name: "GBG", logo: "/assets/img/attendee-logos/gbg.png" },
+  { name: "GCC Exchange", logo: "/assets/img/attendee-logos/Group 2.png" },
+  { name: "3ribe", logo: "/assets/img/discussionpanel-2026/3ribe-logo-alt.png" },
+  { name: "Kani", logo: "/assets/img/attendee-logos/kani.png" },
+  { name: "Leatherback", logo: "/assets/img/keynotes/leatherback-logo.png" },
+  { name: "Link FX", logo: "/assets/img/attendee-logos/link-fx.png" },
+  { name: "Muthoot Global", logo: "/assets/img/attendee-logos/muthoot.png" },
+  { name: "Open Banking", logo: "/assets/img/discussionpanel/OBL_logotype_darkblu-Large.png" },
+  { name: "Orbital", logo: "/assets/img/attendee-logos/orbital.png" },
+  { name: "Payceler", logo: "/assets/img/attendee-logos/payceler.png" },
+  { name: "Paysafe", logo: "/assets/img/attendee-logos/paysafe.svg" },
+  { name: "Sends", logo: "/assets/img/attendee-logos/sends.png" },
+  { name: "Sumsub", logo: "/assets/img/attendee-logos/sumsub 1.png" },
+  { name: "Trust Payments", logo: "/assets/img/attendee-logos/trustpayments.com logo11.png" },
+  { name: "University of Bristol", logo: "/assets/img/attendee-logos/Bristol.png" },
+  { name: "Volume", logo: "/assets/img/attendee-logos/volume.png" },
+  { name: "Thunes", logo: "/assets/img/attendee-logos/thunes-logo-dark.svg" },
+];
+
+function AttendeeLogoCard({ item }) {
+  const [failed, setFailed] = useState(false);
+
+  return (
+    <div className="hero-attendee-card">
+      {failed ? (
+        <span className="hero-attendee-fallback">{item.name}</span>
+      ) : (
+        <img
+          src={item.logo}
+          alt={item.name}
+          loading="lazy"
+          decoding="async"
+          onError={() => setFailed(true)}
+        />
+      )}
+    </div>
+  );
+}
 
 const InteractiveHero = () => {
-  const [isExpanded, setIsExpanded] = useState(false);
-  const [isMobileVideoOpen, setIsMobileVideoOpen] = useState(false);
   const [ctaIndex, setCtaIndex] = useState(0);
-  const videoRef = useRef(null);
 
   useEffect(() => {
     const delay = ctaIndex === 0 ? 3400 : 2200;
     const id = setTimeout(() => setCtaIndex((i) => (i + 1) % 2), delay);
     return () => clearTimeout(id);
   }, [ctaIndex]);
-  // Lock scroll when video is expanded or mobile video popup is open
-  useEffect(() => {
-    if (isExpanded || isMobileVideoOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isExpanded, isMobileVideoOpen]);
-
-  // Unified video click handler
-  const handleVideoClick = (e) => {
-    if (e) {
-      e.stopPropagation();
-      e.preventDefault();
-    }
-    if (window.innerWidth < 1024) {
-      setIsMobileVideoOpen(true);
-    } else {
-      setIsExpanded(true);
-    }
-  };
-
-  // Handle video playback when expansion state changes
-  useEffect(() => {
-    if (videoRef.current && typeof videoRef.current.play === "function") {
-      videoRef.current.load();
-      videoRef.current.play().catch((err) => {
-        console.log("Autoplay was prevented on state transition:", err);
-      });
-    }
-  }, [isExpanded]);
-
-
 
   return (
     <>
@@ -201,6 +215,268 @@ const InteractiveHero = () => {
           }
         }
 
+        .hero-app-download {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 12px;
+        }
+
+        .hero-app-download-line {
+          margin: 0;
+          font-family: 'Outfit', sans-serif;
+          font-size: 14px;
+          font-weight: 500;
+          letter-spacing: 0.01em;
+          color: rgba(255, 255, 255, 0.7);
+          text-align: center;
+          line-height: 1.35;
+        }
+
+        .hero-app-download-line em,
+        .hero-app-download-line strong {
+          font-style: normal;
+          font-weight: 800;
+          color: #fff;
+        }
+
+        .hero-app-row {
+          display: flex;
+          flex-direction: row;
+          align-items: stretch;
+          justify-content: center;
+          gap: 14px;
+        }
+
+        .hero-app-qr {
+          flex-shrink: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 4px;
+          border-radius: 10px;
+          background: #fff;
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+        }
+
+        .hero-app-qr img {
+          display: block;
+          width: 88px;
+          height: 88px;
+          object-fit: contain;
+        }
+
+        .hero-app-divider {
+          width: 1px;
+          align-self: stretch;
+          background: rgba(255, 255, 255, 0.28);
+          flex-shrink: 0;
+        }
+
+        .hero-app-stores {
+          display: flex;
+          flex-direction: column;
+          align-items: stretch;
+          justify-content: center;
+          gap: 8px;
+        }
+
+        .hero-app-store {
+          display: inline-flex;
+          transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+          opacity: 0.95;
+        }
+
+        .hero-app-store:hover {
+          transform: translateY(-2px) scale(1.03);
+          opacity: 1;
+        }
+
+        .hero-app-store:active {
+          transform: translateY(0) scale(0.98);
+        }
+
+        .hero-app-store img {
+          display: block;
+          height: 40px;
+          width: auto;
+          border-radius: 8px;
+          border: 1px solid rgba(255, 255, 255, 0.18);
+          box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+        }
+
+        @media (min-width: 640px) {
+          .hero-app-download-line {
+            font-size: 15px;
+          }
+
+          .hero-app-row {
+            gap: 16px;
+          }
+
+          .hero-app-qr img {
+            width: 96px;
+            height: 96px;
+          }
+
+          .hero-app-stores {
+            gap: 10px;
+          }
+
+          .hero-app-store img {
+            height: 44px;
+          }
+        }
+
+        /* Laptop / short viewports: compact so nothing sits under the bridge */
+        @media (min-width: 1024px) and (max-width: 1399px) {
+          .hero-cta {
+            max-width: 260px;
+          }
+
+          .hero-cta-inner {
+            height: 48px;
+          }
+
+          .hero-cta-label {
+            font-size: 13px;
+            letter-spacing: 0.1em;
+          }
+
+          .hero-app-download {
+            gap: 8px;
+          }
+
+          .hero-app-download-line {
+            font-size: 13px;
+          }
+
+          .hero-app-row {
+            gap: 12px;
+          }
+
+          .hero-app-qr {
+            padding: 3px;
+          }
+
+          .hero-app-qr img {
+            width: 72px;
+            height: 72px;
+          }
+
+          .hero-app-stores {
+            gap: 6px;
+          }
+
+          .hero-app-store img {
+            height: 34px;
+          }
+
+          .hero-attendees {
+            justify-content: center;
+            padding: 6.5rem 0.85rem 5.5rem;
+          }
+
+          .hero-attendees-inner {
+            gap: 0.65rem;
+            max-width: 100%;
+            padding: 0 0.25rem;
+            margin-top: 0;
+          }
+
+          .hero-attendees-title {
+            font-size: clamp(1.15rem, 2vw, 1.45rem);
+          }
+
+          .hero-attendees-grid {
+            gap: 7px;
+          }
+
+          .hero-attendee-card {
+            min-height: 46px;
+            padding: 6px 6px;
+            border-radius: 9px;
+          }
+
+          .hero-attendee-card img {
+            max-height: 24px;
+          }
+
+          .hero-attendees-cta {
+            padding: 0.15rem 0.25rem 0;
+          }
+
+          .hero-attendees-cta span {
+            font-size: clamp(1.45rem, 2vw, 1.75rem);
+            letter-spacing: 0.05em;
+          }
+
+          .hero-meta--bridge {
+            bottom: 0.85rem;
+            width: min(560px, calc(100% - 2.5rem));
+            max-width: 560px;
+            padding: 12px 16px;
+          }
+
+          .hero-meta--bridge .hero-meta-divider {
+            margin: 0 14px;
+          }
+
+          .hero-meta--bridge .hero-meta-weekday {
+            font-size: 11px;
+          }
+
+          .hero-meta--bridge .hero-meta-date {
+            font-size: 13px;
+          }
+
+          .hero-meta--bridge .hero-meta-line {
+            font-size: 11px;
+            line-height: 1.2;
+          }
+        }
+
+        @media (min-width: 1024px) and (max-height: 860px) {
+          .hero-attendees {
+            justify-content: center;
+            padding-top: 5.5rem;
+            padding-bottom: 5.25rem;
+          }
+
+          .hero-attendees-inner {
+            gap: 0.5rem;
+            margin-top: 0;
+          }
+
+          .hero-attendee-card {
+            min-height: 42px;
+            padding: 5px 5px;
+          }
+
+          .hero-attendee-card img {
+            max-height: 22px;
+          }
+
+          .hero-attendees-cta span {
+            font-size: 1.4rem;
+          }
+
+          .hero-app-qr img {
+            width: 64px;
+            height: 64px;
+          }
+
+          .hero-app-store img {
+            height: 30px;
+          }
+
+          .hero-cta-inner {
+            height: 44px;
+          }
+        }
+
         .hero-meta {
           width: 100%;
           background: #ffffff;
@@ -231,7 +507,7 @@ const InteractiveHero = () => {
         }
 
         .hero-meta-col.hero-meta-venue:hover {
-          background: rgba(200, 16, 46, 0.04);
+          background-color: rgba(200, 16, 46, 0.06);
         }
 
         .hero-meta-icon {
@@ -242,39 +518,39 @@ const InteractiveHero = () => {
         .hero-meta-copy {
           display: flex;
           flex-direction: column;
-          align-items: flex-start;
+          gap: 2px;
           min-width: 0;
         }
 
         .hero-meta-weekday {
           font-family: 'Outfit', sans-serif;
-          font-size: 17px;
-          font-weight: 600;
-          color: #1a1a1a;
-          line-height: 1.25;
+          font-size: 13px;
+          font-weight: 700;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          color: #111;
+          line-height: 1.1;
         }
 
         .hero-meta-date {
           font-family: 'Outfit', sans-serif;
-          font-size: 17px;
+          font-size: 15px;
           font-weight: 800;
-          color: #111111;
-          line-height: 1.3;
+          color: #111;
+          line-height: 1.2;
         }
 
         .hero-meta-date sup {
-          font-size: 0.62em;
-          font-weight: 800;
-          vertical-align: super;
-          line-height: 0;
+          font-size: 0.6em;
+          top: -0.4em;
         }
 
         .hero-meta-line {
           font-family: 'Outfit', sans-serif;
-          font-size: 16px;
-          font-weight: 700;
-          color: #111111;
-          line-height: 1.35;
+          font-size: 13px;
+          font-weight: 600;
+          color: #222;
+          line-height: 1.25;
         }
 
         .hero-meta-divider {
@@ -283,6 +559,38 @@ const InteractiveHero = () => {
           background: #e4e4e4;
           margin: 0 28px;
           flex-shrink: 0;
+        }
+
+        .hero-meta--attendees {
+          margin-top: 0.35rem;
+          padding: 14px 16px;
+        }
+
+        .hero-meta--attendees .hero-meta-divider {
+          margin: 0 16px;
+        }
+
+        .hero-meta--attendees .hero-meta-weekday {
+          font-size: 12px;
+        }
+
+        .hero-meta--attendees .hero-meta-date {
+          font-size: 14px;
+        }
+
+        .hero-meta--attendees .hero-meta-line {
+          font-size: 12px;
+        }
+
+        @media (min-width: 1024px) {
+          .hero-meta--attendees {
+            margin-top: 0.5rem;
+            padding: 16px 18px;
+          }
+
+          .hero-meta--attendees .hero-meta-divider {
+            margin: 0 20px;
+          }
         }
 
         @media (max-width: 520px) {
@@ -302,16 +610,377 @@ const InteractiveHero = () => {
             height: 1px;
             margin: 0 auto;
           }
+
+          .hero-meta--bridge {
+            flex-direction: column;
+          }
+        }
+
+        .hero-attendees {
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          width: 100%;
+          height: 100%;
+          padding: 1.25rem 1rem;
+          overflow: hidden;
+          /* Executive stage: deep charcoal depth + soft brand spotlight */
+          background:
+            radial-gradient(ellipse 85% 70% at 12% 8%, rgba(200, 16, 46, 0.28), transparent 58%),
+            radial-gradient(ellipse 55% 45% at 78% 88%, rgba(200, 16, 46, 0.1), transparent 55%),
+            radial-gradient(ellipse 70% 55% at 50% 42%, rgba(255, 255, 255, 0.04), transparent 62%),
+            linear-gradient(180deg, #0c0c0e 0%, #070708 52%, #0e0608 100%);
+        }
+
+        /* Soft diagonal light beams (replaces square grid) */
+        .hero-attendees::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+          z-index: 0;
+          opacity: 0.55;
+          background:
+            linear-gradient(
+              118deg,
+              transparent 0%,
+              transparent 38%,
+              rgba(200, 16, 46, 0.07) 46%,
+              rgba(255, 255, 255, 0.03) 49%,
+              rgba(200, 16, 46, 0.05) 52%,
+              transparent 62%,
+              transparent 100%
+            ),
+            linear-gradient(
+              128deg,
+              transparent 0%,
+              transparent 52%,
+              rgba(200, 16, 46, 0.05) 58%,
+              transparent 68%,
+              transparent 100%
+            ),
+            linear-gradient(
+              108deg,
+              transparent 0%,
+              transparent 22%,
+              rgba(255, 255, 255, 0.025) 28%,
+              transparent 36%,
+              transparent 100%
+            );
+          mask-image: radial-gradient(ellipse 85% 75% at 50% 45%, #000 25%, transparent 80%);
+        }
+
+        /* Edge vignette — keep focus on logos + meta */
+        .hero-attendees::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+          z-index: 0;
+          background:
+            radial-gradient(ellipse 95% 90% at 50% 50%, transparent 42%, rgba(0, 0, 0, 0.55) 100%);
+        }
+
+        .hero-attendees-glow {
+          position: absolute;
+          top: -14%;
+          left: -12%;
+          width: 320px;
+          height: 320px;
+          border-radius: 50%;
+          background: radial-gradient(
+            circle,
+            rgba(200, 16, 46, 0.32) 0%,
+            rgba(200, 16, 46, 0.12) 42%,
+            transparent 72%
+          );
+          filter: blur(42px);
+          pointer-events: none;
+          z-index: 0;
+        }
+
+        .hero-attendees-inner {
+          position: relative;
+          z-index: 1;
+          display: flex;
+          flex-direction: column;
+          gap: 0.85rem;
+          width: 100%;
+          max-width: 560px;
+          margin: 0 auto;
+        }
+
+        .hero-attendees-title {
+          margin: 0;
+          text-align: center;
+          font-family: 'Outfit', sans-serif;
+          font-size: clamp(1.35rem, 3.2vw, 2rem);
+          font-weight: 900;
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
+          color: #fff;
+          line-height: 1.05;
+        }
+
+        .hero-attendees-grid {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 8px;
+        }
+
+        /* Center incomplete last row on mobile (3-col) */
+        .hero-attendees-grid > .hero-attendee-card:nth-child(3n + 1):nth-last-child(2) {
+          grid-column: 2;
+        }
+
+        .hero-attendee-card {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          min-height: 52px;
+          padding: 8px 10px;
+          border-radius: 10px;
+          background: #fff;
+          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+        }
+
+        .hero-attendee-card img {
+          display: block;
+          max-height: 28px;
+          max-width: 100%;
+          width: auto;
+          object-fit: contain;
+        }
+
+        .hero-attendee-fallback {
+          font-family: 'Outfit', sans-serif;
+          font-size: 9px;
+          font-weight: 800;
+          letter-spacing: 0.04em;
+          text-transform: uppercase;
+          color: #c8102e;
+          text-align: center;
+          line-height: 1.2;
+        }
+
+        .hero-meta--bridge {
+          position: relative;
+          z-index: 30;
+          width: calc(100% - 2rem);
+          max-width: 720px;
+          margin: 1rem auto 1.25rem;
+          padding: 16px 20px;
+          box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
+        }
+
+        .hero-meta--bridge .hero-meta-divider {
+          margin: 0 20px;
+        }
+
+        .hero-attendees-cta {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          width: 100%;
+          padding: 0.55rem 0.5rem 0.15rem;
+          gap: 4px;
+        }
+
+        .hero-attendees-cta span {
+          display: block;
+          font-family: 'Outfit', sans-serif;
+          font-weight: 900;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
+          line-height: 1.08;
+          font-size: clamp(1.45rem, 3.5vw, 1.85rem);
+        }
+
+        .hero-attendees-cta .cta-white {
+          color: #fff;
+        }
+
+        .hero-attendees-cta .cta-red {
+          color: #c8102e;
+        }
+
+        @media (min-width: 480px) {
+          .hero-attendees-grid {
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 9px;
+          }
+
+          .hero-attendees-grid > .hero-attendee-card:nth-child(3n + 1):nth-last-child(2) {
+            grid-column: auto;
+          }
+
+          /* Center single leftover on last row (Thunes) */
+          .hero-attendees-grid > .hero-attendee-card:last-child:nth-child(5n + 1) {
+            grid-column: 3;
+          }
+
+          .hero-attendee-card {
+            min-height: 56px;
+          }
+
+          .hero-attendee-card img {
+            max-height: 30px;
+          }
+
+          .hero-attendees-cta span {
+            font-size: clamp(1.55rem, 3vw, 2rem);
+          }
+        }
+
+        @media (min-width: 1024px) {
+          .hero-attendees {
+            justify-content: center;
+            /* Match left panel: nav clearance top + meta bridge clearance bottom */
+            padding: 7rem 1rem 5.75rem;
+          }
+
+          .hero-attendees-inner {
+            gap: 0.75rem;
+            max-width: min(560px, 100%);
+            margin-top: 0;
+            width: 100%;
+          }
+
+          .hero-attendees-grid {
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 8px;
+          }
+
+          .hero-attendee-card {
+            min-height: 52px;
+            padding: 8px 6px;
+            border-radius: 10px;
+          }
+
+          .hero-attendee-card img {
+            max-height: 28px;
+          }
+
+          .hero-attendees-cta {
+            padding-top: 0.45rem;
+            gap: 6px;
+            min-height: 5.5rem;
+          }
+
+          .hero-attendees-cta span {
+            font-size: clamp(1.7rem, 2.35vw, 2.15rem);
+            letter-spacing: 0.055em;
+            line-height: 1.05;
+          }
+
+          /* True center across both halves — no transform (avoids Framer conflict) */
+          .hero-meta--bridge {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 1rem;
+            width: min(600px, calc(100% - 2.5rem));
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 14px 18px;
+          }
+
+          .hero-meta--bridge .hero-meta-divider {
+            margin: 0 18px;
+          }
+
+          .hero-meta--bridge .hero-meta-weekday {
+            font-size: 12px;
+          }
+
+          .hero-meta--bridge .hero-meta-date {
+            font-size: 14px;
+          }
+
+          .hero-meta--bridge .hero-meta-line {
+            font-size: 12px;
+          }
+        }
+
+        @media (min-width: 1400px) {
+          .hero-attendees {
+            justify-content: center;
+            padding: 7.5rem 1.75rem 5.75rem;
+          }
+
+          .hero-attendees-inner {
+            gap: 1rem;
+            max-width: 560px;
+            margin-top: 0;
+          }
+
+          .hero-attendees-grid {
+            gap: 10px;
+          }
+
+          .hero-attendee-card {
+            min-height: 58px;
+            padding: 10px 8px;
+            border-radius: 12px;
+          }
+
+          .hero-attendee-card img {
+            max-height: 32px;
+          }
+
+          .hero-attendees-cta span {
+            font-size: clamp(2rem, 2.4vw, 2.45rem);
+            letter-spacing: 0.06em;
+            line-height: 1.05;
+          }
+
+          .hero-meta--bridge {
+            width: min(680px, calc(100% - 4rem));
+            max-width: 680px;
+            bottom: 1.5rem;
+            padding: 18px 24px;
+          }
+
+          .hero-meta--bridge .hero-meta-divider {
+            margin: 0 24px;
+          }
+
+          .hero-meta--bridge .hero-meta-weekday {
+            font-size: 13px;
+          }
+
+          .hero-meta--bridge .hero-meta-date {
+            font-size: 15px;
+          }
+
+          .hero-meta--bridge .hero-meta-line {
+            font-size: 13px;
+          }
+        }
+
+        @media (min-width: 1536px) {
+          .hero-attendee-card {
+            min-height: 64px;
+          }
+
+          .hero-attendee-card img {
+            max-height: 36px;
+          }
+
+          .hero-attendees-cta span {
+            font-size: clamp(2.15rem, 2.2vw, 2.65rem);
+          }
         }
       `}</style>
 
       <section className="relative w-full min-h-screen lg:h-[100svh] flex flex-col lg:flex-row lg:overflow-hidden bg-black text-white font-outfit select-none">
 
         {/* ================= LEFT HALF: TICKET BOOKING ================= */}
-        <div className={`relative bg-black flex flex-col justify-center overflow-hidden hero-panel-slide z-10 ${isExpanded
-          ? "w-0 lg:w-0 h-0 lg:h-full min-h-0 lg:min-h-0 p-0 opacity-0 pointer-events-none"
-          : "w-full lg:w-1/2 min-h-[50vh] lg:min-h-0 pt-32 pb-12 px-6 md:p-12 lg:px-8 xl:px-16 lg:pb-16 lg:pt-36 opacity-100"
-          }`}>
+        <div className="relative bg-black flex flex-col justify-center overflow-hidden hero-panel-slide z-10 w-full lg:w-1/2 min-h-[50vh] lg:min-h-0 pt-28 pb-10 px-5 sm:px-6 md:p-10 lg:px-6 xl:px-12 2xl:px-16 lg:pb-[5.75rem] xl:pb-24 lg:pt-28 xl:pt-32">
 
           {/* Animated decorative blobs in background */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
@@ -383,12 +1052,7 @@ const InteractiveHero = () => {
           </div>
 
           {/* Central content container */}
-          <div
-            className={`flex-1 flex flex-col justify-center items-center text-center my-6 lg:my-0 z-10 max-w-2xl mx-auto transition-all duration-500 ${isExpanded
-              ? "opacity-0 scale-95 pointer-events-none"
-              : "opacity-100 scale-100"
-              }`}
-          >
+          <div className="flex-1 flex flex-col justify-center items-center text-center my-6 lg:my-0 z-10 max-w-2xl mx-auto">
 
 
             <motion.p
@@ -405,7 +1069,7 @@ const InteractiveHero = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-                className="block text-[2.2rem] sm:text-[3.4rem] md:text-[4.2rem] lg:text-[2.1rem] xl:text-[2.8rem] 2xl:text-[3.5rem] font-black"
+                className="block text-[2.2rem] sm:text-[3.4rem] md:text-[4.2rem] lg:text-[1.85rem] xl:text-[2.55rem] 2xl:text-[3.5rem] font-black"
               >
                 Secure Your
               </motion.span>
@@ -414,7 +1078,7 @@ const InteractiveHero = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.35, ease: "easeOut" }}
-                className="block text-[2rem] sm:text-[3rem] md:text-[3.8rem] lg:text-[1.9rem] xl:text-[2.5rem] 2xl:text-[3.2rem] font-light"
+                className="block text-[2rem] sm:text-[3rem] md:text-[3.8rem] lg:text-[1.7rem] xl:text-[2.3rem] 2xl:text-[3.2rem] font-light"
               >
                 Seat At
               </motion.span>
@@ -423,7 +1087,7 @@ const InteractiveHero = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.45, ease: "easeOut" }}
-                className="block text-[2.8rem] sm:text-[4.4rem] md:text-[5.5rem] lg:text-[2.8rem] xl:text-[3.6rem] 2xl:text-[4.5rem] font-black text-[#c8102e]"
+                className="block text-[2.8rem] sm:text-[4.4rem] md:text-[5.5rem] lg:text-[2.45rem] xl:text-[3.35rem] 2xl:text-[4.5rem] font-black text-[#c8102e]"
               >
                 BFA26
               </motion.span>
@@ -433,23 +1097,20 @@ const InteractiveHero = () => {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.5 }}
-              className="flex flex-col items-center gap-1 mt-4 mb-1 select-none font-outfit text-center"
+              className="flex flex-col items-center gap-1 mt-3 lg:mt-2.5 xl:mt-4 mb-1 select-none font-outfit text-center"
             >
-              <span className="text-base sm:text-2xl font-black uppercase tracking-[0.25em]">
-                Early Bird Ticket Extended
+              <span className="text-base sm:text-2xl lg:text-sm xl:text-lg 2xl:text-2xl font-black uppercase tracking-[0.22em] lg:tracking-[0.2em]">
+                Awards Night Tickets
               </span>
-              <p className="text-[12px] sm:text-[14px] font-bold text-[#ff4d6a] tracking-[0.2em] uppercase mt-1.5 leading-none">
-                16th August – 10th September 2026
-              </p>
             </motion.div>
 
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.55 }}
-              className="mt-3 w-full"
+              className="mt-3 lg:mt-2.5 xl:mt-4 w-full"
             >
-              <div className="w-full max-w-xl mx-auto flex flex-col items-center gap-5">
+              <div className="w-full max-w-xl mx-auto flex flex-col items-center gap-5 lg:gap-4 xl:gap-6">
                 <NavLink
                   to="/ticket-booking"
                   className="hero-cta"
@@ -485,152 +1146,133 @@ const InteractiveHero = () => {
                   </span>
                 </NavLink>
 
-                <div className="hero-meta mt-1">
-                  <div className="hero-meta-col">
-                    <Calendar className="hero-meta-icon w-6 h-6" strokeWidth={1.75} />
-                    <div className="hero-meta-copy">
-                      <span className="hero-meta-weekday">Friday</span>
-                      <span className="hero-meta-date">
-                        9<sup>th</sup> October 2026
-                      </span>
+                <motion.div
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.65 }}
+                  className="hero-app-download"
+                >
+                  <p className="hero-app-download-line">
+                    Take <em>BFA26</em> with you — get the <strong>BFA App</strong>
+                  </p>
+                  <div className="hero-app-row">
+                    <div className="hero-app-qr">
+                      <img
+                        src="/assets/img/download-app-qr.png"
+                        alt="QR code to download the BFA App"
+                        draggable={false}
+                      />
+                    </div>
+                    <div className="hero-app-divider" aria-hidden="true" />
+                    <div className="hero-app-stores">
+                      <a
+                        href={APP_STORE_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hero-app-store"
+                        aria-label="Download the BFA App on the App Store"
+                      >
+                        <img
+                          src="/assets/img/downloadapp-logos/app store.png"
+                          alt="Download on the App Store"
+                        />
+                      </a>
+                      <a
+                        href={PLAY_STORE_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hero-app-store"
+                        aria-label="Get the BFA App on Google Play"
+                      >
+                        <img
+                          src="/assets/img/downloadapp-logos/play store.png"
+                          alt="Get it on Google Play"
+                        />
+                      </a>
                     </div>
                   </div>
+                </motion.div>
 
-                  <div className="hero-meta-divider" aria-hidden="true" />
-
-                  <a
-                    href={VENUE_MAPS_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hero-meta-col hero-meta-venue"
-                    aria-label="Open venue location in Google Maps"
-                  >
-                    <MapPin className="hero-meta-icon w-6 h-6" strokeWidth={1.75} />
-                    <div className="hero-meta-copy">
-                      <span className="hero-meta-line">Landing FortyTwo,</span>
-                      <span className="hero-meta-line">122 Leadenhall Street,</span>
-                      <span className="hero-meta-line">London EC3V 4AB</span>
-                    </div>
-                  </a>
-                </div>
               </div>
             </motion.div>
           </div>
 
         </div>
 
-        {/* ================= RIGHT HALF: MEDIA BANQUET & ACTIONS ================= */}
-        <div
-          onClick={!isExpanded ? handleVideoClick : undefined}
-          className={`relative overflow-hidden bg-zinc-950 flex flex-col justify-center hero-panel-slide z-20 ${isExpanded
-            ? "w-full lg:w-full h-screen lg:h-full p-0 md:p-0 lg:p-0 cursor-default"
-            : "w-full lg:w-1/2 h-[50vh] lg:h-full p-8 md:p-12 lg:p-16 cursor-pointer group/pane"
-            }`}
+        {/* ================= RIGHT HALF: WHO ATTENDS BFA ================= */}
+        <div className="relative overflow-hidden hero-panel-slide z-20 w-full lg:w-1/2 min-h-[50vh] lg:h-full">
+          <div className="hero-attendees">
+            <div className="hero-attendees-glow" aria-hidden="true" />
+
+            <div className="hero-attendees-inner">
+              <motion.h2
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.55, delay: 0.15 }}
+                className="hero-attendees-title"
+              >
+                Who Attends BFA
+              </motion.h2>
+
+              <motion.div
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.25 }}
+                className="hero-attendees-grid"
+              >
+                {ATTENDEE_LOGOS.map((item) => (
+                  <AttendeeLogoCard key={item.name} item={item} />
+                ))}
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.45, delay: 0.45 }}
+                className="hero-attendees-cta"
+              >
+                <span className="cta-white">Will your company</span>
+                <span className="cta-red">be in the room?</span>
+              </motion.div>
+            </div>
+          </div>
+        </div>
+
+        {/* Date / venue — truly centered over the left/right split */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.45 }}
+          className="hero-meta hero-meta--bridge"
         >
-
-          {/* Silent Looping Banquet Video or Full Screen Video */}
-          <iframe
-            className={`absolute inset-0 w-full h-full transition-all duration-700 ${isExpanded
-              ? "opacity-100 pointer-events-auto z-10 scale-100"
-              : "opacity-85 pointer-events-none z-0 scale-[1.35]"
-              }`}
-            src={
-              isExpanded
-                ? "https://www.youtube.com/embed/o6WjXbRSEFo?autoplay=1&mute=0&controls=1&showinfo=0&rel=0&modestbranding=1"
-                : "https://www.youtube.com/embed/o6WjXbRSEFo?autoplay=1&mute=1&loop=1&playlist=o6WjXbRSEFo&controls=0&showinfo=0&rel=0&disablekb=1&modestbranding=1"
-            }
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
-
-          {/* Vignette & color filter overlay */}
-          <div className={`absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-black/50 z-0 pointer-events-none transition-opacity duration-700 ${isExpanded ? "opacity-0" : "opacity-100"
-            }`} />
-
-          {/* Central Play Button Interaction */}
-          <div className={`flex-1 flex items-center justify-center z-10 transition-all duration-500 ${isExpanded ? "opacity-0 scale-90 pointer-events-none" : "opacity-100 scale-100"
-            }`}>
-            <motion.button
-              onClick={handleVideoClick}
-              className="group relative flex items-center justify-center w-24 h-24 sm:w-28 sm:h-28 bg-white/10 hover:bg-white/20 rounded-full border border-white/35 backdrop-blur-sm transition-all duration-300 shadow-[0_0_35px_rgba(0,0,0,0.4)] group-hover/pane:scale-105 group-hover/pane:bg-white/15"
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ delay: 0.3, type: "spring", stiffness: 100 }}
-              whileHover={{ scale: 1.08 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {/* Outer pulsing ring */}
-              <div className="absolute inset-0 rounded-full border border-white/20 group-hover:scale-125 group-hover:opacity-0 transition-all duration-700 pointer-events-none" />
-
-              {/* Play symbol */}
-              <Play
-                size={34}
-                className="text-white ml-2.5 fill-white transition-transform group-hover:scale-105 duration-300"
-              />
-            </motion.button>
+          <div className="hero-meta-col">
+            <Calendar className="hero-meta-icon w-5 h-5 sm:w-6 sm:h-6" strokeWidth={1.75} />
+            <div className="hero-meta-copy">
+              <span className="hero-meta-weekday">Friday</span>
+              <span className="hero-meta-date">
+                9<sup>th</sup> October 2026
+              </span>
+            </div>
           </div>
 
-          {/* Floating close button to collapse video */}
-          {isExpanded && (
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                e.preventDefault();
-                setIsExpanded(false);
-              }}
-              className="fixed top-24 lg:top-28 right-6 z-[9999] w-12 h-12 bg-black/60 hover:bg-[#c8102e] text-white rounded-full flex items-center justify-center backdrop-blur-md border border-white/25 transition-all duration-300 hover:scale-110 active:scale-95 shadow-[0_0_20px_rgba(0,0,0,0.6)] cursor-pointer"
-              aria-label="Collapse video"
-            >
-              <X size={22} className="stroke-[2.5]" />
-            </button>
-          )}
+          <div className="hero-meta-divider" aria-hidden="true" />
 
-        </div>
-      </section>
-
-      {/* ================= MOBILE VIEW ONLY: VIDEO POPUP LIGHTBOX ================= */}
-      <AnimatePresence>
-        {isMobileVideoOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[99999] flex flex-col items-center justify-center bg-black/95 p-4 backdrop-blur-md"
-            onClick={() => setIsMobileVideoOpen(false)}
+          <a
+            href={VENUE_MAPS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hero-meta-col hero-meta-venue"
+            aria-label="Open venue location in Google Maps"
           >
-            {/* Close Button below sticky header area */}
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                setIsMobileVideoOpen(false);
-              }}
-              className="absolute top-24 right-6 w-12 h-12 bg-black/60 hover:bg-[#c8102e] text-white rounded-full flex items-center justify-center backdrop-blur-md border border-white/25 transition-all duration-300 hover:scale-110 active:scale-95 shadow-[0_0_20px_rgba(0,0,0,0.6)] cursor-pointer z-[100000]"
-              aria-label="Close video popup"
-            >
-              <X size={22} className="stroke-[2.5]" />
-            </button>
-
-            {/* Video Player */}
-            <motion.div
-              initial={{ scale: 0.9, y: 20 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.9, y: 20 }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="relative w-full max-w-4xl aspect-video bg-black rounded-2xl overflow-hidden border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <iframe
-                className="w-full h-full"
-                src="https://www.youtube.com/embed/o6WjXbRSEFo?autoplay=1&mute=0&controls=1&showinfo=0&rel=0&modestbranding=1"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            <MapPin className="hero-meta-icon w-5 h-5 sm:w-6 sm:h-6" strokeWidth={1.75} />
+            <div className="hero-meta-copy">
+              <span className="hero-meta-line">Landing FortyTwo,</span>
+              <span className="hero-meta-line">122 Leadenhall Street,</span>
+              <span className="hero-meta-line">London EC3V 4AB</span>
+            </div>
+          </a>
+        </motion.div>
+      </section>
     </>
   );
 };

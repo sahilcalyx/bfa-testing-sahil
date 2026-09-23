@@ -8,12 +8,12 @@ export const daljitYoung = {
   name: "Daljit Young",
   designation: "Chief Financial Officer",
   company: "Peratera UK Ltd",
-  logo: "/assets/img/keynote-speakers-2026/Peratera-logo.png",
-  logoOnDark: true,
-  img: "/assets/img/keynotes2026/daljit-young.jpg",
-  placeholder: true,
+  logo: "/assets/img/keynote-speakers-2026/Peratera-logo-black.png",
+  logoOnDark: false,
+  img: "/assets/img/keynote-speakers-2026/Daljeet-profile-image.jpg",
+  placeholder: false,
   tagline: "Building finance, regulation and AI into everyday operations",
-  linkedin: "",
+  linkedin: "https://www.linkedin.com/in/daljityoung24658999",
   stats: {
     domain: "Finance & Regulatory Fintech",
     association: "2026 Keynote Speaker",
@@ -36,14 +36,15 @@ export const daljitYoung = {
 
 export const ochebhoyaEkpete = {
   id: "ochebhoya-ekpete",
-  slug: "/ochebhoya-ekpete-keynote-speaker-2026",
+  // Details page hidden for now — shown only on the homepage listing
+  // slug: "/ochebhoya-ekpete-keynote-speaker-2026",
   initials: "OE",
   name: "Ochebhoya Ekpete",
   designation: "Chief Executive Officer",
   company: "Leatherback UK",
   logo: "/assets/img/keynote-speakers-2026/Letherback-logo.png",
   logoOnDark: false,
-  img: "/assets/img/keynotes/Ochebhoya Ekpete.png",
+  img: "/assets/img/keynote-speakers-2026/Ochebhoya-profile-image.jpg",
   placeholder: false,
   tagline: "Leading Leatherback UK toward seamless global financial mobility",
   linkedin: "",
@@ -68,4 +69,4 @@ export const ochebhoyaEkpete = {
   ],
 };
 
-export const speakers2026 = [daljitYoung, ochebhoyaEkpete];
+export const speakers2026 = [daljitYoung /*, ochebhoyaEkpete */];

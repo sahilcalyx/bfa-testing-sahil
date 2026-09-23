@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import axios from "axios";
 import { Cancel, ArrowBack } from "@mui/icons-material";
+import { PAYMENT_API_BASE } from "@/lib/paymentApi";
 
 function CancelPage() {
   const [params] = useSearchParams();
@@ -11,7 +12,6 @@ function CancelPage() {
 
   useEffect(() => {
     if (sessionId) {
-      const PAYMENT_API_BASE = (window.location.hostname.includes("britfintechawards.com") || window.location.hostname.includes("vercel.app")) ? "https://bfa-ticket-event.vercel.app" : "https://bfa-ticket-event.vercel.app";
       axios
         .get(`${PAYMENT_API_BASE}/checkout-session?session_id=${sessionId}`)
         .then((res) => {

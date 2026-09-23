@@ -99,10 +99,13 @@ export default function CouponCodeInput({
       lastCheckedRef.current = `${trimmed}|${type}|${qty}|${email}`;
 
       if (result.valid) {
-        setApplied(result);
+        const next = packCheck?.valid
+          ? { ...result, ...packCheck, message: packCheck.message }
+          : result;
+        setApplied(next);
         setCode(trimmed);
-        setStatus({ state: "success", message: result.message });
-        onAppliedRef.current?.(result);
+        setStatus({ state: "success", message: next.message });
+        onAppliedRef.current?.(next);
       } else if (!packCheck?.valid) {
         setApplied(null);
         setStatus({ state: "error", message: result.message });

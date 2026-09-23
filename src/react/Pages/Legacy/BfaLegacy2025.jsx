@@ -10,6 +10,7 @@ import {
 } from "framer-motion";
 import {
   Calendar,
+  Clock,
   Mic2,
   Users,
   Trophy,
@@ -573,6 +574,94 @@ const highlights = [
   { icon: Utensils, label: "Elegant Buffet Dining Experience" },
 ];
 
+const AGENDA_2025 = [
+  { time: "6:00 PM", title: "Greeting & Registration" },
+  { time: "6:50 PM", title: "Welcome Note by Host" },
+  { time: "6:55 PM", title: "Introduction by Vishal Patil" },
+  { time: "7:00 PM", title: "KeyNote Speaker – Leatherback" },
+  { time: "7:20 PM", title: "KeyNote Speaker – Volume" },
+  { time: "7:45 PM", title: "Refuelling while Networking" },
+  {
+    time: "8:00 PM",
+    title: "Discussion Panel",
+    items: ["Clear Junction", "Open Banking", "Leftover Currency"],
+  },
+  { time: "8:25 PM", title: "Startup Pitch 2" },
+  { time: "8:30 PM", title: "Brit Fintech Awards Ceremony" },
+  { time: "9:00 PM", title: "Dinner and Networking" },
+];
+
+function EventAgenda() {
+  return (
+    <section className="mb-20 md:mb-28">
+      <SectionTitle
+        tag="Event Agenda"
+        title="The Night's Programme"
+        subtitle="How the evening unfolded at One Great George Street on 3 October 2025."
+        icon={Clock}
+      />
+
+      <div className="overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm max-w-2xl mx-auto">
+        <table className="w-full border-collapse">
+          <caption className="sr-only">
+            Brit FinTech Awards 2025 event agenda with start times
+          </caption>
+          <thead>
+            <tr className="bg-[#f40181]">
+              <th
+                scope="col"
+                className="px-4 sm:px-6 py-3.5 text-left text-[11px] sm:text-xs font-black uppercase tracking-[0.16em] text-white"
+              >
+                Schedule Description
+              </th>
+              <th
+                scope="col"
+                className="w-[7rem] sm:w-[9.5rem] px-3 sm:px-5 py-3.5 text-center text-[11px] sm:text-xs font-black uppercase tracking-[0.16em] text-white border-l border-white/25 whitespace-nowrap"
+              >
+                Start Time
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {AGENDA_2025.map((item, index) => (
+              <tr
+                key={item.title}
+                className={`border-t border-zinc-100 ${index % 2 === 1 ? "bg-zinc-50" : "bg-white"}`}
+              >
+                <td className={`px-4 sm:px-6 ${item.items ? "py-4" : "py-3.5"}`}>
+                  <p className="m-0 text-sm sm:text-base font-bold text-zinc-900 leading-snug">
+                    {item.title}
+                  </p>
+                  {item.items && (
+                    <ol className="mt-2 mb-0 pl-0 list-none space-y-1">
+                      {item.items.map((sub, i) => (
+                        <li
+                          key={sub}
+                          className="flex items-start gap-2 text-sm text-zinc-600 font-medium leading-snug"
+                        >
+                          <span className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-[#f40181] text-[10px] font-black text-white">
+                            {i + 1}
+                          </span>
+                          <span>{sub}</span>
+                        </li>
+                      ))}
+                    </ol>
+                  )}
+                </td>
+                <td className="w-[7rem] sm:w-[9.5rem] px-3 sm:px-5 text-center align-middle border-l border-zinc-100">
+                  <span className="text-sm sm:text-base font-extrabold text-[#f40181] tabular-nums whitespace-nowrap">
+                    {item.time}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  );
+}
+
 const BfaLegacy2025 = () => {
   return (
     <div className="min-h-[60vh] bg-zinc-50 text-zinc-900 font-['Outfit',system-ui,sans-serif]">
@@ -580,7 +669,7 @@ const BfaLegacy2025 = () => {
         <title>Brit FinTech Awards 2025 Legacy | BFA</title>
         <meta
           name="description"
-          content="Relive Brit FinTech Awards 2025 at One Great George Street — keynotes, panel, judges, winners, sponsors and highlights."
+          content="Relive Brit FinTech Awards 2025 at One Great George Street — keynotes, panel, judges, agenda, winners, sponsors and highlights."
         />
       </Helmet>
 
@@ -1057,7 +1146,10 @@ const BfaLegacy2025 = () => {
             </div>
           </section>
 
-          {/* Section 8: Video Embed & Playlists */}
+          {/* Section 8: Event Agenda */}
+          <EventAgenda />
+
+          {/* Section 9: Video Embed & Playlists */}
           <section className="mb-20 md:mb-28">
             <SectionTitle
               tag="Video Highlights"
@@ -1146,7 +1238,7 @@ const BfaLegacy2025 = () => {
             </div>
           </section>
 
-          {/* Section 9: Looking Ahead */}
+          {/* Section 10: Looking Ahead */}
           <section className="relative overflow-hidden rounded-[36px] bg-zinc-950 px-8 py-16 md:px-14 md:py-20 text-center border border-zinc-800 shadow-xl">
             <div
               aria-hidden="true"

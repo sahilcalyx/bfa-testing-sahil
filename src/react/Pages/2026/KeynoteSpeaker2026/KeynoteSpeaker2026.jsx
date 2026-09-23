@@ -1,7 +1,13 @@
 import React from "react";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
+import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { speakers2026 } from "./speakers2026";
+
+const bioSnippet = (speaker) => {
+  const source = speaker.bioParagraphs?.[0] || speaker.tagline || "";
+  return source.replace(/<[^>]+>/g, "").trim();
+};
 
 const KeynoteSpeaker2026 = () => {
   const navigate = useNavigate();
@@ -13,178 +19,169 @@ const KeynoteSpeaker2026 = () => {
   return (
     <Section aria-labelledby="keynote-speakers-heading">
       <link
-        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@500;600;700&family=Outfit:wght@400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Outfit:wght@400;500;600;700&display=swap"
         rel="stylesheet"
       />
 
       <Stage>
-        <Title id="keynote-speakers-heading">
-          <TitleKicker>BFA 2026</TitleKicker>
-          <TitleMain>Keynote Speakers</TitleMain>
-        </Title>
+        <Header
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <div
+            className="cs-section_heading cs-style2 cs-size3 text-center text-uppercase"
+            style={{ width: "100%" }}
+          >
+            <h2
+              id="keynote-speakers-heading"
+              className="cs-section_title cs-extra_bold"
+              style={{ color: "#c8102e" }}
+            >
+              Keynote Speakers 2026
+            </h2>
+          </div>
+        </Header>
 
-        <StageGrid>
-          {speakers2026.map((speaker, index) => (
-            <SpeakerCard key={speaker.id} style={{ animationDelay: `${index * 0.12}s` }}>
-              <Frame
-                $clickable={Boolean(speaker.slug)}
-                onClick={() => openSpeaker(speaker)}
-                role={speaker.slug ? "link" : undefined}
-                tabIndex={speaker.slug ? 0 : undefined}
-                onKeyDown={(event) => {
-                  if (speaker.slug && (event.key === "Enter" || event.key === " ")) {
-                    event.preventDefault();
-                    openSpeaker(speaker);
-                  }
-                }}
+        <Rows>
+          {speakers2026.map((speaker, index) => {
+            const reverse = index % 2 === 1;
+
+            return (
+              <SpeakerRow
+                key={speaker.id}
+                $reverse={reverse}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.55, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
               >
-                {speaker.img && !speaker.placeholder ? (
-                  <Portrait
-                    src={speaker.img}
-                    alt={speaker.name}
-                    loading="lazy"
-                  />
-                ) : (
-                  <PlaceholderPortrait aria-hidden="true">
-                    <PlaceholderMark>
-                      {speaker.initials || "BFA"}
-                    </PlaceholderMark>
-                    <PlaceholderHint>2026</PlaceholderHint>
-                  </PlaceholderPortrait>
-                )}
-
-                <CardScrim aria-hidden="true" />
-
-                <CardInfo>
-                  <InfoText>
-                    <NameText>{speaker.name}</NameText>
-                    <Designation>{speaker.designation}</Designation>
-                    {speaker.logo ? (
-                      <CompanyLogo
-                        src={speaker.logo}
-                        alt={speaker.company}
-                        loading="lazy"
-                        $onDark={Boolean(speaker.logoOnDark)}
-                      />
-                    ) : (
-                      <Company>{speaker.company}</Company>
-                    )}
-                  </InfoText>
-                </CardInfo>
-
-                {speaker.slug && (
-                  <ArrowBtn
-                    type="button"
-                    aria-label={`View ${speaker.name} profile`}
-                    onClick={(event) => {
-                      event.stopPropagation();
-                      openSpeaker(speaker);
+                <PhotoCol>
+                  <PhotoFrame
+                    $clickable={Boolean(speaker.slug)}
+                    onClick={() => openSpeaker(speaker)}
+                    role={speaker.slug ? "link" : undefined}
+                    tabIndex={speaker.slug ? 0 : undefined}
+                    onKeyDown={(event) => {
+                      if (speaker.slug && (event.key === "Enter" || event.key === " ")) {
+                        event.preventDefault();
+                        openSpeaker(speaker);
+                      }
                     }}
                   >
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4">
-                      <path d="M7 17L17 7M17 7H7M17 7V17" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </ArrowBtn>
-                )}
-              </Frame>
-            </SpeakerCard>
-          ))}
-        </StageGrid>
+                    {speaker.img && !speaker.placeholder ? (
+                      <Portrait src={speaker.img} alt={speaker.name} loading="lazy" />
+                    ) : (
+                      <Placeholder aria-hidden="true">{speaker.initials || "BFA"}</Placeholder>
+                    )}
+                  </PhotoFrame>
+                  <PhotoRule />
+                </PhotoCol>
+
+                <Copy $end={reverse}>
+                  <NameText
+                    $clickable={Boolean(speaker.slug)}
+                    onClick={() => openSpeaker(speaker)}
+                  >
+                    {speaker.name}
+                  </NameText>
+                  <RoleLine>
+                    {speaker.designation}, {speaker.company}
+                  </RoleLine>
+
+                  {speaker.logo && (
+                    <CompanyLogo
+                      src={speaker.logo}
+                      alt={speaker.company}
+                      loading="lazy"
+                      $onDark={Boolean(speaker.logoOnDark)}
+                    />
+                  )}
+
+                  <Bio>{bioSnippet(speaker)}</Bio>
+
+                  {speaker.slug && (
+                    <ProfileBtn
+                      type="button"
+                      onClick={() => openSpeaker(speaker)}
+                    >
+                      View profile
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+                        <path d="M7 17L17 7M17 7H7M17 7V17" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </ProfileBtn>
+                  )}
+                </Copy>
+              </SpeakerRow>
+            );
+          })}
+        </Rows>
       </Stage>
     </Section>
   );
 };
 
-const rise = keyframes`
-  from {
-    opacity: 0;
-    transform: translateY(18px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-`;
-
 const Section = styled.section`
-  --ks-cream: #f2d8ac;
-  --ks-ink: #1a080c;
+  --ks-crimson: #c8102e;
+  --ks-ink: #1a1a1a;
+  --ks-mute: #5a5f6a;
   width: 100%;
-  margin: 0 0 60px;
-  overflow: hidden;
+  margin: 0;
+  background: #ffffff;
   font-family: "Outfit", system-ui, sans-serif;
+  color: var(--ks-ink);
 `;
 
 const Stage = styled.div`
-  position: relative;
-  background: linear-gradient(90deg, #c8102e 0%, #680014 100%);
-  padding: clamp(44px, 6vw, 72px) 20px clamp(48px, 6vw, 80px);
-  overflow: hidden;
-`;
-
-const Title = styled.h2`
-  margin: 0 0 clamp(28px, 4vw, 44px);
-  text-align: center;
-  line-height: 1.05;
-  display: grid;
-  gap: 8px;
-  justify-items: center;
-`;
-
-const TitleKicker = styled.span`
-  display: block;
-  font-family: "Outfit", sans-serif;
-  font-weight: 700;
-  font-size: clamp(12px, 1.6vw, 14px);
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: rgba(242, 216, 172, 0.85);
-`;
-
-const TitleMain = styled.span`
-  display: block;
-  font-family: "Oswald", "Bebas Neue", sans-serif;
-  font-weight: 700;
-  font-size: clamp(36px, 6.5vw, 58px);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--ks-cream);
-`;
-
-const StageGrid = styled.div`
-  position: relative;
-  z-index: 1;
-  max-width: 760px;
+  max-width: 1080px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(14px, 2.5vw, 28px);
-  align-items: stretch;
+  padding: 36px 24px 40px;
+`;
 
-  @media (max-width: 820px) {
-    grid-template-columns: 1fr;
-    max-width: 360px;
+const Header = styled(motion.header)`
+  text-align: center;
+  margin: 0 0 36px;
+`;
+
+const Rows = styled.div`
+  display: grid;
+  gap: 32px;
+`;
+
+const SpeakerRow = styled(motion.article)`
+  display: flex;
+  flex-direction: ${(p) => (p.$reverse ? "row-reverse" : "row")};
+  align-items: center;
+  justify-content: flex-start;
+  gap: 28px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
   }
 `;
 
-const SpeakerCard = styled.article`
-  animation: ${rise} 0.55s ease both;
+const PhotoCol = styled.div`
+  flex: 0 0 auto;
+  width: 200px;
+
+  @media (max-width: 768px) {
+    width: 180px;
+  }
 `;
 
-const Frame = styled.div`
-  position: relative;
-  aspect-ratio: 3 / 4.2;
-  border: 1.5px solid var(--ks-cream);
-  border-radius: 0 22px 0 22px;
-  background: var(--ks-ink);
+const PhotoFrame = styled.div`
+  width: 100%;
+  aspect-ratio: 4 / 5;
   overflow: hidden;
-  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
-  transition: transform 0.35s ease, box-shadow 0.35s ease;
-  cursor: ${(props) => (props.$clickable ? "pointer" : "default")};
+  background: #111;
+  cursor: ${(p) => (p.$clickable ? "pointer" : "default")};
 
-  &:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  &:focus-visible {
+    outline: 2px solid var(--ks-crimson);
+    outline-offset: 4px;
   }
 `;
 
@@ -193,150 +190,108 @@ const Portrait = styled.img`
   height: 100%;
   object-fit: cover;
   object-position: top center;
-  filter: grayscale(1) contrast(1.08);
   display: block;
-  transition: filter 0.4s ease, transform 0.5s ease;
-
-  ${Frame}:hover & {
-    filter: grayscale(0.25) contrast(1.05);
-    transform: scale(1.03);
-  }
 `;
 
-const PlaceholderPortrait = styled.div`
+const Placeholder = styled.div`
   width: 100%;
   height: 100%;
   display: grid;
-  place-content: center;
-  gap: 6px;
-  background:
-    radial-gradient(ellipse at 50% 35%, #5c1820 0%, transparent 60%),
-    linear-gradient(160deg, #2a0c12 0%, #4a1018 55%, #1a080c 100%);
-`;
-
-const PlaceholderMark = styled.span`
-  font-family: "Oswald", sans-serif;
-  font-size: clamp(28px, 4vw, 40px);
+  place-items: center;
+  font-family: "Sora", sans-serif;
   font-weight: 700;
-  letter-spacing: 0.2em;
-  color: rgba(242, 216, 172, 0.35);
+  letter-spacing: 0.16em;
+  color: rgba(255, 255, 255, 0.35);
+  background: linear-gradient(160deg, #2a1016 0%, #111318 100%);
 `;
 
-const PlaceholderHint = styled.span`
-  font-family: "Outfit", sans-serif;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: rgba(242, 216, 172, 0.28);
-  text-align: center;
+const PhotoRule = styled.div`
+  height: 2px;
+  width: 100%;
+  margin-top: 10px;
+  background: var(--ks-crimson);
 `;
 
-const CardScrim = styled.div`
-  position: absolute;
-  inset: auto 0 0 0;
-  height: 48%;
-  background: linear-gradient(
-    180deg,
-    transparent 0%,
-    rgba(10, 4, 6, 0.55) 35%,
-    rgba(10, 4, 6, 0.92) 100%
-  );
-  pointer-events: none;
-  z-index: 1;
-`;
-
-const CardInfo = styled.div`
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 2;
-  padding: 16px 16px 18px;
-`;
-
-const InfoText = styled.div`
+const Copy = styled.div`
+  flex: 1 1 0;
   min-width: 0;
-  display: grid;
-  justify-items: start;
-  gap: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: ${(p) => (p.$end ? "flex-end" : "flex-start")};
+  text-align: ${(p) => (p.$end ? "right" : "left")};
+
+  @media (max-width: 768px) {
+    align-items: center;
+    text-align: center;
+  }
 `;
 
-const NameText = styled.span`
-  font-family: "Bebas Neue", "Oswald", sans-serif;
-  font-weight: 400;
-  font-size: clamp(22px, 2.5vw, 32px);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: #f2d8ac;
-  line-height: 0.95;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+const NameText = styled.h3`
+  margin: 0 0 8px;
+  font-family: "Sora", "Outfit", sans-serif;
+  font-weight: 800;
+  font-size: clamp(26px, 3.4vw, 38px);
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--ks-crimson);
+  cursor: ${(p) => (p.$clickable ? "pointer" : "default")};
+
+  &:hover {
+    color: ${(p) => (p.$clickable ? "#9b0d24" : "var(--ks-crimson)")};
+  }
 `;
 
-const Designation = styled.span`
-  display: block;
-  font-family: "Outfit", sans-serif;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(242, 216, 172, 0.78);
-  line-height: 1.3;
-`;
-
-const Company = styled.span`
-  display: block;
-  font-family: "Outfit", sans-serif;
+const RoleLine = styled.p`
+  margin: 0 0 8px;
   font-size: 12px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.72);
-  line-height: 1.3;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ks-ink);
 `;
 
 const CompanyLogo = styled.img`
   display: block;
   height: 32px;
   width: auto;
-  max-width: 168px;
+  max-width: 170px;
   object-fit: contain;
-  object-position: left center;
   background: ${(p) => (p.$onDark ? "#000" : "transparent")};
-  border-radius: ${(p) => (p.$onDark ? "6px" : "0")};
-  padding: ${(p) => (p.$onDark ? "0" : "0")};
-  margin-top: 2px;
+  border-radius: ${(p) => (p.$onDark ? "5px" : "0")};
+  padding: ${(p) => (p.$onDark ? "4px 8px" : "0")};
+  margin-bottom: 10px;
 `;
 
-const ArrowBtn = styled.button`
-  position: absolute;
-  right: 14px;
-  bottom: 16px;
-  z-index: 3;
-  width: 42px;
-  height: 42px;
-  border: 1px solid rgba(242, 216, 172, 0.7);
-  border-radius: 999px;
-  background: linear-gradient(135deg, #c8102e 0%, #680014 100%);
-  color: #f2d8ac;
-  display: grid;
-  place-items: center;
+const Bio = styled.p`
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--ks-mute);
+`;
+
+const ProfileBtn = styled.button`
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ks-crimson);
+  font-family: "Outfit", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   cursor: pointer;
-  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.35);
-  transition: transform 0.25s ease, background 0.25s ease;
 
   svg {
-    width: 16px;
-    height: 16px;
+    width: 13px;
+    height: 13px;
   }
 
   &:hover {
-    transform: scale(1.08);
-    background: linear-gradient(135deg, #e01438 0%, #c8102e 100%);
+    color: #9b0d24;
   }
 `;
 

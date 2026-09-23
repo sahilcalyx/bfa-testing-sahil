@@ -5,46 +5,57 @@ const NominationAnnouncement = () => {
     <div className="nomination-wrapper py-5 px-3">
       <div className="container text-center">
         <h2 className="headline mb-3">
-          Nominations Open – <span className="highlight">Get Yours In Today!</span>
+          Nominations Closed – <span className="highlight">Thank You for Your Interest!</span>
         </h2>
-        <p className="lead mb-5">Nominate. Recognise. Inspire.</p>
+        <p className="lead mb-5">Nominations for this year have now closed.</p>
 
-        <div className="row justify-content-center gy-4">
-          {/* Super Early Bird */}
-          <div className="col-md-4">
-            <div className="offer-card gradient-pink">
-              <h4 className="title">Super Early Bird</h4>
-              <p className="date-range">2nd June – 15th June 2025</p>
-              <div className="price">£95</div>
+        <div className="row justify-content-center gy-4 align-items-stretch">
+          {/* Super Early Bird — expired */}
+          <div className="col-md-4 d-flex">
+            <div className="offer-card gradient-expired">
+              <span className="offer-badge offer-badge-expired">Expired</span>
+              <h4 className="title">Super Early Bird Offer</h4>
+              <p className="date-range">2nd June – 30th June 2026</p>
+              <div className="price-row">
+                <span className="price-original">£395</span>
+                <span className="price">£195</span>
+              </div>
             </div>
           </div>
 
-          {/* Early Bird */}
-          <div className="col-md-4">
-            <div className="offer-card gradient-aqua">
-              <h4 className="title">Early Bird</h4>
-              <p className="date-range">16th June – 31st July 2025</p>
-              <div className="price">£195</div>
+          {/* Early Bird — expired */}
+          <div className="col-md-4 d-flex">
+            <div className="offer-card gradient-expired">
+              <span className="offer-badge offer-badge-expired">Expired</span>
+              <h4 className="title">Early Bird Offer Extended</h4>
+              <p className="date-range">1st July – 31st July 2026</p>
+              <div className="price-row">
+                <span className="price-original">£395</span>
+                <span className="price">£295</span>
+              </div>
             </div>
           </div>
 
-          {/* Standard */}
-          <div className="col-md-4">
-            <div className="offer-card gradient-purple">
-              <h4 className="title">Standard Nomination</h4>
-              <p className="date-range">1st August – 31st August 2025</p>
-              <div className="price">£395</div>
+          {/* Standard — expired */}
+          <div className="col-md-4 d-flex">
+            <div className="offer-card gradient-expired">
+              <span className="offer-badge offer-badge-expired">Expired</span>
+              <h4 className="title">Standard Nomination Extended</h4>
+              <p className="date-range">1st August – 7th September 2026</p>
+              <div className="price-row">
+                <span className="price">£395</span>
+              </div>
             </div>
           </div>
         </div>
 
         <div className="mt-5">
           <p className="fs-5 fw-bold text-dark mb-2">
-            Don’t miss your chance to nominate your business at the best rate.
+            Nominations are now closed.
           </p>
           <p className="fs-5 text-secondary">
-            The earlier you act, the more you save.<br />
-        Gear up — it’s time to nominate!
+            Thank you to everyone who submitted a nomination.<br />
+            We look forward to seeing you at the awards.
           </p>
         </div>
       </div>
@@ -66,6 +77,7 @@ const NominationAnnouncement = () => {
         }
 
         .offer-card {
+          position: relative;
           background: #fff;
           border-radius: 18px;
           padding: 30px 20px;
@@ -73,6 +85,32 @@ const NominationAnnouncement = () => {
           transition: all 0.3s ease;
           box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
           border: 2px solid transparent;
+          width: 100%;
+          height: 100%;
+          min-height: 200px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .offer-badge {
+          position: absolute;
+          top: 0;
+          right: 0;
+          padding: 5px 12px;
+          border-radius: 0 16px 0 12px;
+          font-size: 0.7rem;
+          font-weight: 700;
+          letter-spacing: 0.04em;
+          text-transform: uppercase;
+          line-height: 1.2;
+        }
+
+        .offer-badge-expired {
+          background: #e5e5e5;
+          color: #666;
+          border: 1px solid #cfcfcf;
         }
 
         .offer-card:hover {
@@ -80,22 +118,69 @@ const NominationAnnouncement = () => {
           box-shadow: 0 16px 28px rgba(0, 0, 0, 0.08);
         }
 
+        .gradient-expired {
+          border-color: #c8c8c8;
+          background: linear-gradient(135deg, #f3f3f3, #e8e8e8);
+          border-width: 2px;
+          box-shadow: none;
+          opacity: 0.72;
+          filter: grayscale(0.85);
+          pointer-events: none;
+        }
+
+        .gradient-expired .title,
+        .gradient-expired .date-range,
+        .gradient-expired .price {
+          color: #777;
+        }
+
+        .gradient-expired:hover {
+          transform: none;
+          box-shadow: none;
+        }
+
         .title {
           font-size: 1.3rem;
           font-weight: 600;
           margin-bottom: 8px;
+          min-height: 2.6em;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          line-height: 1.3;
         }
 
         .date-range {
           font-size: 1rem;
           color: #666;
           margin-bottom: 12px;
+          min-height: 1.5em;
         }
 
         .price {
           font-size: 1.75rem;
           font-weight: bold;
           color: #e60073;
+        }
+
+        .price-row {
+          display: flex;
+          align-items: baseline;
+          justify-content: center;
+          gap: 10px;
+        }
+
+        .price-original {
+          font-size: 1.15rem;
+          font-weight: 600;
+          color: #999;
+          text-decoration: line-through;
+        }
+
+        .gradient-expired .price,
+        .gradient-expired .price-original {
+          color: #777;
         }
 
     .gradient-pink {

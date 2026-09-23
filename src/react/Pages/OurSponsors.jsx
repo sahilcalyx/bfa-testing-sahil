@@ -63,6 +63,14 @@ const OurSponsors = () => {
                 tier: "Silver Sponsor",
                 alt: "Leatherback",
                 title: "Leatherback",
+              },{
+                name: "Invictus Ventures",
+                video: "/assets/video/sponsors-logo-2026/Invictus-sponsor-details-2026.webm",
+                link: "/invictus-ventures-sponsor-details-2026",
+                external: false,
+                tier: "Silver Sponsor",
+                alt: "Invictus Ventures",
+                title: "Invictus Ventures",
               },
               {
                 name: "Grants Payments",
@@ -74,15 +82,6 @@ const OurSponsors = () => {
                 title: "Grants Payments",
               },
               {
-                name: "ECEX",
-                video: "/assets/video/sponsors-logo-2026/ecex-sponsor-details-2026.webm",
-                link: "/ecex-sponsor-details-2026",
-                external: false,
-                tier: "Silver Sponsor",
-                alt: "ECEX",
-                title: "ECEX",
-              },
-              {
                 name: "Peratera",
                 video: "/assets/video/sponsors-logo-2026/peratera-sponsor-details-2026.webm",
                 link: "/peratera-sponsor-details-2026",
@@ -91,12 +90,41 @@ const OurSponsors = () => {
                 alt: "Peratera",
                 title: "Peratera",
               },
+              // {
+              //   name: "ECEX",
+              //   video: "/assets/video/sponsors-logo-2026/ecex-sponsor-details-2026.webm",
+              //   link: "/ecex-sponsor-details-2026",
+              //   external: false,
+              //   tier: "Silver Sponsor",
+              //   alt: "ECEX",
+              //   title: "ECEX",
+              // },
+              
+              
               {
                 name: "Leftover Currency",
                 video: "/assets/video/sponsors-logo-2026/sposnsor-logo-2026-leftover-currency.webm",
                 link: "/leftover-currency-sponsor-details-2026",
                 external: false,
                 tier: "Innovation Sponsor",
+              },
+              {
+                name: "QF Remit",
+                video: "/assets/video/sponsors-logo-2026/sposnsor-logo-2026-qfremit.webm",
+                link: "/qfremit-sponsor-details-2026",
+                external: false,
+                tier: "Innovation Sponsor",
+                alt: "QF Remit",
+                title: "QF Remit",
+              },
+              {
+                name: "Glory & Honour",
+                video: "/assets/video/sponsors-logo-2026/glory-honour-sponsor-details-2026.webm",
+                link: "/glory-honour-sponsor-details-2026",
+                external: false,
+                tier: "Strategic Sponsor",
+                alt: "Glory & Honour",
+                title: "Glory & Honour",
               },
               {
                 name: "MyRemit",
@@ -108,6 +136,16 @@ const OurSponsors = () => {
                 title: "MyRemit",
               },
               {
+                name: "Red Sea Money Transfer",
+                video: "/assets/video/sponsors-logo-2026/Redsea-logo-sponsor-details-2026.webm",
+                link: "/redsea-sponsor-details-2026",
+                external: false,
+                tier: "Strategic Sponsor",
+                alt: "Red Sea Money Transfer",
+                title: "Red Sea Money Transfer",
+              },
+              
+              {
                 name: "Teeparam",
                 video: "/assets/video/sponsors-logo-2026/Teeparam-logo-sponsor-details-2026.webm",
                 link: "/teeparam-sponsor-details-2026",
@@ -116,8 +154,30 @@ const OurSponsors = () => {
                 alt: "Teeparam",
                 title: "Teeparam",
               },
-              
-              
+              {
+                name: "Blue Nile Money Transfer",
+                video: "/assets/video/sponsors-logo-2026/Bluenile-sponsor-details-2026.webm",
+                link: "https://bluenilemoneytransfer.com/",
+                external: true,
+                alt: "Blue Nile Money Transfer",
+                title: "Blue Nile Money Transfer",
+              },
+              {
+                name: "FinestPay",
+                video: "/assets/video/sponsors-logo-2026/Fintestpay-sponsor-details-2026.webm",
+                link: "https://finestpay.co.uk/",
+                external: true,
+                alt: "FinestPay",
+                title: "FinestPay",
+              },
+              {
+                name: "IfePay",
+                video: "/assets/video/sponsors-logo-2026/Ifpay-sponsor-details-2026.webm",
+                link: "https://ifepay.co.uk/",
+                external: true,
+                alt: "IfePay",
+                title: "IfePay",
+              },
              
             ].map((s, index) => (
               <div className="col-lg-5 col-md-6 col-12" key={index}>
@@ -146,23 +206,15 @@ const OurSponsors = () => {
                     e.currentTarget.style.boxShadow = "0 10px 30px rgba(0,0,0,0.05)";
                   }}
                 >
-                  <NavLink
-                    to={s.link}
-                    target={s.external ? "_blank" : undefined}
-                    rel={s.external ? "noopener noreferrer" : undefined}
-                    style={{
-                      display: "block",
-                      width: "100%",
-                    }}
-                  >
-                    {s.video ? (
+                  {(() => {
+                    const media = s.video ? (
                       <video
                         src={s.video}
                         autoPlay
                         loop
                         muted
                         playsInline
-                        aria-label={s.alt}
+                        aria-label={s.alt || s.name}
                         style={{
                           width: "100%",
                           height: "auto",
@@ -175,7 +227,7 @@ const OurSponsors = () => {
                     ) : (
                       <img
                         src={s.image}
-                        alt={s.alt}
+                        alt={s.alt || s.name}
                         style={{
                           width: "100%",
                           height: "auto",
@@ -187,8 +239,32 @@ const OurSponsors = () => {
                           pointerEvents: "none",
                         }}
                       />
-                    )}
-                  </NavLink>
+                    );
+                    const linkStyle = {
+                      display: "block",
+                      width: "100%",
+                    };
+
+                    if (s.external) {
+                      return (
+                        <a
+                          href={s.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={linkStyle}
+                          title={s.title || s.name}
+                        >
+                          {media}
+                        </a>
+                      );
+                    }
+
+                    return (
+                      <NavLink to={s.link} style={linkStyle} title={s.title || s.name}>
+                        {media}
+                      </NavLink>
+                    );
+                  })()}
                 </div>
               </div>
             ))}

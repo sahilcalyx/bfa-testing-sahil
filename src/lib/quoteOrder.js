@@ -1,19 +1,15 @@
+import { FALLBACK_TICKET_PACKS, FALLBACK_TICKET_UNIT, packsForTicketPrice } from "./ticketPacks";
+
 const SERVICE_BASE = (
   process.env.PAYMENT_API_BASE ||
   process.env.NEXT_PUBLIC_PAYMENT_API_BASE ||
   "https://bfa-ticket-event.vercel.app"
 ).replace(/\/$/, "");
 
-const FALLBACK = { ticket: 295, nomination: 395 };
+const FALLBACK = { ticket: FALLBACK_TICKET_UNIT, nomination: 395 };
 
-/** Used when the payment API is down so Duo still quotes £420, not 2 × £295. */
-export const FALLBACK_PACKS = [
-  { code: "INDIVIDUAL", ticketQuantity: 1, packPrice: 295, saveAmount: 0 },
-  { code: "DUO", ticketQuantity: 2, packPrice: 420, saveAmount: 170 },
-  { code: "TEAM3", ticketQuantity: 3, packPrice: 630, saveAmount: 255 },
-  { code: "TEAM5", ticketQuantity: 5, packPrice: 1050, saveAmount: 425 },
-  { code: "TEAM10", ticketQuantity: 10, packPrice: 2100, saveAmount: 850 },
-];
+/** Used when the payment API is down so packs still use the designed save amounts. */
+export const FALLBACK_PACKS = FALLBACK_TICKET_PACKS;
 
 export function packForTicketCount(packs, quantity) {
   const qty = Number(quantity) || 0;
@@ -44,9 +40,11 @@ export async function fetchTicketBundlesServer() {
   try {
     const res = await fetch(`${SERVICE_BASE}/api/coupons/bundles`, { cache: "no-store" });
     const data = await res.json();
-    return Array.isArray(data?.bundles) && data.bundles.length
+    const packs = Array.isArray(data?.bundles) && data.bundles.length
       ? data.bundles
       : FALLBACK_PACKS;
+    const unit = Number(data?.pricing?.ticket) || FALLBACK_TICKET_UNIT;
+    return packsForTicketPrice(unit, packs);
   } catch (err) {
     console.error("Could not load ticket packs:", err.message);
     return FALLBACK_PACKS;
@@ -61,7 +59,10 @@ export async function quoteOrder({ type = "ticket", quantity = 1, email = "", co
   let code = String(couponCode || "").trim();
 
   // If the form did not send a code, still apply the pack that matches this ticket count
-  const pack = type === "ticket" ? packForTicketCount(await fetchTicketBundlesServer(), qty) : null;
+  const pricedPacks = type === "ticket"
+    ? packsForTicketPrice(unitPrice, await fetchTicketBundlesServer())
+    : [];
+  const pack = type === "ticket" ? packForTicketCount(pricedPacks, qty) : null;
   if (!code && pack?.code) code = pack.code;
 
   const requestedPack = FALLBACK_PACKS.find((p) => p.code === String(code).trim().toUpperCase());
@@ -78,11 +79,15 @@ export async function quoteOrder({ type = "ticket", quantity = 1, email = "", co
       });
       const data = await res.json();
       if (data?.valid) {
+        const matchedPack =
+          pack && String(pack.code).toUpperCase() === String(data.code || code).toUpperCase()
+            ? pack
+            : null;
         return {
           unitPrice,
-          baseAmount: Number(data.baseAmount) || baseAmount,
-          discount: Number(data.discount) || 0,
-          amount: Number(data.finalAmount) || 0,
+          baseAmount: matchedPack ? matchedPack.baseAmount : Number(data.baseAmount) || baseAmount,
+          discount: matchedPack ? matchedPack.saveAmount : Number(data.discount) || 0,
+          amount: matchedPack ? matchedPack.packPrice : Number(data.finalAmount) || 0,
           couponCode: data.code || code.toUpperCase(),
         };
       }

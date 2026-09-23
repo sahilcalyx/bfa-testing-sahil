@@ -118,9 +118,13 @@ const   AwardsCategory = () => {
                     <li>▶ B-A-A-S Innovator of the Year</li>
                     <li>▶ Startup of the Year</li>
                     <li>▶ Woman Entrepreneur in FinTech of the Year </li>
+                    <li>▶ Woman in AI of the Year</li>
                     <li>▶ Anti-Fraud Innovator of the Year</li>
                     <li>▶ ID Verification Innovator of the Year</li>
                     <li>▶ Payment Acquirer of the Year</li>
+                    <li>▶ Payment Gateway of the Year</li>
+                    <li>▶ FinTech Leader of the Year</li>
+                    <li>▶ Cross-Border Pay-out Disruptor of the Year</li>
                   </ul>
                 </div>
               </div>
@@ -175,6 +179,8 @@ const   AwardsCategory = () => {
                     <li>▶ MSB Store of the Year </li>
                     <li>▶ MSB App of the Year </li>
                     <li>▶ MSB of the Year </li>
+                    <li>▶ MSB Rising Star of the Year</li>
+                    <li>▶ MSB Leader of the Year</li>
                   </ul>
                 </div>
               </div>

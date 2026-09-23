@@ -247,7 +247,7 @@ const countryCodeOptions = countryCodes.map((c) => ({
 
 const MAX_TICKETS = 5;
 // Fallback only — the live price comes from the admin Pricing page.
-const TICKET_PRICE = 295;
+const TICKET_PRICE = 395;
 
 const buildTicketOptions = (unitPrice) => [
   { value: "", label: "Tickets" },
@@ -1997,7 +1997,7 @@ const SponsorshipForm = () => {
    ========================================================================= */
 const NominateBookSponsor = () => {
   const location = useLocation();
-  const [activeTab, setActiveTab] = useState("nominate");
+  const [activeTab, setActiveTab] = useState("tickets");
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
@@ -2008,7 +2008,8 @@ const NominateBookSponsor = () => {
     } else if (tabParam === "sponsorship" || tabParam === "sponsorship-categories") {
       setActiveTab("sponsorship");
     } else {
-      setActiveTab("nominate");
+      // Nomination tab/form is hidden — default to tickets
+      setActiveTab("tickets");
     }
   }, [location]);
 
@@ -2255,6 +2256,7 @@ const NominateBookSponsor = () => {
               border: "1px solid rgba(0,0,0,0.08)"
             }}
           >
+            {/* Nomination tab hidden
             <button
               onClick={() => setActiveTab("nominate")}
               style={{
@@ -2271,6 +2273,7 @@ const NominateBookSponsor = () => {
             >
               Award Nomination
             </button>
+            */}
             <button
               onClick={() => setActiveTab("tickets")}
               style={{
@@ -2308,7 +2311,7 @@ const NominateBookSponsor = () => {
 
         {/* Tab Contents */}
         <div className="portal-tab-content" style={{ minHeight: "400px" }}>
-          {activeTab === "nominate" && <NominationForm />}
+          {/* {activeTab === "nominate" && <NominationForm />} */}
           {activeTab === "tickets" && <TicketBookingForm />}
           {activeTab === "sponsorship" && <SponsorshipForm />}
         </div>
@@ -2338,6 +2341,7 @@ const NominateBookSponsor = () => {
           padding: "0 12px"
         }}
       >
+        {/* Nomination tab hidden
         <button
           onClick={() => setActiveTab("nominate")}
           style={{
@@ -2401,6 +2405,7 @@ const NominateBookSponsor = () => {
             }} />
           )}
         </button>
+        */}
 
         <button
           onClick={() => setActiveTab("tickets")}

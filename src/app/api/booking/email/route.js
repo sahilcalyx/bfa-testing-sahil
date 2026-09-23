@@ -41,7 +41,7 @@ export async function POST(req) {
 
         const baseUrl = process.env.COMPANY_WEBSITE_URL || "https://britfintechawards.com";
         const totalAmount =
-            booking.amount != null ? Number(booking.amount) : booking.tickets * (booking.unitPrice || 295);
+            booking.amount != null ? Number(booking.amount) : booking.tickets * (booking.unitPrice || 395);
 
         const mailContent = `
         <div style="font-family: 'Outfit', 'Inter', sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e3e8ee; border-radius: 16px; background-color: #f7f9fc;">

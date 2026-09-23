@@ -20,7 +20,9 @@ import DownloadAppStrip from "../Components/DownloadAppStrip";
 import StaticHero from "../Components/SliderBigBan/StaticHero";
 import ScrollRevealVideo from "../Components/SliderBigBan/ScrollRevealVideo";
 import KeynoteSpeakersSection from "./2025/Keynotes/KeynoteSpeakersSection";
+import KeynoteAmaBanner2026 from "./2026/KeynoteSpeaker2026/KeynoteAmaBanner2026";
 import KeynoteSpeaker2026 from "./2026/KeynoteSpeaker2026/KeynoteSpeaker2026";
+import DiscussionPanel2026 from "./2026/DisscussionPanal2026/DiscussionPanel2026";
 import DiscussionPannelSection from "./2025/DiscussionPannel/DiscussionPannelSection";
 import JudgesSection2025 from "./2025/JudgesSection/JudgeSection2025";
 import HeroImageSlider2025 from "../Components/SliderBigBan/HeroImageSlider2025";
@@ -305,10 +307,11 @@ Brit Fintech Awards 2026."
 
         {/* <DynamicSliderSplit /> */}
         {/* <DynamicSliderVideo /> */}
-        <DownloadAppStrip />
+        {/* <DownloadAppStrip /> */}
         <InteractiveHero />
         <SponsorSection2026 />
-
+        {/* <KeynoteAmaBanner2026 /> */}
+        <DiscussionPanel2026 />
         <KeynoteSpeaker2026 /> 
         <AnimatedStats stats={statsData} />
         <EventHostSection />

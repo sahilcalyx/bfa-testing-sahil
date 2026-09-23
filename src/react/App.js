@@ -19,6 +19,7 @@ const AntiFraudinnovatoroftheYear = lazy(() => import("./Pages/AntiFraudinnovato
 const IDScreeningInnovatoroftheYear = lazy(() => import("./Pages/IDScreeningInnovatoroftheYear"));
 const HowToEnter = lazy(() => import("./Pages/HowToEnter"));
 const RegisterNow = lazy(() => import("./Pages/RegisterNow"));
+const RegisterNowNomination2026 = lazy(() => import("./Pages/RegisterNow-Nomination-2026"));
 const TermsAndConditions = lazy(() => import("./Pages/TermsAndConditions"));
 const PrivacyPolicy = lazy(() => import("./Pages/PrivacyPolicy"));
 const ComplianceInnovatorMSBoftheYear = lazy(() => import("./Pages/ComplianceInnovatorMSBoftheYear"));
@@ -28,6 +29,12 @@ const ProgressiveMoneyExchangerMSBoftheYear = lazy(() => import("./Pages/Progres
 const Judges = lazy(() => import("./Pages/Judges"));
 const Faq = lazy(() => import("./Pages/Faq"));
 const MsbOfTheYear = lazy(() => import("./Pages/MsbOfTheYear"));
+const MsbRisingStar = lazy(() => import("./Pages/MsbRisingStar"));
+const MsbLeader = lazy(() => import("./Pages/MsbLeader"));
+const WomenInAi = lazy(() => import("./Pages/WomenInAi"));
+const FinTechLeaderOfTheYear = lazy(() => import("./Pages/FinTechLeaderOfTheYear"));
+const PaymentGatewayOfTheYear = lazy(() => import("./Pages/PaymentGatewayOfTheYear"));
+const CrossBorderInnovatorOfTheYear = lazy(() => import("./Pages/CrossBorderInnovatorOfTheYear"));
 const Msbdisruptoroftheyear = lazy(() => import("./Pages/Msbdisruptoroftheyear"));
 const MsbAppOfTheYear = lazy(() => import("./Pages/MsbAppOfTheYear"));
 const MsbStoreofTheYear = lazy(() => import("./Pages/MsbStoreofTheYear"));
@@ -93,8 +100,12 @@ import MyRemitSponsorDetails2026 from "./Pages/2026/OurSponsors/MyRemitSponsorDe
 import GrantsPaymentsSponsorDetails2026 from "./Pages/2026/OurSponsors/GrantsPaymentsSponsorDetails2026";
 import LeatherbackSponsorDetails2026 from "./Pages/2026/OurSponsors/LeatherbackSponsorDetails2026";
 import EcexSponsorDetails2026 from "./Pages/2026/OurSponsors/EcexSponsorDetails2026";
+import InvictusVenturesSponsorDetails2026 from "./Pages/2026/OurSponsors/InvictusVenturesSponsorDetails2026";
 import PerateraSponsorDetails2026 from "./Pages/2026/OurSponsors/PerateraSponsorDetails2026";
 import TeeparamSponsorDetails2026 from "./Pages/2026/OurSponsors/TeeparamSponsorDetails2026";
+import QFRemitSponsorDetails2026 from "./Pages/2026/OurSponsors/QFRemitSponsorDetails2026";
+import RedSeaSponsorDetails2026 from "./Pages/2026/OurSponsors/RedSeaSponsorDetails2026";
+import GloryHonourSponsorDetails2026 from "./Pages/2026/OurSponsors/GloryHonourSponsorDetails2026";
 const LeatherbackSponsorDetails = lazy(() => import("./Pages/2025/OurSponsors/LeatherbackSponsorDetails"));
 const AiMsbBlog = lazy(() => import("./Pages/Blogs/AiMsbBlog"));
 const ClearJunctionDetails2025 = lazy(() => import("./Pages/2025/OurSponsors/ClearJunctionDetails2025"));
@@ -178,7 +189,10 @@ const BfaLegacy2025 = lazy(() => import("./Pages/Legacy/BfaLegacy2025"));
 const BfaLegacy2024 = lazy(() => import("./Pages/Legacy/BfaLegacy2024"));
 const EventHostDetails2026 = lazy(() => import("./Pages/2026/host/EventHostDetails2026"));
 const DaljitYoungKeynoteDetails2026 = lazy(() => import("./Pages/2026/KeynoteSpeaker2026/DaljitYoungKeynoteDetails2026"));
-const OchebhoyaEkpeteKeynoteDetails2026 = lazy(() => import("./Pages/2026/KeynoteSpeaker2026/OchebhoyaEkpeteKeynoteDetails2026"));
+const FemiEkwuyasiDPDetails2026 = lazy(() => import("./Pages/2026/DisscussionPanal2026/FemiEkwuyasiDPDetails2026"));
+const GayatriChadaramDPDetails2026 = lazy(() => import("./Pages/2026/DisscussionPanal2026/GayatriChadaramDPDetails2026"));
+const JayAnandDPDetails2026 = lazy(() => import("./Pages/2026/DisscussionPanal2026/JayAnandDPDetails2026"));
+// const OchebhoyaEkpeteKeynoteDetails2026 = lazy(() => import("./Pages/2026/KeynoteSpeaker2026/OchebhoyaEkpeteKeynoteDetails2026"));
 
 
 
@@ -368,6 +382,15 @@ function App() {
         />
         <Route path="/msb-store-of-the-year" element={<MsbStoreofTheYear />} />
         <Route path="/msb-of-year" element={<MsbOfTheYear />} />
+        <Route path="/msb-rising-star" element={<MsbRisingStar />} />
+        <Route path="/msb-leader" element={<MsbLeader />} />
+        <Route path="/woman-in-ai" element={<WomenInAi />} />
+        <Route path="/women-in-ai" element={<WomenInAi />} />
+        <Route path="/FinTech-Leader-of-the-Year" element={<FinTechLeaderOfTheYear />} />
+        <Route path="/Payment-Gateway-of-the-Year" element={<PaymentGatewayOfTheYear />} />
+        <Route path="/Cross-Border-Pay-out-Disruptor-of-the-Year" element={<CrossBorderInnovatorOfTheYear />} />
+        <Route path="/Cross-Border-Pay-out-Innovator-of-the-Year" element={<CrossBorderInnovatorOfTheYear />} />
+        <Route path="/Cross-Border-Innovator-of-the-Year" element={<CrossBorderInnovatorOfTheYear />} />
         <Route path="/msb-app-of-the-year" element={<MsbAppOfTheYear />} />
 
         <Route
@@ -383,6 +406,7 @@ function App() {
         <Route path="/judges" element={<Judges />} />
         <Route path="/faqs" element={<Faq />} />
         <Route path="/nominate-now" element={<RegisterNow />} />
+        <Route path="/nominate-now-2026" element={<RegisterNowNomination2026 />} />
 
         <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
         <Route path="/vyne-gold-sponsor" element={<VyneSponsorDetails />} />
@@ -698,9 +722,13 @@ function App() {
           path="/leatherback-sponsor-details-2026"
           element={<LeatherbackSponsorDetails2026 />}
         />
-        <Route
+        {/* <Route
           path="/ecex-sponsor-details-2026"
           element={<EcexSponsorDetails2026 />}
+        /> */}
+        <Route
+          path="/invictus-ventures-sponsor-details-2026"
+          element={<InvictusVenturesSponsorDetails2026 />}
         />
         <Route
           path="/peratera-sponsor-details-2026"
@@ -709,6 +737,18 @@ function App() {
         <Route
           path="/teeparam-sponsor-details-2026"
           element={<TeeparamSponsorDetails2026 />}
+        />
+        <Route
+          path="/qfremit-sponsor-details-2026"
+          element={<QFRemitSponsorDetails2026 />}
+        />
+        <Route
+          path="/redsea-sponsor-details-2026"
+          element={<RedSeaSponsorDetails2026 />}
+        />
+        <Route
+          path="/glory-honour-sponsor-details-2026"
+          element={<GloryHonourSponsorDetails2026 />}
         />
 
         {/* BFA Legacy */}
@@ -785,9 +825,21 @@ function App() {
           element={<DaljitYoungKeynoteDetails2026 />}
         />
         <Route
+          path="/femi-ekwuyasi-discussion-panel-2026"
+          element={<FemiEkwuyasiDPDetails2026 />}
+        />
+        <Route
+          path="/gayatri-chadaram-discussion-panel-2026"
+          element={<GayatriChadaramDPDetails2026 />}
+        />
+        <Route
+          path="/jay-anand-discussion-panel-2026"
+          element={<JayAnandDPDetails2026 />}
+        />
+        {/* <Route
           path="/ochebhoya-ekpete-keynote-speaker-2026"
           element={<OchebhoyaEkpeteKeynoteDetails2026 />}
-        />
+        /> */}
         <Route
           path="/beyond-borders-brit-fintech-awards"
           element={<Beyond_borders_how_brit_fintech />}

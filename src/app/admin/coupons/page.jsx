@@ -627,9 +627,12 @@ export default function CouponsPage() {
                   min="0"
                   value={form.bundlePrice}
                   onChange={(e) => setField("bundlePrice", e.target.value)}
-                  placeholder="e.g. 420 for Duo"
+                  placeholder="Auto from ticket price − save"
                   style={input}
                 />
+                <p style={{ fontSize: "11px", color: "#697386", margin: "5px 0 0" }}>
+                  Ticket packs use Amount off as the save. Pack price follows the live ticket rate.
+                </p>
               </div>
 
               <div>

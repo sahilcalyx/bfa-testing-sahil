@@ -12,6 +12,7 @@ import {
   Layers,
   MapPin,
   Medal,
+  Play,
   RefreshCw,
   Sparkles,
   Wallet,
@@ -314,6 +315,31 @@ const PerateraSponsorDetails2026 = () => {
                   </span>
                 </div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Featured Video */}
+        <section className="mb-14">
+          <div className="text-center mb-6 md:mb-8">
+            <span className="inline-flex items-center gap-2 text-[11px] font-extrabold uppercase tracking-[0.2em] text-[#c8102e]">
+              <Play size={13} strokeWidth={2.5} fill="currentColor" />
+              Featured Video
+            </span>
+            <h2 className="mt-2 text-[24px] md:text-[30px] font-extrabold tracking-tight text-zinc-950">
+              Watch Peratera
+            </h2>
+          </div>
+
+          <div className="relative w-full overflow-hidden rounded-2xl md:rounded-3xl border border-zinc-200/80 bg-zinc-950 shadow-[0_12px_36px_rgba(0,0,0,0.12)]">
+            <div className="relative w-full aspect-video">
+              <iframe
+                src="https://www.youtube.com/embed/oXyhjCer6dM"
+                title="Peratera - Brit FinTech Awards"
+                className="absolute top-0 left-0 w-full h-full rounded-2xl md:rounded-3xl border-0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
             </div>
           </div>
         </section>

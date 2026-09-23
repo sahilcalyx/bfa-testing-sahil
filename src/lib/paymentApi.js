@@ -1,3 +1,11 @@
+import { FALLBACK_TICKET_PACKS, packsForTicketPrice } from "./ticketPacks";
+
+export {
+  FALLBACK_TICKET_PACKS,
+  FALLBACK_TICKET_UNIT,
+  packsForTicketPrice,
+} from "./ticketPacks";
+
 /**
  * Base URL of the bfa_ticket_event Stripe/coupon service.
  * Defaults to the local service on port 5000; override with
@@ -8,15 +16,6 @@ export const PAYMENT_API_BASE = (
 ).replace(/\/$/, "");
 
 export const COUPON_API = `${PAYMENT_API_BASE}/api/coupons`;
-
-/** Shown when the payment API or Mongo is down so Individual / Duo / Team still appear. */
-export const FALLBACK_TICKET_PACKS = [
-  { code: "INDIVIDUAL", label: "INDIVIDUAL", ticketQuantity: 1, packPrice: 295, baseAmount: 295, saveAmount: 0 },
-  { code: "DUO", label: "DUO", ticketQuantity: 2, packPrice: 420, baseAmount: 590, saveAmount: 170 },
-  { code: "TEAM3", label: "TEAM", ticketQuantity: 3, packPrice: 630, baseAmount: 885, saveAmount: 255 },
-  { code: "TEAM5", label: "TEAM", ticketQuantity: 5, packPrice: 1050, baseAmount: 1475, saveAmount: 425 },
-  { code: "TEAM10", label: "TEAM", ticketQuantity: 10, packPrice: 2100, baseAmount: 2950, saveAmount: 850 },
-];
 
 export function couponFromPack(pack) {
   if (!pack?.code) return null;
@@ -101,7 +100,7 @@ export async function validateCoupon({ code, type, quantity, email }) {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ code, type, quantity, email }),
-      signal: AbortSignal.timeout(2500),
+      signal: AbortSignal.timeout(12000),
     });
     const data = await res.json();
     if (data?.valid) {
@@ -161,8 +160,10 @@ export async function fetchTicketBundles() {
     const res = await fetch(`${COUPON_API}/bundles`, { cache: "no-store" });
     const data = await res.json();
     const packs = Array.isArray(data?.bundles) ? data.bundles : [];
+    const unit = Number(data?.pricing?.ticket) || 0;
+    const raw = packs.length ? packs : FALLBACK_TICKET_PACKS;
     return {
-      bundles: packs.length ? packs : FALLBACK_TICKET_PACKS,
+      bundles: unit ? packsForTicketPrice(unit, raw) : packsForTicketPrice(undefined, raw),
       pricing: data?.pricing || null,
     };
   } catch {

@@ -74,10 +74,10 @@ const Footer = () => {
                     {" "}
                     <NavLink to="/awards">Awards</NavLink>{" "}
                   </li> */}
-                  <li>
+                  {/* <li>
                     {" "}
                     <NavLink to="/our-keynote-speaker-2025/">Keynote Speakers</NavLink>{" "}
-                  </li>
+                  </li> */}
                   <li>
                     {" "}
                     <NavLink to="/our-discussion-panel-2025/">Discussion Panel</NavLink>{" "}

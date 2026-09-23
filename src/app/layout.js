@@ -12,20 +12,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: `
-          (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-          })(window,document,'script','dataLayer','GTM-WKBV6SRT');
-        `}} />
-        <script dangerouslySetInnerHTML={{ __html: `
-          (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-          })(window,document,'script','dataLayer','GTM-5RQ73JH6');
-        `}} />
         <link rel="stylesheet" href="/assets/css/plugins/bootstrap.min.css" />
         <link rel="stylesheet" href="/assets/css/plugins/fontawesome.min.css" />
         <link rel="stylesheet" href="/assets/css/plugins/animate.css" />
@@ -35,6 +21,38 @@ export default function RootLayout({ children }) {
         <link rel="stylesheet" href="/assets/css/theme_12.css" />
       </head>
       <body className="font-sans antialiased" suppressHydrationWarning>
+        <Script id="strip-extension-attrs" strategy="beforeInteractive">
+          {`(function(){
+            function clean(el){
+              if (!el || !el.removeAttribute) return;
+              el.removeAttribute("bis_skin_checked");
+              el.removeAttribute("bis_use");
+            }
+            function scan(root){
+              if (!root) return;
+              clean(root);
+              if (root.querySelectorAll) {
+                root.querySelectorAll("[bis_skin_checked],[bis_use]").forEach(clean);
+              }
+            }
+            scan(document.documentElement);
+            new MutationObserver(function(mutations){
+              mutations.forEach(function(m){
+                if (m.type === "attributes") clean(m.target);
+                if (m.addedNodes) {
+                  m.addedNodes.forEach(function(node){
+                    if (node.nodeType === 1) scan(node);
+                  });
+                }
+              });
+            }).observe(document.documentElement, {
+              subtree: true,
+              childList: true,
+              attributes: true,
+              attributeFilter: ["bis_skin_checked", "bis_use"]
+            });
+          })();`}
+        </Script>
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WKBV6SRT" height="0" width="0" style={{display:'none',visibility:'hidden'}}></iframe></noscript>
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5RQ73JH6" height="0" width="0" style={{display:'none',visibility:'hidden'}}></iframe></noscript>
         <Script
@@ -52,6 +70,20 @@ export default function RootLayout({ children }) {
           `}
         </Script>
         {children}
+        <Script id="gtm-WKBV6SRT" strategy="afterInteractive">
+          {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+          })(window,document,'script','dataLayer','GTM-WKBV6SRT');`}
+        </Script>
+        <Script id="gtm-5RQ73JH6" strategy="afterInteractive">
+          {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+          })(window,document,'script','dataLayer','GTM-5RQ73JH6');`}
+        </Script>
         <Script id="tawk-to-script" strategy="lazyOnload">
           {`
             var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();

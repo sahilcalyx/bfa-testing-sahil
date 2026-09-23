@@ -58,7 +58,7 @@ const turnoverOptions = [
 
 const RegisterNow = () => {
   // Add a constant to control form disabled state
-  const NOMINATIONS_CLOSED = false;
+  const NOMINATIONS_CLOSED = true;
 
   const [captchaToken, setCaptchaToken] = useState("");
   const handleCaptchaChange = (token) => {
@@ -709,20 +709,20 @@ const RegisterNow = () => {
   return (
     <>
       <Helmet>
-        <title>Brit Fintech Awards | Nominate for the Awards</title>
+        <title>Brit Fintech Awards | Nominations Are Closed</title>
         <meta
           name="description"
-          content="Nominate Now for Brit Fintech Awards to participate in celebrating innovation and excellence in the UK financial technology sector."
+          content="Nominations for the Brit Fintech Awards are now closed. Thank you for your interest in celebrating innovation and excellence in the UK financial technology sector."
         />
         <meta
           name="keywords"
-          content="Brit Fintech Awards, Nominate Now, Registration, Fintech Awards Registration, Innovation Celebration"
+          content="Brit Fintech Awards, Nominations Closed, Fintech Awards"
         />
         <meta name="author" content="Brit Fintech Awards" />
-        <meta property="og:title" content="Brit Fintech Awards | Nominate Now" />
+        <meta property="og:title" content="Brit Fintech Awards | Nominations Are Closed" />
         <meta
           property="og:description"
-          content="Nominate Now for Brit Fintech Awards to participate in celebrating innovation and excellence in the UK financial technology sector."
+          content="Nominations for the Brit Fintech Awards are now closed. Thank you for your interest."
         />
         <meta
           property="og:image"
@@ -795,13 +795,13 @@ const RegisterNow = () => {
         </div>
       </div>
       <div className="cs-height_40 cs-height_lg_40" />
-      <NominationAnnouncement />
+      <NominationAnnouncement isClosed />
       {/* <div class="cs-height_60 cs-height_lg_75 "></div> */}
       <div id="nominate-now" className="container" style={{ zIndex: 9999 }} >
         <div className="cs-contact cs-style2 cs-white_bg justify-content-center">
           <div className="cs-contact_left cs-accent_bg position-relative">
             <h4 className="cs-contact_title cs-semi_bold cs-white">
-              HOW TO NOMINATE:
+              {NOMINATIONS_CLOSED ? "NOMINATIONS CLOSED:" : "HOW TO NOMINATE:"}
             </h4>
             <ul className="text-white" style={{ fontSize: '14px' }}>
               {NOMINATIONS_CLOSED ? (
@@ -1108,6 +1108,15 @@ const RegisterNow = () => {
                         />
                         Payment Acquirer of the Year
                       </MenuItem>
+                      <MenuItem value="Payment Gateway of the Year">
+                        <Checkbox
+                          checked={formData.awardcate.includes(
+                            "Payment Gateway of the Year"
+                          )}
+                          disabled={NOMINATIONS_CLOSED}
+                        />
+                        Payment Gateway of the Year
+                      </MenuItem>
                       <MenuItem value="Startup of the Year">
                         <Checkbox
                           checked={formData.awardcate.includes(
@@ -1125,6 +1134,13 @@ const RegisterNow = () => {
                           disabled={NOMINATIONS_CLOSED}
                         />
                         Woman Entrepreneur in FinTech of the Year
+                      </MenuItem>
+                      <MenuItem value="Woman in AI of the Year">
+                        <Checkbox
+                          checked={formData.awardcate.includes("Woman in AI of the Year")}
+                          disabled={NOMINATIONS_CLOSED}
+                        />
+                        Woman in AI of the Year
                       </MenuItem>
                       <MenuItem value="Anti-Fraud Innovator of the Year">
                         <Checkbox
@@ -1152,6 +1168,24 @@ const RegisterNow = () => {
                           disabled={NOMINATIONS_CLOSED}
                         />
                         FinTech of the Year
+                      </MenuItem>
+                      <MenuItem value="FinTech Leader of the Year">
+                        <Checkbox
+                          checked={formData.awardcate.includes(
+                            "FinTech Leader of the Year"
+                          )}
+                          disabled={NOMINATIONS_CLOSED}
+                        />
+                        FinTech Leader of the Year
+                      </MenuItem>
+                      <MenuItem value="Cross-Border Pay-out Disruptor of the Year">
+                        <Checkbox
+                          checked={formData.awardcate.includes(
+                            "Cross-Border Pay-out Disruptor of the Year"
+                          )}
+                          disabled={NOMINATIONS_CLOSED}
+                        />
+                        Cross-Border Pay-out Disruptor of the Year
                       </MenuItem>
                       {/* MSB Section options */}
                       <ListSubheader
@@ -1234,6 +1268,20 @@ const RegisterNow = () => {
                           disabled={NOMINATIONS_CLOSED}
                         />
                         MSB Store of the Year
+                      </MenuItem>
+                      <MenuItem value="MSB Rising Star of the Year">
+                        <Checkbox
+                          checked={formData.awardcate.includes("MSB Rising Star of the Year")}
+                          disabled={NOMINATIONS_CLOSED}
+                        />
+                        MSB Rising Star of the Year
+                      </MenuItem>
+                      <MenuItem value="MSB Leader of the Year">
+                        <Checkbox
+                          checked={formData.awardcate.includes("MSB Leader of the Year")}
+                          disabled={NOMINATIONS_CLOSED}
+                        />
+                        MSB Leader of the Year
                       </MenuItem>
                       <ListSubheader
                         style={{

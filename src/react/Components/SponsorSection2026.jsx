@@ -47,6 +47,15 @@ const SPONSORS_2026 = [
     alt: "Leatherback",
     title: "Leatherback",
   },
+  {
+    name: "Invictus Ventures",
+    video: "/assets/video/sponsors-logo-2026/Invictus-sponsor-details-2026.webm",
+    link: "/invictus-ventures-sponsor-details-2026",
+    external: false,
+    tier: "Silver Sponsor",
+    alt: "Invictus Ventures",
+    title: "Invictus Ventures",
+  },
    {
     name: "Grants Payments",
     video: "/assets/video/sponsors-logo-2026/grants-payments-sponsor-details-2026.webm",
@@ -57,15 +66,6 @@ const SPONSORS_2026 = [
     title: "Grants Payments",
   },
   {
-    name: "ECEX",
-    video: "/assets/video/sponsors-logo-2026/ecex-sponsor-details-2026.webm",
-    link: "/ecex-sponsor-details-2026",
-    external: false,
-    tier: "Silver Sponsor",
-    alt: "ECEX",
-    title: "ECEX",
-  },
-  {
     name: "Peratera",
     video: "/assets/video/sponsors-logo-2026/peratera-sponsor-details-2026.webm",
     link: "/peratera-sponsor-details-2026",
@@ -74,12 +74,41 @@ const SPONSORS_2026 = [
     alt: "Peratera",
     title: "Peratera",
   },
+  // {
+  //   name: "ECEX",
+  //   video: "/assets/video/sponsors-logo-2026/ecex-sponsor-details-2026.webm",
+  //   link: "/ecex-sponsor-details-2026",
+  //   external: false,
+  //   tier: "Silver Sponsor",
+  //   alt: "ECEX",
+  //   title: "ECEX",
+  // },
+  
+  
    {
     name: "Leftover Currency",
     video: "/assets/video/sponsors-logo-2026/sposnsor-logo-2026-leftover-currency.webm",
     link: "/leftover-currency-sponsor-details-2026",
     external: false,
     tier: "Innovation Sponsor",
+  },
+  {
+    name: "QF Remit",
+    video: "/assets/video/sponsors-logo-2026/sposnsor-logo-2026-qfremit.webm",
+    link: "/qfremit-sponsor-details-2026",
+    external: false,
+    tier: "Innovation Sponsor",
+    alt: "QF Remit",
+    title: "QF Remit",
+  },
+  {
+    name: "Glory & Honour",
+    video: "/assets/video/sponsors-logo-2026/glory-honour-sponsor-details-2026.webm",
+    link: "/glory-honour-sponsor-details-2026",
+    external: false,
+    tier: "Strategic Sponsor",
+    alt: "Glory & Honour",
+    title: "Glory & Honour",
   },
   {
     name: "MyRemit",
@@ -91,6 +120,16 @@ const SPONSORS_2026 = [
     title: "MyRemit",
   },
   {
+    name: "Red Sea Money Transfer",
+    video: "/assets/video/sponsors-logo-2026/Redsea-logo-sponsor-details-2026.webm",
+    link: "/redsea-sponsor-details-2026",
+    external: false,
+    tier: "Strategic Sponsor",
+    alt: "Red Sea Money Transfer",
+    title: "Red Sea Money Transfer",
+  },
+  
+  {
     name: "Teeparam",
     video: "/assets/video/sponsors-logo-2026/Teeparam-logo-sponsor-details-2026.webm",
     link: "/teeparam-sponsor-details-2026",
@@ -99,39 +138,75 @@ const SPONSORS_2026 = [
     alt: "Teeparam",
     title: "Teeparam",
   },
+  {
+    name: "Blue Nile Money Transfer",
+    video: "/assets/video/sponsors-logo-2026/Bluenile-sponsor-details-2026.webm",
+    link: "https://bluenilemoneytransfer.com/",
+    external: true,
+    alt: "Blue Nile Money Transfer",
+    title: "Blue Nile Money Transfer",
+  },
+  {
+    name: "FinestPay",
+    video: "/assets/video/sponsors-logo-2026/Fintestpay-sponsor-details-2026.webm",
+    link: "https://finestpay.co.uk/",
+    external: true,
+    alt: "FinestPay",
+    title: "FinestPay",
+  },
+  {
+    name: "IfePay",
+    video: "/assets/video/sponsors-logo-2026/Ifpay-sponsor-details-2026.webm",
+    link: "https://ifepay.co.uk/",
+    external: true,
+    alt: "IfePay",
+    title: "IfePay",
+  },
   
 ];
 
 function SponsorSlide({ sponsor, onNavigate }) {
+  const media = sponsor.video ? (
+    <LogoVideo
+      src={sponsor.video}
+      autoPlay
+      loop
+      muted
+      playsInline
+      aria-label={sponsor.name}
+    />
+  ) : (
+    <img
+      src={sponsor.image}
+      alt={sponsor.name}
+      style={{ width: "100%", maxHeight: "140px", objectFit: "contain", padding: "16px", borderRadius: "12px" }}
+    />
+  );
+
+  if (sponsor.external) {
+    return (
+      <SponsorCard
+        as="a"
+        href={sponsor.link}
+        target="_blank"
+        rel="noopener noreferrer"
+        title={sponsor.name}
+      >
+        {media}
+      </SponsorCard>
+    );
+  }
+
   return (
     <SponsorCard
       to={sponsor.link}
-      target={sponsor.external ? "_blank" : undefined}
-      rel={sponsor.external ? "noopener noreferrer" : undefined}
       title={sponsor.name}
       onClick={(e) => {
-        if (!sponsor.external) {
-          e.preventDefault();
-          onNavigate(sponsor.link);
-        }
+        e.preventDefault();
+        onNavigate(sponsor.link);
       }}
     >
-      {sponsor.video ? (
-        <LogoVideo
-          src={sponsor.video}
-          autoPlay
-          loop
-          muted
-          playsInline
-          aria-label={sponsor.name}
-        />
-      ) : (
-        <img
-          src={sponsor.image}
-          alt={sponsor.name}
-          style={{ width: "100%", maxHeight: "140px", objectFit: "contain", padding: "16px", borderRadius: "12px" }}
-        />
-      )}
+      {media}
     </SponsorCard>
   );
 }
@@ -210,7 +285,7 @@ const SectionContainer = styled.section`
   padding: 56px 0 60px;
   border-top: 1px solid #eaeef2;
   border-bottom: 1px solid #eaeef2;
-  margin-bottom: 60px;
+  margin-bottom: 0;
   overflow: hidden;
 `;
 
@@ -250,14 +325,14 @@ const FadeEdge = styled.div`
 const MarqueeTrack = styled.div.attrs({ className: "bfa-sponsor-marquee-track" })`
   display: flex;
   width: max-content;
-  animation: ${marqueeX} 32s linear infinite;
+  animation: ${marqueeX} 60s linear infinite;
   animation-play-state: ${(p) => (p.$paused ? "paused" : "running")};
   will-change: transform;
   backface-visibility: hidden;
   transform: translateZ(0);
 
   @media (max-width: 768px) {
-    animation-duration: 24s;
+    animation-duration: 48s;
   }
 
   @media (prefers-reduced-motion: reduce) {

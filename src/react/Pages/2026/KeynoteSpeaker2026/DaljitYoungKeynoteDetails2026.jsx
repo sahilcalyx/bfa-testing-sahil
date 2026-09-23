@@ -2,9 +2,40 @@ import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
 import { FaLinkedin } from "react-icons/fa";
-import { daljitYoung } from "./speakers2026";
 
-const speaker = daljitYoung;
+const speaker = {
+  id: "daljit-young",
+  slug: "/daljit-young-keynote-speaker-2026",
+  initials: "DY",
+  name: "Daljit Young",
+  designation: "Chief Financial Officer",
+  company: "Peratera UK Ltd",
+  logo: "/assets/img/keynote-speakers-2026/Peratera-logo-black.png",
+  logoOnDark: false,
+  img: "/assets/img/keynote-speakers-2026/Daljeet-profile-image.jpg",
+  placeholder: false,
+  tagline: "Building finance, regulation and AI into everyday operations",
+  linkedin: "https://www.linkedin.com/in/daljityoung24658999",
+  videoUrl: "https://www.youtube.com/embed/Wpr0WqzpmyY",
+  stats: {
+    domain: "Finance & Regulatory Fintech",
+    association: "2026 Keynote Speaker",
+    experience: "20+ Years",
+  },
+  highlights: [
+    "CFO of Peratera UK Ltd, an FCA-authorised electronic money institution",
+    "Joined shortly after authorisation to build the finance function and regulatory framework",
+    "20+ years across investment banking, travel, payments and regulated fintech",
+    "Former CFO and COO of a CAA-regulated travel scale-up",
+    "Built finance functions from the ground up and led teams of 80+",
+    "Delivering over £320,000 a year in AI-driven cost avoidance, now scaling across the business",
+  ],
+  bioParagraphs: [
+    "Daljit Young is <strong>Chief Financial Officer of Peratera UK Ltd</strong>, an FCA-authorised electronic money institution, which she joined shortly after authorisation to <strong>build its finance function and regulatory framework</strong>.",
+    "She has spent <strong>over twenty years</strong> across investment banking, travel, payments and regulated fintech, including as <strong>CFO and COO of a CAA-regulated travel scale-up</strong>. She has built finance functions from the ground up and led teams of more than 80 across finance and other business functions.",
+    "Daljit treats <strong>AI as a normal part of running a finance function</strong> rather than a separate project. She is already delivering over <strong>£320,000 a year in cost avoidance</strong> and is now scaling it across the wider business.",
+  ],
+};
 
 const DaljitYoungKeynoteDetails2026 = () => {
   const navigate = useNavigate();
@@ -141,7 +172,7 @@ const DaljitYoungKeynoteDetails2026 = () => {
                 </div>
               </div>
 
-              <div className="bg-white border border-zinc-100 rounded-[32px] p-8 md:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.015)]">
+              <div className="bg-white border border-zinc-100 rounded-[32px] p-8 md:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.015)] mb-8">
                 <span className="text-[10px] font-black uppercase tracking-[0.25em] text-[#c8102e] block mb-6">
                   Key Highlights
                 </span>
@@ -159,6 +190,23 @@ const DaljitYoungKeynoteDetails2026 = () => {
                       </p>
                     </div>
                   ))}
+                </div>
+              </div>
+
+              <div className="bg-white border border-zinc-100 rounded-[32px] p-6 md:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.015)]">
+                <span className="text-[10px] font-black uppercase tracking-[0.25em] text-[#c8102e] block mb-6">
+                  Featured Video
+                </span>
+                <div className="relative w-full overflow-hidden rounded-[24px] border border-zinc-200/80 bg-zinc-950 shadow-[0_12px_36px_rgba(0,0,0,0.12)]">
+                  <div className="relative w-full aspect-video">
+                    <iframe
+                      src={speaker.videoUrl}
+                      title={`${speaker.name} - Brit FinTech Awards 2026`}
+                      className="absolute top-0 left-0 w-full h-full border-0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                    />
+                  </div>
                 </div>
               </div>
             </div>

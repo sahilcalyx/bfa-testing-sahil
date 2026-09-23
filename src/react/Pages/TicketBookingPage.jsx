@@ -5,7 +5,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { Helmet } from "react-helmet";
 import toast, { Toaster } from "react-hot-toast";
 import CouponCodeInput from "@/components/CouponCodeInput";
-import { PAYMENT_API_BASE, fetchPricing, fetchTicketBundles, formatGBP, FALLBACK_TICKET_PACKS, couponFromPack, resolveCouponForQuantity } from "@/lib/paymentApi";
+import { PAYMENT_API_BASE, fetchPricing, fetchTicketBundles, formatGBP, FALLBACK_TICKET_PACKS, couponFromPack, resolveCouponForQuantity, packsForTicketPrice } from "@/lib/paymentApi";
 // Country codes list (partial - you can extend it)
 // ====== Titles ======
 const titleOptions = [
@@ -200,7 +200,7 @@ console.log(sortedCountryCodes);
 
 const MAX_TICKETS = 10;
 // Fallback only — the live price comes from the admin Pricing page.
-const ACTIVE_TICKET_PRICE = 295;
+const ACTIVE_TICKET_PRICE = 395;
 
 const buildTicketOptions = (unitPrice) => [
   { value: "", label: "Tickets" },
@@ -249,7 +249,10 @@ function TicketBookingPage() {
       setBundles(packs?.length ? packs : FALLBACK_TICKET_PACKS);
     });
     fetchPricing().then((p) => {
-      if (!cancelled && p?.ticket) setTicketPrice(p.ticket);
+      if (!cancelled && p?.ticket) {
+        setTicketPrice(p.ticket);
+        setBundles((prev) => packsForTicketPrice(p.ticket, prev));
+      }
     });
     return () => {
       cancelled = true;
@@ -916,10 +919,10 @@ function TicketBookingPage() {
         <div className="ticket-earlybird-wrap">
           <div className="ticket-earlybird-card">
             <span className="ticket-earlybird-badge">Active</span>
-            <h4 className="ticket-earlybird-title">Early Bird Ticket Extended</h4>
-            <p className="ticket-earlybird-dates">16th August – 10th September 2026</p>
+            <h4 className="ticket-earlybird-title">Awards Night Tickets</h4>
+            {/* <p className="ticket-earlybird-dates">11th September - Onwords</p> */}
             <div className="ticket-earlybird-prices">
-              <span className="ticket-earlybird-was">£395</span>
+              {ticketPrice < 395 && <span className="ticket-earlybird-was">£395</span>}
               <span className="ticket-earlybird-now">£{ticketPrice}</span>
             </div>
           </div>

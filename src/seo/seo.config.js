@@ -73,7 +73,61 @@ export const seoByPath = {
       images: ["/assets/img/og/home.jpg"],
     },
   },
-  "/ochebhoya-ekpete-keynote-speaker-2026": {
+  "/femi-ekwuyasi-discussion-panel-2026": {
+    title: "Femi Ekwuyasi - Discussion Panel | Brit FinTech Awards 2026",
+    description: "Femi Ekwuyasi, Co-Founder and CEO of 3ribe, is a discussion panelist at the Brit FinTech Awards 2026.",
+    openGraph: {
+      title: "Femi Ekwuyasi - Discussion Panel | Brit FinTech Awards 2026",
+      description: "Femi Ekwuyasi, Co-Founder and CEO of 3ribe, is a discussion panelist at the Brit FinTech Awards 2026.",
+      url: `${siteBaseUrl}/femi-ekwuyasi-discussion-panel-2026`,
+      siteName,
+      images: [{ url: "/assets/img/discussionpanel-2026/3ribe-logo-alt.png", width: 1200, height: 630, alt: "Femi Ekwuyasi Discussion Panel BFA 2026" }],
+      type: "profile",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Femi Ekwuyasi - Discussion Panel | Brit FinTech Awards 2026",
+      description: "Femi Ekwuyasi, Co-Founder and CEO of 3ribe, is a discussion panelist at the Brit FinTech Awards 2026.",
+      images: ["/assets/img/discussionpanel-2026/3ribe-logo-alt.png"],
+    },
+  },
+  "/jay-anand-discussion-panel-2026": {
+    title: "Jay Anand - Discussion Panel | Brit FinTech Awards 2026",
+    description: "Jay Anand, Director and MLRO at Mercury Danati Ltd, is a discussion panelist at the Brit FinTech Awards 2026.",
+    openGraph: {
+      title: "Jay Anand - Discussion Panel | Brit FinTech Awards 2026",
+      description: "Jay Anand, Director and MLRO at Mercury Danati Ltd, is a discussion panelist at the Brit FinTech Awards 2026.",
+      url: `${siteBaseUrl}/jay-anand-discussion-panel-2026`,
+      siteName,
+      images: [{ url: "/assets/img/discussionpanel-2026/Jay.png", width: 1200, height: 630, alt: "Jay Anand Discussion Panel BFA 2026" }],
+      type: "profile",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Jay Anand - Discussion Panel | Brit FinTech Awards 2026",
+      description: "Jay Anand, Director and MLRO at Mercury Danati Ltd, is a discussion panelist at the Brit FinTech Awards 2026.",
+      images: ["/assets/img/discussionpanel-2026/Jay.png"],
+    },
+  },
+  "/gayatri-chadaram-discussion-panel-2026": {
+    title: "Gayatri Chadaram - Discussion Panel | Brit FinTech Awards 2026",
+    description: "Gayatri Chadaram, Head of Compliance and MLRO at Leatherback, is a discussion panelist at the Brit FinTech Awards 2026.",
+    openGraph: {
+      title: "Gayatri Chadaram - Discussion Panel | Brit FinTech Awards 2026",
+      description: "Gayatri Chadaram, Head of Compliance and MLRO at Leatherback, is a discussion panelist at the Brit FinTech Awards 2026.",
+      url: `${siteBaseUrl}/gayatri-chadaram-discussion-panel-2026`,
+      siteName,
+      images: [{ url: "/assets/img/discussionpanel-2026/Gayatri.jpg", width: 1200, height: 630, alt: "Gayatri Chadaram Discussion Panel BFA 2026" }],
+      type: "profile",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Gayatri Chadaram - Discussion Panel | Brit FinTech Awards 2026",
+      description: "Gayatri Chadaram, Head of Compliance and MLRO at Leatherback, is a discussion panelist at the Brit FinTech Awards 2026.",
+      images: ["/assets/img/discussionpanel-2026/Gayatri.jpg"],
+    },
+  },
+  /* "/ochebhoya-ekpete-keynote-speaker-2026": {
     title: "Ochebhoya Ekpete - Keynote Speaker | Brit FinTech Awards 2026",
     description: "Ochebhoya Ekpete, CEO of Leatherback UK, is a keynote speaker at the Brit FinTech Awards 2026.",
     openGraph: {
@@ -90,7 +144,7 @@ export const seoByPath = {
       description: "Ochebhoya Ekpete, CEO of Leatherback UK, is a keynote speaker at the Brit FinTech Awards 2026.",
       images: ["/assets/img/keynotes/Ochebhoya Ekpete.png"],
     },
-  },
+  }, */
   "/event-host-2026": {
     title: "Stephen Simmons - Official Host | Brit FinTech Awards 2026",
     description: "Award-winning magician and corporate entertainer Stephen Simmons will host the Brit FinTech Awards 2026 in London.",
@@ -590,6 +644,126 @@ export const seoByPath = {
         "Recognised as MSB Store of the Year 2025 — competitive rates, 80+ currencies, and trusted FX services across London.",
       images: [
         "/assets/img/sponsor-logo/sponsor-banner-strip-2026/sponsor-banner-strip-2026-mercury-danati-details-banner-2026.png",
+      ],
+    },
+  },
+  "/qfremit-sponsor-details-2026": {
+    title: "QF Remit | Innovation Sponsor | Brit FinTech Awards 2026",
+    description:
+      "QF Remit is a cross-border money transfer platform making global payments simple, secure and efficient across 30+ countries and 20+ currencies. Innovation Sponsor of Brit FinTech Awards 2026.",
+    openGraph: {
+      title: "QF Remit – Making global money transfers simpler | Brit FinTech Awards 2026",
+      description:
+        "QF Remit joins the Brit FinTech Awards 2026 as an Innovation Sponsor, helping make global money transfers simpler, more transparent and more efficient.",
+      url: `${siteBaseUrl}/qfremit-sponsor-details-2026`,
+      siteName,
+      images: [
+        {
+          url: "/assets/img/sponsor-logo/sponsor-banner-strip-2026/QF-sponsor-details-banner-2026.png",
+          width: 1920,
+          height: 430,
+          alt: "QF Remit - Innovation Sponsor | Brit FinTech Awards 2026",
+        },
+      ],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "QF Remit – Making global money transfers simpler | Brit FinTech Awards 2026",
+      description:
+        "QF Remit joins the Brit FinTech Awards 2026 as an Innovation Sponsor, helping make global money transfers simpler, more transparent and more efficient.",
+      images: [
+        "/assets/img/sponsor-logo/sponsor-banner-strip-2026/QF-sponsor-details-banner-2026.png",
+      ],
+    },
+  },
+  "/glory-honour-sponsor-details-2026": {
+    title: "Glory & Honour | Strategic Sponsor | Brit FinTech Awards 2026",
+    description:
+      "Glory & Honour is a trusted currency exchange business committed to reliable, convenient and customer-focused financial services. Strategic Sponsor of Brit FinTech Awards 2026.",
+    openGraph: {
+      title: "Glory & Honour: Trusted currency exchange | Brit FinTech Awards 2026",
+      description:
+        "Glory & Honour is a Strategic Sponsor of the Brit FinTech Awards 2026 — trusted currency exchange connecting people across borders.",
+      url: `${siteBaseUrl}/glory-honour-sponsor-details-2026`,
+      siteName,
+      images: [
+        {
+          url: "/assets/img/sponsor-logo/sponsor-banner-strip-2026/glory-honour-sponsor-details-banner-2026.png",
+          width: 1920,
+          height: 430,
+          alt: "Glory & Honour - Strategic Sponsor | Brit FinTech Awards 2026",
+        },
+      ],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Glory & Honour: Trusted currency exchange | Brit FinTech Awards 2026",
+      description:
+        "Glory & Honour is a Strategic Sponsor of the Brit FinTech Awards 2026.",
+      images: [
+        "/assets/img/sponsor-logo/sponsor-banner-strip-2026/ecex-sponsor-details-banner-2026.png",
+      ],
+    },
+  },
+  "/redsea-sponsor-details-2026": {
+    title: "Red Sea Money Transfer | Strategic Sponsor | Brit FinTech Awards 2026",
+    description:
+      "Red Sea Money Transfer returns as a Strategic Sponsor of the Brit FinTech Awards 2026, helping customers send money from the UK to 50+ countries. MSB App of the Year 2025.",
+    openGraph: {
+      title: "Red Sea Money Transfer: Connecting people across borders | Brit FinTech Awards 2026",
+      description:
+        "Red Sea Money Transfer returns as a Strategic Sponsor of the Brit FinTech Awards 2026, supporting innovation across the fintech and remittance industry.",
+      url: `${siteBaseUrl}/redsea-sponsor-details-2026`,
+      siteName,
+      images: [
+        {
+          url: "/assets/img/sponsor-logo/sponsor-banner-strip-2026/redsea-sponsor-details-banner-2026.png",
+          width: 1920,
+          height: 430,
+          alt: "Red Sea Money Transfer - Strategic Sponsor | Brit FinTech Awards 2026",
+        },
+      ],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Red Sea Money Transfer: Connecting people across borders | Brit FinTech Awards 2026",
+      description:
+        "Red Sea Money Transfer returns as a Strategic Sponsor of the Brit FinTech Awards 2026.",
+      images: [
+        "/assets/img/sponsor-logo/sponsor-banner-strip-2026/redsea-sponsor-details-banner-2026.png",
+      ],
+    },
+  },
+  "/invictus-ventures-sponsor-details-2026": {
+    title: "Invictus Ventures | Silver Sponsor | Brit FinTech Awards 2026",
+    description:
+      "Invictus Ventures joins the Brit FinTech Awards 2026 as a Silver Sponsor, providing payment infrastructure and technology solutions that help businesses access global payment methods.",
+    openGraph: {
+      title: "Invictus Ventures joins Brit FinTech Awards 2026 as Silver Sponsor",
+      description:
+        "Invictus Ventures provides payment infrastructure and technology solutions that help businesses access global payment methods through a network of regulated financial partners.",
+      url: `${siteBaseUrl}/invictus-ventures-sponsor-details-2026`,
+      siteName,
+      images: [
+        {
+          url: "/assets/img/sponsor-logo/sponsor-banner-strip-2026/ecex-sponsor-details-banner-2026.png",
+          width: 1920,
+          height: 430,
+          alt: "Invictus Ventures - Silver Sponsor | Brit FinTech Awards 2026",
+        },
+      ],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Invictus Ventures joins Brit FinTech Awards 2026 as Silver Sponsor",
+      description:
+        "Invictus Ventures joins the Brit FinTech Awards 2026 as a Silver Sponsor, providing payment infrastructure and technology solutions for global payments.",
+      images: [
+        "/assets/img/sponsor-logo/sponsor-banner-strip-2026/ecex-sponsor-details-banner-2026.png",
       ],
     },
   },

@@ -1,48 +1,62 @@
 import React from 'react';
 
-const NominationAnnouncement = ({ showFooter = true }) => {
+const NominationAnnouncement = ({ showFooter = true, isClosed = false }) => {
   return (
     <div className="nomination-wrapper py-5 px-3">
       <div className="container text-center">
         <h2 className="headline mb-3">
-          Nominations Open – <span className="highlight">Get Yours In Today!</span>
+          {isClosed ? (
+            <>Nominations Closed – <span className="highlight">Thank You for Your Interest!</span></>
+          ) : (
+            <>Nominations Open – <span className="highlight">Get Yours In Today!</span></>
+          )}
         </h2>
-        <p className="lead mb-5">Nominate. Celebrate. Inspire.</p>
+        <p className="lead mb-5">
+          {isClosed ? "Nominations for this year have now closed." : "Nominate. Celebrate. Inspire."}
+        </p>
 
-        <div className="row justify-content-center gy-4">
+        <div className="row justify-content-center gy-4 align-items-stretch">
           {/* Super Early Bird — expired */}
-          {/* <div className="col-md-8 col-lg-4">
-            <div className="offer-card gradient-expired">
-              <span className="offer-badge offer-badge-expired">Expired</span>
-              <h4 className="title">Super Early Bird Offer </h4>
-              <p className="date-range">2nd June – 30th June 2026</p>
-              <div className="price-row">
-                <span className="price-original">£395</span>
-                <span className="price">£195</span>
+          {isClosed && (
+            <div className="col-md-8 col-lg-4 d-flex">
+              <div className="offer-card gradient-expired">
+                <span className="offer-badge offer-badge-expired">Expired</span>
+                <h4 className="title">Super Early Bird Offer </h4>
+                <p className="date-range">2nd June – 30th June 2026</p>
+                <div className="price-row">
+                  <span className="price-original">£395</span>
+                  <span className="price">£195</span>
+                </div>
               </div>
             </div>
-          </div> */}
-  
-          {/* Early Bird — expired */}
-          {/* <div className="col-md-8 col-lg-4">
-            <div className="offer-card gradient-expired">
-              <span className="offer-badge offer-badge-expired">Expired</span>
-              <h4 className="title">Early Bird Offer Extended</h4>
-              <p className="date-range">1st July – 31st July 2026</p>
-              <div className="price-row">
-                <span className="price-original">£395</span>
-                <span className="price">£295</span>
-              </div>
-            </div>
-          </div> */}
+          )}
 
-          {/* Standard Nomination — active */}
-          <div className="col-md-8 col-lg-4">
-            <div className="offer-card gradient-theme">
-              <span className="offer-badge offer-badge-active">Active</span>
+          {/* Early Bird — expired */}
+          {isClosed && (
+            <div className="col-md-8 col-lg-4 d-flex">
+              <div className="offer-card gradient-expired">
+                <span className="offer-badge offer-badge-expired">Expired</span>
+                <h4 className="title">Early Bird Offer Extended</h4>
+                <p className="date-range">1st July – 31st July 2026</p>
+                <div className="price-row">
+                  <span className="price-original">£395</span>
+                  <span className="price">£295</span>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Standard Nomination */}
+          <div className="col-md-8 col-lg-4 d-flex">
+            <div className={`offer-card ${isClosed ? "gradient-expired" : "gradient-theme"}`}>
+              <span className={`offer-badge ${isClosed ? "offer-badge-expired" : "offer-badge-active"}`}>
+                {isClosed ? "Expired" : "Active"}
+              </span>
               <h4 className="title">Standard Nomination Extended </h4>
               <p className="date-range">1st August – 7th September 2026</p>
-              <div className="price">£395</div>
+              <div className="price-row">
+                <span className="price">£395</span>
+              </div>
             </div>
           </div>
         </div>
@@ -50,20 +64,35 @@ const NominationAnnouncement = ({ showFooter = true }) => {
 
         {showFooter && (
           <div className="mt-5">
-            <p className="fs-5 fw-bold text-dark mb-2">
-              Don’t miss your chance to nominate your business at the best rate.
-            </p>
+            {isClosed ? (
+              <>
+                <p className="fs-5 fw-bold text-dark mb-2">
+                  Nominations are now closed.
+                </p>
+                <p className="fs-5 text-secondary">
+                  Thank you to everyone who submitted a nomination.
+                  <br /><br />
+                  <strong>
+                    <span className="highlight">We look forward to seeing you at the awards.</span>
+                  </strong>
+                </p>
+              </>
+            ) : (
+              <>
+                <p className="fs-5 fw-bold text-dark mb-2">
+                  Don’t miss your chance to nominate your business at the best rate.
+                </p>
 
-            <p className="fs-5 text-secondary">
-              Early movers secure the best rates and maximize their opportunity to shine at the awards.
-              <br /><br />
+                <p className="fs-5 text-secondary">
+                  Early movers secure the best rates and maximize their opportunity to shine at the awards.
+                  <br /><br />
 
-              <strong >
-
-                <span className="highlight">Submit Your Nomination Today.</span>
-              </strong>
-
-            </p>
+                  <strong>
+                    <span className="highlight">Submit Your Nomination Today.</span>
+                  </strong>
+                </p>
+              </>
+            )}
           </div>
         )}
       </div>
@@ -97,6 +126,13 @@ const NominationAnnouncement = ({ showFooter = true }) => {
           transition: all 0.3s ease;
           box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
           border: 2px solid transparent;
+          width: 100%;
+          height: 100%;
+          min-height: 200px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
         }
 
         .offer-badge {
@@ -133,12 +169,19 @@ const NominationAnnouncement = ({ showFooter = true }) => {
           font-size: 1.3rem;
           font-weight: 600;
           margin-bottom: 8px;
+          min-height: 2.6em;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          line-height: 1.3;
         }
 
         .date-range {
           font-size: 1rem;
           color: #666;
           margin-bottom: 12px;
+          min-height: 1.5em;
         }
 
         .price {

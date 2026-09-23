@@ -165,6 +165,23 @@ const Awards = () => {
                   <div className="col-lg-4 wow fadeIn d-flex">
                     <div className="cs-icon_box cs-style3 text-center h-100 d-flex flex-column">
                       <div className="cs-center">
+                        <img src="../assets/img/Fintech/awards-2026.png" alt="Payment Gateway of the Year" />
+                      </div>
+                      <h2 className="cs-icon_box_title cs-semi_bold">
+                        <strong>Payment Gateway</strong> of the Year
+                      </h2>
+                      <div className="cs-icon_box_subtitle mb-4 flex-grow-1">
+                        Recognising outstanding payment gateway solutions driving the future of digital payments.
+                      </div>
+                      <NavLink to="/Payment-Gateway-of-the-Year" className="btn-black">
+                        Explore More
+                      </NavLink>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-4 wow fadeIn d-flex">
+                    <div className="cs-icon_box cs-style3 text-center h-100 d-flex flex-column">
+                      <div className="cs-center">
                         <img src="../assets/img/Fintech/awards-2026.png" alt="Aword Image" />
                       </div>
                       <h2 className="cs-icon_box_title cs-semi_bold mb-4">
@@ -196,6 +213,23 @@ const Awards = () => {
                       </NavLink>
                     </div>
                     {/* <div className="cs-height_30 cs-height_lg_30" /> */}
+                  </div>
+
+                  <div className="col-lg-4 wow fadeIn d-flex">
+                    <div className="cs-icon_box cs-style3 text-center h-100 d-flex flex-column">
+                      <div className="cs-center">
+                        <img src="../assets/img/Fintech/awards-2026.png" alt="Woman in AI of the Year" />
+                      </div>
+                      <h2 className="cs-icon_box_title cs-semi_bold">
+                        <strong>Woman in AI</strong> of the Year
+                      </h2>
+                      <div className="cs-icon_box_subtitle mb-4 flex-grow-1">
+                        Recognising a woman who has demonstrated outstanding leadership, innovation and impact in the field of Artificial Intelligence, driving meaningful advancements across the fintech or technology industry.
+                      </div>
+                      <NavLink to="/woman-in-ai" className="btn-black">
+                        Explore More
+                      </NavLink>
+                    </div>
                   </div>
 
                   <div className="col-lg-4 wow fadeIn d-flex">
@@ -250,6 +284,40 @@ const Awards = () => {
                       </NavLink>
                     </div>
                     {/* <div className="cs-height_30 cs-height_lg_30" /> */}
+                  </div>
+
+                  <div className="col-lg-4 wow fadeIn d-flex">
+                    <div className="cs-icon_box cs-style3 text-center h-100 d-flex flex-column">
+                      <div className="cs-center">
+                        <img src="../assets/img/Fintech/awards-2026.png" alt="FinTech Leader of the Year" />
+                      </div>
+                      <h2 className="cs-icon_box_title cs-semi_bold">
+                        <strong>FinTech Leader</strong> of the Year
+                      </h2>
+                      <div className="cs-icon_box_subtitle mb-4 flex-grow-1">
+                        Recognising FinTech leaders shaping the future of financial services.
+                      </div>
+                      <NavLink to="/FinTech-Leader-of-the-Year" className="btn-black">
+                        Explore More
+                      </NavLink>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-4 wow fadeIn d-flex">
+                    <div className="cs-icon_box cs-style3 text-center h-100 d-flex flex-column">
+                      <div className="cs-center">
+                        <img src="../assets/img/Fintech/awards-2026.png" alt="Cross-Border Pay-out Disruptor of the Year" />
+                      </div>
+                      <h2 className="cs-icon_box_title cs-semi_bold">
+                        <strong>Cross-Border Pay-out Disruptor</strong> of the Year
+                      </h2>
+                      <div className="cs-icon_box_subtitle mb-4 flex-grow-1">
+                        Recognising innovation that is transforming the way money and financial services move across borders.
+                      </div>
+                      <NavLink to="/Cross-Border-Pay-out-Disruptor-of-the-Year" className="btn-black">
+                        Explore More
+                      </NavLink>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -424,6 +492,40 @@ const Awards = () => {
                       </NavLink>
                     </div>
                     {/* <div className="cs-height_30 cs-height_lg_30" /> */}
+                  </div>
+
+                  <div className="col-lg-4 wow fadeIn d-flex">
+                    <div className="cs-icon_box cs-style3 text-center h-100 d-flex flex-column">
+                      <div className="cs-center">
+                        <img src="../assets/img/Fintech/awards-2026.png" alt="MSB Rising Star of the Year" />
+                      </div>
+                      <h2 className="cs-icon_box_title cs-semi_bold">
+                        <strong>MSB Rising Star</strong> of the Year
+                      </h2>
+                      <div className="cs-icon_box_subtitle mb-4 flex-grow-1">
+                        Celebrating an emerging leader or professional who is making a significant contribution to the MSB sector and showing outstanding potential.
+                      </div>
+                      <NavLink to="/msb-rising-star" className="btn-black">
+                        Explore More
+                      </NavLink>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-4 wow fadeIn d-flex">
+                    <div className="cs-icon_box cs-style3 text-center h-100 d-flex flex-column">
+                      <div className="cs-center">
+                        <img src="../assets/img/Fintech/awards-2026.png" alt="MSB Leader of the Year" />
+                      </div>
+                      <h2 className="cs-icon_box_title cs-semi_bold">
+                        <strong>MSB Leader</strong> of the Year
+                      </h2>
+                      <div className="cs-icon_box_subtitle mb-4 flex-grow-1">
+                        Recognising an individual who has demonstrated exceptional leadership, vision and influence within the money services industry.
+                      </div>
+                      <NavLink to="/msb-leader" className="btn-black">
+                        Explore More
+                      </NavLink>
+                    </div>
                   </div>
 
                 </div>
