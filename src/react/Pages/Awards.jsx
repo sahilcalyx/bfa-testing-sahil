@@ -306,6 +306,23 @@ const Awards = () => {
                   <div className="col-lg-4 wow fadeIn d-flex">
                     <div className="cs-icon_box cs-style3 text-center h-100 d-flex flex-column">
                       <div className="cs-center">
+                        <img src="../assets/img/Fintech/awards-2026.png" alt="FinTech CTO of the Year" />
+                      </div>
+                      <h2 className="cs-icon_box_title cs-semi_bold">
+                        <strong>FinTech CTO</strong> of the Year
+                      </h2>
+                      <div className="cs-icon_box_subtitle mb-4 flex-grow-1">
+                        Recognising outstanding technology leadership driving innovation and transformation across FinTech.
+                      </div>
+                      <NavLink to="/FinTech-CTO-of-the-Year" className="btn-black">
+                        Explore More
+                      </NavLink>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-4 wow fadeIn d-flex">
+                    <div className="cs-icon_box cs-style3 text-center h-100 d-flex flex-column">
+                      <div className="cs-center">
                         <img src="../assets/img/Fintech/awards-2026.png" alt="Cross-Border Pay-out Disruptor of the Year" />
                       </div>
                       <h2 className="cs-icon_box_title cs-semi_bold">
@@ -523,6 +540,23 @@ const Awards = () => {
                         Recognising an individual who has demonstrated exceptional leadership, vision and influence within the money services industry.
                       </div>
                       <NavLink to="/msb-leader" className="btn-black">
+                        Explore More
+                      </NavLink>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-4 wow fadeIn d-flex">
+                    <div className="cs-icon_box cs-style3 text-center h-100 d-flex flex-column">
+                      <div className="cs-center">
+                        <img src="../assets/img/Fintech/awards-2026.png" alt="MSB Community Champion of the Year" />
+                      </div>
+                      <h2 className="cs-icon_box_title cs-semi_bold">
+                        <strong>MSB Community Champion</strong> of the Year
+                      </h2>
+                      <div className="cs-icon_box_subtitle mb-4 flex-grow-1">
+                        Recognising companies making a lasting impact across the MSB community.
+                      </div>
+                      <NavLink to="/msb-community-champion" className="btn-black">
                         Explore More
                       </NavLink>
                     </div>

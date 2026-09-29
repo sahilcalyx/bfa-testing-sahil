@@ -57,13 +57,13 @@ const SPONSORS_2026 = [
     title: "Invictus Ventures",
   },
    {
-    name: "Grants Payments",
-    video: "/assets/video/sponsors-logo-2026/grants-payments-sponsor-details-2026.webm",
-    link: "/grants-payments-sponsor-details-2026",
+    name: "3ribe",
+    video: "/assets/video/sponsors-logo-2026/3ribe-sponsor-details-2026.webm",
+    link: "/3ribe-sponsor-details-2026",
     external: false,
     tier: "Silver Sponsor",
-    alt: "Grants Payments",
-    title: "Grants Payments",
+    alt: "3ribe",
+    title: "3ribe",
   },
   {
     name: "Peratera",
@@ -102,6 +102,15 @@ const SPONSORS_2026 = [
     title: "QF Remit",
   },
   {
+    name: "Flex Instant Pay",
+    video: "/assets/video/sponsors-logo-2026/flex-instant-pay-sponsor-logo-2026.webm",
+    link: "/flex-instant-pay-sponsor-details-2026",
+    external: false,
+    tier: "Strategic Sponsor",
+    alt: "Flex Instant Pay",
+    title: "Flex Instant Pay",
+  },
+  {
     name: "Glory & Honour",
     video: "/assets/video/sponsors-logo-2026/glory-honour-sponsor-details-2026.webm",
     link: "/glory-honour-sponsor-details-2026",
@@ -110,6 +119,7 @@ const SPONSORS_2026 = [
     alt: "Glory & Honour",
     title: "Glory & Honour",
   },
+  
   {
     name: "MyRemit",
     video: "/assets/video/sponsors-logo-2026/myremit-sponsor-details-2026.webm",
@@ -127,6 +137,15 @@ const SPONSORS_2026 = [
     tier: "Strategic Sponsor",
     alt: "Red Sea Money Transfer",
     title: "Red Sea Money Transfer",
+  },
+  {
+    name: "TassaPay",
+    video: "/assets/video/sponsors-logo-2026/Tassapay-logo-sponsor-details-2026.webm",
+    link: "/tassapay-sponsor-details-2026",
+    external: false,
+    tier: "Strategic Sponsor",
+    alt: "TassaPay",
+    title: "TassaPay",
   },
   
   {

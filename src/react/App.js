@@ -31,8 +31,10 @@ const Faq = lazy(() => import("./Pages/Faq"));
 const MsbOfTheYear = lazy(() => import("./Pages/MsbOfTheYear"));
 const MsbRisingStar = lazy(() => import("./Pages/MsbRisingStar"));
 const MsbLeader = lazy(() => import("./Pages/MsbLeader"));
+const MsbCommunityChampion = lazy(() => import("./Pages/MsbCommunityChampion"));
 const WomenInAi = lazy(() => import("./Pages/WomenInAi"));
 const FinTechLeaderOfTheYear = lazy(() => import("./Pages/FinTechLeaderOfTheYear"));
+const FinTechCtoOfTheYear = lazy(() => import("./Pages/FinTechCtoOfTheYear"));
 const PaymentGatewayOfTheYear = lazy(() => import("./Pages/PaymentGatewayOfTheYear"));
 const CrossBorderInnovatorOfTheYear = lazy(() => import("./Pages/CrossBorderInnovatorOfTheYear"));
 const Msbdisruptoroftheyear = lazy(() => import("./Pages/Msbdisruptoroftheyear"));
@@ -106,6 +108,8 @@ import TeeparamSponsorDetails2026 from "./Pages/2026/OurSponsors/TeeparamSponsor
 import QFRemitSponsorDetails2026 from "./Pages/2026/OurSponsors/QFRemitSponsorDetails2026";
 import RedSeaSponsorDetails2026 from "./Pages/2026/OurSponsors/RedSeaSponsorDetails2026";
 import GloryHonourSponsorDetails2026 from "./Pages/2026/OurSponsors/GloryHonourSponsorDetails2026";
+import FlexInstantPaySponsorDetails2026 from "./Pages/2026/OurSponsors/FlexInstantPaySponsorDetails2026";
+import TassaPaySponsorDetails2026 from "./Pages/2026/OurSponsors/TassaPaySponsorDetails2026";
 const LeatherbackSponsorDetails = lazy(() => import("./Pages/2025/OurSponsors/LeatherbackSponsorDetails"));
 const AiMsbBlog = lazy(() => import("./Pages/Blogs/AiMsbBlog"));
 const ClearJunctionDetails2025 = lazy(() => import("./Pages/2025/OurSponsors/ClearJunctionDetails2025"));
@@ -192,6 +196,8 @@ const DaljitYoungKeynoteDetails2026 = lazy(() => import("./Pages/2026/KeynoteSpe
 const FemiEkwuyasiDPDetails2026 = lazy(() => import("./Pages/2026/DisscussionPanal2026/FemiEkwuyasiDPDetails2026"));
 const GayatriChadaramDPDetails2026 = lazy(() => import("./Pages/2026/DisscussionPanal2026/GayatriChadaramDPDetails2026"));
 const JayAnandDPDetails2026 = lazy(() => import("./Pages/2026/DisscussionPanal2026/JayAnandDPDetails2026"));
+const SergioIvanovicDPDetails2026 = lazy(() => import("./Pages/2026/DisscussionPanal2026/SergioIvanovicDPDetails2026"));
+const AlonaShevtsovaDPDetails2026 = lazy(() => import("./Pages/2026/DisscussionPanal2026/AlonaShevtsovaDPDetails2026"));
 // const OchebhoyaEkpeteKeynoteDetails2026 = lazy(() => import("./Pages/2026/KeynoteSpeaker2026/OchebhoyaEkpeteKeynoteDetails2026"));
 
 
@@ -384,9 +390,11 @@ function App() {
         <Route path="/msb-of-year" element={<MsbOfTheYear />} />
         <Route path="/msb-rising-star" element={<MsbRisingStar />} />
         <Route path="/msb-leader" element={<MsbLeader />} />
+        <Route path="/msb-community-champion" element={<MsbCommunityChampion />} />
         <Route path="/woman-in-ai" element={<WomenInAi />} />
         <Route path="/women-in-ai" element={<WomenInAi />} />
         <Route path="/FinTech-Leader-of-the-Year" element={<FinTechLeaderOfTheYear />} />
+        <Route path="/FinTech-CTO-of-the-Year" element={<FinTechCtoOfTheYear />} />
         <Route path="/Payment-Gateway-of-the-Year" element={<PaymentGatewayOfTheYear />} />
         <Route path="/Cross-Border-Pay-out-Disruptor-of-the-Year" element={<CrossBorderInnovatorOfTheYear />} />
         <Route path="/Cross-Border-Pay-out-Innovator-of-the-Year" element={<CrossBorderInnovatorOfTheYear />} />
@@ -715,6 +723,10 @@ function App() {
           element={<MyRemitSponsorDetails2026 />}
         />
         <Route
+          path="/3ribe-sponsor-details-2026"
+          element={<GrantsPaymentsSponsorDetails2026 />}
+        />
+        <Route
           path="/grants-payments-sponsor-details-2026"
           element={<GrantsPaymentsSponsorDetails2026 />}
         />
@@ -749,6 +761,14 @@ function App() {
         <Route
           path="/glory-honour-sponsor-details-2026"
           element={<GloryHonourSponsorDetails2026 />}
+        />
+        <Route
+          path="/flex-instant-pay-sponsor-details-2026"
+          element={<FlexInstantPaySponsorDetails2026 />}
+        />
+        <Route
+          path="/tassapay-sponsor-details-2026"
+          element={<TassaPaySponsorDetails2026 />}
         />
 
         {/* BFA Legacy */}
@@ -835,6 +855,14 @@ function App() {
         <Route
           path="/jay-anand-discussion-panel-2026"
           element={<JayAnandDPDetails2026 />}
+        />
+        <Route
+          path="/sergio-ivanovic-discussion-panel-2026"
+          element={<SergioIvanovicDPDetails2026 />}
+        />
+        <Route
+          path="/alona-shevtsova-discussion-panel-2026"
+          element={<AlonaShevtsovaDPDetails2026 />}
         />
         {/* <Route
           path="/ochebhoya-ekpete-keynote-speaker-2026"

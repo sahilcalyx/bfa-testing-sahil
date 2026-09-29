@@ -2,6 +2,7 @@ import React, { useId } from "react";
 import styled from "styled-components";
 import { motion, useReducedMotion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { FaLinkedin } from "react-icons/fa";
 import { discussionPanel2026 } from "./panelists2026";
 
 const ROLE_LABEL = {
@@ -53,6 +54,25 @@ const LogoBlock = ({ person, $onDark, $featured }) => {
   );
 };
 
+const LinkedInLink = ({ person, $featured }) => {
+  if (!person.linkedin) return null;
+
+  return (
+    <LinkedInBtn
+      href={person.linkedin}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`${person.name} on LinkedIn`}
+      $featured={$featured}
+      onClick={(event) => event.stopPropagation()}
+      onKeyDown={(event) => event.stopPropagation()}
+    >
+      <FaLinkedin aria-hidden="true" />
+      {$featured && <span>LinkedIn</span>}
+    </LinkedInBtn>
+  );
+};
+
 const FeaturedPerson = ({ person, reduceMotion, onOpen }) => {
   const clickable = Boolean(person.slug);
 
@@ -88,14 +108,17 @@ const FeaturedPerson = ({ person, reduceMotion, onOpen }) => {
         <LogoBlock person={person} $onDark $featured />
         {person.tagline && <Tagline>{person.tagline}</Tagline>}
         <Bio>{bioSnippet(person)}</Bio>
-        {clickable && (
-          <ProfileBtn type="button" onClick={() => onOpen(person)}>
-            View profile
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
-              <path d="M7 17L17 7M17 7H7M17 7V17" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </ProfileBtn>
-        )}
+        <FeatureActions>
+          {clickable && (
+            <ProfileBtn type="button" onClick={() => onOpen(person)}>
+              View profile
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+                <path d="M7 17L17 7M17 7H7M17 7V17" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </ProfileBtn>
+          )}
+          <LinkedInLink person={person} $featured />
+        </FeatureActions>
       </FeatureCopy>
     </Feature>
   );
@@ -106,9 +129,16 @@ const PersonCard = ({ person, index, reduceMotion, onOpen }) => {
 
   return (
     <Poster
-      type="button"
       $clickable={clickable}
       onClick={() => clickable && onOpen(person)}
+      role={clickable ? "link" : undefined}
+      tabIndex={clickable ? 0 : undefined}
+      onKeyDown={(event) => {
+        if (clickable && event.target === event.currentTarget && (event.key === "Enter" || event.key === " ")) {
+          event.preventDefault();
+          onOpen(person);
+        }
+      }}
       aria-label={clickable ? `View ${person.name} profile` : undefined}
       initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 36 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -123,12 +153,14 @@ const PersonCard = ({ person, index, reduceMotion, onOpen }) => {
       <Caption>
         <RoleLine>{ROLE_LABEL[person.role] || "Panelist"}</RoleLine>
         <Name>{person.name}</Name>
-        <TitleLine>
-          {person.designation}
-          {person.company ? ` · ${person.company}` : ""}
-        </TitleLine>
-        <LogoBlock person={person} $onDark />
-        {clickable && <TapNote>View profile</TapNote>}
+        <CardTitleLine>{person.designation}</CardTitleLine>
+        <CardLogoRow>
+          <LogoBlock person={person} $onDark />
+        </CardLogoRow>
+        <CardFooter>
+          {clickable && <TapNote>View profile</TapNote>}
+          <LinkedInLink person={person} />
+        </CardFooter>
       </Caption>
     </Poster>
   );
@@ -178,7 +210,7 @@ const DiscussionPanel2026 = () => {
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           >
             <Kicker>Brit FinTech Awards 2026</Kicker>
-            <Title id={titleId}>Discussion Panelists </Title>
+            <Title id={titleId}>Discussion Panel </Title>
           </motion.div>
         </Intro>
 
@@ -420,22 +452,32 @@ const ProfileBtn = styled.button`
 
 const Wall = styled.div`
   display: grid;
-  grid-template-columns: repeat(${(p) => Math.min(p.$count || 4, 4)}, minmax(0, 1fr));
+  grid-template-columns: repeat(${(p) => Math.min(p.$count || 4, 5)}, minmax(0, 1fr));
   gap: 12px;
   max-width: ${(p) => (p.$count <= 2 ? "720px" : "100%")};
   margin: 0 auto;
 
   @media (max-width: 1024px) {
     grid-template-columns: repeat(${(p) => Math.min(p.$count || 2, 2)}, minmax(0, 1fr));
+
+    /* Centre an odd card out on the final row */
+    > :last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+      justify-self: center;
+      width: calc(50% - 6px);
+    }
   }
 
   @media (max-width: 560px) {
-    grid-template-columns: 1fr;
-    max-width: 380px;
+    gap: 10px;
+
+    > :last-child:nth-child(odd) {
+      width: calc(50% - 5px);
+    }
   }
 `;
 
-const Poster = styled(motion.button)`
+const Poster = styled(motion.div)`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -535,12 +577,18 @@ const CircuitFill = styled.img`
 const Caption = styled.div`
   position: relative;
   z-index: 1;
+  flex: 1 1 auto;
   margin-top: -40px;
   padding: 48px 14px 12px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   background: #000;
+
+  @media (max-width: 560px) {
+    margin-top: -28px;
+    padding: 34px 10px 10px;
+  }
 `;
 
 const RoleLine = styled.span`
@@ -553,8 +601,10 @@ const RoleLine = styled.span`
   color: var(--dp-crimson);
 `;
 
+/* Name, title and logo rows reserve fixed heights so every card in a row lines up */
 const Name = styled.h3`
   margin: 0 0 3px;
+  min-height: 2.3em;
   font-family: "Oswald", sans-serif;
   font-weight: 600;
   font-size: clamp(16px, 1.6vw, 22px);
@@ -562,6 +612,47 @@ const Name = styled.h3`
   text-transform: uppercase;
   line-height: 1.15;
   color: #fff;
+
+  @media (max-width: 560px) {
+    font-size: 14px;
+  }
+`;
+
+const CardTitleLine = styled.p`
+  margin: 0 0 8px;
+  min-height: 2.8em;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--dp-mute);
+
+  @media (max-width: 560px) {
+    margin-bottom: 6px;
+    font-size: 11px;
+  }
+`;
+
+const CardLogoRow = styled.div`
+  display: flex;
+  align-items: center;
+  height: 40px;
+  max-width: 100%;
+  margin-bottom: 8px;
+
+  > * {
+    margin: 0;
+    max-width: 100%;
+  }
+
+  @media (max-width: 560px) {
+    height: 30px;
+    margin-bottom: 6px;
+
+    img {
+      height: 22px;
+      max-width: 100%;
+    }
+  }
 `;
 
 const TitleLine = styled.p`
@@ -600,6 +691,58 @@ const LogoFallback = styled.span`
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: ${(p) => (p.$invert ? "rgba(236,232,225,0.55)" : "#7a756e")};
+`;
+
+const FeatureActions = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 18px;
+`;
+
+const CardFooter = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  min-height: 28px;
+  margin-top: auto;
+`;
+
+const LinkedInBtn = styled.a`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex-shrink: 0;
+  width: ${(p) => (p.$featured ? "auto" : "28px")};
+  height: 28px;
+  padding: ${(p) => (p.$featured ? "0 12px" : "0")};
+  border-radius: 6px;
+  background: #0a66c2;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+
+  svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  &:hover {
+    background: var(--dp-crimson);
+    color: #fff;
+    transform: translateY(-1px);
+  }
+
+  &:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+  }
 `;
 
 const TapNote = styled.span`

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Calendar, MapPin, Ticket } from "lucide-react";
 import { NavLink } from "react-router-dom";
+import { ATTENDEE_LOGOS } from "../attendeeLogos";
 
 const VENUE_MAPS_URL = "https://maps.app.goo.gl/HTmvq2hv7HkHbqNX9";
 const APP_STORE_URL =
@@ -9,63 +10,81 @@ const APP_STORE_URL =
 const PLAY_STORE_URL =
   "https://play.google.com/store/apps/details?id=com.bfa.fintechapp";
 
-const ATTENDEE_LOGOS = [
-  { name: "Axcess", logo: "/assets/img/attendee-logos/axcessms.com logo13.png" },
-  { name: "Bank of London", logo: "/assets/img/attendee-logos/Frame.png" },
-  { name: "Chrisborough", logo: "/assets/img/attendee-logos/chrisborough.png" },
-  { name: "Clear Junction", logo: "/assets/img/attendee-logos/clear-junction.png" },
-  { name: "Complyport", logo: "/assets/img/attendee-logos/COMPLYPORT_Logo.png" },
-  { name: "ECEX Group", logo: "/assets/img/attendee-logos/ecex.png" },
-  { name: "Ecommpay", logo: "/assets/img/attendee-logos/ecommpay.png" },
-  { name: "eMerchantPay", logo: "/assets/img/attendee-logos/Emarchantpay.png" },
-  { name: "Fena", logo: "/assets/img/attendee-logos/fena.png" },
-  { name: "GBG", logo: "/assets/img/attendee-logos/gbg.png" },
-  { name: "GCC Exchange", logo: "/assets/img/attendee-logos/Group 2.png" },
-  { name: "3ribe", logo: "/assets/img/discussionpanel-2026/3ribe-logo-alt.png" },
-  { name: "Kani", logo: "/assets/img/attendee-logos/kani.png" },
-  { name: "Leatherback", logo: "/assets/img/keynotes/leatherback-logo.png" },
-  { name: "Link FX", logo: "/assets/img/attendee-logos/link-fx.png" },
-  { name: "Muthoot Global", logo: "/assets/img/attendee-logos/muthoot.png" },
-  { name: "Open Banking", logo: "/assets/img/discussionpanel/OBL_logotype_darkblu-Large.png" },
-  { name: "Orbital", logo: "/assets/img/attendee-logos/orbital.png" },
-  { name: "Payceler", logo: "/assets/img/attendee-logos/payceler.png" },
-  { name: "Paysafe", logo: "/assets/img/attendee-logos/paysafe.svg" },
-  { name: "Sends", logo: "/assets/img/attendee-logos/sends.png" },
-  { name: "Sumsub", logo: "/assets/img/attendee-logos/sumsub 1.png" },
-  { name: "Trust Payments", logo: "/assets/img/attendee-logos/trustpayments.com logo11.png" },
-  { name: "University of Bristol", logo: "/assets/img/attendee-logos/Bristol.png" },
-  { name: "Volume", logo: "/assets/img/attendee-logos/volume.png" },
-  { name: "Thunes", logo: "/assets/img/attendee-logos/thunes-logo-dark.svg" },
-];
+const LOGOS_PER_PAGE = 26;
+const PAGE_HOLD_MS = 7000;
+const FLIP_STAGGER_S = 0.06;
+const FLIP_HALF_S = 0.28;
 
-function AttendeeLogoCard({ item }) {
-  const [failed, setFailed] = useState(false);
+/* Pages always hold LOGOS_PER_PAGE cards; a short final page is topped up from the start of the list */
+const ATTENDEE_PAGES = Array.from(
+  { length: Math.ceil(ATTENDEE_LOGOS.length / LOGOS_PER_PAGE) },
+  (_, page) =>
+    Array.from(
+      { length: LOGOS_PER_PAGE },
+      (_, i) => ATTENDEE_LOGOS[(page * LOGOS_PER_PAGE + i) % ATTENDEE_LOGOS.length]
+    )
+);
+
+function AttendeeLogoCard({ item, index, reduceMotion }) {
+  const [failed, setFailed] = useState(!item.logo);
+  const delay = index * FLIP_STAGGER_S;
 
   return (
-    <div className="hero-attendee-card">
+    <motion.div
+      className={`hero-attendee-card${item.dark ? " hero-attendee-card--dark" : ""}${
+        item.tall ? " hero-attendee-card--tall" : ""
+      }`}
+      initial={reduceMotion ? { opacity: 0 } : { rotateY: -90, opacity: 0.4 }}
+      animate={
+        reduceMotion
+          ? { opacity: 1, transition: { duration: 0.3 } }
+          : { rotateY: 0, opacity: 1, transition: { duration: FLIP_HALF_S, ease: "easeOut" } }
+      }
+      exit={
+        reduceMotion
+          ? { opacity: 0, transition: { duration: 0.3, delay: delay / 2 } }
+          : { rotateY: 90, opacity: 0.4, transition: { duration: FLIP_HALF_S, ease: "easeIn", delay } }
+      }
+    >
       {failed ? (
         <span className="hero-attendee-fallback">{item.name}</span>
       ) : (
         <img
           src={item.logo}
           alt={item.name}
-          loading="lazy"
           decoding="async"
           onError={() => setFailed(true)}
         />
       )}
-    </div>
+    </motion.div>
   );
 }
 
 const InteractiveHero = () => {
   const [ctaIndex, setCtaIndex] = useState(0);
+  const [logoPage, setLogoPage] = useState(0);
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
     const delay = ctaIndex === 0 ? 3400 : 2200;
     const id = setTimeout(() => setCtaIndex((i) => (i + 1) % 2), delay);
     return () => clearTimeout(id);
   }, [ctaIndex]);
+
+  useEffect(() => {
+    ATTENDEE_LOGOS.forEach(({ logo }) => {
+      if (logo) new Image().src = logo;
+    });
+  }, []);
+
+  useEffect(() => {
+    if (ATTENDEE_PAGES.length < 2) return undefined;
+    const id = setInterval(
+      () => setLogoPage((p) => (p + 1) % ATTENDEE_PAGES.length),
+      PAGE_HOLD_MS
+    );
+    return () => clearInterval(id);
+  }, []);
 
   return (
     <>
@@ -449,23 +468,108 @@ const InteractiveHero = () => {
         @media (max-width: 520px) {
           .hero-meta {
             flex-direction: column;
-            padding: 16px 18px;
-            gap: 14px;
+            align-items: center;
+            padding: 12px 14px;
+            gap: 10px;
+            border-radius: 12px;
           }
 
           .hero-meta-col {
             justify-content: center;
-            width: 100%;
+            width: auto;
+            max-width: 100%;
+            gap: 10px;
           }
 
           .hero-meta-divider {
-            width: 60%;
+            width: 48%;
+            max-width: 120px;
             height: 1px;
+            align-self: center;
             margin: 0 auto;
+            background: #e8e8e8;
           }
 
           .hero-meta--bridge {
             flex-direction: column;
+            align-items: center;
+            width: calc(100% - 1.5rem);
+            max-width: none;
+            margin: 0.65rem auto 1rem;
+            padding: 12px 14px;
+            border-radius: 12px;
+            text-align: center;
+          }
+
+          .hero-meta--bridge .hero-meta-divider {
+            width: 48%;
+            max-width: 120px;
+            height: 1px;
+            margin: 0 auto;
+            align-self: center;
+          }
+
+          .hero-meta--bridge .hero-meta-col {
+            justify-content: center;
+            width: auto;
+            max-width: 100%;
+            gap: 10px;
+          }
+
+          .hero-meta--bridge .hero-meta-copy {
+            text-align: left;
+          }
+
+          .hero-meta--bridge .hero-meta-weekday {
+            font-size: 11px;
+          }
+
+          .hero-meta--bridge .hero-meta-date {
+            font-size: 13px;
+          }
+
+          .hero-meta--bridge .hero-meta-line {
+            font-size: 12px;
+            line-height: 1.25;
+          }
+
+          .hero-attendees {
+            height: auto;
+            padding: 1.5rem 0.85rem 1.25rem;
+            overflow: visible;
+          }
+
+          .hero-attendees-inner {
+            gap: 0.75rem;
+            max-width: 100%;
+          }
+
+          .hero-attendees-title {
+            font-size: 1.2rem;
+          }
+
+          .hero-attendees-grid {
+            gap: 7px;
+          }
+
+          .hero-attendee-card {
+            min-height: 48px;
+            padding: 6px 8px;
+            border-radius: 9px;
+          }
+
+          .hero-attendee-card img {
+            max-height: 24px;
+          }
+
+          .hero-attendees-cta {
+            padding: 0.35rem 0.25rem 0.1rem;
+            gap: 2px;
+          }
+
+          .hero-attendees-cta span {
+            font-size: 1.25rem;
+            letter-spacing: 0.04em;
           }
         }
 
@@ -578,16 +682,26 @@ const InteractiveHero = () => {
 
         .hero-attendees-grid {
           display: grid;
-          grid-template-columns: repeat(3, minmax(0, 1fr));
+          grid-template-columns: repeat(4, minmax(0, 1fr));
           gap: 8px;
         }
 
-        /* Center incomplete last row on mobile (3-col) */
-        .hero-attendees-grid > .hero-attendee-card:nth-child(3n + 1):nth-last-child(2) {
+        .hero-attendee-slot {
+          display: flex;
+          perspective: 800px;
+        }
+
+        /* Centre a two-card final row in the 4-column grid */
+        .hero-attendee-slot:nth-child(4n + 1):nth-last-child(2) {
           grid-column: 2;
         }
 
         .hero-attendee-card {
+          flex: 1 1 auto;
+          min-width: 0;
+          backface-visibility: hidden;
+          transform-style: preserve-3d;
+          will-change: transform;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -604,6 +718,15 @@ const InteractiveHero = () => {
           max-width: 100%;
           width: auto;
           object-fit: contain;
+        }
+
+        .hero-attendee-card--dark {
+          background: #000;
+        }
+
+        /* Stacked logos need extra height to match the visual weight of wide wordmarks */
+        .hero-attendee-card--tall img {
+          transform: scale(1.45);
         }
 
         .hero-attendee-fallback {
@@ -638,12 +761,19 @@ const InteractiveHero = () => {
 
         .hero-meta--bridge .hero-meta-divider {
           margin: 0 12px;
-          height: 36px;
         }
 
         .hero-meta--bridge .hero-meta-icon {
           width: 18px;
           height: 18px;
+        }
+
+        @media (min-width: 521px) {
+          .hero-meta--bridge .hero-meta-divider {
+            width: 1px;
+            height: 36px;
+            align-self: stretch;
+          }
         }
 
         .hero-attendees-cta {
@@ -677,17 +807,7 @@ const InteractiveHero = () => {
 
         @media (min-width: 480px) {
           .hero-attendees-grid {
-            grid-template-columns: repeat(5, minmax(0, 1fr));
             gap: 9px;
-          }
-
-          .hero-attendees-grid > .hero-attendee-card:nth-child(3n + 1):nth-last-child(2) {
-            grid-column: auto;
-          }
-
-          /* Center single leftover on last row (Thunes) */
-          .hero-attendees-grid > .hero-attendee-card:last-child:nth-child(5n + 1) {
-            grid-column: 3;
           }
 
           .hero-attendee-card {
@@ -718,7 +838,6 @@ const InteractiveHero = () => {
           }
 
           .hero-attendees-grid {
-            grid-template-columns: repeat(5, minmax(0, 1fr));
             gap: 8px;
           }
 
@@ -1050,6 +1169,12 @@ const InteractiveHero = () => {
             width: min(460px, calc(100% - 2.5rem));
           }
         }
+
+        @media (max-width: 479px) {
+          .hero-attendees-grid {
+            gap: 7px;
+          }
+        }
       `}</style>
 
       <section className="relative w-full min-h-screen lg:h-[100svh] flex flex-col lg:flex-row lg:overflow-hidden bg-black text-white font-outfit select-none">
@@ -1295,8 +1420,17 @@ const InteractiveHero = () => {
                 transition={{ duration: 0.6, delay: 0.25 }}
                 className="hero-attendees-grid"
               >
-                {ATTENDEE_LOGOS.map((item) => (
-                  <AttendeeLogoCard key={item.name} item={item} />
+                {ATTENDEE_PAGES[logoPage].map((item, index) => (
+                  <div className="hero-attendee-slot" key={index}>
+                    <AnimatePresence mode="wait" initial={false}>
+                      <AttendeeLogoCard
+                        key={`${logoPage}-${item.name}`}
+                        item={item}
+                        index={index}
+                        reduceMotion={reduceMotion}
+                      />
+                    </AnimatePresence>
+                  </div>
                 ))}
               </motion.div>
 

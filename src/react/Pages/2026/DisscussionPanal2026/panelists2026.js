@@ -1,33 +1,47 @@
 /**
  * BFA 2026 Discussion Panel
- * 1 moderator + 3 panelists. Shown together on the homepage.
+ * 1 moderator + 4 panelists. Shown together on the homepage.
  * Swap placeholder: true / img / logo when assets are ready.
  */
 
-const DEMO_PROFILE_BG = "/assets/img/discussionpanel-2026/BG-demo-profile-images.jpg";
-
-export const moderator2026 = {
-  id: "moderator-01",
+export const alonaShevtsova = {
+  id: "alona-shevtsova",
   role: "moderator",
-  initials: "MD",
-  name: "To be announced",
-  designation: "Panel Moderator",
-  company: "Brit FinTech Awards",
-  logo: null,
-  img: DEMO_PROFILE_BG,
-  placeholder: true,
-  tagline: "Chairing the Brit FinTech Awards 2026 discussion",
-  linkedin: "",
+  initials: "AS",
+  name: "Alona Shevtsova",
+  designation: "Chief Executive Officer",
+  company: "Sends",
+  slug: "/alona-shevtsova-discussion-panel-2026",
+  logo: "/assets/img/attendee-logos/sends.png",
+  logoLight: "/assets/img/attendee-logos/sends.png",
+  logoOnDark: false,
+  img: "/assets/img/discussionpanel-2026/Alona-Shevtsova.jpg",
+  placeholder: false,
+  tagline: "Connecting markets, moving money: The evolution of cross-border payments",
+  linkedin: "https://www.linkedin.com/in/alyona-shevtsova-43489420/",
+  stats: {
+    domain: "Payments & Fintech",
+    association: "2026 Discussion Panel Moderator",
+    experience: "15+ Years",
+  },
   highlights: [
-    "Official moderator for the 2026 discussion panel",
-    "Guides the conversation across payments, regulation and innovation",
-    "Portrait and company details will be published shortly",
+    "Director and CEO of Sends, a UK-based fintech payments platform",
+    "Delivers B2B and B2C payment solutions across the EU and UK markets",
+    "Over 15 years of experience in the fintech and payments industry",
+    "Woman Entrepreneur of the Year in Fintech, Brit FinTech Awards 2025",
+    "Financial Women Trailblazer of the Year, Finnovex Middle East 2025",
+    "Included in Innovate Finance’s Women Powerlist 2026",
+    "Founded and led a payment system for over a decade before moving into banking",
   ],
   bioParagraphs: [
-    "The moderator will chair the <strong>Brit FinTech Awards 2026 discussion panel</strong>, bringing structure and pace to a conversation with three industry leaders.",
-    "Full biography, portrait and company mark will appear here as soon as they are confirmed.",
+    "Alona Shevtsova is the <strong>Director and CEO of Sends</strong>, a UK-based fintech platform focused on delivering <strong>payment solutions for both B2B and B2C clients across the EU and UK markets</strong>. With <strong>over 15 years of experience in the fintech and payments industry</strong>, she has played a pivotal role in shaping Sends’ development strategy and expansion.",
+    "In 2025, Alona was recognised as <strong>Woman Entrepreneur of the Year in Fintech</strong> by the Brit FinTech Awards and as <strong>Financial Women Trailblazer of the Year</strong> at Finnovex Middle East 2025. In 2026, she was included in <strong>Innovate Finance’s Women Powerlist</strong>.",
+    "Alona began her career by <strong>founding and leading a payment system</strong>, where she spent over a decade building and scaling operations. Following this success, she expanded her expertise into the <strong>banking sector</strong>, deepening her knowledge of international finance and regulatory frameworks.",
+    "In 2024, she took on the role of <strong>CEO at Sends</strong>, where she is driving the company’s vision to <strong>simplify cross-border payments</strong> and support modern businesses with <strong>secure, scalable financial infrastructure</strong>.",
   ],
 };
+
+export const moderator2026 = alonaShevtsova;
 
 export const femiEkwuyasi = {
   id: "femi-ekwuyasi",
@@ -87,7 +101,7 @@ export const gayatriChadaram = {
   videoUrl: "https://www.youtube.com/embed/sMxKif5xp_E",
   website: "https://leatherback.co/",
   tagline: "Building risk-based financial crime, compliance and governance frameworks",
-  linkedin: "",
+  linkedin: "https://www.linkedin.com/in/gayatri-chadaram",
   stats: {
     domain: "Financial Crime & Compliance",
     association: "2026 Discussion Panel",
@@ -124,8 +138,9 @@ export const jayAnand = {
   logoSize: { height: "36px", maxWidth: "132px" },
   img: "/assets/img/discussionpanel-2026/Jay.png",
   placeholder: false,
+  videoUrl: "https://www.youtube.com/embed/26wxG1LBJkk",
   tagline: "Robust AML controls, regulatory standards and customer-focused currency exchange",
-  linkedin: "",
+  linkedin: "https://www.linkedin.com/in/jay-anand-425178228",
   stats: {
     domain: "Currency Exchange & AML",
     association: "2026 Discussion Panel",
@@ -149,9 +164,49 @@ export const jayAnand = {
 
 export const panelistThree2026 = jayAnand;
 
+export const sergioIvanovic = {
+  id: "sergio-ivanovic",
+  role: "panelist",
+  initials: "SI",
+  name: "Sergio Ivanovic",
+  designation: "Founder & CEO",
+  company: "Invictus",
+  slug: "/sergio-ivanovic-discussion-panel-2026",
+  logo: "/assets/img/discussionpanel-2026/Invictus-Logo-cropped.png",
+  logoLight: "/assets/img/discussionpanel-2026/Invictus-Logo-cropped.png",
+  logoOnDark: false,
+  img: "/assets/img/discussionpanel-2026/Sergio-Ivanovic.jpg",
+  placeholder: false,
+  videoUrl: "https://www.youtube.com/embed/q_jmdfcWTu0",
+  tagline: "Building secure, scalable and compliant global payment infrastructure",
+  linkedin: "https://www.linkedin.com/in/sergio-ivanovic-3699411bb",
+  stats: {
+    domain: "Global Payments Infrastructure",
+    association: "2026 Discussion Panel",
+    experience: "10+ Years (INVICTUS)",
+  },
+  highlights: [
+    "Founder & CEO of Invictus, a London-based payments company",
+    "Invictus is an FCA authorised and regulated Payment Institution",
+    "Extensive experience in the global payments industry",
+    "Expertise across payment processing, risk management and regulatory compliance",
+    "Enables access to global payment methods and cross-border payment and payout solutions",
+    "Capabilities spanning payment processing, payout infrastructure, fraud and risk management, reporting and reconciliation",
+    "Expanding INVICTUS regulatory and licensing footprint across key international markets",
+  ],
+  bioParagraphs: [
+    "Sergio Ivanovic is <strong>Founder & CEO of Invictus</strong>, with extensive experience in the <strong>global payments industry</strong>. He focuses on developing <strong>secure, scalable, and compliant payment infrastructure</strong>, with expertise across <strong>payment processing, risk management, and regulatory compliance</strong>. Under his leadership, <strong>INVICTUS</strong> supports businesses with access to <strong>global payment methods and technology solutions</strong> designed to simplify and strengthen their payment operations.",
+    "<strong>Invictus</strong> is a London based <strong>FCA authorised and regulated Payment Institution</strong> providing payment infrastructure and technology solutions to businesses worldwide. INVICTUS enables access to global payment methods and <strong>cross-border payment and payout solutions</strong> through a combination of its own regulated capabilities, banking and payment partners, and local payment networks.",
+    "With <strong>10+ years of industry experience</strong>, INVICTUS focuses on developing secure, scalable and compliant payment solutions, with capabilities spanning <strong>payment processing, payout infrastructure, fraud and risk management, reporting and reconciliation</strong>. The company is also expanding its own regulatory and licensing footprint across key international markets, supporting its long-term strategy to build a broader and more connected global payments infrastructure.",
+  ],
+};
+
+export const panelistFour2026 = sergioIvanovic;
+
 export const discussionPanel2026 = [
   moderator2026,
   panelistOne2026,
   panelistTwo2026,
   panelistThree2026,
+  panelistFour2026,
 ];

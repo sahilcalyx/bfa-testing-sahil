@@ -109,6 +109,42 @@ export const seoByPath = {
       images: ["/assets/img/discussionpanel-2026/Jay.png"],
     },
   },
+  "/alona-shevtsova-discussion-panel-2026": {
+    title: "Alona Shevtsova - Discussion Panel Moderator | Brit FinTech Awards 2026",
+    description: "Alona Shevtsova, Chief Executive Officer of Sends, is the discussion panel moderator at the Brit FinTech Awards 2026.",
+    openGraph: {
+      title: "Alona Shevtsova - Discussion Panel Moderator | Brit FinTech Awards 2026",
+      description: "Alona Shevtsova, Chief Executive Officer of Sends, is the discussion panel moderator at the Brit FinTech Awards 2026.",
+      url: `${siteBaseUrl}/alona-shevtsova-discussion-panel-2026`,
+      siteName,
+      images: [{ url: "/assets/img/discussionpanel-2026/Alona-Shevtsova.jpg", width: 1200, height: 630, alt: "Alona Shevtsova Discussion Panel Moderator BFA 2026" }],
+      type: "profile",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Alona Shevtsova - Discussion Panel Moderator | Brit FinTech Awards 2026",
+      description: "Alona Shevtsova, Chief Executive Officer of Sends, is the discussion panel moderator at the Brit FinTech Awards 2026.",
+      images: ["/assets/img/discussionpanel-2026/Alona-Shevtsova.jpg"],
+    },
+  },
+  "/sergio-ivanovic-discussion-panel-2026": {
+    title: "Sergio Ivanovic - Discussion Panel | Brit FinTech Awards 2026",
+    description: "Sergio Ivanovic, Founder and CEO of Invictus, is a discussion panelist at the Brit FinTech Awards 2026.",
+    openGraph: {
+      title: "Sergio Ivanovic - Discussion Panel | Brit FinTech Awards 2026",
+      description: "Sergio Ivanovic, Founder and CEO of Invictus, is a discussion panelist at the Brit FinTech Awards 2026.",
+      url: `${siteBaseUrl}/sergio-ivanovic-discussion-panel-2026`,
+      siteName,
+      images: [{ url: "/assets/img/discussionpanel-2026/Sergio-Ivanovic.jpg", width: 1200, height: 630, alt: "Sergio Ivanovic Discussion Panel BFA 2026" }],
+      type: "profile",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Sergio Ivanovic - Discussion Panel | Brit FinTech Awards 2026",
+      description: "Sergio Ivanovic, Founder and CEO of Invictus, is a discussion panelist at the Brit FinTech Awards 2026.",
+      images: ["/assets/img/discussionpanel-2026/Sergio-Ivanovic.jpg"],
+    },
+  },
   "/gayatri-chadaram-discussion-panel-2026": {
     title: "Gayatri Chadaram - Discussion Panel | Brit FinTech Awards 2026",
     description: "Gayatri Chadaram, Head of Compliance and MLRO at Leatherback, is a discussion panelist at the Brit FinTech Awards 2026.",

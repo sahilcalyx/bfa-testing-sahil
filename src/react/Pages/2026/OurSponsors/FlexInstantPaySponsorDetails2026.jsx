@@ -2,84 +2,89 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import { NavLink } from "react-router-dom";
 import {
-  Banknote,
+  ArrowUpRight,
   Calendar,
+  Coins,
   ExternalLink,
   Globe2,
-  HeartHandshake,
-  Landmark,
+  Handshake,
+  Heart,
   MapPin,
   Medal,
-  Play,
-  Send,
   ShieldCheck,
   Sparkles,
+  Store,
   Users,
 } from "lucide-react";
 
 const BANNER_IMG =
-  "/assets/img/sponsor-logo/sponsor-banner-strip-2026/3ribe-sponsor-details-banner-2026.png";
-const SITE_URL = "https://3ribe.io";
-const PAGE_PATH = "/3ribe-sponsor-details-2026";
+  "/assets/img/sponsor-logo/sponsor-banner-strip-2026/flexpay-sponsor-details-banner-2026.png";
+const SITE_URL = "https://flexinstantpay.com/";
+const PAGE_PATH = "/flex-instant-pay-sponsor-details-2026";
 const OG_IMAGE = `https://britfintechawards.com${BANNER_IMG}`;
 
 const highlights = [
   {
+    icon: Handshake,
+    title: "Personal Service",
+    desc: "Face-to-face customer support",
+  },
+  {
+    icon: Store,
+    title: "Local & Accessible",
+    desc: "Store-based approach",
+  },
+  {
     icon: ShieldCheck,
-    title: "UK-Licensed",
-    desc: "Grants Payment Solutions Ltd",
+    title: "Trust & Security",
+    desc: "Secure, regulated transfers",
   },
   {
     icon: Medal,
-    title: "Silver Sponsor 2026",
+    title: "Strategic Sponsor",
     desc: "Brit FinTech Awards 2026",
-  },
-  {
-    icon: Send,
-    title: "Global Remittance",
-    desc: "Fast cross-border transfers",
-  },
-  {
-    icon: Globe2,
-    title: "Africa to the World",
-    desc: "Connecting global markets",
   },
 ];
 
-const what3ribeOffers = [
+const keyFeatures = [
   {
-    icon: Send,
-    title: "Global Money Remittance",
-    desc: "Simple, reliable cross-border money transfers that help individuals send money to family and loved ones around the world.",
+    icon: Handshake,
+    title: "Personal & face-to-face service",
+    desc: "Flex Instant Pay believes that money transfers are about more than transactions. Customers can speak directly with the team and receive personal assistance throughout their transfer journey.",
   },
   {
-    icon: Landmark,
-    title: "Digital Banking Solutions",
-    desc: "Digital financial services that give customers easier access to accounts, payments and everyday money management.",
-  },
-  {
-    icon: Globe2,
-    title: "Connecting Africa to Global Markets",
-    desc: "A strong focus on bridging Africa with the rest of the world, making international payments faster and more accessible.",
+    icon: Store,
+    title: "Local & accessible",
+    desc: "With a store-based approach, Flex Instant Pay provides customers with a familiar local place where they can visit, ask questions and receive help with their money transfer needs.",
   },
   {
     icon: ShieldCheck,
-    title: "UK-Licensed Payment Entity",
-    desc: "Operates under Grants Payment Solutions Ltd, a UK-licensed payment entity, giving customers confidence in every transaction.",
+    title: "Trust & security",
+    desc: "Trust is at the heart of Flex Instant Pay's service. The company focuses on providing customers with a secure and reliable money transfer experience while operating in accordance with applicable regulatory requirements.",
+  },
+  {
+    icon: Globe2,
+    title: "International money transfers",
+    desc: "Flex Instant Pay helps customers send money internationally, supporting individuals and families who need to transfer funds across borders.",
+  },
+  {
+    icon: Coins,
+    title: "Competitive rates",
+    desc: "Flex Instant Pay focuses on providing competitive exchange rates and transparent transfer costs, helping customers understand the value of their transactions.",
+  },
+  {
+    icon: Heart,
+    title: "Customer-focused service",
+    desc: "Every customer has different needs. Flex Instant Pay takes a personal approach, helping customers understand the transfer process and providing support when they need it.",
   },
   {
     icon: Users,
-    title: "For Individuals & Businesses",
-    desc: "Payment and remittance solutions designed to serve both personal customers and businesses operating across borders.",
-  },
-  {
-    icon: HeartHandshake,
-    title: "Driving Financial Inclusion",
-    desc: "Building solutions that widen financial access and drive inclusion across emerging markets.",
+    title: "Community & relationships",
+    desc: "By maintaining a local, face-to-face approach, Flex Instant Pay builds relationships with the communities and customers it serves, creating a more personal alternative to an entirely digital money transfer experience.",
   },
 ];
 
-const GrantsPaymentsSponsorDetails2026 = () => {
+const FlexInstantPaySponsorDetails2026 = () => {
   return (
     <div className="min-h-screen bg-zinc-50 text-zinc-900 font-['Outfit',system-ui,sans-serif]">
       <link
@@ -87,14 +92,16 @@ const GrantsPaymentsSponsorDetails2026 = () => {
         rel="stylesheet"
       />
       <Helmet>
-        <title>3ribe | Silver Sponsor | Brit FinTech Awards 2026</title>
+        <title>
+          Flex Instant Pay | Strategic Sponsor | Brit FinTech Awards 2026
+        </title>
         <meta
           name="description"
-          content="3ribe is a global money remittance and digital banking solutions brand operating under Grants Payment Solutions Ltd, a UK-licensed payment entity. Silver Sponsor of Brit FinTech Awards 2026."
+          content="Flex Instant Pay is a UK-based money transfer service focused on trusted, secure and convenient international money transfers with personal, face-to-face customer support. Strategic Sponsor of Brit FinTech Awards 2026."
         />
         <meta
           name="keywords"
-          content="3ribe, Grants Payment Solutions Ltd, money remittance, digital banking, cross-border payments, international money transfer, Africa payments, UK payment entity, Silver Sponsor 2026, Brit FinTech Awards"
+          content="Flex Instant Pay, FlexPay, UK money transfer, international money transfers, personal service, Strategic Sponsor 2026, Brit FinTech Awards"
         />
         <meta name="author" content="Brit Fintech Award" />
         <meta property="og:type" content="website" />
@@ -104,27 +111,27 @@ const GrantsPaymentsSponsorDetails2026 = () => {
         />
         <meta
           property="og:title"
-          content="3ribe — Simplifying Cross-Border Payments | Brit FinTech Awards 2026"
+          content="Flex Instant Pay: Fast, secure & convenient money transfers | Brit FinTech Awards 2026"
         />
         <meta
           property="og:description"
-          content="3ribe — global money remittance and digital banking brand and Silver Sponsor of the Brit FinTech Awards 2026."
+          content="Flex Instant Pay is a Strategic Sponsor of the Brit FinTech Awards 2026 — trusted money transfers with personal service."
         />
         <meta property="og:image" content={OG_IMAGE} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta
           property="og:image:alt"
-          content="3ribe - Silver Sponsor | Brit FinTech Awards 2026"
+          content="Flex Instant Pay - Strategic Sponsor | Brit FinTech Awards 2026"
         />
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:title"
-          content="3ribe — Simplifying Cross-Border Payments | Brit FinTech Awards 2026"
+          content="Flex Instant Pay: Fast, secure & convenient money transfers | Brit FinTech Awards 2026"
         />
         <meta
           name="twitter:description"
-          content="3ribe — global money remittance and digital banking brand and Silver Sponsor of the Brit FinTech Awards 2026."
+          content="Flex Instant Pay is a Strategic Sponsor of the Brit FinTech Awards 2026."
         />
         <meta name="twitter:image" content={OG_IMAGE} />
       </Helmet>
@@ -136,13 +143,13 @@ const GrantsPaymentsSponsorDetails2026 = () => {
         href={SITE_URL}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Visit 3ribe website"
-        className="sponsor-banner-2026 relative block w-full overflow-hidden bg-[#2a0a10] h-[130px] sm:h-[160px] md:h-auto"
+        aria-label="Visit Flex Instant Pay website"
+        className="sponsor-banner-2026 relative block w-full overflow-hidden bg-[#18181b] min-h-[130px] sm:min-h-[160px] md:min-h-[220px]"
         style={{ lineHeight: 0 }}
       >
         <img
           src={`${BANNER_IMG}?v=1`}
-          alt="3ribe — Silver Sponsor | Brit FinTech Awards 2026"
+          alt="Flex Instant Pay — Strategic Sponsor | Brit FinTech Awards 2026"
           width={1920}
           height={430}
           decoding="async"
@@ -166,23 +173,26 @@ const GrantsPaymentsSponsorDetails2026 = () => {
         {/* Intro Header */}
         <div className="mb-10">
           <h1 className="m-0 text-[20px] sm:text-[24px] md:text-[32px] leading-[1.25] font-extrabold tracking-tight text-zinc-950">
-            3ribe – Simplifying Cross-Border Payments
+            Flex Instant Pay: Fast, secure &amp; convenient money transfers
           </h1>
+          <p className="mt-3 mb-0 text-[15px] md:text-[16px] font-semibold text-zinc-500">
+            Trusted Money Transfers, Personal Service
+          </p>
         </div>
 
         {/* Body copy */}
         <div className="space-y-6 text-[17px] md:text-[18px] leading-[1.85] text-zinc-600 mb-12">
           <p className="m-0">
-            We’re delighted to welcome <strong>3ribe</strong> as a{" "}
-            <strong>Silver Sponsor of the Brit FinTech Awards 2026</strong>.
+            <strong>Flex Instant Pay</strong> is a UK-based money transfer
+            service focused on providing customers with trusted, secure and
+            convenient international money transfer services.
           </p>
 
           <p className="m-0">
-            3ribe is a global money remittance and digital banking solutions brand operating under <strong>Grants Payment Solutions Ltd</strong>, a UK-licensed payment entity.
-          </p>
-
-          <p className="m-0">
-            With a mission to simplify cross-border payments and financial access for individuals and businesses, 3ribe has a strong focus on connecting Africa to global markets.
+            With a strong emphasis on personal service and face-to-face customer
+            support, Flex Instant Pay gives customers the opportunity to speak
+            directly with its team and receive assistance with their money
+            transfer needs.
           </p>
         </div>
 
@@ -192,7 +202,7 @@ const GrantsPaymentsSponsorDetails2026 = () => {
             {highlights.map(({ icon: Icon, title, desc }) => (
               <div
                 key={title}
-                className="group rounded-2xl bg-white px-4 py-5 text-center border-2 border-[#c0c0c0] shadow-[0_8px_24px_rgba(192,192,192,0.25)] transition-all duration-300 hover:-translate-y-1 hover:border-[#a8a8a8] hover:shadow-[0_12px_28px_rgba(192,192,192,0.35)]"
+                className="group rounded-2xl bg-white px-4 py-5 text-center border-2 border-[#c0c0c0] shadow-[0_0_20px_rgba(192,192,192,0.55),0_8px_24px_rgba(160,160,175,0.2)] transition-all duration-300 hover:-translate-y-1 hover:border-[#a0a0a0] hover:shadow-[0_0_30px_rgba(192,192,192,0.9),0_0_15px_rgba(210,210,225,0.7)]"
               >
                 <span className="inline-flex items-center justify-center text-[#c8102e] mb-3 transition-transform duration-300 group-hover:scale-110">
                   <Icon size={28} strokeWidth={2} />
@@ -208,36 +218,20 @@ const GrantsPaymentsSponsorDetails2026 = () => {
           </div>
         </section>
 
-        {/* Moving Money Across Borders */}
-        <section className="mb-14 rounded-2xl border-l-[4px] border-[#c8102e] bg-white p-6 md:p-8 shadow-[0_4px_20px_rgba(15,23,42,0.04)]">
-          <div className="flex items-center gap-2.5 mb-3">
-            <Banknote size={22} strokeWidth={2.25} className="text-[#c8102e]" />
-            <h2 className="m-0 text-[22px] md:text-[26px] font-extrabold tracking-tight text-zinc-950">
-              Moving Money Across Borders, Simply
-            </h2>
-          </div>
-          <p className="m-0 mb-4 text-[16px] md:text-[17px] leading-[1.8] text-zinc-600">
-            3ribe combines money remittance with digital banking solutions, making it easier for people and businesses to send, receive and manage money internationally.
-          </p>
-          <p className="m-0 text-[16px] md:text-[17px] leading-[1.8] text-zinc-600 font-medium">
-            By bridging Africa and global markets, 3ribe is building payment infrastructure that drives financial inclusion across emerging markets.
-          </p>
-        </section>
-
-        {/* What 3ribe Offers */}
+        {/* Key features & benefits */}
         <section className="mb-14">
           <div className="text-center mb-8">
             <span className="inline-flex items-center gap-2 text-[11px] font-extrabold uppercase tracking-[0.2em] text-[#c8102e]">
               <Sparkles size={13} strokeWidth={2.5} />
-              Core Capabilities
+              Key Features &amp; Benefits
             </span>
             <h2 className="mt-2 text-[24px] md:text-[30px] font-extrabold tracking-tight text-zinc-950">
-              What 3ribe Offers
+              Why choose Flex Instant Pay
             </h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {what3ribeOffers.map(({ icon: Icon, title, desc }) => (
+            {keyFeatures.map(({ icon: Icon, title, desc }) => (
               <article
                 key={title}
                 className="group rounded-[16px] border border-zinc-200 bg-white p-6 h-full transition-all duration-300 hover:-translate-y-0.5 hover:border-[#c8102e]/25 hover:shadow-[0_14px_32px_rgba(15,23,42,0.08)]"
@@ -250,33 +244,60 @@ const GrantsPaymentsSponsorDetails2026 = () => {
                   />
                   {title}
                 </h3>
-                <p className="m-0 text-[0.95rem] leading-[1.65] text-zinc-600">{desc}</p>
+                <p className="m-0 text-[0.95rem] leading-[1.65] text-zinc-600">
+                  {desc}
+                </p>
               </article>
             ))}
           </div>
         </section>
 
-        {/* 3ribe at BFA 2026 */}
+        {/* Our mission */}
         <section className="mb-14 rounded-2xl border-l-[4px] border-[#c8102e] bg-white p-6 md:p-8 shadow-[0_4px_20px_rgba(15,23,42,0.04)]">
-          <div className="flex items-center gap-3 mb-4">
-            <Medal size={22} strokeWidth={2.25} className="text-[#c8102e] shrink-0" />
+          <div className="flex items-center gap-2.5 mb-3">
+            <Medal size={22} strokeWidth={2.25} className="text-[#c8102e]" />
             <h2 className="m-0 text-[22px] md:text-[26px] font-extrabold tracking-tight text-zinc-950">
-              3ribe at BFA 2026
+              Our mission
             </h2>
           </div>
           <p className="m-0 mb-4 text-[16px] md:text-[17px] leading-[1.8] text-zinc-600">
-            3ribe brings its expertise in remittance, cross-border payments and digital financial infrastructure to the Brit FinTech Awards 2026.
+            We are delighted to welcome Flex Instant Pay as a{" "}
+            <strong>Strategic Sponsor of the Brit FinTech Awards 2026</strong>.
           </p>
+          <p className="m-0 text-[16px] md:text-[17px] leading-[1.8] text-zinc-600">
+            Flex Instant Pay joins a community of fintech, payments, banking and
+            financial services businesses coming together to recognise
+            innovation and celebrate the people and organisations shaping the
+            future of the industry.
+          </p>
+        </section>
+
+        {/* Strategic sponsor + event details */}
+        <section className="mb-14 rounded-2xl border-l-[4px] border-[#c8102e] bg-white p-6 md:p-8 shadow-[0_4px_20px_rgba(15,23,42,0.04)]">
+          <div className="flex items-center gap-3 mb-4">
+            <Globe2
+              size={22}
+              strokeWidth={2.25}
+              className="text-[#c8102e] shrink-0"
+            />
+            <h2 className="m-0 text-[22px] md:text-[26px] font-extrabold tracking-tight text-zinc-950">
+              Meet Flex Instant Pay at the event
+            </h2>
+          </div>
           <p className="m-0 mb-6 text-[16px] md:text-[17px] leading-[1.8] text-zinc-600">
-            As a Silver Sponsor, 3ribe joins the businesses supporting an evening that brings together the innovators, leaders and organisations shaping the future of FinTech, payments and Money Services.
+            Connect with the Flex Instant Pay team and discover more about their
+            approach to international money transfers, digital payments and
+            customer-focused financial services.
           </p>
 
-          {/* Event Details Light Banner */}
           <div className="rounded-2xl bg-zinc-50/80 p-6 md:p-7 border border-zinc-200/80 shadow-sm">
             <div className="flex flex-col md:flex-row items-start md:items-center justify-start md:justify-around gap-6 md:gap-10">
-              {/* Date Item */}
               <div className="flex items-center gap-4">
-                <Calendar size={32} strokeWidth={2} className="text-[#c8102e] shrink-0" />
+                <Calendar
+                  size={32}
+                  strokeWidth={2}
+                  className="text-[#c8102e] shrink-0"
+                />
                 <div className="flex flex-col text-left">
                   <span className="text-[17px] md:text-[19px] font-bold text-zinc-800 leading-snug">
                     Friday
@@ -287,12 +308,14 @@ const GrantsPaymentsSponsorDetails2026 = () => {
                 </div>
               </div>
 
-              {/* Divider */}
               <div className="hidden md:block h-12 w-px bg-zinc-200" />
 
-              {/* Venue Item */}
               <div className="flex items-center gap-4">
-                <MapPin size={32} strokeWidth={2} className="text-[#c8102e] shrink-0" />
+                <MapPin
+                  size={32}
+                  strokeWidth={2}
+                  className="text-[#c8102e] shrink-0"
+                />
                 <div className="flex flex-col text-left">
                   <span className="text-[17px] md:text-[19px] font-bold text-zinc-950 leading-snug">
                     Landing FortyTwo,
@@ -301,35 +324,10 @@ const GrantsPaymentsSponsorDetails2026 = () => {
                     122 Leadenhall Street,
                   </span>
                   <span className="text-[16px] md:text-[18px] font-bold text-zinc-800 leading-snug">
-                    London EC3V 4AB
+                    London
                   </span>
                 </div>
               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Featured Video */}
-        <section className="mb-14">
-          <div className="text-center mb-6 md:mb-8">
-            <span className="inline-flex items-center gap-2 text-[11px] font-extrabold uppercase tracking-[0.2em] text-[#c8102e]">
-              <Play size={13} strokeWidth={2.5} fill="currentColor" />
-              Featured Video
-            </span>
-            <h2 className="mt-2 text-[24px] md:text-[30px] font-extrabold tracking-tight text-zinc-950">
-              Watch 3ribe
-            </h2>
-          </div>
-
-          <div className="relative w-full overflow-hidden rounded-2xl md:rounded-3xl border border-zinc-200/80 bg-zinc-950 shadow-[0_12px_36px_rgba(0,0,0,0.12)]">
-            <div className="relative w-full aspect-video">
-              <iframe
-                src="https://www.youtube.com/embed/T3bmUJsrp70"
-                title="3ribe - Brit FinTech Awards"
-                className="absolute top-0 left-0 w-full h-full rounded-2xl md:rounded-3xl border-0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-              />
             </div>
           </div>
         </section>
@@ -349,10 +347,12 @@ const GrantsPaymentsSponsorDetails2026 = () => {
               Brit FinTech Awards 2026
             </p>
             <h2 className="mt-3 mb-3 text-[22px] md:text-[28px] font-extrabold tracking-tight text-white">
-              Learn More About 3ribe
+              MEET FLEX INSTANT PAY AT THE EVENT!
             </h2>
             <p className="m-0 mb-7 text-[14px] md:text-[15px] text-zinc-300 max-w-xl mx-auto leading-relaxed">
-              Connect with 3ribe at the Brit FinTech Awards 2026 and discover their global remittance and digital banking solutions.
+              Connect with the Flex Instant Pay team and discover more about
+              their approach to international money transfers, digital payments
+              and customer-focused financial services.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
               <a
@@ -361,9 +361,10 @@ const GrantsPaymentsSponsorDetails2026 = () => {
                 rel="noopener noreferrer"
                 className="!m-0 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-extrabold !text-zinc-950 no-underline transition-all hover:bg-[#c8102e] hover:!text-white"
               >
-                Visit 3ribe Website
+                Visit Flex Instant Pay
                 <ExternalLink size={16} />
               </a>
+             
               <NavLink
                 to="/our-sponsors"
                 className="!m-0 inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/5 px-6 py-3 text-sm font-extrabold text-white no-underline transition-all hover:bg-white/15"
@@ -372,7 +373,7 @@ const GrantsPaymentsSponsorDetails2026 = () => {
               </NavLink>
             </div>
             <p className="mt-5 mb-0 text-[13px] text-zinc-500">
-              https://3ribe.io
+              Flex Instant Pay — Trusted Money Transfers, Personal Service
             </p>
           </div>
         </section>
@@ -381,4 +382,4 @@ const GrantsPaymentsSponsorDetails2026 = () => {
   );
 };
 
-export default GrantsPaymentsSponsorDetails2026;
+export default FlexInstantPaySponsorDetails2026;

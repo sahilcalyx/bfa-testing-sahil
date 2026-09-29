@@ -12,6 +12,7 @@ export const AWARD_CATEGORIES_2026 = [
   "ID Verification Innovator of the Year",
   "FinTech of the Year",
   "FinTech Leader of the Year",
+  "FinTech CTO of the Year",
   "Cross-Border Pay-out Disruptor of the Year",
   "Compliance Innovator of the year",
   "Best in Customer Service MSB of the Year",
@@ -23,6 +24,7 @@ export const AWARD_CATEGORIES_2026 = [
   "MSB Store of the Year",
   "MSB Rising Star of the Year",
   "MSB Leader of the Year",
+  "MSB Community Champion of the Year",
   "MSB Global of the Year",
   "FinTech Global of the Year",
 ];

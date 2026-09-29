@@ -38,6 +38,7 @@ import WhoAttendsBfaSection from "../Components/WhoAttendsBfaSection";
 import WhoAttendsBfaTabsSection from "../Components/WhoAttendsBfaTabsSection";
 import GlobalConnectivitySection from "../Components/GlobalConnectivitySection";
 import EventHostSection from "./2026/host/EventHostSection";
+import EventSchedule2026 from "./2026/Schedule2026/EventSchedule2026";
 
 const Home = () => {
   const deadline = new Date("2025-08-31"); // change date here
@@ -315,6 +316,7 @@ Brit Fintech Awards 2026."
         <KeynoteSpeaker2026 /> 
         <AnimatedStats stats={statsData} />
         <EventHostSection />
+        <EventSchedule2026 />
         {/* <StaticHero />
         <ScrollRevealVideo /> */}
         {/* <DynamicSlider/> */}

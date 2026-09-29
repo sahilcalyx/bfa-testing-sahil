@@ -1,75 +1,41 @@
 import React, { useMemo, useState } from "react";
-
-const ATTENDEE_CATEGORIES = [
-  {
-    category: "Banking",
-    subtitle: "Banks, FX, treasury and infrastructure leaders",
-    items: [
-      { name: "IFX Payments", logo: "/assets/img/attendee-logos/IFX.svg" },
-      { name: "Clear Junction", logo: "/assets/img/attendee-logos/clear-junction.png" },
-      { name: "Leatherback", logo: "/assets/img/keynotes/leatherback-logo.png" },
-      { name: "Grants Payments", logo: "/assets/img/attendee-logos/Grants-Payment.png" },
-      { name: "Orbital", logo: "/assets/img/attendee-logos/orbital.png" },
-    ],
-  },
-  {
-    category: "Open Banking",
-    subtitle: "API-first innovators and open finance enablers",
-    items: [
-      { name: "Volume", logo: "/assets/img/attendee-logos/volume.png" },
-      { name: "Fena", logo: "/assets/img/attendee-logos/fena.png" },
-      { name: "Yapily", logo: "/assets/img/attendee-logos/yapily.com logo49.png" },
-      { name: "Open Banking", logo: "/assets/img/discussionpanel/OBL_logotype_darkblu-Large.png" },
-    ],
-  },
-  {
-    category: "Payments",
-    subtitle: "Processors, gateways, issuing and acquiring players",
-    items: [
-      { name: "Sends", logo: "/assets/img/attendee-logos/sends.png" },
-      { name: "Payceler", logo: "/assets/img/attendee-logos/payceler.png" },
-      { name: "Kani Payments", logo: "/assets/img/attendee-logos/kani.png" },
-      { name: "Ecommpay", logo: "/assets/img/attendee-logos/ecommpay.png" },
-      { name: "Paysafe", logo: "/assets/img/attendee-logos/paysafe.svg" },
-    ],
-  },
-  {
-    category: "Card Acquirers",
-    subtitle: "Merchant acquiring and card payment specialists",
-    items: [
-      { name: "Trust Payments", logo: "/assets/img/attendee-logos/trustpayments.com logo11.png" },
-      { name: "eMerchantPay", logo: "/assets/img/attendee-logos/Emarchantpay.png" },
-      { name: "Axcess Merchant Services", logo: "/assets/img/attendee-logos/axcessms.com logo13.png" },
-    ],
-  },
-  {
-    category: "Payout Companies",
-    subtitle: "Cross-border payout and remittance partners",
-    items: [
-      { name: "GCC Exchange", logo: "/assets/img/attendee-logos/Group 2.png" },
-      { name: "Chrisborough Group", logo: "/assets/img/attendee-logos/chrisborough.png" },
-    ],
-  },
-  {
-    category: "Identity Verification",
-    subtitle: "KYC, AML and digital identity solutions",
-    items: [
-      { name: "Sumsub", logo: "/assets/img/attendee-logos/sumsub 1.png" },
-      { name: "GBG", logo: "/assets/img/attendee-logos/gbg.png" },
-    ],
-  },
-  {
-    category: "Others",
-    subtitle: "Industry partners shaping the wider ecosystem",
-    items: [
-      { name: "Muthoot Finance", logo: "/assets/img/attendee-logos/muthoot.png" },
-      { name: "Link FX", logo: "/assets/img/attendee-logos/link-fx.png" },
-      { name: "ECEX Group", logo: "/assets/img/attendee-logos/ecex.png" },
-    ],
-  },
-];
+import { ATTENDEE_CATEGORIES, ATTENDEE_LOGOS } from "./attendeeLogos";
 
 const ALL_TAB = "All";
+
+/* MSB overlaps other categories, so it is a name list rather than a category on the shared data */
+const MSB_CATEGORY = {
+  category: "MSB",
+  subtitle: "Money Services Businesses — money transfer, remittance and currency exchange",
+  names: new Set([
+    "3ribe",
+    "Baaz Money",
+    "Belyfted",
+    "Blue Nile",
+    "Finest Pay",
+    "Flex Instant Pay",
+    "Glory & Honour",
+    "IFEPay",
+    "K Money",
+    "Kmbal",
+    "Leftover Currency",
+    "Mercury Danati",
+    "MyRemit",
+    "NEC Money",
+    "QF Remit",
+    "Red Sea Money Transfer",
+    "Super Transfer",
+    "Teeparam",
+    "Tigris Pay",
+    "Transfer Rocket",
+    "Travel Cashier",
+  ]),
+};
+
+const TAB_CATEGORIES = [...ATTENDEE_CATEGORIES, MSB_CATEGORY];
+
+/* On sm+ the tab bar breaks onto a second row starting at this tab */
+const SECOND_ROW_START = "Identity Verification";
 
 function LogoCard({ item }) {
   const [failed, setFailed] = useState(false);
@@ -88,7 +54,9 @@ function LogoCard({ item }) {
           loading="lazy"
           decoding="async"
           onError={() => setFailed(true)}
-          className="max-h-[40px] sm:max-h-[54px] w-auto max-w-full object-contain"
+          className={`${
+            item.tall ? "max-h-[58px] sm:max-h-[78px]" : "max-h-[40px] sm:max-h-[54px]"
+          } w-auto max-w-full object-contain`}
         />
       )}
     </div>
@@ -98,29 +66,20 @@ function LogoCard({ item }) {
 const WhoAttendsBfaTabsSection = () => {
   const [activeTab, setActiveTab] = useState(ALL_TAB);
 
-  const tabs = useMemo(() => [ALL_TAB, ...ATTENDEE_CATEGORIES.map((c) => c.category)], []);
+  const tabs = useMemo(() => [ALL_TAB, ...TAB_CATEGORIES.map((c) => c.category)], []);
 
   const activeCategory = useMemo(
-    () => ATTENDEE_CATEGORIES.find((c) => c.category === activeTab) || null,
+    () => TAB_CATEGORIES.find((c) => c.category === activeTab) || null,
     [activeTab]
   );
 
   const visibleItems = useMemo(() => {
-    if (activeTab === ALL_TAB) {
-      return ATTENDEE_CATEGORIES.flatMap((cat) =>
-        cat.items.map((item) => ({
-          ...item,
-          category: cat.category,
-          key: `${cat.category}-${item.name}`,
-        }))
-      );
+    if (activeTab === ALL_TAB) return ATTENDEE_LOGOS;
+    if (activeTab === MSB_CATEGORY.category) {
+      return ATTENDEE_LOGOS.filter((item) => MSB_CATEGORY.names.has(item.name));
     }
-    return (activeCategory?.items || []).map((item) => ({
-      ...item,
-      category: activeCategory.category,
-      key: `${activeCategory.category}-${item.name}`,
-    }));
-  }, [activeTab, activeCategory]);
+    return ATTENDEE_LOGOS.filter((item) => item.category === activeTab);
+  }, [activeTab]);
 
   const subtitle =
     activeTab === ALL_TAB
@@ -154,18 +113,22 @@ const WhoAttendsBfaTabsSection = () => {
             {tabs.map((tab) => {
               const isActive = activeTab === tab;
               return (
-                <button
-                  key={tab}
-                  type="button"
-                  onClick={() => setActiveTab(tab)}
-                  className={`rounded-xl px-3 py-2.5 sm:px-4 sm:py-2.5 text-[11px] sm:text-sm font-bold tracking-wide transition-colors duration-200 whitespace-nowrap border text-center ${
-                    isActive
-                      ? "bg-[#c8102e] text-white border-[#c8102e] shadow-md shadow-[#c8102e]/25"
-                      : "bg-white text-zinc-600 border-zinc-200 hover:border-[#c8102e]/40 hover:text-[#c8102e]"
-                  }`}
-                >
-                  {tab}
-                </button>
+                <React.Fragment key={tab}>
+                  {tab === SECOND_ROW_START && (
+                    <span aria-hidden="true" className="hidden sm:block basis-full h-0" />
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => setActiveTab(tab)}
+                    className={`rounded-xl px-3 py-2.5 sm:px-4 sm:py-2.5 text-[11px] sm:text-sm font-bold tracking-wide transition-colors duration-200 whitespace-nowrap border text-center ${
+                      isActive
+                        ? "bg-[#c8102e] text-white border-[#c8102e] shadow-md shadow-[#c8102e]/25"
+                        : "bg-white text-zinc-600 border-zinc-200 hover:border-[#c8102e]/40 hover:text-[#c8102e]"
+                    }`}
+                  >
+                    {tab}
+                  </button>
+                </React.Fragment>
               );
             })}
           </div>
@@ -183,7 +146,7 @@ const WhoAttendsBfaTabsSection = () => {
 
             <div className="flex flex-wrap justify-center gap-2.5 sm:gap-4">
               {visibleItems.map((item) => (
-                <LogoCard key={item.key} item={item} />
+                <LogoCard key={item.name} item={item} />
               ))}
             </div>
 

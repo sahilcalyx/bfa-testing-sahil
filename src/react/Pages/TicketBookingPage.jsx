@@ -5,6 +5,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { Helmet } from "react-helmet";
 import toast, { Toaster } from "react-hot-toast";
 import CouponCodeInput from "@/components/CouponCodeInput";
+import EventScheduleCompact2026 from "./2026/Schedule2026/EventScheduleCompact2026";
 import { PAYMENT_API_BASE, fetchPricing, fetchTicketBundles, formatGBP, FALLBACK_TICKET_PACKS, couponFromPack, resolveCouponForQuantity, packsForTicketPrice } from "@/lib/paymentApi";
 // Country codes list (partial - you can extend it)
 // ====== Titles ======
@@ -1778,6 +1779,8 @@ function TicketBookingPage() {
           </div>
         </div>
       </div>
+
+      <EventScheduleCompact2026 />
       <Toaster position="bottom-center" reverseOrder={false} />
     </>
   );

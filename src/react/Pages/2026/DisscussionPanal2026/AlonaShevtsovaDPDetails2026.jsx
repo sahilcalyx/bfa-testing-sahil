@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
 import { FaLinkedin } from "react-icons/fa";
-import { jayAnand } from "./panelists2026";
+import { alonaShevtsova } from "./panelists2026";
 
-const speaker = jayAnand;
+const speaker = alonaShevtsova;
 const logoSrc = speaker.logoLight || speaker.logo;
 
-const JayAnandDPDetails2026 = () => {
+const AlonaShevtsovaDPDetails2026 = () => {
   const navigate = useNavigate();
   const [imgFailed, setImgFailed] = useState(!speaker.img);
 
@@ -15,7 +15,7 @@ const JayAnandDPDetails2026 = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  const showPhoto = speaker.img && !speaker.placeholder && !imgFailed;
+  const showPhoto = speaker.img && !imgFailed;
 
   return (
     <>
@@ -23,7 +23,7 @@ const JayAnandDPDetails2026 = () => {
         <title>{speaker.name} - Discussion Panel | Brit FinTech Awards 2026</title>
         <meta
           name="description"
-          content={`${speaker.name} is ${speaker.designation} at ${speaker.company} and a discussion panelist at the Brit FinTech Awards 2026.`}
+          content={`${speaker.name} is ${speaker.designation} at ${speaker.company} and the discussion panel moderator at the Brit FinTech Awards 2026.`}
         />
       </Helmet>
 
@@ -55,34 +55,37 @@ const JayAnandDPDetails2026 = () => {
                       onError={() => setImgFailed(true)}
                     />
                   ) : (
-                    <div className="w-full h-full flex flex-col items-center justify-center gap-2 bg-[radial-gradient(ellipse_at_50%_35%,#5c1820_0%,transparent_60%),linear-gradient(160deg,#2a0c12_0%,#4a1018_55%,#1a080c_100%)]">
-                      <span className="font-[Oswald,sans-serif] text-5xl tracking-[0.18em] text-[#f2d8ac]/80 font-bold">
+                    <div className="w-full h-full bg-[radial-gradient(ellipse_at_50%_35%,#5c1820_0%,transparent_60%),linear-gradient(160deg,#2a0c12_0%,#4a1018_55%,#1a080c_100%)]" />
+                  )}
+                  {speaker.placeholder || !showPhoto ? (
+                    <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 pointer-events-none">
+                      <span className="font-[Oswald,sans-serif] text-5xl tracking-[0.18em] text-[#f2d8ac]/80 font-bold drop-shadow-[0_0_18px_rgba(200,16,46,0.45)]">
                         {speaker.initials}
                       </span>
-                      <span className="text-[10px] font-bold tracking-[0.28em] uppercase text-[#f2d8ac]/45">
+                      <span className="text-[10px] font-bold tracking-[0.28em] uppercase text-[#f2d8ac]/60">
                         BFA 2026
                       </span>
                     </div>
-                  )}
+                  ) : null}
                 </div>
 
                 <span className="text-[10px] font-black uppercase tracking-[0.25em] text-[#c8102e] mb-2">
-                  Discussion Panelist
+                  Discussion Panel Moderator
                 </span>
 
                 <h1 className="text-2xl md:text-3xl font-extrabold text-zinc-900 tracking-tight">
                   {speaker.name}
                 </h1>
 
-                <div className="text-zinc-400 text-[10px] font-extrabold uppercase tracking-[0.2em] mt-1.5 leading-relaxed">
-                  {speaker.designation}
+                <div className="text-zinc-400 text-[12px] font-extrabold uppercase tracking-[0.2em] mt-1.5 leading-relaxed">
+                  {speaker.designation} 
                 </div>
 
                 {logoSrc ? (
                   <img
                     src={logoSrc}
                     alt={speaker.company}
-                    className="h-12 w-auto max-w-[200px] object-contain mt-3"
+                    className="h-9 w-auto max-w-[200px] object-contain mt-4"
                   />
                 ) : null}
 
@@ -138,7 +141,7 @@ const JayAnandDPDetails2026 = () => {
                 </div>
               </div>
 
-              <div className="bg-white border border-zinc-100 rounded-[32px] p-8 md:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.015)] mb-8">
+              <div className="bg-white border border-zinc-100 rounded-[32px] p-8 md:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.015)]">
                 <span className="text-[10px] font-black uppercase tracking-[0.25em] text-[#c8102e] block mb-6">
                   Key Highlights
                 </span>
@@ -158,25 +161,6 @@ const JayAnandDPDetails2026 = () => {
                   ))}
                 </div>
               </div>
-
-              {speaker.videoUrl && (
-                <div className="bg-white border border-zinc-100 rounded-[32px] p-6 md:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.015)]">
-                  <span className="text-[10px] font-black uppercase tracking-[0.25em] text-[#c8102e] block mb-6">
-                    Featured Video
-                  </span>
-                  <div className="relative w-full overflow-hidden rounded-[24px] border border-zinc-200/80 bg-zinc-950 shadow-[0_12px_36px_rgba(0,0,0,0.12)]">
-                    <div className="relative w-full aspect-video">
-                      <iframe
-                        src={speaker.videoUrl}
-                        title={`${speaker.name} - Brit FinTech Awards 2026`}
-                        className="absolute top-0 left-0 w-full h-full border-0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowFullScreen
-                      />
-                    </div>
-                  </div>
-                </div>
-              )}
             </div>
           </div>
         </div>
@@ -185,4 +169,4 @@ const JayAnandDPDetails2026 = () => {
   );
 };
 
-export default JayAnandDPDetails2026;
+export default AlonaShevtsovaDPDetails2026;

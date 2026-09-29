@@ -124,6 +124,7 @@ const   AwardsCategory = () => {
                     <li>▶ Payment Acquirer of the Year</li>
                     <li>▶ Payment Gateway of the Year</li>
                     <li>▶ FinTech Leader of the Year</li>
+                    <li>▶ FinTech CTO of the Year</li>
                     <li>▶ Cross-Border Pay-out Disruptor of the Year</li>
                   </ul>
                 </div>
@@ -181,6 +182,7 @@ const   AwardsCategory = () => {
                     <li>▶ MSB of the Year </li>
                     <li>▶ MSB Rising Star of the Year</li>
                     <li>▶ MSB Leader of the Year</li>
+                    <li>▶ MSB Community Champion of the Year</li>
                   </ul>
                 </div>
               </div>

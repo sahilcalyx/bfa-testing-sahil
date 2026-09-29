@@ -1180,6 +1180,15 @@ const RegisterNow = () => {
                         />
                         FinTech Leader of the Year
                       </MenuItem>
+                      <MenuItem value="FinTech CTO of the Year">
+                        <Checkbox
+                          checked={formData.awardcate.includes(
+                            "FinTech CTO of the Year"
+                          )}
+                          disabled={NOMINATIONS_CLOSED}
+                        />
+                        FinTech CTO of the Year
+                      </MenuItem>
                       <MenuItem value="Cross-Border Pay-out Disruptor of the Year">
                         <Checkbox
                           checked={formData.awardcate.includes(
@@ -1288,6 +1297,15 @@ const RegisterNow = () => {
                           disabled={NOMINATIONS_CLOSED}
                         />
                         MSB Leader of the Year
+                      </MenuItem>
+                      <MenuItem value="MSB Community Champion of the Year">
+                        <Checkbox
+                          checked={formData.awardcate.includes(
+                            "MSB Community Champion of the Year"
+                          )}
+                          disabled={NOMINATIONS_CLOSED}
+                        />
+                        MSB Community Champion of the Year
                       </MenuItem>
                       <ListSubheader
                         style={{
