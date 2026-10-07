@@ -286,7 +286,7 @@ const Awards = () => {
                     {/* <div className="cs-height_30 cs-height_lg_30" /> */}
                   </div>
 
-                  <div className="col-lg-4 wow fadeIn d-flex">
+                  {/* <div className="col-lg-4 wow fadeIn d-flex">
                     <div className="cs-icon_box cs-style3 text-center h-100 d-flex flex-column">
                       <div className="cs-center">
                         <img src="../assets/img/Fintech/awards-2026.png" alt="FinTech Leader of the Year" />
@@ -301,7 +301,7 @@ const Awards = () => {
                         Explore More
                       </NavLink>
                     </div>
-                  </div>
+                  </div> */}
 
                   <div className="col-lg-4 wow fadeIn d-flex">
                     <div className="cs-icon_box cs-style3 text-center h-100 d-flex flex-column">
@@ -592,7 +592,7 @@ const Awards = () => {
                 <div className="cs-height_10 cs-height_lg_10" />
                 <div className="row justify-content-center gy-4">
 
-                  <div className="col-lg-4 wow fadeIn d-flex">
+                  {/* <div className="col-lg-4 wow fadeIn d-flex">
                     <div className="cs-icon_box cs-style3 text-center h-100 d-flex flex-column">
                       <div className="cs-center">
                         <img src="../assets/img/Fintech/awards-2026.png" alt="Aword Image" />
@@ -607,8 +607,7 @@ const Awards = () => {
                         Explore More
                       </NavLink>
                     </div>
-                    {/* <div className="cs-height_30 cs-height_lg_30" /> */}
-                  </div>
+                  </div> */}
 
                   <div className="col-lg-4 wow fadeIn d-flex">
                     <div className="cs-icon_box cs-style3 text-center h-100 d-flex flex-column">

@@ -168,7 +168,10 @@ const WinnerBanner2026 = () => {
     bridgeAnimRef.current = tl;
   }, [runCircularReveal]);
 
+  const scrambleDoneRef = useRef(false);
   const handleScrambleComplete = useCallback(() => {
+    if (scrambleDoneRef.current) return;
+    scrambleDoneRef.current = true;
     // Short beat on black after scramble exits, then bridge
     window.setTimeout(runBlackToWhiteBridge, 160);
   }, [runBlackToWhiteBridge]);

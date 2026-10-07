@@ -17,8 +17,11 @@ const WinnerCard2026 = ({ award, index, reduceMotion }) => {
   const handleMouseMove = useSpotlight();
 
   const showImage = Boolean(award.img) && !imgFailed;
-  const announced = Boolean(award.name);
+  const person = award.person || "";
+  const company = award.company || "";
+  const announced = Boolean(person || company || award.name);
   const hasLink = Boolean(award.link);
+  const winnerLabel = [person, company].filter(Boolean).join(", ") || award.name;
   const body = (
     <motion.article
       onMouseMove={handleMouseMove}
@@ -38,7 +41,7 @@ const WinnerCard2026 = ({ award, index, reduceMotion }) => {
         {showImage ? (
           <img
             src={award.img}
-            alt={`${award.name || award.title} – Brit FinTech Awards 2026`}
+            alt={`${winnerLabel || award.title} – Brit FinTech Awards 2026`}
             loading="lazy"
             onError={() => setImgFailed(true)}
             className="w-full h-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.05]"
@@ -54,9 +57,23 @@ const WinnerCard2026 = ({ award, index, reduceMotion }) => {
             {award.title}
           </h3>
           {announced ? (
-            <p className="mt-2 mb-0 truncate text-sm font-semibold text-zinc-500">
-              {award.name}
-            </p>
+            <div className="mt-3 space-y-1">
+              {person ? (
+                <p className="mb-0 text-sm font-semibold leading-snug text-zinc-800">
+                  {person}
+                </p>
+              ) : null}
+              {company ? (
+                <p className="mb-0 text-sm font-medium leading-snug text-zinc-500 break-words">
+                  {company}
+                </p>
+              ) : null}
+              {!person && !company && award.name ? (
+                <p className="mb-0 text-sm font-medium leading-snug text-zinc-500 break-words">
+                  {award.name}
+                </p>
+              ) : null}
+            </div>
           ) : null}
         </div>
 
@@ -79,7 +96,7 @@ const WinnerCard2026 = ({ award, index, reduceMotion }) => {
         <Link
           to={award.link}
           className="block h-full no-underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[#c8102e] focus-visible:ring-offset-4 rounded-[28px]"
-          aria-label={`${award.title}${announced ? ` – ${award.name}` : ""}`}
+          aria-label={`${award.title}${announced ? ` – ${winnerLabel}` : ""}`}
         >
           {body}
         </Link>

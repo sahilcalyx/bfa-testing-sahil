@@ -16,6 +16,8 @@ import { cn } from "@/lib/utils";
 export type ArcRevealGreeting = {
   /** Greeting text in the target script */
   text: string;
+  /** Optional rich content rendered instead of `text`; `text` still keys the transition. */
+  content?: React.ReactNode;
   /** Optional `lang` attribute applied to the span (helps screen readers / font rendering) */
   lang?: string;
 };
@@ -213,7 +215,7 @@ export function ArcRevealHero({
                       greetingClassName,
                     )}
                   >
-                    {current.text}
+                    {current.content ?? current.text}
                   </motion.span>
                 )}
               </AnimatePresence>

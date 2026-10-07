@@ -91,6 +91,15 @@ const OurSponsors = () => {
                 title: "Peratera",
               },
               {
+                name: "ECEX",
+                video: "/assets/video/sponsors-logo-2026/ecex-sponsor-details-2026.webm",
+                link: "/ecex-sponsor-details-2026",
+                external: false,
+                tier: "Silver Sponsor",
+                alt: "ECEX",
+                title: "ECEX",
+              },
+              {
                 name: "Alico Remit",
                 video: "/assets/video/sponsors-logo-2026/Alico-sponsor-details-2026.webm",
                 link: "/alicoremit-sponsor-details-2026",
@@ -99,15 +108,7 @@ const OurSponsors = () => {
                 alt: "Alico Remit",
                 title: "Alico Remit",
               },
-              // {
-              //   name: "ECEX",
-              //   video: "/assets/video/sponsors-logo-2026/ecex-sponsor-details-2026.webm",
-              //   link: "/ecex-sponsor-details-2026",
-              //   external: false,
-              //   tier: "Silver Sponsor",
-              //   alt: "ECEX",
-              //   title: "ECEX",
-              // },
+              
               
               
               {

@@ -37,6 +37,7 @@ const Winners2026 = () => {
   };
   const active = winnerSections2026.find((section) => section.id === activeId);
 
+  const isSingle = active.awards.length === 1;
   const isCompact = active.awards.length <= 2;
 
   return (
@@ -140,9 +141,11 @@ const Winners2026 = () => {
               <motion.ul
                 variants={gridVariants}
                 className={`grid gap-6 md:gap-7 p-0 m-0 ${
-                  isCompact
-                    ? "grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto"
-                    : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+                  isSingle
+                    ? "grid-cols-1 max-w-md mx-auto"
+                    : isCompact
+                      ? "grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto"
+                      : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
                 }`}
               >
                 {active.awards.map((award, index) => (

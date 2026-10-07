@@ -10,6 +10,7 @@ import {
   useMotionValue,
   useSpring,
   useMotionValueEvent,
+  useInView,
 } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
@@ -109,6 +110,7 @@ function Card({
   cardRadius,
   pointer,
   depth,
+  intro,
 }) {
   const { item, target } = card;
   // with known image dimensions the card follows the photo's own ratio, so nothing is cropped
@@ -149,9 +151,10 @@ function Card({
         scale,
       }}
     >
-      <div
+      <motion.div
         className="relative h-full w-full overflow-hidden shadow-[0_20px_50px_-20px_rgba(0,0,0,0.6)] max-md:rounded-[4vw]"
         style={{ borderRadius: `${cardRadius}px` }}
+        {...introMotion(intro, endX, endY)}
       >
         <Image
           src={item.src}
@@ -162,9 +165,30 @@ function Card({
           draggable={false}
           className={aspect ? "object-contain" : "object-cover"}
         />
-      </div>
+      </motion.div>
     </motion.div>
   );
+}
+
+const INTRO_DISTANCE = { x: 70, y: 80 };
+const INTRO_EASE = [0.22, 1, 0.36, 1];
+
+// fly each card in from outside the frame, along the line from the centre to its resting spot
+function introMotion(intro, endX, endY) {
+  if (!intro) return {};
+  const mag = Math.hypot(endX, endY) || 1;
+  const from = {
+    x: `${(endX / mag) * INTRO_DISTANCE.x}vw`,
+    y: `${(endY / mag) * INTRO_DISTANCE.y}vh`,
+    rotate: endX === 0 ? 0 : Math.sign(endX) * 8,
+    scale: 0.9,
+    opacity: 0,
+  };
+  return {
+    initial: from,
+    animate: intro.entered ? { x: "0vw", y: "0vh", rotate: 0, scale: 1, opacity: 1 } : from,
+    transition: { duration: 1.2, ease: INTRO_EASE, delay: intro.delay },
+  };
 }
 
 /**
@@ -176,6 +200,11 @@ export default function StackSpread({
   title,
   subtitle,
   action,
+  /**
+   * false = render the settled spread layout as a static section; cards fly in from
+   * the edges once on entering view (non-touch only) and pointer parallax still runs
+   */
+  scrollEffect = true,
   scrollLength = 350,
   bgColor = "#ececeb",
   clusterRotation = true,
@@ -198,20 +227,25 @@ export default function StackSpread({
   });
 
   // hold, scatter, then settle
-  const progress = useTransform(
+  const scrollProgress = useTransform(
     scrollYProgress,
     [0, SCATTER_START, SCATTER_END, 1],
     [0, 0, 1, 1],
   );
+  const settledProgress = useMotionValue(1);
+  const progress = scrollEffect ? scrollProgress : settledProgress;
 
-  const [spread, setSpread] = useState(false);
-  const [copyVisible, setCopyVisible] = useState(false);
+  const [spread, setSpread] = useState(!scrollEffect);
+  const [copyVisible, setCopyVisible] = useState(!scrollEffect);
   useMotionValueEvent(progress, "change", (p) => {
     setSpread((was) => (was ? p > 0.985 : p >= 0.999));
     setCopyVisible(p >= textFadeStart + 0.2);
   });
   const parallaxEnabled = reduce !== true && !isSmall;
   const pointer = usePointerParallax(spread, parallaxEnabled);
+
+  const introEnabled = !scrollEffect && reduce !== true && !isSmall;
+  const inView = useInView(wrapRef, { once: true, amount: 0.35 });
 
   const noScale = reduce === true;
   const copyOpacity = useTransform(progress, [textFadeStart, textFadeStart + 0.35], [0, 1]);
@@ -223,9 +257,11 @@ export default function StackSpread({
       id={id}
       ref={wrapRef}
       className={`relative w-full ${className}`}
-      style={{ height: `${scrollLength}vh`, backgroundColor: bgColor }}
+      style={{ height: scrollEffect ? `${scrollLength}vh` : "100vh", backgroundColor: bgColor }}
     >
-      <div className="sticky top-0 h-screen w-full overflow-hidden">
+      <div
+        className={`h-screen w-full overflow-hidden ${scrollEffect ? "sticky top-0" : "relative"}`}
+      >
         <motion.div
           className="pointer-events-none absolute inset-0 z-[5] flex flex-col items-center justify-center px-6 text-center max-md:px-8"
           style={{ opacity: copyOpacity, scale: noScale ? 1 : copyScale }}
@@ -272,11 +308,12 @@ export default function StackSpread({
               cardRadius={cardRadius}
               pointer={pointer}
               depth={parallaxEnabled ? parallaxDepth(i, cards.length) : 0}
+              intro={introEnabled ? { entered: inView, delay: 0.1 + i * 0.08 } : null}
             />
           ))}
         </div>
 
-        {showScrollHint && (
+        {scrollEffect && showScrollHint && (
           <motion.div
             className="pointer-events-none absolute inset-x-0 bottom-[3vh] z-20 flex flex-col items-center gap-[0.6vh] text-[0.8vw] font-medium uppercase tracking-[0.2em] max-md:bottom-6 max-md:gap-1 max-md:text-[2.8vw]"
             style={{ color: textColor, opacity: hintOpacity }}

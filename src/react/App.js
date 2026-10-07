@@ -204,6 +204,9 @@ const HighRiskSessionPage = lazy(() => import("./Pages/2026/FocusSession2026/Hig
 const FocusSessionSpeakerPage = lazy(() => import("./Pages/2026/FocusSession2026/FocusSessionSpeakerPage"));
 const Winners2026 = lazy(() => import("./Pages/2026/Winners2026/Winners2026"));
 const Account2AccountWinnerDetails2026 = lazy(() => import("./Pages/2026/WinnerDetails2026/Account2AccountWinnerDetails2026"));
+const FenaAccount2AccountWinnerDetails2026 = lazy(() => import("./Pages/2026/WinnerDetails2026/FenaAccount2AccountWinnerDetails2026"));
+const NeemaPaymentInnovatorWinnerDetails2026 = lazy(() => import("./Pages/2026/WinnerDetails2026/NeemaPaymentInnovatorWinnerDetails2026"));
+const InvictusPayOutInnovatorWinnerDetails2026 = lazy(() => import("./Pages/2026/WinnerDetails2026/InvictusPayOutInnovatorWinnerDetails2026"));
 const EventSchedulePage2026 = lazy(() => import("./Pages/2026/Schedule2026/EventSchedulePage2026"));
 const WhoAttendsBfaPage = lazy(() => import("./Pages/WhoAttendsBfaPage"));
 // const OchebhoyaEkpeteKeynoteDetails2026 = lazy(() => import("./Pages/2026/KeynoteSpeaker2026/OchebhoyaEkpeteKeynoteDetails2026"));
@@ -634,6 +637,18 @@ function App() {
           path="/award-winners-2026/account-2-account-payment-processor-of-the-year"
           element={<Account2AccountWinnerDetails2026 />}
         />
+        <Route
+          path="/award-winners-2026/fena-account-to-account-payment-processor-2026"
+          element={<FenaAccount2AccountWinnerDetails2026 />}
+        />
+        <Route
+          path="/award-winners-2026/neema-payment-innovator-2026"
+          element={<NeemaPaymentInnovatorWinnerDetails2026 />}
+        />
+        <Route
+          path="/award-winners-2026/invictus-pay-out-innovator-2026"
+          element={<InvictusPayOutInnovatorWinnerDetails2026 />}
+        />
           {/* 2026 Winners Page End */}
 
 
@@ -777,10 +792,10 @@ function App() {
           path="/alicoremit-sponsor-details-2026"
           element={<AlicoRemitSponsorDetails2026 />}
         />
-        {/* <Route
+        <Route
           path="/ecex-sponsor-details-2026"
           element={<EcexSponsorDetails2026 />}
-        /> */}
+        />
         <Route
           path="/invictus-ventures-sponsor-details-2026"
           element={<InvictusVenturesSponsorDetails2026 />}

@@ -8,12 +8,39 @@ import { buildWinnerRows, THEME } from "./winnersData";
  */
 const ScrambleWinnersOverlay = ({ onComplete, reducedMotion = false }) => {
   const rootRef = useRef(null);
+  const fitRef = useRef(null);
   const onCompleteRef = useRef(onComplete);
   const reducedMotionRef = useRef(reducedMotion);
   const rows = buildWinnerRows();
 
   onCompleteRef.current = onComplete;
   reducedMotionRef.current = reducedMotion;
+
+  useEffect(() => {
+    const root = rootRef.current;
+    const fit = fitRef.current;
+    if (!root || !fit) return undefined;
+
+    const fitToView = () => {
+      fit.style.transform = "none";
+      const width = fit.scrollWidth;
+      const height = fit.scrollHeight;
+      const scale = Math.min(
+        1,
+        (root.clientWidth * 0.92) / Math.max(width, 1),
+        (root.clientHeight * 0.84) / Math.max(height, 1)
+      );
+      fit.style.transform = `scale(${Number.isFinite(scale) ? scale : 1})`;
+    };
+
+    fitToView();
+    const raf = window.requestAnimationFrame(fitToView);
+    window.addEventListener("resize", fitToView);
+    return () => {
+      window.cancelAnimationFrame(raf);
+      window.removeEventListener("resize", fitToView);
+    };
+  }, []);
 
   useEffect(() => {
     const root = rootRef.current;
@@ -25,7 +52,15 @@ const ScrambleWinnersOverlay = ({ onComplete, reducedMotion = false }) => {
     const others = root.querySelectorAll(
       ".wb26-scramble__cell:not(.wb26-scramble__center)"
     );
-    const finish = () => onCompleteRef.current?.();
+    let finished = false;
+    let safetyId = 0;
+    const finish = () => {
+      if (finished) return;
+      finished = true;
+      window.clearTimeout(safetyId);
+      onCompleteRef.current?.();
+    };
+    safetyId = window.setTimeout(finish, 7000);
 
     if (reducedMotionRef.current) {
       if (center) {
@@ -39,7 +74,10 @@ const ScrambleWinnersOverlay = ({ onComplete, reducedMotion = false }) => {
       });
       if (slide) slide.style.opacity = "1";
       const t = window.setTimeout(finish, 400);
-      return () => window.clearTimeout(t);
+      return () => {
+        window.clearTimeout(t);
+        window.clearTimeout(safetyId);
+      };
     }
 
     const tl = createTimeline({
@@ -57,14 +95,13 @@ const ScrambleWinnersOverlay = ({ onComplete, reducedMotion = false }) => {
     tl.add(
       center,
       {
-        scale: { from: 2.6, to: 1, duration: 900, ease: "out(3)" },
+        scale: { from: 2.6, to: 1, duration: 1000, ease: "out(3)" },
         color: { from: THEME.goldBright, to: THEME.white },
         innerHTML: scrambleText({
           override: " ",
           ease: "inQuad",
-          duration: 520,
+          duration: 1000,
           from: "center",
-          cursor: "░▒▓█",
         }),
       },
       "<<"
@@ -79,13 +116,12 @@ const ScrambleWinnersOverlay = ({ onComplete, reducedMotion = false }) => {
         innerHTML: scrambleText({
           override: " ",
           from: "center",
-          duration: 1200,
-          revealDelay: 400,
-          cursor: "░▒▓",
-          perturbation: 0.28,
+          duration: 700,
+          revealDelay: 120,
+          perturbation: 0.15,
         }),
       },
-      stagger([400, 1800], {
+      stagger([80, 520], {
         grid: true,
         from: "center",
         ease: "out(3)",
@@ -104,11 +140,10 @@ const ScrambleWinnersOverlay = ({ onComplete, reducedMotion = false }) => {
           from: "center",
           ease: "outQuad",
           reversed: true,
-          duration: 720,
-          cursor: "░▒▓",
+          duration: 480,
         }),
       },
-      "<+=1180"
+      "<+=720"
     );
 
     // 5) Center becomes CONGRATULATIONS
@@ -124,9 +159,8 @@ const ScrambleWinnersOverlay = ({ onComplete, reducedMotion = false }) => {
           ease: "inQuad",
           override: false,
           from: "center",
-          duration: 900,
-          perturbation: 0.22,
-          cursor: "░▒▓█",
+          duration: 640,
+          perturbation: 0.12,
         }),
       },
       "<<"
@@ -142,9 +176,8 @@ const ScrambleWinnersOverlay = ({ onComplete, reducedMotion = false }) => {
             text: "TO ALL WINNERS 2026",
             override: " ",
             from: "center",
-            duration: 900,
+            duration: 640,
             ease: "inOut",
-            cursor: "░▒▓",
           }),
         },
         "<<"
@@ -180,6 +213,7 @@ const ScrambleWinnersOverlay = ({ onComplete, reducedMotion = false }) => {
     tl.init();
 
     return () => {
+      window.clearTimeout(safetyId);
       try {
         tl.pause();
         if (typeof tl.revert === "function") tl.revert();
@@ -191,12 +225,17 @@ const ScrambleWinnersOverlay = ({ onComplete, reducedMotion = false }) => {
 
   return (
     <div className="wb26-scramble" ref={rootRef} aria-hidden="true">
+      <div className="wb26-scramble__fit" ref={fitRef}>
       <div className="wb26__slide wb26-scramble__slide">
-        {rows.map((row, rowIndex) => (
-          <div className="wb26__row" key={`row-${rowIndex}`}>
-            {row.items.map((item, itemIndex) => {
+        {rows.map((row, rowIndex) => {
+          const centerIndex = row.items.findIndex(
+            (item) => typeof item === "object" && item.center
+          );
+          const renderItem = (item, itemIndex) => {
               const isCenter = typeof item === "object" && item.center;
-              const label = isCenter ? item.text : item;
+              const rawLabel = isCenter ? item.text : item;
+              // anime.js parses text like "3ribe" as number + unit; a zero-width prefix keeps it a string
+              const label = /^\d/.test(rawLabel) ? `\u200B${rawLabel}` : rawLabel;
               const tone = (rowIndex + itemIndex) % 6;
 
               if (isCenter) {
@@ -222,9 +261,31 @@ const ScrambleWinnersOverlay = ({ onComplete, reducedMotion = false }) => {
                   {label}
                 </p>
               );
-            })}
-          </div>
-        ))}
+          };
+
+          if (centerIndex === -1) {
+            return (
+              <div className="wb26__row" key={`row-${rowIndex}`}>
+                {row.items.map(renderItem)}
+              </div>
+            );
+          }
+
+          return (
+            <div className="wb26__row wb26__row--center" key={`row-${rowIndex}`}>
+              <div className="wb26__row-side wb26__row-side--left">
+                {row.items.slice(0, centerIndex).map(renderItem)}
+              </div>
+              {renderItem(row.items[centerIndex], centerIndex)}
+              <div className="wb26__row-side wb26__row-side--right">
+                {row.items
+                  .slice(centerIndex + 1)
+                  .map((item, i) => renderItem(item, centerIndex + 1 + i))}
+              </div>
+            </div>
+          );
+        })}
+      </div>
       </div>
     </div>
   );

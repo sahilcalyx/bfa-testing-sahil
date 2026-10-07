@@ -143,10 +143,24 @@
 }
 
 .wb26-scramble {
-  max-width: 1100px;
+  max-width: none;
+  width: 100%;
   margin: 0 auto;
   left: 0;
   right: 0;
+  overflow: hidden;
+}
+
+.wb26-scramble__fit {
+  width: max-content;
+  transform-origin: center center;
+}
+
+.wb26-scramble .wb26-scramble__slide {
+  position: relative;
+  inset: auto;
+  width: max-content;
+  height: auto;
 }
 
 .wb26__slide {
@@ -168,11 +182,32 @@
   align-items: center;
 }
 
+/* Equal side columns keep "WINNERS" exactly centered regardless of name lengths */
+.wb26__row--center {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  width: 100%;
+}
+
+.wb26__row-side {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+.wb26__row-side--left {
+  justify-content: flex-end;
+}
+
+.wb26__row-side--right {
+  justify-content: flex-start;
+}
+
 .wb26__cell {
   font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-  font-size: clamp(0.7rem, 1.65vw, 1.85rem);
+  font-size: clamp(0.62rem, 1.05vw, 1.05rem);
   font-weight: 700;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
   flex-shrink: 0;
   line-height: 1;
@@ -324,11 +359,6 @@
     min-height: 320px;
   }
 
-  .wb26__row:nth-child(1),
-  .wb26__row:nth-child(7) {
-    display: none;
-  }
-
   .wb26__cell {
     margin: 0.35ch 0.4ch;
     letter-spacing: 0.02em;
@@ -389,11 +419,6 @@
 @media (max-width: 480px) {
   .wb26__stage {
     min-height: 260px;
-  }
-
-  .wb26__row:nth-child(2),
-  .wb26__row:nth-child(6) {
-    display: none;
   }
 
   .wb26__cell {

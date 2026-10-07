@@ -27,6 +27,7 @@ const Gallery2026 = () => {
       <div className="hidden md:block">
         <StackSpread
           cards={GALLERY_CARDS_2026}
+          scrollEffect={false}
           bgColor="#ffffff"
           textColor="#0b0b0c"
           cardRadius={10}
