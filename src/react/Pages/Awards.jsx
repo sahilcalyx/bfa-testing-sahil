@@ -218,15 +218,15 @@ const Awards = () => {
                   <div className="col-lg-4 wow fadeIn d-flex">
                     <div className="cs-icon_box cs-style3 text-center h-100 d-flex flex-column">
                       <div className="cs-center">
-                        <img src="../assets/img/Fintech/awards-2026.png" alt="Woman in AI of the Year" />
+                        <img src="../assets/img/Fintech/awards-2026.png" alt="Visionary Woman in AI of the Year" />
                       </div>
                       <h2 className="cs-icon_box_title cs-semi_bold">
-                        <strong>Woman in AI</strong> of the Year
+                        <strong>Visionary Woman in AI</strong> of the Year
                       </h2>
                       <div className="cs-icon_box_subtitle mb-4 flex-grow-1">
                         Recognising a woman who has demonstrated outstanding leadership, innovation and impact in the field of Artificial Intelligence, driving meaningful advancements across the fintech or technology industry.
                       </div>
-                      <NavLink to="/woman-in-ai" className="btn-black">
+                      <NavLink to="/visionary-woman-in-ai" className="btn-black">
                         Explore More
                       </NavLink>
                     </div>

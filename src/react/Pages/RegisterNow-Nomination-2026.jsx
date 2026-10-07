@@ -1135,14 +1135,14 @@ const RegisterNow = () => {
                         />
                         Woman Entrepreneur in FinTech of the Year
                       </MenuItem>
-                      <MenuItem value="Woman in AI of the Year">
+                      <MenuItem value="Visionary Woman in AI of the Year">
                         <Checkbox
                           checked={formData.awardcate.includes(
-                            "Woman in AI of the Year"
+                            "Visionary Woman in AI of the Year"
                           )}
                           disabled={NOMINATIONS_CLOSED}
                         />
-                        Woman in AI of the Year
+                        Visionary Woman in AI of the Year
                       </MenuItem>
                       <MenuItem value="Anti-Fraud Innovator of the Year">
                         <Checkbox

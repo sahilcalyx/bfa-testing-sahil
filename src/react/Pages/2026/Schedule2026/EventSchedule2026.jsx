@@ -38,8 +38,9 @@ const Speaker = ({ person, onOpen }) => {
           {clickable && <FiArrowUpRight aria-hidden="true" />}
         </SpeakerName>
         <SpeakerMeta>
-          <SpeakerRole>{person.role}</SpeakerRole>
-          {person.designation && <> · {person.designation}</>}
+          {person.role && <SpeakerRole>{person.role}</SpeakerRole>}
+          {person.role && person.designation && " · "}
+          {person.designation}
         </SpeakerMeta>
       </SpeakerText>
     </Tag>

@@ -88,6 +88,7 @@ import LeatherbackSponsorDetails from "./Pages/LeatherbackSponsorDetails";
 import KeyNoteDetails from "./Pages/KeyNoteDetails";
 import AiMsbBlog from "./react/Pages/Blogs/AiMsbBlog";
 import FinancialInclusionUK from "./react/Pages/Blogs/FinancialInclusionUK";
+import HighRiskSessionPage from "./react/Pages/2026/FocusSession2026/HighRiskSessionPage";
 
 
 function App() {
@@ -282,6 +283,7 @@ function App() {
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/fintech-in-the-uk" element={<FinTechintheUK />} />
         <Route path="/financial-inclusion-in-the-uk-how-fintech-is-bridging-the-gap-for-the-underbanked" element={<FinancialInclusionUK />} />
+        <Route path="/focus-session-2026" element={<HighRiskSessionPage />} />
       </Routes>
 
       {!hideHeaderFooter && <Footer />}

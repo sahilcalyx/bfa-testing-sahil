@@ -14,6 +14,10 @@ const BookingSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
+        designation: {
+            type: String,
+            default: "",
+        },
         email: {
             type: String,
             required: true,
@@ -37,6 +41,7 @@ const BookingSchema = new mongoose.Schema(
                 title: { type: String },
                 fullName: { type: String },
                 companyName: { type: String },
+                designation: { type: String },
                 email: { type: String },
                 phone: { type: String },
             }

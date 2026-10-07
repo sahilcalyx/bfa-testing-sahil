@@ -2,7 +2,6 @@ import React, { useId } from "react";
 import styled from "styled-components";
 import { motion, useReducedMotion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { FaLinkedin } from "react-icons/fa";
 import { discussionPanel2026 } from "./panelists2026";
 
 const ROLE_LABEL = {
@@ -35,6 +34,24 @@ const PortraitBlock = ({ person }) => {
 };
 
 const LogoBlock = ({ person, $onDark, $featured }) => {
+  const isForen =
+    person.id === "gayatri-chadaram" ||
+    person.foren ||
+    String(person.company || "").startsWith("FOREN");
+
+  if (isForen) {
+    return (
+      <LogoSlot $featured={$featured}>
+        <ForenMark $onDark={$onDark} aria-label={person.company || "FOREN. formerly Leatherback"}>
+          <ForenName $featured={$featured}>FOREN.</ForenName>
+          <ForenSub $featured={$featured}>
+            <em>formerly</em> leatherback
+          </ForenSub>
+        </ForenMark>
+      </LogoSlot>
+    );
+  }
+
   const src = $onDark ? person.logo : person.logoLight || person.logo;
   if (!src) {
     return <LogoFallback $invert={$onDark}>{person.company}</LogoFallback>;
@@ -51,25 +68,6 @@ const LogoBlock = ({ person, $onDark, $featured }) => {
         $size={!$featured ? person.logoSize : undefined}
       />
     </LogoSlot>
-  );
-};
-
-const LinkedInLink = ({ person, $featured }) => {
-  if (!person.linkedin) return null;
-
-  return (
-    <LinkedInBtn
-      href={person.linkedin}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={`${person.name} on LinkedIn`}
-      $featured={$featured}
-      onClick={(event) => event.stopPropagation()}
-      onKeyDown={(event) => event.stopPropagation()}
-    >
-      <FaLinkedin aria-hidden="true" />
-      {$featured && <span>LinkedIn</span>}
-    </LinkedInBtn>
   );
 };
 
@@ -108,17 +106,16 @@ const FeaturedPerson = ({ person, reduceMotion, onOpen }) => {
         <LogoBlock person={person} $onDark $featured />
         {person.tagline && <Tagline>{person.tagline}</Tagline>}
         <Bio>{bioSnippet(person)}</Bio>
-        <FeatureActions>
-          {clickable && (
+        {clickable && (
+          <FeatureActions>
             <ProfileBtn type="button" onClick={() => onOpen(person)}>
               View profile
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
                 <path d="M7 17L17 7M17 7H7M17 7V17" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </ProfileBtn>
-          )}
-          <LinkedInLink person={person} $featured />
-        </FeatureActions>
+          </FeatureActions>
+        )}
       </FeatureCopy>
     </Feature>
   );
@@ -157,10 +154,11 @@ const PersonCard = ({ person, index, reduceMotion, onOpen }) => {
         <CardLogoRow>
           <LogoBlock person={person} $onDark />
         </CardLogoRow>
-        <CardFooter>
-          {clickable && <TapNote>View profile</TapNote>}
-          <LinkedInLink person={person} />
-        </CardFooter>
+        {clickable && (
+          <CardFooter>
+            <TapNote>View profile</TapNote>
+          </CardFooter>
+        )}
       </Caption>
     </Poster>
   );
@@ -669,6 +667,39 @@ const LogoSlot = styled.div`
   margin: ${(p) => (p.$featured ? "6px 0 18px" : "0 0 8px")};
 `;
 
+const ForenMark = styled.span`
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 2px;
+  line-height: 1;
+  color: ${(p) => (p.$onDark ? "#ffffff" : "#231c16")};
+`;
+
+const ForenName = styled.span`
+  font-family: "Oswald", "Outfit", system-ui, sans-serif;
+  font-size: ${(p) => (p.$featured ? "30px" : "18px")};
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
+`;
+
+const ForenSub = styled.span`
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: ${(p) => (p.$featured ? "11px" : "8px")};
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 1.15;
+  white-space: nowrap;
+  opacity: ${(p) => (p.$featured ? 0.9 : 0.92)};
+
+  em {
+    font-style: italic;
+    margin-right: 0.22em;
+  }
+`;
+
 const CompanyLogo = styled.img`
   display: block;
   height: ${(p) => p.$size?.height || (p.$featured ? "48px" : "28px")};
@@ -702,47 +733,9 @@ const FeatureActions = styled.div`
 const CardFooter = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 8px;
   width: 100%;
   min-height: 28px;
   margin-top: auto;
-`;
-
-const LinkedInBtn = styled.a`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  flex-shrink: 0;
-  width: ${(p) => (p.$featured ? "auto" : "28px")};
-  height: 28px;
-  padding: ${(p) => (p.$featured ? "0 12px" : "0")};
-  border-radius: 6px;
-  background: #0a66c2;
-  color: #fff;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: background 0.2s ease, transform 0.2s ease;
-
-  svg {
-    width: 15px;
-    height: 15px;
-  }
-
-  &:hover {
-    background: var(--dp-crimson);
-    color: #fff;
-    transform: translateY(-1px);
-  }
-
-  &:focus-visible {
-    outline: 2px solid #fff;
-    outline-offset: 2px;
-  }
 `;
 
 const TapNote = styled.span`

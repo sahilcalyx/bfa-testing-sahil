@@ -118,7 +118,7 @@ const   AwardsCategory = () => {
                     <li>▶ B-A-A-S Innovator of the Year</li>
                     <li>▶ Startup of the Year</li>
                     <li>▶ Woman Entrepreneur in FinTech of the Year </li>
-                    <li>▶ Woman in AI of the Year</li>
+                    <li>▶ Visionary Woman in AI of the Year</li>
                     <li>▶ Anti-Fraud Innovator of the Year</li>
                     <li>▶ ID Verification Innovator of the Year</li>
                     <li>▶ Payment Acquirer of the Year</li>

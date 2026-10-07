@@ -17,7 +17,7 @@ export const alonaShevtsova = {
   logoOnDark: false,
   img: "/assets/img/discussionpanel-2026/Alona-Shevtsova.jpg",
   placeholder: false,
-  tagline: "Connecting markets, moving money: The evolution of cross-border payments",
+  tagline: "Can Fintechs and MSBs Afford to Ignore AI?",
   linkedin: "https://www.linkedin.com/in/alyona-shevtsova-43489420/",
   stats: {
     domain: "Payments & Fintech",
@@ -91,15 +91,16 @@ export const gayatriChadaram = {
   initials: "GC",
   name: "Gayatri Chadaram",
   designation: "Head of Compliance and MLRO",
-  company: "Leatherback",
+  company: "FOREN. formerly Leatherback",
   slug: "/gayatri-chadaram-discussion-panel-2026",
-  logo: "/assets/img/keynote-speakers-2026/Letherback-logo.png",
-  logoLight: "/assets/img/sponsor-logo/leatherback-logo.png",
+  logo: "/assets/img/attendee-logos/FOREN-formerly-LEATHERBACK.svg",
+  logoLight: "/assets/img/attendee-logos/FOREN-formerly-LEATHERBACK.svg",
   logoOnDark: false,
   img: "/assets/img/discussionpanel-2026/Gayatri.jpg",
   placeholder: false,
   videoUrl: "https://www.youtube.com/embed/sMxKif5xp_E",
-  website: "https://leatherback.co/",
+  website: "https://foren.co/",
+  foren: true,
   tagline: "Building risk-based financial crime, compliance and governance frameworks",
   linkedin: "https://www.linkedin.com/in/gayatri-chadaram",
   stats: {
@@ -108,7 +109,7 @@ export const gayatriChadaram = {
     experience: " 20 Years",
   },
   highlights: [
-    "Head of Compliance and Money Laundering Reporting Officer at Leatherback",
+    "Head of Compliance and Money Laundering Reporting Officer at FOREN. formerly Leatherback",
     "Leads the firm’s financial crime and regulatory compliance function",
     "20 years of experience in financial services",
     "13 years with API and EMI firms, including nine years in MLRO roles",
@@ -116,9 +117,9 @@ export const gayatriChadaram = {
     "MBA-qualified, with a focus on developing the teams that operate compliance frameworks",
   ],
   bioParagraphs: [
-    "Gayatri Chadaram is <strong>Head of Compliance and Money Laundering Reporting Officer at Leatherback</strong>, where she leads the firm’s financial crime and regulatory compliance function. She has nearly <strong>20 years of experience in financial services</strong>, including <strong>13 years with API and EMI firms</strong> and <strong>nine years in MLRO roles</strong>.",
+    "Gayatri Chadaram is <strong>Head of Compliance and Money Laundering Reporting Officer at FOREN. formerly Leatherback</strong>, where she leads the firm’s financial crime and regulatory compliance function. She has nearly <strong>20 years of experience in financial services</strong>, including <strong>13 years with API and EMI firms</strong> and <strong>nine years in MLRO roles</strong>.",
     "She began her career in banking in India before moving to the UK, and holds an <strong>MBA</strong>. Her focus is on building <strong>risk-based and proportionate financial crime risk management, regulatory compliance and governance frameworks</strong>, and on developing the teams that operate them.",
-    "<strong>Leatherback</strong> is a regulated global payments platform that enables businesses and individuals to move money across borders instantly, securely, and at scale. The firm eliminates the friction, delays, and hidden costs of traditional cross-border payments, empowering customers to send, receive, and manage money faster and more reliably across multiple currencies.",
+    "<strong>FOREN. formerly Leatherback</strong> is a regulated global payments platform that enables businesses and individuals to move money across borders instantly, securely, and at scale. The firm eliminates the friction, delays, and hidden costs of traditional cross-border payments, empowering customers to send, receive, and manage money faster and more reliably across multiple currencies.",
   ],
 };
 

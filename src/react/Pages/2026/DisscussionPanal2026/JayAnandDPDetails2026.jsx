@@ -119,11 +119,11 @@ const JayAnandDPDetails2026 = () => {
 
             <div className="lg:col-span-8 flex flex-col">
               <div className="bg-gradient-to-r from-[#c8102e] to-[#680014] rounded-[32px] p-8 md:p-10 mb-8 text-[#f2d8ac]">
-                <span className="text-[10px] font-black uppercase tracking-[0.25em] text-[#f2d8ac]/75 block mb-3">
-                  BFA 2026 · Discussion Panel
+                <span className="text-sm md:text-base font-bold tracking-normal text-[#f2d8ac]/90 block mb-3">
+                  BFA 2026 · Discussion Panel on
                 </span>
                 <p className="text-xl md:text-2xl font-semibold leading-snug tracking-tight">
-                  {speaker.tagline}
+                  Can Fintechs and MSBs Afford to Ignore AI?
                 </p>
               </div>
 

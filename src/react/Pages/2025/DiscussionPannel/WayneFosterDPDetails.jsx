@@ -209,7 +209,7 @@ const WayneFosterDPDetails = () => {
               if (window.history.state && window.history.state.idx > 0) {
                 navigate(-1);
               } else {
-                navigate("/our-discussion-panel-2025"); // fallback route (homepage or desired page)
+                navigate("/discussion-panel-2025"); // fallback route (homepage or desired page)
               }
             }}
             style={{

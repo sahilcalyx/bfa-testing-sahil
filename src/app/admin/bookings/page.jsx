@@ -219,7 +219,7 @@ export default function BookingsPage() {
                     <Search size={18} style={{ position: "absolute", left: "14px", top: "50%", transform: "translateY(-50%)", color: "#697386" }} />
                     <input
                         type="text"
-                        placeholder="Search by company, name, email..."
+                        placeholder="Search by company, name, email, designation..."
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
                         style={{
@@ -349,6 +349,9 @@ export default function BookingsPage() {
                                         </td>
                                         <td style={{ padding: "16px 24px", borderBottom: "1px solid #f7f9fc" }}>
                                             <div style={{ fontSize: "14px", fontWeight: "600", color: "#1a1f36" }}>{booking.title || ""} {booking.fullName}</div>
+                                            {booking.designation ? (
+                                                <div style={{ fontSize: "12px", color: "#635bff", fontWeight: "600" }}>{booking.designation}</div>
+                                            ) : null}
                                             <div style={{ fontSize: "12px", color: "#697386" }}>{booking.email}</div>
                                         </td>
                                         <td style={{ padding: "16px 24px", borderBottom: "1px solid #f7f9fc" }}>
@@ -483,7 +486,7 @@ export default function BookingsPage() {
                                     </div>
                                     <div>
                                         <div style={{ fontSize: "15px", fontWeight: "700", color: "#1a1f36" }}>{selectedBooking.title || ""} {selectedBooking.fullName}</div>
-                                        <div style={{ fontSize: "13px", color: "#64748b" }}>Representative</div>
+                                        <div style={{ fontSize: "13px", color: "#64748b" }}>{selectedBooking.designation || "Representative"}</div>
                                     </div>
                                 </div>
                                 <div style={{ display: "grid", gap: "8px", marginTop: "16px", paddingTop: "16px", borderTop: "1px solid #e2e8f0" }}>
@@ -511,6 +514,9 @@ export default function BookingsPage() {
                                                     <strong>Company:</strong> {att.companyName || "N/A"}
                                                 </div>
                                                 <div style={{ fontSize: "13px", color: "#475569" }}>
+                                                    <strong>Designation:</strong> {att.designation || "N/A"}
+                                                </div>
+                                                <div style={{ fontSize: "13px", color: "#475569" }}>
                                                     <strong>Email:</strong> {att.email || "N/A"}
                                                 </div>
                                                 <div style={{ fontSize: "13px", color: "#475569" }}>
@@ -529,6 +535,10 @@ export default function BookingsPage() {
                                     <div style={{ display: "flex", justifyContent: "space-between" }}>
                                         <span style={{ color: "#697386" }}>Company Name</span>
                                         <span style={{ fontWeight: "600", color: "#1a1f36" }}>{selectedBooking.companyName}</span>
+                                    </div>
+                                    <div style={{ display: "flex", justifyContent: "space-between" }}>
+                                        <span style={{ color: "#697386" }}>Designation</span>
+                                        <span style={{ fontWeight: "600", color: "#1a1f36" }}>{selectedBooking.designation || "N/A"}</span>
                                     </div>
                                     <div style={{ display: "flex", justifyContent: "space-between" }}>
                                         <span style={{ color: "#697386" }}>Tickets Purchased</span>

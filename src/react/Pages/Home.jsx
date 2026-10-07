@@ -16,6 +16,7 @@ import SponsorsSlider2025 from "../Components/SliderBigBan/SponsorsSlider2025";
 import DynamicSliderVideo from "../Components/SliderBigBan/DynamicSlider-1";
 import DynamicSliderSplit from "../Components/SliderBigBan/DynamicSliderSplit";
 import InteractiveHero from "../Components/SliderBigBan/InteractiveHero";
+import HeroSection2026 from "../Components/SliderBigBan/HeroSection2026";
 import DownloadAppStrip from "../Components/DownloadAppStrip";
 import StaticHero from "../Components/SliderBigBan/StaticHero";
 import ScrollRevealVideo from "../Components/SliderBigBan/ScrollRevealVideo";
@@ -23,13 +24,17 @@ import KeynoteSpeakersSection from "./2025/Keynotes/KeynoteSpeakersSection";
 import KeynoteAmaBanner2026 from "./2026/KeynoteSpeaker2026/KeynoteAmaBanner2026";
 import KeynoteSpeaker2026 from "./2026/KeynoteSpeaker2026/KeynoteSpeaker2026";
 import DiscussionPanel2026 from "./2026/DisscussionPanal2026/DiscussionPanel2026";
+import FocusSession2026 from "./2026/FocusSession2026/FocusSession2026";
 import DiscussionPannelSection from "./2025/DiscussionPannel/DiscussionPannelSection";
 import JudgesSection2025 from "./2025/JudgesSection/JudgeSection2025";
 import HeroImageSlider2025 from "../Components/SliderBigBan/HeroImageSlider2025";
 import CountdownSlider2025 from "../Components/SliderBigBan/SliderMiniComponents/CountdownSlider2025";
+import CountdownSlider2026 from "../Components/SliderBigBan/SliderMiniComponents/CountdownSlider2026";
+import CountdownSlider2026Animated from "../Components/SliderBigBan/SliderMiniComponents/CountdownSlider2026Animated";
 import GallarySection2025 from "./2025/GallarySection25/GallarySection2025";
 import TestimonialSlider2025 from "../Components/Testmonials/TestimonialSlider2025";
 import WinnerBanner from "../Components/SliderBigBan/WinnerBanner";
+import WinnerBanner2026 from "../Components/WinnerBanner2026";
 import TestimonialCommon from "../Components/Testmonials/TestimonialCommon";
 import BFA26Section from "../Components/BFA26Section";
 import { color } from "framer-motion";
@@ -39,6 +44,7 @@ import WhoAttendsBfaTabsSection from "../Components/WhoAttendsBfaTabsSection";
 import GlobalConnectivitySection from "../Components/GlobalConnectivitySection";
 import EventHostSection from "./2026/host/EventHostSection";
 import EventSchedule2026 from "./2026/Schedule2026/EventSchedule2026";
+import Gallery2026 from "./2026/Gallery2026";
 
 const Home = () => {
   const deadline = new Date("2025-08-31"); // change date here
@@ -309,20 +315,35 @@ Brit Fintech Awards 2026."
         {/* <DynamicSliderSplit /> */}
         {/* <DynamicSliderVideo /> */}
         {/* <DownloadAppStrip /> */}
-        <InteractiveHero />
+        <WinnerBanner2026 />
+        
+        {/* <CountdownSlider2026Animated /> */}
+        {/* <InteractiveHero /> */}
+        <HeroSection2026 />
+
+        <Gallery2026 />
+        {/* <CountdownSlider2025/> */}
+        {/* Compare A: minimal white strip */}
+        {/* <CountdownSlider2026 /> */}
+        {/* Compare B: animated hero-theme strip */}
+       
         <SponsorSection2026 />
+        <EventSchedule2026 />
+        <KeynoteSpeaker2026 /> 
         {/* <KeynoteAmaBanner2026 /> */}
         <DiscussionPanel2026 />
-        <KeynoteSpeaker2026 /> 
-        <AnimatedStats stats={statsData} />
+        <FocusSession2026 />
+       
+        {/* <AnimatedStats stats={statsData} /> */}
+       
         <EventHostSection />
-        <EventSchedule2026 />
+        
         {/* <StaticHero />
         <ScrollRevealVideo /> */}
         {/* <DynamicSlider/> */}
         {/* <WinnerBanner /> */}
         {/* <HeroImageSlider2025/> */}
-        {/* <CountdownSlider2025/> */}
+        
 
         <div className="cs-height_0 cs-height_lg_0" />
         {/* <SponsorsSlider2025 /> */}
@@ -549,7 +570,7 @@ Download the BFA app and start networking.
                     />
                     <div className="cs-post_info">
                       <h2 className="cs-post_title cs-white cs-white_hover">
-                        Who decided the BFA26 stage? | Meet our Jury
+                        Who decides who takes the BFA26 stage? | Meet our jury
                       </h2>
                     </div>
                   </div>

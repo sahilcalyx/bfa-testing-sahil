@@ -9,16 +9,16 @@ const WomenInAi = () => {
   return (
     <>
       <Helmet>
-        <title>Brit Fintech Awards | Woman in AI of the Year</title>
+        <title>Brit Fintech Awards | Visionary Woman in AI of the Year</title>
         <meta
           name="description"
           content="Recognising a woman who has demonstrated outstanding leadership, innovation and impact in the field of Artificial Intelligence across the fintech or technology industry."
         />
         <meta
           name="keywords"
-          content="Woman in AI of the Year, Artificial Intelligence Award, FinTech Awards, Female Leadership in AI, Brit FinTech Awards"
+          content="Visionary Woman in AI of the Year, Artificial Intelligence Award, FinTech Awards, Female Leadership in AI, Brit FinTech Awards"
         />
-        <meta property="og:title" content="Brit Fintech Awards | Woman in AI of the Year" />
+        <meta property="og:title" content="Brit Fintech Awards | Visionary Woman in AI of the Year" />
         <meta
           property="og:description"
           content="Recognising a woman who has demonstrated outstanding leadership, innovation and impact in the field of Artificial Intelligence."
@@ -49,7 +49,7 @@ const WomenInAi = () => {
               className="cs-hero_title cs-white text-uppercase pb-3 mb-0"
               style={{ marginTop: "40px !important" }}
             >
-              <strong>Woman in AI</strong> <br /> of the Year
+              <strong>Visionary Woman in AI</strong> <br /> of the Year
             </h1>
             <p className="pb-0 mb-0 text-left" style={{ color: "#fff" }}>
               Recognising a woman who has demonstrated outstanding leadership, innovation and impact in the field of Artificial Intelligence, driving meaningful advancements across the fintech or technology industry.
@@ -104,7 +104,7 @@ const WomenInAi = () => {
               <img
                 src={AWARD_IMG}
                 style={{ boxShadow: "3px 0 10px 0 #b3b3b3", borderRadius: "20px" }}
-                alt="Woman in AI of the Year"
+                alt="Visionary Woman in AI of the Year"
               />
             </div>
             <div className="cs-height_30 cs-height_lg_30" />
@@ -155,7 +155,7 @@ const WomenInAi = () => {
                     </li>
                   </ul>
                 </div>
-                <RegisterButton awardName="Woman in AI of the Year" />
+                <RegisterButton awardName="Visionary Woman in AI of the Year" />
               </div>
             </div>
           </div>

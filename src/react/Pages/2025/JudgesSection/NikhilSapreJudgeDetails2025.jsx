@@ -8,7 +8,7 @@ const judgesList = [
   {
     id: "/nikhil-sapre-judge-details-2025",
     name: "Dr. Nikhil Sapre",
-    desig: "Lecturer in Finance & Programme Director for MSc Financial Technology",
+    desig: "Programme Director MSc Fintech",
     company: "University of Bristol Business School",
     img: "../assets/img/judges2025/nikhil-sapare.jpg",
     linkedin: "https://www.linkedin.com/in/nikhilsapre?utm_source=share&amp;utm_campaign=share_via&amp;utm_content=profile&amp;utm_medium=ios_app",

@@ -5,7 +5,7 @@ import { FaLinkedin } from "react-icons/fa";
 
 const judgeData = {
   name: "Dr. Nikhil Sapre",
-  role: "Lecturer in Finance & Programme Director",
+  role: "Programme Director MSc Fintech",
   company: "University of Bristol Business School",
   img: "../assets/img/judges2026/nikhil-sapre.jpg",
   linkedin: "https://www.linkedin.com/in/nikhilsapre?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",

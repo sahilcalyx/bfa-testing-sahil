@@ -77,11 +77,18 @@ const GayatriChadaramDPDetails2026 = () => {
                   {speaker.designation}
                 </div>
 
-                <img
-                  src={speaker.logo}
-                  alt={speaker.company}
-                  className="h-10 w-auto max-w-[180px] object-contain rounded-md px-2 py-1 mt-3 bg-white border border-zinc-100"
-                />
+                <div
+                  className="mt-4 flex flex-col items-center justify-center gap-0.5 text-[#231c16]"
+                  aria-label={speaker.company}
+                >
+                  <span className="font-[Oswald,sans-serif] text-[28px] font-bold tracking-tight leading-none">
+                    FOREN.
+                  </span>
+                  <span className="font-[Georgia,'Times_New_Roman',serif] text-[11px] leading-tight whitespace-nowrap">
+                    <em className="italic mr-0.5">formerly</em>
+                    leatherback
+                  </span>
+                </div>
 
                 <div className="w-full h-px bg-zinc-100 my-6" />
 
@@ -120,11 +127,11 @@ const GayatriChadaramDPDetails2026 = () => {
 
             <div className="lg:col-span-8 flex flex-col">
               <div className="bg-gradient-to-r from-[#c8102e] to-[#680014] rounded-[32px] p-8 md:p-10 mb-8 text-[#f2d8ac]">
-                <span className="text-[10px] font-black uppercase tracking-[0.25em] text-[#f2d8ac]/75 block mb-3">
-                  BFA 2026 · Discussion Panel
+                <span className="text-sm md:text-base font-bold tracking-normal text-[#f2d8ac]/90 block mb-3">
+                  BFA 2026 · Discussion Panel on
                 </span>
                 <p className="text-xl md:text-2xl font-semibold leading-snug tracking-tight">
-                  {speaker.tagline}
+                  Can Fintechs and MSBs Afford to Ignore AI?
                 </p>
               </div>
 

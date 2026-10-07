@@ -55,6 +55,90 @@ export const seoByPath = {
       images: ["/assets/img/og/home.jpg"],
     },
   },
+  "/focus-session-2026": {
+    title: "What is High Risk? | Brit FinTech Awards 2026",
+    description:
+      "A focused session at the Brit FinTech Awards 2026 with Stefan Binder and Osman Ibrahim on what high risk means for FinTech and MSB businesses.",
+    openGraph: {
+      title: "What is High Risk? | Brit FinTech Awards 2026",
+      description:
+        "A focused session at the Brit FinTech Awards 2026 with Stefan Binder and Osman Ibrahim on what high risk means for FinTech and MSB businesses.",
+      url: `${siteBaseUrl}/focus-session-2026`,
+      siteName,
+      images: [
+        {
+          url: "/assets/img/focus-session-2026/what-is-high-risk-title-banner.png",
+          width: 1200,
+          height: 630,
+          alt: "What is High Risk? Brit FinTech Awards 2026",
+        },
+      ],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "What is High Risk? | Brit FinTech Awards 2026",
+      description:
+        "A focused session at the Brit FinTech Awards 2026 with Stefan Binder and Osman Ibrahim on what high risk means for FinTech and MSB businesses.",
+      images: ["/assets/img/focus-session-2026/what-is-high-risk-title-banner.png"],
+    },
+  },
+  "/stefan-binder-focus-session-2026": {
+    title: "Stefan Binder - Focus Session | Brit FinTech Awards 2026",
+    description:
+      "Stefan Binder, Co-Founder & Chairman of Fena, joins the What is High Risk focus session at the Brit FinTech Awards 2026.",
+    openGraph: {
+      title: "Stefan Binder - Focus Session | Brit FinTech Awards 2026",
+      description:
+        "Stefan Binder, Co-Founder & Chairman of Fena, joins the What is High Risk focus session at the Brit FinTech Awards 2026.",
+      url: `${siteBaseUrl}/stefan-binder-focus-session-2026`,
+      siteName,
+      images: [
+        {
+          url: "/assets/img/focus-session-2026/stefan-binder.jpg",
+          width: 1200,
+          height: 630,
+          alt: "Stefan Binder",
+        },
+      ],
+      type: "profile",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Stefan Binder - Focus Session | Brit FinTech Awards 2026",
+      description:
+        "Stefan Binder, Co-Founder & Chairman of Fena, joins the What is High Risk focus session at the Brit FinTech Awards 2026.",
+      images: ["/assets/img/focus-session-2026/stefan-binder.jpg"],
+    },
+  },
+  "/osman-ibrahim-focus-session-2026": {
+    title: "Osman Ibrahim - Focus Session | Brit FinTech Awards 2026",
+    description:
+      "Osman Ibrahim, Director of Kmbal Ltd, joins the What is High Risk focus session at the Brit FinTech Awards 2026.",
+    openGraph: {
+      title: "Osman Ibrahim - Focus Session | Brit FinTech Awards 2026",
+      description:
+        "Osman Ibrahim, Director of Kmbal Ltd, joins the What is High Risk focus session at the Brit FinTech Awards 2026.",
+      url: `${siteBaseUrl}/osman-ibrahim-focus-session-2026`,
+      siteName,
+      images: [
+        {
+          url: "/assets/img/focus-session-2026/Osman-Ibrahim.jpg",
+          width: 1200,
+          height: 630,
+          alt: "Osman Ibrahim",
+        },
+      ],
+      type: "profile",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Osman Ibrahim - Focus Session | Brit FinTech Awards 2026",
+      description:
+        "Osman Ibrahim, Director of Kmbal Ltd, joins the What is High Risk focus session at the Brit FinTech Awards 2026.",
+      images: ["/assets/img/focus-session-2026/Osman-Ibrahim.jpg"],
+    },
+  },
   "/daljit-young-keynote-speaker-2026": {
     title: "Daljit Young - Keynote Speaker | Brit FinTech Awards 2026",
     description: "Daljit Young, Chief Financial Officer of Peratera UK Ltd, is a keynote speaker at the Brit FinTech Awards 2026.",
@@ -147,10 +231,10 @@ export const seoByPath = {
   },
   "/gayatri-chadaram-discussion-panel-2026": {
     title: "Gayatri Chadaram - Discussion Panel | Brit FinTech Awards 2026",
-    description: "Gayatri Chadaram, Head of Compliance and MLRO at Leatherback, is a discussion panelist at the Brit FinTech Awards 2026.",
+    description: "Gayatri Chadaram, Head of Compliance and MLRO at FOREN. formerly Leatherback, is a discussion panelist at the Brit FinTech Awards 2026.",
     openGraph: {
       title: "Gayatri Chadaram - Discussion Panel | Brit FinTech Awards 2026",
-      description: "Gayatri Chadaram, Head of Compliance and MLRO at Leatherback, is a discussion panelist at the Brit FinTech Awards 2026.",
+      description: "Gayatri Chadaram, Head of Compliance and MLRO at FOREN. formerly Leatherback, is a discussion panelist at the Brit FinTech Awards 2026.",
       url: `${siteBaseUrl}/gayatri-chadaram-discussion-panel-2026`,
       siteName,
       images: [{ url: "/assets/img/discussionpanel-2026/Gayatri.jpg", width: 1200, height: 630, alt: "Gayatri Chadaram Discussion Panel BFA 2026" }],
@@ -159,7 +243,7 @@ export const seoByPath = {
     twitter: {
       card: "summary_large_image",
       title: "Gayatri Chadaram - Discussion Panel | Brit FinTech Awards 2026",
-      description: "Gayatri Chadaram, Head of Compliance and MLRO at Leatherback, is a discussion panelist at the Brit FinTech Awards 2026.",
+      description: "Gayatri Chadaram, Head of Compliance and MLRO at FOREN. formerly Leatherback, is a discussion panelist at the Brit FinTech Awards 2026.",
       images: ["/assets/img/discussionpanel-2026/Gayatri.jpg"],
     },
   },
@@ -182,12 +266,48 @@ export const seoByPath = {
     },
   }, */
   "/event-host-2026": {
+    title: "Event Host 2026 | Brit FinTech Awards",
+    description: "Meet Stephen Simmons, official host and MC of the Brit FinTech Awards 2026 in London.",
+    openGraph: {
+      title: "Event Host 2026 | Brit FinTech Awards",
+      description: "Meet Stephen Simmons, official host and MC of the Brit FinTech Awards 2026 in London.",
+      url: `${siteBaseUrl}/event-host-2026`,
+      siteName,
+      images: [{ url: "/assets/img/stephen-simmons-host.png", width: 1200, height: 630, alt: "Stephen Simmons Official Host BFA 2026" }],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Event Host 2026 | Brit FinTech Awards",
+      description: "Meet Stephen Simmons, official host and MC of the Brit FinTech Awards 2026 in London.",
+      images: ["/assets/img/stephen-simmons-host.png"],
+    },
+  },
+  "/event-host": {
+    title: "Event Host 2026 | Brit FinTech Awards",
+    description: "Meet Stephen Simmons, official host and MC of the Brit FinTech Awards 2026 in London.",
+    openGraph: {
+      title: "Event Host 2026 | Brit FinTech Awards",
+      description: "Meet Stephen Simmons, official host and MC of the Brit FinTech Awards 2026 in London.",
+      url: `${siteBaseUrl}/event-host`,
+      siteName,
+      images: [{ url: "/assets/img/stephen-simmons-host.png", width: 1200, height: 630, alt: "Stephen Simmons Official Host BFA 2026" }],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Event Host 2026 | Brit FinTech Awards",
+      description: "Meet Stephen Simmons, official host and MC of the Brit FinTech Awards 2026 in London.",
+      images: ["/assets/img/stephen-simmons-host.png"],
+    },
+  },
+  "/host/stephen-simmons": {
     title: "Stephen Simmons - Official Host | Brit FinTech Awards 2026",
     description: "Award-winning magician and corporate entertainer Stephen Simmons will host the Brit FinTech Awards 2026 in London.",
     openGraph: {
       title: "Stephen Simmons - Official Host | Brit FinTech Awards 2026",
       description: "Award-winning magician and corporate entertainer Stephen Simmons will host the Brit FinTech Awards 2026 in London.",
-      url: `${siteBaseUrl}/event-host-2026`,
+      url: `${siteBaseUrl}/host/stephen-simmons`,
       siteName,
       images: [{ url: "/assets/img/stephen-simmons-host.png", width: 1200, height: 630, alt: "Stephen Simmons Official Host BFA 2026" }],
       type: "profile",
@@ -199,13 +319,13 @@ export const seoByPath = {
       images: ["/assets/img/stephen-simmons-host.png"],
     },
   },
-  "/event-host": {
+  "/stephen-simmons-event-host-2026": {
     title: "Stephen Simmons - Official Host | Brit FinTech Awards 2026",
     description: "Award-winning magician and corporate entertainer Stephen Simmons will host the Brit FinTech Awards 2026 in London.",
     openGraph: {
       title: "Stephen Simmons - Official Host | Brit FinTech Awards 2026",
       description: "Award-winning magician and corporate entertainer Stephen Simmons will host the Brit FinTech Awards 2026 in London.",
-      url: `${siteBaseUrl}/event-host`,
+      url: `${siteBaseUrl}/stephen-simmons-event-host-2026`,
       siteName,
       images: [{ url: "/assets/img/stephen-simmons-host.png", width: 1200, height: 630, alt: "Stephen Simmons Official Host BFA 2026" }],
       type: "profile",
@@ -340,7 +460,7 @@ export const seoByPath = {
       images: ["/assets/img/og/register.jpg"],
     },
   },
-  "/our-discussion-panel-2025": {
+  "/discussion-panel-2025": {
     title: "Discussion Panel | Brit Fintech Awards 2025",
     description:
       "Join Brit FinTech Awards UK, celebrating top innovations and achievements in FinTech, and honouring pioneers shaping the future of financial technology.",
@@ -348,7 +468,7 @@ export const seoByPath = {
       title: "Discussion Panel | Brit Fintech Awards 2025",
       description:
         "Join Brit FinTech Awards UK, celebrating top innovations and achievements in FinTech, and honouring pioneers shaping the future of financial technology.",
-      url: `${siteBaseUrl}/our-discussion-panel-2025`,
+      url: `${siteBaseUrl}/discussion-panel-2025`,
       siteName,
       images: [
         { url: "/assets/img/og/discussion-panel.jpg", width: 1200, height: 630, alt: "Discussion Panel" },
@@ -572,23 +692,43 @@ export const seoByPath = {
     },
   },
   "/our-sponsors": {
-    title: "Our Sponsors | Brit Fintech Awards 2025 ",
-    description: "How Brit Fintech Awards celebrates global innovation beyond borders.",
+    title: "Our Sponsors | Brit FinTech Awards 2026",
+    description:
+      "Meet the sponsors of the Brit FinTech Awards 2026, the leading FinTechs, MSBs and payment companies supporting innovation in UK financial services, plus our 2025 and 2024 sponsors.",
+    keywords: [
+      "Brit FinTech Awards sponsors",
+      "Brit FinTech Awards 2026",
+      "FinTech awards sponsors UK",
+      "MSB sponsors",
+      "payments sponsors",
+      "financial technology awards",
+      "fintech event sponsorship London",
+    ],
+    alternates: {
+      canonical: `${siteBaseUrl}/our-sponsors`,
+    },
     openGraph: {
-      title: "Our Sponsors | Brit Fintech Awards 2025 ",
-      description: "How Brit Fintech Awards celebrates global innovation beyond borders.",
+      title: "Our Sponsors | Brit FinTech Awards 2026",
+      description:
+        "Meet the sponsors of the Brit FinTech Awards 2026, the leading FinTechs, MSBs and payment companies supporting innovation in UK financial services.",
       url: `${siteBaseUrl}/our-sponsors`,
       siteName,
       images: [
-        { url: "/assets/img/og/sponsors.jpg", width: 1200, height: 630, alt: "Judges" },
+        {
+          url: "/assets/img/og/sponosrs.jpg",
+          width: 1200,
+          height: 630,
+          alt: "Brit FinTech Awards 2026 Sponsors",
+        },
       ],
-      type: "article",
+      type: "website",
     },
     twitter: {
       card: "summary_large_image",
-      title: "Our Sponsors | Brit Fintech Awards 2025 ",
-      description: "How Brit Fintech Awards celebrates global innovation beyond borders.",
-      images: ["/assets/img/og/sponsors.jpg"],
+      title: "Our Sponsors | Brit FinTech Awards 2026",
+      description:
+        "Meet the sponsors of the Brit FinTech Awards 2026, the leading FinTechs, MSBs and payment companies supporting innovation in UK financial services.",
+      images: ["/assets/img/og/sponosrs.jpg"],
     },
   },
   "/tigris-pay-sponsor-details-2026": {
@@ -770,6 +910,66 @@ export const seoByPath = {
         "Red Sea Money Transfer returns as a Strategic Sponsor of the Brit FinTech Awards 2026.",
       images: [
         "/assets/img/sponsor-logo/sponsor-banner-strip-2026/redsea-sponsor-details-banner-2026.png",
+      ],
+    },
+  },
+  "/foren-sponsor-details-2026": {
+    title: "FOREN. formerly Leatherback | Silver Sponsor | Brit FinTech Awards 2026",
+    description:
+      "FOREN. formerly Leatherback is a global financial technology company powering global payments beyond borders. Silver Sponsor of Brit FinTech Awards 2026.",
+    openGraph: {
+      title: "FOREN. formerly Leatherback – Powering Global Payments Beyond Borders | Brit FinTech Awards 2026",
+      description:
+        "FOREN. formerly Leatherback — Global financial technology company helping businesses move money across borders and Silver Sponsor of Brit FinTech Awards 2026.",
+      url: `${siteBaseUrl}/foren-sponsor-details-2026`,
+      siteName,
+      images: [
+        {
+          url: "/assets/img/sponsor-logo/sponsor-banner-strip-2026/FOREN-leatherback-details-banner-2026.png",
+          width: 1200,
+          height: 630,
+          alt: "FOREN. formerly Leatherback - Silver Sponsor | Brit FinTech Awards 2026",
+        },
+      ],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "FOREN. formerly Leatherback – Powering Global Payments Beyond Borders | Brit FinTech Awards 2026",
+      description:
+        "FOREN. formerly Leatherback — Global financial technology company helping businesses move money across borders and Silver Sponsor of Brit FinTech Awards 2026.",
+      images: [
+        "/assets/img/sponsor-logo/sponsor-banner-strip-2026/FOREN-leatherback-details-banner-2026.png",
+      ],
+    },
+  },
+  "/leatherback-sponsor-details-2026": {
+    title: "FOREN. formerly Leatherback | Silver Sponsor | Brit FinTech Awards 2026",
+    description:
+      "FOREN. formerly Leatherback is a global financial technology company powering global payments beyond borders. Silver Sponsor of Brit FinTech Awards 2026.",
+    openGraph: {
+      title: "FOREN. formerly Leatherback – Powering Global Payments Beyond Borders | Brit FinTech Awards 2026",
+      description:
+        "FOREN. formerly Leatherback — Global financial technology company helping businesses move money across borders and Silver Sponsor of Brit FinTech Awards 2026.",
+      url: `${siteBaseUrl}/foren-sponsor-details-2026`,
+      siteName,
+      images: [
+        {
+          url: "/assets/img/sponsor-logo/sponsor-banner-strip-2026/FOREN-leatherback-details-banner-2026.png",
+          width: 1200,
+          height: 630,
+          alt: "FOREN. formerly Leatherback - Silver Sponsor | Brit FinTech Awards 2026",
+        },
+      ],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "FOREN. formerly Leatherback – Powering Global Payments Beyond Borders | Brit FinTech Awards 2026",
+      description:
+        "FOREN. formerly Leatherback — Global financial technology company helping businesses move money across borders and Silver Sponsor of Brit FinTech Awards 2026.",
+      images: [
+        "/assets/img/sponsor-logo/sponsor-banner-strip-2026/FOREN-leatherback-details-banner-2026.png",
       ],
     },
   },
@@ -977,6 +1177,26 @@ export const seoByPath = {
       title: "Video Gallery 2024 | Brit Fintech Awards 2024 ",
       description: "How Brit Fintech Awards celebrates global innovation beyond borders.",
       images: ["/assets/img/og/videgallery-2024.jpg"],
+    },
+  },
+  "/award-winners-2026": {
+    title: "Award Winners 2026 | Brit FinTech Awards 2026",
+    description: "Meet the winners of the Brit FinTech Awards 2026 across FinTech, MSB and Global categories.",
+    openGraph: {
+      title: "Award Winners 2026 | Brit FinTech Awards 2026",
+      description: "Meet the winners of the Brit FinTech Awards 2026 across FinTech, MSB and Global categories.",
+      url: `${siteBaseUrl}/award-winners-2026`,
+      siteName,
+      images: [
+        { url: "/assets/img/og/winners-2025.jpg", width: 1200, height: 630, alt: "Award Winners 2026" },
+      ],
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Award Winners 2026 | Brit FinTech Awards 2026",
+      description: "Meet the winners of the Brit FinTech Awards 2026 across FinTech, MSB and Global categories.",
+      images: ["/assets/img/og/winners-2025.jpg"],
     },
   },
   "/award-winners-2025": {

@@ -5,7 +5,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { Helmet } from "react-helmet";
 import toast, { Toaster } from "react-hot-toast";
 import CouponCodeInput from "@/components/CouponCodeInput";
-import EventScheduleCompact2026 from "./2026/Schedule2026/EventScheduleCompact2026";
+import EventSchedule2026 from "./2026/Schedule2026/EventSchedule2026";
 import { PAYMENT_API_BASE, fetchPricing, fetchTicketBundles, formatGBP, FALLBACK_TICKET_PACKS, couponFromPack, resolveCouponForQuantity, packsForTicketPrice } from "@/lib/paymentApi";
 // Country codes list (partial - you can extend it)
 // ====== Titles ======
@@ -225,6 +225,7 @@ function TicketBookingPage() {
     title: "",
     fullName: "",
     companyName: "",
+    designation: "",
     countryCode: "44",
     phone: "",
     email: "",
@@ -467,6 +468,7 @@ function TicketBookingPage() {
       errs.fullName = "Please enter both name and surname (e.g. John Smith).";
     }
     if (!form.companyName.trim()) errs.companyName = "Company name is required.";
+    if (!form.designation.trim()) errs.designation = "Designation is required.";
     if (!form.countryCode) errs.countryCode = "Select your country code.";
     if (!form.phone.trim()) errs.phone = "Phone number is required.";
     else if (!/^\d{10,15}$/.test(form.phone)) errs.phone = "Mobile Number should be Min 10 digits and max 15 digits";
@@ -508,6 +510,7 @@ function TicketBookingPage() {
           aErr.fullName = "Please enter both name and surname (e.g. John Smith).";
         }
         if (!att.companyName?.trim()) aErr.companyName = "Company name is required.";
+        if (!att.designation?.trim()) aErr.designation = "Designation is required.";
         if (!att.countryCode) aErr.countryCode = "Select country code.";
         if (!att.phone?.trim()) aErr.phone = "Phone number is required.";
         else if (!/^\d{10,15}$/.test(att.phone)) aErr.phone = "Mobile Number should be Min 10 digits and max 15 digits";
@@ -616,6 +619,7 @@ function TicketBookingPage() {
             title: "",
             fullName: "",
             companyName: form.companyName || "",
+            designation: "",
             countryCode: "44",
             phone: "",
             email: "",
@@ -718,6 +722,7 @@ function TicketBookingPage() {
         title: form.title,
         fullName: form.fullName,
         companyName: form.companyName,
+        designation: form.designation.trim(),
         email: form.email,
         phone: fullPhone,
       },
@@ -725,6 +730,7 @@ function TicketBookingPage() {
         title: att.title,
         fullName: att.fullName,
         companyName: att.companyName,
+        designation: (att.designation || "").trim(),
         email: att.email,
         phone: `${att.countryCode}${att.phone}`,
       })),
@@ -741,6 +747,7 @@ function TicketBookingPage() {
       title: form.title,
       fullName: form.fullName,
       companyName: form.companyName,
+      designation: form.designation.trim(),
       email: form.email,
       tickets: form.tickets,
       mobile: fullPhone,
@@ -1260,6 +1267,17 @@ function TicketBookingPage() {
               {errors.companyName && <p style={errorStyle}>{errors.companyName}</p>}
             </div>
 
+            <div>
+              <input
+                name="designation"
+                placeholder="Designation"
+                value={form.designation}
+                onChange={handleChange}
+                style={getInputStyle("designation")}
+              />
+              {errors.designation && <p style={errorStyle}>{errors.designation}</p>}
+            </div>
+
             <div style={{ display: "flex", gap: "10px", alignItems: "flex-start" }}>
               {/* Country Code Select */}
               <div style={{ flex: "0 0 140px" }}>
@@ -1425,6 +1443,17 @@ function TicketBookingPage() {
                       style={getAdditionalInputStyle(idx, "companyName")}
                     />
                     {attErrors.companyName && <p style={errorStyle}>{attErrors.companyName}</p>}
+                  </div>
+
+                  <div>
+                    <input
+                      name="designation"
+                      placeholder="Designation"
+                      value={att.designation || ""}
+                      onChange={(e) => handleAdditionalChange(idx, "designation", e.target.value)}
+                      style={getAdditionalInputStyle(idx, "designation")}
+                    />
+                    {attErrors.designation && <p style={errorStyle}>{attErrors.designation}</p>}
                   </div>
 
                   <div style={{ display: "flex", gap: "10px", alignItems: "flex-start" }}>
@@ -1780,7 +1809,7 @@ function TicketBookingPage() {
         </div>
       </div>
 
-      <EventScheduleCompact2026 />
+      <EventSchedule2026 />
       <Toaster position="bottom-center" reverseOrder={false} />
     </>
   );

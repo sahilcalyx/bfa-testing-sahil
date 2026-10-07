@@ -6,12 +6,16 @@ import {
   jayAnand,
   sergioIvanovic,
 } from "../DisscussionPanal2026/panelists2026";
+import {
+  stefanBinder,
+  osmanIbrahim,
+} from "../FocusSession2026/speakers2026";
 
 const person = (source, role, designation) => ({
   name: source.name,
   role,
   designation,
-  img: source.img,
+  img: source.placeholder ? undefined : source.img,
   slug: source.slug,
 });
 
@@ -33,7 +37,7 @@ export const schedule2026 = [
         role: "Host",
         designation: "Event Host, Brit FinTech Awards 2026",
         img: "/assets/img/stephen-simmons-host-new.png",
-        slug: "/event-host-2026",
+        slug: "/host/stephen-simmons",
       },
     ],
   },
@@ -45,8 +49,7 @@ export const schedule2026 = [
     people: [
       {
         name: "Vishal Patil",
-        role: "Opening Address",
-        designation: "",
+        designation: "Founder & CEO, Calyx Solutions UK Ltd",
         img: "/assets/img/bfa-legacy/vishal-patil-main.png",
       },
     ],
@@ -66,8 +69,8 @@ export const schedule2026 = [
     people: [
       person(alonaShevtsova, "Moderator", "CEO, Sends"),
       person(femiEkwuyasi, "Panelist", "Co-Founder & CEO, 3ribe"),
-      person(gayatriChadaram, "Panelist", "Head of Compliance & MLRO, Leatherback"),
-      person(jayAnand, "Panelist", "MLRO, Mercury Danati Ltd"),
+      person(gayatriChadaram, "Panelist", "Head of Compliance & MLRO, FOREN. formerly leatherback"),
+      person(jayAnand, "Panelist", "Director & MLRO, Mercury Danati Ltd"),
       person(sergioIvanovic, "Panelist", "Founder & CEO, INVICTUS"),
     ],
   },
@@ -76,6 +79,16 @@ export const schedule2026 = [
     time: "7:40",
     meridiem: "PM",
     title: "Refuelling While Networking",
+  },
+  {
+    id: "focus-session",
+    time: "7:50",
+    meridiem: "PM",
+    title: "Focus Session – What is High Risk?",
+    people: [
+      person(stefanBinder, "Co-Founder & Chairman", "Fena"),
+      person(osmanIbrahim, "Director", "Kmbal Ltd"),
+    ],
   },
   {
     id: "ceremony",

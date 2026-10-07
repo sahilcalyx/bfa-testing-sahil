@@ -19,7 +19,7 @@ const judges2026List = [
   {
     id: "/nikhil-sapre-judge-details-2026",
     name: "Mr. Nikhil Sapre",
-    role: "Lecturer in Finance & Programme Director",
+    role: "Programme Director MSc Fintech",
     company: "University of Bristol Business School",
     img: "/assets/img/judges2026/nikhil-sapre.jpg",
     linkedin: "https://www.linkedin.com/in/nikhilsapre?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
@@ -110,18 +110,10 @@ const JudgesSection2026 = () => {
             {/* Content Column */}
             <div className="flex-1 flex flex-col justify-between text-left pt-2 sm:pt-0">
               <div>
-                <div className="flex justify-between items-start gap-2">
+                <div>
                   <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#c8102e]">
                     {judge.company}
                   </span>
-                  <a
-                    href={judge.linkedin}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="w-7 h-7 rounded-full bg-zinc-100 text-zinc-600 hover:text-white hover:bg-[#c8102e] flex items-center justify-center transition-all duration-300 shadow-sm"
-                  >
-                    <span className="fab fa-linkedin text-[13px]" />
-                  </a>
                 </div>
 
                 <h3 className="text-xl font-bold text-zinc-900 mt-1.5 group-hover:text-zinc-800 transition-colors">
@@ -154,7 +146,7 @@ const JudgesSection2026 = () => {
                   onClick={() => navigate(judge.id, { state: judge })}
                   className="cursor-pointer inline-flex items-center gap-1 text-[10px] font-black uppercase tracking-wider text-[#c8102e] hover:text-zinc-950 transition-colors flex-shrink-0"
                 >
-                  <span>Full Bio</span>
+                  <span>View Profile</span>
                   <span className="text-xs transition-transform duration-300 group-hover:translate-x-1">→</span>
                 </a>
               </div>

@@ -7,7 +7,7 @@ export const AWARD_CATEGORIES_2026 = [
   "Payment Gateway of the Year",
   "Startup of the Year",
   "Woman Entrepreneur in FinTech of the Year",
-  "Woman in AI of the Year",
+  "Visionary Woman in AI of the Year",
   "Anti-Fraud Innovator of the Year",
   "ID Verification Innovator of the Year",
   "FinTech of the Year",

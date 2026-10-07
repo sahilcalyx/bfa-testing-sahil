@@ -1,8 +1,6 @@
-import { ArrowBack } from "@mui/icons-material";
-import React, { useState } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 
-import BfaChatBot from "./BfaChatBot";
 import ScrollToTopButton from "./ScrollToTopButton";
 import CookieConsent from "./SliderBigBan/CookieConsent";
 
@@ -45,52 +43,31 @@ const Footer = () => {
                 <h2 className="cs-widget_title text-white" style={{ fontWeight: "600" }}>Quick Links</h2>
                 <ul className="menu text-white">
                   <li>
-                    {" "}
-                    <NavLink to="/sponsorship-categories">
-                      Sponsors
-                    </NavLink>{" "}
-                  </li>
-
-                  {/* <li>
-                    {" "}
-                    <NavLink to="/sponsorship-categories">
-                      Book Your Tickets Now
-                    </NavLink>{" "}
-                  </li> */}
-                  {/* <li>
-                    {" "}
-                    <NavLink to="/nominate-now">
-                      Nominate for the Awards
-                    </NavLink>{" "}
-                  </li> */}
-
-                  {/* <li>
-                    {" "}
-                    <NavLink to="/registerfor-startup-pitch">
-                      Register For Startup Pitch
-                    </NavLink>{" "}
-                  </li> */}
-                  {/* <li>
-                    {" "}
-                    <NavLink to="/awards">Awards</NavLink>{" "}
-                  </li> */}
-                  {/* <li>
-                    {" "}
-                    <NavLink to="/our-keynote-speaker-2025/">Keynote Speakers</NavLink>{" "}
-                  </li> */}
-                  <li>
-                    {" "}
-                    <NavLink to="/our-discussion-panel-2025/">Discussion Panel</NavLink>{" "}
+                    <NavLink to="/sponsorship-categories">Sponsors</NavLink>
                   </li>
                   <li>
-                    {" "}
-                    <NavLink to="/blogs">Blogs</NavLink>{" "}
+                    <NavLink to="/keynote-speakers-2026">Keynote Speakers</NavLink>
                   </li>
-                  {/* <li>
-                    <NavLink to="/how-to-enter">How To Enter</NavLink>
-                  </li> */}
                   <li>
-                    <NavLink to="/judges">Judges </NavLink>
+                    <NavLink to="/discussion-panel-2026">Discussion Panel</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/event-host-2026">Event Host</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/focus-session-2026">Focus Session</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/event-schedule-2026">Event Schedule</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/blogs">Blogs</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/judges">Judges</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/who-attends-bfa">Who Attends BFA</NavLink>
                   </li>
                   <li>
                     <NavLink to="/bfa-legacy">BFA Legacy</NavLink>

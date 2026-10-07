@@ -2,7 +2,6 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import { NavLink } from "react-router-dom";
 import {
-  Award,
   Building2,
   Calendar,
   CreditCard,
@@ -19,9 +18,12 @@ import {
 } from "lucide-react";
 
 const BANNER_IMG =
-  "/assets/img/sponsor-logo/sponsor-banner-strip-2026/leatherback-details-banner-2026.png";
-const SITE_URL = "https://leatherback.co/";
-const PAGE_PATH = "/leatherback-sponsor-details-2026";
+  "/assets/img/sponsor-logo/sponsor-banner-strip-2026/FOREN-leatherback-details-banner-2026.png";
+const SITE_URL = "https://foren.co/";
+const PAGE_PATH = "/foren-sponsor-details-2026";
+const SPONSOR_NAME = "FOREN";
+const SPONSOR_FORMER_NAME = "Leatherback";
+const SPONSOR_DISPLAY = `${SPONSOR_NAME}. formerly ${SPONSOR_FORMER_NAME}`;
 const OG_IMAGE = `https://britfintechawards.com${BANNER_IMG}`;
 
 const highlights = [
@@ -89,15 +91,15 @@ const LeatherbackSponsorDetails2026 = () => {
       />
       <Helmet>
         <title>
-          Leatherback | Silver Sponsor | Brit FinTech Awards 2026
+          {SPONSOR_DISPLAY} | Silver Sponsor | Brit FinTech Awards 2026
         </title>
         <meta
           name="description"
-          content="Leatherback is a global financial technology company powering global payments beyond borders. Silver Sponsor of Brit FinTech Awards 2026."
+          content={`${SPONSOR_DISPLAY} is a global financial technology company powering global payments beyond borders. Silver Sponsor of Brit FinTech Awards 2026.`}
         />
         <meta
           name="keywords"
-          content="Leatherback, global payments, multi-currency accounts, international transfers, global pay-outs, cross-border payments, Silver Sponsor 2026, Brit FinTech Awards"
+          content={`${SPONSOR_DISPLAY}, ${SPONSOR_NAME}, ${SPONSOR_FORMER_NAME}, global payments, multi-currency accounts, international transfers, global pay-outs, cross-border payments, Silver Sponsor 2026, Brit FinTech Awards`}
         />
         <meta name="author" content="Brit Fintech Award" />
         <meta property="og:type" content="website" />
@@ -107,29 +109,33 @@ const LeatherbackSponsorDetails2026 = () => {
         />
         <meta
           property="og:title"
-          content="Leatherback – Powering Global Payments Beyond Borders | Brit FinTech Awards 2026"
+          content={`${SPONSOR_DISPLAY} – Powering Global Payments Beyond Borders | Brit FinTech Awards 2026`}
         />
         <meta
           property="og:description"
-          content="Leatherback — Global financial technology company helping businesses move money across borders and Silver Sponsor of Brit FinTech Awards 2026."
+          content={`${SPONSOR_DISPLAY} — Global financial technology company helping businesses move money across borders and Silver Sponsor of Brit FinTech Awards 2026.`}
         />
         <meta property="og:image" content={OG_IMAGE} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta
           property="og:image:alt"
-          content="Leatherback - Silver Sponsor | Brit FinTech Awards 2026"
+          content={`${SPONSOR_DISPLAY} - Silver Sponsor | Brit FinTech Awards 2026`}
         />
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:title"
-          content="Leatherback – Powering Global Payments Beyond Borders | Brit FinTech Awards 2026"
+          content={`${SPONSOR_DISPLAY} – Powering Global Payments Beyond Borders | Brit FinTech Awards 2026`}
         />
         <meta
           name="twitter:description"
-          content="Leatherback — Global financial technology company helping businesses move money across borders and Silver Sponsor of Brit FinTech Awards 2026."
+          content={`${SPONSOR_DISPLAY} — Global financial technology company helping businesses move money across borders and Silver Sponsor of Brit FinTech Awards 2026.`}
         />
         <meta name="twitter:image" content={OG_IMAGE} />
+        <link
+          rel="canonical"
+          href={`https://britfintechawards.com${PAGE_PATH}`}
+        />
       </Helmet>
 
       <div className="cs-height_90 cs-height_lg_80" />
@@ -139,20 +145,19 @@ const LeatherbackSponsorDetails2026 = () => {
         href={SITE_URL}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Visit Leatherback website"
+        aria-label={`Visit ${SPONSOR_DISPLAY} website`}
         className="sponsor-banner-2026 relative block w-full overflow-hidden bg-[#2a0a10] h-[130px] sm:h-[160px] md:h-auto min-h-[140px] md:min-h-[220px]"
         style={{ lineHeight: 0 }}
       >
         <img
-          src={`${BANNER_IMG}?v=1`}
-          alt="Leatherback — Silver Sponsor | Brit FinTech Awards 2026"
+          src={`${BANNER_IMG}?v=2`}
+          alt={`${SPONSOR_DISPLAY} — Silver Sponsor | Brit FinTech Awards 2026`}
           width={1920}
           height={430}
           decoding="async"
           className="block w-full h-full md:h-auto object-cover object-center md:object-contain scale-[1.35] sm:scale-[1.25] md:scale-100 origin-center"
           style={{ width: "100%", display: "block" }}
           onError={(e) => {
-            // Keep background gradient visible if blank or fallback needed
             e.currentTarget.style.opacity = "0.9";
           }}
         />
@@ -173,27 +178,32 @@ const LeatherbackSponsorDetails2026 = () => {
         {/* Intro */}
         <div className="mb-10">
           <h1 className="m-0 text-[20px] sm:text-[24px] md:text-[32px] leading-[1.25] font-extrabold tracking-tight text-zinc-950">
-            Leatherback – Powering Global Payments Beyond Borders
+            {SPONSOR_DISPLAY} – Powering Global Payments Beyond Borders
           </h1>
         </div>
 
         {/* Body Copy */}
         <div className="space-y-6 text-[17px] md:text-[18px] leading-[1.85] text-zinc-600 mb-12">
           <p className="m-0">
-            We’re delighted to have <strong>Leatherback</strong> join the{" "}
+            We’re delighted to have <strong>{SPONSOR_DISPLAY}</strong> join the{" "}
             <strong>Brit FinTech Awards 2026 as a Silver Sponsor for the second consecutive year</strong>.
           </p>
 
           <p className="m-0">
-            Leatherback is a global financial technology company helping businesses send, receive, manage and move money across borders through a connected suite of financial solutions.
+            <strong>{SPONSOR_DISPLAY}</strong> is a global financial technology company helping
+            businesses send, receive, manage and move money across borders through a connected suite
+            of financial solutions.
           </p>
 
           <p className="m-0">
-            Its platform brings together multi-currency accounts, international transfers, collections, payment links, card payments and global pay-outs, giving businesses the infrastructure to operate across markets from one platform.
+            Its platform brings together multi-currency accounts, international transfers, collections,
+            payment links, card payments and global pay-outs, giving businesses the infrastructure to
+            operate across markets from one platform.
           </p>
 
           <p className="m-0">
-            Leatherback serves start-ups, SMEs, enterprises, merchants, payment service providers and financial institutions looking to simplify their international financial operations.
+            {SPONSOR_DISPLAY} serves start-ups, SMEs, enterprises, merchants, payment service providers
+            and financial institutions looking to simplify their international financial operations.
           </p>
         </div>
 
@@ -228,7 +238,9 @@ const LeatherbackSponsorDetails2026 = () => {
             </h2>
           </div>
           <p className="m-0 text-[16px] md:text-[17px] leading-[1.8] text-zinc-600">
-            Whether businesses are expanding into new markets, managing multiple currencies or moving funds internationally, Leatherback is helping make global financial operations more connected and accessible.
+            Whether businesses are expanding into new markets, managing multiple currencies or moving
+            funds internationally, {SPONSOR_DISPLAY} is helping make global financial operations more
+            connected and accessible.
           </p>
         </section>
 
@@ -264,16 +276,18 @@ const LeatherbackSponsorDetails2026 = () => {
           </div>
         </section>
 
-        {/* Leatherback at BFA 2026 */}
+        {/* FOREN at BFA 2026 */}
         <section className="mb-14 rounded-2xl border-l-[4px] border-[#c8102e] bg-white p-6 md:p-8 shadow-[0_4px_20px_rgba(15,23,42,0.04)]">
           <div className="flex items-center gap-3 mb-4">
             <Medal size={22} strokeWidth={2.25} className="text-[#c8102e] shrink-0" />
             <h2 className="m-0 text-[22px] md:text-[26px] font-extrabold tracking-tight text-zinc-950">
-              Leatherback at BFA 2026
+              {SPONSOR_DISPLAY} at BFA 2026
             </h2>
           </div>
           <p className="m-0 mb-6 text-[16px] md:text-[17px] leading-[1.8] text-zinc-600">
-            As a returning Silver Sponsor, Leatherback brings its experience in global payments and financial technology to a community of innovators, operators and leaders shaping the future of finTech, payments and Money Services.
+            As a returning Silver Sponsor, {SPONSOR_DISPLAY} brings its experience in global payments
+            and financial technology to a community of innovators, operators and leaders shaping the
+            future of finTech, payments and Money Services.
           </p>
 
           {/* Event Details Light Banner */}
@@ -322,7 +336,7 @@ const LeatherbackSponsorDetails2026 = () => {
               Featured Video
             </span>
             <h2 className="mt-2 text-[24px] md:text-[30px] font-extrabold tracking-tight text-zinc-950">
-              Watch Leatherback
+              Watch {SPONSOR_DISPLAY}
             </h2>
           </div>
 
@@ -330,7 +344,7 @@ const LeatherbackSponsorDetails2026 = () => {
             <div className="relative w-full aspect-video">
               <iframe
                 src="https://www.youtube.com/embed/fsc8LWT5DVc"
-                title="Leatherback - Brit FinTech Awards"
+                title={`${SPONSOR_DISPLAY} - Brit FinTech Awards`}
                 className="absolute top-0 left-0 w-full h-full rounded-2xl md:rounded-3xl border-0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
@@ -357,7 +371,8 @@ const LeatherbackSponsorDetails2026 = () => {
               MEET US AT THE EVENT &amp; DISCOVER MORE!
             </h2>
             <p className="m-0 mb-7 text-[14px] md:text-[15px] text-zinc-300 max-w-xl mx-auto leading-relaxed">
-              Connect with Leatherback and discover how they are powering global payments beyond borders.
+              Connect with {SPONSOR_DISPLAY} and discover how they are powering global payments beyond
+              borders.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
               <a
@@ -366,7 +381,7 @@ const LeatherbackSponsorDetails2026 = () => {
                 rel="noopener noreferrer"
                 className="!m-0 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-extrabold !text-zinc-950 no-underline transition-all hover:bg-[#c8102e] hover:!text-white"
               >
-                Visit Leatherback Website
+                Visit {SPONSOR_DISPLAY} Website
                 <ExternalLink size={16} />
               </a>
               <NavLink
@@ -377,7 +392,7 @@ const LeatherbackSponsorDetails2026 = () => {
               </NavLink>
             </div>
             <p className="mt-5 mb-0 text-[13px] text-zinc-500">
-              www.leatherback.co
+              www.foren.co
             </p>
           </div>
         </section>

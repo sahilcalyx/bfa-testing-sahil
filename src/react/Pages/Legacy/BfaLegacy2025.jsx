@@ -1030,7 +1030,7 @@ const BfaLegacy2025 = () => {
             </div>
 
             <div className="flex flex-wrap justify-center gap-3.5">
-              <NavLink to="/our-discussion-panel-2025" className={CTA_PRIMARY}>
+              <NavLink to="/discussion-panel-2025" className={CTA_PRIMARY}>
                 Meet the panelists
               </NavLink>
               <a

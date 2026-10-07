@@ -38,14 +38,14 @@ const SPONSORS_2026 = [
     external: false,
     tier: "Silver Sponsor",
   },
-   {
-    name: "Leatherback",
-    video: "/assets/video/sponsors-logo-2026/leatherback-logo-sponsor-2026.webm",
-    link: "/leatherback-sponsor-details-2026",
+  {
+    name: "FOREN. formerly Leatherback",
+    video: "/assets/video/sponsors-logo-2026/Foren-sponsor-details-2026.webm",
+    link: "/foren-sponsor-details-2026",
     external: false,
     tier: "Silver Sponsor",
-    alt: "Leatherback",
-    title: "Leatherback",
+    alt: "FOREN. formerly Leatherback",
+    title: "FOREN. formerly Leatherback",
   },
   {
     name: "Invictus Ventures",
@@ -74,6 +74,16 @@ const SPONSORS_2026 = [
     alt: "Peratera",
     title: "Peratera",
   },
+  {
+    name: "Alico Remit",
+    video: "/assets/video/sponsors-logo-2026/Alico-sponsor-details-2026.webm",
+    link: "/alicoremit-sponsor-details-2026",
+    external: false,
+    tier: "Travel Sponsor",
+    alt: "Alico Remit",
+    title: "Alico Remit",
+  },
+  
   // {
   //   name: "ECEX",
   //   video: "/assets/video/sponsors-logo-2026/ecex-sponsor-details-2026.webm",
@@ -100,6 +110,15 @@ const SPONSORS_2026 = [
     tier: "Innovation Sponsor",
     alt: "QF Remit",
     title: "QF Remit",
+  },
+  {
+    name: "Disbuz by Payceler",
+    video: "/assets/video/sponsors-logo-2026/Disbuz-sponsor-details-2026.webm",
+    link: "/disbuz-sponsor-details-2026",
+    external: false,
+    tier: "Strategic Sponsor",
+    alt: "Disbuz by Payceler",
+    title: "Disbuz by Payceler",
   },
   {
     name: "Flex Instant Pay",
@@ -158,6 +177,14 @@ const SPONSORS_2026 = [
     title: "Teeparam",
   },
   {
+    name: "Add Money Transfer",
+    video: "/assets/video/sponsors-logo-2026/Add-money-sponsor-details-2026.webm",
+    link: "https://addmoneytransfer.co.uk/",
+    external: true,
+    alt: "Add Money Transfer",
+    title: "Add Money Transfer",
+  },
+  {
     name: "Blue Nile Money Transfer",
     video: "/assets/video/sponsors-logo-2026/Bluenile-sponsor-details-2026.webm",
     link: "https://bluenilemoneytransfer.com/",
@@ -181,6 +208,7 @@ const SPONSORS_2026 = [
     alt: "IfePay",
     title: "IfePay",
   },
+  
   
 ];
 

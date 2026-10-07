@@ -17,6 +17,7 @@ export async function POST(req) {
                 title: data.title,
                 fullName: data.fullName,
                 companyName: data.companyName,
+                designation: data.designation || "",
                 email: data.email,
                 phone: data.mobile || data.phone
             }];
@@ -54,6 +55,7 @@ export async function POST(req) {
             title: data.title,
             fullName: data.fullName,
             companyName: data.companyName,
+            designation: String(data.designation || "").trim(),
             email: data.email,
             phone: data.mobile || data.phone,
             tickets: parseInt(data.tickets),
@@ -98,6 +100,7 @@ export async function POST(req) {
                             <span style="color: #697386; font-size: 14px; text-transform: uppercase; font-weight: 600;">Primary Attendee details</span>
                             <p style="margin: 8px 0; font-size: 18px; color: #1a1f36; font-weight: 700;">${data.title} ${data.fullName}</p>
                             <p style="margin: 8px 0; font-size: 14px; color: #697386;"><strong>Company:</strong> ${data.companyName}</p>
+                            <p style="margin: 8px 0; font-size: 14px; color: #697386;"><strong>Designation:</strong> ${data.designation || "N/A"}</p>
                             <p style="margin: 8px 0; font-size: 14px; color: #697386;"><strong>Email:</strong> <a href="mailto:${data.email}" style="color: #635bff; text-decoration: none;">${data.email}</a></p>
                             <p style="margin: 8px 0; font-size: 14px; color: #697386;"><strong>Phone:</strong> ${data.mobile || data.phone}</p>
                         </div>
@@ -108,6 +111,7 @@ export async function POST(req) {
                                 <div style="margin-top: 10px; padding: 10px; background: #f8fafc; border-radius: 6px; border: 1px solid #e3e8ee;">
                                     <strong style="color: #1a1f36;">Attendee ${i + 1}: ${att.title || ""} ${att.fullName || ""}</strong>
                                     <div style="font-size: 13px; color: #697386;">Company: ${att.companyName || "N/A"}</div>
+                                    <div style="font-size: 13px; color: #697386;">Designation: ${att.designation || "N/A"}</div>
                                     <div style="font-size: 13px; color: #697386;">Email: ${att.email || "N/A"}</div>
                                     <div style="font-size: 13px; color: #697386;">Phone: ${att.phone || "N/A"}</div>
                                 </div>
@@ -176,6 +180,7 @@ export async function GET(req) {
                 { fullName: { $regex: search, $options: "i" } },
                 { email: { $regex: search, $options: "i" } },
                 { companyName: { $regex: search, $options: "i" } },
+                { designation: { $regex: search, $options: "i" } },
             ];
         }
 

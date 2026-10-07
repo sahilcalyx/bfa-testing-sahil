@@ -56,13 +56,13 @@ const OurSponsors = () => {
                 title: "Kmbal",
               },
               {
-                name: "Leatherback",
-                video: "/assets/video/sponsors-logo-2026/leatherback-logo-sponsor-2026.webm",
-                link: "/leatherback-sponsor-details-2026",
+                name: "FOREN. formerly Leatherback",
+                video: "/assets/video/sponsors-logo-2026/Foren-sponsor-details-2026.webm",
+                link: "/foren-sponsor-details-2026",
                 external: false,
                 tier: "Silver Sponsor",
-                alt: "Leatherback",
-                title: "Leatherback",
+                alt: "FOREN. formerly Leatherback",
+                title: "FOREN. formerly Leatherback",
               },{
                 name: "Invictus Ventures",
                 video: "/assets/video/sponsors-logo-2026/Invictus-sponsor-details-2026.webm",
@@ -90,6 +90,15 @@ const OurSponsors = () => {
                 alt: "Peratera",
                 title: "Peratera",
               },
+              {
+                name: "Alico Remit",
+                video: "/assets/video/sponsors-logo-2026/Alico-sponsor-details-2026.webm",
+                link: "/alicoremit-sponsor-details-2026",
+                external: false,
+                tier: "Travel Sponsor",
+                alt: "Alico Remit",
+                title: "Alico Remit",
+              },
               // {
               //   name: "ECEX",
               //   video: "/assets/video/sponsors-logo-2026/ecex-sponsor-details-2026.webm",
@@ -116,6 +125,15 @@ const OurSponsors = () => {
                 tier: "Innovation Sponsor",
                 alt: "QF Remit",
                 title: "QF Remit",
+              },
+              {
+                name: "Disbuz by Payceler",
+                video: "/assets/video/sponsors-logo-2026/Disbuz-sponsor-details-2026.webm",
+                link: "/disbuz-sponsor-details-2026",
+                external: false,
+                tier: "Strategic Sponsor",
+                alt: "Disbuz by Payceler",
+                title: "Disbuz by Payceler",
               },
               {
                 name: "Flex Instant Pay",
@@ -174,6 +192,14 @@ const OurSponsors = () => {
                 title: "Teeparam",
               },
               {
+                name: "Add Money Transfer",
+                video: "/assets/video/sponsors-logo-2026/Add-money-sponsor-details-2026.webm",
+                link: "https://addmoneytransfer.co.uk/",
+                external: true,
+                alt: "Add Money Transfer",
+                title: "Add Money Transfer",
+              },
+              {
                 name: "Blue Nile Money Transfer",
                 video: "/assets/video/sponsors-logo-2026/Bluenile-sponsor-details-2026.webm",
                 link: "https://bluenilemoneytransfer.com/",
@@ -197,6 +223,7 @@ const OurSponsors = () => {
                 alt: "IfePay",
                 title: "IfePay",
               },
+              
              
             ].map((s, index) => (
               <div className="col-lg-5 col-md-6 col-12" key={index}>
@@ -699,24 +726,29 @@ const OurSponsors = () => {
   return (
     <div>
       <Helmet>
-        <title>Meet Our Sponsors | Brit Fintech Awards Sponsors</title>
+        <title>Our Sponsors | Brit FinTech Awards 2026</title>
         <meta
           name="description"
-          content="Meet our sponsors, the leading Fintech Awards sponsors in the UK, supporting innovation as financial award sponsors at the prestigious Brit Fintech Awards."
+          content="Meet the sponsors of the Brit FinTech Awards 2026, the leading FinTechs, MSBs and payment companies supporting innovation in UK financial services, plus our 2025 and 2024 sponsors."
         />
         <meta
           name="keywords"
-          content="Brit Fintech Awards, Sponsors, Financial Technology, Fintech Sponsors, Supporters, Fintech Innovation, Fintech Awards Sponsors UK, Financial Award Sponsors"
+          content="Brit FinTech Awards sponsors, Brit FinTech Awards 2026, FinTech awards sponsors UK, MSB sponsors, payments sponsors, financial technology awards, fintech event sponsorship London"
         />
         <meta name="author" content="Brit Fintech Awards" />
-        <meta
-          property="og:title"
-          content="Meet Our Sponsors | Brit Fintech Awards Sponsors"
-        />
+        <link rel="canonical" href="https://britfintechawards.com/our-sponsors" />
+        <meta property="og:title" content="Our Sponsors | Brit FinTech Awards 2026" />
         <meta
           property="og:description"
-          content="Meet our sponsors, the leading Fintech Awards sponsors in the UK, supporting innovation as financial award sponsors at the prestigious Brit Fintech Awards."
+          content="Meet the sponsors of the Brit FinTech Awards 2026, the leading FinTechs, MSBs and payment companies supporting innovation in UK financial services."
         />
+        <meta property="og:url" content="https://britfintechawards.com/our-sponsors" />
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:image"
+          content="https://britfintechawards.com/assets/img/og/sponosrs.jpg"
+        />
+        <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
 
       <div>

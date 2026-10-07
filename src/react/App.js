@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import Header from "./Components/Header";
 const Home = lazy(() => import("./Pages/Home"));
 const About = lazy(() => import("./Pages/About"));
@@ -101,6 +101,8 @@ import LeftoverCurrencySponsorDetails2026 from "./Pages/2026/OurSponsors/Leftove
 import MyRemitSponsorDetails2026 from "./Pages/2026/OurSponsors/MyRemitSponsorDetails2026";
 import GrantsPaymentsSponsorDetails2026 from "./Pages/2026/OurSponsors/GrantsPaymentsSponsorDetails2026";
 import LeatherbackSponsorDetails2026 from "./Pages/2026/OurSponsors/LeatherbackSponsorDetails2026";
+import DisbuzSponsorDetails2026 from "./Pages/2026/OurSponsors/DisbuzSponsorDetails2026";
+import AlicoRemitSponsorDetails2026 from "./Pages/2026/OurSponsors/AlicoRemitSponsorDetails2026";
 import EcexSponsorDetails2026 from "./Pages/2026/OurSponsors/EcexSponsorDetails2026";
 import InvictusVenturesSponsorDetails2026 from "./Pages/2026/OurSponsors/InvictusVenturesSponsorDetails2026";
 import PerateraSponsorDetails2026 from "./Pages/2026/OurSponsors/PerateraSponsorDetails2026";
@@ -127,7 +129,6 @@ const QFRemitSponsorDetails = lazy(() => import("./Pages/2025/OurSponsors/QFRemi
 const EndozDisbuzDetails2025 = lazy(() => import("./Pages/2025/OurSponsors/EndozDisbuzDetails2025"));
 const KmbalSponsorDetails = lazy(() => import("./Pages/2025/OurSponsors/KmbalSponsorDetails"));
 const OurKeyNoteSpeakers = lazy(() => import("./Pages/OurKeyNoteSpeakers"));
-const DiscussionPannelSection = lazy(() => import("./Pages/2025/DiscussionPannel/DiscussionPannelSection"));
 const WayneFosterDPDetails = lazy(() => import("./Pages/2025/DiscussionPannel/WayneFosterDPDetails"));
 const MarioVanPoppelDPDetails = lazy(() => import("./Pages/2025/DiscussionPannel/MarioVanPoppelDPDetails"));
 const RedSeaDetails2025 = lazy(() => import("./Pages/2025/OurSponsors/RedSeaDetails2025"));
@@ -191,6 +192,7 @@ const DownloadApp = lazy(() => import("./Pages/DownloadApp"));
 const BfaLegacy = lazy(() => import("./Pages/Legacy/BfaLegacy"));
 const BfaLegacy2025 = lazy(() => import("./Pages/Legacy/BfaLegacy2025"));
 const BfaLegacy2024 = lazy(() => import("./Pages/Legacy/BfaLegacy2024"));
+const EventHostPage2026 = lazy(() => import("./Pages/2026/host/EventHostPage2026"));
 const EventHostDetails2026 = lazy(() => import("./Pages/2026/host/EventHostDetails2026"));
 const DaljitYoungKeynoteDetails2026 = lazy(() => import("./Pages/2026/KeynoteSpeaker2026/DaljitYoungKeynoteDetails2026"));
 const FemiEkwuyasiDPDetails2026 = lazy(() => import("./Pages/2026/DisscussionPanal2026/FemiEkwuyasiDPDetails2026"));
@@ -198,6 +200,12 @@ const GayatriChadaramDPDetails2026 = lazy(() => import("./Pages/2026/Disscussion
 const JayAnandDPDetails2026 = lazy(() => import("./Pages/2026/DisscussionPanal2026/JayAnandDPDetails2026"));
 const SergioIvanovicDPDetails2026 = lazy(() => import("./Pages/2026/DisscussionPanal2026/SergioIvanovicDPDetails2026"));
 const AlonaShevtsovaDPDetails2026 = lazy(() => import("./Pages/2026/DisscussionPanal2026/AlonaShevtsovaDPDetails2026"));
+const HighRiskSessionPage = lazy(() => import("./Pages/2026/FocusSession2026/HighRiskSessionPage"));
+const FocusSessionSpeakerPage = lazy(() => import("./Pages/2026/FocusSession2026/FocusSessionSpeakerPage"));
+const Winners2026 = lazy(() => import("./Pages/2026/Winners2026/Winners2026"));
+const Account2AccountWinnerDetails2026 = lazy(() => import("./Pages/2026/WinnerDetails2026/Account2AccountWinnerDetails2026"));
+const EventSchedulePage2026 = lazy(() => import("./Pages/2026/Schedule2026/EventSchedulePage2026"));
+const WhoAttendsBfaPage = lazy(() => import("./Pages/WhoAttendsBfaPage"));
 // const OchebhoyaEkpeteKeynoteDetails2026 = lazy(() => import("./Pages/2026/KeynoteSpeaker2026/OchebhoyaEkpeteKeynoteDetails2026"));
 
 
@@ -227,9 +235,10 @@ function App() {
       <Suspense fallback={null}>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/event-host-2026" element={<EventHostDetails2026 />} />
-        <Route path="/event-host" element={<EventHostDetails2026 />} />
-        <Route path="/host/stephen-simmons" element={<EventHostDetails2026 />} />
+        <Route path="/event-host-2026" element={<EventHostPage2026 />} />
+        <Route path="/event-host" element={<EventHostPage2026 />} />
+        <Route path="/event-schedule-2026" element={<EventSchedulePage2026 />} />        <Route path="/host/stephen-simmons" element={<EventHostDetails2026 />} />
+        <Route path="/stephen-simmons-event-host-2026" element={<EventHostDetails2026 />} />
         <Route path="/sponsorship-categories" element={<Sponsers />} />
         <Route path="/sponsors" element={<Sponsers />} />
         <Route path="/awards" element={<Awards />} />
@@ -257,12 +266,28 @@ function App() {
           element={<DownloadPhotosForm />}
         />
         <Route
-          path="/our-keynote-speaker-2025"
+          path="/keynote-speakers-2026"
           element={<OurKeyNoteSpeakers />}
         />
         <Route
-          path="/our-discussion-panel-2025"
+          path="/keynote-speakers-2025"
+          element={<OurKeyNoteSpeakers />}
+        />
+        <Route
+          path="/our-keynote-speaker-2025"
+          element={<Navigate to="/keynote-speakers-2025" replace />}
+        />
+        <Route
+          path="/discussion-panel-2026"
           element={<OurDiscussionPanel />}
+        />
+        <Route
+          path="/discussion-panel-2025"
+          element={<OurDiscussionPanel />}
+        />
+        <Route
+          path="/our-discussion-panel-2025"
+          element={<Navigate to="/discussion-panel-2025" replace />}
         />
         <Route
           path="/simone-martinelli-volume"
@@ -272,10 +297,6 @@ function App() {
         <Route
           path="/ochebhoya-ekpete-leatherback"
           element={<OchebhoyaKeyNoteDetails />}
-        />
-        <Route
-          path="/our-discussion-panel-2025"
-          element={<DiscussionPannelSection />}
         />
         <Route
           path="/wayne-foster-discussion-panel-2025"
@@ -391,8 +412,9 @@ function App() {
         <Route path="/msb-rising-star" element={<MsbRisingStar />} />
         <Route path="/msb-leader" element={<MsbLeader />} />
         <Route path="/msb-community-champion" element={<MsbCommunityChampion />} />
-        <Route path="/woman-in-ai" element={<WomenInAi />} />
-        <Route path="/women-in-ai" element={<WomenInAi />} />
+        <Route path="/visionary-woman-in-ai" element={<WomenInAi />} />
+        <Route path="/woman-in-ai" element={<Navigate to="/visionary-woman-in-ai" replace />} />
+        <Route path="/women-in-ai" element={<Navigate to="/visionary-woman-in-ai" replace />} />
         <Route path="/FinTech-Leader-of-the-Year" element={<FinTechLeaderOfTheYear />} />
         <Route path="/FinTech-CTO-of-the-Year" element={<FinTechCtoOfTheYear />} />
         <Route path="/Payment-Gateway-of-the-Year" element={<PaymentGatewayOfTheYear />} />
@@ -606,6 +628,15 @@ function App() {
           path="/award-winners-2024/travel-cashier-ltd-progressive-money-exchanger-msb-of-the-year-2024"
           element={<TravelCashierWinnerDetails />}
         />
+          {/* 2026 Winners Page */}
+        <Route path="/award-winners-2026" element={<Winners2026 />} />
+        <Route
+          path="/award-winners-2026/account-2-account-payment-processor-of-the-year"
+          element={<Account2AccountWinnerDetails2026 />}
+        />
+          {/* 2026 Winners Page End */}
+
+
 
         {/* Start Winner 2025 Details Pages */}
 
@@ -731,8 +762,20 @@ function App() {
           element={<GrantsPaymentsSponsorDetails2026 />}
         />
         <Route
+          path="/foren-sponsor-details-2026"
+          element={<LeatherbackSponsorDetails2026 />}
+        />
+        <Route
           path="/leatherback-sponsor-details-2026"
           element={<LeatherbackSponsorDetails2026 />}
+        />
+        <Route
+          path="/disbuz-sponsor-details-2026"
+          element={<DisbuzSponsorDetails2026 />}
+        />
+        <Route
+          path="/alicoremit-sponsor-details-2026"
+          element={<AlicoRemitSponsorDetails2026 />}
         />
         {/* <Route
           path="/ecex-sponsor-details-2026"
@@ -790,6 +833,7 @@ function App() {
         
 
         <Route path="/download-app" element={<DownloadApp />} />
+        <Route path="/who-attends-bfa" element={<WhoAttendsBfaPage />} />
         <Route path="/blogs" element={<Blogs />} />
          <Route
           path="/inside-the-bfa-experience-networking-energy-innovation"
@@ -863,6 +907,15 @@ function App() {
         <Route
           path="/alona-shevtsova-discussion-panel-2026"
           element={<AlonaShevtsovaDPDetails2026 />}
+        />
+        <Route path="/focus-session-2026" element={<HighRiskSessionPage />} />
+        <Route
+          path="/stefan-binder-focus-session-2026"
+          element={<FocusSessionSpeakerPage />}
+        />
+        <Route
+          path="/osman-ibrahim-focus-session-2026"
+          element={<FocusSessionSpeakerPage />}
         />
         {/* <Route
           path="/ochebhoya-ekpete-keynote-speaker-2026"

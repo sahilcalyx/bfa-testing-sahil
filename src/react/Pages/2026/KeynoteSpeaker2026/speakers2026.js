@@ -12,7 +12,7 @@ export const daljitYoung = {
   logoOnDark: false,
   img: "/assets/img/keynote-speakers-2026/Daljeet-profile-image.jpg",
   placeholder: false,
-  tagline: "Building finance, regulation and AI into everyday operations",
+  tagline: "The AI-Augmented CFO: Inside a Next-Gen EMI’s Financial Engine Room",
   linkedin: "https://www.linkedin.com/in/daljityoung24658999",
   stats: {
     domain: "Finance & Regulatory Fintech",

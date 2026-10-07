@@ -1,38 +1,61 @@
 import React, { useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import { ATTENDEE_CATEGORIES, ATTENDEE_LOGOS } from "./attendeeLogos";
 
 const ALL_TAB = "All";
 
-/* MSB overlaps other categories, so it is a name list rather than a category on the shared data */
+const FOREN_FORMERLY_LEATHERBACK_LOGO =
+  "/assets/img/attendee-logos/FOREN-formerly-LEATHERBACK.svg";
+
+const withForenLogo = (item) =>
+  item.name === "Leatherback" || item.name === "FOREN. formerly Leatherback" || item.foren
+    ? {
+        ...item,
+        name: "FOREN. formerly Leatherback",
+        logo: FOREN_FORMERLY_LEATHERBACK_LOGO,
+        tall: true,
+        foren: true,
+      }
+    : item;
+
 const MSB_CATEGORY = {
   category: "MSB",
   subtitle: "Money Services Businesses — money transfer, remittance and currency exchange",
-  names: new Set([
-    "3ribe",
+};
+
+const TAB_CATEGORIES = [...ATTENDEE_CATEGORIES, MSB_CATEGORY];
+
+/* Companies can appear in several tabs, so each tab lists its logos by name in display order */
+const TAB_LOGO_NAMES = {
+  MSB: [
     "Baaz Money",
     "Belyfted",
     "Blue Nile",
     "Finest Pay",
-    "Flex Instant Pay",
-    "Glory & Honour",
     "IFEPay",
     "K Money",
     "Kmbal",
-    "Leftover Currency",
-    "Mercury Danati",
+    "Muthoot Global",
     "MyRemit",
     "NEC Money",
     "QF Remit",
     "Red Sea Money Transfer",
     "Super Transfer",
     "Teeparam",
+    "Glory & Honour",
+    "Mercury Danati",
     "Tigris Pay",
-    "Transfer Rocket",
-    "Travel Cashier",
-  ]),
+  ],
+  Others: ["Complyport", "Kani", "Lumine Solicitors", "University of Bristol"],
+  "Payout Companies": ["Chrisborough Group", "Disbuz", "Thunes", "GCC Exchange"],
+  "Card Acquirers": ["Axcess Merchant Services", "Ecommpay", "Emerchantpay", "Trust Payments"],
+  Payments: ["Orbital", "Sends", "LinkFX", "3ribe", "ECEX Group"],
+  "Open Banking": ["Fena", "Volume", "Payceler"],
+  "Identity Verification": ["GBG", "Sumsub"],
+  Banking: ["Bank of London", "Clear Junction", "PURSE BAAS", "Peratera", "IFX Payments"],
 };
 
-const TAB_CATEGORIES = [...ATTENDEE_CATEGORIES, MSB_CATEGORY];
+const LOGOS_BY_NAME = new Map(ATTENDEE_LOGOS.map((item) => [item.name, item]));
 
 /* On sm+ the tab bar breaks onto a second row starting at this tab */
 const SECOND_ROW_START = "Identity Verification";
@@ -63,8 +86,14 @@ function LogoCard({ item }) {
   );
 }
 
-const WhoAttendsBfaTabsSection = () => {
+/**
+ * @param {"home" | "page"} variant
+ *  - home: homepage section with link to full page
+ *  - page: dedicated /who-attends-bfa page (tighter top padding for fixed header)
+ */
+const WhoAttendsBfaTabsSection = ({ variant = "home" }) => {
   const [activeTab, setActiveTab] = useState(ALL_TAB);
+  const isPage = variant === "page";
 
   const tabs = useMemo(() => [ALL_TAB, ...TAB_CATEGORIES.map((c) => c.category)], []);
 
@@ -74,11 +103,11 @@ const WhoAttendsBfaTabsSection = () => {
   );
 
   const visibleItems = useMemo(() => {
-    if (activeTab === ALL_TAB) return ATTENDEE_LOGOS;
-    if (activeTab === MSB_CATEGORY.category) {
-      return ATTENDEE_LOGOS.filter((item) => MSB_CATEGORY.names.has(item.name));
-    }
-    return ATTENDEE_LOGOS.filter((item) => item.category === activeTab);
+    const items =
+      activeTab === ALL_TAB
+        ? ATTENDEE_LOGOS
+        : (TAB_LOGO_NAMES[activeTab] || []).map((name) => LOGOS_BY_NAME.get(name)).filter(Boolean);
+    return items.map(withForenLogo);
   }, [activeTab]);
 
   const subtitle =
@@ -87,7 +116,11 @@ const WhoAttendsBfaTabsSection = () => {
       : activeCategory?.subtitle;
 
   return (
-    <section className="relative overflow-hidden bg-white py-16 md:py-24">
+    <section
+      className={`relative overflow-hidden bg-white ${
+        isPage ? "pt-24 pb-16 md:pt-28 md:pb-24" : "py-16 md:py-24"
+      }`}
+    >
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-zinc-50 to-transparent"
@@ -96,15 +129,26 @@ const WhoAttendsBfaTabsSection = () => {
       <div className="container relative z-10">
         {/* Title block */}
         <div className="mx-auto max-w-3xl text-center mb-10 md:mb-12">
-         
           <h2 className="m-0 text-3xl sm:text-4xl md:text-[2.75rem] font-black uppercase tracking-tight text-[#c8102e]">
             Who Attends BFA?
           </h2>
-          
+
           <p className="mx-auto mt-5 mb-0 max-w-2xl text-[15px] sm:text-base text-zinc-600 font-medium leading-relaxed">
             Every year, BFA brings senior decision-makers from across financial services.
             Explore attendee brands across banking, payments, acquiring, payouts, and more.
           </p>
+
+          {!isPage && (
+            <div className="mt-6">
+              <Link
+                to="/who-attends-bfa"
+                className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[0.14em] text-[#c8102e] hover:text-[#a00d25] transition-colors duration-200"
+              >
+                <span>View full page</span>
+                <span aria-hidden="true">→</span>
+              </Link>
+            </div>
+          )}
         </div>
 
         <div className="mx-auto max-w-6xl">
@@ -152,7 +196,7 @@ const WhoAttendsBfaTabsSection = () => {
 
             {activeTab === ALL_TAB && (
               <p className="mt-5 sm:mt-7 mb-0 text-center text-xs sm:text-sm text-zinc-400 font-medium">
-               And many more.
+                And many more.
               </p>
             )}
           </div>
