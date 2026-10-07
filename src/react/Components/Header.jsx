@@ -301,6 +301,18 @@ box-shadow: none;
                                 className={`nav-link  ${
                                   isSticky ? "" : "text-dark"
                                 }`}
+                                to="/award-winners-2026"
+                                style={{ color: "#333", fontWeight: "600" }}
+                                onClick={handleNavLinkClick}
+                              >
+                                Winners 2026
+                              </NavLink>
+                            </li>
+                            <li id={splitLocation[2] === "" ? "active" : ""}>
+                              <NavLink
+                                className={`nav-link  ${
+                                  isSticky ? "" : "text-dark"
+                                }`}
                                 to="/award-winners-2025"
                                 style={{ color: "#333", fontWeight: "600" }}
                                 onClick={handleNavLinkClick}
