@@ -5,6 +5,7 @@ import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion
 import { FiArrowLeft } from "react-icons/fi";
 import { Activity, AlignLeft, Award, CheckCircle2, MousePointerClick, ShieldBan, TrendingUp } from "lucide-react";
 import { ArcRevealHero } from "@/components/ui/arc-preloader-hero";
+import WinnersConfetti2026 from "../Winners2026/components/WinnersConfetti2026";
 
 const EASE = [0.16, 1, 0.3, 1];
 const DISPLAY = "Oswald, sans-serif";
@@ -62,6 +63,8 @@ const Account2AccountWinnerDetails2026 = () => {
         href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&display=swap"
         rel="stylesheet"
       />
+
+      <WinnersConfetti2026 reduceMotion={reduceMotion} delay={2600} burst={false} />
 
       <ArcRevealHero
         greetings={[

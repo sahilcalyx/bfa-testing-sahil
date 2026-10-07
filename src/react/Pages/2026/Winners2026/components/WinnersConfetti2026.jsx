@@ -28,7 +28,7 @@ const createPiece = (width, height, scatter) => {
   };
 };
 
-const WinnersConfetti2026 = ({ burstKey, reduceMotion }) => {
+const WinnersConfetti2026 = ({ burstKey = 0, reduceMotion, delay = 0, burst = true }) => {
   const canvasRef = useRef(null);
   const rainRef = useRef(null);
   const initialKey = useRef(burstKey);
@@ -42,7 +42,7 @@ const WinnersConfetti2026 = ({ burstKey, reduceMotion }) => {
     let width = 0;
     let height = 0;
     let raf = 0;
-    let rainUntil = performance.now() + RAIN_DURATION;
+    let rainUntil = performance.now() + delay + RAIN_DURATION;
     const count = window.innerWidth < 768 ? 60 : 110;
 
     const resize = () => {
@@ -114,18 +114,21 @@ const WinnersConfetti2026 = ({ burstKey, reduceMotion }) => {
       if (!raf) raf = requestAnimationFrame(draw);
     };
 
-    raf = requestAnimationFrame(draw);
+    const startTimer = setTimeout(() => {
+      raf = requestAnimationFrame(draw);
+    }, delay);
 
     return () => {
+      clearTimeout(startTimer);
       cancelAnimationFrame(raf);
       rainRef.current = null;
       window.removeEventListener("resize", resize);
       confetti.reset();
     };
-  }, [reduceMotion]);
+  }, [reduceMotion, delay]);
 
   useEffect(() => {
-    if (reduceMotion) return;
+    if (reduceMotion || !burst) return;
 
     const initial = burstKey === initialKey.current;
     if (!initial) rainRef.current?.();
@@ -147,7 +150,7 @@ const WinnersConfetti2026 = ({ burstKey, reduceMotion }) => {
 
     fire(0, 60);
     fire(1, 120);
-  }, [burstKey, reduceMotion]);
+  }, [burstKey, reduceMotion, burst]);
 
   if (reduceMotion) return null;
 
