@@ -319,7 +319,7 @@ Brit Fintech Awards 2026."
         
         {/* <CountdownSlider2026Animated /> */}
         {/* <InteractiveHero /> */}
-        <HeroSection2026 />
+        {/* <HeroSection2026 /> */}
 
         <Gallery2026 />
         {/* <CountdownSlider2025/> */}
