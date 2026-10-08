@@ -9,11 +9,11 @@ const TITLE = (
   <>
     Moments
     <span className="text-[#c8102e]"> That </span>
-    Matter.
+    Matter
   </>
 );
 
-const SUBTITLE = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.";
+const SUBTITLE = "Lorem ipsum dolor sit amet consectetur adipisicing elit.";
 
 const ACTION = (
   <NavLink to="/photo-gallery-2025" className="btn-pro-1 inline-block">
