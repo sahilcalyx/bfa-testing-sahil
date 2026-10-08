@@ -61,7 +61,7 @@ const Winners2026 = () => {
           backgroundSize: "24px 24px",
         }}
       >
-        <div className="relative z-20 py-5 bg-zinc-50/85 backdrop-blur-md border-b border-zinc-200/70">
+        <div className="relative z-20 py-3 bg-zinc-50/85 backdrop-blur-md border-b border-zinc-200/70">
           <div className="max-w-7xl mx-auto px-5 md:px-8 flex justify-center">
             <div
               role="tablist"
@@ -107,7 +107,7 @@ const Winners2026 = () => {
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-5 md:px-8 pt-16 md:pt-20">
+        <div className="max-w-7xl mx-auto px-5 md:px-8 pt-6 md:pt-8">
           <AnimatePresence mode="wait">
             <motion.div
               key={active.id}
@@ -123,13 +123,13 @@ const Winners2026 = () => {
                   hidden: { opacity: 0, y: 16 },
                   show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE } },
                 }}
-                className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-end mb-12 md:mb-14"
+                className="grid grid-cols-1 lg:grid-cols-12 gap-3 lg:gap-6 items-end mb-6 md:mb-8"
               >
                 <div className="lg:col-span-7">
                   <span className="text-[11px] font-black uppercase tracking-[0.3em] text-[#c8102e]">
                     Category
                   </span>
-                  <h2 className="mt-3 mb-0 font-[Oswald,sans-serif] text-4xl md:text-5xl font-bold uppercase tracking-[-0.005em] text-zinc-900">
+                  <h2 className="mt-1 mb-0 font-[Oswald,sans-serif] text-3xl md:text-4xl font-bold uppercase tracking-[-0.005em] text-zinc-900">
                     {active.label}
                   </h2>
                 </div>

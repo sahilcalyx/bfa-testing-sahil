@@ -220,9 +220,9 @@ const WinnerBanner2026 = () => {
           className={`wb26__winner-box${showWinnerBox ? " is-visible" : ""}`}
           aria-live="polite"
         >
-          <p className="wb26__eyebrow">Brit Fintech Awards</p>
+          <p className="wb26__eyebrow">Brit Fintech Awards 2026</p>
           <h1 className="wb26__title">CONGRATULATIONS</h1>
-          <h2 className="wb26__subtitle">To all the winners 2026</h2>
+          <h2 className="wb26__subtitle">To all the winners</h2>
         </div>
 
         {/* Black splash for scramble intro */}

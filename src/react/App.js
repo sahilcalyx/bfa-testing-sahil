@@ -204,9 +204,32 @@ const HighRiskSessionPage = lazy(() => import("./Pages/2026/FocusSession2026/Hig
 const FocusSessionSpeakerPage = lazy(() => import("./Pages/2026/FocusSession2026/FocusSessionSpeakerPage"));
 const Winners2026 = lazy(() => import("./Pages/2026/Winners2026/Winners2026"));
 const Account2AccountWinnerDetails2026 = lazy(() => import("./Pages/2026/WinnerDetails2026/Account2AccountWinnerDetails2026"));
-const FenaAccount2AccountWinnerDetails2026 = lazy(() => import("./Pages/2026/WinnerDetails2026/FenaAccount2AccountWinnerDetails2026"));
-const NeemaPaymentInnovatorWinnerDetails2026 = lazy(() => import("./Pages/2026/WinnerDetails2026/NeemaPaymentInnovatorWinnerDetails2026"));
-const InvictusPayOutInnovatorWinnerDetails2026 = lazy(() => import("./Pages/2026/WinnerDetails2026/InvictusPayOutInnovatorWinnerDetails2026"));
+const FenaAccount2AccountWinnerDetails2026 = lazy(() => import("./Pages/2026/WinnerDetails2026/Fintech-winner-details-2026/FenaAccount2AccountWinnerDetails2026"));
+const NeemaPaymentInnovatorWinnerDetails2026 = lazy(() => import("./Pages/2026/WinnerDetails2026/Fintech-winner-details-2026/NeemaPaymentInnovatorWinnerDetails2026"));
+const InvictusPayOutInnovatorWinnerDetails2026 = lazy(() => import("./Pages/2026/WinnerDetails2026/Fintech-winner-details-2026/InvictusPayOutInnovatorWinnerDetails2026"));
+const ForenBaasInnovatorWinnerDetails2026 = lazy(() => import("./Pages/2026/WinnerDetails2026/Fintech-winner-details-2026/ForenBaasInnovatorWinnerDetails2026"));
+const DectaPaymentAcquirerWinnerDetails2026 = lazy(() => import("./Pages/2026/WinnerDetails2026/Fintech-winner-details-2026/DectaPaymentAcquirerWinnerDetails2026"));
+const TribeStartupOfTheYearWinnerDetails2026 = lazy(() => import("./Pages/2026/WinnerDetails2026/Fintech-winner-details-2026/TribeStartupOfTheYearWinnerDetails2026"));
+const AlonaShevtsovaWomanEntrepreneurWinnerDetails2026 = lazy(() => import("./Pages/2026/WinnerDetails2026/Fintech-winner-details-2026/AlonaShevtsovaWomanEntrepreneurWinnerDetails2026"));
+const GbgAntiFraudInnovatorWinnerDetails2026 = lazy(() => import("./Pages/2026/WinnerDetails2026/Fintech-winner-details-2026/GbgAntiFraudInnovatorWinnerDetails2026"));
+const ShuftiIdVerificationInnovatorWinnerDetails2026 = lazy(() => import("./Pages/2026/WinnerDetails2026/Fintech-winner-details-2026/ShuftiIdVerificationInnovatorWinnerDetails2026"));
+const EmerchantpayFintechOfTheYearWinnerDetails2026 = lazy(() => import("./Pages/2026/WinnerDetails2026/Fintech-winner-details-2026/EmerchantpayFintechOfTheYearWinnerDetails2026"));
+const DaljitYoungVisionaryWomanInAiWinnerDetails2026 = lazy(() => import("./Pages/2026/WinnerDetails2026/Fintech-winner-details-2026/DaljitYoungVisionaryWomanInAiWinnerDetails2026"));
+const TrustUkPaymentGatewayWinnerDetails2026 = lazy(() => import("./Pages/2026/WinnerDetails2026/Fintech-winner-details-2026/TrustUkPaymentGatewayWinnerDetails2026"));
+const DisbuzCrossBorderPayoutDisruptorWinnerDetails2026 = lazy(() => import("./Pages/2026/WinnerDetails2026/Fintech-winner-details-2026/DisbuzCrossBorderPayoutDisruptorWinnerDetails2026"));
+const TundeAyoFabiyiFintechCtoWinnerDetails2026 = lazy(() => import("./Pages/2026/WinnerDetails2026/Fintech-winner-details-2026/TundeAyoFabiyiFintechCtoWinnerDetails2026"));
+const KmbalComplianceInnovatorMsbWinnerDetails2026 = lazy(() => import("./Pages/2026/WinnerDetails2026/MSB-winner-details-2026/KmbalComplianceInnovatorMsbWinnerDetails2026"));
+const MyRemitBestCustomerServiceMsbWinnerDetails2026 = lazy(() => import("./Pages/2026/WinnerDetails2026/MSB-winner-details-2026/MyRemitBestCustomerServiceMsbWinnerDetails2026"));
+const RedSeaRemittanceInnovatorMsbWinnerDetails2026 = lazy(() => import("./Pages/2026/WinnerDetails2026/MSB-winner-details-2026/RedSeaRemittanceInnovatorMsbWinnerDetails2026"));
+const EcexProgressiveMoneyExchangerWinnerDetails2026 = lazy(() => import("./Pages/2026/WinnerDetails2026/MSB-winner-details-2026/EcexProgressiveMoneyExchangerWinnerDetails2026"));
+const TassaPayMsbDisruptorWinnerDetails2026 = lazy(() => import("./Pages/2026/WinnerDetails2026/MSB-winner-details-2026/TassaPayMsbDisruptorWinnerDetails2026"));
+const MercuryDanatiMsbStoreOfTheYearWinnerDetails2026 = lazy(() => import("./Pages/2026/WinnerDetails2026/MSB-winner-details-2026/MercuryDanatiMsbStoreOfTheYearWinnerDetails2026"));
+const TigrisPayMsbAppOfTheYearWinnerDetails2026 = lazy(() => import("./Pages/2026/WinnerDetails2026/MSB-winner-details-2026/TigrisPayMsbAppOfTheYearWinnerDetails2026"));
+const TeeparamMsbOfTheYearWinnerDetails2026 = lazy(() => import("./Pages/2026/WinnerDetails2026/MSB-winner-details-2026/TeeparamMsbOfTheYearWinnerDetails2026"));
+const LeftoverCurrencyMsbLeaderWinnerDetails2026 = lazy(() => import("./Pages/2026/WinnerDetails2026/MSB-winner-details-2026/LeftoverCurrencyMsbLeaderWinnerDetails2026"));
+const QfRemitMsbRisingStarWinnerDetails2026 = lazy(() => import("./Pages/2026/WinnerDetails2026/MSB-winner-details-2026/QfRemitMsbRisingStarWinnerDetails2026"));
+const StarrzMoneyMsbCommunityChampionWinnerDetails2026 = lazy(() => import("./Pages/2026/WinnerDetails2026/MSB-winner-details-2026/StarrzMoneyMsbCommunityChampionWinnerDetails2026"));
+const LaCedriMsbOfTheYearGlobalWinnerDetails2026 = lazy(() => import("./Pages/2026/WinnerDetails2026/Global-winner-details-2026/LaCedriMsbOfTheYearGlobalWinnerDetails2026"));
 const EventSchedulePage2026 = lazy(() => import("./Pages/2026/Schedule2026/EventSchedulePage2026"));
 const WhoAttendsBfaPage = lazy(() => import("./Pages/WhoAttendsBfaPage"));
 // const OchebhoyaEkpeteKeynoteDetails2026 = lazy(() => import("./Pages/2026/KeynoteSpeaker2026/OchebhoyaEkpeteKeynoteDetails2026"));
@@ -648,6 +671,98 @@ function App() {
         <Route
           path="/award-winners-2026/invictus-pay-out-innovator-2026"
           element={<InvictusPayOutInnovatorWinnerDetails2026 />}
+        />
+        <Route
+          path="/award-winners-2026/foren-baas-innovator-2026"
+          element={<ForenBaasInnovatorWinnerDetails2026 />}
+        />
+        <Route
+          path="/award-winners-2026/decta-payment-acquirer-2026"
+          element={<DectaPaymentAcquirerWinnerDetails2026 />}
+        />
+        <Route
+          path="/award-winners-2026/3ribe-startup-of-the-year-2026"
+          element={<TribeStartupOfTheYearWinnerDetails2026 />}
+        />
+        <Route
+          path="/award-winners-2026/alona-shevtsova-woman-entrepreneur-in-fintech-2026"
+          element={<AlonaShevtsovaWomanEntrepreneurWinnerDetails2026 />}
+        />
+        <Route
+          path="/award-winners-2026/gbg-anti-fraud-innovator-2026"
+          element={<GbgAntiFraudInnovatorWinnerDetails2026 />}
+        />
+        <Route
+          path="/award-winners-2026/shufti-pro-id-verification-innovator-2026"
+          element={<ShuftiIdVerificationInnovatorWinnerDetails2026 />}
+        />
+        <Route
+          path="/award-winners-2026/emerchantpay-fintech-of-the-year-2026"
+          element={<EmerchantpayFintechOfTheYearWinnerDetails2026 />}
+        />
+        <Route
+          path="/award-winners-2026/daljit-young-visionary-woman-in-ai-2026"
+          element={<DaljitYoungVisionaryWomanInAiWinnerDetails2026 />}
+        />
+        <Route
+          path="/award-winners-2026/trustuk-payments-payment-gateway-2026"
+          element={<TrustUkPaymentGatewayWinnerDetails2026 />}
+        />
+        <Route
+          path="/award-winners-2026/disbuz-cross-border-payout-disruptor-2026"
+          element={<DisbuzCrossBorderPayoutDisruptorWinnerDetails2026 />}
+        />
+        <Route
+          path="/award-winners-2026/tunde-ayo-fabiyi-fintech-cto-2026"
+          element={<TundeAyoFabiyiFintechCtoWinnerDetails2026 />}
+        />
+        <Route
+          path="/award-winners-2026/kmbal-compliance-innovator-msb-2026"
+          element={<KmbalComplianceInnovatorMsbWinnerDetails2026 />}
+        />
+        <Route
+          path="/award-winners-2026/myremit-best-in-customer-service-msb-2026"
+          element={<MyRemitBestCustomerServiceMsbWinnerDetails2026 />}
+        />
+        <Route
+          path="/award-winners-2026/red-sea-money-transfer-remittance-innovator-msb-2026"
+          element={<RedSeaRemittanceInnovatorMsbWinnerDetails2026 />}
+        />
+        <Route
+          path="/award-winners-2026/ecex-progressive-money-exchanger-2026"
+          element={<EcexProgressiveMoneyExchangerWinnerDetails2026 />}
+        />
+        <Route
+          path="/award-winners-2026/tassa-pay-msb-disruptor-2026"
+          element={<TassaPayMsbDisruptorWinnerDetails2026 />}
+        />
+        <Route
+          path="/award-winners-2026/mercury-danati-msb-store-of-the-year-2026"
+          element={<MercuryDanatiMsbStoreOfTheYearWinnerDetails2026 />}
+        />
+        <Route
+          path="/award-winners-2026/tigris-pay-msb-app-of-the-year-2026"
+          element={<TigrisPayMsbAppOfTheYearWinnerDetails2026 />}
+        />
+        <Route
+          path="/award-winners-2026/teeparam-exchange-msb-of-the-year-2026"
+          element={<TeeparamMsbOfTheYearWinnerDetails2026 />}
+        />
+        <Route
+          path="/award-winners-2026/leftover-currency-msb-leader-2026"
+          element={<LeftoverCurrencyMsbLeaderWinnerDetails2026 />}
+        />
+        <Route
+          path="/award-winners-2026/qf-remit-msb-rising-star-2026"
+          element={<QfRemitMsbRisingStarWinnerDetails2026 />}
+        />
+        <Route
+          path="/award-winners-2026/starrz-money-msb-community-champion-2026"
+          element={<StarrzMoneyMsbCommunityChampionWinnerDetails2026 />}
+        />
+        <Route
+          path="/award-winners-2026/la-cedri-msb-of-the-year-global-2026"
+          element={<LaCedriMsbOfTheYearGlobalWinnerDetails2026 />}
         />
           {/* 2026 Winners Page End */}
 

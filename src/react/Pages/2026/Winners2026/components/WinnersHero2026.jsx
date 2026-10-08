@@ -32,7 +32,7 @@ const WinnersHero2026 = ({ reduceMotion }) => {
   return (
     <section
       ref={rootRef}
-      className="relative overflow-hidden bg-[#0d0507] text-white mt-[80px] py-8 md:py-10 px-5 md:px-8"
+      className="relative overflow-hidden bg-[#0d0507] text-white mt-[80px] py-5 md:py-6 px-5 md:px-8"
     >
       <div className="wh-orb pointer-events-none absolute -top-24 right-[5%] w-[420px] h-[260px] rounded-full bg-[#c8102e] opacity-30 blur-[110px]" />
       <div className="pointer-events-none absolute -bottom-24 left-[5%] w-[360px] h-[220px] rounded-full bg-[#680014] opacity-40 blur-[100px]" />
@@ -55,7 +55,7 @@ const WinnersHero2026 = ({ reduceMotion }) => {
             </span>
           ))}
         </h1>
-        <div className="wh-rule mx-auto mt-4 h-px w-40 md:w-64 bg-gradient-to-r from-transparent via-[#c8102e] to-transparent" />
+        <div className="wh-rule mx-auto mt-3 h-px w-40 md:w-64 bg-gradient-to-r from-transparent via-[#c8102e] to-transparent" />
       </div>
     </section>
   );

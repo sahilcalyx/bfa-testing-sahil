@@ -39,13 +39,31 @@ const WinnerCard2026 = ({ award, index, reduceMotion }) => {
 
       <div className="relative aspect-[3/2] overflow-hidden">
         {showImage ? (
-          <img
-            src={award.img}
-            alt={`${winnerLabel || award.title} – Brit FinTech Awards 2026`}
-            loading="lazy"
-            onError={() => setImgFailed(true)}
-            className="w-full h-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.05]"
-          />
+          <>
+            <img
+              src={award.img}
+              alt={`${winnerLabel || award.title} – Brit FinTech Awards 2026`}
+              loading="lazy"
+              onError={() => setImgFailed(true)}
+              className="w-full h-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.05]"
+            />
+            {!reduceMotion && (
+              <motion.div
+                aria-hidden="true"
+                className="pointer-events-none absolute -inset-y-4 left-0 w-2/5 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                style={{ skewX: -25 }}
+                initial={{ x: "-160%" }}
+                animate={{ x: "360%" }}
+                transition={{
+                  duration: 2.2,
+                  ease: [0.45, 0, 0.55, 1],
+                  repeat: Infinity,
+                  repeatDelay: 2.4,
+                  delay: (index % 6) * 0.35,
+                }}
+              />
+            )}
+          </>
         ) : (
           <WinnerImagePlaceholder2026 index={index} logo={award.logo} reduceMotion={reduceMotion} />
         )}
