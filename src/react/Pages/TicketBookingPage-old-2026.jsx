@@ -219,9 +219,6 @@ const countryCodeOptions = countryCodes.map((c) => ({
   label: c.label,
 }));
 
-// Set to false to reopen ticket sales.
-const SALES_CLOSED = true;
-
 function TicketBookingPage() {
   const [captchaToken, setCaptchaToken] = useState("");
   const [form, setForm] = useState({
@@ -698,7 +695,6 @@ function TicketBookingPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (SALES_CLOSED) return;
     setIsSubmitting(true);
 
     // Clear previous errors
@@ -917,62 +913,6 @@ function TicketBookingPage() {
           <div className="cs-hero_img_circle" id="ticket-booking" />
         </div>
       </div>
-      {SALES_CLOSED && (
-        <div className="ticket-closed-banner" role="status">
-          <span className="ticket-closed-badge">Full House</span>
-          <p className="ticket-closed-text">
-            We are housefull. All tickets for BFA26 are sold out and bookings are now closed.
-          </p>
-          <style>{`
-            .ticket-closed-banner {
-              max-width: 760px;
-              margin: 2.5rem auto 0;
-              padding: 1.5rem 1.75rem;
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-              gap: 0.75rem;
-              text-align: center;
-              background: #101826;
-              border-radius: 16px;
-              box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
-            }
-            .ticket-closed-badge {
-              padding: 5px 14px;
-              border-radius: 999px;
-              background: #c8102e;
-              color: #fff;
-              font-size: 0.75rem;
-              font-weight: 700;
-              letter-spacing: 0.12em;
-              text-transform: uppercase;
-            }
-            .ticket-closed-text {
-              margin: 0;
-              color: #fff;
-              font-size: 1.1rem;
-              font-weight: 600;
-              line-height: 1.6;
-            }
-            .ticket-frozen {
-              border: 0;
-              margin: 0;
-              padding: 0;
-              min-width: 0;
-              filter: grayscale(1);
-              opacity: 0.45;
-              pointer-events: none;
-              user-select: none;
-            }
-          `}</style>
-        </div>
-      )}
-      <fieldset
-        disabled={SALES_CLOSED}
-        aria-disabled={SALES_CLOSED}
-        className={SALES_CLOSED ? "ticket-frozen" : undefined}
-        style={SALES_CLOSED ? undefined : { border: 0, margin: 0, padding: 0, minWidth: 0 }}
-      >
       <div
         style={{
           display: "flex",
@@ -1868,7 +1808,6 @@ function TicketBookingPage() {
           </div>
         </div>
       </div>
-      </fieldset>
 
       <EventSchedule2026 />
       <Toaster position="bottom-center" reverseOrder={false} />

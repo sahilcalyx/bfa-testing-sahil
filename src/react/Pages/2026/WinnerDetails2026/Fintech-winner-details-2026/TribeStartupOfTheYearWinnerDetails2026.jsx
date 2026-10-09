@@ -69,7 +69,7 @@ const OVERVIEW = [
   "Designed for customers and businesses operating across borders, 3ribe combines technology, payment connectivity and financial tools to make international transactions more accessible, transparent and easier to manage.",
 ];
 const FEATURES_HEADING = "Key Features of 3ribe";
-const WHY_HEADING = "Why 3ribe Deserves Recognition?";
+const WHY_HEADING = "Why 3ribe deserves recognition?";
 const WHY = [
   "3ribe demonstrates how technology can simplify the increasingly complex world of cross-border financial services by bringing multiple capabilities together within a single digital ecosystem.",
   "From international money transfers and bill payments for individuals to collections, payouts, multi-currency accounts and compliance tools for businesses, 3ribe addresses a broad range of financial needs through a unified platform.",
@@ -224,7 +224,7 @@ const TribeStartupOfTheYearWinnerDetails2026 = () => {
 
           <motion.div
             style={{ y: contentY }}
-            className="relative z-10 mx-auto grid max-w-6xl items-end gap-6 px-5 pt-6 md:px-8 md:pt-8 lg:grid-cols-12 lg:gap-8"
+            className="relative z-10 mx-auto grid max-w-6xl items-center gap-6 px-5 pt-6 md:px-8 md:pt-8 lg:grid-cols-12 lg:gap-8"
           >
             <div className="pb-8 md:pb-10 lg:col-span-7">
               <motion.div
@@ -257,35 +257,6 @@ const TribeStartupOfTheYearWinnerDetails2026 = () => {
                   </span>
                 ))}
               </motion.h1>
-
-              <motion.div
-                initial={reduceMotion ? false : { opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, ease: EASE, delay: 0.24 }}
-                className="mt-8"
-              >
-                <p className="m-0 text-[11px] font-bold uppercase tracking-[0.26em] text-white/50">
-                  Winner
-                </p>
-                <p
-                  className="mb-0 mt-1 text-xl font-semibold uppercase tracking-[0.02em] text-white md:text-2xl"
-                  style={{ fontFamily: DISPLAY }}
-                >
-                  {winner}
-                </p>
-                {ROLE && (
-                  <p className="mb-0 mt-1 text-sm font-medium text-white/70 md:text-base">
-                    {ROLE}
-                  </p>
-                )}
-                <div className="mt-4">
-                  {renderLogo(
-                    "block h-12 max-w-[220px] object-left",
-                    COMPANY,
-                    "text-3xl"
-                  )}
-                </div>
-              </motion.div>
             </div>
 
             <motion.div
@@ -294,26 +265,12 @@ const TribeStartupOfTheYearWinnerDetails2026 = () => {
               transition={{ duration: 0.8, ease: EASE, delay: 0.2 }}
               className="flex items-center justify-center pb-10 lg:col-span-5 lg:justify-end lg:pb-14"
             >
-              <div className="relative flex h-[260px] w-full max-w-[400px] items-center justify-center sm:h-[300px] lg:h-[340px]">
-                <motion.div
-                  aria-hidden="true"
-                  className="absolute h-56 w-56 rounded-full bg-[#c8102e]/60 blur-3xl"
-                  animate={
-                    reduceMotion ? undefined : { scale: [1, 1.12, 1], opacity: [0.5, 0.85, 0.5] }
-                  }
-                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                />
-                <motion.div
-                  className="relative flex w-full items-center justify-center rounded-[28px] border border-white/15 bg-white/[0.06] px-10 py-14 backdrop-blur-sm"
-                  animate={reduceMotion ? undefined : { y: [0, -8, 0] }}
-                  transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
-                >
-                  {renderLogo(
-                    "max-h-[140px] max-w-[85%] drop-shadow-[0_6px_24px_rgba(200,16,46,0.55)]",
-                    `${winner}, winner of ${AWARD}`,
-                    "text-center text-5xl drop-shadow-[0_6px_24px_rgba(200,16,46,0.55)] sm:text-6xl"
-                  )}
-                </motion.div>
+              <div className="flex w-full max-w-[400px] items-center justify-center lg:justify-end">
+                {renderLogo(
+                  "max-h-[140px] max-w-full drop-shadow-[0_6px_24px_rgba(200,16,46,0.55)]",
+                  `${winner}, winner of ${AWARD}`,
+                  "text-center text-5xl drop-shadow-[0_6px_24px_rgba(200,16,46,0.55)] sm:text-6xl"
+                )}
               </div>
             </motion.div>
           </motion.div>

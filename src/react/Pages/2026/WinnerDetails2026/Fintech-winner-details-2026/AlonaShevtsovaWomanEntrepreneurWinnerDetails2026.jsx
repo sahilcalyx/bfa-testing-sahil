@@ -61,7 +61,7 @@ const TITLE_LINES = ["Woman Entrepreneur", "in FinTech", "2026"];
 const META_DESCRIPTION = "Alona Shevtsova of Sends, winner of Woman Entrepreneur in FinTech 2026 at the Brit FinTech Awards.";
 const OVERVIEW = "Alona Shevtsova is the Founder and CEO of Sends, a UK-based fintech company providing payment solutions for individuals and businesses. With over 15 years of experience across fintech, payments, and financial services, Alona has led Sends' strategic growth while navigating international finance, payment systems, and regulatory frameworks.";
 const FEATURES_HEADING = "Key Contributions of Alona Shevtsova";
-const WHY_HEADING = "Why Alona Shevtsova Deserves Recognition?";
+const WHY_HEADING = "Why Alona Shevtsova deserves recognition?";
 const WHY = [
   "Alona Shevtsova demonstrates strong entrepreneurial leadership through her work as Founder and CEO of Sends and her continued contribution to the global fintech community.",
   "Her 15+ years of industry experience, leadership of Sends, international engagement, and recognition within the fintech and payments sector reflect her contribution to the development and growth of financial technology.",
@@ -212,7 +212,7 @@ const AlonaShevtsovaWomanEntrepreneurWinnerDetails2026 = () => {
 
           <motion.div
             style={{ y: contentY }}
-            className="relative z-10 mx-auto grid max-w-6xl items-end gap-6 px-5 pt-6 md:px-8 md:pt-8 lg:grid-cols-12 lg:gap-8"
+            className="relative z-10 mx-auto grid max-w-6xl items-center gap-6 px-5 pt-6 md:px-8 md:pt-8 lg:grid-cols-12 lg:gap-8"
           >
             <div className="pb-8 md:pb-10 lg:col-span-7">
               <motion.div
@@ -245,35 +245,6 @@ const AlonaShevtsovaWomanEntrepreneurWinnerDetails2026 = () => {
                   </span>
                 ))}
               </motion.h1>
-
-              <motion.div
-                initial={reduceMotion ? false : { opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, ease: EASE, delay: 0.24 }}
-                className="mt-8"
-              >
-                <p className="m-0 text-[11px] font-bold uppercase tracking-[0.26em] text-white/50">
-                  Winner
-                </p>
-                <p
-                  className="mb-0 mt-1 text-xl font-semibold uppercase tracking-[0.02em] text-white md:text-2xl"
-                  style={{ fontFamily: DISPLAY }}
-                >
-                  {winner}
-                </p>
-                {ROLE && (
-                  <p className="mb-0 mt-1 text-sm font-medium text-white/70 md:text-base">
-                    {ROLE}
-                  </p>
-                )}
-                <div className="mt-4">
-                  {renderLogo(
-                    "block h-12 max-w-[220px] object-left",
-                    COMPANY,
-                    "text-3xl"
-                  )}
-                </div>
-              </motion.div>
             </div>
 
             <motion.div
@@ -282,26 +253,12 @@ const AlonaShevtsovaWomanEntrepreneurWinnerDetails2026 = () => {
               transition={{ duration: 0.8, ease: EASE, delay: 0.2 }}
               className="flex items-center justify-center pb-10 lg:col-span-5 lg:justify-end lg:pb-14"
             >
-              <div className="relative flex h-[260px] w-full max-w-[400px] items-center justify-center sm:h-[300px] lg:h-[340px]">
-                <motion.div
-                  aria-hidden="true"
-                  className="absolute h-56 w-56 rounded-full bg-[#c8102e]/60 blur-3xl"
-                  animate={
-                    reduceMotion ? undefined : { scale: [1, 1.12, 1], opacity: [0.5, 0.85, 0.5] }
-                  }
-                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                />
-                <motion.div
-                  className="relative flex w-full items-center justify-center rounded-[28px] border border-white/15 bg-white/[0.06] px-10 py-14 backdrop-blur-sm"
-                  animate={reduceMotion ? undefined : { y: [0, -8, 0] }}
-                  transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
-                >
-                  {renderLogo(
-                    "max-h-[140px] max-w-[85%] drop-shadow-[0_6px_24px_rgba(200,16,46,0.55)]",
-                    `${winner}, winner of ${AWARD}`,
-                    "text-center text-5xl drop-shadow-[0_6px_24px_rgba(200,16,46,0.55)] sm:text-6xl"
-                  )}
-                </motion.div>
+              <div className="flex w-full max-w-[400px] items-center justify-center lg:justify-end">
+                {renderLogo(
+                  "max-h-[140px] max-w-full drop-shadow-[0_6px_24px_rgba(200,16,46,0.55)]",
+                  `${winner}, winner of ${AWARD}`,
+                  "text-center text-5xl drop-shadow-[0_6px_24px_rgba(200,16,46,0.55)] sm:text-6xl"
+                )}
               </div>
             </motion.div>
           </motion.div>

@@ -7,7 +7,7 @@ import { getUkCountdownToEvent } from "./SliderMiniComponents/ukEventTime";
 
 /**
  * Homepage hero (2026):
- * countdown strip + combined venue/date/time strip → centred Book Your Ticket CTA → full-width Who Attends BFA.
+ * countdown strip + combined venue/date/time strip → centred Full House CTA → full-width Who Attends BFA.
  * Target: Fri 9 Oct 2026, 18:00 Europe/London (real UK time).
  */
 
@@ -345,6 +345,7 @@ function AttendeeLogoCard({ item, index, reduceMotion }) {
 const HeroSection2026 = () => {
   const reduce = useReducedMotion();
   const [timeLeft, setTimeLeft] = useState(null);
+  const [eventStarted, setEventStarted] = useState(false);
   const [ctaIndex, setCtaIndex] = useState(0);
   const [logoPage, setLogoPage] = useState(0);
 
@@ -352,6 +353,7 @@ const HeroSection2026 = () => {
     const tick = () => {
       const next = getUkCountdownToEvent();
       setTimeLeft(next);
+      setEventStarted(!next);
       return next;
     };
     if (!tick()) return undefined;
@@ -858,6 +860,32 @@ const HeroSection2026 = () => {
           </div>
         )}
 
+        {eventStarted && (
+          <div style={{ position: "relative", overflow: "hidden" }}>
+            <ThemeAnimatedBg reduce={reduce} />
+            <motion.h2
+              initial={reduce ? false : { opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              style={{
+                position: "relative",
+                zIndex: 1,
+                margin: 0,
+                padding: "22px 24px",
+                textAlign: "center",
+                fontSize: "clamp(1.3rem, 3.4vw, 2.2rem)",
+                fontWeight: 900,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                color: THEME.white,
+                lineHeight: 1.2,
+              }}
+            >
+              Brit FinTech Awards 2026
+            </motion.h2>
+          </div>
+        )}
+
         {/* Venue · date · time — single strip attached under the countdown */}
         <div className="hs26-info-wrap" style={{ background: "#0c0c0e" }}>
           <motion.div
@@ -910,7 +938,7 @@ const HeroSection2026 = () => {
               transition={{ duration: 0.55, delay: 0.2 }}
               className="hs26-book"
             >
-              <p className="hs26-eyebrow">Final days to secure your seat at BFA26</p>
+              <p className="hs26-eyebrow">BFA26 IS READY WELCOME THE INDUSTRY!</p>
               <NavLink to="/ticket-booking" className="hs26-cta">
                 <span className="hs26-cta-inner">
                   <AnimatePresence mode="wait">
@@ -924,7 +952,7 @@ const HeroSection2026 = () => {
                         transition={{ duration: 0.42, ease: [0.16, 1, 0.3, 1] }}
                       >
                         <Ticket strokeWidth={2.4} />
-                        Book Your Ticket
+                        House Full
                       </motion.span>
                     ) : (
                       <motion.span
@@ -936,7 +964,7 @@ const HeroSection2026 = () => {
                         transition={{ duration: 0.42, ease: [0.16, 1, 0.3, 1] }}
                       >
                         <span className="hs26-cta-live" aria-hidden="true" />
-                        Limited seats left
+                        Tickets Sold Out
                       </motion.span>
                     )}
                   </AnimatePresence>

@@ -580,9 +580,12 @@ box-shadow: none;
                           className="d-none-sm mb-3 mt-4 "
                           onClick={handleNavLinkClick}
                         >
-                          <NavLink to="/sponsorship-categories#sponsorship-categories" className="btn-pro-1">
-                            <span>Sponsor Now</span>
+                          <NavLink to="/event-schedule-2026" className="btn-pro-1">
+                            <span>Event Schedule</span>
                           </NavLink>
+                          {/* <NavLink to="/sponsorship-categories#sponsorship-categories" className="btn-pro-1">
+                            <span>Sponsor Now</span>
+                          </NavLink> */}
                         </span>
                         {/* Ticket Booking to Winnner  */}
                         <span
@@ -590,11 +593,17 @@ box-shadow: none;
                           onClick={handleNavLinkClick}
                         >
                           <NavLink
+                            to="/ticket-booking"
+                            className={`btn-pro-2 text-center`}
+                          >
+                            <span style={{ color: "#fff" }}>House Full</span>
+                          </NavLink>
+                          {/* <NavLink
                             to="/sponsorship-categories#next_section"
                             className={`btn-pro-2 text-center`}
                           >
                             <span style={{ color: "#fff" }}> Book Tickets Now</span>
-                          </NavLink>
+                          </NavLink> */}
                         </span>
                       </div>
 
@@ -623,9 +632,12 @@ box-shadow: none;
                     <span>Download Brochure</span>
                   </a> */}
 
-                  <NavLink to="/sponsorship-categories#sponsorship-categories" className="btn-pro-1">
-                    <span>Sponsor Now</span>
+                  <NavLink to="/event-schedule-2026" className="btn-pro-1">
+                    <span>Event Schedule</span>
                   </NavLink>
+                  {/* <NavLink to="/sponsorship-categories#sponsorship-categories" className="btn-pro-1">
+                    <span>Sponsor Now</span>
+                  </NavLink> */}
 
                   {/* <GalleryButton /> */}
 
@@ -637,7 +649,7 @@ box-shadow: none;
                     to="/ticket-booking"
                     className={`btn-pro-2`}
                   >
-                    <span style={{ color: "#fff" }}> Book Tickets Now</span>
+                    <span style={{ color: "#fff" }}> House Full</span>
                   </NavLink>
                 </div>
               </div>

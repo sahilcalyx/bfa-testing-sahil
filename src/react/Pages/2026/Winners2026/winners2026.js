@@ -75,18 +75,12 @@ export const winnerSections2026 = [
         img: "/assets/img/winner-logos-26/winner-card-images/GBG-card.png",
         link: "/award-winners-2026/gbg-anti-fraud-innovator-2026",
       }),
-      award({
-        title: "ID Verification Innovator 2026",
-        company: "Shufti Pro Limited",
-        img: "/assets/img/winner-logos-26/winner-card-images/shufti-card.png",
-        link: "/award-winners-2026/shufti-pro-id-verification-innovator-2026",
-      }),
-      award({
-        title: "FinTech of the Year 2026",
-        company: "Emerchantpay Limited",
-        img: "/assets/img/winner-logos-26/winner-card-images/Emerchantpay-card.png",
-        link: "/award-winners-2026/emerchantpay-fintech-of-the-year-2026",
-      }),
+      // award({
+      //   title: "ID Verification Innovator 2026",
+      //   company: "Shufti Pro Limited",
+      //   img: "/assets/img/winner-logos-26/winner-card-images/shufti-card.png",
+      //   link: "/award-winners-2026/shufti-pro-id-verification-innovator-2026",
+      // }),
       award({
         title: "Visionary Woman in AI 2026",
         person: "Ms Daljit Young",
@@ -96,25 +90,34 @@ export const winnerSections2026 = [
         link: "/award-winners-2026/daljit-young-visionary-woman-in-ai-2026",
       }),
       award({
-        title: "Payment Gateway 2026",
-        company: "TrustUK Payments Ltd",
-        logo: "/assets/img/attendee-logos/trustpayments.com logo11.png",
-        img: "/assets/img/winner-logos-26/winner-card-images/Trust-card.png",
-        link: "/award-winners-2026/trustuk-payments-payment-gateway-2026",
-      }),
-      award({
         title: "Cross-Border Pay-Out Disruptor of the Year 2026",
         company: "Disbuz by Payceler",
         logo: "/assets/img/attendee-logos/disbuz.png",
         img: "/assets/img/winner-logos-26/winner-card-images/Disbuz-card.png",
         link: "/award-winners-2026/disbuz-cross-border-payout-disruptor-2026",
       }),
+      
+      
+      award({
+        title: "Payment Gateway 2026",
+        company: "TrustUK Payments Ltd",
+        logo: "/assets/img/attendee-logos/trustpayments.com logo11.png",
+        img: "/assets/img/winner-logos-26/winner-card-images/Trust-card.png",
+        link: "/award-winners-2026/trustuk-payments-payment-gateway-2026",
+      }),
+      
       award({
         title: "FinTech CTO 2026",
         person: "Tunde Ayo Fabiyi",
         logo: "/assets/img/attendee-logos/payceler.png",
         img: "/assets/img/winner-logos-26/winner-card-images/Tunde-card.png",
         link: "/award-winners-2026/tunde-ayo-fabiyi-fintech-cto-2026",
+      }),
+      award({
+        title: "FinTech of the Year 2026",
+        company: "Emerchantpay Limited",
+        img: "/assets/img/winner-logos-26/winner-card-images/Emerchantpay-card.png",
+        link: "/award-winners-2026/emerchantpay-fintech-of-the-year-2026",
       }),
     ],
   },
@@ -174,11 +177,10 @@ export const winnerSections2026 = [
         link: "/award-winners-2026/tigris-pay-msb-app-of-the-year-2026",
       }),
       award({
-        title: "MSB of the Year 2026",
-        company: "Teeparam Exchange Limited",
-        logo: "/assets/img/attendee-logos/Teeparam.png",
-        img: "/assets/img/winner-logos-26/winner-card-images/Teeparam-card.png",
-        link: "/award-winners-2026/teeparam-exchange-msb-of-the-year-2026",
+        title: "MSB Community Champion 2026",
+        company: "Starrz Money",
+        img: "/assets/img/winner-logos-26/winner-card-images/Satrzz-card.png",
+        link: "/award-winners-2026/starrz-money-msb-community-champion-2026",
       }),
       award({
         title: "MSB Leader 2026",
@@ -196,11 +198,15 @@ export const winnerSections2026 = [
         link: "/award-winners-2026/qf-remit-msb-rising-star-2026",
       }),
       award({
-        title: "MSB Community Champion 2026",
-        company: "Starrz Money",
-        img: "/assets/img/winner-logos-26/winner-card-images/Satrzz-card.png",
-        link: "/award-winners-2026/starrz-money-msb-community-champion-2026",
+        title: "MSB of the Year 2026",
+        company: "Teeparam Exchange Limited",
+        logo: "/assets/img/attendee-logos/Teeparam.png",
+        img: "/assets/img/winner-logos-26/winner-card-images/Teeparam-card.png",
+        link: "/award-winners-2026/teeparam-exchange-msb-of-the-year-2026",
       }),
+      
+     
+      
     ],
   },
   {

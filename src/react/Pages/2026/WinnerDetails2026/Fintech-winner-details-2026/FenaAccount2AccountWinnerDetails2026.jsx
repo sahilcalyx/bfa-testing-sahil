@@ -21,7 +21,6 @@ const EASE = [0.16, 1, 0.3, 1];
 const DISPLAY = "Oswald, sans-serif";
 
 const AWARD = "Account-to-Account Payment Processor 2026";
-const PORTRAIT = "/assets/img/winners2025-logs-banner/Volume-winner25-banner.png";
 const LOGO = "/assets/img/winner-logos-26/Winners-logo-white/Fena.png";
 
 const KEY_POINTS = [
@@ -173,9 +172,9 @@ const FenaAccount2AccountWinnerDetails2026 = () => {
 
           <motion.div
             style={{ y: contentY }}
-            className="relative z-10 mx-auto grid max-w-6xl items-end gap-6 px-5 pt-6 md:px-8 md:pt-8 lg:grid-cols-12 lg:gap-8"
+            className="relative z-10 mx-auto grid max-w-6xl items-center gap-6 px-5 py-10 md:px-8 md:py-14 lg:min-h-[400px] lg:grid-cols-12 lg:gap-8"
           >
-            <div className="pb-8 md:pb-10 lg:col-span-7">
+            <div className="lg:col-span-7">
               <motion.div
                 initial={reduceMotion ? false : { opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -206,40 +205,18 @@ const FenaAccount2AccountWinnerDetails2026 = () => {
                   2026
                 </span>
               </motion.h1>
-
-              <motion.div
-                initial={reduceMotion ? false : { opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, ease: EASE, delay: 0.24 }}
-                className="mt-8"
-              >
-                <p className="m-0 text-[11px] font-bold uppercase tracking-[0.26em] text-white/50">
-                  Winner
-                </p>
-                <p
-                  className="mb-0 mt-1 text-xl font-semibold uppercase tracking-[0.02em] text-white md:text-2xl"
-                  style={{ fontFamily: DISPLAY }}
-                >
-                  Fena
-                </p>
-                <img
-                  src={LOGO}
-                  alt="Fena"
-                  className="mt-4 block h-12 w-auto max-w-[220px] object-contain object-left"
-                />
-              </motion.div>
             </div>
 
             <motion.div
               initial={reduceMotion ? false : { opacity: 0, y: 28 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: EASE, delay: 0.2 }}
-              className="flex items-end justify-center lg:col-span-5 lg:justify-end"
+              className="flex items-center justify-center lg:col-span-5 lg:justify-end"
             >
               <img
-                src={PORTRAIT}
+                src={LOGO}
                 alt="Fena, winner of Account-to-Account Payment Processor 2026"
-                className="h-[340px] w-auto max-w-full object-contain object-bottom sm:h-[390px] lg:h-[440px]"
+                className="h-auto w-full max-w-[260px] object-contain drop-shadow-[0_6px_24px_rgba(200,16,46,0.45)] sm:max-w-[320px] lg:max-w-[380px]"
               />
             </motion.div>
           </motion.div>
@@ -304,7 +281,7 @@ const FenaAccount2AccountWinnerDetails2026 = () => {
             >
               <h2 className="m-0 flex items-center gap-2 text-2xl font-semibold text-[#c8102e]">
                 <Award size={22} aria-hidden="true" />
-                Why Fena Deserves Recognition?
+                Why Fena deserves recognition?
               </h2>
               <p className="mb-0 mt-3 text-base leading-relaxed text-zinc-700">
                 Fena demonstrates how Open Banking technology can modernise

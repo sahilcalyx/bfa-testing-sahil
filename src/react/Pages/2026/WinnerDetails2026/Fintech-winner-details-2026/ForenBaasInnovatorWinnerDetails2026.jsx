@@ -173,7 +173,7 @@ const ForenBaasInnovatorWinnerDetails2026 = () => {
 
           <motion.div
             style={{ y: contentY }}
-            className="relative z-10 mx-auto grid max-w-6xl items-end gap-6 px-5 pt-6 md:px-8 md:pt-8 lg:grid-cols-12 lg:gap-8"
+            className="relative z-10 mx-auto grid max-w-6xl items-center gap-6 px-5 pt-6 md:px-8 md:pt-8 lg:grid-cols-12 lg:gap-8"
           >
             <div className="pb-8 md:pb-10 lg:col-span-7">
               <motion.div
@@ -206,28 +206,6 @@ const ForenBaasInnovatorWinnerDetails2026 = () => {
                   2026
                 </span>
               </motion.h1>
-
-              <motion.div
-                initial={reduceMotion ? false : { opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, ease: EASE, delay: 0.24 }}
-                className="mt-8"
-              >
-                <p className="m-0 text-[11px] font-bold uppercase tracking-[0.26em] text-white/50">
-                  Winner
-                </p>
-                <p
-                  className="mb-0 mt-1 text-xl font-semibold uppercase tracking-[0.02em] text-white md:text-2xl"
-                  style={{ fontFamily: DISPLAY }}
-                >
-                  {COMPANY}
-                </p>
-                <img
-                  src={LOGO}
-                  alt={COMPANY}
-                  className="mt-4 block h-12 w-auto max-w-[220px] object-contain object-left"
-                />
-              </motion.div>
             </div>
 
             <motion.div
@@ -236,26 +214,12 @@ const ForenBaasInnovatorWinnerDetails2026 = () => {
               transition={{ duration: 0.8, ease: EASE, delay: 0.2 }}
               className="flex items-center justify-center pb-10 lg:col-span-5 lg:justify-end lg:pb-14"
             >
-              <div className="relative flex h-[260px] w-full max-w-[400px] items-center justify-center sm:h-[300px] lg:h-[340px]">
-                <motion.div
-                  aria-hidden="true"
-                  className="absolute h-56 w-56 rounded-full bg-[#c8102e]/60 blur-3xl"
-                  animate={
-                    reduceMotion ? undefined : { scale: [1, 1.12, 1], opacity: [0.5, 0.85, 0.5] }
-                  }
-                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              <div className="flex w-full max-w-[400px] items-center justify-center lg:justify-end">
+                <img
+                  src={LOGO}
+                  alt={`${COMPANY}, winner of ${AWARD}`}
+                  className="max-h-[140px] w-auto max-w-full object-contain drop-shadow-[0_6px_24px_rgba(200,16,46,0.55)]"
                 />
-                <motion.div
-                  className="relative flex w-full items-center justify-center rounded-[28px] border border-white/15 bg-white/[0.06] px-10 py-14 backdrop-blur-sm"
-                  animate={reduceMotion ? undefined : { y: [0, -8, 0] }}
-                  transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
-                >
-                  <img
-                    src={LOGO}
-                    alt={`${COMPANY}, winner of ${AWARD}`}
-                    className="max-h-[140px] w-auto max-w-[85%] object-contain drop-shadow-[0_6px_24px_rgba(200,16,46,0.55)]"
-                  />
-                </motion.div>
               </div>
             </motion.div>
           </motion.div>
@@ -328,7 +292,7 @@ const ForenBaasInnovatorWinnerDetails2026 = () => {
             >
               <h2 className="m-0 flex items-center gap-2 text-2xl font-semibold text-[#c8102e]">
                 <Award size={22} aria-hidden="true" />
-                Why FOREN Deserves Recognition?
+                Why FOREN deserves recognition?
               </h2>
               <p className="mb-0 mt-3 text-base leading-relaxed text-zinc-700">
                 Foren demonstrates how Banking-as-a-Service-style infrastructure can
