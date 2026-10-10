@@ -74,6 +74,19 @@ const CONGRATULATIONS = "Congratulations to Disbuz by Payceler — Cross-Border 
 
 const toParagraphs = (value) => (Array.isArray(value) ? value : [value]);
 
+const HIGHLIGHTS = [AWARD, AWARD.replace(/ 2026$/, ""), "Disbuz by Payceler", "Disbuz", "Payceler"];
+const HIGHLIGHT_PATTERN = new RegExp(
+  `((?<![\\w])(?:${[...HIGHLIGHTS]
+    .sort((a, b) => b.length - a.length)
+    .map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
+    .join("|")})(?![\\w]))`
+);
+
+const emphasize = (text) =>
+  text.split(HIGHLIGHT_PATTERN).map((part, i) =>
+    i % 2 ? <strong key={i} className="font-bold">{part}</strong> : part
+  );
+
 const DisbuzCrossBorderPayoutDisruptorWinnerDetails2026 = () => {
   const heroRef = useRef(null);
   const reduceMotion = useReducedMotion();
@@ -279,7 +292,7 @@ const DisbuzCrossBorderPayoutDisruptorWinnerDetails2026 = () => {
             </h2>
             {toParagraphs(OVERVIEW).map((text) => (
               <p key={text} className="mb-0 mt-3 text-base leading-relaxed text-zinc-700">
-                {text}
+                {emphasize(text)}
               </p>
             ))}
           </motion.section>
@@ -306,7 +319,7 @@ const DisbuzCrossBorderPayoutDisruptorWinnerDetails2026 = () => {
                   </p>
                   {toParagraphs(point.body).map((text) => (
                     <p key={text} className="mb-0 mt-1.5 text-base leading-relaxed text-white/90">
-                      {text}
+                      {emphasize(text)}
                     </p>
                   ))}
                 </li>
@@ -336,7 +349,7 @@ const DisbuzCrossBorderPayoutDisruptorWinnerDetails2026 = () => {
               </h2>
               {toParagraphs(WHY).map((text) => (
                 <p key={text} className="mb-0 mt-3 text-base leading-relaxed text-zinc-700">
-                  {text}
+                  {emphasize(text)}
                 </p>
               ))}
             </motion.section>
@@ -353,11 +366,11 @@ const DisbuzCrossBorderPayoutDisruptorWinnerDetails2026 = () => {
               </h2>
               {toParagraphs(CONCLUSION).map((text) => (
                 <p key={text} className="mb-0 mt-3 text-base leading-relaxed text-zinc-700">
-                  {text}
+                  {emphasize(text)}
                 </p>
               ))}
               <p className="mb-0 mt-3 text-base font-semibold leading-relaxed text-zinc-900">
-                {CONGRATULATIONS}
+                {emphasize(CONGRATULATIONS)}
               </p>
             </motion.section>
           </div>

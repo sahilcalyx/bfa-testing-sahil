@@ -60,6 +60,11 @@ const KEY_POINTS = [
 
 const CIRCUIT = "/assets/svgs/download.svg";
 
+const Strong = ({ children }) => <strong className="font-bold">{children}</strong>;
+
+const emphasizeCompany = (text) =>
+  text.split(/(\bForen\b)/).map((part, i) => (part === "Foren" ? <Strong key={i}>{part}</Strong> : part));
+
 const ForenBaasInnovatorWinnerDetails2026 = () => {
   const heroRef = useRef(null);
   const reduceMotion = useReducedMotion();
@@ -77,7 +82,7 @@ const ForenBaasInnovatorWinnerDetails2026 = () => {
         <title>{COMPANY}: {AWARD} | Brit FinTech Awards</title>
         <meta
           name="description"
-          content="Foren, formerly Leatherback, winner of B-A-A-S Innovator 2026 at the Brit FinTech Awards."
+          content="Foren. formerly Leatherback, winner of B-A-A-S Innovator 2026 at the Brit FinTech Awards."
         />
       </Helmet>
       <link
@@ -237,7 +242,7 @@ const ForenBaasInnovatorWinnerDetails2026 = () => {
               Overview
             </h2>
             <p className="mb-0 mt-3 text-base leading-relaxed text-zinc-700">
-              Foren, formerly Leatherback, provides global payment infrastructure
+              <Strong>Foren</Strong>, formerly <Strong>Leatherback</Strong>, provides global payment infrastructure
               designed to help businesses manage cross-border payments, collections,
               payouts, and multi-currency financial operations. Its technology-led
               platform gives businesses access to global accounts, payment
@@ -267,7 +272,7 @@ const ForenBaasInnovatorWinnerDetails2026 = () => {
                     {point.title}
                   </p>
                   <p className="mb-0 mt-1.5 text-base leading-relaxed text-white/90">
-                    {point.body}
+                    {emphasizeCompany(point.body)}
                   </p>
                 </li>
               ))}
@@ -295,7 +300,7 @@ const ForenBaasInnovatorWinnerDetails2026 = () => {
                 Why FOREN deserves recognition?
               </h2>
               <p className="mb-0 mt-3 text-base leading-relaxed text-zinc-700">
-                Foren demonstrates how Banking-as-a-Service-style infrastructure can
+                <Strong>Foren</Strong> demonstrates how Banking-as-a-Service-style infrastructure can
                 simplify global financial operations by bringing accounts,
                 collections, payouts, currency management, and payment connectivity
                 together within a technology-led platform.
@@ -307,7 +312,7 @@ const ForenBaasInnovatorWinnerDetails2026 = () => {
                 single connection.
               </p>
               <p className="mb-0 mt-3 text-base leading-relaxed text-zinc-700">
-                The {AWARD} recognition celebrates Foren&apos;s contribution to
+                The <Strong>{AWARD}</Strong> recognition celebrates <Strong>Foren</Strong>&apos;s contribution to
                 developing flexible, scalable, and globally connected financial
                 infrastructure.
               </p>
@@ -324,14 +329,14 @@ const ForenBaasInnovatorWinnerDetails2026 = () => {
                 Conclusion
               </h2>
               <p className="mb-0 mt-3 text-base leading-relaxed text-zinc-700">
-                Foren, formerly Leatherback, combines multi-currency accounts,
+                <Strong>Foren</Strong>, formerly <Strong>Leatherback</Strong>, combines multi-currency accounts,
                 cross-border payments, API-based infrastructure, global collections,
                 and payouts to support the evolving needs of modern businesses. Its
                 technology-driven approach makes it a deserving recipient of the{" "}
-                {AWARD} award.
+                <Strong>{AWARD}</Strong> award.
               </p>
               <p className="mb-0 mt-3 text-base font-semibold leading-relaxed text-zinc-900">
-                Congratulations to {COMPANY} — {AWARD}.
+                Congratulations to <Strong>{COMPANY}</Strong> — <Strong>{AWARD}</Strong>.
               </p>
             </motion.section>
           </div>

@@ -75,12 +75,12 @@ export const winnerSections2026 = [
         img: "/assets/img/winner-logos-26/winner-card-images/GBG-card.png",
         link: "/award-winners-2026/gbg-anti-fraud-innovator-2026",
       }),
-      // award({
-      //   title: "ID Verification Innovator 2026",
-      //   company: "Shufti Pro Limited",
-      //   img: "/assets/img/winner-logos-26/winner-card-images/shufti-card.png",
-      //   link: "/award-winners-2026/shufti-pro-id-verification-innovator-2026",
-      // }),
+      award({
+        title: "ID Verification Innovator 2026",
+        company: "Shufti Pro Limited",
+        img: "/assets/img/winner-logos-26/winner-card-images/shufti-card.png",
+        link: "/award-winners-2026/shufti-pro-id-verification-innovator-2026",
+      }),
       award({
         title: "Visionary Woman in AI 2026",
         person: "Ms Daljit Young",

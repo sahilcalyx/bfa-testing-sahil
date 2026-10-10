@@ -58,6 +58,11 @@ const KEY_POINTS = [
 
 const CIRCUIT = "/assets/svgs/download.svg";
 
+const Strong = ({ children }) => <strong className="font-bold">{children}</strong>;
+
+const emphasizeCompany = (text) =>
+  text.split(/(\bFena\b)/).map((part, i) => (part === "Fena" ? <Strong key={i}>{part}</Strong> : part));
+
 const FenaAccount2AccountWinnerDetails2026 = () => {
   const heroRef = useRef(null);
   const reduceMotion = useReducedMotion();
@@ -234,12 +239,12 @@ const FenaAccount2AccountWinnerDetails2026 = () => {
               Overview
             </h2>
             <p className="mb-0 mt-3 text-base leading-relaxed text-zinc-700">
-              Fena is a UK-based Open Banking payments provider focused on enabling
+              <Strong>Fena</Strong> is a UK-based Open Banking payments provider focused on enabling
               fast, secure, and cost-efficient account-to-account payments. Its
               technology allows businesses to accept payments directly from
               customers’ bank accounts, with solutions designed for eCommerce,
               in-store payments, invoicing, payment links, recurring payments, bulk
-              payments, and other payment use cases. Fena is trusted by more than
+              payments, and other payment use cases. <Strong>Fena</Strong> is trusted by more than
               2,500 merchants in the UK.
             </p>
           </motion.section>
@@ -265,7 +270,7 @@ const FenaAccount2AccountWinnerDetails2026 = () => {
                     {point.title}
                   </p>
                   <p className="mb-0 mt-1.5 text-base leading-relaxed text-white/90">
-                    {point.body}
+                    {emphasizeCompany(point.body)}
                   </p>
                 </li>
               ))}
@@ -284,7 +289,7 @@ const FenaAccount2AccountWinnerDetails2026 = () => {
                 Why Fena deserves recognition?
               </h2>
               <p className="mb-0 mt-3 text-base leading-relaxed text-zinc-700">
-                Fena demonstrates how Open Banking technology can modernise
+                <Strong>Fena</Strong> demonstrates how Open Banking technology can modernise
                 account-to-account payments by combining direct bank payments,
                 flexible payment solutions, rapid settlement, and lower payment
                 costs.
@@ -293,15 +298,15 @@ const FenaAccount2AccountWinnerDetails2026 = () => {
                 Its ability to support Pay by Bank, payment links, invoice payments,
                 QR-code payments, in-store payments, Variable Recurring Payments, and
                 bulk payments provides businesses with multiple ways to collect and
-                move money. At the same time, Fena states that businesses can save up
+                move money. At the same time, <Strong>Fena</Strong> states that businesses can save up
                 to 85% compared with typical card processing fees while avoiding card
                 chargebacks.
               </p>
               <p className="mb-0 mt-3 text-base leading-relaxed text-zinc-700">
-                With more than 2,500 merchants in the UK using its platform, Fena is
+                With more than 2,500 merchants in the UK using its platform, <Strong>Fena</Strong> is
                 demonstrating growing demand for account-to-account payment
                 solutions. With its focus on making account-to-account payments
-                faster, more accessible, and more cost-effective, Fena is helping
+                faster, more accessible, and more cost-effective, <Strong>Fena</Strong> is helping
                 drive the continued adoption of Open Banking payments.
               </p>
             </motion.section>
@@ -317,16 +322,16 @@ const FenaAccount2AccountWinnerDetails2026 = () => {
                 Conclusion
               </h2>
               <p className="mb-0 mt-3 text-base leading-relaxed text-zinc-700">
-                Fena brings together Open Banking technology, flexible payment
+                <Strong>Fena</Strong> brings together Open Banking technology, flexible payment
                 solutions, rapid settlement, and cost-efficient account-to-account
                 payments to create a modern payment experience for businesses and
                 their customers. Its ability to reduce payment costs, avoid card
                 chargebacks, support multiple payment use cases, and serve more than
-                2,500 UK merchants makes Fena a deserving recipient of the {AWARD}{" "}
-                award.
+                2,500 UK merchants makes <Strong>Fena</Strong> a deserving recipient of the{" "}
+                <Strong>{AWARD}</Strong> award.
               </p>
               <p className="mb-0 mt-3 text-base font-semibold leading-relaxed text-zinc-900">
-                Congratulations to Fena — {AWARD}.
+                Congratulations to <Strong>Fena</Strong> — <Strong>{AWARD}</Strong>.
               </p>
             </motion.section>
           </div>

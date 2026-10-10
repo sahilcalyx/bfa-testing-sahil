@@ -47,6 +47,11 @@ const KEY_POINTS = [
 
 const CIRCUIT = "/assets/svgs/download.svg";
 
+const Strong = ({ children }) => <strong className="font-bold">{children}</strong>;
+
+const emphasizeCompany = (text) =>
+  text.split(/(\bInvictus\b)/).map((part, i) => (part === "Invictus" ? <Strong key={i}>{part}</Strong> : part));
+
 const InvictusPayOutInnovatorWinnerDetails2026 = () => {
   const heroRef = useRef(null);
   const reduceMotion = useReducedMotion();
@@ -224,9 +229,9 @@ const InvictusPayOutInnovatorWinnerDetails2026 = () => {
               Overview
             </h2>
             <p className="mb-0 mt-3 text-base leading-relaxed text-zinc-700">
-              Invictus Ventures provides payment infrastructure and technology
+              <Strong>Invictus Ventures</Strong> provides payment infrastructure and technology
               solutions that support international money movement and cross-border
-              payouts. Through its network of regulated financial partners, Invictus
+              payouts. Through its network of regulated financial partners, <Strong>Invictus</Strong>{" "}
               helps businesses access global payment capabilities and manage
               international transactions.
             </p>
@@ -253,7 +258,7 @@ const InvictusPayOutInnovatorWinnerDetails2026 = () => {
                     {point.title}
                   </p>
                   <p className="mb-0 mt-1.5 text-base leading-relaxed text-white/90">
-                    {point.body}
+                    {emphasizeCompany(point.body)}
                   </p>
                 </li>
               ))}
@@ -272,7 +277,7 @@ const InvictusPayOutInnovatorWinnerDetails2026 = () => {
                 Why Invictus deserves recognition?
               </h2>
               <p className="mb-0 mt-3 text-base leading-relaxed text-zinc-700">
-                Invictus stands out for its multi-currency processing and
+                <Strong>Invictus</Strong> stands out for its multi-currency processing and
                 international money transfer capabilities, helping businesses manage
                 cross-border payments across a wide range of markets and currencies.
                 Its support for 150+ currencies and settlement in 25+ currencies
@@ -294,11 +299,11 @@ const InvictusPayOutInnovatorWinnerDetails2026 = () => {
               <p className="mb-0 mt-3 text-base leading-relaxed text-zinc-700">
                 By combining multi-currency payment processing, international money
                 transfers, flexible infrastructure, and compliance-focused
-                technology, Invictus Ventures demonstrates a strong approach to
+                technology, <Strong>Invictus Ventures</Strong> demonstrates a strong approach to
                 modernising global payouts.
               </p>
               <p className="mb-0 mt-3 text-base font-semibold leading-relaxed text-zinc-900">
-                Congratulations to {COMPANY} — {AWARD}.
+                Congratulations to <Strong>{COMPANY}</Strong> — <Strong>{AWARD}</Strong>.
               </p>
             </motion.section>
           </div>

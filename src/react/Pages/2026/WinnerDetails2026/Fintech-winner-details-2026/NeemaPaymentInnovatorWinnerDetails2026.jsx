@@ -54,6 +54,11 @@ const KEY_POINTS = [
 
 const CIRCUIT = "/assets/svgs/download.svg";
 
+const Strong = ({ children }) => <strong className="font-bold">{children}</strong>;
+
+const emphasizeCompany = (text) =>
+  text.split(/(\bNeema\b)/).map((part, i) => (part === "Neema" ? <Strong key={i}>{part}</Strong> : part));
+
 const GREETING_HOLD = 2300;
 const REVEAL_DURATION = 1500;
 // Hero content mounts behind the intro overlay; this is when the curtain clears.
@@ -239,9 +244,9 @@ const NeemaPaymentInnovatorWinnerDetails2026 = () => {
               Overview
             </h2>
             <p className="mb-0 mt-3 text-base leading-relaxed text-zinc-700">
-              Neema is a global cross-border payments platform helping businesses
+              <Strong>Neema</Strong> is a global cross-border payments platform helping businesses
               move money faster, more reliably, and more efficiently. Through a
-              single API integration, Neema provides access to 120+ countries and
+              single API integration, <Strong>Neema</Strong> provides access to 120+ countries and
               90+ currencies, combining intelligent routing with real-time payment
               infrastructure.
             </p>
@@ -268,7 +273,7 @@ const NeemaPaymentInnovatorWinnerDetails2026 = () => {
                     {point.title}
                   </p>
                   <p className="mb-0 mt-1.5 text-base leading-relaxed text-white/90">
-                    {point.body}
+                    {emphasizeCompany(point.body)}
                   </p>
                 </li>
               ))}
@@ -287,7 +292,7 @@ const NeemaPaymentInnovatorWinnerDetails2026 = () => {
                 Why Neema deserves recognition?
               </h2>
               <p className="mb-0 mt-3 text-base leading-relaxed text-zinc-700">
-                Neema is helping modernise cross-border payments by combining
+                <Strong>Neema</Strong> is helping modernise cross-border payments by combining
                 intelligent routing, global payment connectivity, single API
                 integration, flexible payout options, and reliable real-time
                 delivery.
@@ -311,14 +316,14 @@ const NeemaPaymentInnovatorWinnerDetails2026 = () => {
                 Conclusion
               </h2>
               <p className="mb-0 mt-3 text-base leading-relaxed text-zinc-700">
-                Neema&apos;s technology-led approach provides businesses with a
+                <Strong>Neema</Strong>&apos;s technology-led approach provides businesses with a
                 simpler and more efficient way to move money internationally. Its
                 combination of intelligent routing, broad payment coverage, flexible
                 payouts, single API integration, and reliable delivery makes it a
-                deserving recipient of the {AWARD} award.
+                deserving recipient of the <Strong>{AWARD}</Strong> award.
               </p>
               <p className="mb-0 mt-3 text-base font-semibold leading-relaxed text-zinc-900">
-                Congratulations to {COMPANY} — {AWARD}.
+                Congratulations to <Strong>{COMPANY}</Strong> — <Strong>{AWARD}</Strong>.
               </p>
             </motion.section>
           </div>
