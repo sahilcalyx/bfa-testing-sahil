@@ -4,7 +4,7 @@ import ScrambleWinnersOverlay from "./ScrambleWinnersOverlay";
 import WinnersConfetti2026 from "../../Pages/2026/Winners2026/components/WinnersConfetti2026";
 import "./WinnerBanner2026.css";
 
-const BANNER_IMAGE = "/assets/img/winner-logos-26/winner-banner-2026/groupBanner2026%20JPG.webp";
+const BANNER_IMAGE = "/assets/img/winner-logos-26/winner-banner-2026/groupBanner2026.webp";
 
 /**
  * Flow (once per page load / refresh — does not loop):
