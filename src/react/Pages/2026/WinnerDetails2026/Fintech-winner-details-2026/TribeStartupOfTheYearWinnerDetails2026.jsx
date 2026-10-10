@@ -65,7 +65,7 @@ const INTRO_AWARD_LINES = [AWARD];
 const TITLE_LINES = ["Startup", "of the Year", "2026"];
 const META_DESCRIPTION = "3ribe, winner of Startup of the Year 2026 at the Brit FinTech Awards.";
 const OVERVIEW = [
-  "3ribe, a trading name of Grants PaymentSolutions Ltd, is a digital financial platform focused on simplifying global money movement for individuals and businesses. Its platform brings together international money transfers, bill payments, currency management, business collections, payouts, and compliance capabilities within a unified digital experience.",
+  "3ribe, a trading name of Grants Payment Solutions Ltd, is a digital financial platform focused on simplifying global money movement for individuals and businesses. Its platform brings together international money transfers, bill payments, currency management, business collections, payouts, and compliance capabilities within a unified digital experience.",
   "Designed for customers and businesses operating across borders, 3ribe combines technology, payment connectivity and financial tools to make international transactions more accessible, transparent and easier to manage.",
 ];
 const FEATURES_HEADING = "Key Features of 3ribe";

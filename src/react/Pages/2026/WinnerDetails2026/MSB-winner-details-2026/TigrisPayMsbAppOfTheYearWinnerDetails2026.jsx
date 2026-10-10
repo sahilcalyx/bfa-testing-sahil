@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { ArcRevealHero } from "@/components/ui/arc-preloader-hero";
 import WinnersConfetti2026 from "../../Winners2026/components/WinnersConfetti2026";
+import PreviousWinStrip2026 from "../components/PreviousWinStrip2026";
 
 const EASE = [0.16, 1, 0.3, 1];
 const DISPLAY = "Oswald, sans-serif";
@@ -62,15 +63,15 @@ const OVERVIEW = [
   "Fast Track Money Transfer trading as Tigris Pay provides a simple digital platform that makes money transfers easy and accessible. Its mobile-first service enables customers in the UK to send money internationally through a convenient digital experience.",
 ];
 const FEATURES_HEADING = "Key Features of Tigris Pay";
-const WHY_HEADING = "Why Fast Track Money Transfer trading as Tigris Pay deserves recognition?";
+const WHY_HEADING = "Why Tigris Pay deserves recognition?";
 const WHY = [
-  "Fast Track Money Transfer trading as Tigris Pay demonstrates the growing role of mobile technology in making international money transfers more accessible and convenient. Its simple digital platform, international reach, real-time tracking, and focus on security reflect the evolving needs of modern remittance customers.",
+  "Tigris Pay demonstrates the growing role of mobile technology in making international money transfers more accessible and convenient. Its simple digital platform, international reach, real-time tracking, and focus on security reflect the evolving needs of modern remittance customers.",
   "The MSB App of the Year 2026 recognition celebrates Tigris Pay's contribution to creating a simple, secure, and digitally connected money-transfer experience.",
 ];
 const CONCLUSION = [
-  "Fast Track Money Transfer trading as Tigris Pay combines mobile technology, international remittance, accessibility, and security to create a convenient digital money-transfer experience.",
+  "Tigris Pay combines mobile technology, international remittance, accessibility, and security to create a convenient digital money-transfer experience.",
 ];
-const CONGRATULATIONS = "Congratulations to Fast Track Money Transfer trading as Tigris Pay — MSB App of the Year 2026.";
+const CONGRATULATIONS = "Congratulations to Tigris Pay — MSB App of the Year 2026.";
 
 const toParagraphs = (value) => (Array.isArray(value) ? value : [value]);
 
@@ -326,6 +327,15 @@ const TigrisPayMsbAppOfTheYearWinnerDetails2026 = () => {
               ))}
             </ul>
           </motion.section>
+
+          <PreviousWinStrip2026
+            className="mt-12"
+            year="2025"
+            eyebrow="Back-to-Back Winner"
+            title="Payment Innovator of the Year 2025"
+            description="Recognised as Fast Track Money in 2025 and honoured again as Tigris Pay in 2026, the company continues to deliver fast, affordable, and secure money transfers across global corridors."
+            href="/award-winners-2025/fast-track-payment-innovator-2025"
+          />
 
           <div className="mt-12 flex flex-col gap-10">
             <motion.section

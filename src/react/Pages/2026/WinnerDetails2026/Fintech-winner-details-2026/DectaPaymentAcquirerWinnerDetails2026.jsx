@@ -25,7 +25,7 @@ const AWARD = "Payment Acquirer 2026";
 
 const FEATURES = [
   {
-    title: "Global payment processing company",
+    title: "Global Payment Processing Company",
     body: "DECTA enables merchants and payment service providers to accept payments through major card networks and digital payment methods, supporting international payment acceptance across 50+ currencies.",
     Icon: Globe2,
   },
@@ -64,7 +64,7 @@ const LOGO_INVERT = false;
 const INTRO_AWARD_LINES = [AWARD];
 const TITLE_LINES = ["Payment", "Acquirer", "2026"];
 const META_DESCRIPTION = "DECTA, winner of Payment Acquirer 2026 at the Brit FinTech Awards.";
-const OVERVIEW = "DECTA is a global payment processing company providing end-to-end payment infrastructure for merchants, fintechs, banks, and payment service providers. Its acquiring solutions enable businesses to accept and process payments across multiple channels, currencies, and payment methods through secure and scalable infrastructure.";
+const OVERVIEW = "DECTA is a Global Payment Processing Company providing end-to-end payment infrastructure for merchants, fintechs, banks, and payment service providers. Its acquiring solutions enable businesses to accept and process payments across multiple channels, currencies, and payment methods through secure and scalable infrastructure.";
 const FEATURES_HEADING = "Key Features of DECTA";
 const WHY_HEADING = "Why DECTA deserves recognition?";
 const WHY = [

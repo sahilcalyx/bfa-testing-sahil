@@ -141,6 +141,19 @@ box-shadow: none;
   font-family: 'Poppins', sans-serif !important;
 }
 
+@media (min-width: 1200px) {
+  .cs-site_header.cs-style1 .cs-main_header_left {
+    flex: 1 1 auto;
+  }
+  .cs-site_header.cs-style1 .cs-main_header_left .cs-nav {
+    margin-left: auto !important;
+    margin-right: 28px;
+  }
+  .cs-site_header.cs-style1 .cs-main_header_left .cs-nav_list {
+    margin-left: 0 !important;
+  }
+}
+
           
       `}</style>
 
@@ -580,8 +593,8 @@ box-shadow: none;
                           className="d-none-sm mb-3 mt-4 "
                           onClick={handleNavLinkClick}
                         >
-                          <NavLink to="/event-schedule-2026" className="btn-pro-1">
-                            <span>Event Schedule</span>
+                          <NavLink to="/award-winners-2026" className="btn-pro-1">
+                            <span>Winners 2026</span>
                           </NavLink>
                           {/* <NavLink to="/sponsorship-categories#sponsorship-categories" className="btn-pro-1">
                             <span>Sponsor Now</span>
@@ -592,12 +605,12 @@ box-shadow: none;
                           className="d-none-sm"
                           onClick={handleNavLinkClick}
                         >
-                          <NavLink
+                          {/* <NavLink
                             to="/ticket-booking"
                             className={`btn-pro-2 text-center`}
                           >
                             <span style={{ color: "#fff" }}>House Full</span>
-                          </NavLink>
+                          </NavLink> */}
                           {/* <NavLink
                             to="/sponsorship-categories#next_section"
                             className={`btn-pro-2 text-center`}
@@ -632,8 +645,8 @@ box-shadow: none;
                     <span>Download Brochure</span>
                   </a> */}
 
-                  <NavLink to="/event-schedule-2026" className="btn-pro-1">
-                    <span>Event Schedule</span>
+                  <NavLink to="/award-winners-2026" className="btn-pro-1">
+                    <span>Winners 2026</span>
                   </NavLink>
                   {/* <NavLink to="/sponsorship-categories#sponsorship-categories" className="btn-pro-1">
                     <span>Sponsor Now</span>
@@ -645,12 +658,12 @@ box-shadow: none;
                     <Button />
                   </div> */}
 
-                  <NavLink
+                  {/* <NavLink
                     to="/ticket-booking"
                     className={`btn-pro-2`}
                   >
                     <span style={{ color: "#fff" }}> House Full</span>
-                  </NavLink>
+                  </NavLink> */}
                 </div>
               </div>
               <div className="cs-hamburger_menu" onClick={toggleMenu}>
