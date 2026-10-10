@@ -6,12 +6,13 @@ import { FiArrowLeft } from "react-icons/fi";
 import {
   AlignLeft,
   Award,
-  Banknote,
-  Building2,
   CheckCircle2,
   Coins,
-  Send,
-  ShieldCheck,
+  GraduationCap,
+  HeartHandshake,
+  Recycle,
+  TrendingUp,
+  Users,
 } from "lucide-react";
 import { ArcRevealHero } from "@/components/ui/arc-preloader-hero";
 import WinnersConfetti2026 from "../../Winners2026/components/WinnersConfetti2026";
@@ -21,61 +22,66 @@ const EASE = [0.16, 1, 0.3, 1];
 const DISPLAY = "Oswald, sans-serif";
 const CIRCUIT = "/assets/svgs/download.svg";
 
-const AWARD = "MSB Leader 2026";
+const AWARD = "MSB Leader of the Year 2026";
 
 const FEATURES = [
   {
-    title: "Specialised Currency Exchange",
-    body: "Leftover Currency focuses on foreign coins, old banknotes, and obsolete currencies that may be difficult to exchange through traditional channels.",
+    title: "Entrepreneurial Leadership & Business Growth",
+    body: "Under Mario’s leadership, Leftover Currency has developed its specialist foreign exchange services, helping individuals and businesses exchange currencies that may be difficult to process through traditional exchange channels. The company has built expertise in foreign coins, obsolete banknotes, exotic currencies and bulk processing of mixed coins and banknotes.",
+    Icon: TrendingUp,
+  },
+  {
+    title: "Specialist Foreign Exchange Expertise",
+    body: "Mario has helped establish Leftover Currency across several specialist areas of the foreign exchange market. Its services include exchanging foreign coins and withdrawn banknotes, handling exotic currencies and processing large volumes of mixed foreign currency, creating opportunities to recirculate and recover value from unused money.",
     Icon: Coins,
   },
   {
-    title: "Online Exchange Service",
-    body: "Customers can list and submit their currencies online and receive payment via bank transfer, PayPal, or cheque.",
-    Icon: Send,
+    title: "Employee-Focused Leadership",
+    body: "One of the key achievements highlighted in Mario’s award nomination is the transformation of Leftover Currency into an employee-owned organisation in 2025. This initiative reflects a commitment to employee participation, shared responsibility and long-term business sustainability, with the aim of enabling employees to play a greater role in the company's continued success.",
+    Icon: HeartHandshake,
   },
   {
-    title: "Extensive Currency Coverage",
-    body: "The company exchanges more than 50 different currencies, including circulating and obsolete currencies.",
-    Icon: Banknote,
+    title: "Employment & Team Development",
+    body: "Under Mario’s leadership, Leftover Currency has developed a team of employees from diverse backgrounds and experiences. The company has also supported employment and development opportunities through apprenticeships, local job fairs, seasonal roles and other employment initiatives, contributing to workforce development.",
+    Icon: GraduationCap,
   },
   {
-    title: "Customer & Corporate Services",
-    body: "Leftover Currency serves individuals, businesses, and charities with tailored solutions for unused foreign currency.",
-    Icon: Building2,
+    title: "Contribution to Foreign Currency Sustainability",
+    body: "Mario has contributed to industry discussions on foreign currency recirculation, including the value of returning foreign coins to circulation and reducing the amount of unused currency that goes to waste. Through participation in international industry events, he has helped highlight the role of specialist currency businesses in supporting more sustainable currency management.",
+    Icon: Recycle,
   },
   {
-    title: "Regulated MSB Operations",
-    body: "Leftover Currency is an HMRC-supervised Money Services Business.",
-    Icon: ShieldCheck,
+    title: "Commitment to the Wider MSB Community",
+    body: "Mario remains engaged with the wider Money Services Business (MSB) community, sharing knowledge and engaging in discussions around industry challenges, including banking access, cybersecurity and anti-money laundering compliance. His willingness to exchange knowledge and support responsible business practices reflects his commitment to the continued development of the sector.",
+    Icon: Users,
   },
 ];
 
 const COMPANY = "Leftover Currency Limited";
-const PERSON = "";
-const ROLE = "";
+const PERSON = "Mario Van Poppel";
+const ROLE = "Leftover Currency";
 const LOGO = "/assets/img/winner-logos-26/Winners-logo-white/Leftover.png";
 const LOGO_INVERT = false;
-const INTRO_AWARD_LINES = ["MSB Leader 2026"];
-const TITLE_LINES = ["MSB", "Leader", "2026"];
-const META_DESCRIPTION = "Leftover Currency Limited, winner of MSB Leader 2026 at the Brit FinTech Awards.";
+const INTRO_AWARD_LINES = ["MSB Leader", "of the Year 2026"];
+const TITLE_LINES = ["MSB Leader", "of the Year", "2026"];
+const META_DESCRIPTION = "Mario Van Poppel of Leftover Currency, winner of MSB Leader of the Year 2026 at the Brit FinTech Awards.";
 const OVERVIEW = [
-  "Leftover Currency Limited is a UK-based Money Services Business specialising in the exchange of foreign coins, old banknotes, and obsolete currencies. Its online exchange model helps customers turn unused foreign currency into cash.",
+  "Mario Van Poppel is the Director and founder of Leftover Currency Limited, a UK-based bureau de change specialising in the exchange and processing of foreign coins, obsolete and withdrawn banknotes, and other specialist currencies. Under his leadership, the company has developed a distinctive position in the foreign exchange market, combining specialist expertise with innovative processing services and a commitment to sustainable business growth.",
 ];
-const FEATURES_HEADING = "Key Features of Leftover Currency";
-const WHY_HEADING = "Why Leftover Currency Limited deserves recognition?";
+const FEATURES_HEADING = "Key Features of Mario Van Poppel’s Leadership";
+const WHY_HEADING = "Why Mario Van Poppel deserves recognition?";
 const WHY = [
-  "Leftover Currency has developed a specialised model for converting foreign coins, old banknotes, and obsolete currencies into usable cash. Its combination of online technology, specialist currency expertise, and accessible customer services demonstrates a distinctive approach within the money services sector.",
-  "The MSB Leader 2026 recognition celebrates Leftover Currency's contribution to making specialised currency exchange more accessible through a dedicated digital service.",
+  "Mario Van Poppel demonstrates the qualities of an effective MSB leader through his entrepreneurial vision, specialist foreign exchange expertise and focus on sustainable business development. His leadership has helped establish Leftover Currency as a specialist business while creating opportunities for employees and raising awareness of foreign currency recirculation.",
+  "His employee-focused approach, industry engagement and commitment to responsible business practices make him a deserving recipient of MSB Leader of the Year 2026.",
 ];
 const CONCLUSION = [
-  "Leftover Currency Limited demonstrates leadership through its specialised currency exchange model, digital customer experience, and focus on currencies that can be difficult to exchange through traditional channels.",
+  "Mario Van Poppel’s leadership at Leftover Currency combines entrepreneurial ambition, specialist industry knowledge and a commitment to employee development and foreign currency sustainability. Through the growth of the business and his engagement with the wider MSB community, he continues to contribute to the development of the foreign exchange sector.",
 ];
-const CONGRATULATIONS = "Congratulations to Leftover Currency Limited — MSB Leader 2026.";
+const CONGRATULATIONS = "Congratulations to Mario Van Poppel — MSB Leader of the Year 2026.";
 
 const toParagraphs = (value) => (Array.isArray(value) ? value : [value]);
 
-const HIGHLIGHTS = [AWARD, AWARD.replace(/ 2026$/, ""), "Leftover Currency Limited", "Leftover Currency"];
+const HIGHLIGHTS = [AWARD, AWARD.replace(/ 2026$/, ""), "Mario Van Poppel", "Mario", "Leftover Currency Limited", "Leftover Currency"];
 const HIGHLIGHT_PATTERN = new RegExp(
   `((?<![\\w])(?:${[...HIGHLIGHTS]
     .sort((a, b) => b.length - a.length)
@@ -333,7 +339,7 @@ const LeftoverCurrencyMsbLeaderWinnerDetails2026 = () => {
             year="2025"
             eyebrow="Back-to-Back Winner"
             title="MSB Disruptor of the Year 2025"
-            description="Named MSB Disruptor of the Year in 2025 and MSB Leader in 2026, Leftover Currency Limited continues to make specialised currency exchange more accessible through its dedicated digital service."
+            description="Leftover Currency was named MSB Disruptor of the Year in 2025, and in 2026 its founder Mario Van Poppel is honoured as MSB Leader of the Year for his entrepreneurial and employee-focused leadership."
             href="/award-winners-2025/leftover-msb-disruptor-of-the-year-2025"
           />
 

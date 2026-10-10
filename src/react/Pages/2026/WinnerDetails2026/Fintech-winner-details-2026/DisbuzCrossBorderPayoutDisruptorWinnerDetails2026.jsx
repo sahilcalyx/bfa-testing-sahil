@@ -332,7 +332,7 @@ const DisbuzCrossBorderPayoutDisruptorWinnerDetails2026 = () => {
             year="2025"
             eyebrow="Back-to-Back Winner"
             title="Pay-Out Innovator of the Year 2025"
-            description="Named Pay-Out Innovator of the Year in 2025 and Cross-Border Pay-out Disruptor of the Year in 2026, Disbuz by Payceler continues to redefine how businesses move money across borders."
+            description="From Pay-Out Innovator in 2025 to Cross-Border Pay-Out Disruptor in 2026, Disbuz by Payceler continues to push boundaries and reshape the future of cross-border payments."
             href="/award-winners-2025/disbuz-pay-out-innovator-2025"
           />
 

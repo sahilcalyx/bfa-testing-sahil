@@ -141,6 +141,12 @@ box-shadow: none;
   font-family: 'Poppins', sans-serif !important;
 }
 
+.cs-site_header .btn-pro-1,
+.cs-site_header .btn-pro-1.active,
+.cs-site_header .btn-pro-1.active span {
+  color: #fff !important;
+}
+
 @media (min-width: 1200px) {
   .cs-site_header.cs-style1 .cs-main_header_left {
     flex: 1 1 auto;

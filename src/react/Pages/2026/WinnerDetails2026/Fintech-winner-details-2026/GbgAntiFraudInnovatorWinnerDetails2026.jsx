@@ -338,7 +338,7 @@ const GbgAntiFraudInnovatorWinnerDetails2026 = () => {
             year="2024"
             eyebrow="Returning Champion"
             title="ID Verification Innovator 2024"
-            description="Named ID Verification Innovator in 2024 and Anti-Fraud Innovator in 2026, GBG returns to the winners' circle with its trusted identity and fraud-prevention expertise."
+            description="Recognised as ID Verification Innovator in 2024 and Anti-Fraud Innovator in 2026, GBG returns to the winners’ circle, showcasing its continued expertise in identity verification and fraud prevention."
             href="/award-winners-2024/gbg-plc-id-verification-innovator-of-the-year-2024"
           />
 

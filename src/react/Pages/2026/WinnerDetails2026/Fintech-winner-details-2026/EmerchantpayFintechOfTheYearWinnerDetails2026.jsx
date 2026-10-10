@@ -339,7 +339,7 @@ const EmerchantpayFintechOfTheYearWinnerDetails2026 = () => {
             year="2025"
             eyebrow="Back-to-Back Winner"
             title="Payment Acquirer of the Year 2025"
-            description="Named Payment Acquirer of the Year in 2025 and FinTech of the Year in 2026, emerchantpay Limited has risen from category leader to the industry's top honour."
+            description="From Payment Acquirer of the Year in 2025 to FinTech of the Year in 2026, emerchantpay Limited continues to raise the bar for excellence and innovation across the payments industry."
             href="/award-winners-2025/emerchantpay-payment-acquirer-2025"
           />
 
