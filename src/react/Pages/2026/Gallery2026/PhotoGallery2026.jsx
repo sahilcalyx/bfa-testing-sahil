@@ -38,7 +38,7 @@ const PhotoGallery2026 = () => {
     ...makeImages("venue", 42),
     ...makeImages("winner-photos", 85),
     ...makeImages("team", 37),
-    ...makeImages("branding-banners", 12),
+    ...makeImages("branding-banners", 11),
     ...makeImages("audience", 15),
     ...makeImages("host", 21),
     ...makeImages("thank-you-gifts", 18),
