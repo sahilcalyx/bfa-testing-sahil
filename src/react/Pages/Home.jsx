@@ -35,6 +35,7 @@ import GallarySection2025 from "./2025/GallarySection25/GallarySection2025";
 import TestimonialSlider2025 from "../Components/Testmonials/TestimonialSlider2025";
 import WinnerBanner from "../Components/SliderBigBan/WinnerBanner";
 import WinnerBanner2026 from "../Components/WinnerBanner2026";
+import ImageStreamHeroSection from "../Components/ImageStreamHeroSection";
 import TestimonialCommon from "../Components/Testmonials/TestimonialCommon";
 import BFA26Section from "../Components/BFA26Section";
 import { color } from "framer-motion";
@@ -316,7 +317,25 @@ Brit Fintech Awards 2026."
         {/* <DynamicSliderVideo /> */}
         {/* <DownloadAppStrip /> */}
         <WinnerBanner2026 />
-        
+        <ImageStreamHeroSection />
+
+        <Gallery2026 />
+
+        <SponsorSection2026 />
+
+
+        {/* Testimonials (3rd section, above Sponsors) */}
+        <div className="cs-height_60 cs-height_lg_45" />
+        <div
+          className="container wow fadeInDown"
+          data-wow-duration="1s"
+          data-wow-delay="0.2s"
+        >
+          <div className="cs-section_heading cs-style2 cs-size3 text-center text-uppercase">
+            <TestimonialCommon />
+          </div>
+        </div>
+
         {/* <CountdownSlider2026Animated /> */}
         {/* <InteractiveHero /> */}
         {/* <HeroSection2026 /> */}
@@ -328,17 +347,15 @@ Brit Fintech Awards 2026."
         {/* Compare B: animated hero-theme strip */}
        
         
-        <Gallery2026 />
-        <SponsorSection2026 />
         {/* <EventSchedule2026 /> */}
-        <KeynoteSpeaker2026 /> 
+        {/* <KeynoteSpeaker2026 />  */}
         {/* <KeynoteAmaBanner2026 /> */}
-        <DiscussionPanel2026 />
-        <FocusSession2026 />
+        {/* <DiscussionPanel2026 /> */}
+        {/* <FocusSession2026 /> */}
        
         {/* <AnimatedStats stats={statsData} /> */}
        
-        <EventHostSection />
+        {/* <EventHostSection /> */}
         
         {/* <StaticHero />
         <ScrollRevealVideo /> */}
@@ -352,120 +369,6 @@ Brit Fintech Awards 2026."
 
         {/* <div className="cs-height_20 cs-height_lg_20" /> */}
        
-        
-        <WhoAttendsBfaTabsSection />
-        <GlobalConnectivitySection />
-       
-
-
-
-
-        {/* <div className="container">
-          <SponsorsSlider />
-        </div> */}
-        {/* 
- <section
-      style={{
-        width: "100%",
-        padding: "20px 20px",
-        backgroundColor: "#fff",
-        fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
-      }}
-    >
-      <h2
-        style={{
-          textAlign: "center",
-          fontSize: "36px",
-          fontWeight: "700",
-          marginBottom: "40px",
-          color: "#222",
-        }}
-      >
-        Key Notes
-      </h2>
-
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-          gap: "30px",
-          maxWidth: "1200px",
-          margin: "0 auto",
-        }}
-      >
-        {keynoteData.map((speaker) => (
-          <div
-            key={speaker.id}
-            style={{
-              background: "#fff",
-              borderRadius: "16px",
-              boxShadow: "0 6px 20px rgba(0,0,0,0.1)",
-              overflow: "hidden",
-              transition: "transform 0.3s ease",
-            }}
-            onMouseOver={(e) => {
-              e.currentTarget.style.transform = "translateY(-5px)";
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.transform = "translateY(0)";
-            }}
-          >
-            <img
-              src={speaker.img}
-              alt={speaker.name}
-              style={{
-                width: "100%",
-                height: "250px",
-                objectFit: "cover",
-              }}
-            />
-            <div style={{ padding: "20px" }}>
-              <h3
-                style={{
-                  fontSize: "20px",
-                  fontWeight: "700",
-                  marginBottom: "8px",
-                  color: "#ff2e63",
-                }}
-              >
-                {speaker.name}
-              </h3>
-              <p
-                style={{
-                  fontSize: "15px",
-                  lineHeight: "1.6",
-                  color: "#555",
-                }}
-              >
-                {speaker.desc}
-              </p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </section> */}
-        <ErrorBoundary>
-          {/* <GallerySection /> */}
-         
-        </ErrorBoundary>
-        {/* Keynote Speakers Section 2026 */}
-         
-
-        {/* Discussion Pannel Section  */}
-
-        {/* Jury 2026 Section */}
-        <section
-          id="judges-section"
-          className="py-16 bg-zinc-50"
-        >
-          <div className="container">
-            <JudgesSection2026 />
-          </div>
-        </section>
-        
-       
-        {/* <DiscussionPannelSection /> */}
-
         <div
           className="cs-gradient_bg_2 "
           style={{
@@ -623,23 +526,126 @@ Download the BFA app and start networking.
           </div>
           <div className="cs-height_50 cs-height_lg_50" />
         </div>
+        
+        <WhoAttendsBfaTabsSection />
+        <GlobalConnectivitySection />
+       
+
+
+
+
+        {/* <div className="container">
+          <SponsorsSlider />
+        </div> */}
+        {/* 
+ <section
+      style={{
+        width: "100%",
+        padding: "20px 20px",
+        backgroundColor: "#fff",
+        fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+      }}
+    >
+      <h2
+        style={{
+          textAlign: "center",
+          fontSize: "36px",
+          fontWeight: "700",
+          marginBottom: "40px",
+          color: "#222",
+        }}
+      >
+        Key Notes
+      </h2>
+
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+          gap: "30px",
+          maxWidth: "1200px",
+          margin: "0 auto",
+        }}
+      >
+        {keynoteData.map((speaker) => (
+          <div
+            key={speaker.id}
+            style={{
+              background: "#fff",
+              borderRadius: "16px",
+              boxShadow: "0 6px 20px rgba(0,0,0,0.1)",
+              overflow: "hidden",
+              transition: "transform 0.3s ease",
+            }}
+            onMouseOver={(e) => {
+              e.currentTarget.style.transform = "translateY(-5px)";
+            }}
+            onMouseOut={(e) => {
+              e.currentTarget.style.transform = "translateY(0)";
+            }}
+          >
+            <img
+              src={speaker.img}
+              alt={speaker.name}
+              style={{
+                width: "100%",
+                height: "250px",
+                objectFit: "cover",
+              }}
+            />
+            <div style={{ padding: "20px" }}>
+              <h3
+                style={{
+                  fontSize: "20px",
+                  fontWeight: "700",
+                  marginBottom: "8px",
+                  color: "#ff2e63",
+                }}
+              >
+                {speaker.name}
+              </h3>
+              <p
+                style={{
+                  fontSize: "15px",
+                  lineHeight: "1.6",
+                  color: "#555",
+                }}
+              >
+                {speaker.desc}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section> */}
+        <ErrorBoundary>
+          {/* <GallerySection /> */}
+         
+        </ErrorBoundary>
+        {/* Keynote Speakers Section 2026 */}
+         
+
+        {/* Discussion Pannel Section  */}
+
+        {/* Jury 2026 Section */}
+        {/* <section
+          id="judges-section"
+          className="py-16 bg-zinc-50"
+        >
+          <div className="container">
+            <JudgesSection2026 />
+          </div>
+        </section> */}
+        
+       
+        {/* <DiscussionPannelSection /> */}
+
+        
         {/* <BFA26Section />
  <GallarySection2025 /> */}
         {/* End Hero Seciton */}
 
         <div className="cs-height_60 cs-height_lg_45" />
-
-        <div
-          className="container wow fadeInDown"
-          data-wow-duration="1s"
-          data-wow-delay="0.2s"
-        >
-          <div className="cs-section_heading cs-style2 cs-size3 text-center text-uppercase">
-            {/* <TestimonialSlider /> */}
-            {/* <TestimonialSlider2025/> */}
-            <TestimonialCommon />
-          </div>
-        </div>
 
         {/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Get Supprt Section ++++++++++++++++++++++++++++++++++++++++ */}
         <div className="cs-height_100 cs-height_lg_50" bis_skin_checked={1} />

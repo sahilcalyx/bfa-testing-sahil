@@ -3,6 +3,9 @@ import "lightgallery/css/lightgallery.css";
 import lightGallery from "lightgallery";
 import { Helmet } from "react-helmet";
 import Image from "next/image";
+import { GALLERY_CARDS_2026 } from "./galleryData";
+
+const fileNumber = (src) => Number(src.match(/(\d+)\.webp$/)?.[1] ?? 0);
 
 const PhotoGallery2026 = () => {
   const [activeCategory, setActiveCategory] = useState("all");
@@ -30,14 +33,15 @@ const PhotoGallery2026 = () => {
   // Set each count to the number of photos in /public/assets/img/gallery2026/<category>/ (named 1.webp, 2.webp, ...)
   const galleryImages = [
     ...makeImages("registration", 24),
-    ...makeImages("networking", 103),
+    ...makeImages("red-carpet", 97),
+    ...makeImages("networking", 100),
     ...makeImages("discussion", 27),
-    ...makeImages("keynote", 7),
+    ...makeImages("keynote", 13),
     ...makeImages("food-drinks", 51),
     ...makeImages("focus-session", 15),
-    ...makeImages("venue", 42),
+    ...makeImages("venue", 43),
     ...makeImages("winner-photos", 85),
-    ...makeImages("team", 37),
+    ...makeImages("team", 12),
     ...makeImages("event-branding", 11),
     ...makeImages("audience", 15),
     ...makeImages("host", 21),
@@ -45,16 +49,21 @@ const PhotoGallery2026 = () => {
     ...makeImages("others", 0),
   ];
 
+  // the home page "Moments That Matter" photos lead the All Photos tab, in file order
+  const featuredImages = GALLERY_CARDS_2026.map((card) => card.item)
+    .sort((a, b) => fileNumber(a.src) - fileNumber(b.src))
+    .map((item) => ({
+      id: idCounter++,
+      src: item.src,
+      category: "featured",
+      caption: item.alt,
+    }));
+
   // =================== Filtered Images ===================
   const filteredImages =
     activeCategory === "all"
-      ? galleryImages
+      ? [...featuredImages, ...galleryImages]
       : galleryImages.filter((img) => img.category === activeCategory);
-
-  const countFor = (id) =>
-    id === "all"
-      ? galleryImages.length
-      : galleryImages.filter((img) => img.category === id).length;
 
   // =================== LightGallery Init ===================
   useEffect(() => {
@@ -108,16 +117,18 @@ const PhotoGallery2026 = () => {
     { id: "all", label: "All Photos" },
     { id: "venue", label: "Venue" },
     { id: "registration", label: "Registration" },
-    { id: "host", label: "Host" },
-    { id: "keynote", label: "Keynote Speaker" },
+    { id: "red-carpet", label: "Red Carpet" },
+    
+    { id: "keynote", label: "Speakers" },
     { id: "discussion", label: "Discussion Panel" },
     { id: "focus-session", label: "Focus Session" },
     { id: "winner-photos", label: "Winner Photos" },
     { id: "networking", label: "Networking" },
     { id: "audience", label: "Audience" },
-    { id: "event-branding", label: "Brand Exposure" },
+    { id: "event-branding", label: "Brand Showcase" },
     { id: "food-drinks", label: "Food and Drinks" },
     { id: "thank-you-gifts", label: "Thank You Gifts" },
+    { id: "host", label: "Host" },
     { id: "team", label: "Team" },
     // { id: "others", label: "Others" },
   ];
@@ -198,10 +209,9 @@ const PhotoGallery2026 = () => {
             border-radius: 11px;
             background: transparent;
             color: rgba(255, 255, 255, 0.62);
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 600;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
+            letter-spacing: 0.01em;
             white-space: nowrap;
             cursor: pointer;
             transition: color 0.25s ease, background-color 0.25s ease;
@@ -218,19 +228,6 @@ const PhotoGallery2026 = () => {
           .pg26-tab:focus-visible {
             outline: 2px solid #fff;
             outline-offset: 2px;
-          }
-          .pg26-count {
-            min-width: 22px;
-            padding: 2px 7px;
-            border-radius: 999px;
-            background: rgba(255, 255, 255, 0.1);
-            font-size: 11px;
-            letter-spacing: 0;
-            line-height: 1.4;
-            transition: background-color 0.25s ease;
-          }
-          .pg26-tab.is-active .pg26-count {
-            background: rgba(0, 0, 0, 0.28);
           }
           @keyframes pg26-tab-in {
             from { opacity: 0; transform: translateY(10px); }
@@ -296,8 +293,8 @@ const PhotoGallery2026 = () => {
               justify-content: center;
               min-height: 44px;
               padding: 8px 6px;
-              font-size: 11.5px;
-              letter-spacing: 0.05em;
+              font-size: 12.5px;
+              letter-spacing: 0;
               white-space: normal;
               text-align: center;
               line-height: 1.25;
@@ -310,7 +307,7 @@ const PhotoGallery2026 = () => {
           }
 
           @media (prefers-reduced-motion: reduce) {
-            .pg26-indicator, .pg26-tab, .pg26-count { transition: none; }
+            .pg26-indicator, .pg26-tab { transition: none; }
             .pg26-tab, .pg26-item, .pg26-empty { animation: none; }
           }
           `}
@@ -352,7 +349,6 @@ const PhotoGallery2026 = () => {
               )}
               {categories.map((tab, index) => {
                 const isActive = activeCategory === tab.id;
-                const count = countFor(tab.id);
                 return (
                   <button
                     key={tab.id}
@@ -369,7 +365,6 @@ const PhotoGallery2026 = () => {
                     style={{ animationDelay: `${index * 45}ms` }}
                   >
                     {tab.label}
-                    {count > 0 && <span className="pg26-count">{count}</span>}
                   </button>
                 );
               })}

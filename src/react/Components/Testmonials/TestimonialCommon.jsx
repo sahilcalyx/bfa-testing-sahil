@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import TestimonialSlider2025 from "./TestimonialSlider2025";
+import TestimonialSlider2026 from "./TestimonialSlider2026";
 import Testimonial from "./TestimonialSlider";
 
 const TestimonialCommon = () => {
-  // ✅ Set default active tab to 2025
-  const [activeTab, setActiveTab] = useState("2025");
+  // ✅ Set default active tab to 2026
+  const [activeTab, setActiveTab] = useState("2026");
 
   return (
     <div>
@@ -59,7 +60,22 @@ const TestimonialCommon = () => {
                 border: "2px solid #eee",
               }}
             >
-              
+              <button
+                className={`px-4 py-2 fw-bold text-uppercase ${
+                  activeTab === "2026" ? "active-tab" : "inactive-tab"
+                }`}
+                style={{
+                  border: "none",
+                  borderRadius: "50px",
+                  background: activeTab === "2026" ? "#c8102e" : "transparent",
+                  color: activeTab === "2026" ? "#fff" : "#333",
+                  transition: "0.3s",
+                  cursor: "pointer",
+                }}
+                onClick={() => setActiveTab("2026")}
+              >
+                2026
+              </button>
 
               <button
                 className={`px-4 py-2 fw-bold text-uppercase ${
@@ -96,12 +112,16 @@ const TestimonialCommon = () => {
             </div>
           </div>
 
+          {/* Space below tabs (mobile / tablet only) */}
+          <div className="cs-height_0 cs-height_lg_40" />
+
           {/* Tab Content */}
           <div
             className="wow fadeInUp"
             data-wow-duration="1s"
             data-wow-delay="0.3s"
           >
+            {activeTab === "2026" && <TestimonialSlider2026 />}
             {activeTab === "2024" && <Testimonial />}
             {activeTab === "2025" && <TestimonialSlider2025 />}
           </div>
