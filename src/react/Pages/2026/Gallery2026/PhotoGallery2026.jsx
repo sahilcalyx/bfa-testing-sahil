@@ -30,18 +30,18 @@ const PhotoGallery2026 = () => {
   // Set each count to the number of photos in /public/assets/img/gallery2026/<category>/ (named 1.webp, 2.webp, ...)
   const galleryImages = [
     ...makeImages("registration", 24),
-    ...makeImages("networking", 87),
+    ...makeImages("networking", 103),
     ...makeImages("discussion", 27),
     ...makeImages("keynote", 7),
     ...makeImages("food-drinks", 51),
-    ...makeImages("focus-session", 16),
+    ...makeImages("focus-session", 15),
     ...makeImages("venue", 42),
     ...makeImages("winner-photos", 85),
     ...makeImages("team", 37),
     ...makeImages("event-branding", 11),
     ...makeImages("audience", 15),
     ...makeImages("host", 21),
-    ...makeImages("thank-you-gifts", 18),
+    ...makeImages("thank-you-gifts", 16),
     ...makeImages("others", 0),
   ];
 
