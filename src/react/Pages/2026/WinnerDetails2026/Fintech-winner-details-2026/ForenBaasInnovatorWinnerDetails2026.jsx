@@ -22,8 +22,9 @@ const EASE = [0.16, 1, 0.3, 1];
 const DISPLAY = "Oswald, sans-serif";
 
 const AWARD = "B-A-A-S Innovator 2026";
-const COMPANY = "Foren, formerly Leatherback";
+const COMPANY = "Foren. formerly leatherback";
 const LOGO = "/assets/img/winner-logos-26/Winners-logo-white/Foren.png";
+const PORTRAIT = "/assets/img/winner-logos-26/winners-with-trophy-2026/B-A-A-S-Innovator-2026.png";
 
 const KEY_POINTS = [
   {
@@ -82,7 +83,7 @@ const ForenBaasInnovatorWinnerDetails2026 = () => {
         <title>{COMPANY}: {AWARD} | Brit FinTech Awards</title>
         <meta
           name="description"
-          content="Foren. formerly Leatherback, winner of B-A-A-S Innovator 2026 at the Brit FinTech Awards."
+          content="Foren. formerly leatherback, winner of B-A-A-S Innovator 2026 at the Brit FinTech Awards."
         />
       </Helmet>
       <link
@@ -178,7 +179,7 @@ const ForenBaasInnovatorWinnerDetails2026 = () => {
 
           <motion.div
             style={{ y: contentY }}
-            className="relative z-10 mx-auto grid max-w-6xl items-center gap-6 px-5 pt-6 md:px-8 md:pt-8 lg:grid-cols-12 lg:gap-8"
+            className="relative z-10 mx-auto grid max-w-6xl items-end gap-6 px-5 pt-6 md:px-8 md:pt-8 lg:grid-cols-12 lg:gap-8"
           >
             <div className="pb-8 md:pb-10 lg:col-span-7">
               <motion.div
@@ -211,21 +212,28 @@ const ForenBaasInnovatorWinnerDetails2026 = () => {
                   2026
                 </span>
               </motion.h1>
+
+              <motion.img
+                src={LOGO}
+                alt={COMPANY}
+                initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, ease: EASE, delay: 0.24 }}
+                className="mt-8 block h-12 w-auto max-w-[220px] object-contain object-left md:h-14"
+              />
             </div>
 
             <motion.div
               initial={reduceMotion ? false : { opacity: 0, y: 28 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: EASE, delay: 0.2 }}
-              className="flex items-center justify-center pb-10 lg:col-span-5 lg:justify-end lg:pb-14"
+              className="flex items-end justify-center lg:col-span-5 lg:justify-end"
             >
-              <div className="flex w-full max-w-[400px] items-center justify-center lg:justify-end">
-                <img
-                  src={LOGO}
-                  alt={`${COMPANY}, winner of ${AWARD}`}
-                  className="max-h-[140px] w-auto max-w-full object-contain drop-shadow-[0_6px_24px_rgba(200,16,46,0.55)]"
-                />
-              </div>
+              <img
+                src={PORTRAIT}
+                alt={`${COMPANY}, winner of ${AWARD}`}
+                className="h-[340px] w-auto max-w-full object-contain object-bottom sm:h-[390px] lg:h-[440px]"
+              />
             </motion.div>
           </motion.div>
         </section>
@@ -242,7 +250,7 @@ const ForenBaasInnovatorWinnerDetails2026 = () => {
               Overview
             </h2>
             <p className="mb-0 mt-3 text-base leading-relaxed text-zinc-700">
-              <Strong>Foren</Strong>, formerly <Strong>Leatherback</Strong>, provides global payment infrastructure
+              <Strong>Foren.</Strong> formerly <Strong>leatherback</Strong>, provides global payment infrastructure
               designed to help businesses manage cross-border payments, collections,
               payouts, and multi-currency financial operations. Its technology-led
               platform gives businesses access to global accounts, payment
@@ -284,7 +292,7 @@ const ForenBaasInnovatorWinnerDetails2026 = () => {
             year="2025"
             eyebrow="Back-to-Back Winner"
             title="B-A-A-S Innovator of the Year 2025"
-            description="Recognised as Leatherback in 2025 and honoured again as Foren in 2026, the company continues to lead Banking-as-a-Service innovation with infrastructure that powers global payments."
+            description="Recognised as leatherback in 2025 and honoured again as Foren in 2026, the company continues to lead Banking-as-a-Service innovation with infrastructure that powers global payments."
             href="/award-winners-2025/Leatherback-B-A-A-S-innovator-2025"
           />
 
@@ -329,7 +337,7 @@ const ForenBaasInnovatorWinnerDetails2026 = () => {
                 Conclusion
               </h2>
               <p className="mb-0 mt-3 text-base leading-relaxed text-zinc-700">
-                <Strong>Foren</Strong>, formerly <Strong>Leatherback</Strong>, combines multi-currency accounts,
+                <Strong>Foren.</Strong> formerly <Strong>leatherback</Strong>, combines multi-currency accounts,
                 cross-border payments, API-based infrastructure, global collections,
                 and payouts to support the evolving needs of modern businesses. Its
                 technology-driven approach makes it a deserving recipient of the{" "}

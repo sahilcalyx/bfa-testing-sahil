@@ -51,7 +51,7 @@ const FEATURES = [
   },
   {
     title: "Secure & Regulated Operations",
-    body: "3ribe operates through Grants PaymentSolutions Ltd, which is authorised and regulated by the UK Financial Conduct Authority for the provision of payment services and is licensed by HMRC as a Money Services Business. 3ribe also highlights security, authentication and compliance as core elements of its platform.",
+    body: "3ribe operates through Grants Payment Solutions Ltd, which is authorised and regulated by the UK Financial Conduct Authority for the provision of payment services and is licensed by HMRC as a Money Services Business. 3ribe also highlights security, authentication and compliance as core elements of its platform.",
     Icon: ShieldCheck,
   },
 ];
@@ -60,6 +60,7 @@ const COMPANY = "3ribe";
 const PERSON = "";
 const ROLE = "";
 const LOGO = "/assets/img/winner-logos-26/Winners-logo-white/3ribe.png";
+const PORTRAIT = "/assets/img/winner-logos-26/winners-with-trophy-2026/Startup-of-the-Year-2026.png";
 const LOGO_INVERT = false;
 const INTRO_AWARD_LINES = [AWARD];
 const TITLE_LINES = ["Startup", "of the Year", "2026"];
@@ -237,7 +238,7 @@ const TribeStartupOfTheYearWinnerDetails2026 = () => {
 
           <motion.div
             style={{ y: contentY }}
-            className="relative z-10 mx-auto grid max-w-6xl items-center gap-6 px-5 pt-6 md:px-8 md:pt-8 lg:grid-cols-12 lg:gap-8"
+            className="relative z-10 mx-auto grid max-w-6xl items-end gap-6 px-5 pt-6 md:px-8 md:pt-8 lg:grid-cols-12 lg:gap-8"
           >
             <div className="pb-8 md:pb-10 lg:col-span-7">
               <motion.div
@@ -270,21 +271,28 @@ const TribeStartupOfTheYearWinnerDetails2026 = () => {
                   </span>
                 ))}
               </motion.h1>
+
+              <motion.div
+                initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, ease: EASE, delay: 0.24 }}
+                className="mt-8"
+              >
+                {renderLogo("block h-12 max-w-[220px] object-left md:h-14", COMPANY, "text-3xl")}
+              </motion.div>
             </div>
 
             <motion.div
               initial={reduceMotion ? false : { opacity: 0, y: 28 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: EASE, delay: 0.2 }}
-              className="flex items-center justify-center pb-10 lg:col-span-5 lg:justify-end lg:pb-14"
+              className="flex items-end justify-center lg:col-span-5 lg:justify-end"
             >
-              <div className="flex w-full max-w-[400px] items-center justify-center lg:justify-end">
-                {renderLogo(
-                  "max-h-[140px] max-w-full drop-shadow-[0_6px_24px_rgba(200,16,46,0.55)]",
-                  `${winner}, winner of ${AWARD}`,
-                  "text-center text-5xl drop-shadow-[0_6px_24px_rgba(200,16,46,0.55)] sm:text-6xl"
-                )}
-              </div>
+              <img
+                src={PORTRAIT}
+                alt={`${winner}, winner of ${AWARD}`}
+                className="h-[340px] w-auto max-w-full object-contain object-bottom sm:h-[390px] lg:h-[440px]"
+              />
             </motion.div>
           </motion.div>
         </section>

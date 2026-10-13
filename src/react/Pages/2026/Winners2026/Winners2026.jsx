@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { FiArrowUpRight } from "react-icons/fi";
 import WinnersHero2026 from "./components/WinnersHero2026";
@@ -27,12 +27,24 @@ const PAST_EDITIONS = [
 
 const Winners2026 = () => {
   const reduceMotion = useReducedMotion();
-  const [activeId, setActiveId] = useState(winnerSections2026[0].id);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const requestedId = searchParams.get("category");
+  const activeId = winnerSections2026.some((section) => section.id === requestedId)
+    ? requestedId
+    : winnerSections2026[0].id;
   const [burstCount, setBurstCount] = useState(0);
 
   const selectSection = (id) => {
     if (id === activeId) return;
-    setActiveId(id);
+    setSearchParams(
+      (params) => {
+        const next = new URLSearchParams(params);
+        if (id === winnerSections2026[0].id) next.delete("category");
+        else next.set("category", id);
+        return next;
+      },
+      { replace: true, preventScrollReset: true }
+    );
     setBurstCount((count) => count + 1);
   };
   const active = winnerSections2026.find((section) => section.id === activeId);

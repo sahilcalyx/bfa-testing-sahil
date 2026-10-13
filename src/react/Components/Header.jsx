@@ -599,9 +599,14 @@ box-shadow: none;
                           className="d-none-sm mb-3 mt-4 "
                           onClick={handleNavLinkClick}
                         >
-                          <NavLink to="/award-winners-2026" className="btn-pro-1">
-                            <span>Winners 2026</span>
-                          </NavLink>
+                          <div className="d-flex flex-column align-items-start gap-3">
+                            <NavLink to="/award-winners-2026" className="btn-pro-1">
+                              <span>Winners 2026</span>
+                            </NavLink>
+                            <NavLink to="/photo-gallery-2026" className="btn-pro-2">
+                              <span>Gallery 2026</span>
+                            </NavLink>
+                          </div>
                           {/* <NavLink to="/sponsorship-categories#sponsorship-categories" className="btn-pro-1">
                             <span>Sponsor Now</span>
                           </NavLink> */}
@@ -654,9 +659,9 @@ box-shadow: none;
                   <NavLink to="/award-winners-2026" className="btn-pro-1">
                     <span>Winners 2026</span>
                   </NavLink>
-                  {/* <NavLink to="/sponsorship-categories#sponsorship-categories" className="btn-pro-1">
-                    <span>Sponsor Now</span>
-                  </NavLink> */}
+                  <NavLink to="/photo-gallery-2026" className="btn-pro-2 ">
+                    <span>Gallery 2026</span>
+                  </NavLink>
 
                   {/* <GalleryButton /> */}
 

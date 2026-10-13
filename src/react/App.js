@@ -162,6 +162,7 @@ const PurseBassSponsorDetails = lazy(() => import("./Pages/2025/OurSponsors/Purs
 const GallarySection2025 = lazy(() => import("./Pages/2025/GallarySection25/GallarySection2025"));
 const PhotoGallery2025 = lazy(() => import("./Pages/2025/GallarySection25/PhotoGallery2025"));
 const RegistrationPhotos2025 = lazy(() => import("./Pages/2025/GallarySection25/RegistrationPhotos2025"));
+const PhotoGallery2026 = lazy(() => import("./Pages/2026/Gallery2026/PhotoGallery2026"));
 const ChrisbourghWinnerDetails25 = lazy(() => import("./Pages/2025/Winner/WinnerDetailsPages/ChrisbourghWinnerDetails25"));
 const AyoremitWinnerDetails2025 = lazy(() => import("./Pages/2025/Winner/WinnerDetailsPages/AyoremitWinnerDetails2025"));
 const KmbalWinnerDetails2025 = lazy(() => import("./Pages/2025/Winner/WinnerDetailsPages/KmbalWinnerDetails2025"));
@@ -958,6 +959,8 @@ function App() {
 
 
         {/* Gallary 2025 Pages End */}
+
+        <Route path="/photo-gallery-2026" element={<PhotoGallery2026 />} />
          <Route path="/all-testimonials" element={<AllTestimonials />} />
 
         

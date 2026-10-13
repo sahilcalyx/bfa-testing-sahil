@@ -23,6 +23,7 @@ const AWARD = "Payment Innovator 2026";
 const COMPANY = "Neema";
 // White artwork on transparent: render on dark surfaces only.
 const LOGO = "/assets/img/winner-logos-26/Winners-logo-white/Neema.png";
+const PORTRAIT = "/assets/img/winner-logos-26/winners-with-trophy-2026/Payment%20Innovator%202026%20Neema.png";
 
 const KEY_POINTS = [
   {
@@ -173,7 +174,7 @@ const NeemaPaymentInnovatorWinnerDetails2026 = () => {
 
           <motion.div
             style={{ y: contentY }}
-            className="relative z-10 mx-auto grid max-w-6xl items-center gap-6 px-5 pt-6 md:px-8 md:pt-8 lg:grid-cols-12 lg:gap-8"
+            className="relative z-10 mx-auto grid max-w-6xl items-end gap-6 px-5 pt-6 md:px-8 md:pt-8 lg:grid-cols-12 lg:gap-8"
           >
             <div className="pb-8 md:pb-10 lg:col-span-7">
               <motion.div
@@ -206,28 +207,28 @@ const NeemaPaymentInnovatorWinnerDetails2026 = () => {
                   2026
                 </span>
               </motion.h1>
+
+              <motion.img
+                src={LOGO}
+                alt={COMPANY}
+                initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, ease: EASE, delay: 0.24 }}
+                className="mt-8 block h-12 w-auto max-w-[220px] object-contain object-left md:h-14"
+              />
             </div>
 
             <motion.div
               initial={reduceMotion ? false : { opacity: 0, y: 28 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: EASE, delay: 0.2 }}
-              className="flex items-center justify-center pb-10 lg:col-span-5 lg:justify-end lg:pb-14"
+              className="flex items-end justify-center lg:col-span-5 lg:justify-end"
             >
-              <div className="flex w-full max-w-[400px] items-center justify-center lg:justify-end">
-                <motion.img
-                  src={LOGO}
-                  alt={`${COMPANY}, winner of ${AWARD}`}
-                  initial={
-                    reduceMotion
-                      ? false
-                      : { opacity: 0, scale: 0.7, filter: "blur(12px)", clipPath: "circle(0% at 50% 50%)" }
-                  }
-                  animate={{ opacity: 1, scale: 1, filter: "blur(0px)", clipPath: "circle(75% at 50% 50%)" }}
-                  transition={{ duration: 1.1, ease: EASE, delay: reduceMotion ? 0 : INTRO_SECONDS }}
-                  className="h-[150px] w-auto max-w-full object-contain drop-shadow-[0_6px_24px_rgba(200,16,46,0.55)] sm:h-[180px]"
-                />
-              </div>
+              <img
+                src={PORTRAIT}
+                alt={`${COMPANY}, winner of ${AWARD}`}
+                className="h-[340px] w-auto max-w-full object-contain object-bottom sm:h-[390px] lg:h-[440px]"
+              />
             </motion.div>
           </motion.div>
         </section>

@@ -5,7 +5,7 @@ import { motion, useReducedMotion } from "motion/react";
 
 const Gallery2026Mobile = ({ cards, title, subtitle, action }) => {
   const reduce = useReducedMotion();
-  // front-of-stack card is image 1, so reverse to show 1 → 8 top to bottom
+  // reverse so the front-of-stack card is listed first
   const ordered = [...cards].reverse();
 
   return (

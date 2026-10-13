@@ -933,6 +933,14 @@ h6,
   left: 140%;
 }
 
+/* Keep text white when the button's NavLink matches the current page */
+.btn-pro-1.active,
+.btn-pro-1.active span,
+.btn-pro-2.active,
+.btn-pro-2.active span {
+  color: #fff !important;
+}
+
 
 /* New BFA26 Button 2 */
 

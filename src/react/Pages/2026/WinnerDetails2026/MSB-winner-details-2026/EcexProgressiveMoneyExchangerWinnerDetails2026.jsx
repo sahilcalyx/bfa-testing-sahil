@@ -242,7 +242,7 @@ const EcexProgressiveMoneyExchangerWinnerDetails2026 = () => {
                 transition={{ duration: 0.6, ease: EASE }}
               >
                 <Link
-                  to="/award-winners-2026"
+                  to="/award-winners-2026?category=msb"
                   className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.22em] text-white/70 no-underline transition-colors hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
                 >
                   <FiArrowLeft aria-hidden="true" />

@@ -321,12 +321,14 @@ Brit Fintech Awards 2026."
         {/* <InteractiveHero /> */}
         {/* <HeroSection2026 /> */}
 
-        {/* <Gallery2026 /> */}
+       
         {/* <CountdownSlider2025/> */}
         {/* Compare A: minimal white strip */}
         {/* <CountdownSlider2026 /> */}
         {/* Compare B: animated hero-theme strip */}
        
+        
+        <Gallery2026 />
         <SponsorSection2026 />
         {/* <EventSchedule2026 /> */}
         <KeynoteSpeaker2026 /> 

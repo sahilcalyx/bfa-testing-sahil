@@ -14,6 +14,9 @@ import {
 import ReCAPTCHA from "react-google-recaptcha";
 import PrcingTable from "../Components/PrcingTable";
 import PricingBFA from "../Components/PricingBFA";
+// Set to false to re-open the sponsorship enquiry form.
+const FORM_BLOCKED = true;
+
 const Sponsors = () => {
   const [showModal, setShowModal] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
@@ -266,6 +269,7 @@ const Sponsors = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (FORM_BLOCKED) return;
     setLoading(true); // Set loading to true when the form is submitted
 
     // Form validation
@@ -632,6 +636,15 @@ const Sponsors = () => {
               <p>Complete the form now and join our sponsors list.</p>
               <div className="cs-height_10 cs-height_lg_10" />
               <form className="cs-contact_form" onSubmit={handleSubmit} >
+                <fieldset
+                  disabled={FORM_BLOCKED}
+                  aria-disabled={FORM_BLOCKED}
+                  style={
+                    FORM_BLOCKED
+                      ? { border: 0, margin: 0, padding: 0, minWidth: 0, opacity: 0.6, cursor: "not-allowed" }
+                      : { border: 0, margin: 0, padding: 0, minWidth: 0 }
+                  }
+                >
                 <div className="row cs-row_gap_20">
                   <div className="col-sm-6">
                     <div className="input-container d-flex">
@@ -901,6 +914,7 @@ const Sponsors = () => {
                     {loading ? "Submitting..." : "Submit Interest"}
                   </span>
                 </button>
+                </fieldset>
               </form>
             </div>
           </div>
