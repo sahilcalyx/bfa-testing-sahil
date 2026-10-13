@@ -33,12 +33,12 @@ const PhotoGallery2026 = () => {
     ...makeImages("networking", 87),
     ...makeImages("discussion", 27),
     ...makeImages("keynote", 7),
-    ...makeImages("food-drinks", 58),
+    ...makeImages("food-drinks", 51),
     ...makeImages("focus-session", 16),
     ...makeImages("venue", 42),
     ...makeImages("winner-photos", 85),
     ...makeImages("team", 37),
-    ...makeImages("branding-banners", 11),
+    ...makeImages("event-branding", 11),
     ...makeImages("audience", 15),
     ...makeImages("host", 21),
     ...makeImages("thank-you-gifts", 18),
@@ -115,11 +115,11 @@ const PhotoGallery2026 = () => {
     { id: "winner-photos", label: "Winner Photos" },
     { id: "networking", label: "Networking" },
     { id: "audience", label: "Audience" },
-    { id: "branding-banners", label: "Branding Banners" },
+    { id: "event-branding", label: "Brand Exposure" },
     { id: "food-drinks", label: "Food and Drinks" },
     { id: "thank-you-gifts", label: "Thank You Gifts" },
     { id: "team", label: "Team" },
-    { id: "others", label: "Others" },
+    // { id: "others", label: "Others" },
   ];
 
   const activeLabel = categories.find((c) => c.id === activeCategory)?.label;
