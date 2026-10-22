@@ -12,9 +12,10 @@ const ContactUs = () => {
     title: "",
     firstName: "",
     lastName: "",
-    mobile: "",
+    phone: "",
     email: "",
     message: "",
+    inquiryType: "general",
     reCaptcha: "",
   });
   const [errors, setErrors] = useState({});
@@ -81,24 +82,20 @@ const ContactUs = () => {
         }
         break;
 
-      case "mobile":
+      case "phone":
+      case "mobile": {
         let numericValue = value;
-        // Check if the mobile number starts with a "+"
         if (numericValue.startsWith("+")) {
-          // Remove all non-numeric characters except "+"
           numericValue = "+" + numericValue.slice(1).replace(/\D/g, "");
         } else {
-          // Remove all non-numeric characters
           numericValue = numericValue.replace(/\D/g, "");
         }
 
-        // Update form data with cleaned mobile number
         setFormData((prevFormData) => ({
           ...prevFormData,
-          [id]: numericValue,
+          phone: numericValue,
         }));
 
-        // Check if the mobile number is at least 10 digits (excluding the "+")
         if (
           numericValue.startsWith("+")
             ? numericValue.length < 15
@@ -108,6 +105,14 @@ const ContactUs = () => {
             "Mobile Number should be Min 10 digits and max 15 digits";
         } else {
           delete updatedErrors.phone;
+        }
+        break;
+      }
+      case "inquiryType":
+        if (!value) {
+          updatedErrors.inquiryType = "Please select an enquiry type";
+        } else {
+          delete updatedErrors.inquiryType;
         }
         break;
       default:
@@ -135,13 +140,16 @@ const ContactUs = () => {
       newErrors.lastName = "Numbers are not allowed in Last Name";
     }
 
-    if (!formData.phone.trim()) {
+    if (!formData.phone?.trim()) {
       newErrors.phone = "Mobile is required";
     } else if (!/^\+?[0-9]{10,15}$/.test(formData.phone)) {
       newErrors.phone = "Mobile is invalid";
     }
     if (!formData.title) {
       newErrors.title = "Please select a title";
+    }
+    if (!formData.inquiryType) {
+      newErrors.inquiryType = "Please select an enquiry type";
     }
 
     // if (!captchaToken) {
@@ -172,15 +180,15 @@ const ContactUs = () => {
     setErrors(newErrors);
     // If no errors, submit form data
     if (Object.keys(newErrors).length === 0) {
+      const isMarketing = formData.inquiryType === "marketing";
+      const apiEndpoint = isMarketing ? "/api/contact/marketing" : "/api/contact";
       const finalFormData = {
-        ...formData, // Spread the formData fields
-        reCaptcha: captchaToken, // Add the captcha token
+        ...formData,
+        phone: formData.phone,
+        reCaptcha: captchaToken,
       };
       axios
-        .post(
-          "/api/contact",
-          finalFormData
-        )
+        .post(apiEndpoint, finalFormData)
         .then((response) => {
           if (response.data.response === false) {
             console.error("Error:", response.data.data);
@@ -226,9 +234,10 @@ const ContactUs = () => {
       title: "",
       firstName: "",
       lastName: "",
-      mobile: "",
+      phone: "",
       email: "",
       message: "",
+      inquiryType: "general",
     });
   };
   const handleCheckboxChange = (e) => {
@@ -347,6 +356,18 @@ const ContactUs = () => {
                     <a href="mailto:kudos@britfintechawards.com">
                       kudos@britfintechawards.com
                     </a>
+                    <div style={{ fontSize: "12px", marginTop: "4px", opacity: 0.85 }}>
+                      General Enquiry &amp; Support
+                    </div>
+                  </li>
+                  <li>
+                    <i className="far fa-envelope" />{" "}
+                    <a href="mailto:marketing@britfintechawards.com">
+                      marketing@britfintechawards.com
+                    </a>
+                    <div style={{ fontSize: "12px", marginTop: "4px", opacity: 0.85 }}>
+                      Marketing, Media &amp; Press
+                    </div>
                   </li>
 
                   {/* <li>
@@ -397,6 +418,46 @@ const ContactUs = () => {
               <div className="cs-height_10 cs-height_lg_10" />
               <form className="cs-contact_form" onSubmit={handleSubmit}>
                 <div className="row cs-row_gap_20">
+                  <div className="col-lg-12">
+                    <label
+                      htmlFor="inquiryType"
+                      style={{ display: "block", marginBottom: "8px", fontWeight: 600 }}
+                    >
+                      Nature of Enquiry
+                    </label>
+                    <select
+                      id="inquiryType"
+                      className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color ${
+                        errors.inquiryType && "error-border"
+                      }`}
+                      onChange={handleChange}
+                      value={formData.inquiryType}
+                    >
+                      <option value="general">
+                        General Enquiry &amp; Support
+                      </option>
+                      <option value="marketing">
+                        Marketing, Media &amp; Press Enquiries
+                      </option>
+                    </select>
+                    {errors.inquiryType && (
+                      <div className="error text-danger">{errors.inquiryType}</div>
+                    )}
+                    <p
+                      style={{
+                        marginTop: "8px",
+                        marginBottom: 0,
+                        fontSize: "13px",
+                        color: "#697386",
+                        lineHeight: 1.5,
+                      }}
+                    >
+                      {formData.inquiryType === "marketing"
+                        ? "For media coverage, press releases, interviews, and marketing partnerships. Your enquiry will be directed to our Marketing & Press Office at marketing@britfintechawards.com."
+                        : "For general questions, event information, and other support requests. Your enquiry will be directed to our team at kudos@britfintechawards.com."}
+                    </p>
+                    <div className="cs-height_20 cs-height_lg_20" />
+                  </div>
                   <div className="col-sm-6">
                     <div className="input-container d-flex">
                       <select
@@ -459,7 +520,7 @@ const ContactUs = () => {
                   <div className="col-sm-6">
                     <input
                       type="text"
-                      id="mobile"
+                      id="phone"
                       className={`cs-form_field cs-white_bg cs-accent_30_border cs-primary_color ${errors.phone && "error-border"
                         }`}
                       maxLength="15"

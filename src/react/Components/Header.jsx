@@ -437,6 +437,18 @@ box-shadow: none;
                                 className={`nav-link  ${
                                   isSticky ? "" : "text-dark"
                                 }`}
+                                to="/photo-gallery-2026"
+                                style={{ color: "#333", fontWeight: "600" }}
+                                onClick={handleNavLinkClick}
+                              >
+                                Photos 2026
+                              </NavLink>
+                            </li>
+                            <li id={splitLocation[2] === "" ? "" : ""}>
+                              <NavLink
+                                className={`nav-link  ${
+                                  isSticky ? "" : "text-dark"
+                                }`}
                                 to="/photo-gallery-2025"
                                 style={{ color: "#333", fontWeight: "600" }}
                                 onClick={handleNavLinkClick}
@@ -496,6 +508,18 @@ box-shadow: none;
                               isDropdownOpen6 ? "show" : ""
                             }`}
                           >
+                            <li id={splitLocation[2] === "" ? "active" : ""}>
+                              <NavLink
+                                className={`nav-link ${
+                                  isSticky ? "" : "text-dark"
+                                }`}
+                                to="/video-gallery-2026"
+                                style={{ color: "#333", fontWeight: "600" }}
+                                onClick={handleNavLinkClick}
+                              >
+                                Videos 2026
+                              </NavLink>
+                            </li>
                             <li id={splitLocation[2] === "" ? "active" : ""}>
                               <NavLink
                                 className={`nav-link ${

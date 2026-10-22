@@ -119,15 +119,27 @@ const Footer = () => {
                 <h2 className="cs-widget_title " style={{ fontWeight: "600" }}>Contact Us</h2>
                 <ScrollToTopButton />
                 <div className="cs-footer_item cs-address_widgert">
-                  <ul className="text-white">
-                    <li>
-                      <i className="far fa-envelope-open" />
+                  <ul className="text-white" style={{ listStyle: "none", margin: 0, padding: 0 }}>
+                    <li style={{ position: "relative", paddingLeft: "28px", marginBottom: "14px" }}>
+                      <i className="far fa-envelope" style={{ position: "absolute", left: 0, top: "4px", width: "18px", textAlign: "center" }} />
                       <NavLink to="mailto:kudos@britfintechawards.com">
                         kudos@britfintechawards.com
                       </NavLink>
+                      <div style={{ fontSize: "12px", marginTop: "4px", opacity: 0.85, lineHeight: 1.3 }}>
+                        General Enquiry &amp; Support
+                      </div>
                     </li>
-                    <li>
-                      <i className="far fa-address-book" />
+                    <li style={{ position: "relative", paddingLeft: "28px", marginBottom: "14px" }}>
+                      <i className="far fa-envelope" style={{ position: "absolute", left: 0, top: "4px", width: "18px", textAlign: "center" }} />
+                      <NavLink to="mailto:marketing@britfintechawards.com">
+                        marketing@britfintechawards.com
+                      </NavLink>
+                      <div style={{ fontSize: "12px", marginTop: "4px", opacity: 0.85, lineHeight: 1.3 }}>
+                        Marketing, Media &amp; Press
+                      </div>
+                    </li>
+                    <li style={{ position: "relative", paddingLeft: "28px" }}>
+                      <i className="fas fa-phone-alt" style={{ position: "absolute", left: 0, top: "4px", width: "18px", textAlign: "center" }} />
                       <NavLink to="tel:+442038283277">+44 20 3828 3277</NavLink>
                     </li>
                   </ul>

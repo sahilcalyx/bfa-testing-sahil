@@ -17,6 +17,7 @@ export const alonaShevtsova = {
   logoOnDark: false,
   img: "/assets/img/discussionpanel-2026/Alona-Shevtsova.jpg",
   placeholder: false,
+  videoUrl: "https://www.youtube.com/embed/UA-M7v1Vy7U",
   tagline: "Can Fintechs and MSBs Afford to Ignore AI?",
   linkedin: "https://www.linkedin.com/in/alyona-shevtsova-43489420/",
   stats: {

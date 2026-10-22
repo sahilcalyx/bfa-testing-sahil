@@ -13,6 +13,7 @@ import {
   Megaphone,
   Sparkles,
 } from "lucide-react";
+import WinnerVideoSection2026 from "../components/WinnerVideoSection2026";
 import { ArcRevealHero } from "@/components/ui/arc-preloader-hero";
 import WinnersConfetti2026 from "../../Winners2026/components/WinnersConfetti2026";
 
@@ -383,6 +384,13 @@ const DaljitYoungVisionaryWomanInAiWinnerDetails2026 = () => {
               </p>
             </motion.section>
           </div>
+
+          <WinnerVideoSection2026
+            className="mt-16"
+            videoId="ap62ESX40qQ"
+            title="Daljit Young Wins Visionary Woman in AI 2026"
+          />
+
         </div>
       </article>
       </ArcRevealHero>

@@ -176,6 +176,7 @@ const RedSeaMoneyTransferWinnerDetails2025 = lazy(() => import("./Pages/2025/Win
 const AllTestimonials = lazy(() => import("./Pages/AllTestimonials"));
 const InsidetheBFAExperienceNetworkingEnergyandInnovation = lazy(() => import("./Pages/Blogs/InsidetheBFAExperienceNetworkingEnergyandInnovation"));
 const VideoGallery2025 = lazy(() => import("./Pages/2025/VideoGallary25/VideoGallery2025"));
+const VideoGallery2026 = lazy(() => import("./Pages/2026/VideoGallery2026/VideoGallery2026"));
 const TheBankinYourPocketHowEverydayAppsBecameGlobalBanks = lazy(() => import("./Pages/Blogs/TheBankinYourPocketHowEverydayAppsBecameGlobalBanks"));
 const Awards24 = lazy(() => import("./Pages/Awards copy"));
 const Awards2024 = lazy(() => import("./Pages/AwardsCategory"));
@@ -276,6 +277,7 @@ function App() {
         <Route path="/dinner-2024" element={<DinnerGallery />} />
         <Route path="/video-gallery-2024" element={<VideoGallery />} />
         <Route path="/video-gallery-2025" element={<VideoGallery2025 />} />
+        <Route path="/video-gallery-2026" element={<VideoGallery2026 />} />
         <Route path="/ticket-booking" element={<TicketBookingPage />} />
         <Route path="/ticket-booking-test" element={<TicketBookingPage />} />
         <Route path="/nominate-booking-sponsorship" element={<NominateBookSponsor />} />

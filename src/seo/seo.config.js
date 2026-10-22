@@ -1179,6 +1179,26 @@ export const seoByPath = {
       images: ["/assets/img/og/photo-gallery-2025.jpg"],
     },
   },
+  "/video-gallery-2026": {
+    title: "Video Gallery 2026 | Brit Fintech Awards 2026 ",
+    description: "Watch the Brit Fintech Awards 2026 videos - event highlights, keynote speaker, discussion panelists, sponsors and jury.",
+    openGraph: {
+      title: "Video Gallery 2026 | Brit Fintech Awards 2026 ",
+      description: "Watch the Brit Fintech Awards 2026 videos - event highlights, keynote speaker, discussion panelists, sponsors and jury.",
+      url: `${siteBaseUrl}/video-gallery-2026`,
+      siteName,
+      images: [
+        { url: "/assets/img/og/photo-gallery-2025.jpg", width: 1200, height: 630, alt: "Video Gallery" },
+      ],
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Video Gallery 2026 | Brit Fintech Awards 2026 ",
+      description: "Watch the Brit Fintech Awards 2026 videos - event highlights, keynote speaker, discussion panelists, sponsors and jury.",
+      images: ["/assets/img/og/photo-gallery-2025.jpg"],
+    },
+  },
   "/video-gallery-2024": {
     title: "Video Gallery 2024 | Brit Fintech Awards 2024 ",
     description: "How Brit Fintech Awards celebrates global innovation beyond borders.",

@@ -1,12 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { motion, useReducedMotion } from "framer-motion";
-import { FiArrowUpRight } from "react-icons/fi";
+import { FiArrowUpRight, FiVolume2 } from "react-icons/fi";
 import { focusSession2026 } from "./speakers2026";
 
 const EASE = [0.16, 1, 0.3, 1];
+const SESSION_VIDEO_ID = "oU2rhIwkqFE";
+const SESSION_VIDEO_TITLE = "What is High Risk? — Focus Session | Brit FinTech Awards 2026";
+
+const mutedEmbedSrc = `https://www.youtube.com/embed/${SESSION_VIDEO_ID}?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1&loop=1&playlist=${SESSION_VIDEO_ID}`;
+const unmutedEmbedSrc = `https://www.youtube.com/embed/${SESSION_VIDEO_ID}?autoplay=1&mute=0&controls=1&modestbranding=1&rel=0&playsinline=1`;
 
 const PAGE_TITLE = "What is High Risk? | Brit FinTech Awards 2026";
 const PAGE_DESCRIPTION =
@@ -14,6 +19,7 @@ const PAGE_DESCRIPTION =
 
 const HighRiskSessionPage = () => {
   const reduceMotion = useReducedMotion();
+  const [unmuted, setUnmuted] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -61,6 +67,46 @@ const HighRiskSessionPage = () => {
             </p>
           </BriefCopy>
         </Brief>
+
+        <VideoSection
+          aria-labelledby="high-risk-video"
+          initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 0.5, ease: EASE }}
+        >
+          <VideoHeader>
+            <VideoLabel id="high-risk-video">Watch the session</VideoLabel>
+            <VideoDeck>
+              Stefan Binder and Osman Ibrahim on what “high risk” means for FinTech and MSB businesses.
+            </VideoDeck>
+          </VideoHeader>
+
+          <VideoStage>
+            <VideoFrame>
+              <iframe
+                key={unmuted ? "unmuted" : "muted"}
+                src={unmuted ? unmutedEmbedSrc : mutedEmbedSrc}
+                title={SESSION_VIDEO_TITLE}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              />
+              {!unmuted ? (
+                <UnmuteOverlay
+                  type="button"
+                  onClick={() => setUnmuted(true)}
+                  aria-label="Unmute and play with sound"
+                >
+                  <UnmuteCue>
+                    <FiVolume2 aria-hidden="true" />
+                    <span>Tap for sound</span>
+                  </UnmuteCue>
+                </UnmuteOverlay>
+              ) : null}
+            </VideoFrame>
+          </VideoStage>
+        </VideoSection>
 
         <Speakers aria-labelledby="high-risk-speakers">
           <SpeakersTitle id="high-risk-speakers">Meet the speakers</SpeakersTitle>
@@ -205,6 +251,112 @@ const BriefCopy = styled.div`
 
   p:last-child {
     margin-bottom: 0;
+  }
+`;
+
+const VideoSection = styled(motion.section)`
+  margin-top: 48px;
+  padding: 36px 0 8px;
+  border-top: 1px solid #e4e1db;
+`;
+
+const VideoHeader = styled.div`
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+  gap: 32px;
+  margin-bottom: 24px;
+
+  @media (max-width: 720px) {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+`;
+
+const VideoLabel = styled.h2`
+  margin: 4px 0 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #c8102e;
+`;
+
+const VideoDeck = styled.p`
+  margin: 0;
+  max-width: 36em;
+  font-size: 17px;
+  line-height: 1.55;
+  color: #3a3835;
+`;
+
+const VideoStage = styled.div`
+  border: 1px solid #e6e2dc;
+  background: #14080c;
+  overflow: hidden;
+`;
+
+const VideoFrame = styled.div`
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: #0a0406;
+
+  iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+`;
+
+const UnmuteOverlay = styled.button`
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 20px;
+  border: 0;
+  background: linear-gradient(
+    to top,
+    rgba(10, 4, 6, 0.55) 0%,
+    rgba(10, 4, 6, 0.12) 42%,
+    transparent 70%
+  );
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: 2px solid #c8102e;
+    outline-offset: -2px;
+  }
+
+  &:hover > span {
+    background: #c8102e;
+    border-color: #c8102e;
+  }
+`;
+
+const UnmuteCue = styled.span`
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 9999px;
+  background: #161616;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: background 0.2s ease, border-color 0.2s ease;
+
+  svg {
+    font-size: 15px;
   }
 `;
 

@@ -17,6 +17,7 @@ import {
 import { ArcRevealHero } from "@/components/ui/arc-preloader-hero";
 import WinnersConfetti2026 from "../../Winners2026/components/WinnersConfetti2026";
 import PreviousWinStrip2026 from "../components/PreviousWinStrip2026";
+import WinnerVideoSection2026 from "../components/WinnerVideoSection2026";
 
 const EASE = [0.16, 1, 0.3, 1];
 const DISPLAY = "Oswald, sans-serif";
@@ -309,9 +310,7 @@ const GbgAntiFraudInnovatorWinnerDetails2026 = () => {
                 {emphasize(text)}
               </p>
             ))}
-          </motion.section>
-
-          <motion.section
+          </motion.section><motion.section
             initial={reduceMotion ? false : { opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
@@ -388,6 +387,13 @@ const GbgAntiFraudInnovatorWinnerDetails2026 = () => {
               </p>
             </motion.section>
           </div>
+
+          <WinnerVideoSection2026
+            className="mt-16"
+            videoId="eO4wI81i3qY"
+            title="GBG Wins Anti-Fraud Innovator 2026"
+          />
+
         </div>
       </article>
       </ArcRevealHero>

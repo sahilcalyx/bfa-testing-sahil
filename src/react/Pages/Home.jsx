@@ -35,9 +35,13 @@ import GallarySection2025 from "./2025/GallarySection25/GallarySection2025";
 import TestimonialSlider2025 from "../Components/Testmonials/TestimonialSlider2025";
 import WinnerBanner from "../Components/SliderBigBan/WinnerBanner";
 import WinnerBanner2026 from "../Components/WinnerBanner2026";
+import HeroHighlightVideo from "../Components/HeroHighlightVideo";
+import HeroFilmGate2026 from "../Components/HeroFilmGate2026";
+import HeroKineticStrip2026 from "../Components/HeroKineticStrip2026";
 import ImageStreamHeroSection from "../Components/ImageStreamHeroSection";
 import TestimonialCommon from "../Components/Testmonials/TestimonialCommon";
 import BFA26Section from "../Components/BFA26Section";
+import VideoGallerySection from "../Components/VideoGallerySection";
 import { color } from "framer-motion";
 import SponsorSection2026 from "../Components/SponsorSection2026";
 import WhoAttendsBfaSection from "../Components/WhoAttendsBfaSection";
@@ -316,10 +320,14 @@ Brit Fintech Awards 2026."
         {/* <DynamicSliderSplit /> */}
         {/* <DynamicSliderVideo /> */}
         {/* <DownloadAppStrip /> */}
+        {/* Compare A: <HeroHighlightVideo /> */}
+        {/* Compare B: <HeroFilmGate2026 /> */}
+        <HeroKineticStrip2026 />
         <WinnerBanner2026 />
+        <Gallery2026 />
         <ImageStreamHeroSection />
 
-        <Gallery2026 />
+       
 
         <SponsorSection2026 />
 
@@ -369,163 +377,21 @@ Brit Fintech Awards 2026."
 
         {/* <div className="cs-height_20 cs-height_lg_20" /> */}
        
-        <div
-          className="cs-gradient_bg_2 "
-          style={{
-            backgroundImage:
-              'url("../assets/img/event-conference/counter_bg2.png")',
-            backgroundPosition: "center center",
-            backgroundSize: "cover",
-          }}
-        >
-          <div className="cs-height_35 cs-height_lg_35" />
-          <div
-            className="container wow fadeInUp"
-            data-wow-duration="1s"
-            data-wow-delay="0.2s"
-          >
-            <div
-              className="container cs-bg_parallax"
-              data-wow-duration="1s"
-              data-wow-delay="0.2s"
-              bis_skin_checked={1}
-            >
-              <div
-                className="cs-section_heading cs-style2 cs-size3 text-center text-uppercase"
-                bis_skin_checked={1}
-              >
-                <div
-                  className="cs-section_subtitle cs-primary_font cs-medium cs-accent_color text-white"
-                  bis_skin_checked={1}
-                >
-                  <span style={{ color: "#c8102e" }}> <strong>VIDEO GALLERY 2026</strong></span>
-                </div>
-                <h2
-                  className="cs-section_title cs-extra_bold "
-                  style={{ color: "#ffffffff" }}
-                >
-                  Highlights That Define Fintech Excellence
-                </h2>
-              </div>
-              <div
-                className="cs-height_70 cs-height_lg_50"
-                bis_skin_checked={1}
-              />
-            </div>
-          </div>
-          <div
-            className="container wow fadeIn"
-            data-wow-duration="1s"
-            data-wow-delay="0.3s"
-          >
-            <div className="row justify-content-center">
-              <div className="col-lg-4">
-                <a
-                  href="https://youtu.be/HfSIeOrDXWc"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <div
-                    className="cs-post cs-style10 position-relative"
-                    style={{ height: "400px" }}
-                  >
-                    <iframe
-                      width="100%"
-                      height="100%"
-                      src="https://www.youtube.com/embed/HfSIeOrDXWc?autoplay=1&mute=1&loop=1&playlist=HfSIeOrDXWc&controls=0&modestbranding=1&rel=0"
-                      loading="lazy"
-                      title="Brit FinTech Awards 2026"
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                      referrerPolicy="strict-origin-when-cross-origin"
-                      allowFullScreen
-                      className="cs-post_thumb cs-bg"
-                    />
-                    <div className="cs-post_info">
-                      <h2 className="cs-post_title cs-white cs-white_hover">
-                        
-Download the BFA app and start networking.
-                      </h2>
-                    </div>
-                  </div>
-                </a>
-                <div className="cs-height_30 cs-height_lg_30" />
-              </div>
-              <div className="col-lg-4">
-                <a
-                  href="https://youtu.be/JEpncdxVGMg?si=03nr6SXJ1c36QeXj"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <div
-                    className="cs-post cs-style10 position-relative"
-                    style={{ height: "400px" }}
-                  >
-                    <iframe
-                      width="100%"
-                      height="100%"
-                      src="https://www.youtube.com/embed/JEpncdxVGMg?autoplay=1&mute=1&loop=1&playlist=JEpncdxVGMg&controls=0&modestbranding=1&rel=0"
-                      loading="lazy"
-                      title="Who decided the BFA26 stage? | Meet our Jury"
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                      referrerPolicy="strict-origin-when-cross-origin"
-                      allowFullScreen
-                      className="cs-post_thumb cs-bg"
-                    />
-                    <div className="cs-post_info">
-                      <h2 className="cs-post_title cs-white cs-white_hover">
-                        Who decides who takes the BFA26 stage? | Meet our jury
-                      </h2>
-                    </div>
-                  </div>
-                </a>
-                <div className="cs-height_30 cs-height_lg_30" />
-              </div>
-              <div className="col-lg-4">
-                <a
-                  href="https://youtu.be/o6WjXbRSEFo?si=SXeVqu-AaT9Fz7yZ"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <div
-                    className="cs-post cs-style10 position-relative"
-                    style={{ height: "400px" }}
-                  >
-                    <iframe
-                      width="100%"
-                      height="100%"
-                      src="https://www.youtube.com/embed/o6WjXbRSEFo?autoplay=1&mute=1&loop=1&playlist=o6WjXbRSEFo&controls=0&modestbranding=1&rel=0"
-                      loading="lazy"
-                      title="London's skyline is about to host something different."
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                      referrerPolicy="strict-origin-when-cross-origin"
-                      allowFullScreen
-                      className="cs-post_thumb cs-bg"
-                    />
-                    <div className="cs-post_info">
-                      <h2 className="cs-post_title cs-white cs-white_hover">
-                        London's skyline is about to host something different.
-                      </h2>
-                    </div>
-                  </div>
-                </a>
-                <div className="cs-height_30 cs-height_lg_30" />
-              </div>
-            </div>
-            <div className="text-center" bis_skin_checked="1">
-              <NavLink
-                to="/video-gallery-2025"
-                className="cs-btn cs-style1  cs-btn_lg cs-medium text_uppercase cs-primary_font cs-accent_bg cs-accent_border cs-white cs-accent_bg_2_hover cs-white_hover cs-accent_border_2_hover"
-                bis_skin_checked={1}
-              >
-                View More Videos
-              </NavLink>
-            </div>
-          </div>
-          <div className="cs-height_50 cs-height_lg_50" />
-        </div>
+        <VideoGallerySection
+          subtitle="BFA26 • FOCUS SESSION"
+          heading={`What Does "High Risk" Really Mean?`}
+          deck="Understanding Risk in Today's FinTech Landscape"
+          viewMoreLink="/focus-session-2026"
+          viewMoreLabel="Watch Full Session"
+          secondaryLink="/video-gallery-2026"
+          secondaryLabel="Watch All Videos"
+          videos={[
+            {
+              id: "oU2rhIwkqFE",
+              title: `What Does "High Risk" Really Mean?`,
+            },
+          ]}
+        />
         
         <WhoAttendsBfaTabsSection />
         <GlobalConnectivitySection />
@@ -645,10 +511,10 @@ Download the BFA app and start networking.
  <GallarySection2025 /> */}
         {/* End Hero Seciton */}
 
-        <div className="cs-height_60 cs-height_lg_45" />
+        {/* <div className="cs-height_60 cs-height_lg_45" /> */}
 
         {/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Get Supprt Section ++++++++++++++++++++++++++++++++++++++++ */}
-        <div className="cs-height_100 cs-height_lg_50" bis_skin_checked={1} />
+        {/* <div className="cs-height_100 cs-height_lg_50" bis_skin_checked={1} /> */}
         <div className="cs-accent_color_2_bg cs-parallax" bis_skin_checked={1}>
           <div
             className="cs-bg_parallax"

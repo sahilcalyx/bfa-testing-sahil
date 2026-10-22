@@ -141,7 +141,7 @@ const AlonaShevtsovaDPDetails2026 = () => {
                 </div>
               </div>
 
-              <div className="bg-white border border-zinc-100 rounded-[32px] p-8 md:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.015)]">
+              <div className="bg-white border border-zinc-100 rounded-[32px] p-8 md:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.015)] mb-8">
                 <span className="text-[10px] font-black uppercase tracking-[0.25em] text-[#c8102e] block mb-6">
                   Key Highlights
                 </span>
@@ -161,6 +161,25 @@ const AlonaShevtsovaDPDetails2026 = () => {
                   ))}
                 </div>
               </div>
+
+              {speaker.videoUrl && (
+                <div className="bg-white border border-zinc-100 rounded-[32px] p-6 md:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.015)]">
+                  <span className="text-[10px] font-black uppercase tracking-[0.25em] text-[#c8102e] block mb-6">
+                    Featured Video
+                  </span>
+                  <div className="relative w-full overflow-hidden rounded-[24px] border border-zinc-200/80 bg-zinc-950 shadow-[0_12px_36px_rgba(0,0,0,0.12)]">
+                    <div className="relative w-full aspect-video">
+                      <iframe
+                        src={speaker.videoUrl}
+                        title={`${speaker.name} - Brit FinTech Awards 2026`}
+                        className="absolute top-0 left-0 w-full h-full border-0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowFullScreen
+                      />
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>

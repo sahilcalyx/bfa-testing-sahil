@@ -13,6 +13,7 @@ import {
   Sparkles,
   Users,
 } from "lucide-react";
+import WinnerVideoSection2026 from "../components/WinnerVideoSection2026";
 import { ArcRevealHero } from "@/components/ui/arc-preloader-hero";
 import WinnersConfetti2026 from "../../Winners2026/components/WinnersConfetti2026";
 
@@ -372,6 +373,13 @@ const QfRemitMsbRisingStarWinnerDetails2026 = () => {
               </p>
             </motion.section>
           </div>
+
+          <WinnerVideoSection2026
+            className="mt-16"
+            videoId="xBtkPz5n1QU"
+            title="QF Remit Wins MSB Rising Star 2026"
+          />
+
         </div>
       </article>
       </ArcRevealHero>

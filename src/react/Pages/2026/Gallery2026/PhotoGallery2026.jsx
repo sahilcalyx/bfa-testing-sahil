@@ -3,14 +3,43 @@ import "lightgallery/css/lightgallery.css";
 import lightGallery from "lightgallery";
 import { Helmet } from "react-helmet";
 import Image from "next/image";
+import { useLocation, useNavigate } from "react-router-dom";
 import { GALLERY_CARDS_2026 } from "./galleryData";
 
 const fileNumber = (src) => Number(src.match(/(\d+)\.webp$/)?.[1] ?? 0);
 
+const CATEGORY_IDS = new Set([
+  "all",
+  "venue",
+  "registration",
+  "red-carpet",
+  "keynote",
+  "discussion",
+  "focus-session",
+  "winner-photos",
+  "networking",
+  "audience",
+  "event-branding",
+  "food-drinks",
+  "thank-you-gifts",
+  "host",
+  "team",
+]);
+
+const hashToCategory = (hash) => {
+  const id = (hash || "").replace(/^#/, "");
+  return id && CATEGORY_IDS.has(id) ? id : "all";
+};
+
 const PhotoGallery2026 = () => {
-  const [activeCategory, setActiveCategory] = useState("all");
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [activeCategory, setActiveCategory] = useState(() =>
+    hashToCategory(location.hash)
+  );
   const [indicator, setIndicator] = useState(null);
   const railRef = useRef(null);
+  const gallerySectionRef = useRef(null);
   const tabRefs = useRef({});
 
   // =================== Helper Function to Generate Unique IDs ===================
@@ -33,18 +62,18 @@ const PhotoGallery2026 = () => {
   // Set each count to the number of photos in /public/assets/img/gallery2026/<category>/ (named 1.webp, 2.webp, ...)
   const galleryImages = [
     ...makeImages("registration", 24),
-    ...makeImages("red-carpet", 97),
-    ...makeImages("networking", 100),
-    ...makeImages("discussion", 27),
-    ...makeImages("keynote", 13),
-    ...makeImages("food-drinks", 51),
+    ...makeImages("red-carpet", 161),
+    ...makeImages("networking", 173),
+    ...makeImages("discussion", 39),
+    ...makeImages("keynote", 21),
+    ...makeImages("food-drinks", 59),
     ...makeImages("focus-session", 15),
-    ...makeImages("venue", 43),
-    ...makeImages("winner-photos", 85),
-    ...makeImages("team", 12),
-    ...makeImages("event-branding", 11),
-    ...makeImages("audience", 15),
-    ...makeImages("host", 21),
+    ...makeImages("venue", 44),
+    ...makeImages("winner-photos", 112),
+    ...makeImages("team", 15),
+    ...makeImages("event-branding", 23),
+    ...makeImages("audience", 45),
+    ...makeImages("host", 27),
     ...makeImages("thank-you-gifts", 16),
     ...makeImages("others", 0),
   ];
@@ -73,6 +102,13 @@ const PhotoGallery2026 = () => {
       selector: ".cs-lightbox-item",
       download: false,
       subHtmlSelectorRelative: true,
+      hideBarsDelay: 0,
+      // lightGallery disables close + arrows on mobile by default
+      mobileSettings: {
+        controls: true,
+        showCloseIcon: true,
+        download: false,
+      },
     });
 
     return () => {
@@ -101,7 +137,48 @@ const PhotoGallery2026 = () => {
     return () => observer.disconnect();
   }, [syncIndicator]);
 
-  const selectCategory = (id) => setActiveCategory(id);
+  const selectCategory = (id) => {
+    setActiveCategory(id);
+    navigate(
+      {
+        pathname: location.pathname,
+        search: location.search,
+        hash: id === "all" ? "" : id,
+      },
+      { replace: true, preventScrollReset: true, state: { fromTab: true } }
+    );
+  };
+
+  // Keep tab in sync with #hash (e.g. #thank-you-gifts)
+  useEffect(() => {
+    const next = hashToCategory(location.hash);
+    setActiveCategory((prev) => (prev === next ? prev : next));
+  }, [location.hash]);
+
+  // Deep-link: #category scrolls to gallery section (hero stays visible)
+  useEffect(() => {
+    const category = hashToCategory(location.hash);
+    if (category === "all") return;
+    if (location.state?.fromTab) return;
+
+    const scrollToGallery = () => {
+      const el =
+        gallerySectionRef.current ||
+        document.getElementById(category) ||
+        document.getElementById("gallery-photos");
+      if (!el) return;
+      const headerOffset = 100;
+      const top =
+        el.getBoundingClientRect().top + window.scrollY - headerOffset;
+      window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+    };
+
+    scrollToGallery();
+    const timers = [100, 400, 800, 1200].map((ms) =>
+      window.setTimeout(scrollToGallery, ms)
+    );
+    return () => timers.forEach((id) => window.clearTimeout(id));
+  }, [location.hash, location.state]);
 
   const handleTabKeyDown = (e, index) => {
     const step = { ArrowRight: 1, ArrowLeft: -1 }[e.key];
@@ -167,6 +244,173 @@ const PhotoGallery2026 = () => {
             font-size: 21px;
             font-weight: bold;
             color: #ededff;
+          }
+
+          /* Keep controls visible (override auto-hide) */
+          .lg-outer.lg-show-in .lg-toolbar,
+          .lg-outer.lg-show-in .lg-prev,
+          .lg-outer.lg-show-in .lg-next,
+          .lg-outer.lg-show-in.lg-hide-items .lg-toolbar,
+          .lg-outer.lg-show-in.lg-hide-items .lg-prev,
+          .lg-outer.lg-show-in.lg-hide-items .lg-next {
+            opacity: 1 !important;
+            transform: none !important;
+            pointer-events: auto !important;
+          }
+
+          /* Close: system × (no icon font) — always top-right */
+          .lg-toolbar {
+            z-index: 1085 !important;
+            pointer-events: none;
+          }
+          .lg-toolbar .lg-close {
+            pointer-events: auto !important;
+            position: fixed !important;
+            top: max(10px, env(safe-area-inset-top, 0px)) !important;
+            right: max(10px, env(safe-area-inset-right, 0px)) !important;
+            float: none !important;
+            z-index: 1090 !important;
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+            width: 44px !important;
+            height: 44px !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            border: 0 !important;
+            border-radius: 50% !important;
+            background: rgba(0, 0, 0, 0.7) !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.45) !important;
+            color: #fff !important;
+            cursor: pointer !important;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+          }
+          .lg-toolbar .lg-close:before,
+          .lg-toolbar .lg-close:after {
+            font-family: Arial, Helvetica, sans-serif !important;
+          }
+          .lg-toolbar .lg-close:after {
+            content: "×" !important;
+            font-size: 34px !important;
+            font-weight: 400 !important;
+            line-height: 1 !important;
+            color: #fff !important;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+          }
+          .lg-toolbar .lg-close:hover,
+          .lg-toolbar .lg-close:focus {
+            background: rgba(224, 25, 58, 0.95) !important;
+            color: #fff !important;
+          }
+
+          /* Prev/next: system arrows (no icon font) */
+          .lg-prev,
+          .lg-next {
+            font-family: Arial, Helvetica, sans-serif !important;
+            background: rgba(0, 0, 0, 0.65) !important;
+            color: #fff !important;
+            border-radius: 50% !important;
+            width: 44px !important;
+            height: 44px !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+          }
+          .lg-prev:after,
+          .lg-next:before {
+            font-family: Arial, Helvetica, sans-serif !important;
+            font-size: 28px !important;
+            font-weight: 700 !important;
+            line-height: 1 !important;
+            color: #fff !important;
+          }
+          .lg-prev:after { content: "‹" !important; }
+          .lg-next:before { content: "›" !important; }
+
+          @media (max-width: 767px) {
+            /* Real phones: old lightgallery.min.css + dynamic browser chrome
+               leave the image stuck at the top — force true middle centering */
+            .lg-container,
+            .lg-outer {
+              height: 100% !important;
+              height: 100dvh !important;
+              max-height: 100dvh !important;
+            }
+            .lg-outer .lg-content,
+            .lg-outer .lg-inner {
+              top: 0 !important;
+              bottom: 0 !important;
+              height: 100% !important;
+            }
+            .lg-outer .lg-item,
+            .lg-outer .lg-img-wrap {
+              display: flex !important;
+              align-items: center !important;
+              justify-content: center !important;
+              width: 100% !important;
+              height: 100% !important;
+              padding: 56px 12px 110px !important;
+              box-sizing: border-box !important;
+              white-space: normal !important;
+              font-size: 0 !important;
+            }
+            .lg-outer .lg-item:before,
+            .lg-outer .lg-img-wrap:before {
+              content: none !important;
+              display: none !important;
+            }
+            .lg-outer .lg-object,
+            .lg-outer .lg-image {
+              display: block !important;
+              position: relative !important;
+              width: auto !important;
+              height: auto !important;
+              max-width: 100% !important;
+              max-height: calc(100dvh - 170px) !important;
+              margin: 0 auto !important;
+              vertical-align: middle !important;
+            }
+
+            .lg-toolbar .lg-close {
+              top: max(12px, env(safe-area-inset-top, 0px)) !important;
+              right: max(12px, env(safe-area-inset-right, 0px)) !important;
+              width: 48px !important;
+              height: 48px !important;
+            }
+            .lg-toolbar .lg-close:after {
+              font-size: 38px !important;
+            }
+
+            /* Left/right just under the image (not stuck at screen bottom) */
+            .lg-prev,
+            .lg-next {
+              top: auto !important;
+              bottom: max(78px, calc(env(safe-area-inset-bottom, 0px) + 70px)) !important;
+              width: 48px !important;
+              height: 48px !important;
+              margin-top: 0 !important;
+            }
+            .lg-prev { left: 20px !important; right: auto !important; }
+            .lg-next { right: 20px !important; left: auto !important; }
+            .lg-prev:after,
+            .lg-next:before {
+              font-size: 32px !important;
+            }
+
+            .lg-sub-html {
+              font-size: 14px;
+              padding: 8px 56px 14px;
+              padding-bottom: max(14px, env(safe-area-inset-bottom, 0px));
+            }
+            .lg-sub-html h4 {
+              font-size: 15px;
+            }
           }
 
           /* --- Tabs --- */
@@ -331,8 +575,12 @@ const PhotoGallery2026 = () => {
           </div>
         </div>
 
-        {/* --- Tabs --- */}
-        <div className="container">
+        {/* --- Tabs (id matches #hash so e.g. #thank-you-gifts scrolls here) --- */}
+        <div
+          className="container"
+          ref={gallerySectionRef}
+          id={activeCategory !== "all" ? activeCategory : "gallery-photos"}
+        >
           <div className="pg26-rail-wrap">
             <div
               ref={railRef}

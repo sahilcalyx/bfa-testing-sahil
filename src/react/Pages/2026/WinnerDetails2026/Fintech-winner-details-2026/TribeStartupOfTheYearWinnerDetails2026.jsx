@@ -14,6 +14,7 @@ import {
   Send,
   ShieldCheck,
 } from "lucide-react";
+import WinnerVideoSection2026 from "../components/WinnerVideoSection2026";
 import { ArcRevealHero } from "@/components/ui/arc-preloader-hero";
 import WinnersConfetti2026 from "../../Winners2026/components/WinnersConfetti2026";
 
@@ -313,9 +314,7 @@ const TribeStartupOfTheYearWinnerDetails2026 = () => {
                 {emphasize(text)}
               </p>
             ))}
-          </motion.section>
-
-          <motion.section
+          </motion.section><motion.section
             initial={reduceMotion ? false : { opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
@@ -383,6 +382,13 @@ const TribeStartupOfTheYearWinnerDetails2026 = () => {
               </p>
             </motion.section>
           </div>
+
+          <WinnerVideoSection2026
+            className="mt-16"
+            videoId="dFsMrzAocfo"
+            title="3ribe Wins Startup of the Year 2026"
+          />
+
         </div>
       </article>
       </ArcRevealHero>

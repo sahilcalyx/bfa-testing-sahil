@@ -14,6 +14,7 @@ import {
   Users,
   Zap,
 } from "lucide-react";
+import WinnerVideoSection2026 from "../components/WinnerVideoSection2026";
 import { ArcRevealHero } from "@/components/ui/arc-preloader-hero";
 import WinnersConfetti2026 from "../../Winners2026/components/WinnersConfetti2026";
 
@@ -257,9 +258,7 @@ const FenaAccount2AccountWinnerDetails2026 = () => {
               payments, and other payment use cases. <Strong>Fena</Strong> is trusted by more than
               2,500 merchants in the UK.
             </p>
-          </motion.section>
-
-          <motion.section
+          </motion.section><motion.section
             initial={reduceMotion ? false : { opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
@@ -345,6 +344,13 @@ const FenaAccount2AccountWinnerDetails2026 = () => {
               </p>
             </motion.section>
           </div>
+
+          <WinnerVideoSection2026
+            className="mt-16"
+            videoId="8-hHVA_ur6o"
+            title="Fena Wins Account 2 Account Payment Processor of the Year 2026"
+          />
+
         </div>
       </article>
       </ArcRevealHero>

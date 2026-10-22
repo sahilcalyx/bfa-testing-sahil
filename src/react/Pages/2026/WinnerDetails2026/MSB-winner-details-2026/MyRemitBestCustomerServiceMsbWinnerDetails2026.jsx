@@ -17,6 +17,7 @@ import {
 import { ArcRevealHero } from "@/components/ui/arc-preloader-hero";
 import WinnersConfetti2026 from "../../Winners2026/components/WinnersConfetti2026";
 import PreviousWinStrip2026 from "../components/PreviousWinStrip2026";
+import WinnerVideoSection2026 from "../components/WinnerVideoSection2026";
 
 const EASE = [0.16, 1, 0.3, 1];
 const DISPLAY = "Oswald, sans-serif";
@@ -400,6 +401,13 @@ const MyRemitBestCustomerServiceMsbWinnerDetails2026 = () => {
               </p>
             </motion.section>
           </div>
+
+          <WinnerVideoSection2026
+            className="mt-16"
+            videoId="ivUL0_SaX3U"
+            title="MyRemit Ltd Wins Best in Customer Service MSB 2026"
+          />
+
         </div>
       </article>
       </ArcRevealHero>
