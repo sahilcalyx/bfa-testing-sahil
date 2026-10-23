@@ -90,14 +90,46 @@ const HeroKineticStrip2026 = () => {
         };
       });
 
-      // —— Desktop: full kinetic experience (unchanged) ——
+      // —— Desktop / laptop: kinetic experience ——
       mm.add("(min-width: 900px)", () => {
+        const vhNow = () => root.clientHeight || window.innerHeight;
+        const vwNow = () => root.clientWidth || window.innerWidth;
+
+        const isLaptop = () => {
+          const vw = vwNow();
+          const vh = vhNow();
+          return vh < 920 || (vw >= 900 && vw < 1440 && vh < 980);
+        };
+
+        const titleBottom = () => {
+          const rootTop = root.getBoundingClientRect().top;
+          const titleEl = root.querySelector(".hks-title");
+          if (titleEl) {
+            return titleEl.getBoundingClientRect().bottom - rootTop;
+          }
+          return Math.max(220, vhNow() * 0.3);
+        };
+
+        // Large screens: centered band. Laptop: always below the title.
         const band = () => {
-          const h = Math.min(420, window.innerHeight * 0.42);
-          const top = (window.innerHeight - h) / 2;
+          const vh = vhNow();
+          if (isLaptop()) {
+            const top = titleBottom() + 28;
+            const bottomPad = 44;
+            const h = Math.max(220, Math.min(300, vh - top - bottomPad));
+            return {
+              top,
+              bottom: Math.max(0, vh - top - h),
+              left: 0,
+              right: 0,
+              borderRadius: 0,
+            };
+          }
+          const h = Math.min(420, vh * 0.42);
+          const top = (vh - h) / 2;
           return {
             top,
-            bottom: window.innerHeight - top - h,
+            bottom: vh - top - h,
             left: 0,
             right: 0,
             borderRadius: 0,
@@ -105,53 +137,62 @@ const HeroKineticStrip2026 = () => {
         };
 
         const boxed = () => {
-          const vw = root.clientWidth || window.innerWidth;
-          const vh = root.clientHeight || window.innerHeight;
-          // Laptop / short viewports need a tighter stack so text & box don't overlap
-          const isLaptop = vh < 920 || (vw >= 900 && vw < 1440 && vh < 980);
-
-          const rootTop = root.getBoundingClientRect().top;
-          const titleEl = root.querySelector(".hks-title");
-          const titleBottom = titleEl
-            ? titleEl.getBoundingClientRect().bottom - rootTop
-            : Math.max(260, vh * 0.34);
-
-          const gapAfterText = isLaptop ? 36 : 48;
-          const bottomPad = isLaptop
-            ? Math.max(48, vh * 0.07)
+          const vw = vwNow();
+          const vh = vhNow();
+          const laptop = isLaptop();
+          const gapAfterText = laptop ? 28 : 48;
+          const bottomPad = laptop
+            ? Math.max(40, vh * 0.06)
             : Math.max(72, vh * 0.09);
+          const minBoxH = laptop ? 260 : 300;
 
-          let top = titleBottom + gapAfterText;
-          const availH = Math.max(140, vh - top - bottomPad);
-          const maxW = Math.min(
-            isLaptop ? 760 : 900,
-            vw * (isLaptop ? 0.78 : 0.84),
+          let top = titleBottom() + gapAfterText;
+          let availH = Math.max(minBoxH, vh - top - bottomPad);
+
+          // Prefer a readable video size — never collapse to a thin line
+          let maxW = Math.min(
+            laptop ? 820 : 900,
+            vw * (laptop ? 0.86 : 0.84),
             (availH * 16) / 9
           );
-          const boxH = maxW * (9 / 16);
-          const left = (vw - maxW) / 2;
+          let boxH = maxW * (9 / 16);
 
-          // Never climb back over the title — shrink width instead (already capped)
-          if (top + boxH + bottomPad > vh) {
-            top = Math.max(titleBottom + gapAfterText, vh - boxH - bottomPad);
+          if (boxH < minBoxH) {
+            boxH = Math.min(minBoxH, vh - bottomPad - (titleBottom() + 20));
+            maxW = Math.min(vw * 0.9, (boxH * 16) / 9);
+            top = Math.max(titleBottom() + 20, vh - boxH - bottomPad);
           }
+
+          const left = (vw - maxW) / 2;
 
           return {
             top,
             left,
             right: vw - left - maxW,
-            bottom: vh - top - boxH,
+            bottom: Math.max(0, vh - top - boxH),
             borderRadius: 14,
           };
         };
 
         const full = { top: 0, left: 0, right: 0, bottom: 0, borderRadius: 0 };
 
+        // Hairline must sit under the title on laptop (not through “Excellence”)
         const hairline = () => {
-          const mid = window.innerHeight / 2;
+          const vh = vhNow();
+          if (isLaptop()) {
+            const y = titleBottom() + 28;
+            return {
+              top: y,
+              bottom: vh - y - 3,
+              left: 0,
+              right: 0,
+              borderRadius: 0,
+            };
+          }
+          const mid = vh / 2;
           return {
             top: mid - 1.5,
-            bottom: window.innerHeight - mid - 1.5,
+            bottom: vh - mid - 1.5,
             left: 0,
             right: 0,
             borderRadius: 0,
@@ -196,13 +237,59 @@ const HeroKineticStrip2026 = () => {
         }
 
         let reverse;
+        const prevOverflow = document.body.style.overflow;
+        const prevHtmlOverflow = document.documentElement.style.overflow;
+
+        // Block page scroll until fullscreen expand finishes (desktop + laptop)
+        const blockScroll = (e) => {
+          e.preventDefault();
+          window.scrollTo(0, 0);
+        };
+        const lockScroll = () => {
+          document.body.style.overflow = "hidden";
+          document.documentElement.style.overflow = "hidden";
+          window.scrollTo(0, 0);
+          window.addEventListener("wheel", blockScroll, { passive: false });
+          window.addEventListener("touchmove", blockScroll, { passive: false });
+          window.addEventListener("keydown", onKeyScrollBlock, false);
+        };
+        const onKeyScrollBlock = (e) => {
+          const keys = [
+            "ArrowDown",
+            "ArrowUp",
+            "PageDown",
+            "PageUp",
+            "Home",
+            "End",
+            " ",
+          ];
+          if (keys.includes(e.key)) {
+            e.preventDefault();
+          }
+        };
+        const unlockScroll = () => {
+          document.body.style.overflow = prevOverflow;
+          document.documentElement.style.overflow = prevHtmlOverflow;
+          window.removeEventListener("wheel", blockScroll);
+          window.removeEventListener("touchmove", blockScroll);
+          window.removeEventListener("keydown", onKeyScrollBlock);
+        };
+
+        lockScroll();
 
         const intro = gsap.timeline({
           defaults: { ease: "power3.out" },
           onComplete: () => {
             gsap.set(strip, { ...full, backgroundColor: "#0a0a0a" });
-            gsap.set(media, { ...mediaCover });
+            gsap.set(media, {
+              position: "absolute",
+              ...(isLaptop() ? mediaFit : mediaCover),
+            });
 
+            // Scroll allowed only after video is fullscreen
+            unlockScroll();
+
+            // Full → band → settled box (title returns after box settles)
             reverse = gsap
               .timeline({
                 scrollTrigger: {
@@ -225,10 +312,10 @@ const HeroKineticStrip2026 = () => {
                   opacity: 1,
                   y: 0,
                   textAlign: "center",
-                  duration: 0.45,
+                  duration: 0.4,
                   ease: "none",
                 },
-                0.35
+                0.75
               )
               .to(
                 slash,
@@ -236,12 +323,12 @@ const HeroKineticStrip2026 = () => {
                   marginLeft: "auto",
                   marginRight: "auto",
                   transformOrigin: "center center",
-                  duration: 0.45,
+                  duration: 0.4,
                   ease: "none",
                 },
-                0.35
+                0.75
               )
-              .to(year, { opacity: 0.07, duration: 0.35, ease: "none" }, 0.4);
+              .to(year, { opacity: 0.07, duration: 0.35, ease: "none" }, 0.8);
 
             ScrollTrigger.refresh();
           },
@@ -291,6 +378,7 @@ const HeroKineticStrip2026 = () => {
         intro.to(hint, { opacity: 1, duration: 0.4 }, "-=0.2");
 
         return () => {
+          unlockScroll();
           reverse?.scrollTrigger?.kill();
           reverse?.kill();
           intro.kill();

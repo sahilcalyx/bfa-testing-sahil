@@ -15,14 +15,16 @@ const BANNER_IMAGE = "/assets/img/winner-logos-26/winner-banner-2026/groupBanner
  * 5) Solid winner box at bottom center
  */
 const WinnerBanner2026 = () => {
+  const sectionRef = useRef(null);
   const imageRef = useRef(null);
   const bridgeRef = useRef(null);
   const bloomRef = useRef(null);
   const irisAnimRef = useRef(null);
   const bridgeAnimRef = useRef(null);
 
-  const [phase, setPhase] = useState("splash");
-  // splash | scramble | bridge | iris | done
+  const [phase, setPhase] = useState("idle");
+  // idle | splash | scramble | bridge | iris | done
+  const [hasEntered, setHasEntered] = useState(false);
   const [showWinnerBox, setShowWinnerBox] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(() => {
     if (typeof window === "undefined") return false;
@@ -36,15 +38,38 @@ const WinnerBanner2026 = () => {
     return () => mq.removeEventListener?.("change", onChange);
   }, []);
 
+  // Start only when this section scrolls into view (not while on the video hero above)
   useEffect(() => {
+    const el = sectionRef.current;
+    if (!el || hasEntered) return undefined;
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.35) {
+          setHasEntered(true);
+          io.disconnect();
+        }
+      },
+      { threshold: [0.35, 0.5], rootMargin: "0px 0px -10% 0px" }
+    );
+
+    io.observe(el);
+    return () => io.disconnect();
+  }, [hasEntered]);
+
+  useEffect(() => {
+    if (!hasEntered) return undefined;
+
     if (reducedMotion) {
       setPhase("done");
       setShowWinnerBox(true);
       return undefined;
     }
+
+    setPhase("splash");
     const t = window.setTimeout(() => setPhase("scramble"), 650);
     return () => window.clearTimeout(t);
-  }, [reducedMotion]);
+  }, [hasEntered, reducedMotion]);
 
   const runCircularReveal = useCallback(() => {
     const el = imageRef.current;
@@ -198,6 +223,7 @@ const WinnerBanner2026 = () => {
 
   return (
     <section
+      ref={sectionRef}
       className={`wb26${onWhiteField ? " wb26--reveal" : ""}`}
       aria-label="Congratulations to all winners 2026"
     >
