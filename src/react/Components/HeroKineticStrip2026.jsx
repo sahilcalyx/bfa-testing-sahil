@@ -107,17 +107,35 @@ const HeroKineticStrip2026 = () => {
         const boxed = () => {
           const vw = root.clientWidth || window.innerWidth;
           const vh = root.clientHeight || window.innerHeight;
-          const bottomPad = Math.max(72, vh * 0.09);
-          const titleBlock = Math.max(300, Math.min(vh * 0.38, 380));
-          const gapAfterText = 48;
-          let top = titleBlock + gapAfterText;
-          const availH = vh - top - bottomPad;
-          const maxW = Math.min(900, vw * 0.84, (availH * 16) / 9);
+          // Laptop / short viewports need a tighter stack so text & box don't overlap
+          const isLaptop = vh < 920 || (vw >= 900 && vw < 1440 && vh < 980);
+
+          const rootTop = root.getBoundingClientRect().top;
+          const titleEl = root.querySelector(".hks-title");
+          const titleBottom = titleEl
+            ? titleEl.getBoundingClientRect().bottom - rootTop
+            : Math.max(260, vh * 0.34);
+
+          const gapAfterText = isLaptop ? 36 : 48;
+          const bottomPad = isLaptop
+            ? Math.max(48, vh * 0.07)
+            : Math.max(72, vh * 0.09);
+
+          let top = titleBottom + gapAfterText;
+          const availH = Math.max(140, vh - top - bottomPad);
+          const maxW = Math.min(
+            isLaptop ? 760 : 900,
+            vw * (isLaptop ? 0.78 : 0.84),
+            (availH * 16) / 9
+          );
           const boxH = maxW * (9 / 16);
           const left = (vw - maxW) / 2;
+
+          // Never climb back over the title — shrink width instead (already capped)
           if (top + boxH + bottomPad > vh) {
-            top = Math.max(320, vh - boxH - bottomPad);
+            top = Math.max(titleBottom + gapAfterText, vh - boxH - bottomPad);
           }
+
           return {
             top,
             left,
@@ -303,12 +321,13 @@ const HeroKineticStrip2026 = () => {
       />
 
       {/* Title — stacked on mobile, overlay on desktop */}
-      <div className="hks-title relative z-20 px-5 pb-5 pt-28 text-center md:absolute md:inset-x-0 md:top-0 md:px-14 md:pb-0 md:pt-36 lg:px-20 lg:pt-40">
-        <p className="hks-eyebrow mb-3 font-['Outfit',sans-serif] text-[0.65rem] font-bold uppercase tracking-[0.28em] text-[#c8102e] sm:text-[0.7rem] sm:tracking-[0.34em] md:mb-4">
+      <div className="hks-title relative z-20 px-5 pb-5 pt-28 text-center md:absolute md:inset-x-0 md:top-0 md:px-10 md:pb-0 md:pt-28 lg:px-14 lg:pt-32 xl:px-20 xl:pt-40">
+        <p className="hks-eyebrow mb-3 font-['Outfit',sans-serif] text-[0.65rem] font-bold uppercase tracking-[0.28em] text-[#c8102e] sm:text-[0.7rem] sm:tracking-[0.34em] md:mb-3 xl:mb-4">
           Brit Fintech Awards 2026
         </p>
 
-        <h1 className="m-0 font-['Outfit',sans-serif] text-[clamp(1.65rem,7.5vw,4.8rem)] font-extrabold uppercase leading-[0.98] tracking-[-0.04em] text-zinc-950 md:leading-[0.94]">
+        {/* Smaller type on laptop (md–lg); full size on xl+ desktop */}
+        <h1 className="m-0 font-['Outfit',sans-serif] text-[clamp(1.65rem,7.5vw,4.8rem)] font-extrabold uppercase leading-[0.98] tracking-[-0.04em] text-zinc-950 md:text-[clamp(1.85rem,3.6vw,3.15rem)] md:leading-[0.96] xl:text-[clamp(2.2rem,5vw,4.6rem)] xl:leading-[0.94]">
           <span className="block overflow-hidden md:whitespace-nowrap">
             <span className="hks-word inline-block">
               The Night That{" "}
@@ -322,7 +341,7 @@ const HeroKineticStrip2026 = () => {
           </span>
         </h1>
 
-        <div className="hks-slash mx-auto mt-4 h-[2px] w-20 bg-[#c8102e] md:mt-5 md:w-24" />
+        <div className="hks-slash mx-auto mt-4 h-[2px] w-20 bg-[#c8102e] md:mt-4 md:w-20 xl:mt-5 xl:w-24" />
       </div>
 
       {/* Video — normal box on mobile; absolute kinetic gate on desktop */}
