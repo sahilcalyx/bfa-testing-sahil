@@ -62,7 +62,10 @@ const VideoCard = ({ video, showBadge, index }) => {
           <h5>{video.title}</h5>
           {video.profile && (
             <NavLink to={video.profile} className="vg26-link">
-              {video.category === "winners" ? "View Winner" : "View Profile"}{" "}
+              {video.linkLabel ||
+                (video.category === "winners"
+                  ? "View Winner"
+                  : "View Profile")}{" "}
               &rarr;
             </NavLink>
           )}

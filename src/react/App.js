@@ -7,6 +7,7 @@ const Sponsers = lazy(() => import("./Pages/Sponsers"));
 import React, { useLayoutEffect, useEffect, Suspense, lazy } from "react";
 const Awards = lazy(() => import("./Pages/Awards"));
 const ContactUs = lazy(() => import("./Pages/ContactUs"));
+const RegisterInterest2027 = lazy(() => import("./Pages/2027/RegisterInterest2027"));
 const PaymentAcquireroftheYear = lazy(() => import("./Pages/PaymentAcquireroftheYear"));
 const Bank2BankPaymentProcessoroftheYear = lazy(() => import("./Pages/Bank2BankPaymentProcessoroftheYear"));
 const PaymentInnovatoroftheYear = lazy(() => import("./Pages/PaymentInnovatoroftheYear"));
@@ -254,7 +255,7 @@ function App() {
 
   const location = useLocation();
 
-  // Hide Header and Footer on the profile page
+  // Hide Header and Footer on profile page
   const hideHeaderFooter = location.pathname === "/profile";
   return (
     <div className="App">
@@ -462,6 +463,7 @@ function App() {
         <Route path="/how-to-enter" element={<HowToEnter />} />
 
         <Route path="/contact" element={<ContactUs />} />
+        <Route path="/register-interest-2027" element={<RegisterInterest2027 />} />
         <Route path="/judges" element={<Judges />} />
         <Route path="/faqs" element={<Faq />} />
         <Route path="/nominate-now" element={<RegisterNow />} />

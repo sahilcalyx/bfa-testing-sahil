@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import { useLocation, useNavigate } from "react-router-dom";
+import { FiVolume2 } from "react-icons/fi";
 import KeynoteSpeakersSection from "./2025/Keynotes/KeynoteSpeakersSection";
 import KeynoteSpeaker2026 from "./2026/KeynoteSpeaker2026/KeynoteSpeaker2026";
+
+const KEYNOTE_VIDEO_ID = "CB6UjQOcQ4g";
+const KEYNOTE_VIDEO_TITLE = "The AI-Augmented CFO | Daljit Young";
+const KEYNOTE_VIDEO_DECK = "The AI-Augmented CFO — Inside a Next-Gen EMI’s Financial Engine Room";
+
+const mutedKeynoteEmbedSrc =
+  `https://www.youtube.com/embed/${KEYNOTE_VIDEO_ID}?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1&loop=1&playlist=${KEYNOTE_VIDEO_ID}`;
+const unmutedKeynoteEmbedSrc =
+  `https://www.youtube.com/embed/${KEYNOTE_VIDEO_ID}?autoplay=1&mute=0&controls=1&modestbranding=1&rel=0&playsinline=1`;
 
 const TAB_ROUTES = {
   "2026": "/keynote-speakers-2026",
@@ -16,6 +26,7 @@ const OurKeyNoteSpeakers = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const activeTab = getTabFromPath(location.pathname);
+  const [unmuted, setUnmuted] = useState(false);
 
   const setActiveTab = (year) => {
     const route = TAB_ROUTES[year];
@@ -137,6 +148,52 @@ const OurKeyNoteSpeakers = () => {
               </div>
             )}
           </div>
+
+          {activeTab === "2026" && (
+            <section
+              aria-labelledby="keynote-session-heading"
+              className="mt-10 border-t border-zinc-200 pt-8 md:mt-12 md:pt-10"
+            >
+              <div className="mb-5 grid grid-cols-1 gap-2.5 md:grid-cols-[180px_minmax(0,1fr)] md:gap-7">
+                <h2
+                  id="keynote-session-heading"
+                  className="text-[12px] font-bold uppercase tracking-[0.16em] text-[#c8102e] md:mt-1"
+                >
+                  Watch the keynote
+                </h2>
+                <p className="max-w-[42em] text-[15px] leading-relaxed text-[#3a454f] md:text-base">
+                  {KEYNOTE_VIDEO_DECK}
+                </p>
+              </div>
+
+              <div className="overflow-hidden border border-zinc-300 bg-[#0a0406]">
+                <div className="relative aspect-video">
+                  <iframe
+                    key={unmuted ? "unmuted" : "muted"}
+                    src={unmuted ? unmutedKeynoteEmbedSrc : mutedKeynoteEmbedSrc}
+                    title={KEYNOTE_VIDEO_TITLE}
+                    className="absolute inset-0 h-full w-full border-0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allowFullScreen
+                  />
+                  {!unmuted && (
+                    <button
+                      type="button"
+                      onClick={() => setUnmuted(true)}
+                      aria-label="Unmute and play the keynote with sound"
+                      className="group absolute inset-0 flex h-full w-full cursor-pointer items-end justify-start border-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent p-4 md:p-5"
+                    >
+                      <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-[#161616] px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-[0.12em] text-white transition-colors duration-200 group-hover:border-[#c8102e] group-hover:bg-[#c8102e]">
+                        <FiVolume2 aria-hidden="true" className="text-[15px]" />
+                        <span>Tap for sound</span>
+                      </span>
+                    </button>
+                  )}
+                </div>
+              </div>
+            </section>
+          )}
         </div>
       </div>
     </div>

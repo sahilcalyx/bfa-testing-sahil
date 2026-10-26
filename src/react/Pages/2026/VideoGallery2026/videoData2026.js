@@ -156,6 +156,24 @@ export const WINNER_VIDEO_BY_PROFILE = Object.fromEntries(
 // Newest upload first, matching https://www.youtube.com/@BritFinTechAwardsUK/videos
 const channelVideos = [
   {
+    id: "CB6UjQOcQ4g",
+    category: "keynote",
+    title: "The AI-Augmented CFO | Daljit Young",
+    profile: "/keynote-speakers-2026",
+  },
+  {
+    id: "CL7d_w7iNT4",
+    category: "panel",
+    title: "Can FinTech & MSBs Afford to Ignore AI? | BFA26 Discussion Panel",
+    profile: "/discussion-panel-2026",
+    linkLabel: "Meet the panel",
+  },
+  {
+    id: "b6mHivEGIqI",
+    category: "event",
+    title: "Brit Fintech Awards 2026 - Event Highlights",
+  },
+  {
     id: "oU2rhIwkqFE",
     category: "focus",
     title: "What is High Risk? Session Highlight",

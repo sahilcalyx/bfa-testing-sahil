@@ -130,9 +130,9 @@ const VideoGallerySection = ({
           gap: "12px 16px",
         }}
       >
-        <NavLink to={viewMoreLink} className={btnClass}>
+        <a target="_blank" href={viewMoreLink} className={btnClass}>
           {viewMoreLabel}
-        </NavLink>
+        </a>
         {secondaryLink && secondaryLabel ? (
           <NavLink to={secondaryLink} className={btnClass}>
             {secondaryLabel}

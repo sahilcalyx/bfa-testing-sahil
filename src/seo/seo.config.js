@@ -391,6 +391,34 @@ export const seoByPath = {
       images: ["/assets/img/og/contact.jpg"],
     },
   },
+  "/register-interest-2027": {
+    title: "Register Interest 2027 | Brit Fintech Awards",
+    description:
+      "Register your interest for Brit FinTech Awards 2027. Be first for nominations, tickets, and partnership opportunities.",
+    openGraph: {
+      title: "Register Interest 2027 | Brit Fintech Awards",
+      description:
+        "Register your interest for Brit FinTech Awards 2027. Be first for nominations, tickets, and partnership opportunities.",
+      url: `${siteBaseUrl}/register-interest-2027`,
+      siteName,
+      images: [
+        {
+          url: "/assets/img/og/register.jpg",
+          width: 1200,
+          height: 630,
+          alt: "Register Interest 2027",
+        },
+      ],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Register Interest 2027 | Brit Fintech Awards",
+      description:
+        "Register your interest for Brit FinTech Awards 2027. Be first for nominations, tickets, and partnership opportunities.",
+      images: ["/assets/img/og/register.jpg"],
+    },
+  },
   "/privacy-policy": {
     title: "Brit Fintech Awards | Privacy Policy",
     description:

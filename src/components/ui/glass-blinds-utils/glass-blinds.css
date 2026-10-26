@@ -1,0 +1,73 @@
+.gbl {
+  --gbl-glow: #8f9bff;
+  --gbl-deep: #3a3fd6;
+  --gbl-ground: #020208;
+
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  width: 100%;
+  min-height: inherit;
+  background: var(--gbl-ground);
+  color: #fff;
+}
+
+.gbl__canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.gbl__content {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  min-height: inherit;
+  pointer-events: none;
+}
+
+.gbl__content a,
+.gbl__content button,
+.gbl__content input,
+.gbl__content select,
+.gbl__content textarea,
+.gbl__content [data-ri27-interactive] {
+  pointer-events: auto;
+}
+
+/* CSS fallback when WebGL is unavailable */
+.gbl[data-fallback] {
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--gbl-deep) 55%, var(--gbl-ground)) 0%,
+      var(--gbl-ground) 42%,
+      color-mix(in srgb, var(--gbl-glow) 28%, var(--gbl-ground)) 100%
+    );
+}
+
+.gbl[data-fallback]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--gbl-glow) 22%, transparent) 0,
+    color-mix(in srgb, var(--gbl-glow) 22%, transparent) 1px,
+    transparent 1px,
+    transparent calc(100% / 10),
+    color-mix(in srgb, var(--gbl-ground) 70%, #000) calc(100% / 10),
+    color-mix(in srgb, var(--gbl-ground) 70%, #000) calc(100% / 10 + 2px)
+  );
+  opacity: 0.85;
+}
+
+.gbl[data-fallback] .gbl__canvas {
+  display: none;
+}

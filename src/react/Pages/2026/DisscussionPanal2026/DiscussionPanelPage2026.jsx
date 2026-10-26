@@ -1,10 +1,10 @@
-import React, { useEffect, useId } from "react";
+import React, { useEffect, useId, useState } from "react";
 import { Helmet } from "react-helmet";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { motion, useReducedMotion } from "framer-motion";
 import { FaLinkedin } from "react-icons/fa";
-import { FiArrowUpRight } from "react-icons/fi";
+import { FiArrowUpRight, FiVolume2 } from "react-icons/fi";
 import { discussionPanel2026 } from "./panelists2026";
 
 const EASE = [0.16, 1, 0.3, 1];
@@ -15,6 +15,36 @@ const PAGE_DESCRIPTION =
 const PANEL_THEME = "Can Fintechs and MSBs Afford to Ignore AI?";
 const PANEL_BRIEF =
   "How AI and changing customer behaviour are reshaping the Fintech and MSB industry, and how quickly businesses need to adapt to stay competitive.";
+
+/**
+ * Panel session video — paste the link here.
+ * YouTube (watch / share / shorts link, or a bare video id) plays inline in the
+ * rectangle; any other link renders as an outbound video card for the same slot.
+ */
+const PANEL_VIDEO_URL = "https://youtu.be/CL7d_w7iNT4";
+const PANEL_VIDEO_TITLE =
+  "Can FinTech & MSBs Afford to Ignore AI? | BFA26 Discussion Panel";
+const PANEL_VIDEO_DECK =
+  "The full panel conversation on AI, customer behaviour and what it means for FinTech and MSB businesses.";
+
+const YOUTUBE_URL_RE =
+  /(?:youtube\.com\/(?:watch\?(?:[^#]*&)?v=|embed\/|shorts\/|live\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/i;
+
+const getYouTubeId = (url = "") => {
+  const value = String(url).trim();
+  if (!value) return null;
+  const match = value.match(YOUTUBE_URL_RE);
+  if (match) return match[1];
+  return /^[A-Za-z0-9_-]{11}$/.test(value) ? value : null;
+};
+
+const getVideoHost = (url = "") => {
+  try {
+    return new URL(String(url)).hostname.replace(/^www\./, "");
+  } catch {
+    return "Video";
+  }
+};
 
 const ROLE_LABEL = {
   moderator: "Moderator",
@@ -66,6 +96,85 @@ const PANEL_ORDER = [
   "femi-ekwuyasi",
   "jay-anand",
 ];
+
+/**
+ * Session video, above "The panel" heading — same treatment as the
+ * /focus-session-2026 video section: label + deck, then a bordered 16:9 stage
+ * that autoplays muted and offers a "tap for sound" cue.
+ */
+const PanelVideo = ({ url }) => {
+  const reduceMotion = useReducedMotion();
+  const [unmuted, setUnmuted] = useState(false);
+  const youtubeId = getYouTubeId(url);
+  const hasVideo = Boolean(url);
+
+  const mutedEmbedSrc = youtubeId
+    ? `https://www.youtube.com/embed/${youtubeId}?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1&loop=1&playlist=${youtubeId}`
+    : "";
+  const unmutedEmbedSrc = youtubeId
+    ? `https://www.youtube.com/embed/${youtubeId}?autoplay=1&mute=0&controls=1&modestbranding=1&rel=0&playsinline=1`
+    : "";
+
+  return (
+    <VideoSection
+      aria-labelledby="panel-video-heading"
+      initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.25 }}
+      transition={{ duration: 0.5, ease: EASE }}
+    >
+      <VideoHeader>
+        <BriefLabel id="panel-video-heading">Watch the panel discussion</BriefLabel>
+        <VideoDeck></VideoDeck>
+      </VideoHeader>
+
+      <VideoStage>
+        <VideoFrame>
+          {youtubeId && (
+            <>
+              <VideoEmbed
+                key={unmuted ? "unmuted" : "muted"}
+                src={unmuted ? unmutedEmbedSrc : mutedEmbedSrc}
+                title={PANEL_VIDEO_TITLE}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              />
+              {!unmuted && (
+                <UnmuteOverlay
+                  type="button"
+                  onClick={() => setUnmuted(true)}
+                  aria-label="Unmute and play the panel video with sound"
+                >
+                  <UnmuteCue>
+                    <FiVolume2 aria-hidden="true" />
+                    <span>Tap for sound</span>
+                  </UnmuteCue>
+                </UnmuteOverlay>
+              )}
+            </>
+          )}
+
+          {hasVideo && !youtubeId && (
+            <VideoOutbound
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Watch the panel video (opens in a new tab)"
+            >
+              <span>Watch the panel</span>
+              <small>{getVideoHost(url)}</small>
+            </VideoOutbound>
+          )}
+
+          {!hasVideo && (
+            <VideoPlaceholder>Panel video coming soon</VideoPlaceholder>
+          )}
+        </VideoFrame>
+      </VideoStage>
+    </VideoSection>
+  );
+};
 
 const DiscussionPanelPage2026 = ({ embedded = false }) => {
   const reduceMotion = useReducedMotion();
@@ -148,6 +257,8 @@ const DiscussionPanelPage2026 = ({ embedded = false }) => {
             <p>{PANEL_BRIEF}</p>
           </BriefCopy>
         </Brief>
+
+        <PanelVideo url={PANEL_VIDEO_URL} />
 
         <Bench id="panel" aria-labelledby="panelists-heading">
           <BenchHead>
@@ -458,6 +569,173 @@ const BriefCopy = styled.div`
 
   p:last-child {
     margin-bottom: 0;
+  }
+`;
+
+/* ——— session video ——— */
+
+const VideoSection = styled(motion.section)`
+  margin-top: 44px;
+  padding: 34px 0 8px;
+  border-top: 1px solid var(--line);
+
+  @media (max-width: 720px) {
+    margin-top: 32px;
+    padding-top: 26px;
+  }
+`;
+
+const VideoHeader = styled.div`
+  display: grid;
+  grid-template-columns: 180px minmax(0, 1fr);
+  gap: 28px;
+  margin-bottom: 22px;
+
+  @media (max-width: 720px) {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+`;
+
+const VideoDeck = styled.p`
+  margin: 0;
+  max-width: 40em;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #3a454f;
+`;
+
+const VideoStage = styled.div`
+  border: 1px solid var(--line);
+  background: #14080c;
+  overflow: hidden;
+`;
+
+const VideoFrame = styled.div`
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: #0a0406;
+`;
+
+const VideoEmbed = styled.iframe`
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+`;
+
+const UnmuteOverlay = styled.button`
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 20px;
+  border: 0;
+  background: linear-gradient(
+    to top,
+    rgba(10, 4, 6, 0.55) 0%,
+    rgba(10, 4, 6, 0.12) 42%,
+    transparent 70%
+  );
+  cursor: pointer;
+
+  &:hover > span {
+    background: var(--crimson);
+    border-color: var(--crimson);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--crimson);
+    outline-offset: -2px;
+  }
+
+  @media (max-width: 640px) {
+    padding: 14px;
+  }
+`;
+
+const UnmuteCue = styled.span`
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 9999px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: background 0.2s ease, border-color 0.2s ease;
+
+  svg {
+    font-size: 15px;
+  }
+
+  @media (max-width: 640px) {
+    padding: 8px 12px;
+    font-size: 10px;
+  }
+`;
+
+const VideoPlaceholder = styled.div`
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.42);
+`;
+
+const VideoOutbound = styled.a`
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  background: radial-gradient(120% 120% at 50% 0%, #1b2027 0%, #0a0406 62%);
+
+  span {
+    font-family: "Oswald", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #fff;
+  }
+
+  small {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  &:hover span {
+    color: #ffd6db;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--crimson);
+    outline-offset: -3px;
   }
 `;
 

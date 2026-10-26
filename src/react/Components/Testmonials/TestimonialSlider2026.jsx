@@ -6,6 +6,15 @@ import "slick-carousel/slick/slick-theme.css";
 // `image` is optional. When a company logo is not available yet, a branded
 // initials badge is shown instead. `logoBg` sets the tile colour behind a logo.
 const testimonials = [
+  {
+    id: 36,
+    text: "The future of financial services will be shaped by intelligent technology—and by the people, controls and partnerships that make it trustworthy.\n\nA big thank you to Brit Fintech Awards, powered by Calyx Solutions, for a brilliantly executed event. Marbo Money was delighted to attend, connecting with e-banks, compliance providers, fintechs and MSBs, and exploring how AI can strengthen the future of payments and money transfers.\n\nAt Marbo Money, we believe agentic AI can help financial institutions grow, scale and manage complexity—but only when it is built around robust risk controls, continuous compliance monitoring and meaningful human-in-the-loop oversight.\n\nThe future is not AI without accountability. It is intelligent agents working alongside experienced people to make financial services safer, faster and more resilient.\n\nThe conversations and connections at the event reinforced the importance of collaboration across the ecosystem—from AI and fintech innovators to compliance and infrastructure providers, and corporates seeking trusted financial services solutions.\n\nMarbo Money is ready to partner with organisations shaping this future. If you are building, enabling or seeking safer, smarter and more scalable financial services, let's connect.",
+    name: "Rose Mary Nakasenge B.",
+    designation: "(Marbo Money)",
+    initials: "MM",
+    source: "linkedin",
+    link: "https://lnkd.in/p/d-JwxP58",
+  },
   // {
   //   id: 1,
   //   text: "**Nice event**",
@@ -315,6 +324,7 @@ const sourceBadgeStyle = {
 };
 
 const TRUNCATE_AT = 220;
+const EXPAND_STEP = 300;
 
 const plainText = (text) => text.replace(/\*\*/g, "");
 
@@ -359,12 +369,19 @@ const avatarBoxStyle = {
 
 const TestimonialSlider2026 = () => {
   const sliderRef = useRef(null);
-  const [expandedIndexes, setExpandedIndexes] = useState([]);
+  const [visibleLimits, setVisibleLimits] = useState({});
 
-  const toggleExpand = (index) => {
-    setExpandedIndexes((prev) =>
-      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
-    );
+  const toggleExpand = (index, totalLength) => {
+    setVisibleLimits((prev) => {
+      const current = prev[index] ?? TRUNCATE_AT;
+      return {
+        ...prev,
+        [index]:
+          current >= totalLength
+            ? TRUNCATE_AT
+            : Math.min(current + EXPAND_STEP, totalLength),
+      };
+    });
   };
 
   const sliderSettings = {
@@ -426,10 +443,17 @@ const TestimonialSlider2026 = () => {
             <div className="cs-height_100 cs-height_lg_10"></div>
             <Slider {...sliderSettings} ref={sliderRef} className="cs-slider">
               {testimonials.map((testimonial, index) => {
-                const isExpanded = expandedIndexes.includes(index);
-                const shouldTruncate =
-                  plainText(testimonial.text).length > TRUNCATE_AT;
-                const shortText = truncateMarked(testimonial.text, TRUNCATE_AT);
+                const totalLength = plainText(testimonial.text).length;
+                const shouldTruncate = totalLength > TRUNCATE_AT;
+                const visibleLimit = Math.min(
+                  visibleLimits[index] ?? TRUNCATE_AT,
+                  totalLength
+                );
+                const isExpanded = visibleLimit >= totalLength;
+                const shortText = truncateMarked(
+                  testimonial.text,
+                  visibleLimit
+                );
 
                 return (
                   <div className="cs-slide" key={testimonial.id}>
@@ -527,7 +551,7 @@ const TestimonialSlider2026 = () => {
                         {shouldTruncate && (
                           <button
                             className="read-more-btn"
-                            onClick={() => toggleExpand(index)}
+                            onClick={() => toggleExpand(index, totalLength)}
                             style={{
                               color: "#c8102e",
                               background: "none",

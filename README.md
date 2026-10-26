@@ -4,15 +4,16 @@
  
 First, run the development server: 
  
-```bash 
+```bash  
 npm run dev 
-# or
+# or 
 yarn dev 
 # or
 pnpm dev
 # or
 bun dev
 ```
+
 
 
 

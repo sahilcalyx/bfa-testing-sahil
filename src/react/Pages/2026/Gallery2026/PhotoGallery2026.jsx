@@ -63,8 +63,8 @@ const PhotoGallery2026 = () => {
   const galleryImages = [
     ...makeImages("registration", 24),
     ...makeImages("red-carpet", 161),
-    ...makeImages("networking", 173),
-    ...makeImages("discussion", 39),
+    ...makeImages("networking", 174),
+    ...makeImages("discussion", 42),
     ...makeImages("keynote", 21),
     ...makeImages("food-drinks", 59),
     ...makeImages("focus-session", 15),

@@ -5,8 +5,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
-const VIDEO_ID = "oU2rhIwkqFE";
-const EMBED_SRC = `https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1&mute=1&loop=1&playlist=${VIDEO_ID}&controls=0&modestbranding=1&rel=0&playsinline=1&fs=0&iv_load_policy=3&disablekb=1&cc_load_policy=0`;
+const VIDEO_ID = "b6mHivEGIqI";
+const WATCH_URL = `https://www.youtube.com/watch?v=${VIDEO_ID}`;
+const EMBED_SRC = `https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1&mute=1&loop=1&playlist=${VIDEO_ID}&controls=0&modestbranding=1&rel=0&playsinline=1&fs=0&iv_load_policy=3&disablekb=1&cc_load_policy=0&showinfo=0`;
 
 /**
  * Desktop: kinetic strip (hairline → band → full → scroll to box)
@@ -57,8 +58,8 @@ const HeroKineticStrip2026 = () => {
 
       const mm = gsap.matchMedia();
 
-      // —— Mobile: text + video box only (no expand / pin) ——
-      mm.add("(max-width: 899px)", () => {
+      // —— Mobile + tablet/iPad: text + video box only (no expand / pin) ——
+      mm.add("(max-width: 1023px)", () => {
         gsap.set(year, { opacity: 0, display: "none" });
         gsap.set(hint, { opacity: 0, display: "none" });
         gsap.set(title, { clearProps: "all", opacity: 1 });
@@ -90,15 +91,15 @@ const HeroKineticStrip2026 = () => {
         };
       });
 
-      // —— Desktop / laptop: kinetic experience ——
-      mm.add("(min-width: 900px)", () => {
+      // —— Desktop / laptop (≥1024): kinetic experience ——
+      mm.add("(min-width: 1024px)", () => {
         const vhNow = () => root.clientHeight || window.innerHeight;
         const vwNow = () => root.clientWidth || window.innerWidth;
 
         const isLaptop = () => {
           const vw = vwNow();
           const vh = vhNow();
-          return vh < 920 || (vw >= 900 && vw < 1440 && vh < 980);
+          return vh < 920 || (vw >= 1024 && vw < 1440 && vh < 980);
         };
 
         const titleBottom = () => {
@@ -393,11 +394,11 @@ const HeroKineticStrip2026 = () => {
   return (
     <section
       ref={rootRef}
-      className="relative isolate w-full overflow-hidden bg-[#fafafa] md:h-[100svh] md:min-h-[100svh]"
+      className="relative isolate w-full overflow-hidden bg-[#fafafa] lg:h-[100svh] lg:min-h-[100svh]"
       aria-label="Brit Fintech Awards 2026 — kinetic strip hero"
     >
       <div
-        className="hks-year pointer-events-none absolute -right-4 bottom-[-6%] z-[2] hidden select-none font-['Outfit',sans-serif] text-[min(58vh,32rem)] font-black leading-none tracking-[-0.09em] text-zinc-950 md:block"
+        className="hks-year pointer-events-none absolute -right-4 bottom-[-6%] z-[2] hidden select-none font-['Outfit',sans-serif] text-[min(58vh,32rem)] font-black leading-none tracking-[-0.09em] text-zinc-950 lg:block"
         aria-hidden="true"
       >
         26
@@ -408,15 +409,14 @@ const HeroKineticStrip2026 = () => {
         aria-hidden="true"
       />
 
-      {/* Title — stacked on mobile, overlay on desktop */}
-      <div className="hks-title relative z-20 px-5 pb-5 pt-28 text-center md:absolute md:inset-x-0 md:top-0 md:px-10 md:pb-0 md:pt-28 lg:px-14 lg:pt-32 xl:px-20 xl:pt-40">
-        <p className="hks-eyebrow mb-3 font-['Outfit',sans-serif] text-[0.65rem] font-bold uppercase tracking-[0.28em] text-[#c8102e] sm:text-[0.7rem] sm:tracking-[0.34em] md:mb-3 xl:mb-4">
+      {/* Title — stacked on mobile/tablet; overlay only on desktop lg+ */}
+      <div className="hks-title relative z-20 px-5 pb-5 pt-28 text-center sm:px-8 lg:absolute lg:inset-x-0 lg:top-0 lg:px-14 lg:pb-0 lg:pt-32 xl:px-20 xl:pt-40">
+        <p className="hks-eyebrow mb-3 font-['Outfit',sans-serif] text-[0.65rem] font-bold uppercase tracking-[0.28em] text-[#c8102e] sm:text-[0.7rem] sm:tracking-[0.34em] lg:mb-3 xl:mb-4">
           Brit Fintech Awards 2026
         </p>
 
-        {/* Smaller type on laptop (md–lg); full size on xl+ desktop */}
-        <h1 className="m-0 font-['Outfit',sans-serif] text-[clamp(1.65rem,7.5vw,4.8rem)] font-extrabold uppercase leading-[0.98] tracking-[-0.04em] text-zinc-950 md:text-[clamp(1.85rem,3.6vw,3.15rem)] md:leading-[0.96] xl:text-[clamp(2.2rem,5vw,4.6rem)] xl:leading-[0.94]">
-          <span className="block overflow-hidden md:whitespace-nowrap">
+        <h1 className="m-0 font-['Outfit',sans-serif] text-[clamp(1.65rem,6.5vw,3.4rem)] font-extrabold uppercase leading-[0.98] tracking-[-0.04em] text-zinc-950 lg:text-[clamp(1.85rem,3.6vw,3.15rem)] lg:leading-[0.96] xl:text-[clamp(2.2rem,5vw,4.6rem)] xl:leading-[0.94]">
+          <span className="block overflow-hidden lg:whitespace-nowrap">
             <span className="hks-word inline-block">
               The Night That{" "}
               <span className="text-[#c8102e]">Defined</span>
@@ -429,23 +429,34 @@ const HeroKineticStrip2026 = () => {
           </span>
         </h1>
 
-        <div className="hks-slash mx-auto mt-4 h-[2px] w-20 bg-[#c8102e] md:mt-4 md:w-20 xl:mt-5 xl:w-24" />
+        <div className="hks-slash mx-auto mt-4 h-[2px] w-20 bg-[#c8102e] xl:mt-5 xl:w-24" />
       </div>
 
-      {/* Video — normal box on mobile; absolute kinetic gate on desktop */}
-      <div className="hks-strip relative z-30 mx-auto mb-12 aspect-video w-[92%] max-w-xl overflow-hidden rounded-[14px] bg-zinc-950 shadow-[0_20px_50px_rgba(0,0,0,0.14)] md:absolute md:mx-0 md:mb-0 md:aspect-auto md:w-auto md:max-w-none md:rounded-none md:shadow-[0_24px_70px_rgba(0,0,0,0.16)]">
+      {/* Video — visible box on mobile/tablet; kinetic gate on desktop lg+ */}
+      <div className="hks-strip relative z-30 mx-auto mb-12 aspect-video w-[92%] max-w-2xl overflow-hidden rounded-[14px] bg-zinc-950 shadow-[0_20px_50px_rgba(0,0,0,0.14)] lg:absolute lg:mx-0 lg:mb-0 lg:aspect-auto lg:w-auto lg:max-w-none lg:rounded-none lg:shadow-[0_24px_70px_rgba(0,0,0,0.16)]">
         <div className="absolute inset-0 overflow-hidden bg-zinc-950">
           <iframe
-            className="hks-media pointer-events-none absolute inset-0 h-full w-full border-0 md:inset-auto"
+            className="hks-media pointer-events-none absolute inset-0 h-full w-full border-0 lg:inset-auto"
             src={EMBED_SRC}
             title="Brit Fintech Awards 2026 — Official Highlights"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerPolicy="strict-origin-when-cross-origin"
           />
         </div>
+
+        {/* YouTube icon — opens watch page (no controls / title on embed) */}
+        <a
+          href={WATCH_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="absolute bottom-3 left-3 z-50 flex h-11 w-11 items-center justify-center rounded-full bg-[#ff0000] text-white shadow-[0_8px_24px_rgba(0,0,0,0.35)] transition-transform hover:scale-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          aria-label="Watch on YouTube"
+        >
+          <i className="fab fa-youtube text-[1.35rem] leading-none" aria-hidden="true" />
+        </a>
       </div>
 
-      <p className="hks-hint pointer-events-none absolute bottom-6 left-1/2 z-40 hidden -translate-x-1/2 font-['Outfit',sans-serif] text-[0.68rem] font-semibold uppercase tracking-[0.22em] text-white/85 drop-shadow-[0_1px_8px_rgba(0,0,0,0.5)] md:block">
+      <p className="hks-hint pointer-events-none absolute bottom-6 left-1/2 z-40 hidden -translate-x-1/2 font-['Outfit',sans-serif] text-[0.68rem] font-semibold uppercase tracking-[0.22em] text-white/85 drop-shadow-[0_1px_8px_rgba(0,0,0,0.5)] lg:block">
         Scroll · video settles below ·{" "}
         <span className="text-[#ff4d6a]">2026 winners</span>
       </p>
