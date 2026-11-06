@@ -4,7 +4,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { ArrowUpRight, CalendarDays, ChevronLeft, Clock } from "lucide-react";
-import { T, btnPrimary, FloorMark } from "./shared";
+import { T, btnPrimary } from "./shared";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -125,8 +125,7 @@ function Opening2026() {
 
       <div className="mx-[auto] grid max-w-[1120px] grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] items-start gap-[clamp(32px,5vw,64px)] border-b border-solid border-b-bfa-line px-[24px] pb-[80px] pt-[72px] max-[900px]:grid-cols-1">
         <div data-reveal>
-          <FloorMark className="text-[clamp(56px,8vw,80px)]" />
-          <h2 className="mx-[0px] mb-[0px] mt-[18px] font-montserrat text-[clamp(24px,3.2vw,32px)] font-bold leading-[1.2] tracking-[-0.03em] text-bfa-ink">
+          <h2 className="m-[0px] font-montserrat text-[clamp(24px,3.2vw,32px)] font-bold leading-[1.2] tracking-[-0.03em] text-bfa-ink">
             Celebrating Excellence.
             <br />
             Advancing FinTech.
