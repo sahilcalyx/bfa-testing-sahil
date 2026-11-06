@@ -136,34 +136,30 @@ code {
   }
 }
 
-/* Hide Tawk.to Chatbot on Mobile Views */
-@media (max-width: 768px) {
-  #tawkchat-iframe-container,
-  #tawkchat-container,
-  #tawkchat-minified-iframe-wrapper,
-  #tawkchat-minified-box,
-  .tawk-min-container,
-  .tawk-button,
-  .tawk-button-circle,
-  .tawk-mobile,
-  .tawk-custom-color,
-  iframe[src*="tawk.to"],
-  iframe[title*="chat"],
-  iframe[title*="Chat"],
-  div[class*="tawk-"],
-  div[id*="tawk"],
-  div[class*="Tawk_"],
-  a[href*="tawk.to"] {
-    display: none !important;
-    visibility: hidden !important;
-    opacity: 0 !important;
-    pointer-events: none !important;
-    width: 0 !important;
-    height: 0 !important;
-    max-height: 0 !important;
-    overflow: hidden !important;
-    z-index: -1 !important;
-  }
+#tawkchat-iframe-container,
+#tawkchat-container,
+#tawkchat-minified-iframe-wrapper,
+#tawkchat-minified-box,
+.tawk-min-container,
+.tawk-button,
+.tawk-button-circle,
+.tawk-mobile,
+.tawk-custom-color,
+iframe[src*="tawk.to"],
+iframe[id*="tawk"],
+div[class*="tawk-"],
+div[id*="tawk"],
+div[class*="Tawk_"],
+a[href*="tawk.to"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  max-height: 0 !important;
+  overflow: hidden !important;
+  z-index: -1 !important;
 }
 
 /* Legacy page heroes: title was clipped on mobile (global height:200px + 80px title) */

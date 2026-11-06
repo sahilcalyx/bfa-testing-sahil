@@ -14,6 +14,7 @@ import {
   Scale,
   TicketPercent,
   BadgePoundSterling,
+  Sparkles,
 } from "lucide-react";
 import { SessionProvider, useSession, signOut } from "next-auth/react";
 
@@ -97,6 +98,7 @@ function AdminLayoutContent({ children }) {
     { name: "Pricing", href: "/admin/pricing", icon: BadgePoundSterling },
     { name: "Coupon Codes", href: "/admin/coupons", icon: TicketPercent },
     { name: "Brochure Requests", href: "/admin/brochures", icon: FileText },
+    { name: "Interest 2027", href: "/admin/interest-2027", icon: Sparkles },
   ];
 
   const navItems = adminNavItems;

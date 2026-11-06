@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { animate, createTimeline } from "animejs";
+import { motion, useScroll, useTransform } from "framer-motion";
 import ScrambleWinnersOverlay from "./ScrambleWinnersOverlay";
 import WinnersConfetti2026 from "../../Pages/2026/Winners2026/components/WinnersConfetti2026";
 import "./WinnerBanner2026.css";
@@ -13,8 +14,12 @@ const BANNER_IMAGE = "/assets/img/winner-logos-26/winner-banner-2026/groupBanner
  * 3) Smooth black → brand → white bridge
  * 4) Image circle expands from center → outer
  * 5) Solid winner box at bottom center
+ *
+ * @param {object} [props]
+ * @param {boolean} [props.embedded] — drop homepage top margin (legacy / nested use)
+ * @param {boolean} [props.parallax] — scroll parallax on the banner once reveal finishes
  */
-const WinnerBanner2026 = () => {
+const WinnerBanner2026 = ({ embedded = false, parallax = false } = {}) => {
   const sectionRef = useRef(null);
   const imageRef = useRef(null);
   const bridgeRef = useRef(null);
@@ -220,11 +225,25 @@ const WinnerBanner2026 = () => {
   const isIris = phase === "iris";
   const isDone = phase === "done";
   const onWhiteField = showBridge || isIris || isDone;
+  const useParallax = parallax && isDone && !reducedMotion;
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+  const parallaxY = useTransform(scrollYProgress, [0, 1], ["-14%", "14%"]);
+  const parallaxScale = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    [1.14, 1.04, 1.14]
+  );
 
   return (
     <section
       ref={sectionRef}
-      className={`wb26${onWhiteField ? " wb26--reveal" : ""}`}
+      className={`wb26${onWhiteField ? " wb26--reveal" : ""}${
+        embedded ? " wb26--embedded" : ""
+      }${parallax ? " wb26--parallax" : ""}`}
       aria-label="Congratulations to all winners 2026"
     >
       <div
@@ -232,12 +251,17 @@ const WinnerBanner2026 = () => {
           isDone ? " is-done" : ""
         }`}
       >
-        <div
+        <motion.div
           ref={imageRef}
           className={`wb26__image${isIris || isDone ? " is-revealed" : ""}${
             isIris ? " is-irising" : ""
           }${isDone ? " is-open" : ""}`}
-          style={{ backgroundImage: `url(${BANNER_IMAGE})` }}
+          style={{
+            backgroundImage: `url(${BANNER_IMAGE})`,
+            ...(useParallax
+              ? { y: parallaxY, scale: parallaxScale }
+              : undefined),
+          }}
           role="img"
           aria-label="Brit Fintech Awards winners group"
         />

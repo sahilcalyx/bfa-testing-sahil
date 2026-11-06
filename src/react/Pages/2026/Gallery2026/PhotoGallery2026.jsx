@@ -24,6 +24,7 @@ const CATEGORY_IDS = new Set([
   "thank-you-gifts",
   "host",
   "team",
+  "others",
 ]);
 
 const hashToCategory = (hash) => {
@@ -69,13 +70,13 @@ const PhotoGallery2026 = () => {
     ...makeImages("food-drinks", 59),
     ...makeImages("focus-session", 15),
     ...makeImages("venue", 44),
-    ...makeImages("winner-photos", 112),
+    ...makeImages("winner-photos", 113),
     ...makeImages("team", 15),
     ...makeImages("event-branding", 23),
     ...makeImages("audience", 45),
     ...makeImages("host", 27),
     ...makeImages("thank-you-gifts", 16),
-    ...makeImages("others", 0),
+    ...makeImages("others", 4),
   ];
 
   // the home page "Moments That Matter" photos lead the All Photos tab, in file order
@@ -207,7 +208,7 @@ const PhotoGallery2026 = () => {
     { id: "thank-you-gifts", label: "Thank You Gifts" },
     { id: "host", label: "Host" },
     { id: "team", label: "Team" },
-    // { id: "others", label: "Others" },
+    { id: "others", label: "Others" },
   ];
 
   const activeLabel = categories.find((c) => c.id === activeCategory)?.label;

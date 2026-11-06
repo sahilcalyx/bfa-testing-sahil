@@ -1,221 +1,145 @@
 "use client";
 
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import axios from "axios";
 import { Helmet } from "react-helmet";
-import { Link, NavLink } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import ReCAPTCHA from "react-google-recaptcha";
-import Swal from "sweetalert2";
-import styled from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import { motion, useReducedMotion } from "framer-motion";
-import { ChevronDown, Search } from "lucide-react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import {
+  ArrowUpRight,
+  Check,
+  ChevronDown,
+  Search,
+  Sparkles,
+} from "lucide-react";
+import { INTEREST_2027_FORM_OPTIONS } from "../../../lib/interest2027Options";
+import { DIAL_CODE_OPTIONS } from "../../../lib/dialCodes";
+import { RECAPTCHA_SITE_KEY } from "../../../lib/recaptchaSiteKey";
+import HeroSpotlight2027 from "./HeroSpotlight2027";
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const EASE = [0.16, 1, 0.3, 1];
+const FILM_IMAGES = [
+  "audience/2",
+  "homepage-section/2",
+  "keynote/1",
+  "audience/44",
+  "focus-session/9",
+  "venue/1",
+].map((p) => `/assets/img/gallery2026/web/${p}.webp`);
+// Wide group shots: a shorter image band inside the usual frame keeps everyone in shot without changing the grid.
+const FILM_UNCROPPED = new Set(["/assets/img/gallery2026/web/homepage-section/2.webp"]);
 
-const COUNTRY_OPTIONS = [
-  "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria",
-  "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan",
-  "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cabo Verde", "Cambodia",
-  "Cameroon", "Canada", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo (Congo-Brazzaville)", "Costa Rica",
-  "Croatia", "Cuba", "Cyprus", "Czechia (Czech Republic)", "Democratic Republic of the Congo", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador",
-  "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Fiji", "Finland", "France",
-  "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau",
-  "Guyana", "Haiti", "Holy See", "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq",
-  "Ireland", "Israel", "Italy", "Ivory Coast", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati",
-  "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania",
-  "Luxembourg", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius",
-  "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar (formerly Burma)", "Namibia",
-  "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea", "North Macedonia", "Norway",
-  "Oman", "Pakistan", "Palau", "Palestine State", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland",
-  "Portugal", "Qatar", "Romania", "Russia", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent and the Grenadines", "Samoa", "San Marino",
-  "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands",
-  "Somalia", "South Africa", "South Korea", "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland",
-  "Syria", "Tajikistan", "Tanzania", "Thailand", "Timor-Leste", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey",
-  "Turkmenistan", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States of America", "Uruguay", "Uzbekistan", "Vanuatu",
-  "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe",
-].map((c) => ({ value: c, label: c }));
+const DIAL_OPTIONS = DIAL_CODE_OPTIONS.map((o) => ({
+  id: o.label,
+  code: o.value,
+  country: o.label.split(" (+")[0],
+  label: o.label,
+}));
+const DEFAULT_DIAL = DIAL_OPTIONS.find((o) => o.code === "44") || DIAL_OPTIONS[0];
 
-const COUNTRY_CODE_OPTIONS = [
-  { code: "93", label: "Afghanistan (+93)" },
-  { code: "355", label: "Albania (+355)" },
-  { code: "213", label: "Algeria (+213)" },
-  { code: "376", label: "Andorra (+376)" },
-  { code: "244", label: "Angola (+244)" },
-  { code: "54", label: "Argentina (+54)" },
-  { code: "374", label: "Armenia (+374)" },
-  { code: "61", label: "Australia (+61)" },
-  { code: "43", label: "Austria (+43)" },
-  { code: "994", label: "Azerbaijan (+994)" },
-  { code: "973", label: "Bahrain (+973)" },
-  { code: "880", label: "Bangladesh (+880)" },
-  { code: "375", label: "Belarus (+375)" },
-  { code: "32", label: "Belgium (+32)" },
-  { code: "501", label: "Belize (+501)" },
-  { code: "229", label: "Benin (+229)" },
-  { code: "975", label: "Bhutan (+975)" },
-  { code: "591", label: "Bolivia (+591)" },
-  { code: "387", label: "Bosnia and Herzegovina (+387)" },
-  { code: "267", label: "Botswana (+267)" },
-  { code: "55", label: "Brazil (+55)" },
-  { code: "673", label: "Brunei (+673)" },
-  { code: "359", label: "Bulgaria (+359)" },
-  { code: "226", label: "Burkina Faso (+226)" },
-  { code: "257", label: "Burundi (+257)" },
-  { code: "855", label: "Cambodia (+855)" },
-  { code: "237", label: "Cameroon (+237)" },
-  { code: "1", label: "Canada (+1)" },
-  { code: "238", label: "Cape Verde (+238)" },
-  { code: "236", label: "Central African Republic (+236)" },
-  { code: "235", label: "Chad (+235)" },
-  { code: "56", label: "Chile (+56)" },
-  { code: "86", label: "China (+86)" },
-  { code: "57", label: "Colombia (+57)" },
-  { code: "269", label: "Comoros (+269)" },
-  { code: "242", label: "Congo (+242)" },
-  { code: "506", label: "Costa Rica (+506)" },
-  { code: "385", label: "Croatia (+385)" },
-  { code: "53", label: "Cuba (+53)" },
-  { code: "357", label: "Cyprus (+357)" },
-  { code: "420", label: "Czech Republic (+420)" },
-  { code: "45", label: "Denmark (+45)" },
-  { code: "253", label: "Djibouti (+253)" },
-  { code: "593", label: "Ecuador (+593)" },
-  { code: "20", label: "Egypt (+20)" },
-  { code: "503", label: "El Salvador (+503)" },
-  { code: "240", label: "Equatorial Guinea (+240)" },
-  { code: "291", label: "Eritrea (+291)" },
-  { code: "372", label: "Estonia (+372)" },
-  { code: "251", label: "Ethiopia (+251)" },
-  { code: "679", label: "Fiji (+679)" },
-  { code: "358", label: "Finland (+358)" },
-  { code: "33", label: "France (+33)" },
-  { code: "995", label: "Georgia (+995)" },
-  { code: "49", label: "Germany (+49)" },
-  { code: "233", label: "Ghana (+233)" },
-  { code: "30", label: "Greece (+30)" },
-  { code: "502", label: "Guatemala (+502)" },
-  { code: "224", label: "Guinea (+224)" },
-  { code: "592", label: "Guyana (+592)" },
-  { code: "509", label: "Haiti (+509)" },
-  { code: "504", label: "Honduras (+504)" },
-  { code: "852", label: "Hong Kong (+852)" },
-  { code: "36", label: "Hungary (+36)" },
-  { code: "354", label: "Iceland (+354)" },
-  { code: "91", label: "India (+91)" },
-  { code: "62", label: "Indonesia (+62)" },
-  { code: "98", label: "Iran (+98)" },
-  { code: "964", label: "Iraq (+964)" },
-  { code: "353", label: "Ireland (+353)" },
-  { code: "972", label: "Israel (+972)" },
-  { code: "39", label: "Italy (+39)" },
-  { code: "81", label: "Japan (+81)" },
-  { code: "962", label: "Jordan (+962)" },
-  { code: "7", label: "Kazakhstan (+7)" },
-  { code: "254", label: "Kenya (+254)" },
-  { code: "82", label: "South Korea (+82)" },
-  { code: "965", label: "Kuwait (+965)" },
-  { code: "996", label: "Kyrgyzstan (+996)" },
-  { code: "856", label: "Laos (+856)" },
-  { code: "371", label: "Latvia (+371)" },
-  { code: "961", label: "Lebanon (+961)" },
-  { code: "266", label: "Lesotho (+266)" },
-  { code: "231", label: "Liberia (+231)" },
-  { code: "218", label: "Libya (+218)" },
-  { code: "423", label: "Liechtenstein (+423)" },
-  { code: "370", label: "Lithuania (+370)" },
-  { code: "352", label: "Luxembourg (+352)" },
-  { code: "853", label: "Macau (+853)" },
-  { code: "389", label: "North Macedonia (+389)" },
-  { code: "261", label: "Madagascar (+261)" },
-  { code: "265", label: "Malawi (+265)" },
-  { code: "60", label: "Malaysia (+60)" },
-  { code: "960", label: "Maldives (+960)" },
-  { code: "223", label: "Mali (+223)" },
-  { code: "356", label: "Malta (+356)" },
-  { code: "230", label: "Mauritius (+230)" },
-  { code: "52", label: "Mexico (+52)" },
-  { code: "373", label: "Moldova (+373)" },
-  { code: "377", label: "Monaco (+377)" },
-  { code: "976", label: "Mongolia (+976)" },
-  { code: "382", label: "Montenegro (+382)" },
-  { code: "212", label: "Morocco (+212)" },
-  { code: "258", label: "Mozambique (+258)" },
-  { code: "95", label: "Myanmar (+95)" },
-  { code: "264", label: "Namibia (+264)" },
-  { code: "977", label: "Nepal (+977)" },
-  { code: "31", label: "Netherlands (+31)" },
-  { code: "64", label: "New Zealand (+64)" },
-  { code: "505", label: "Nicaragua (+505)" },
-  { code: "234", label: "Nigeria (+234)" },
-  { code: "47", label: "Norway (+47)" },
-  { code: "968", label: "Oman (+968)" },
-  { code: "92", label: "Pakistan (+92)" },
-  { code: "970", label: "Palestine (+970)" },
-  { code: "507", label: "Panama (+507)" },
-  { code: "675", label: "Papua New Guinea (+675)" },
-  { code: "595", label: "Paraguay (+595)" },
-  { code: "51", label: "Peru (+51)" },
-  { code: "63", label: "Philippines (+63)" },
-  { code: "48", label: "Poland (+48)" },
-  { code: "351", label: "Portugal (+351)" },
-  { code: "974", label: "Qatar (+974)" },
-  { code: "40", label: "Romania (+40)" },
-  { code: "7", label: "Russia (+7)" },
-  { code: "250", label: "Rwanda (+250)" },
-  { code: "966", label: "Saudi Arabia (+966)" },
-  { code: "221", label: "Senegal (+221)" },
-  { code: "381", label: "Serbia (+381)" },
-  { code: "65", label: "Singapore (+65)" },
-  { code: "421", label: "Slovakia (+421)" },
-  { code: "386", label: "Slovenia (+386)" },
-  { code: "27", label: "South Africa (+27)" },
-  { code: "34", label: "Spain (+34)" },
-  { code: "94", label: "Sri Lanka (+94)" },
-  { code: "46", label: "Sweden (+46)" },
-  { code: "41", label: "Switzerland (+41)" },
-  { code: "963", label: "Syria (+963)" },
-  { code: "886", label: "Taiwan (+886)" },
-  { code: "992", label: "Tajikistan (+992)" },
-  { code: "255", label: "Tanzania (+255)" },
-  { code: "66", label: "Thailand (+66)" },
-  { code: "228", label: "Togo (+228)" },
-  { code: "216", label: "Tunisia (+216)" },
-  { code: "90", label: "Turkey (+90)" },
-  { code: "993", label: "Turkmenistan (+993)" },
-  { code: "256", label: "Uganda (+256)" },
-  { code: "380", label: "Ukraine (+380)" },
-  { code: "971", label: "United Arab Emirates (+971)" },
-  { code: "44", label: "United Kingdom (+44)" },
-  { code: "1", label: "United States (+1)" },
-  { code: "598", label: "Uruguay (+598)" },
-  { code: "998", label: "Uzbekistan (+998)" },
-  { code: "58", label: "Venezuela (+58)" },
-  { code: "84", label: "Vietnam (+84)" },
-  { code: "967", label: "Yemen (+967)" },
-  { code: "260", label: "Zambia (+260)" },
-  { code: "263", label: "Zimbabwe (+263)" },
-]
-  .sort((a, b) => a.label.localeCompare(b.label))
-  .map((c) => ({ value: c.code, label: c.label }));
-
-const INITIAL_FORM = {
-  firstName: "",
-  lastName: "",
-  companyName: "",
-  email: "",
-  country: "",
-  countryCode: "44",
-  phone: "",
-};
-
-const HEAR_ITEMS = [
-  "Nomination dates and categories, so you can start planning your submission early",
-  "Table bookings, before they open to everyone else",
-  "Sponsorship opportunities, including first conversations on headline and category packages",
-  "Format, venue and date announcements as soon as they’re confirmed",
+const OPPORTUNITIES = [
+  {
+    id: "sponsorship",
+    kicker: "Visibility",
+    title: "Sponsorship & Partnerships",
+    copy: "Put your brand at the centre of the FinTech community and explore opportunities to connect with key industry players.",
+    interest: "sponsorship",
+    cta: "I want to partner",
+    image: "/assets/img/gallery2026/web/red-carpet/35.webp",
+    imagePosition: "35% center",
+  },
+  {
+    id: "nominations",
+    kicker: "Recognition",
+    title: "Award Nominations",
+    copy: "Get ready to showcase your achievements and gain recognition for the work you're doing across the industry.",
+    interest: "nominations",
+    cta: "I want to nominate",
+    image: "/assets/img/gallery2026/web/winner-photos/3.webp",
+  },
+  {
+    id: "attend",
+    kicker: "The night",
+    title: "Attend BFA27",
+    copy: "Join industry leaders, decision-makers and innovators for an evening of recognition, networking and celebration.",
+    interest: "attending",
+    cta: "I want to attend",
+    image: "/assets/img/gallery2026/web/audience/44.webp",
+  },
 ];
 
-/** Dropdown with a real search bar inside the menu (country + phone code) */
+const INITIAL_FORM = {
+  fullName: "",
+  companyName: "",
+  jobTitle: "",
+  email: "",
+  dialId: DEFAULT_DIAL.id,
+  phone: "",
+  interests: [],
+  otherInterest: "",
+};
+
+const INTEREST_VALUES = INTEREST_2027_FORM_OPTIONS.map((o) => o.value);
+
+const MARQUEE_WORDS = [
+  "BFA27",
+  "The next chapter",
+  "Register your interest",
+  "Nominations",
+  "Tickets",
+  "Sponsorship",
+];
+
+const PERKS = [
+  "Early access to early bird offers",
+  "Early notice of award categories and nomination windows",
+  "Priority updates on tickets and exhibit space availability",
+  "First conversations on sponsorship and partnership packages",
+];
+
+// Only needed after a submit, so they stay out of the initial bundle.
+const showError = async (text) => {
+  const { default: Swal } = await import("sweetalert2");
+  Swal.fire({ title: "Something went wrong", text, icon: "error", confirmButtonColor: "#c8102e" });
+};
+
+const celebrate = async () => {
+  const { default: confetti } = await import("canvas-confetti");
+  const fire = (x, angle) =>
+    confetti({
+      colors: ["#c8102e", "#ffffff", "#f2d8ac", "#8a0a1f"],
+      particleCount: 70,
+      angle,
+      spread: 62,
+      startVelocity: 58,
+      ticks: 240,
+      gravity: 0.9,
+      origin: { x, y: 0.7 },
+      zIndex: 60,
+      disableForReducedMotion: true,
+    });
+  fire(0.1, 60);
+  fire(0.9, 120);
+};
+
+/* ---------------------------------------------------------------------- */
+/* Small building blocks                                                   */
+/* ---------------------------------------------------------------------- */
+
+/** Dropdown with a search field inside the menu (dial codes) */
 const SearchSelect = ({
   value,
   onChange,
@@ -226,6 +150,7 @@ const SearchSelect = ({
   formatOption,
   menuMinWidth,
   emptyText = "No results found",
+  invalid = false,
 }) => {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
@@ -238,7 +163,7 @@ const SearchSelect = ({
     return options.filter(
       (o) =>
         o.label.toLowerCase().includes(q) ||
-        String(o.value).toLowerCase().includes(q)
+        String(o.code ?? o.id).toLowerCase().includes(q)
     );
   }, [options, query]);
 
@@ -257,7 +182,7 @@ const SearchSelect = ({
     if (open && searchRef.current) searchRef.current.focus();
   }, [open]);
 
-  const selected = options.find((o) => o.value === value);
+  const selected = options.find((o) => o.id === value);
   const triggerLabel = selected
     ? formatTrigger
       ? formatTrigger(selected)
@@ -265,25 +190,26 @@ const SearchSelect = ({
     : placeholder;
 
   return (
-    <CountryRoot ref={rootRef}>
-      <CountryTrigger
+    <SelectRoot ref={rootRef}>
+      <SelectTrigger
         type="button"
         $open={open}
+        $invalid={invalid}
         onClick={() => setOpen((v) => !v)}
         aria-haspopup="listbox"
         aria-expanded={open}
       >
-        <span style={{ color: selected ? "#0f1419" : "#8a939c" }}>
+        <span style={{ color: selected ? "#fff" : "rgba(255,255,255,0.45)" }}>
           {triggerLabel}
         </span>
-        <ChevronDown size={16} style={{ opacity: 0.55, flexShrink: 0 }} />
-      </CountryTrigger>
+        <ChevronDown size={16} style={{ opacity: 0.6, flexShrink: 0 }} />
+      </SelectTrigger>
 
       {open && (
-        <CountryMenu role="listbox" $minWidth={menuMinWidth}>
-          <CountrySearchRow>
-            <Search size={15} style={{ color: "#8a939c", flexShrink: 0 }} />
-            <CountrySearchInput
+        <SelectMenu role="listbox" $minWidth={menuMinWidth}>
+          <SelectSearchRow>
+            <Search size={15} style={{ color: "rgba(255,255,255,0.5)", flexShrink: 0 }} />
+            <SelectSearchInput
               ref={searchRef}
               type="text"
               value={query}
@@ -291,73 +217,186 @@ const SearchSelect = ({
               placeholder={searchPlaceholder}
               autoComplete="off"
             />
-          </CountrySearchRow>
-          <CountryList>
+          </SelectSearchRow>
+          <SelectList>
             {filtered.length === 0 ? (
-              <CountryEmpty>{emptyText}</CountryEmpty>
+              <SelectEmpty>{emptyText}</SelectEmpty>
             ) : (
               filtered.map((o) => (
-                <CountryOption
-                  key={`${o.label}-${o.value}`}
+                <SelectOption
+                  key={o.id}
                   type="button"
-                  $active={o.value === value}
+                  role="option"
+                  aria-selected={o.id === value}
+                  $active={o.id === value}
                   onClick={() => {
-                    onChange(o.value);
+                    onChange(o.id);
                     setOpen(false);
                     setQuery("");
                   }}
                 >
                   {formatOption ? formatOption(o) : o.label}
-                </CountryOption>
+                </SelectOption>
               ))
             )}
-          </CountryList>
-        </CountryMenu>
+          </SelectList>
+        </SelectMenu>
       )}
-    </CountryRoot>
+    </SelectRoot>
   );
 };
 
+/* ---------------------------------------------------------------------- */
+/* Page                                                                    */
+/* ---------------------------------------------------------------------- */
+
 const RegisterInterest2027 = () => {
   const reduceMotion = useReducedMotion();
+  const location = useLocation();
+  const filmRef = useRef(null);
+  const formRef = useRef(null);
+  const formCardRef = useRef(null);
+  const recaptchaRef = useRef(null);
+
   const [formData, setFormData] = useState(INITIAL_FORM);
   const [errors, setErrors] = useState({});
   const [captchaToken, setCaptchaToken] = useState("");
   const [loading, setLoading] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-  const [agreePrivacyPolicy, setAgreePrivacyPolicy] = useState(false);
+  const [submitted, setSubmitted] = useState(null); // null | { updated, name }
+  const [agreeTerms, setAgreeTerms] = useState(false);
+  const [source, setSource] = useState("page");
 
+  // Deep links from the home promo: ?interest=nominations&src=home-section#register-form
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+    const params = new URLSearchParams(location.search);
+    const interest = params.get("interest");
+    const src = params.get("src");
+    if (interest && INTEREST_VALUES.includes(interest)) {
+      setFormData((prev) => ({
+        ...prev,
+        interests: prev.interests.includes(interest)
+          ? prev.interests
+          : [...prev.interests, interest],
+      }));
+    }
+    if (src) setSource(src);
+  }, [location.search]);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    let next = value;
-    if (name === "phone") next = value.replace(/\D/g, "");
-    setFormData((prev) => ({ ...prev, [name]: next }));
+  // The route is lazy-loaded, so the global hash scroller runs before the form exists.
+  useEffect(() => {
+    if (location.hash !== "#register-form") return undefined;
+    const t = window.setTimeout(() => {
+      // On stacked layouts the copy sits above the form, so jump straight to the fields.
+      const target = window.matchMedia("(max-width: 1023px)").matches
+        ? formCardRef.current || formRef.current
+        : formRef.current;
+      target?.scrollIntoView({
+        behavior: reduceMotion ? "auto" : "smooth",
+        block: "start",
+      });
+    }, 350);
+    return () => window.clearTimeout(t);
+  }, [location.hash, reduceMotion]);
+
+  // Film strip: alternate frames drift at different speeds while scrolling past.
+  useGSAP(
+    () => {
+      const strip = filmRef.current;
+      if (!strip || reduceMotion) return undefined;
+      const ups = strip.querySelectorAll("figure.up");
+      const downs = strip.querySelectorAll("figure.down");
+      const st = {
+        trigger: strip,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 1.4,
+      };
+      gsap.fromTo(ups, { y: 60 }, { y: -40, ease: "none", scrollTrigger: st });
+      gsap.fromTo(downs, { y: 110 }, { y: 10, ease: "none", scrollTrigger: st });
+      return undefined;
+    },
+    { scope: filmRef, dependencies: [reduceMotion] }
+  );
+
+  const scrollToElement = useCallback((el) => {
+    if (!el) return;
+    el.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+  }, [reduceMotion]);
+
+  const scrollToForm = useCallback(() => {
+    scrollToElement(formRef.current);
+  }, [scrollToElement]);
+
+  const scrollToFormCard = useCallback(() => {
+    scrollToElement(formCardRef.current);
+  }, [scrollToElement]);
+
+  const chooseOpportunity = (interest) => {
+    setFormData((prev) => ({
+      ...prev,
+      interests: prev.interests.includes(interest)
+        ? prev.interests
+        : [...prev.interests, interest],
+    }));
     setErrors((prev) => {
+      const copy = { ...prev };
+      delete copy.interests;
+      return copy;
+    });
+    if (window.matchMedia("(max-width: 1023px)").matches) {
+      window.requestAnimationFrame(scrollToFormCard);
+    } else {
+      scrollToForm();
+    }
+  };
+
+  const clearError = (name) =>
+    setErrors((prev) => {
+      if (!prev[name]) return prev;
       const copy = { ...prev };
       delete copy[name];
       return copy;
     });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    const next = name === "phone" ? value.replace(/\D/g, "") : value;
+    setFormData((prev) => ({ ...prev, [name]: next }));
+    clearError(name);
+  };
+
+  const toggleInterest = (value) => {
+    setFormData((prev) => {
+      const has = prev.interests.includes(value);
+      return {
+        ...prev,
+        interests: has
+          ? prev.interests.filter((v) => v !== value)
+          : [...prev.interests, value],
+        otherInterest: value === "other" && has ? "" : prev.otherInterest,
+      };
+    });
+    clearError("interests");
+    if (value === "other") clearError("otherInterest");
   };
 
   const validate = () => {
     const next = {};
-    if (!formData.firstName.trim()) next.firstName = "First name is required";
-    if (!formData.lastName.trim()) next.lastName = "Last name is required";
+    if (!formData.fullName.trim()) next.fullName = "Please enter your full name";
     if (!formData.companyName.trim())
-      next.companyName = "Company name is required";
-    if (!formData.email.trim()) next.email = "Email is required";
+      next.companyName = "Please enter your company name";
+    if (!formData.jobTitle.trim()) next.jobTitle = "Please enter your job title";
+    if (!formData.email.trim()) next.email = "Please enter your business email";
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email))
-      next.email = "Invalid email address";
-    if (!formData.countryCode) next.countryCode = "Country code is required";
-    if (!formData.phone.trim()) next.phone = "Phone number is required";
-    else if (formData.phone.length < 7)
-      next.phone = "Enter a valid phone number";
-    if (!agreePrivacyPolicy)
-      next.privacy = "Please agree to the Terms and Conditions";
+      next.email = "That email address doesn't look right";
+    if (!formData.dialId) next.phone = "Please choose a country code";
+    else if (!formData.phone.trim()) next.phone = "Please enter your contact number";
+    else if (formData.phone.length < 7) next.phone = "Please enter a valid contact number";
+    if (formData.interests.length === 0)
+      next.interests = "Pick at least one option so we can send the right updates";
+    if (formData.interests.includes("other") && !formData.otherInterest.trim())
+      next.otherInterest = "Tell us a little more";
+    if (!agreeTerms) next.terms = "Please agree to the Terms and Conditions";
     return next;
   };
 
@@ -366,216 +405,256 @@ const RegisterInterest2027 = () => {
     const nextErrors = validate();
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) {
-      Swal.fire({
-        title: "Please check the form",
-        text: "Fill in all required fields to continue.",
-        icon: "warning",
-        confirmButtonColor: "#c8102e",
-      });
+      const firstKey = Object.keys(nextErrors)[0];
+      const el = document.querySelector(`[data-field="${firstKey}"]`);
+      el?.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "center" });
       return;
     }
+
+    const dial = DIAL_OPTIONS.find((o) => o.id === formData.dialId) || DEFAULT_DIAL;
 
     setLoading(true);
     try {
       const response = await axios.post("/api/interest-2027", {
-        ...formData,
-        jobTitle: "",
-        city: "",
+        fullName: formData.fullName,
+        companyName: formData.companyName,
+        jobTitle: formData.jobTitle,
+        email: formData.email,
+        countryCode: dial.code,
+        country: dial.country,
+        phone: formData.phone,
+        interests: formData.interests,
+        otherInterest: formData.otherInterest,
+        source,
         year: 2027,
         reCaptcha: captchaToken,
       });
 
       if (response.data.response === false) {
-        Swal.fire({
-          title: "Error",
-          text: response.data.data,
-          icon: "error",
-          confirmButtonColor: "#c8102e",
-        });
-      } else {
-        setSubmitted(true);
-        setFormData(INITIAL_FORM);
-        setCaptchaToken("");
-        setAgreePrivacyPolicy(false);
-        if (window.grecaptcha) window.grecaptcha.reset();
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        showError(response.data.data);
+        return;
       }
+
+      const firstName = formData.fullName.trim().split(/\s+/)[0];
+      setSubmitted({ updated: !!response.data.updated, name: firstName });
+      setFormData(INITIAL_FORM);
+      setCaptchaToken("");
+      setAgreeTerms(false);
+      recaptchaRef.current?.reset?.();
+
+      if (!reduceMotion) celebrate();
+
+      window.requestAnimationFrame(() => scrollToForm());
     } catch (error) {
-      Swal.fire({
-        title: "Error",
-        text:
-          error.response?.data?.data ||
-          "Something went wrong. Please try again.",
-        icon: "error",
-        confirmButtonColor: "#c8102e",
-      });
+      showError(error.response?.data?.data || "We couldn't save your details. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
+  const reveal = (delay = 0) =>
+    reduceMotion
+      ? {}
+      : {
+          initial: { opacity: 0, y: 16 },
+          whileInView: { opacity: 1, y: 0 },
+          viewport: { once: true, amount: 0.2, margin: "0px 0px -8% 0px" },
+          transition: { duration: 0.9, delay, ease: EASE },
+        };
+
   return (
     <Page>
       <Helmet>
-        <title>Register Interest 2027 | Brit FinTech Awards</title>
+        <title>Register Interest for BFA27 | Brit FinTech Awards 2027</title>
         <meta
           name="description"
-          content="Register your interest for Brit FinTech Awards 2027. Be first for nominations, tickets and sponsorship."
+          content="The next chapter of FinTech excellence begins here. Register your interest in the Brit FinTech Awards 2027 for early updates on nominations, tickets and sponsorship."
         />
       </Helmet>
 
       <link
-        href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet"
       />
 
-      <Rail aria-hidden="true" />
-      <Ambient aria-hidden="true" />
+      {/* ------------------------------------------------------------ Hero */}
+      <HeroSpotlight2027 onRegister={scrollToForm} reduceMotion={reduceMotion} />
 
-      <Main>
-        <Hero
-          initial={reduceMotion ? false : { opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55, ease: EASE }}
-        >
-          <YearMark aria-hidden="true">2027</YearMark>
+      {/* --------------------------------------------------------- Marquee */}
+      <Marquee aria-hidden="true" $still={!!reduceMotion}>
+        <div className="track">
+          {Array.from({ length: 2 }).map((_, i) => (
+            <span key={i} className="group">
+              {MARQUEE_WORDS.map((word) => (
+                <React.Fragment key={word}>
+                  <span>{word}</span>
+                  <i />
+                </React.Fragment>
+              ))}
+            </span>
+          ))}
+        </div>
+      </Marquee>
 
-          <HeroInner>
-            <HeroMeta>
-              <MetaMark>Brit FinTech Awards 2027</MetaMark>
-              <MetaTime>Next chapter</MetaTime>
-            </HeroMeta>
+      {/* --------------------------------------------------------- Journey */}
+      <Section>
+        <Container>
+          <Journey>
+            <motion.div {...reveal()}>
+              <SectionLabel>The journey continues</SectionLabel>
+            </motion.div>
+            <div>
+              <motion.p className="lead" {...reveal(0.05)}>
+                Following an incredible 2026, the Brit FinTech Awards returns in
+                2027 to celebrate the people and innovation shaping the future
+                of finance.
+              </motion.p>
+            </div>
+          </Journey>
+        </Container>
 
-            <Title>
-              The next
-              <TitleAccent>Chapter</TitleAccent>
-            </Title>
+        <FilmStrip ref={filmRef}>
+          {FILM_IMAGES.map((src, i) => (
+            <figure key={src} className={`${i % 2 ? "down" : "up"}${FILM_UNCROPPED.has(src) ? " whole" : ""}`}>
+              <img src={src} alt={`Brit FinTech Awards 2026 moment ${i + 1}`} loading="lazy" />
+            </figure>
+          ))}
+        </FilmStrip>
 
-            <Theme>
-              After years of celebrating the best in British FinTech, the Awards
-              are evolving for 2027. Register your interest to be first to know
-              what&apos;s coming.
-            </Theme>
+      </Section>
 
-            <HeroActions>
-              <PrimaryCue href="#register-form">Register interest</PrimaryCue>
-              <GhostCue to="/">Back to home</GhostCue>
-            </HeroActions>
-          </HeroInner>
-        </Hero>
+      {/* --------------------------------------------------- Opportunities */}
+      <Section $tone="raised" id="opportunities">
+        <Container>
+          <SectionHead>
+            <motion.div {...reveal()}>
+              <SectionLabel>Be part of what comes next</SectionLabel>
+              <SectionTitle>
+                Whether you build it, back it or celebrate it, BFA27 has a place
+                for you
+              </SectionTitle>
+            </motion.div>
+          </SectionHead>
 
-        {submitted ? (
-          <SuccessCard>
-            <MetaMark>Confirmed</MetaMark>
-            <SuccessTitle>You&apos;re on the list</SuccessTitle>
-            <Theme style={{ marginTop: 12 }}>
-              Thanks for registering your interest in Brit FinTech Awards 2027.
-              We&apos;ll be in touch as the next chapter unfolds.
-            </Theme>
-            <HeroActions>
-              <GhostCue to="/">Back to home</GhostCue>
-            </HeroActions>
-          </SuccessCard>
-        ) : (
-          <>
-            <Brief>
-              <BriefLabel>The story</BriefLabel>
-              <BriefCopy>
-                <p>
-                  The Brit FinTech Awards set out to recognise the people and
-                  organisations moving FinTech forward. The industry looks very
-                  different now — and so will the Awards.
-                </p>
-              </BriefCopy>
-            </Brief>
+          <ExploreLabel>Explore the opportunities ahead</ExploreLabel>
 
-            <Bench>
-              <BenchHead>
-                <BenchTitle>Be first to hear about</BenchTitle>
-                <BenchCount>4 updates</BenchCount>
-              </BenchHead>
-              <HearGrid>
-                {HEAR_ITEMS.map((item, i) => (
-                  <HearCard
-                    key={item}
-                    initial={reduceMotion ? false : { opacity: 0, y: 16 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                    transition={{ duration: 0.45, delay: i * 0.06, ease: EASE }}
-                  >
-                    <HearNum>0{i + 1}</HearNum>
-                    <HearText>{item}</HearText>
-                  </HearCard>
+          <CardGrid>
+            {OPPORTUNITIES.map((o, i) => (
+                <OpportunityCard
+                  key={o.id}
+                  type="button"
+                  onClick={() => chooseOpportunity(o.interest)}
+                  initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2, margin: "0px 0px -8% 0px" }}
+                  transition={{ duration: 0.9, delay: i * 0.1, ease: EASE }}
+                  aria-label={`${o.title}: ${o.cta}`}
+                >
+                  <span className="media" aria-hidden="true">
+                    <img
+                      src={o.image}
+                      alt=""
+                      loading="lazy"
+                      style={o.imagePosition ? { objectPosition: o.imagePosition } : undefined}
+                    />
+                    <span className="tint" />
+                  </span>
+
+                  <span className="kicker">{o.kicker}</span>
+
+                  <span className="body">
+                    <h3>{o.title}</h3>
+                    <p>{o.copy}</p>
+                    <span className="cta">
+                      {o.cta}
+                      <ArrowUpRight size={16} strokeWidth={2.4} />
+                    </span>
+                  </span>
+                </OpportunityCard>
+            ))}
+          </CardGrid>
+        </Container>
+      </Section>
+
+      {/* ------------------------------------------------------------ Form */}
+      <Section id="register-form" ref={formRef} $tone="form">
+        <Container>
+          <FormLayout>
+            <FormCopy>
+              <motion.div {...reveal()}>
+                <SectionLabel>The journey to BFA27 starts now</SectionLabel>
+                <SectionTitle as="h2">
+                  Your place in the next chapter starts here
+                </SectionTitle>
+              </motion.div>
+
+              <motion.ul className="perks" {...reveal(0.1)}>
+                {PERKS.map((perk) => (
+                  <li key={perk}>
+                    <Check size={15} strokeWidth={3} aria-hidden="true" />
+                    {perk}
+                  </li>
                 ))}
-              </HearGrid>
-            </Bench>
+              </motion.ul>
+            </FormCopy>
 
-            <PartnerStrip
-              initial={reduceMotion ? false : { opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.35 }}
-              transition={{ duration: 0.5, ease: EASE }}
-            >
-              <PartnerAccent />
-              <PartnerBody>
-                <div>
-                  <PartnerLabel>Partnerships</PartnerLabel>
-                  <PartnerTitle>Want to own a moment in 2027?</PartnerTitle>
-                  <PartnerCopy>
-                    A new format means new ways to get your brand in front of the
-                    industry&apos;s decision-makers. Speak to our partnerships
-                    team to be part of the first conversations.
-                  </PartnerCopy>
-                </div>
-                <PartnerMail href="mailto:marketing@britfintechawards.com">
-                  Email partnerships
-                </PartnerMail>
-              </PartnerBody>
-            </PartnerStrip>
+            {submitted ? (
+              <SuccessCard
+                initial={reduceMotion ? false : { opacity: 0, scale: 0.97 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, ease: EASE }}
+                role="status"
+              >
+                <span className="badge">
+                  <Sparkles size={18} />
+                </span>
+                <SectionLabel>
+                  {submitted.updated ? "Preferences updated" : "You're on the list"}
+                </SectionLabel>
+                <h3>
+                  {submitted.updated
+                    ? `Thanks, ${submitted.name}. We've updated your interests.`
+                    : `Thanks, ${submitted.name}. Your place in the next chapter starts here.`}
+                </h3>
+                <p>
+                  {submitted.updated
+                    ? "Your details were already with us, so we've refreshed them and added anything new you told us."
+                    : "You'll be among the first to hear as BFA27 announcements are released."}
+                </p>
+              </SuccessCard>
+            ) : (
+              <FormCard
+                ref={formCardRef}
+                onSubmit={handleSubmit}
+                noValidate
+                initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.15 }}
+                transition={{ duration: 0.6, ease: EASE }}
+              >
+                <FormCardHead>
+                  <span>Register your interest</span>
+                </FormCardHead>
 
-            <FormSection id="register-form">
-              <BenchHead>
-                <BenchTitle>Register your interest</BenchTitle>
-                <BenchCount>Required *</BenchCount>
-              </BenchHead>
-
-              <FormCard onSubmit={handleSubmit} noValidate>
-                <FormGrid>
-                  <Field>
-                    <FieldLabel htmlFor="firstName">
-                      First name <Req>*</Req>
+                <FieldGrid>
+                  <Field data-field="fullName">
+                    <FieldLabel htmlFor="fullName">
+                      Full name <Req>*</Req>
                     </FieldLabel>
                     <Input
-                      id="firstName"
-                      name="firstName"
-                      $error={!!errors.firstName}
-                      placeholder="Enter first name"
-                      value={formData.firstName}
+                      id="fullName"
+                      name="fullName"
+                      $error={!!errors.fullName}
+                      placeholder="Your full name"
+                      value={formData.fullName}
                       onChange={handleChange}
                       maxLength={130}
-                      autoComplete="given-name"
+                      autoComplete="name"
                     />
-                    {errors.firstName && <Err>{errors.firstName}</Err>}
+                    {errors.fullName && <Err>{errors.fullName}</Err>}
                   </Field>
 
-                  <Field>
-                    <FieldLabel htmlFor="lastName">
-                      Last name <Req>*</Req>
-                    </FieldLabel>
-                    <Input
-                      id="lastName"
-                      name="lastName"
-                      $error={!!errors.lastName}
-                      placeholder="Enter last name"
-                      value={formData.lastName}
-                      onChange={handleChange}
-                      maxLength={130}
-                      autoComplete="family-name"
-                    />
-                    {errors.lastName && <Err>{errors.lastName}</Err>}
-                  </Field>
-
-                  <Field>
+                  <Field data-field="companyName">
                     <FieldLabel htmlFor="companyName">
                       Company name <Req>*</Req>
                     </FieldLabel>
@@ -583,7 +662,7 @@ const RegisterInterest2027 = () => {
                       id="companyName"
                       name="companyName"
                       $error={!!errors.companyName}
-                      placeholder="Enter company name"
+                      placeholder="Where you work"
                       value={formData.companyName}
                       onChange={handleChange}
                       maxLength={130}
@@ -592,76 +671,68 @@ const RegisterInterest2027 = () => {
                     {errors.companyName && <Err>{errors.companyName}</Err>}
                   </Field>
 
-                  <Field>
+                  <Field data-field="jobTitle">
+                    <FieldLabel htmlFor="jobTitle">
+                      Job title <Req>*</Req>
+                    </FieldLabel>
+                    <Input
+                      id="jobTitle"
+                      name="jobTitle"
+                      $error={!!errors.jobTitle}
+                      placeholder="Your role"
+                      value={formData.jobTitle}
+                      onChange={handleChange}
+                      maxLength={130}
+                      autoComplete="organization-title"
+                    />
+                    {errors.jobTitle && <Err>{errors.jobTitle}</Err>}
+                  </Field>
+
+                  <Field data-field="email">
                     <FieldLabel htmlFor="email">
-                      Email address <Req>*</Req>
+                      Business email <Req>*</Req>
                     </FieldLabel>
                     <Input
                       id="email"
                       name="email"
                       type="email"
                       $error={!!errors.email}
-                      placeholder="Enter email address"
+                      placeholder="you@company.com"
                       value={formData.email}
                       onChange={handleChange}
                       maxLength={130}
                       autoComplete="email"
+                      inputMode="email"
                     />
                     {errors.email && <Err>{errors.email}</Err>}
                   </Field>
 
-                  <Field>
-                    <FieldLabel htmlFor="country">Country / region</FieldLabel>
-                    <SearchSelect
-                      value={formData.country}
-                      options={COUNTRY_OPTIONS}
-                      placeholder="Select country / region"
-                      searchPlaceholder="Search country…"
-                      emptyText="No countries found"
-                      onChange={(country) =>
-                        setFormData((prev) => ({ ...prev, country }))
-                      }
-                    />
-                  </Field>
-
-                  <Field>
+                  <Field data-field="phone" className="span-2">
                     <FieldLabel htmlFor="phone">
-                      Phone number <Req>*</Req>
+                      Contact number <Req>*</Req>
                     </FieldLabel>
                     <PhoneRow>
-                      <div style={{ width: 110, flexShrink: 0 }}>
+                      <div className="code">
                         <SearchSelect
-                          value={formData.countryCode}
-                          options={COUNTRY_CODE_OPTIONS}
+                          value={formData.dialId}
+                          options={DIAL_OPTIONS}
                           placeholder="Code"
                           searchPlaceholder="Search country or code…"
                           emptyText="No codes found"
                           menuMinWidth={300}
-                          formatTrigger={(o) => `+${o.value}`}
-                          formatOption={(o) => {
-                            const name = o.label.split(" (+")[0];
-                            return (
-                              <span
-                                style={{
-                                  display: "flex",
-                                  gap: 10,
-                                  alignItems: "center",
-                                }}
-                              >
-                                <span style={{ width: 42, flexShrink: 0 }}>
-                                  +{o.value}
-                                </span>
-                                <span>{name}</span>
+                          invalid={!!errors.phone && !formData.dialId}
+                          formatTrigger={(o) => `+${o.code}`}
+                          formatOption={(o) => (
+                            <span style={{ display: "flex", gap: 10, alignItems: "center" }}>
+                              <span style={{ width: 46, flexShrink: 0, opacity: 0.7 }}>
+                                +{o.code}
                               </span>
-                            );
-                          }}
-                          onChange={(countryCode) => {
-                            setFormData((prev) => ({ ...prev, countryCode }));
-                            setErrors((prev) => {
-                              const copy = { ...prev };
-                              delete copy.countryCode;
-                              return copy;
-                            });
+                              <span>{o.country}</span>
+                            </span>
+                          )}
+                          onChange={(dialId) => {
+                            setFormData((prev) => ({ ...prev, dialId }));
+                            clearError("phone");
                           }}
                         />
                       </div>
@@ -669,485 +740,661 @@ const RegisterInterest2027 = () => {
                         id="phone"
                         name="phone"
                         $error={!!errors.phone}
-                        placeholder="Enter phone number"
+                        placeholder="Contact number"
                         value={formData.phone}
                         onChange={handleChange}
                         maxLength={15}
                         inputMode="numeric"
                         autoComplete="tel-national"
-                        style={{ flex: 1 }}
                       />
                     </PhoneRow>
-                    {(errors.countryCode || errors.phone) && (
-                      <Err>{errors.countryCode || errors.phone}</Err>
-                    )}
+                    {errors.phone && <Err>{errors.phone}</Err>}
                   </Field>
-                </FormGrid>
+                </FieldGrid>
+
+                <InterestBlock data-field="interests">
+                  <FieldLabel as="p">
+                    What are you interested in? <Req>*</Req>
+                    <span className="hint">Select all that apply</span>
+                  </FieldLabel>
+                  <Pills role="group" aria-label="What are you interested in?">
+                    {INTEREST_2027_FORM_OPTIONS.map((opt) => {
+                      const active = formData.interests.includes(opt.value);
+                      return (
+                        <Pill
+                          key={opt.value}
+                          type="button"
+                          role="checkbox"
+                          aria-checked={active}
+                          $active={active}
+                          onClick={() => toggleInterest(opt.value)}
+                        >
+                          <span className="box">
+                            <Check size={12} strokeWidth={3.5} />
+                          </span>
+                          <span className="option-label">{opt.label}</span>
+                        </Pill>
+                      );
+                    })}
+                  </Pills>
+                  {errors.interests && <Err>{errors.interests}</Err>}
+
+                  {formData.interests.includes("other") && (
+                    <motion.div
+                      data-field="otherInterest"
+                      initial={reduceMotion ? false : { opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      transition={{ duration: 0.3, ease: EASE }}
+                      style={{ overflow: "hidden" }}
+                    >
+                      <Field style={{ marginTop: 14 }}>
+                        <FieldLabel htmlFor="otherInterest">
+                          Tell us more <Req>*</Req>
+                        </FieldLabel>
+                        <Input
+                          id="otherInterest"
+                          name="otherInterest"
+                          $error={!!errors.otherInterest}
+                          placeholder="What would you like to hear about?"
+                          value={formData.otherInterest}
+                          onChange={handleChange}
+                          maxLength={200}
+                        />
+                        {errors.otherInterest && <Err>{errors.otherInterest}</Err>}
+                      </Field>
+                    </motion.div>
+                  )}
+                </InterestBlock>
 
                 <CaptchaWrap>
                   <ReCAPTCHA
-                    sitekey="6LdxNigqAAAAAJ6jU9uuhEtrAw-s8J_qnsGCVvj5"
+                    ref={recaptchaRef}
+                    sitekey={RECAPTCHA_SITE_KEY}
+                    theme="dark"
                     onChange={(token) => setCaptchaToken(token || "")}
                   />
                 </CaptchaWrap>
 
-                <CheckRow>
+                <CheckRow data-field="terms" $error={!!errors.terms}>
                   <input
                     type="checkbox"
-                    id="privacyPolicy"
-                    checked={agreePrivacyPolicy}
+                    id="ri27-terms"
+                    checked={agreeTerms}
                     onChange={(e) => {
-                      setAgreePrivacyPolicy(e.target.checked);
-                      setErrors((prev) => {
-                        const copy = { ...prev };
-                        delete copy.privacy;
-                        return copy;
-                      });
+                      setAgreeTerms(e.target.checked);
+                      clearError("terms");
                     }}
                   />
-                  <label htmlFor="privacyPolicy">
-                    I have read and agreed to the{" "}
-                    <NavLink to="/terms-and-conditions">
-                      Terms and Conditions
-                    </NavLink>
+                  <label htmlFor="ri27-terms">
+                    I have read and agree to the{" "}
+                    <Link to="/terms-and-conditions">Terms and Conditions</Link>{" "}
+                    and <Link to="/privacy-policy">Privacy Policy</Link>.
                   </label>
                 </CheckRow>
-                {errors.privacy && <Err>{errors.privacy}</Err>}
+                {errors.terms && <Err>{errors.terms}</Err>}
 
-                <SubmitBtn type="submit" disabled={loading}>
-                  {loading ? "Submitting…" : "Submit"}
-                </SubmitBtn>
+                <SubmitButton type="submit" disabled={loading}>
+                  {loading ? (
+                    <>
+                      <Spinner aria-hidden="true" />
+                      Submitting…
+                    </>
+                  ) : (
+                    <>
+                      Submit your interest
+                      <ArrowUpRight size={18} strokeWidth={2.5} />
+                    </>
+                  )}
+                </SubmitButton>
               </FormCard>
-            </FormSection>
-          </>
-        )}
-      </Main>
+            )}
+          </FormLayout>
+        </Container>
+      </Section>
+
+      {/* --------------------------------------------------------- Closing */}
+      <Closing>
+        <Container>
+          <motion.div {...reveal()}>
+            <Eyebrow $center>
+              <EyebrowDot />
+              Brit FinTech Awards 2027
+            </Eyebrow>
+            <h2>
+              Celebrating the people, ideas and innovations shaping
+              tomorrow&apos;s financial world.
+            </h2>
+          </motion.div>
+        </Container>
+        <ClosingYear aria-hidden="true">BFA27</ClosingYear>
+      </Closing>
     </Page>
   );
 };
 
-/* ——— layout (Event Host aesthetic) ——— */
+/* ---------------------------------------------------------------------- */
+/* Styles                                                                  */
+/* ---------------------------------------------------------------------- */
 
 const Page = styled.div`
-  --ink: #0f1419;
-  --chalk: #eef1f4;
-  --rail: #1a6b6e;
+  --bg: #07070a;
+  --bg-raised: #0d0d12;
+  --ink: #ffffff;
+  --mute: rgba(255, 255, 255, 0.64);
+  --faint: rgba(255, 255, 255, 0.4);
+  --line: rgba(255, 255, 255, 0.1);
   --crimson: #c8102e;
-  --mute: #5a6570;
-  --line: #cfd8de;
-  --surface: #ffffff;
+  --crimson-deep: #680014;
+  --gold: #f2d8ac;
 
   position: relative;
   width: 100%;
-  min-height: 100vh;
-  background:
-    radial-gradient(ellipse 70% 45% at 100% 0%, rgba(200, 16, 46, 0.07), transparent 55%),
-    radial-gradient(ellipse 50% 40% at 0% 30%, rgba(26, 107, 110, 0.06), transparent 50%),
-    var(--chalk);
+  background: var(--bg);
   color: var(--ink);
-  font-family: "IBM Plex Sans", system-ui, sans-serif;
-  overflow-x: hidden;
-`;
+  font-family: "Outfit", system-ui, -apple-system, sans-serif;
+  overflow-x: clip;
 
-const Rail = styled.div`
-  pointer-events: none;
-  position: fixed;
-  inset: 0 auto 0 0;
-  width: 6px;
-  z-index: 5;
-  background: linear-gradient(
-    180deg,
-    var(--crimson) 0%,
-    var(--rail) 42%,
-    var(--ink) 100%
-  );
-
-  @media (max-width: 640px) {
-    width: 4px;
+  /* Theme CSS paints every heading #070707 in Montserrat !important; this page is dark and uses Outfit. */
+  h1, h2, h3 {
+    margin: 0;
+    color: var(--ink);
+    font-family: "Outfit", system-ui, -apple-system, sans-serif !important;
   }
+  p { margin: 0; }
+  em { font-style: normal; }
 `;
 
-const Ambient = styled.div`
-  pointer-events: none;
-  position: absolute;
-  top: 120px;
-  right: -80px;
-  width: 420px;
-  height: 420px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(200, 16, 46, 0.12), transparent 68%);
-  filter: blur(2px);
-`;
-
-const Main = styled.main`
-  position: relative;
-  z-index: 1;
+const Container = styled.div`
   width: 100%;
-  max-width: 1140px;
+  max-width: 1240px;
   margin: 0 auto;
-  padding: 96px 15px 80px;
+  padding: 0 24px;
   box-sizing: border-box;
 
-  @media (max-width: 640px) {
-    padding: 88px 16px 56px;
-  }
+  @media (min-width: 768px) { padding: 0 40px; }
 `;
 
-const Hero = styled(motion.header)`
-  position: relative;
-  padding: 8px 0 36px;
-  border-bottom: 1px solid var(--line);
-  overflow: hidden;
-`;
-
-const YearMark = styled.span`
-  position: absolute;
-  right: -2%;
-  top: 50%;
-  transform: translateY(-52%);
-  font-family: "Oswald", sans-serif;
-  font-weight: 700;
-  font-size: clamp(120px, 22vw, 220px);
-  line-height: 0.8;
-  letter-spacing: -0.04em;
-  color: transparent;
-  -webkit-text-stroke: 1.5px rgba(15, 20, 25, 0.1);
-  user-select: none;
-  pointer-events: none;
-
-  @media (max-width: 720px) {
-    font-size: 110px;
-    right: -8%;
-    opacity: 0.7;
-  }
-`;
-
-const HeroInner = styled.div`
-  position: relative;
-  z-index: 1;
-  max-width: 620px;
-`;
-
-const HeroMeta = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px 20px;
-  margin-bottom: 18px;
-`;
-
-const MetaMark = styled.p`
-  margin: 0;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--crimson);
-`;
-
-const MetaTime = styled.p`
-  margin: 0;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--mute);
-`;
-
-const Title = styled.h1`
-  margin: 0;
-  font-family: "Oswald", sans-serif;
-  font-weight: 700;
-  font-size: clamp(52px, 9vw, 92px);
-  line-height: 0.88;
-  letter-spacing: -0.02em;
-  text-transform: uppercase;
-  color: var(--ink);
-`;
-
-const TitleAccent = styled.span`
-  display: block;
-  color: var(--crimson);
-`;
-
-const Theme = styled.p`
-  margin: 18px 0 0;
-  max-width: 34em;
-  font-size: clamp(16px, 2vw, 19px);
-  font-weight: 500;
-  line-height: 1.5;
-  color: var(--mute);
-`;
-
-const HeroActions = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 12px;
-  margin-top: 26px;
-`;
-
-const PrimaryCue = styled.a`
+const Eyebrow = styled.p`
   display: inline-flex;
   align-items: center;
-  padding: 14px 22px;
+  gap: 10px;
+  margin: 0 0 22px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  ${(p) => p.$center && css`justify-content: center; width: 100%;`}
+`;
+
+const pulse = keyframes`
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.5); opacity: 0.55; }
+`;
+
+const EyebrowDot = styled.span`
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
   background: var(--crimson);
-  color: var(--surface);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  text-decoration: none;
-  box-shadow: 0 12px 28px rgba(200, 16, 46, 0.28);
-  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 0 0 4px rgba(200, 16, 46, 0.25);
+  animation: ${pulse} 2.4s ease-in-out infinite;
 
-  &:hover {
-    background: var(--ink);
-    transform: translateY(-2px);
-    color: #fff;
-    box-shadow: 0 14px 32px rgba(15, 20, 25, 0.2);
-  }
+  @media (prefers-reduced-motion: reduce) { animation: none; }
 `;
 
-const GhostCue = styled(Link)`
+const buttonBase = css`
   display: inline-flex;
   align-items: center;
-  padding: 14px 18px;
-  border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(6px);
-  color: var(--ink);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
-
-  &:hover {
-    border-color: var(--ink);
-    color: var(--crimson);
-    background: #fff;
-  }
-`;
-
-const Brief = styled.section`
-  display: grid;
-  grid-template-columns: 140px minmax(0, 1fr);
-  gap: 20px;
-  padding: 32px 0 0;
-
-  @media (max-width: 720px) {
-    grid-template-columns: 1fr;
-    gap: 8px;
-  }
-`;
-
-const BriefLabel = styled.h2`
-  margin: 4px 0 0;
-  font-size: 12px;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 26px;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--crimson);
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  will-change: transform;
+
+  &:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
 `;
 
-const BriefCopy = styled.div`
-  max-width: 44em;
+/* Marquee --------------------------------------------------------------- */
+
+const slide = keyframes`
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+`;
+
+const Marquee = styled.div`
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  background: var(--crimson);
+  color: #fff;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.35);
+
+  .track {
+    display: flex;
+    width: max-content;
+    animation: ${(p) => (p.$still ? "none" : css`${slide} 28s linear infinite`)};
+  }
+  .group { display: inline-flex; align-items: center; }
+  span.group > span {
+    padding: 14px 0;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  i {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    margin: 0 28px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.75);
+  }
+`;
+
+/* Sections -------------------------------------------------------------- */
+
+const Section = styled.section`
+  position: relative;
+  padding: 96px 0;
+  /* Fixed site header (+ optional announcement bar) must not cover anchored sections */
+  scroll-margin-top: calc(100px + var(--ri27-bar-h, 0px));
+  background: ${(p) =>
+    p.$tone === "raised"
+      ? "var(--bg-raised)"
+      : p.$tone === "form"
+        ? "radial-gradient(70% 60% at 100% 0%, rgba(200, 16, 46, 0.16), transparent 60%), var(--bg)"
+        : "var(--bg)"};
+  ${(p) => p.$tone === "raised" && css`border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);`}
+
+  @media (min-width: 1024px) { padding: 128px 0; }
+`;
+
+const SectionLabel = styled.p`
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 18px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--crimson);
+
+  &::before {
+    content: "";
+    width: 28px;
+    height: 2px;
+    background: var(--crimson);
+  }
+`;
+
+const SectionTitle = styled.h2`
+  max-width: 20ch;
+  font-weight: 700;
+  font-size: clamp(1.9rem, 4vw, 3.2rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+`;
+
+const Journey = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
 
   p {
-    margin: 0;
-    font-size: 17px;
+    max-width: 60ch;
+    font-size: 1.08rem;
     line-height: 1.7;
     color: var(--mute);
   }
+  p + p { margin-top: 20px; }
+  p.lead {
+    font-size: clamp(1.3rem, 2.2vw, 1.75rem);
+    line-height: 1.4;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  @media (min-width: 900px) {
+    grid-template-columns: 260px minmax(0, 1fr);
+    gap: 48px;
+  }
 `;
 
-const Bench = styled.section`
-  margin-top: 40px;
+const FilmStrip = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 72px 0 0;
+  padding: 0 10px;
+
+  figure {
+    position: relative;
+    margin: 0;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    border: 1px solid rgba(200, 16, 46, 0.6);
+    border-radius: 6px;
+    box-sizing: border-box;
+    background: #111;
+    will-change: transform;
+  }
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.9);
+    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+  }
+  figure:hover img { transform: scale(1.05); filter: saturate(1.05); }
+  figure:nth-child(3) img { object-position: 85% center; }
+  figure.whole {
+    display: flex;
+    align-items: center;
+    background: #0b0b0d;
+  }
+  figure.whole img {
+    height: 72%;
+    object-position: 51.5% center;
+    -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 14%, #000 86%, transparent 100%);
+    mask-image: linear-gradient(180deg, transparent 0, #000 14%, #000 86%, transparent 100%);
+  }
+
+  @media (max-width: 767px) {
+    figure:nth-child(2) {
+      grid-column: 2;
+      grid-row: 1 / 3;
+      align-self: center;
+      transform: none !important;
+    }
+    figure:nth-child(5) { display: none; }
+  }
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 14px;
+    padding: 0 24px;
+    figure { aspect-ratio: 3 / 4; }
+  }
 `;
 
-const BenchHead = styled.div`
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 18px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid var(--line);
+/* Opportunities --------------------------------------------------------- */
+
+const SectionHead = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+  align-items: end;
+
+  p {
+    max-width: 56ch;
+    font-size: 1.08rem;
+    line-height: 1.7;
+    color: var(--mute);
+  }
+
+  @media (min-width: 1000px) {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: 64px;
+  }
 `;
 
-const BenchTitle = styled.h2`
-  margin: 0;
-  font-family: "Oswald", sans-serif;
-  font-weight: 600;
-  font-size: clamp(24px, 3vw, 34px);
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  color: var(--ink);
-`;
-
-const BenchCount = styled.span`
+const ExploreLabel = styled.p`
+  && { margin: 56px 0 36px; }
   font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--rail);
+  color: var(--faint);
 `;
 
-const HearGrid = styled.div`
+const CardGrid = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
+  grid-template-columns: 1fr;
+  gap: 18px;
 
-  @media (max-width: 720px) {
-    grid-template-columns: 1fr;
-  }
+  @media (min-width: 820px) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 `;
 
-const HearCard = styled(motion.article)`
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 14px;
-  align-items: start;
-  padding: 18px 18px 20px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  transition: border-color 0.2s ease, transform 0.25s ease, box-shadow 0.25s ease;
-
-  &:hover {
-    border-color: var(--ink);
-    transform: translateY(-3px);
-    box-shadow: 0 14px 30px rgba(15, 20, 25, 0.07);
-  }
-`;
-
-const HearNum = styled.span`
-  font-family: "Oswald", sans-serif;
-  font-size: 22px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  color: var(--crimson);
-  line-height: 1;
-`;
-
-const HearText = styled.p`
-  margin: 0;
-  font-size: 14.5px;
-  line-height: 1.55;
-  color: var(--mute);
-`;
-
-const PartnerStrip = styled(motion.aside)`
+const OpportunityCard = styled(motion.button)`
   position: relative;
-  margin-top: 40px;
-  overflow: hidden;
-  background: linear-gradient(125deg, #0f1419 0%, #1a0508 48%, #680014 100%);
-  color: #fff;
-`;
-
-const PartnerAccent = styled.div`
-  position: absolute;
-  top: -40%;
-  right: -10%;
-  width: 280px;
-  height: 280px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(200, 16, 46, 0.55), transparent 70%);
-  pointer-events: none;
-`;
-
-const PartnerBody = styled.div`
-  position: relative;
-  z-index: 1;
+  isolation: isolate;
   display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
+  flex-direction: column;
   justify-content: space-between;
-  gap: 22px;
-  padding: 28px 26px;
-`;
+  min-height: 460px;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #0b0b10;
+  color: var(--ink);
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+  will-change: transform;
 
-const PartnerLabel = styled.p`
-  margin: 0 0 8px;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: #ff7a8a;
-`;
+  .media {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+  }
+  .media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transform: scale(1.02);
+    filter: saturate(0.75) brightness(0.9);
+    transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+  }
+  .media .tint {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(7, 7, 10, 0.35) 0%, rgba(7, 7, 10, 0.1) 30%, rgba(7, 7, 10, 0.78) 62%, rgba(7, 7, 10, 0.96) 100%);
+    transition: background 0.6s ease;
+  }
 
-const PartnerTitle = styled.h3`
-  margin: 0 0 10px;
-  font-family: "Oswald", sans-serif;
-  font-size: clamp(22px, 3vw, 28px);
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  color: #fff;
-`;
+  .body { display: block; }
+  .kicker {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    width: max-content;
+    max-width: 100%;
+    margin-bottom: 12px;
+    padding: 7px 11px;
+    border: 1px solid rgba(242, 216, 172, 0.5);
+    border-radius: 999px;
+    background: rgba(5, 5, 7, 0.88);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    line-height: 1.3;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.9);
+  }
+  h3 {
+    font-size: clamp(1.5rem, 2.1vw, 1.85rem);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.05;
+    color: var(--ink);
+  }
+  p {
+    margin-top: 12px;
+    max-width: 34ch;
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.72);
+  }
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 22px;
+    padding: 11px 16px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.06);
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink);
+    backdrop-filter: blur(6px);
+    transition: background 0.35s ease, color 0.35s ease, border-color 0.35s ease, gap 0.35s ease;
+  }
 
-const PartnerCopy = styled.p`
-  margin: 0;
-  max-width: 38em;
-  font-size: 14.5px;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.72);
-`;
+  &:hover,
+  &:focus-visible {
+    transform: translateY(-8px);
+    border-color: rgba(200, 16, 46, 0.7);
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(200, 16, 46, 0.25);
+    outline: none;
+  }
+  &:hover .media img,
+  &:focus-visible .media img {
+    transform: scale(1.1);
+    filter: saturate(1) brightness(1);
+  }
+  &:hover .media .tint,
+  &:focus-visible .media .tint {
+    background:
+      linear-gradient(180deg, rgba(7, 7, 10, 0.3) 0%, rgba(7, 7, 10, 0.05) 30%, rgba(7, 7, 10, 0.8) 62%, rgba(7, 7, 10, 0.97) 100%),
+      linear-gradient(180deg, rgba(200, 16, 46, 0) 40%, rgba(200, 16, 46, 0.35) 100%);
+  }
+  &:hover .cta,
+  &:focus-visible .cta {
+    background: #fff;
+    border-color: #fff;
+    color: #0a0a0a;
+    gap: 12px;
+  }
 
-const PartnerMail = styled.a`
-  display: inline-flex;
-  padding: 14px 18px;
-  background: #fff;
-  color: var(--crimson);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  text-decoration: none;
-  white-space: nowrap;
-  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
-
-  &:hover {
-    background: var(--crimson);
-    color: #fff;
-    transform: translateY(-2px);
+  @media (max-width: 819px) {
+    min-height: 400px;
   }
 `;
 
-const FormSection = styled.section`
-  margin-top: 48px;
+/* Form ------------------------------------------------------------------ */
+
+const FormLayout = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+
+  @media (min-width: 1024px) {
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: 72px;
+    align-items: start;
+  }
 `;
 
-const FormCard = styled.form`
+const FormCopy = styled.div`
+  .perks {
+    list-style: none;
+    margin: 32px 0 0;
+    padding: 0;
+    display: grid;
+    gap: 12px;
+  }
+  .perks li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .perks svg {
+    flex-shrink: 0;
+    margin-top: 3px;
+    color: var(--crimson);
+  }
+
+  p {
+    margin-top: 20px;
+    max-width: 48ch;
+    font-size: 1.08rem;
+    line-height: 1.7;
+    color: var(--mute);
+  }
+
+  @media (min-width: 1024px) {
+    position: sticky;
+    top: 130px;
+  }
+`;
+
+const cardSurface = css`
   position: relative;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  padding: 28px 24px 32px;
-  box-shadow: 0 18px 40px rgba(15, 20, 25, 0.06);
+  padding: 32px 28px 30px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  box-sizing: border-box;
 
   &::before {
     content: "";
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
+    inset: 0 0 auto 0;
     height: 3px;
-    background: linear-gradient(90deg, var(--crimson), #680014, var(--ink));
+    border-radius: 14px 14px 0 0;
+    background: linear-gradient(90deg, var(--crimson), var(--crimson-deep));
   }
 
-  @media (max-width: 640px) {
-    padding: 20px 16px 28px;
-  }
+  @media (max-width: 640px) { padding: 24px 18px 24px; }
 `;
 
-const FormGrid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px 18px;
+const FormCard = styled(motion.form)`
+  ${cardSurface}
+  scroll-margin-top: calc(100px + var(--ri27-bar-h, 0px));
+`;
 
-  @media (max-width: 720px) {
-    grid-template-columns: 1fr;
+const FormCardHead = styled.div`
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 26px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ink);
+`;
+
+const FieldGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+
+  @media (min-width: 640px) {
+    grid-template-columns: 1fr 1fr;
+    .span-2 { grid-column: 1 / -1; }
   }
 `;
 
@@ -1158,218 +1405,351 @@ const Field = styled.div`
 `;
 
 const FieldLabel = styled.label`
-  margin-bottom: 8px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 9px;
   font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--ink);
+  color: rgba(255, 255, 255, 0.85);
+
+  .hint {
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: none;
+    color: var(--faint);
+  }
 `;
 
 const Req = styled.span`
   color: var(--crimson);
 `;
 
-const Input = styled.input`
+/* Global CSS forces `input { border: none !important }`; borders are drawn via box-shadow. */
+const fieldSurface = css`
   width: 100%;
-  height: 48px;
-  padding: 0 14px;
-  /* Global CSS: input { border: none !important } — draw border via box-shadow */
+  height: 52px;
+  padding: 0 16px;
   border: none !important;
-  border-radius: 0 !important;
-  background: #fff !important;
-  color: var(--ink);
+  border-radius: 8px !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  color: #fff !important;
   font-family: inherit;
   font-size: 15px;
   outline: none !important;
   box-sizing: border-box;
   appearance: none;
-  box-shadow: inset 0 0 0 1.5px
-    ${(p) => (p.$error ? "var(--crimson)" : "#b0b5bd")};
-  transition: box-shadow 0.15s ease;
+  transition: box-shadow 0.15s ease, background 0.15s ease;
+`;
 
-  &::placeholder {
-    color: #8a939c;
-  }
+const Input = styled.input`
+  ${fieldSurface}
+  box-shadow: inset 0 0 0 1px ${(p) => (p.$error ? "var(--crimson)" : "rgba(255,255,255,0.16)")};
 
+  &::placeholder { color: rgba(255, 255, 255, 0.38); }
+  &:hover { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.32); }
   &:focus {
-    box-shadow: inset 0 0 0 1.5px var(--ink) !important;
+    background: rgba(255, 255, 255, 0.07) !important;
+    box-shadow: inset 0 0 0 1.5px #fff !important;
+  }
+  &:-webkit-autofill,
+  &:-webkit-autofill:focus {
+    -webkit-text-fill-color: #fff;
+    -webkit-box-shadow: 0 0 0 1000px #1a1a20 inset, inset 0 0 0 1px rgba(255, 255, 255, 0.16);
+    caret-color: #fff;
   }
 `;
 
 const PhoneRow = styled.div`
   display: flex;
-  gap: 0;
+  gap: 10px;
   align-items: stretch;
+
+  .code { width: 112px; flex-shrink: 0; }
+  ${Input} { flex: 1; min-width: 0; }
 `;
 
-const CountryRoot = styled.div`
+const SelectRoot = styled.div`
   position: relative;
   width: 100%;
 `;
 
-const CountryTrigger = styled.button`
-  width: 100%;
-  height: 48px;
+const SelectTrigger = styled.button`
+  ${fieldSurface}
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
-  padding: 0 14px;
-  border: none !important;
-  border-radius: 0 !important;
-  background: #fff !important;
-  font-family: inherit;
-  font-size: 15px;
+  gap: 8px;
   text-align: left;
   cursor: pointer;
-  box-shadow: inset 0 0 0 1.5px
-    ${(p) => (p.$open ? "#0f1419" : "#b0b5bd")};
-  transition: box-shadow 0.15s ease;
+  box-shadow: inset 0 0 0 1px
+    ${(p) => (p.$invalid ? "var(--crimson)" : p.$open ? "#fff" : "rgba(255,255,255,0.16)")};
 
-  &:hover {
-    box-shadow: inset 0 0 0 1.5px #0f1419;
-  }
+  &:hover { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.32); }
 `;
 
-const CountryMenu = styled.div`
+const SelectMenu = styled.div`
   position: absolute;
-  top: calc(100% + 4px);
+  top: calc(100% + 6px);
   left: 0;
-  right: 0;
   min-width: ${(p) => (p.$minWidth ? `${p.$minWidth}px` : "100%")};
+  max-width: min(92vw, 360px);
   z-index: 50;
-  background: #fff;
-  border: 1px solid #cfd8de;
-  box-shadow: 0 16px 36px rgba(15, 20, 25, 0.14);
+  overflow: hidden;
+  border-radius: 10px;
+  background: #15151b;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
 `;
 
-const CountrySearchRow = styled.div`
+const SelectSearchRow = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 10px 12px;
-  border-bottom: 1px solid #e8ecf0;
-  background: #f7f8fa;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.03);
 `;
 
-const CountrySearchInput = styled.input`
+const SelectSearchInput = styled.input`
   flex: 1;
   min-width: 0;
-  height: 34px;
-  padding: 0 4px;
+  height: 32px;
+  padding: 0 2px;
   border: none !important;
   outline: none !important;
   background: transparent !important;
   box-shadow: none !important;
   font-family: inherit;
   font-size: 14px;
-  color: #0f1419;
+  color: #fff !important;
 
-  &::placeholder {
-    color: #8a939c;
-  }
+  &::placeholder { color: rgba(255, 255, 255, 0.38); }
 `;
 
-const CountryList = styled.div`
-  max-height: 220px;
+const SelectList = styled.div`
+  max-height: 240px;
   overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
 `;
 
-const CountryOption = styled.button`
+const SelectOption = styled.button`
   display: block;
   width: 100%;
   padding: 11px 14px;
   border: none !important;
-  background: ${(p) => (p.$active ? "#c8102e" : "transparent")} !important;
-  color: ${(p) => (p.$active ? "#fff" : "#0f1419")};
+  background: ${(p) => (p.$active ? "var(--crimson)" : "transparent")} !important;
+  color: #fff;
   font-family: inherit;
   font-size: 14px;
   text-align: left;
   cursor: pointer;
 
   &:hover {
-    background: ${(p) => (p.$active ? "#c8102e" : "#f4f7f8")} !important;
+    background: ${(p) => (p.$active ? "var(--crimson)" : "rgba(255,255,255,0.07)")} !important;
   }
 `;
 
-const CountryEmpty = styled.div`
+const SelectEmpty = styled.div`
   padding: 14px;
   font-size: 14px;
-  color: #8a939c;
+  color: var(--faint);
 `;
 
 const Err = styled.p`
-  margin: 6px 0 0;
-  font-size: 12px;
+  margin: 7px 0 0;
+  font-size: 12.5px;
   font-weight: 600;
-  color: var(--crimson);
+  color: #ff5c73;
+`;
+
+const InterestBlock = styled.div`
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+`;
+
+const Pills = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+`;
+
+const Pill = styled.button`
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  box-sizing: border-box;
+  gap: 10px;
+  padding: 11px 16px 11px 12px;
+  border-radius: 999px;
+  border: 1px solid ${(p) => (p.$active ? "var(--crimson)" : "rgba(255,255,255,0.16)")};
+  background: ${(p) => (p.$active ? "rgba(200,16,46,0.18)" : "rgba(255,255,255,0.03)")};
+  color: #fff;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.45;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+
+  .box {
+    display: grid;
+    flex-shrink: 0;
+    place-items: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 5px;
+    border: 1px solid ${(p) => (p.$active ? "var(--crimson)" : "rgba(255,255,255,0.3)")};
+    background: ${(p) => (p.$active ? "var(--crimson)" : "transparent")};
+    color: #fff;
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+  .box svg { opacity: ${(p) => (p.$active ? 1 : 0)}; transition: opacity 0.15s ease; }
+  .option-label { min-width: 0; }
+
+  &:hover { border-color: ${(p) => (p.$active ? "var(--crimson)" : "rgba(255,255,255,0.4)")}; transform: translateY(-1px); }
+  &:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
 `;
 
 const CaptchaWrap = styled.div`
-  margin-top: 24px;
+  margin-top: 26px;
+
+  > div { max-width: 100%; }
 `;
 
 const CheckRow = styled.div`
   display: flex;
   align-items: flex-start;
-  gap: 10px;
-  margin-top: 18px;
+  gap: 12px;
+  margin-top: 20px;
   font-size: 14px;
+  line-height: 1.55;
   color: var(--mute);
 
-  a {
-    color: var(--ink);
-    font-weight: 600;
-    text-decoration: underline;
-  }
+  a { color: #fff; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+  a:hover { color: var(--gold); }
 
   input {
-    margin-top: 3px;
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    accent-color: var(--crimson);
+    cursor: pointer;
+    ${(p) => p.$error && css`outline: 2px solid var(--crimson); outline-offset: 1px; border-radius: 3px;`}
   }
+  label { margin: 0; cursor: pointer; }
 `;
 
-const SubmitBtn = styled.button`
-  margin-top: 24px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 200px;
-  padding: 15px 26px;
-  border: none;
-  background: ${(p) => (p.disabled ? "#666" : "var(--crimson)")};
+const spin = keyframes`
+  to { transform: rotate(360deg); }
+`;
+
+const Spinner = styled.span`
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #fff;
+  animation: ${spin} 0.8s linear infinite;
+`;
+
+const SubmitButton = styled.button`
+  ${buttonBase}
+  width: 100%;
+  margin-top: 26px;
+  padding: 18px 26px;
+  border: 1px solid var(--crimson);
+  background: var(--crimson);
   color: #fff;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  cursor: ${(p) => (p.disabled ? "not-allowed" : "pointer")};
-  box-shadow: ${(p) =>
-    p.disabled ? "none" : "0 12px 28px rgba(200, 16, 46, 0.28)"};
-  transition: background 0.2s ease, transform 0.2s ease;
+  box-shadow: 0 14px 40px rgba(200, 16, 46, 0.3);
 
   &:hover:not(:disabled) {
-    background: var(--ink);
+    background: #fff;
+    border-color: #fff;
+    color: #0a0a0a;
     transform: translateY(-2px);
+  }
+  &:disabled {
+    cursor: wait;
+    opacity: 0.75;
+    box-shadow: none;
   }
 `;
 
-const SuccessCard = styled.div`
-  margin-top: 36px;
-  padding: 44px 28px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  box-shadow: 0 18px 40px rgba(15, 20, 25, 0.06);
+const SuccessCard = styled(motion.div)`
+  ${cardSurface}
+  padding: 44px 36px 36px;
+
+  .badge {
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    margin-bottom: 22px;
+    border-radius: 50%;
+    background: var(--crimson);
+    color: #fff;
+    box-shadow: 0 14px 40px rgba(200, 16, 46, 0.4);
+  }
+  h3 {
+    font-size: clamp(1.6rem, 3vw, 2.3rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+  p {
+    margin-top: 16px;
+    max-width: 46ch;
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: var(--mute);
+  }
+  @media (max-width: 640px) { padding: 30px 20px 26px; }
 `;
 
-const SuccessTitle = styled.h2`
-  margin: 12px 0 0;
-  font-family: "Oswald", sans-serif;
-  font-size: clamp(28px, 4vw, 40px);
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  color: var(--ink);
+/* Closing --------------------------------------------------------------- */
+
+const Closing = styled.footer`
+  position: relative;
+  overflow: hidden;
+  padding: 110px 0 120px;
+  text-align: center;
+  background:
+    radial-gradient(60% 80% at 50% 100%, rgba(200, 16, 46, 0.35), transparent 70%),
+    #050507;
+  border-top: 1px solid var(--line);
+
+  h2 {
+    margin: 0 auto;
+    max-width: 22ch;
+    font-weight: 600;
+    font-size: clamp(1.6rem, 3.4vw, 2.8rem);
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+  }
+`;
+
+const ClosingYear = styled.span`
+  position: absolute;
+  left: 50%;
+  bottom: -0.22em;
+  transform: translateX(-50%);
+  font-weight: 900;
+  font-size: clamp(7rem, 24vw, 22rem);
+  line-height: 1;
+  letter-spacing: -0.06em;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.08);
+  pointer-events: none;
+  user-select: none;
 `;
 
 export default RegisterInterest2027;

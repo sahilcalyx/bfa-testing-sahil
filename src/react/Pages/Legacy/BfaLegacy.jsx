@@ -67,6 +67,15 @@ function SectionTitle({ tag, title, subtitle, icon: Icon }) {
 
 const years = [
   {
+    to: "/bfa-legacy/2026",
+    year: "2026",
+    title: "Brit FinTech Awards 2026",
+    date: "Friday 9 October 2026",
+    venue: "Landing FortyTwo, 122 Leadenhall Street, London",
+    bg: "/assets/img/gallery2026/venue/1.webp",
+    bgPosition: "center 22%",
+  },
+  {
     to: "/bfa-legacy/2025",
     year: "2025",
     title: "Brit FinTech Awards 2025",
@@ -108,7 +117,7 @@ const BfaLegacy = () => {
         <title>BFA Legacy | Brit FinTech Awards</title>
         <meta
           name="description"
-          content="Explore the Brit FinTech Awards legacy — Our Legacy of Excellence across 2024 and 2025 editions."
+          content="Explore the Brit FinTech Awards legacy — Our Legacy of Excellence across 2024, 2025 and 2026 editions."
         />
       </Helmet>
 
@@ -188,8 +197,11 @@ const BfaLegacy = () => {
                 >
                   {/* Background Image */}
                   <div
-                    className="absolute inset-0 bg-cover bg-center transition-transform duration-[1000ms] ease-out group-hover:scale-110"
-                    style={{ backgroundImage: `url("${item.bg}")` }}
+                    className="absolute inset-0 bg-cover transition-transform duration-[1000ms] ease-out group-hover:scale-110"
+                    style={{
+                      backgroundImage: `url("${item.bg}")`,
+                      backgroundPosition: item.bgPosition || "center",
+                    }}
                   />
                   {/* Overlays */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/75 to-black/30" />

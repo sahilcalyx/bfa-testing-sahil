@@ -43,6 +43,9 @@ const Footer = () => {
                 <h2 className="cs-widget_title text-white" style={{ fontWeight: "600" }}>Quick Links</h2>
                 <ul className="menu text-white">
                   <li>
+                    <NavLink to="/register-interest-2027">Register Interest 2027</NavLink>
+                  </li>
+                  <li>
                     <NavLink to="/sponsorship-categories">Sponsors</NavLink>
                   </li>
                   <li>

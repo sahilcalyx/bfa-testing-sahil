@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const judges2026List = [
+export const judges2026List = [
   {
     id: "/james-borley-judge-details-2026",
     name: "Mr. James Borley",

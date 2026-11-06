@@ -11,7 +11,18 @@ module.exports = {
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
   		},
+  		fontFamily: {
+  			montserrat: ['"Montserrat"', 'system-ui', 'sans-serif']
+  		},
   		colors: {
+  			bfa: {
+  				paper: '#FFFFFF',
+  				ink: '#0E0E10',
+  				red: '#C8102E',
+  				mute: '#5A5A60',
+  				line: '#E6E6E8',
+  				soft: '#F5F5F4'
+  			},
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {

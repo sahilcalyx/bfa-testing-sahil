@@ -48,6 +48,26 @@ const shortVideos = [
 // Newest first — winner announcement videos from https://www.youtube.com/@BritFinTechAwardsUK/videos
 const winnerVideos = [
   {
+    id: "Z-BB3cXdsnU",
+    title: "Alona Shevtsova Wins Woman Entrepreneur in FinTech 2026",
+    profile: "/award-winners-2026/alona-shevtsova-woman-entrepreneur-in-fintech-2026",
+  },
+  {
+    id: "ieYpxK_5SDI",
+    title: "ECEX Wins Progressive Money Exchanger 2026 | Brit FinTech Awards",
+    profile: "/award-winners-2026/ecex-progressive-money-exchanger-2026",
+  },
+  {
+    id: "8UJoDfcspec",
+    title: "Tigris Pay Wins MSB App of the Year 2026 | Brit FinTech Awards",
+    profile: "/award-winners-2026/tigris-pay-msb-app-of-the-year-2026",
+  },
+  {
+    id: "QPAXD87fB40",
+    title: "Teeparam Exchange Limited Wins MSB of the Year 2026 | Brit FinTech Awards",
+    profile: "/award-winners-2026/teeparam-exchange-msb-of-the-year-2026",
+  },
+  {
     id: "ap62ESX40qQ",
     title: "Daljit Young Wins Visionary Woman in AI 2026",
     profile: "/award-winners-2026/daljit-young-visionary-woman-in-ai-2026",
@@ -156,6 +176,31 @@ export const WINNER_VIDEO_BY_PROFILE = Object.fromEntries(
 // Newest upload first, matching https://www.youtube.com/@BritFinTechAwardsUK/videos
 const channelVideos = [
   {
+    id: "hP4VXYSHFbw",
+    category: "event",
+    title: "Voices of BFA26 — The People, the Moments, the Stories",
+  },
+  {
+    id: "kN42T7a2zyo",
+    category: "event",
+    title: "A Message from Mr. Vishal Patil | Brit FinTech Awards 2026",
+  },
+  {
+    id: "w2aPU09FL5A",
+    category: "event",
+    title: "Beyond Borders. One Global Celebration | Brit FinTech Awards 2026",
+  },
+  {
+    id: "_vWzfmR4-9c",
+    category: "event",
+    title: "The Red Carpet | Brit FinTech Awards 2026 Spotlight",
+  },
+  {
+    id: "K-oDt8fjX5U",
+    category: "event",
+    title: "THE PEOPLE. THE PARTNERSHIPS. BFA26 | Client Connections",
+  },
+  {
     id: "CB6UjQOcQ4g",
     category: "keynote",
     title: "The AI-Augmented CFO | Daljit Young",
@@ -242,7 +287,9 @@ const channelVideos = [
   { id: "tGC-9Z1x174", category: "event", title: "BFA 2026 loading | Where tech sparks transformation" },
 ];
 
-const listedIds = new Set(channelVideos.map((video) => video.id));
+const listedIds = new Set(
+  channelVideos.map((video) => video.id).filter(Boolean)
+);
 
 export const VIDEOS_2026 = [
   ...channelVideos,

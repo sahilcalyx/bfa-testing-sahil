@@ -1,5 +1,11 @@
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import Header from "./Components/Header";
+import Announcement2027Bar from "./Components/Announcement2027Bar";
+
+// BFA27 promo variants (compare and keep the one that works best):
+// - SHOW_RI27_BAR: slim site-wide announcement bar above the header
+// - SHOW_RI27_SECTION (Home.jsx): full-width section below the winners banner
+const SHOW_RI27_BAR = true;
 const Home = lazy(() => import("./Pages/Home"));
 const About = lazy(() => import("./Pages/About"));
 import Footer from "./Components/Footer";
@@ -195,6 +201,7 @@ const DownloadApp = lazy(() => import("./Pages/DownloadApp"));
 const BfaLegacy = lazy(() => import("./Pages/Legacy/BfaLegacy"));
 const BfaLegacy2025 = lazy(() => import("./Pages/Legacy/BfaLegacy2025"));
 const BfaLegacy2024 = lazy(() => import("./Pages/Legacy/BfaLegacy2024"));
+const BfaLegacy2026 = lazy(() => import("./Pages/Legacy/BfaLegacy2026"));
 const EventHostPage2026 = lazy(() => import("./Pages/2026/host/EventHostPage2026"));
 const EventHostDetails2026 = lazy(() => import("./Pages/2026/host/EventHostDetails2026"));
 const DaljitYoungKeynoteDetails2026 = lazy(() => import("./Pages/2026/KeynoteSpeaker2026/DaljitYoungKeynoteDetails2026"));
@@ -259,6 +266,7 @@ function App() {
   const hideHeaderFooter = location.pathname === "/profile";
   return (
     <div className="App">
+      {SHOW_RI27_BAR && !hideHeaderFooter && <Announcement2027Bar />}
       {!hideHeaderFooter && <Header />}
       <ScrollToHashElement />
       <Suspense fallback={null}>
@@ -951,6 +959,7 @@ function App() {
 
         {/* BFA Legacy */}
         <Route path="/bfa-legacy" element={<BfaLegacy />} />
+        <Route path="/bfa-legacy/2026" element={<BfaLegacy2026 />} />
         <Route path="/bfa-legacy/2025" element={<BfaLegacy2025 />} />
         <Route path="/bfa-legacy/2024" element={<BfaLegacy2024 />} />
 

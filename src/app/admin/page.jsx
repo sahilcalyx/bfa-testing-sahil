@@ -1,7 +1,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Users, CreditCard, Activity, ArrowUpRight, Award, Ticket } from "lucide-react";
+import Link from "next/link";
+import { Users, CreditCard, Activity, ArrowUpRight, Award, Ticket, Sparkles } from "lucide-react";
 
 export default function AdminPage() {
     const [stats, setStats] = useState({
@@ -11,7 +12,9 @@ export default function AdminPage() {
         totalPaidNominations: 0,
         totalBookings: 0,
         totalPaidBookings: 0,
-        enquiriesToday: 0
+        enquiriesToday: 0,
+        totalInterest2027: 0,
+        interest2027Today: 0
     });
     const [loading, setLoading] = useState(true);
 
@@ -112,6 +115,24 @@ export default function AdminPage() {
                         <p style={valueStyle}>{loading ? "..." : stats.totalPaidBookings}</p>
                     </div>
                 </div>
+
+                {/* Stat Card 7: 2027 Interest */}
+                <Link href="/admin/interest-2027" style={{ ...cardStyle, textDecoration: "none", color: "inherit", display: "block" }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "16px" }}>
+                        <h3 style={labelStyle}>BFA 2027 Interest</h3>
+                        {stats.interest2027Today > 0 && (
+                            <div style={trendStyle}>
+                                <ArrowUpRight size={12} /> +{stats.interest2027Today} today
+                            </div>
+                        )}
+                    </div>
+                    <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                        <div style={{ ...iconContainerStyle, backgroundColor: "#fdecef", color: "#c8102e" }}>
+                            <Sparkles size={20} />
+                        </div>
+                        <p style={valueStyle}>{loading ? "..." : stats.totalInterest2027}</p>
+                    </div>
+                </Link>
 
                 {/* Activity Card */}
                 <div style={cardStyle}>

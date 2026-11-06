@@ -17,6 +17,7 @@ const badgeLabel = (video) =>
 
 const VideoCard = ({ video, showBadge, index }) => {
   const [playing, setPlaying] = useState(false);
+  const hasVideo = Boolean(video.id);
 
   return (
     <div
@@ -27,7 +28,14 @@ const VideoCard = ({ video, showBadge, index }) => {
     >
       <div className="vg26-card">
         <div className={`vg26-frame${video.short ? " is-short" : ""}`}>
-          {playing ? (
+          {!hasVideo ? (
+            <div className="vg26-poster vg26-coming-soon" aria-label={`${video.title} — coming soon`}>
+              {video.thumbnail && (
+                <img src={video.thumbnail} alt={video.title} loading="lazy" />
+              )}
+              <span className="vg26-coming-soon-label">Coming soon</span>
+            </div>
+          ) : playing ? (
             <iframe
               src={`https://www.youtube.com/embed/${video.id}?autoplay=1&controls=1&modestbranding=1&rel=0&playsinline=1`}
               title={video.title}
@@ -241,6 +249,31 @@ const VideoGallery2026 = () => {
           transition: opacity 0.3s ease, transform 0.5s ease;
         }
         .vg26-poster:hover img { opacity: 1; transform: scale(1.04); }
+        .vg26-coming-soon {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: default;
+          background: #1a1516;
+        }
+        .vg26-coming-soon img {
+          opacity: 0.45;
+          filter: grayscale(0.35);
+        }
+        .vg26-coming-soon:hover img { opacity: 0.45; transform: none; }
+        .vg26-coming-soon-label {
+          position: absolute;
+          z-index: 1;
+          padding: 8px 16px;
+          border-radius: 999px;
+          background: rgba(23, 21, 22, 0.85);
+          border: 1px solid rgba(255, 255, 255, 0.18);
+          color: #fff;
+          font-size: 13px;
+          font-weight: 600;
+          letter-spacing: 0.04em;
+          text-transform: uppercase;
+        }
         .vg26-play {
           position: absolute;
           top: 50%;
@@ -447,7 +480,11 @@ const VideoGallery2026 = () => {
                   </h3>
                   <div className="row">
                     {tierVideos.map((video, index) => (
-                      <VideoCard key={video.id} video={video} index={index} />
+                      <VideoCard
+                        key={video.id || video.profile || video.title}
+                        video={video}
+                        index={index}
+                      />
                     ))}
                   </div>
                 </section>
@@ -458,7 +495,7 @@ const VideoGallery2026 = () => {
           <div className="row" key={activeCategory}>
             {filteredVideos.map((video, index) => (
               <VideoCard
-                key={video.id}
+                key={video.id || video.profile || video.title}
                 video={video}
                 index={index}
                 showBadge={activeCategory === "all"}

@@ -52,6 +52,9 @@ import EventSchedule2026 from "./2026/Schedule2026/EventSchedule2026";
 import Gallery2026 from "./2026/Gallery2026";
 import RegisterInterest2027Section from "../Components/RegisterInterest2027Section";
 
+// BFA27 promo variant toggle (see also SHOW_RI27_BAR in App.js)
+const SHOW_RI27_SECTION = true;
+
 const Home = () => {
   const deadline = new Date("2025-08-31"); // change date here
 
@@ -325,7 +328,7 @@ Brit Fintech Awards 2026."
         {/* Compare B: <HeroFilmGate2026 /> */}
         <HeroKineticStrip2026 />
         <WinnerBanner2026 />
-        <RegisterInterest2027Section />
+        {SHOW_RI27_SECTION && <RegisterInterest2027Section />}
         <Gallery2026 />
         <ImageStreamHeroSection />
 
@@ -379,18 +382,20 @@ Brit Fintech Awards 2026."
 
         {/* <div className="cs-height_20 cs-height_lg_20" /> */}
        
+       
+
         <VideoGallerySection
-          subtitle="BFA26 • KEYNOTE SESSION"
-          heading={`THE AI-AUGMENTED CFO`}
-          deck="Inside a Next-Gen EMI’s Financial Engine Room"
-          viewMoreLink="https://youtu.be/CB6UjQOcQ4g"
-          viewMoreLabel="Watch Full Session"
+          subtitle="BFA26 • VOICES OF THE EVENING"
+          heading="The People. The Moments. The Stories."
+          
+          viewMoreLink="https://youtu.be/hP4VXYSHFbw"
+          viewMoreLabel="Watch Full Video"
           secondaryLink="/video-gallery-2026"
           secondaryLabel="Watch All Videos"
           videos={[
             {
-              id: "CB6UjQOcQ4g",
-              title: "The AI-Augmented CFO | Daljit Young",
+              id: "hP4VXYSHFbw",
+              title: "Voices of BFA26 — The People, the Moments, the Stories",
             },
           ]}
         />

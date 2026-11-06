@@ -1,103 +1,114 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet";
+import { NavLink } from "react-router-dom";
+import {
+  SPONSOR_TIERS_2025,
+  VIDEO_CATEGORIES_2025,
+  VIDEOS_2025,
+} from "./videoData2025";
+
+const categoryLabel = (id) =>
+  VIDEO_CATEGORIES_2025.find((c) => c.id === id)?.label;
+
+const tierLabel = (id) => SPONSOR_TIERS_2025.find((t) => t.id === id)?.label;
+
+const badgeLabel = (video) =>
+  video.tier ? tierLabel(video.tier) : categoryLabel(video.category);
+
+const VideoCard = ({ video, showBadge, index }) => {
+  const [playing, setPlaying] = useState(false);
+
+  return (
+    <div
+      className="col-lg-4 col-md-6 mb-4 vg25-item"
+      style={{ animationDelay: `${Math.min(index, 12) * 50}ms` }}
+    >
+      <div className="vg25-card">
+        <div className="vg25-frame">
+          {playing ? (
+            <iframe
+              src={`https://www.youtube.com/embed/${video.id}?autoplay=1&controls=1&modestbranding=1&rel=0&playsinline=1`}
+              title={video.title}
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            />
+          ) : (
+            <button
+              type="button"
+              className="vg25-poster"
+              onClick={() => setPlaying(true)}
+              aria-label={`Play ${video.title}`}
+            >
+              <img
+                src={`https://img.youtube.com/vi/${video.id}/hqdefault.jpg`}
+                alt={video.title}
+                loading="lazy"
+              />
+              <span className="vg25-play" aria-hidden="true" />
+            </button>
+          )}
+        </div>
+        <div className="vg25-info">
+          {showBadge && <span className="vg25-badge">{badgeLabel(video)}</span>}
+          <h5>{video.title}</h5>
+          {video.profile && (
+            <NavLink to={video.profile} className="vg25-link">
+              {video.linkLabel ||
+                (video.category === "winners" ? "View Winner" : "View Profile")}{" "}
+              &rarr;
+            </NavLink>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const VideoGallery2025 = () => {
-  const [activeTab, setActiveTab] = useState("event");
+  const [activeCategory, setActiveCategory] = useState("all");
+  const [indicator, setIndicator] = useState(null);
+  const railRef = useRef(null);
+  const tabRefs = useRef({});
 
-  // 🎉 Event Highlights
-  const eventVideos = [
-    {
-      id: 1,
-      title: "The Story Beyond the Spotlight: Brit FinTech Awards 2025",
-      link: "https://youtu.be/Q1bf7AyvJlc?si=83nc984aJyBzlphG",
-      embed: "https://www.youtube.com/embed/Q1bf7AyvJlc",
-    },
-    {
-      id: 2,
-      title: "The Visionary Behind the Brit Fintech Awards - Mr. Vishal Patil",
-      link: "https://youtu.be/efNlqln3hH8?si=YKqcv3GKuBltWJTh",
-      embed: "https://www.youtube.com/embed/efNlqln3hH8",
-    },
-    {
-      id: 3,
-      title: "Brit Fintech Awards 2025 - Event Highlights Are Here!",
-      link: "https://youtu.be/DnbK2axm36w?si=XlvCUD8eMnFhJmPp",
-      embed: "https://www.youtube.com/embed/DnbK2axm36w",
-    },
-  ];
+  const filteredVideos =
+    activeCategory === "all"
+      ? VIDEOS_2025
+      : VIDEOS_2025.filter((video) => video.category === activeCategory);
 
-  // 🎬 Winners Videos
-  const winnersVideos = [
-    {
-      id: 1,
-      title: "Volume - Winner of Account 2 Account of the Year 2025",
-      link: "https://youtu.be/Ti1rIwk15fk?si=qR4V405VnUIAQPJD",
-      embed: "https://www.youtube.com/embed/Ti1rIwk15fk",
-    },
-    {
-      id: 2,
-      title:
-        "Fast Track Money Transfer Limited - Winner of Payment Innovator of the Year 2025.",
-      link: "https://youtu.be/HPaGGeE8cPo?si=Gm0BxW9iMsuSyF3u",
-      embed: "https://www.youtube.com/embed/HPaGGeE8cPo",
-    },
-    {
-      id: 3,
-      title: "Disbuz - Winner of Pay-Out Innovator of the Year 2025",
-      link: "https://youtu.be/Dwp7SokzCFE?si=gqQ7gP3QOGUEE-EX",
-      embed: "https://www.youtube.com/embed/Dwp7SokzCFE",
-    },
-  ];
+  const syncIndicator = useCallback(() => {
+    const tab = tabRefs.current[activeCategory];
+    if (!tab) return;
+    setIndicator({
+      left: tab.offsetLeft,
+      top: tab.offsetTop,
+      width: tab.offsetWidth,
+      height: tab.offsetHeight,
+    });
+  }, [activeCategory]);
 
-  // 💬 Testimonies Videos
-  const testimoniesVideos = [
-    {
-      id: 1,
-      title: "Lola’s take on the Brit Fintech Awards: A Must-Attend Event!",
-      link: "https://youtu.be/U3hWVuR_r_I?si=QWekwlrdaU-cAKhB",
-      embed: "https://www.youtube.com/embed/U3hWVuR_r_I",
-    },
-    {
-      id: 2,
-      title: "Thomas from Netsible shares his Excitement for BFA 2026",
-      link: "https://youtu.be/JTDEg_k5pV0?si=TUO2GOKCNUKyCdTF",
-      embed: "https://www.youtube.com/embed/JTDEg_k5pV0",
-    },
-    {
-      id: 3,
-      title: "Amazing Topics & Industry Players! – Rose Mary, Marbo Global",
-      link: "https://youtu.be/qLixVWCcEps?si=HZ6l62YyjiUKsXjU",
-      embed: "https://www.youtube.com/embed/qLixVWCcEps",
-    },
-  ];
+  useEffect(() => {
+    syncIndicator();
+    const rail = railRef.current;
+    if (!rail || typeof ResizeObserver === "undefined") return;
+    const observer = new ResizeObserver(syncIndicator);
+    observer.observe(rail);
+    return () => observer.disconnect();
+  }, [syncIndicator]);
 
-  // 🎤 Keynotes Videos
-  const keynotesVideos = [
-    {
-      id: 1,
-      title:
-        "Remittance impact one in eight people worldwide yet the system remains slow, costly, and fragmented.",
-      link: "https://youtu.be/S_knASu3l5o?si=sIWI98ldBhTp0Vo3",
-      embed: "https://www.youtube.com/embed/S_knASu3l5o",
-    },
-    {
-      id: 2,
-      title:
-        "From Silence to Networks: Building the Future of Global Payments | Mr. Ochebhoya Ekpete, Leatherback",
-      link: "https://youtu.be/6vQkv8m5NjQ?si=BkcsjuaVwmqnKC_p",
-      embed: "https://www.youtube.com/embed/6vQkv8m5NjQ",
-    },
-  ];
-
-  // 🔁 Dynamic Tab Handling
-  const currentVideos =
-    activeTab === "event"
-      ? eventVideos
-      : activeTab === "winners"
-      ? winnersVideos
-      : activeTab === "testimonies"
-      ? testimoniesVideos
-      : keynotesVideos;
+  const handleTabKeyDown = (e, index) => {
+    const step = { ArrowRight: 1, ArrowLeft: -1 }[e.key];
+    if (!step) return;
+    e.preventDefault();
+    const next =
+      VIDEO_CATEGORIES_2025[
+        (index + step + VIDEO_CATEGORIES_2025.length) %
+          VIDEO_CATEGORIES_2025.length
+      ];
+    setActiveCategory(next.id);
+    tabRefs.current[next.id]?.focus();
+  };
 
   return (
     <div>
@@ -105,263 +116,334 @@ const VideoGallery2025 = () => {
         <title>Video Gallery 2025 | Brit Fintech Awards</title>
         <meta
           name="description"
-          content="Explore the highlights from the Brit Fintech Awards 2025! Watch winners, testimonies, and keynotes celebrating innovation."
+          content="Watch the Brit Fintech Awards 2025 videos - event highlights, keynote speakers, discussion panel, sponsors, testimonials and winners."
         />
       </Helmet>
 
-      {/* ✅ Hero Section */}
-      <div>
-        <div className="cs-height_90 cs-height_lg_80" />
-        <div
-          className="cs-hero cs-style12 cs-type1 cs-center text-center cs-parallax cs-hobble"
-          style={{
-            backgroundImage:
-              'url("../assets/img/event-conference/hero-img.jpg")',
-          }}
-        >
-          <div className="container wow fadeInDown" data-wow-delay="0.2s">
-            <div className="cs-hero_text text-left">
-              <h1 className="cs-hero_title cs-extra_bold cs-white text-uppercase pb-0 mb-2">
-                Video Gallery 2025
-              </h1>
-              <p className="pb-0 mb-0 text-left text-white">
-                Let’s celebrate innovation together.
-              </p>
-            </div>
+      <style>
+        {`
+        .vg25-rail-wrap {
+          margin-top: 28px;
+          position: relative;
+        }
+        .vg25-rail {
+          position: relative;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 4px;
+          padding: 6px;
+          background: #171516;
+          border-radius: 16px;
+          box-shadow: 0 18px 40px -22px rgba(23, 21, 22, 0.7);
+        }
+        .vg25-indicator {
+          position: absolute;
+          z-index: 0;
+          border-radius: 11px;
+          background: linear-gradient(120deg, #e0193a, #c8102e 45%, #8a0a1f);
+          box-shadow: 0 8px 22px -6px rgba(200, 16, 46, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+          transition:
+            left 0.5s cubic-bezier(0.34, 1.3, 0.64, 1),
+            top 0.5s cubic-bezier(0.34, 1.3, 0.64, 1),
+            width 0.5s cubic-bezier(0.34, 1.3, 0.64, 1),
+            height 0.5s cubic-bezier(0.34, 1.3, 0.64, 1);
+          pointer-events: none;
+        }
+        .vg25-tab {
+          position: relative;
+          z-index: 1;
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 11px 18px;
+          border: 0;
+          border-radius: 11px;
+          background: transparent;
+          color: rgba(255, 255, 255, 0.62);
+          font-size: 14px;
+          font-weight: 600;
+          white-space: nowrap;
+          cursor: pointer;
+          transition: color 0.25s ease, background-color 0.25s ease;
+          -webkit-tap-highlight-color: transparent;
+        }
+        .vg25-break { flex-basis: 100%; height: 0; margin-top: -4px; }
+        .vg25-tab:hover { color: #fff; background-color: rgba(255, 255, 255, 0.07); }
+        .vg25-tab.is-active { color: #fff; background-color: transparent; }
+        .vg25-tab:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+        .vg25-tab:focus:not(:focus-visible) { outline: none; box-shadow: none; }
+
+        .vg25-item {
+          animation: vg25-rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+        @keyframes vg25-rise {
+          from { opacity: 0; transform: translateY(24px) scale(0.97); }
+          to { opacity: 1; transform: none; }
+        }
+        .vg25-card {
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          border-radius: 16px;
+          overflow: hidden;
+          background: #171516;
+          box-shadow: 0 14px 34px -20px rgba(23, 21, 22, 0.8);
+          transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
+        .vg25-card:hover {
+          transform: translateY(-6px);
+          box-shadow: 0 20px 40px -18px rgba(200, 16, 46, 0.6);
+        }
+        .vg25-frame {
+          position: relative;
+          aspect-ratio: 16 / 9;
+          background: #000;
+        }
+        .vg25-frame iframe,
+        .vg25-poster {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+        }
+        .vg25-poster {
+          padding: 0;
+          border: 0;
+          background: #000;
+          cursor: pointer;
+        }
+        .vg25-poster img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          opacity: 0.85;
+          transition: opacity 0.3s ease, transform 0.5s ease;
+        }
+        .vg25-poster:hover img { opacity: 1; transform: scale(1.04); }
+        .vg25-play {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 64px;
+          height: 64px;
+          margin: -32px 0 0 -32px;
+          border-radius: 50%;
+          background: linear-gradient(120deg, #e0193a, #c8102e 45%, #8a0a1f);
+          box-shadow: 0 0 0 8px rgba(200, 16, 46, 0.25);
+          transition: transform 0.3s ease;
+        }
+        .vg25-play::after {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          margin: -10px 0 0 -6px;
+          border-style: solid;
+          border-width: 10px 0 10px 17px;
+          border-color: transparent transparent transparent #fff;
+        }
+        .vg25-poster:hover .vg25-play { transform: scale(1.1); }
+        .vg25-info {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          padding: 16px 18px 18px;
+        }
+        .vg25-badge {
+          align-self: flex-start;
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: 0.04em;
+          text-transform: uppercase;
+          color: #ff4d67;
+        }
+        .vg25-info h5 {
+          margin: 0;
+          font-size: 16px;
+          font-weight: 600;
+          line-height: 1.4;
+          color: #fff;
+        }
+        .vg25-link {
+          margin-top: auto;
+          font-size: 13px;
+          font-weight: 600;
+          color: #ff4d67;
+        }
+        .vg25-link:hover { color: #fff; }
+
+        .vg25-tier + .vg25-tier { margin-top: 24px; }
+        .vg25-tier-title {
+          display: flex;
+          align-items: center;
+          gap: 14px;
+          margin: 0 0 20px;
+          font-size: 20px;
+          font-weight: 800;
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
+          color: #171516;
+        }
+        .vg25-tier-title::before {
+          content: "";
+          width: 6px;
+          height: 26px;
+          border-radius: 3px;
+          background: var(--vg25-tier, #c8102e);
+        }
+        .vg25-tier-title::after {
+          content: "";
+          flex: 1;
+          height: 1px;
+          background: rgba(23, 21, 22, 0.12);
+        }
+        .vg25-tier-travel { --vg25-tier: linear-gradient(180deg, #3d7ea6, #1d4e89); }
+
+        @media (max-width: 767px) {
+          .vg25-rail-wrap { margin-top: 20px; }
+          .vg25-rail {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            padding: 5px;
+            border-radius: 14px;
+          }
+          .vg25-tab {
+            justify-content: center;
+            min-height: 44px;
+            padding: 8px 6px;
+            font-size: 12.5px;
+            white-space: normal;
+            text-align: center;
+            line-height: 1.25;
+            background-color: rgba(255, 255, 255, 0.05);
+          }
+          .vg25-tab.is-active { background-color: transparent; }
+          .vg25-break { display: none; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .vg25-indicator, .vg25-tab { transition: none; }
+          .vg25-item { animation: none; }
+        }
+        `}
+      </style>
+
+      <div className="cs-height_90 cs-height_lg_80" />
+      <div
+        className="cs-hero cs-style12 cs-type1 cs-center text-center cs-parallax cs-hobble"
+        style={{
+          backgroundImage: 'url("/assets/img/event-conference/hero-img.jpg")',
+        }}
+      >
+        <div className="container wow fadeInDown">
+          <div className="cs-hero_text text-left">
+            <h1 className="cs-hero_title cs-extra_bold cs-white text-uppercase pb-0 mb-2">
+              Video Gallery 2025
+            </h1>
+            <p className="pb-0 mb-0 text-left text-white">
+              Let’s celebrate innovation together.
+            </p>
           </div>
         </div>
+      </div>
 
-        {/* ✅ Tabs Section */}
-        <div className="container text-center mt-5">
-          <div className="tabs-container">
-            <button
-              className={`tab-btn ${activeTab === "event" ? "active" : ""}`}
-              onClick={() => setActiveTab("event")}
-            >
-              Event Highlights
-            </button>
-            <button
-              className={`tab-btn ${activeTab === "winners" ? "active" : ""}`}
-              onClick={() => setActiveTab("winners")}
-            >
-              Winner Highlights
-            </button>
-            <button
-              className={`tab-btn ${
-                activeTab === "testimonies" ? "active" : ""
-              }`}
-              onClick={() => setActiveTab("testimonies")}
-            >
-              Testimony Highlights
-            </button>
-            <button
-              className={`tab-btn ${activeTab === "keynotes" ? "active" : ""}`}
-              onClick={() => setActiveTab("keynotes")}
-            >
-              Keynote Speaker Highlights
-            </button>
-          </div>
-        </div>
-
-        {/* ✅ Dynamic Video Section */}
-        <div className="cs-height_60" />
-        <div
-          className="container wow fadeIn"
-          data-wow-duration="1s"
-          data-wow-delay="0.3s"
-        >
+      <div className="container">
+        <div className="vg25-rail-wrap">
           <div
-            className={`row ${
-              activeTab === "keynotes" || activeTab === "event"
-                ? "justify-content-center text-center"
-                : ""
-            }`}
+            ref={railRef}
+            className="vg25-rail"
+            role="tablist"
+            aria-label="Video categories"
           >
-            {currentVideos.map((video, index) => {
-              const autoplayUrl =
-                index === 0
-                  ? `${video.embed}?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0`
-                  : `${video.embed}?autoplay=0&mute=0&controls=1&modestbranding=1&rel=0`;
-
+            {indicator && (
+              <span className="vg25-indicator" aria-hidden="true" style={indicator} />
+            )}
+            {VIDEO_CATEGORIES_2025.map((tab, index) => {
+              const isActive = activeCategory === tab.id;
               return (
-                <div
-                  className={`${
-                    activeTab === "keynotes" || activeTab === "event"
-                      ? "col-lg-4 col-md-6"
-                      : "col-lg-4 col-md-6"
-                  } mb-4`}
-                  key={video.id}
-                >
-                  <a href={video.link} target="_blank" rel="noreferrer">
-                    <div className="video-box position-relative mx-auto">
-                      <iframe
-                        width="100%"
-                        height="100%"
-                        src={autoplayUrl}
-                        title={video.title}
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                        className="rounded-3"
-                      />
-                      <div className="video-overlay">
-                        <h5>{video.title}</h5>
-                      </div>
-                    </div>
-                  </a>
-                </div>
+                <React.Fragment key={tab.id}>
+                  {tab.id === "testimonials" && (
+                    <span className="vg25-break" aria-hidden="true" />
+                  )}
+                  <button
+                    ref={(el) => {
+                      tabRefs.current[tab.id] = el;
+                    }}
+                    type="button"
+                    role="tab"
+                    aria-selected={isActive}
+                    tabIndex={isActive ? 0 : -1}
+                    onClick={() => setActiveCategory(tab.id)}
+                    onKeyDown={(e) => handleTabKeyDown(e, index)}
+                    className={`vg25-tab ${isActive ? "is-active" : ""}`}
+                  >
+                    {tab.label}
+                  </button>
+                </React.Fragment>
               );
             })}
           </div>
-
-          {/* 🎥 View More buttons per tab */}
-          <div className="text-center mt-5">
-            {activeTab === "event" ? (
-              <a
-                className="cs-btn cs-style1 cs-btn_lg cs-medium text_uppercase cs-primary_font cs-accent_bg_2 cs-accent_border_2 cs-white cs-accent_bg_hover cs-white_hover"
-                href="https://youtube.com/@BritFinTechAwardsUK/featured"
-                target="_blank"
-                rel="noreferrer"
-              >
-                View More Videos
-              </a>
-            ) : activeTab === "winners" ? (
-              <a
-                className="cs-btn cs-style1 cs-btn_lg cs-medium text_uppercase cs-primary_font cs-accent_bg_2 cs-accent_border_2 cs-white cs-accent_bg_hover cs-white_hover"
-                href="https://youtube.com/playlist?list=PLrge5A87R3JZu_PzfgXm6EvnSHqk97Ipj&si=j-J06ueFo1szIYso"
-                target="_blank"
-                rel="noreferrer"
-              >
-                View More Videos
-              </a>
-            ) : activeTab === "testimonies" ? (
-              <a
-                className="cs-btn cs-style1 cs-btn_lg cs-medium text_uppercase cs-primary_font cs-accent_bg_2 cs-accent_border_2 cs-white cs-accent_bg_hover cs-white_hover"
-                href="https://youtube.com/playlist?list=PLrge5A87R3JYMc1tV85MSSkub7dbBess9&si=adVjGVQZgZdY05Gq"
-                target="_blank"
-                rel="noreferrer"
-              >
-                View More Videos
-              </a>
-            ) : (
-              <a
-                className="cs-btn cs-style1 cs-btn_lg cs-medium text_uppercase cs-primary_font cs-accent_bg_2 cs-accent_border_2 cs-white cs-accent_bg_hover cs-white_hover"
-                href="https://youtube.com/@BritFinTechAwardsUK/featured"
-                target="_blank"
-                rel="noreferrer"
-              >
-                View More Videos
-              </a>
-            )}
-          </div>
         </div>
-
-        <div className="cs-height_100 cs-height_lg_50" />
       </div>
 
-      {/* 💅 CSS Section (unchanged) */}
-      <style>{`
-        .tabs-container {
-          margin-top: 50px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          gap: 16px;
-          flex-wrap: wrap;
-        }
+      <div
+        className="container mt-5"
+        role="tabpanel"
+        aria-label={categoryLabel(activeCategory)}
+      >
+        {activeCategory === "sponsor" ? (
+          <div key={activeCategory}>
+            {SPONSOR_TIERS_2025.map((tier) => {
+              const tierVideos = filteredVideos.filter(
+                (video) => video.tier === tier.id
+              );
+              if (tierVideos.length === 0) return null;
+              return (
+                <section key={tier.id} className="vg25-tier">
+                  <h3 className={`vg25-tier-title vg25-tier-${tier.id}`}>
+                    {tier.label}
+                  </h3>
+                  <div className="row">
+                    {tierVideos.map((video, index) => (
+                      <VideoCard
+                        key={video.id}
+                        video={video}
+                        index={index}
+                      />
+                    ))}
+                  </div>
+                </section>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="row" key={activeCategory}>
+            {filteredVideos.map((video, index) => (
+              <VideoCard
+                key={video.id}
+                video={video}
+                index={index}
+                showBadge={activeCategory === "all"}
+              />
+            ))}
+          </div>
+        )}
 
-        .tab-btn {
-          background: transparent;
-          border: 2px solid #c8102e;
-          color: #c8102e;
-          padding: 12px 28px;
-          border-radius: 30px;
-          font-weight: 600;
-          transition: all 0.3s ease;
-          min-width: 200px;
-          font-size: 1.1rem;
-        }
+        <div className="text-center mt-4">
+          <a
+            className="cs-btn cs-style1 cs-btn_lg cs-medium text_uppercase cs-primary_font cs-accent_bg_2 cs-accent_border_2 cs-white cs-accent_bg_hover cs-white_hover"
+            href="https://www.youtube.com/@BritFinTechAwardsUK/videos"
+            target="_blank"
+            rel="noreferrer"
+          >
+            View More Videos
+          </a>
+        </div>
+      </div>
 
-        .tab-btn.active {
-          background: linear-gradient(90deg, #000000ff, #c8102e, #000000ff);
-          color: #fffefeff !important;
-          border: none;
-          box-shadow: 0 0 15px rgba(86, 87, 87, 0.6);
-        }
-
-        .tab-btn:hover {
-          transform: translateY(-3px);
-        }
-
-        @media (max-width: 768px) {
-          .tabs-container {
-            flex-direction: column;
-            gap: 12px;
-            width: 100%;
-            padding: 40px 20px;
-          }
-
-          .tab-btn {
-            width: 100%;
-            min-width: unset;
-            font-size: 1rem;
-            padding: 12px 16px;
-          }
-        }
-
-        .video-box {
-          height: 400px;
-          border-radius: 16px;
-          overflow: hidden;
-          position: relative;
-          background: #000;
-          transition: all 0.4s ease-in-out;
-          box-shadow: 0 0 15px rgba(255, 0, 124, 0.25);
-        }
-
-        .video-box:hover {
-          transform: translateY(-8px);
-          box-shadow: 0 0 25px #c8102e rgba(0, 255, 255, 0.5) ,
-            0 0 45px rgba(255, 0, 124, 0.4);
-        }
-
-        .video-overlay {
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          background: linear-gradient(
-            180deg,
-            transparent,
-            rgba(0, 0, 0, 0.85)
-          );
-          padding: 20px;
-          color: #fff;
-          transition: background 0.4s ease;
-        }
-
-        .video-box:hover .video-overlay {
-          background: linear-gradient(
-            180deg,
-            rgba(0, 255, 255, 0.3),
-            rgba(255, 0, 124, 0.7)
-          );
-        }
-
-        .video-overlay h5 {
-          font-size: 1rem;
-          font-weight: 600;
-          color: #fff;
-          margin: 0;
-          text-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
-        }
-
-        @media (max-width: 768px) {
-          .video-box {
-            height: 250px;
-          }
-        }
-      `}</style>
+      <div className="cs-height_100 cs-height_lg_50" />
     </div>
   );
 };

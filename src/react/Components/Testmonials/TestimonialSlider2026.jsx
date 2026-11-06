@@ -7,6 +7,21 @@ import "slick-carousel/slick/slick-theme.css";
 // initials badge is shown instead. `logoBg` sets the tile colour behind a logo.
 const testimonials = [
   {
+    id: 37,
+    text: "Overall, it was a **very well-structured** event.",
+    name: "Saurabh Jain",
+    designation: "(RS)",
+    initials: "SJ",
+  },
+  {
+    id: 38,
+    text: "The Brit FinTech Awards is one of the **best events** for bringing together industry leaders to share knowledge, celebrate achievements, and build valuable connections. A **truly excellent event** and a credit to the organisers. **Well done** for making it one of the **standout events** in the industry.",
+    name: "Abdulkadir Daad",
+    designation: "(MyRemit Ltd)",
+    image: "/assets/img/winner-logos-26/Winners-logo-white/Myremit.png",
+    logoBg: "#111111",
+  },
+  {
     id: 36,
     text: "The future of financial services will be shaped by intelligent technology—and by the people, controls and partnerships that make it trustworthy.\n\nA big thank you to Brit Fintech Awards, powered by Calyx Solutions, for a brilliantly executed event. Marbo Money was delighted to attend, connecting with e-banks, compliance providers, fintechs and MSBs, and exploring how AI can strengthen the future of payments and money transfers.\n\nAt Marbo Money, we believe agentic AI can help financial institutions grow, scale and manage complexity—but only when it is built around robust risk controls, continuous compliance monitoring and meaningful human-in-the-loop oversight.\n\nThe future is not AI without accountability. It is intelligent agents working alongside experienced people to make financial services safer, faster and more resilient.\n\nThe conversations and connections at the event reinforced the importance of collaboration across the ecosystem—from AI and fintech innovators to compliance and infrastructure providers, and corporates seeking trusted financial services solutions.\n\nMarbo Money is ready to partner with organisations shaping this future. If you are building, enabling or seeking safer, smarter and more scalable financial services, let's connect.",
     name: "Rose Mary Nakasenge B.",

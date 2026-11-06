@@ -2013,54 +2013,6 @@ const NominateBookSponsor = () => {
     }
   }, [location]);
 
-  useEffect(() => {
-    let checkInterval;
-    
-    const toggleChatbot = () => {
-      const isMobile = window.innerWidth <= 768;
-      if (window.Tawk_API && typeof window.Tawk_API.hideWidget === "function") {
-        if (isMobile) {
-          window.Tawk_API.hideWidget();
-        } else {
-          window.Tawk_API.showWidget();
-        }
-        return true;
-      }
-      return false;
-    };
-
-    // Try hiding immediately
-    const success = toggleChatbot();
-    
-    // If API is not fully loaded, check periodically
-    if (!success) {
-      checkInterval = setInterval(() => {
-        const done = toggleChatbot();
-        if (done) clearInterval(checkInterval);
-      }, 300);
-    }
-
-    // Adapt to window resize
-    const handleResize = () => {
-      toggleChatbot();
-    };
-    window.addEventListener("resize", handleResize);
-
-    // If Tawk_API defines onLoad callback
-    if (window.Tawk_API) {
-      window.Tawk_API.onLoad = toggleChatbot;
-    }
-
-    // Clean up: restore chatbot visibility when unmounting this portal page
-    return () => {
-      if (checkInterval) clearInterval(checkInterval);
-      window.removeEventListener("resize", handleResize);
-      if (window.Tawk_API && typeof window.Tawk_API.showWidget === "function") {
-        window.Tawk_API.showWidget();
-      }
-    };
-  }, []);
-
   return (
     <>
       <Helmet>
@@ -2090,20 +2042,6 @@ const NominateBookSponsor = () => {
           [id*="nextjs-portal"],
           #webpack-hot-middleware-clientOverlay,
           #react-devtools-anchor {
-            display: none !important;
-            visibility: hidden !important;
-            opacity: 0 !important;
-            pointer-events: none !important;
-          }
-          /* Fallback stylesheet rule to hide Tawk.to chatbot container on mobile */
-          iframe[src*="tawk.to"],
-          iframe[title*="chat"],
-          iframe[id*="tawk"],
-          div[id*="tawk"],
-          [class*="tawk"],
-          #tawkchat-iframe-container,
-          .tawk-min-container,
-          .tawk-button {
             display: none !important;
             visibility: hidden !important;
             opacity: 0 !important;

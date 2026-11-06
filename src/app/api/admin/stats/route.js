@@ -4,6 +4,7 @@ import Contact from "@/lib/models/Contact";
 import Sponsor from "@/lib/models/Sponsor";
 import Nomination from "@/lib/models/Nomination";
 import Booking from "@/lib/models/Booking";
+import Interest2027 from "@/lib/models/Interest2027";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../../auth/[...nextauth]/route";
 
@@ -29,6 +30,10 @@ export async function GET() {
         const enquiriesToday = await Contact.countDocuments({
             createdAt: { $gte: today }
         });
+        const totalInterest2027 = await Interest2027.countDocuments();
+        const interest2027Today = await Interest2027.countDocuments({
+            createdAt: { $gte: today }
+        });
 
         return NextResponse.json({
             response: true,
@@ -39,7 +44,9 @@ export async function GET() {
                 totalPaidNominations,
                 totalBookings,
                 totalPaidBookings,
-                enquiriesToday
+                enquiriesToday,
+                totalInterest2027,
+                interest2027Today
             }
         }, { status: 200 });
 

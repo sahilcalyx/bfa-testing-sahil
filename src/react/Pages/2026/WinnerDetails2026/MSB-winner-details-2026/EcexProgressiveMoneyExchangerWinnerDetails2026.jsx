@@ -14,6 +14,7 @@ import {
   MapPin,
   ShieldCheck,
 } from "lucide-react";
+import WinnerVideoSection2026 from "../components/WinnerVideoSection2026";
 import { ArcRevealHero } from "@/components/ui/arc-preloader-hero";
 import WinnersConfetti2026 from "../../Winners2026/components/WinnersConfetti2026";
 
@@ -371,6 +372,12 @@ const EcexProgressiveMoneyExchangerWinnerDetails2026 = () => {
               </p>
             </motion.section>
           </div>
+
+          <WinnerVideoSection2026
+            className="mt-16"
+            videoId="ieYpxK_5SDI"
+            title="ECEX Wins Progressive Money Exchanger 2026 | Brit FinTech Awards"
+          />
         </div>
       </article>
       </ArcRevealHero>

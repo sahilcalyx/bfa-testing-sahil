@@ -392,31 +392,31 @@ export const seoByPath = {
     },
   },
   "/register-interest-2027": {
-    title: "Register Interest 2027 | Brit Fintech Awards",
+    title: "Register Interest for BFA27 | Brit FinTech Awards 2027",
     description:
-      "Register your interest for Brit FinTech Awards 2027. Be first for nominations, tickets, and partnership opportunities.",
+      "The next chapter of FinTech excellence begins here. Register your interest in the Brit FinTech Awards 2027 for early updates on award nominations, tickets and sponsorship.",
     openGraph: {
-      title: "Register Interest 2027 | Brit Fintech Awards",
+      title: "Brit FinTech Awards 2027 — The Next Chapter Begins Here",
       description:
-        "Register your interest for Brit FinTech Awards 2027. Be first for nominations, tickets, and partnership opportunities.",
+        "A bigger stage. New opportunities. Another celebration of innovation. Register your interest in BFA27 to be first to hear about nominations, tickets and sponsorship.",
       url: `${siteBaseUrl}/register-interest-2027`,
       siteName,
       images: [
         {
-          url: "/assets/img/og/register.jpg",
+          url: "/assets/img/winner-logos-26/winner-banner-2026/groupBanner2026.webp",
           width: 1200,
           height: 630,
-          alt: "Register Interest 2027",
+          alt: "Brit FinTech Awards 2027 — register your interest",
         },
       ],
       type: "website",
     },
     twitter: {
       card: "summary_large_image",
-      title: "Register Interest 2027 | Brit Fintech Awards",
+      title: "Brit FinTech Awards 2027 — The Next Chapter Begins Here",
       description:
-        "Register your interest for Brit FinTech Awards 2027. Be first for nominations, tickets, and partnership opportunities.",
-      images: ["/assets/img/og/register.jpg"],
+        "Register your interest in BFA27 to be first to hear about award nominations, tickets and sponsorship opportunities.",
+      images: ["/assets/img/winner-logos-26/winner-banner-2026/groupBanner2026.webp"],
     },
   },
   "/privacy-policy": {
@@ -1064,7 +1064,7 @@ export const seoByPath = {
   "/bfa-legacy": {
     title: "BFA Legacy | Our Legacy of Excellence | Brit FinTech Awards",
     description:
-      "Explore the Brit FinTech Awards legacy — celebrating excellence across 2024 and 2025 editions.",
+      "Explore the Brit FinTech Awards legacy — celebrating excellence across the 2024, 2025 and 2026 editions.",
     openGraph: {
       title: "BFA Legacy | Brit FinTech Awards",
       description:
@@ -1082,6 +1082,34 @@ export const seoByPath = {
       description:
         "From pioneering startups to industry leaders — explore past Brit FinTech Awards editions.",
       images: ["/assets/img/og/about.jpg"],
+    },
+  },
+  "/bfa-legacy/2026": {
+    title: "Brit FinTech Awards 2026 Legacy | BFA",
+    description:
+      "Relive Brit FinTech Awards 2026 at Landing FortyTwo — keynote, discussion panel, focus session, schedule, winners, sponsors and galleries.",
+    openGraph: {
+      title: "Brit FinTech Awards 2026 Legacy",
+      description:
+        "Friday 9 October 2026 at Landing FortyTwo, 122 Leadenhall Street — keynotes, panel, focus session, winners and galleries.",
+      url: `${siteBaseUrl}/bfa-legacy/2026`,
+      siteName,
+      images: [
+        {
+          url: "/assets/img/gallery2026/venue/1.webp",
+          width: 1200,
+          height: 630,
+          alt: "Landing FortyTwo at The Leadenhall Building, Brit FinTech Awards 2026",
+        },
+      ],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Brit FinTech Awards 2026 Legacy",
+      description:
+        "Friday 9 October 2026 at Landing FortyTwo, 122 Leadenhall Street — keynotes, panel, focus session, winners and galleries.",
+      images: ["/assets/img/gallery2026/venue/1.webp"],
     },
   },
   "/bfa-legacy/2025": {

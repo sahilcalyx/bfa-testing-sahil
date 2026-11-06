@@ -84,28 +84,6 @@ export default function RootLayout({ children }) {
           'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
           })(window,document,'script','dataLayer','GTM-5RQ73JH6');`}
         </Script>
-        <Script id="tawk-to-script" strategy="lazyOnload">
-          {`
-            var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-            (function(){
-              function hideTawkOnMobile() {
-                try {
-                  if (window.innerWidth <= 768 && window.Tawk_API && typeof window.Tawk_API.hideWidget === "function") {
-                    window.Tawk_API.hideWidget();
-                  }
-                } catch (e) {}
-              }
-              Tawk_API.onLoad = hideTawkOnMobile;
-              window.addEventListener("resize", hideTawkOnMobile);
-              var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-              s1.async=true;
-              s1.src='https://embed.tawk.to/6891f729932a8a1930b18491/1j1t2qvk8';
-              s1.charset='UTF-8';
-              s1.setAttribute('crossorigin','*');
-              s0.parentNode.insertBefore(s1,s0);
-            })();
-          `}
-        </Script>
       </body>
     </html>
   );

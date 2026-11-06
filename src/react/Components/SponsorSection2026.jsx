@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import styled, { keyframes } from "styled-components";
 import { NavLink, useNavigate } from "react-router-dom";
 
-const SPONSORS_2026 = [
+export const SPONSORS_2026 = [
   {
     name: "Calyx Solutions",
     video: "/assets/video/sponsors-logo-2026/sposnsor-logo-2026-Calyx-solutions.webm",
