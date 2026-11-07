@@ -176,6 +176,19 @@ export const WINNER_VIDEO_BY_PROFILE = Object.fromEntries(
 // Newest upload first, matching https://www.youtube.com/@BritFinTechAwardsUK/videos
 const channelVideos = [
   {
+    id: "jXwyVPmdhAk",
+    category: "event",
+    title: "Celebrating 26 Outstanding Winners | Brit FinTech Awards 2026",
+  },
+  {
+    id: "ForLRrevCWM",
+    category: "sponsor",
+    tier: "travel",
+    alsoIn: ["event"],
+    title: "Alico Remit | Official Travel Sponsor at BFA26",
+    profile: "/alicoremit-sponsor-details-2026",
+  },
+  {
     id: "hP4VXYSHFbw",
     category: "event",
     title: "Voices of BFA26 — The People, the Moments, the Stories",

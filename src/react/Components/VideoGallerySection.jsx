@@ -15,6 +15,12 @@ const VideoGallerySection = ({
   secondaryLabel = "Watch All Videos",
 }) => {
   const isSingle = videos.length === 1;
+  const isPair = videos.length === 2;
+  const columnClass = isSingle
+    ? "col-lg-10 col-xl-9"
+    : isPair
+      ? "col-lg-6"
+      : "col-lg-4";
 
   return (
   <div
@@ -83,7 +89,7 @@ const VideoGallerySection = ({
       <div className="row justify-content-center">
         {videos.map((video) => (
           <div
-            className={isSingle ? "col-lg-10 col-xl-9" : "col-lg-4"}
+            className={columnClass}
             key={video.id}
           >
             <a
@@ -94,8 +100,8 @@ const VideoGallerySection = ({
               <div
                 className="cs-post cs-style10 position-relative"
                 style={{
-                  height: isSingle ? "auto" : "400px",
-                  aspectRatio: isSingle ? "16 / 9" : undefined,
+                  height: isSingle || isPair ? "auto" : "400px",
+                  aspectRatio: isSingle || isPair ? "16 / 9" : undefined,
                 }}
               >
                 <iframe

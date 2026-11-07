@@ -23,7 +23,7 @@ const initialsOf = (name = "") =>
 function SchedulePerson({ person }) {
   const body = (
     <>
-      <span className="grid h-[26px] w-[26px] shrink-0 place-items-center [overflow:hidden] rounded-full bg-bfa-line text-[9px] font-extrabold text-bfa-mute">
+      <span className="grid h-[36px] w-[36px] shrink-0 place-items-center [overflow:hidden] rounded-full bg-bfa-line text-[10px] font-extrabold tracking-[0.04em] text-bfa-mute shadow-[0_0_0_1px_rgba(14,14,16,0.08)]">
         {person.img ? (
           <img
             src={person.img}
@@ -35,21 +35,27 @@ function SchedulePerson({ person }) {
           initialsOf(person.name)
         )}
       </span>
-      <span className="min-w-0 leading-[1.3]">
-        <span className="text-[13px] font-bold text-bfa-ink transition-[color] duration-200 [transition-timing-function:ease] group-hover:text-bfa-red">
+      <span className="min-w-0">
+        <span className="flex items-center gap-[4px] text-[14px] font-bold leading-[1.3] text-bfa-ink transition-[color] duration-200 [transition-timing-function:ease] group-hover:text-bfa-red">
           {person.name}
+          {person.slug ? (
+            <ArrowUpRight size={13} className="shrink-0" aria-hidden="true" />
+          ) : null}
         </span>
-        {person.role && (
-          <span className="text-[12px] font-medium text-bfa-mute">
-            {" "}
-            · {person.role}
+        {(person.role || person.designation) && (
+          <span className="mt-[2px] block text-[12.5px] font-medium leading-[1.4] text-bfa-mute">
+            {person.role ? (
+              <span className="text-bfa-ink">{person.role}</span>
+            ) : null}
+            {person.role && person.designation ? " · " : null}
+            {person.designation}
           </span>
         )}
       </span>
     </>
   );
 
-  const personClass = "inline-flex min-w-0 items-center gap-[8px] no-underline";
+  const personClass = "flex min-w-0 items-center gap-[10px] no-underline";
 
   return person.slug ? (
     <NavLink to={person.slug} className={`group ${personClass}`}>
@@ -160,7 +166,13 @@ function Schedule2026() {
                   </span>
 
                   {people.length > 0 && (
-                    <div className="mt-[12px] flex [flex-wrap:wrap] gap-x-[22px] gap-y-[10px]">
+                    <div
+                      className={`mt-[14px] grid gap-x-[28px] gap-y-[12px] ${
+                        people.length > 1
+                          ? "grid-cols-2 max-[720px]:grid-cols-1"
+                          : "grid-cols-1"
+                      }`}
+                    >
                       {people.map((person) => (
                         <SchedulePerson key={person.name} person={person} />
                       ))}

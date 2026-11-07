@@ -385,17 +385,17 @@ Brit Fintech Awards 2026."
        
 
         <VideoGallerySection
-          subtitle="BFA26 • VOICES OF THE EVENING"
-          heading="The People. The Moments. The Stories."
+          subtitle="BFA26 • CELEBRATING 26 OUTSTANDING WINNERS"
+          heading="Recognised. Celebrated. Remembered."
           
-          viewMoreLink="https://youtu.be/hP4VXYSHFbw"
-          viewMoreLabel="Watch Full Video"
+          viewMoreLink="https://youtu.be/jXwyVPmdhAk"
+          viewMoreLabel="Watch the Winners Video"
           secondaryLink="/video-gallery-2026"
           secondaryLabel="Watch All Videos"
           videos={[
             {
-              id: "hP4VXYSHFbw",
-              title: "Voices of BFA26 — The People, the Moments, the Stories",
+              id: "jXwyVPmdhAk",
+              title: "Celebrating 26 Outstanding Winners",
             },
           ]}
         />

@@ -18,13 +18,6 @@ function Keynote2026() {
               <br />
               Speaker
             </h2>
-            <NavLink
-              to="/keynote-speakers-2026"
-              className="mt-[18px] inline-flex items-center gap-[8px] border-b border-solid border-b-bfa-ink pb-[4px] text-[14px] font-extrabold text-bfa-ink no-underline hover:text-bfa-ink"
-            >
-              Keynote speaker page
-              <ArrowUpRight size={15} />
-            </NavLink>
           </div>
           <div className="pb-[6px] text-right max-[900px]:text-left">
             <div className="flex items-center justify-end gap-[14px] max-[900px]:justify-start">
@@ -65,7 +58,7 @@ function Keynote2026() {
                 </li>
               ))}
             </ul>
-            <div className="mt-[32px] flex items-center gap-[10px]">
+            <div className="mt-[32px] flex flex-wrap items-center gap-[18px]">
               <a
                 href={`https://www.youtube.com/watch?v=${KEYNOTE_VIDEO}`}
                 target="_blank"
@@ -76,12 +69,11 @@ function Keynote2026() {
                 Watch keynote
               </a>
               <NavLink
-                to={daljitYoung.slug}
-                aria-label="Read Daljit Young's profile"
-                title="Read the profile"
-                className="grid h-[46px] w-[46px] place-items-center rounded-[10px] border-[1px] border-solid border-[rgba(255,255,255,0.4)] text-[#fff] hover:text-white"
+                to="/keynote-speakers-2026"
+                className="inline-flex items-center gap-[8px] border-b border-solid border-b-white pb-[4px] text-[14px] font-extrabold text-[#fff] no-underline hover:text-white"
               >
-                <ArrowUpRight size={18} />
+                Keynote speaker page
+                <ArrowUpRight size={15} />
               </NavLink>
             </div>
           </div>

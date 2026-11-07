@@ -99,10 +99,13 @@ const VideoGallery2026 = () => {
   const railRef = useRef(null);
   const tabRefs = useRef({});
 
+  const inCategory = (video, category) =>
+    video.category === category || video.alsoIn?.includes(category);
+
   const filteredVideos =
     activeCategory === "all"
       ? VIDEOS_2026.filter((video) => !video.short)
-      : VIDEOS_2026.filter((video) => video.category === activeCategory);
+      : VIDEOS_2026.filter((video) => inCategory(video, activeCategory));
 
   const syncIndicator = useCallback(() => {
     const tab = tabRefs.current[activeCategory];
