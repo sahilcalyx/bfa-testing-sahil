@@ -113,6 +113,10 @@ function RedCarpet2026() {
     >
       <div
         aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-[url('/assets/svgs/download.svg')] bg-cover bg-center bg-no-repeat opacity-[0.55] [-webkit-mask-image:radial-gradient(ellipse_75%_70%_at_50%_50%,rgba(0,0,0,0.3)_0%,#000_100%)] [mask-image:radial-gradient(ellipse_75%_70%_at_50%_50%,rgba(0,0,0,0.3)_0%,#000_100%)]"
+      />
+      <div
+        aria-hidden="true"
         className="pointer-events-none absolute left-1/2 top-[18%] h-[600px] w-[900px] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,rgba(200,16,46,0.28),rgba(200,16,46,0)_65%)]"
       />
 
@@ -167,8 +171,12 @@ function RedCarpet2026() {
                 className="group absolute inset-0 w-full cursor-pointer border-[0px] bg-black p-[0px]"
               >
                 <img
-                  src={RED_CARPET_IMG(1)}
-                  alt="Guest on the BFA26 red carpet"
+                  src={`https://i.ytimg.com/vi/${RED_CARPET_VIDEO}/maxresdefault.jpg`}
+                  onError={(e) => {
+                    e.currentTarget.onerror = null;
+                    e.currentTarget.src = `https://i.ytimg.com/vi/${RED_CARPET_VIDEO}/hqdefault.jpg`;
+                  }}
+                  alt="BFA26 red carpet video thumbnail"
                   className="block h-full w-full object-cover transition-transform [transition-duration:900ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.05]"
                 />
                 <span
@@ -209,7 +217,7 @@ function RedCarpet2026() {
           data-rc-foot
           className="relative z-[4] mt-[48px] grid grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)_minmax(0,1fr)] items-center gap-[24px] max-[900px]:grid-cols-[1fr_1fr] max-[900px]:gap-[16px]"
         >
-          {[20, 45].map((n, i) => (
+          {[68, 50].map((n, i) => (
             <div
               key={n}
               data-rc-thumb

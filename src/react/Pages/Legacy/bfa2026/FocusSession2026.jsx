@@ -15,6 +15,13 @@ const FOCUS_VIEWS = {
   "osman-ibrahim": "The operator's view",
 };
 
+const FOCUS_PHOTOS = {
+  "osman-ibrahim": {
+    src: "/assets/img/focus-session-2026/kmbal-profile-new.png",
+    position: "object-[44%_center]",
+  },
+};
+
 const FOCUS_MODERATOR = {
   id: "vishal-patil",
   name: "Vishal Patil",
@@ -88,10 +95,12 @@ function FocusProfile({ person, tag, moderator = false }) {
       >
         <span className="absolute inset-0 block transition-transform [transition-duration:900ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.07]">
           <img
-            src={person.img}
+            src={FOCUS_PHOTOS[person.id]?.src || person.img}
             alt={person.name}
             loading="lazy"
-            className="block h-full w-full object-cover object-[center_25%]"
+            className={`block h-full w-full object-cover ${
+              FOCUS_PHOTOS[person.id]?.position || "object-[center_25%]"
+            }`}
           />
         </span>
         <span
