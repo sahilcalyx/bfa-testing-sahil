@@ -63,14 +63,16 @@ const BfaLegacy2026 = () => {
       <AwardWinnersParallax2026 />
       <SponsorStream2026 sponsors={SPONSORS_2026} />
       <RedCarpet2026 />
-      <Host2026 />
-      <Schedule2026 />
+      
       <div id="programme" className="scroll-mt-[96px]" />
       <Keynote2026 />
       <DiscussionSection2026 />
       <FocusSession2026 />
       <Judges2026 />
+      <Host2026 />
+      <Schedule2026 />
       <Highlights2026 />
+      
       <Gallery2026 />
       <LookingAhead2026 />
     </div>

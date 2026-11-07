@@ -6,7 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { ArrowUpRight } from "lucide-react";
 import { judges2026List } from "../../2026/JudgesSection/JudgeSection2026";
-import { btnGhost, Eyebrow } from "./shared";
+import { btnGhost, Eyebrow, LinkedInLink } from "./shared";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -29,17 +29,17 @@ function JudgeCard({ judge, index }) {
             className="block h-full w-full object-cover object-[center_top]"
           />
         </span>
-        <span className="absolute left-[12px] top-[12px] rounded-[999px] bg-[#fff] px-[10px] py-[6px] text-[11px] font-extrabold tracking-[0.16em] text-bfa-ink">
-          JUDGE {String(index + 1).padStart(2, "0")}
-        </span>
       </div>
 
       <div
         data-judge-body
         className="flex flex-1 flex-col px-[6px] pb-[6px] pt-[18px]"
       >
-        <span className="block text-[20px] font-extrabold leading-[1.2] tracking-[-0.02em]">
-          {judge.name}
+        <span className="flex items-start justify-between gap-[10px]">
+          <span className="block text-[20px] font-extrabold leading-[1.2] tracking-[-0.02em]">
+            {judge.name}
+          </span>
+          <LinkedInLink href={judge.linkedin} name={judge.name} nested className="mt-[1px]" />
         </span>
         <span className="mt-[6px] block text-[13.5px] font-bold leading-[1.4] text-bfa-red">
           {judge.role}

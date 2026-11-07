@@ -6,7 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { ArrowUpRight, Play } from "lucide-react";
 import { FOCUS_SESSION_PAGE_URL, focusSession2026 } from "../../2026/FocusSession2026/speakers2026";
-import { FOCUS_VIDEO, FOCUS_NOTES, btnBase, VideoFrame } from "./shared";
+import { FOCUS_VIDEO, FOCUS_NOTES, btnBase, VideoFrame, LinkedInLink } from "./shared";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -28,6 +28,7 @@ const FOCUS_MODERATOR = {
   designation: "Founder & CEO",
   company: "Calyx Solutions UK Ltd",
   img: "/assets/img/bfa-legacy/vishal-patil-main.png",
+  linkedin: "https://www.linkedin.com/in/vishal-patil-78181914",
   slug: FOCUS_SESSION_PAGE_URL,
 };
 
@@ -119,8 +120,11 @@ function FocusProfile({ person, tag, moderator = false }) {
         >
           {tag}
         </span>
-        <span className="block font-montserrat text-[20px] font-extrabold tracking-[-0.03em] text-[#fff] [transition:color_0.3s_ease] group-hover:text-bfa-red">
-          {person.name}
+        <span className="flex items-start gap-[10px]">
+          <span className="block font-montserrat text-[20px] font-extrabold tracking-[-0.03em] text-[#fff] [transition:color_0.3s_ease] group-hover:text-bfa-red">
+            {person.name}
+          </span>
+          <LinkedInLink href={person.linkedin} name={person.name} nested className="mt-[2px]" />
         </span>
         <span className="mt-[4px] block text-[13px] font-semibold leading-[1.4] text-[rgba(255,255,255,0.62)]">
           {person.designation}

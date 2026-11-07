@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { ArrowUpRight, Play } from "lucide-react";
 import { daljitYoung } from "../../2026/KeynoteSpeaker2026/speakers2026";
-import { KEYNOTE_VIDEO, KEYNOTE_POINTERS } from "./shared";
+import { KEYNOTE_VIDEO, KEYNOTE_POINTERS, LinkedInLink } from "./shared";
 
 function Keynote2026() {
   return (
@@ -12,15 +12,27 @@ function Keynote2026() {
         className="mx-[auto] max-w-[1120px] [overflow:hidden] rounded-[28px] bg-bfa-ink"
       >
         <div className="relative z-[1] grid grid-cols-[minmax(0,1fr)_auto] items-end gap-[24px] rounded-[28px] bg-bfa-red px-[44px] pb-[40px] pt-[44px] text-bfa-ink max-[900px]:grid-cols-1 max-[900px]:px-[26px] max-[900px]:pb-[28px] max-[900px]:pt-[32px]">
-          <h2 className="m-[0px] font-montserrat text-[clamp(48px,7.4vw,104px)] font-extrabold leading-[0.86] tracking-[-0.06em] text-bfa-ink">
-            Keynote
-            <br />
-            Speaker
-          </h2>
+          <div>
+            <h2 className="m-[0px] font-montserrat text-[clamp(48px,7.4vw,104px)] font-extrabold leading-[0.86] tracking-[-0.06em] text-bfa-ink">
+              Keynote
+              <br />
+              Speaker
+            </h2>
+            <NavLink
+              to="/keynote-speakers-2026"
+              className="mt-[18px] inline-flex items-center gap-[8px] border-b border-solid border-b-bfa-ink pb-[4px] text-[14px] font-extrabold text-bfa-ink no-underline hover:text-bfa-ink"
+            >
+              Keynote speaker page
+              <ArrowUpRight size={15} />
+            </NavLink>
+          </div>
           <div className="pb-[6px] text-right max-[900px]:text-left">
-            <p className="m-[0px] font-montserrat text-[clamp(28px,3.4vw,46px)] font-extrabold leading-none tracking-[-0.045em] text-[#fff]">
-              Ms Daljit Young
-            </p>
+            <div className="flex items-center justify-end gap-[14px] max-[900px]:justify-start">
+              <p className="m-[0px] font-montserrat text-[clamp(28px,3.4vw,46px)] font-extrabold leading-none tracking-[-0.045em] text-[#fff]">
+                Ms Daljit Young
+              </p>
+              <LinkedInLink href={daljitYoung.linkedin} name="Daljit Young" size="lg" />
+            </div>
             <p className="mx-[0px] mb-[0px] mt-[12px] text-[16px] font-bold text-[#fff]">
               Chief Financial Officer
             </p>

@@ -5,7 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import {
-  ArrowUpRight, Award, Building2, CalendarDays, Camera, Gift, Handshake, MapPin,
+  ArrowUpRight, Award, Building2, CalendarDays, Camera, Gift, Handshake,
   MessagesSquare, Mic, Network, Play, Target, Trophy, Users, Utensils, WandSparkles,
 } from "lucide-react";
 import {
@@ -18,7 +18,7 @@ const HIGHLIGHT_STATS = [
   { icon: CalendarDays, value: "3rd", label: "Edition of the Brit FinTech Awards" },
   { icon: Users, value: "150+", label: "Attendees on the night" },
   { icon: Building2, value: "70+", label: "Unique businesses represented" },
-  { icon: MapPin, value: "42nd", label: "Floor at Landing FortyTwo, London" },
+  { icon: Mic, value: "10", label: "Speakers sharing industry insights" },
 ];
 
 const HIGHLIGHT_POINTS = [

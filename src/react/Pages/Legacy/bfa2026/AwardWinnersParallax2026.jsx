@@ -68,9 +68,8 @@ function AwardWinnersParallax2026() {
                 Award Winners 2026
               </h2>
               <p className="mt-3 m-0 text-base font-medium leading-relaxed text-zinc-200 md:text-lg">
-                Meet the trailblazers, innovators, and industry leaders
-                recognised on the night across payments, fintech, compliance,
-                and digital banking.
+              Honouring the organisations and individuals setting new 
+              benchmarks across the MSB, FinTech, payments and wider financial services landscape.
               </p>
             </div>
 
@@ -84,11 +83,11 @@ function AwardWinnersParallax2026() {
                 <ArrowUpRight size={16} strokeWidth={2.5} />
               </NavLink>
               <NavLink
-                to="/photo-gallery-2026"
+                to="/photo-gallery-2026#winner-photos"
                 className="inline-flex items-center justify-center gap-2 rounded-2xl bg-white px-6 py-3.5 text-sm font-extrabold text-zinc-950 no-underline shadow-md transition-all duration-300 hover:scale-[1.03] hover:bg-zinc-100"
               >
                 <Camera size={16} strokeWidth={2.5} />
-                <span>View Photos 2026</span>
+                <span>View Winners 2026 Photos</span>
                 <ArrowUpRight size={16} strokeWidth={2.5} />
               </NavLink>
             </div>
