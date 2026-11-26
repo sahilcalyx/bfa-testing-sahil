@@ -31,6 +31,8 @@ const Header = () => {
   const [downloadLink, setDownloadLink] = useState("");
 
   const navigate = useNavigate();
+  const themeLab =
+    pathname === "/theme-prototype-2027" || pathname === "/theme-prototype-2027-part2";
 
   const handleShow = () => {
     setShow(true);
@@ -160,13 +162,108 @@ box-shadow: none;
   }
 }
 
+.cs-site_header.bfa-theme-header.cs-sticky-header,
+.cs-site_header.bfa-theme-header.cs-style1.cs-sticky-active {
+  background: linear-gradient(90deg, #0e103d 0%, #0e103d 34%, #090a11 100%) !important;
+  border-bottom: 1px solid rgba(201, 162, 39, 0.45);
+  box-shadow: 0 12px 28px rgba(9, 10, 17, 0.35);
+}
+
+.bfa-theme-header .cs-main_header_left > a {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(165deg, #faf5a9 0%, #e0b45a 46%, #9a6929 100%);
+  -webkit-mask: url("/assets/img/logo-white.svg") center / contain no-repeat;
+  mask: url("/assets/img/logo-white.svg") center / contain no-repeat;
+}
+.bfa-theme-header .cs-main_header_left > a img {
+  opacity: 0;
+  height: 80px;
+  width: 80px;
+  filter: none;
+}
+
+.bfa-theme-header .cs-hamburger_menu {
+  color: #faf5a9;
+}
+
+@media (min-width: 1139px) {
+  .bfa-theme-header .cs-nav .cs-nav_list > li > a,
+  .bfa-theme-header .cs-nav .cs-nav_list > li > a.nav-link,
+  .bfa-theme-header .cs-nav .cs-nav_list > li > a.text-white-navlink,
+  .bfa-theme-header .cs-nav .cs-nav_list > li > a.text-dark,
+  .bfa-theme-header .cs-nav .cs-nav_list > li > a.active {
+    background-image: linear-gradient(90deg, #fffceb 0%, #faf5a9 40%, #e0b45a 100%) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    color: transparent !important;
+  }
+  .bfa-theme-header .cs-nav .cs-nav_list > li > a:hover {
+    background-image: linear-gradient(90deg, #fffceb 0%, #faf5a9 100%) !important;
+    -webkit-text-fill-color: transparent !important;
+    color: transparent !important;
+  }
+}
+
+@media (max-width: 1138px) {
+  .bfa-theme-header .cs-nav .cs-nav_list > li > a,
+  .bfa-theme-header .cs-nav .cs-nav_list > li > a.nav-link,
+  .bfa-theme-header .cs-nav .cs-nav_list > li > a.active {
+    color: #0e103d !important;
+  }
+  .bfa-theme-header .cs-close_icon {
+    color: #0e103d;
+  }
+}
+
+.bfa-theme-header .btn-pro-1,
+.bfa-theme-header .btn-pro-1.active,
+.bfa-theme-header .btn-pro-1 span,
+.bfa-theme-header .btn-pro-1.active span {
+  color: #090a11 !important;
+}
+.bfa-theme-header .btn-pro-1,
+.bfa-theme-header .btn-pro-1.active {
+  background: linear-gradient(135deg, #faf5a9 0%, #e0b45a 46%, #9a6929 100%);
+  box-shadow: 0 8px 18px rgba(154, 105, 41, 0.35);
+}
+.bfa-theme-header .btn-pro-1:hover,
+.bfa-theme-header .btn-pro-1:hover span {
+  color: #090a11 !important;
+}
+.bfa-theme-header .btn-pro-1:hover {
+  background: linear-gradient(135deg, #fffceb 0%, #faf5a9 40%, #c9953a 100%);
+  box-shadow: 0 12px 26px rgba(154, 105, 41, 0.4), 0 0 18px rgba(250, 245, 169, 0.35);
+}
+.bfa-theme-header .btn-pro-2,
+.bfa-theme-header .btn-pro-2.active,
+.bfa-theme-header .btn-pro-2 span,
+.bfa-theme-header .btn-pro-2.active span {
+  color: #090a11 !important;
+}
+.bfa-theme-header .btn-pro-2,
+.bfa-theme-header .btn-pro-2.active {
+  background: linear-gradient(135deg, #9a6929 0%, #e0b45a 52%, #faf5a9 100%);
+  box-shadow: 0 8px 18px rgba(154, 105, 41, 0.35);
+}
+.bfa-theme-header .btn-pro-2:hover,
+.bfa-theme-header .btn-pro-2:hover span {
+  color: #090a11 !important;
+}
+.bfa-theme-header .btn-pro-2:hover {
+  background: linear-gradient(135deg, #c9953a 0%, #faf5a9 55%, #fffceb 100%);
+  box-shadow: 0 12px 26px rgba(154, 105, 41, 0.4), 0 0 18px rgba(250, 245, 169, 0.3);
+}
+
           
       `}</style>
 
       <header
         className={`cs-site_header cs-style1 cs-sticky-header cs-primary_font ${
-          isSticky ? "sticky" : ""
-        }`}
+          themeLab ? "bfa-theme-header" : ""
+        } ${isSticky ? "sticky" : ""}`}
       >
         {/* <FlipBanner/> */}
         <div className="cs-main_header mt-1">
@@ -175,11 +272,7 @@ box-shadow: none;
               <div className="cs-main_header_left">
                 <NavLink to="/">
                   <img
-                    src={
-                      isSticky
-                        ? "../assets/img/logo-white.svg"
-                        : "../assets/img/logo-white.svg"
-                    }
+                    src="../assets/img/logo-white.svg"
                     style={{ height: "80px" }}
                     alt="Logo"
                   />

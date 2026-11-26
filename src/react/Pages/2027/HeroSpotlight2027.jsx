@@ -56,7 +56,7 @@ const wallTiles = COLUMNS.map((col, c) => (
   </div>
 ));
 
-const HeroSpotlight2027 = ({ onRegister, reduceMotion }) => {
+const HeroSpotlight2027 = ({ onRegister, reduceMotion, royal = false }) => {
   const rootRef = useRef(null);
 
   // Stop the endless column loops once the hero is off screen.
@@ -104,23 +104,23 @@ const HeroSpotlight2027 = ({ onRegister, reduceMotion }) => {
         };
 
   return (
-    <Stage ref={rootRef} aria-labelledby="ri27-hero-title" $still={!!reduceMotion}>
+    <Stage ref={rootRef} aria-labelledby="ri27-hero-title" $still={!!reduceMotion} $royal={royal}>
       <Wall data-sp-wall aria-hidden="true" $tone="ambient">
         {wallTiles}
       </Wall>
 
-      <Darkness aria-hidden="true" />
+      <Darkness aria-hidden="true" $royal={royal} />
 
       {/* Same wall in full colour, visible only inside the spotlight. The mask lives on the untransformed wrapper so it tracks hero coordinates. */}
       <LitLayer aria-hidden="true">
         <Wall data-sp-wall $tone="lit">{wallTiles}</Wall>
       </LitLayer>
-      <Glow aria-hidden="true" />
+      <Glow aria-hidden="true" $royal={royal} />
       <Grain aria-hidden="true" />
-      <Fade aria-hidden="true" />
+      <Fade aria-hidden="true" $royal={royal} />
 
-      <Content data-sp-content>
-        <Year aria-hidden="true">
+      <Content data-sp-content $royal={royal}>
+        <Year aria-hidden="true" $royal={royal}>
           <motion.span
             className="glow"
             initial={reduceMotion ? false : { opacity: 0, scale: 0.6 }}
@@ -210,7 +210,7 @@ const Stage = styled.header`
   place-items: center;
   padding: 150px 0 110px;
   overflow: hidden;
-  background: #050507;
+  background: ${(p) => (p.$royal ? "#ffffff" : "#050507")};
   box-sizing: border-box;
 
   @media (min-width: 1024px) { padding: 170px 0 120px; }
@@ -331,7 +331,7 @@ const Darkness = styled.div`
   position: absolute;
   inset: 0;
   z-index: -3;
-  background: rgba(5, 5, 7, 0.9);
+  background: ${(p) => (p.$royal ? "rgba(255, 252, 246, 0.9)" : "rgba(5, 5, 7, 0.9)")};
   ${spotMask}
 `;
 
@@ -341,12 +341,10 @@ const Glow = styled.div`
   z-index: -2;
   pointer-events: none;
   mix-blend-mode: soft-light;
-  background: radial-gradient(
-    circle at var(--mx, 75%) var(--my, 35%),
-    rgba(242, 216, 172, 0.55) 0,
-    rgba(200, 16, 46, 0.18) calc(var(--r) * 0.7),
-    transparent var(--r)
-  );
+  background: ${(p) =>
+    p.$royal
+      ? `radial-gradient(circle at var(--mx, 75%) var(--my, 35%), rgba(201, 162, 39, 0.42) 0, rgba(14, 16, 61, 0.12) calc(var(--r) * 0.7), transparent var(--r))`
+      : `radial-gradient(circle at var(--mx, 75%) var(--my, 35%), rgba(242, 216, 172, 0.55) 0, rgba(200, 16, 46, 0.18) calc(var(--r) * 0.7), transparent var(--r))`};
 `;
 
 const Grain = styled.div`
@@ -364,14 +362,16 @@ const Fade = styled.div`
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background:
-    radial-gradient(ellipse 50% 44% at 50% 54%, rgba(5, 5, 7, 0.78) 0%, rgba(5, 5, 7, 0.45) 55%, transparent 100%),
-    linear-gradient(180deg, rgba(5, 5, 7, 0.75) 0%, transparent 22%, transparent 72%, var(--bg, #07070a) 100%);
+  background: ${(p) =>
+    p.$royal
+      ? `radial-gradient(ellipse 50% 44% at 50% 54%, rgba(255, 252, 246, 0.92) 0%, rgba(255, 252, 246, 0.55) 55%, transparent 100%), linear-gradient(180deg, rgba(255, 255, 255, 0.72) 0%, transparent 22%, transparent 72%, var(--bg, #ffffff) 100%)`
+      : `radial-gradient(ellipse 50% 44% at 50% 54%, rgba(5, 5, 7, 0.78) 0%, rgba(5, 5, 7, 0.45) 55%, transparent 100%), linear-gradient(180deg, rgba(5, 5, 7, 0.75) 0%, transparent 22%, transparent 72%, var(--bg, #07070a) 100%)`};
 
   @media (max-width: 767px) {
-    background:
-      radial-gradient(ellipse 90% 50% at 50% 55%, rgba(5, 5, 7, 0.85) 0%, rgba(5, 5, 7, 0.5) 60%, transparent 100%),
-      linear-gradient(180deg, rgba(5, 5, 7, 0.75) 0%, transparent 22%, transparent 72%, var(--bg, #07070a) 100%);
+    background: ${(p) =>
+      p.$royal
+        ? `radial-gradient(ellipse 90% 50% at 50% 55%, rgba(255, 252, 246, 0.94) 0%, rgba(255, 252, 246, 0.6) 60%, transparent 100%), linear-gradient(180deg, rgba(255, 255, 255, 0.72) 0%, transparent 22%, transparent 72%, var(--bg, #ffffff) 100%)`
+        : `radial-gradient(ellipse 90% 50% at 50% 55%, rgba(5, 5, 7, 0.85) 0%, rgba(5, 5, 7, 0.5) 60%, transparent 100%), linear-gradient(180deg, rgba(5, 5, 7, 0.75) 0%, transparent 22%, transparent 72%, var(--bg, #07070a) 100%)`};
   }
 `;
 
@@ -395,8 +395,11 @@ const Content = styled.div`
     margin-top: clamp(4px, 1vw, 12px);
     margin-bottom: clamp(28px, 4vw, 40px);
     flex-shrink: 0;
-    background: linear-gradient(90deg, transparent, var(--crimson, #c8102e) 25%, var(--gold, #f2d8ac) 50%, var(--crimson, #c8102e) 75%, transparent);
-    box-shadow: 0 0 24px rgba(200, 16, 46, 0.7);
+    background: ${(p) =>
+      p.$royal
+        ? "linear-gradient(90deg, transparent, #9a6929 20%, #faf5a9 50%, #9a6929 80%, transparent)"
+        : "linear-gradient(90deg, transparent, var(--crimson, #c8102e) 25%, var(--gold, #f2d8ac) 50%, var(--crimson, #c8102e) 75%, transparent)"};
+    box-shadow: ${(p) => (p.$royal ? "0 0 24px rgba(201, 162, 39, 0.55)" : "0 0 24px rgba(200, 16, 46, 0.7)")};
     transform-origin: 50% 50%;
   }
 
@@ -405,11 +408,34 @@ const Content = styled.div`
     font-weight: 800;
     font-size: clamp(1.55rem, 3.4vw, 2.85rem);
     line-height: 1.04;
-    letter-spacing: -0.03em;
-    text-transform: uppercase;
+    letter-spacing: 0;
+    text-transform: none;
     text-wrap: balance;
   }
-  h1 em { color: var(--crimson, #c8102e); }
+  ${(p) =>
+    p.$royal &&
+    css`
+      && h1,
+      && h1 em {
+        font-family: "GoudyOldStyle", "Palatino Linotype", serif !important;
+        font-weight: 700 !important;
+        font-style: normal !important;
+        font-synthesis: weight !important;
+      }
+      && h1 {
+        color: #0e103d;
+        font-size: clamp(2.2rem, 5vw, 4.25rem) !important;
+        line-height: 1.08 !important;
+      }
+      && h1 em {
+        background: none;
+        -webkit-background-clip: border-box;
+        background-clip: border-box;
+        color: #0e103d;
+        -webkit-text-fill-color: #0e103d;
+      }
+    `}
+  h1 em { color: ${(p) => (p.$royal ? "#0e103d" : "var(--crimson, #c8102e)")}; }
 
   .actions {
     display: flex;
@@ -440,9 +466,9 @@ const Content = styled.div`
   .primary {
     padding: 8px 8px 8px 26px;
     border: 0;
-    background: #fff;
-    color: #0a0a0a;
-    box-shadow: 0 18px 50px rgba(255, 255, 255, 0.14);
+    background: ${(p) => (p.$royal ? "linear-gradient(135deg, #faf5a9 0%, #e0b45a 46%, #9a6929 100%)" : "#fff")};
+    color: ${(p) => (p.$royal ? "#090a11" : "#0a0a0a")};
+    box-shadow: ${(p) => (p.$royal ? "0 18px 50px rgba(201, 162, 39, 0.28)" : "0 18px 50px rgba(255, 255, 255, 0.14)")};
   }
   .primary .ico {
     display: grid;
@@ -450,25 +476,33 @@ const Content = styled.div`
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: var(--crimson, #c8102e);
-    color: #fff;
+    background: ${(p) => (p.$royal ? "#0e103d" : "var(--crimson, #c8102e)")};
+    color: ${(p) => (p.$royal ? "#faf5a9" : "#fff")};
     transition: transform 0.35s ease;
   }
   .primary:hover {
-    background: var(--crimson, #c8102e);
-    color: #fff;
-    box-shadow: 0 18px 50px rgba(200, 16, 46, 0.45);
+    background: ${(p) => (p.$royal ? "#0e103d" : "var(--crimson, #c8102e)")};
+    color: ${(p) => (p.$royal ? "#faf5a9" : "#fff")};
+    box-shadow: ${(p) => (p.$royal ? "0 18px 50px rgba(14, 16, 61, 0.28)" : "0 18px 50px rgba(200, 16, 46, 0.45)")};
   }
-  .primary:hover .ico { background: #fff; color: var(--crimson, #c8102e); transform: rotate(45deg); }
+  .primary:hover .ico {
+    background: ${(p) => (p.$royal ? "linear-gradient(135deg, #faf5a9 0%, #e0b45a 100%)" : "#fff")};
+    color: ${(p) => (p.$royal ? "#090a11" : "var(--crimson, #c8102e)")};
+    transform: rotate(45deg);
+  }
   .ghost {
     padding: 0 26px;
     min-height: 56px;
-    border: 1px solid rgba(255, 255, 255, 0.26);
-    background: rgba(5, 5, 7, 0.4);
+    border: 1px solid ${(p) => (p.$royal ? "rgba(14, 16, 61, 0.28)" : "rgba(255, 255, 255, 0.26)")};
+    background: ${(p) => (p.$royal ? "rgba(255, 255, 255, 0.82)" : "rgba(5, 5, 7, 0.4)")};
     backdrop-filter: blur(8px);
-    color: #fff;
+    color: ${(p) => (p.$royal ? "#0e103d" : "#fff")};
   }
-  .ghost:hover { border-color: #fff; color: #fff; background: rgba(255, 255, 255, 0.08); }
+  .ghost:hover {
+    border-color: ${(p) => (p.$royal ? "#9a6929" : "#fff")};
+    color: ${(p) => (p.$royal ? "#0e103d" : "#fff")};
+    background: ${(p) => (p.$royal ? "rgba(201, 162, 39, 0.16)" : "rgba(255, 255, 255, 0.08)")};
+  }
 `;
 
 const Year = styled.div`
@@ -488,7 +522,10 @@ const Year = styled.div`
 
   .base {
     padding-right: 0.04em;
-    background: linear-gradient(180deg, #ffffff 30%, rgba(255, 255, 255, 0.55) 100%);
+    background: ${(p) =>
+      p.$royal
+        ? "linear-gradient(180deg, #0e103d 20%, #9a6929 100%)"
+        : "linear-gradient(180deg, #ffffff 30%, rgba(255, 255, 255, 0.55) 100%)"};
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -505,12 +542,28 @@ const Year = styled.div`
   .d { display: block; height: 1em; }
   .old {
     color: transparent;
-    -webkit-text-stroke: 2px rgba(255, 255, 255, 0.55);
+    -webkit-text-stroke: 2px ${(p) => (p.$royal ? "rgba(14, 16, 61, 0.35)" : "rgba(255, 255, 255, 0.55)")};
   }
   .new {
-    color: var(--crimson, #c8102e);
-    text-shadow: 0 0 60px rgba(200, 16, 46, 0.55);
+    color: ${(p) => (p.$royal ? "#9a6929" : "var(--crimson, #c8102e)")};
+    text-shadow: ${(p) => (p.$royal ? "none" : "0 0 60px rgba(200, 16, 46, 0.55)")};
   }
+
+  ${(p) =>
+    p.$royal &&
+    css`
+      .base,
+      .new {
+        background: none;
+        -webkit-background-clip: border-box;
+        background-clip: border-box;
+        color: #0e103d;
+        -webkit-text-fill-color: #0e103d;
+        -webkit-text-stroke: 0.02em #9a6929;
+        paint-order: stroke fill;
+        filter: none;
+      }
+    `}
 
   .glow {
     position: absolute;
@@ -519,7 +572,10 @@ const Year = styled.div`
     width: 0.9em;
     height: 0.8em;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(200, 16, 46, 0.65), transparent 70%);
+    background: ${(p) =>
+      p.$royal
+        ? "radial-gradient(circle, rgba(201, 162, 39, 0.55), transparent 70%)"
+        : "radial-gradient(circle, rgba(200, 16, 46, 0.65), transparent 70%)"};
     filter: blur(28px);
     pointer-events: none;
     z-index: -1;

@@ -5,7 +5,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
-const VIDEO_ID = "b6mHivEGIqI";
+const VIDEO_ID = "BoTixDYmw4w";
 const WATCH_URL = `https://www.youtube.com/watch?v=${VIDEO_ID}`;
 const EMBED_SRC = `https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1&mute=1&loop=1&playlist=${VIDEO_ID}&controls=0&modestbranding=1&rel=0&playsinline=1&fs=0&iv_load_policy=3&disablekb=1&cc_load_policy=0&showinfo=0`;
 
@@ -177,7 +177,7 @@ const HeroKineticStrip2026 = () => {
 
         const full = { top: 0, left: 0, right: 0, bottom: 0, borderRadius: 0 };
 
-        // Hairline must sit under the title on laptop (not through “Excellence”)
+        // Hairline must sit under the title on laptop (not through the headline)
         const hairline = () => {
           const vh = vhNow();
           if (isLaptop()) {
@@ -395,7 +395,7 @@ const HeroKineticStrip2026 = () => {
     <section
       ref={rootRef}
       className="relative isolate w-full overflow-hidden bg-[#fafafa] lg:h-[100svh] lg:min-h-[100svh]"
-      aria-label="Brit Fintech Awards 2026 — kinetic strip hero"
+      aria-label="The BFA26 Rewind — Brit FinTech Awards 2026"
     >
       <div
         className="hks-year pointer-events-none absolute -right-4 bottom-[-6%] z-[2] hidden select-none font-['Outfit',sans-serif] text-[min(58vh,32rem)] font-black leading-none tracking-[-0.09em] text-zinc-950 lg:block"
@@ -412,19 +412,19 @@ const HeroKineticStrip2026 = () => {
       {/* Title — stacked on mobile/tablet; overlay only on desktop lg+ */}
       <div className="hks-title relative z-20 px-5 pb-5 pt-28 text-center sm:px-8 lg:absolute lg:inset-x-0 lg:top-0 lg:px-14 lg:pb-0 lg:pt-32 xl:px-20 xl:pt-40">
         <p className="hks-eyebrow mb-3 font-['Outfit',sans-serif] text-[0.65rem] font-bold uppercase tracking-[0.28em] text-[#c8102e] sm:text-[0.7rem] sm:tracking-[0.34em] lg:mb-3 xl:mb-4">
-          Brit Fintech Awards 2026
+          Brit FinTech Awards 2026
         </p>
 
         <h1 className="m-0 font-['Outfit',sans-serif] text-[clamp(1.65rem,6.5vw,3.4rem)] font-extrabold uppercase leading-[0.98] tracking-[-0.04em] text-zinc-950 lg:text-[clamp(1.85rem,3.6vw,3.15rem)] lg:leading-[0.96] xl:text-[clamp(2.2rem,5vw,4.6rem)] xl:leading-[0.94]">
           <span className="block overflow-hidden lg:whitespace-nowrap">
             <span className="hks-word inline-block">
-              The Night That{" "}
-              <span className="text-[#c8102e]">Defined</span>
+              The BFA26{" "}
+              <span className="text-[#c8102e]">Rewind</span>
             </span>
           </span>
           <span className="block overflow-hidden">
             <span className="hks-word inline-block text-zinc-950">
-              Excellence
+              Relive the Night
             </span>
           </span>
         </h1>
@@ -438,7 +438,7 @@ const HeroKineticStrip2026 = () => {
           <iframe
             className="hks-media pointer-events-none absolute inset-0 h-full w-full border-0 lg:inset-auto"
             src={EMBED_SRC}
-            title="Brit Fintech Awards 2026 — Official Highlights"
+            title="The BFA26 Rewind | Brit FinTech Awards 2026"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerPolicy="strict-origin-when-cross-origin"
           />
@@ -450,15 +450,15 @@ const HeroKineticStrip2026 = () => {
           target="_blank"
           rel="noopener noreferrer"
           className="absolute bottom-3 left-3 z-50 flex h-11 w-11 items-center justify-center rounded-full bg-[#ff0000] text-white shadow-[0_8px_24px_rgba(0,0,0,0.35)] transition-transform hover:scale-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-          aria-label="Watch on YouTube"
+          aria-label="Watch The BFA26 Rewind on YouTube"
         >
           <i className="fab fa-youtube text-[1.35rem] leading-none" aria-hidden="true" />
         </a>
       </div>
 
       <p className="hks-hint pointer-events-none absolute bottom-6 left-1/2 z-40 hidden -translate-x-1/2 font-['Outfit',sans-serif] text-[0.68rem] font-semibold uppercase tracking-[0.22em] text-white/85 drop-shadow-[0_1px_8px_rgba(0,0,0,0.5)] lg:block">
-        Scroll · video settles below ·{" "}
-        <span className="text-[#ff4d6a]">2026 winners</span>
+        Scroll · the night, rewound ·{" "}
+        <span className="text-[#ff4d6a]">BFA26</span>
       </p>
     </section>
   );

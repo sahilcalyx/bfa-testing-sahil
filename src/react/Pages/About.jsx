@@ -6,7 +6,7 @@ import WhoAttendsBfaTabsSection from "../Components/WhoAttendsBfaTabsSection";
 
 const About = () => {
   return (
-    <div>
+    <div className="bfa-royal-2027">
 
 
       <div>
@@ -41,7 +41,7 @@ const About = () => {
           >
 
             <div className="cs-hero_text text-left" >
-              <h1 className="cs-hero_title cs-extra_bold cs-white text-uppercase pb-0 mb-2" style={{ marginTop: '40px !important' }}>
+              <h1 className="cs-hero_title cs-extra_bold cs-white pb-0 mb-2" style={{ marginTop: '40px !important' }}>
                 About Brit Fintech Awards
 
               </h1>
@@ -80,17 +80,17 @@ const About = () => {
                       Inception
                     </div>
                     <br />
-                    <h3 className="cs-text_box_title text-uppercase cs-bold fs-4">
+                    <h3 className="cs-text_box_title cs-bold fs-4">
 
                     </h3>
-                    <h2 className="cs-text_box_title text-uppercase cs-bold">WHY BRIT FINTECH AWARDS?</h2>
+                    <h2 className="cs-text_box_title cs-bold">Why Brit Fintech Awards?</h2>
                     <div className="cs-height_35 cs-height_lg_25" />
                     <div className="cs-text_box_text">
                       Idea, implementation, and innovation are powerful forces driving change in the evolving financial industry. Financial institutions continue to innovate, offering better services to customers. Many new financial verticals have emerged as winners by embracing technology - diversifying products, going fully digital, or enhancing the user experience even with traditional models. <br />
                       The key is to motivate these innovators. By launching the Brit FinTech Awards, we aim to Celebrate Innovation in the financial sector.
                     </div>
                     <div className="cs-height_35 cs-height_lg_25" />
-                    <h3 className="cs-text_box_title text-uppercase cs-bold fs-4">
+                    <h3 className="cs-text_box_title cs-bold fs-4">
                       How we are different
                     </h3>
                     <div className="cs-height_15 cs-height_lg_15" />

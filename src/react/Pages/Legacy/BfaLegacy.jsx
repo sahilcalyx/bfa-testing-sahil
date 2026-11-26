@@ -188,73 +188,119 @@ const BfaLegacy = () => {
               icon={Trophy}
             />
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10">
-              {years.map((item) => (
-                <NavLink
-                  key={item.year}
-                  to={item.to}
-                  className="group relative isolate flex flex-col min-h-[360px] md:min-h-[400px] overflow-hidden no-underline !text-white rounded-[32px] border border-zinc-800/20 shadow-[0_24px_60px_-15px_rgba(0,0,0,0.35)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_36px_80px_-15px_rgba(200,16,46,0.35)] hover:border-[#c8102e]/50"
-                >
-                  {/* Background Image */}
-                  <div
-                    className="absolute inset-0 bg-cover transition-transform duration-[1000ms] ease-out group-hover:scale-110"
-                    style={{
-                      backgroundImage: `url("${item.bg}")`,
-                      backgroundPosition: item.bgPosition || "center",
-                    }}
-                  />
-                  {/* Overlays */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/75 to-black/30" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-transparent" />
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(circle_at_top_right,rgba(200,16,46,0.4),transparent_60%)]" />
+            <div className="grid grid-cols-1 gap-8 md:gap-10 lg:grid-cols-2">
+              {years.map((item) => {
+                const isFeatured = item.year === "2026";
+                return (
+                  <NavLink
+                    key={item.year}
+                    to={item.to}
+                    className={`group relative isolate flex flex-col overflow-hidden no-underline !text-white rounded-[32px] border border-zinc-800/20 shadow-[0_24px_60px_-15px_rgba(0,0,0,0.35)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_36px_80px_-15px_rgba(200,16,46,0.35)] hover:border-[#c8102e]/50 ${
+                      isFeatured
+                        ? "lg:col-span-2 min-h-[280px] sm:min-h-[320px] md:min-h-[380px] lg:min-h-[420px] border-[#c8102e]/35 shadow-[0_28px_70px_-15px_rgba(200,16,46,0.28)]"
+                        : "min-h-[300px] md:min-h-[340px]"
+                    }`}
+                  >
+                    {/* Background Image */}
+                    <div
+                      className="absolute inset-0 bg-cover transition-transform duration-[1000ms] ease-out group-hover:scale-110"
+                      style={{
+                        backgroundImage: `url("${item.bg}")`,
+                        backgroundPosition: item.bgPosition || "center",
+                      }}
+                    />
+                    {/* Overlays */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/75 to-black/30" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-transparent" />
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(circle_at_top_right,rgba(200,16,46,0.4),transparent_60%)]" />
+                    {isFeatured && (
+                      <div
+                        aria-hidden="true"
+                        className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_80%,rgba(200,16,46,0.22),transparent_55%)]"
+                      />
+                    )}
 
-                  {/* Shine Effect */}
-                  <div className="pointer-events-none absolute -left-1/2 top-0 h-full w-1/2 skew-x-[-20deg] bg-gradient-to-r from-transparent via-white/15 to-transparent opacity-0 transition-all duration-700 group-hover:left-full group-hover:opacity-100" />
+                    {/* Shine Effect */}
+                    <div className="pointer-events-none absolute -left-1/2 top-0 h-full w-1/2 skew-x-[-20deg] bg-gradient-to-r from-transparent via-white/15 to-transparent opacity-0 transition-all duration-700 group-hover:left-full group-hover:opacity-100" />
 
-                  <div className="relative z-[1] flex flex-col flex-1 p-7 sm:p-8 md:p-9">
-                    {/* Top Year Number */}
-                    <div className="flex justify-end">
-                      <span className="select-none text-6xl md:text-7xl leading-none font-black tracking-tighter text-white/[0.15] transition-colors duration-300 group-hover:text-white/[0.25]">
-                        {item.year}
-                      </span>
-                    </div>
-
-                    {/* Bottom Details */}
-                    <div className="mt-auto pt-6">
-                      <h3 className="text-2xl sm:text-3xl md:text-3xl leading-tight font-black tracking-tight text-white mb-4">
-                        {item.title}
-                      </h3>
-
-                      <div className="mb-6 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:gap-3">
-                        <span className="inline-flex w-fit items-center gap-2 rounded-full border border-white/15 bg-black/40 backdrop-blur-md px-4 py-2 text-xs md:text-sm font-semibold text-white/95">
-                          <Calendar
-                            size={15}
-                            className="text-[#f2d8ac] shrink-0"
-                            strokeWidth={2.25}
-                          />
-                          {item.date}
-                        </span>
-                        <span className="inline-flex w-fit items-center gap-2 rounded-full border border-white/15 bg-black/40 backdrop-blur-md px-4 py-2 text-xs md:text-sm font-semibold text-white/95">
-                          <MapPin
-                            size={15}
-                            className="text-[#f2d8ac] shrink-0"
-                            strokeWidth={2.25}
-                          />
-                          {item.venue}
+                    <div
+                      className={`relative z-[1] flex flex-1 p-7 sm:p-8 md:p-9 ${
+                        isFeatured
+                          ? "flex-col sm:flex-row sm:items-end sm:justify-between gap-6"
+                          : "flex-col"
+                      }`}
+                    >
+                      {/* Top Year Number */}
+                      <div
+                        className={`flex ${
+                          isFeatured
+                            ? "sm:absolute sm:right-8 sm:top-8 md:right-10 md:top-10 justify-end"
+                            : "justify-end"
+                        }`}
+                      >
+                        <span
+                          className={`select-none leading-none font-black tracking-tighter text-white/[0.15] transition-colors duration-300 group-hover:text-white/[0.25] ${
+                            isFeatured
+                              ? "text-7xl sm:text-8xl md:text-9xl"
+                              : "text-6xl md:text-7xl"
+                          }`}
+                        >
+                          {item.year}
                         </span>
                       </div>
 
-                      <span className="inline-flex items-center gap-3 rounded-full bg-white text-zinc-950 px-6 py-3 text-sm font-extrabold shadow-xl transition-all duration-300 group-hover:!bg-[#c8102e] group-hover:!text-white">
-                        Explore {item.year}
-                        <ArrowUpRight
-                          size={18}
-                          className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                        />
-                      </span>
+                      {/* Bottom Details */}
+                      <div
+                        className={`mt-auto ${
+                          isFeatured ? "sm:mt-0 sm:max-w-xl md:max-w-2xl pt-2 sm:pt-16" : "pt-6"
+                        }`}
+                      >
+                        {isFeatured && (
+                          <span className="mb-3 inline-flex items-center rounded-full border border-[#f2d8ac]/40 bg-[#c8102e]/90 px-3.5 py-1.5 text-[10px] sm:text-xs font-extrabold uppercase tracking-[0.18em] text-[#f2d8ac]">
+                            Latest edition
+                          </span>
+                        )}
+                        <h3
+                          className={`leading-tight font-black tracking-tight text-white mb-4 ${
+                            isFeatured
+                              ? "text-3xl sm:text-4xl md:text-[2.75rem]"
+                              : "text-2xl sm:text-3xl"
+                          }`}
+                        >
+                          {item.title}
+                        </h3>
+
+                        <div className="mb-6 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:gap-3">
+                          <span className="inline-flex w-fit items-center gap-2 rounded-full border border-white/15 bg-black/40 backdrop-blur-md px-4 py-2 text-xs md:text-sm font-semibold text-white/95">
+                            <Calendar
+                              size={15}
+                              className="text-[#f2d8ac] shrink-0"
+                              strokeWidth={2.25}
+                            />
+                            {item.date}
+                          </span>
+                          <span className="inline-flex w-fit items-center gap-2 rounded-full border border-white/15 bg-black/40 backdrop-blur-md px-4 py-2 text-xs md:text-sm font-semibold text-white/95">
+                            <MapPin
+                              size={15}
+                              className="text-[#f2d8ac] shrink-0"
+                              strokeWidth={2.25}
+                            />
+                            {item.venue}
+                          </span>
+                        </div>
+
+                        <span className="inline-flex items-center gap-3 rounded-full bg-white text-zinc-950 px-6 py-3 text-sm font-extrabold shadow-xl transition-all duration-300 group-hover:!bg-[#c8102e] group-hover:!text-white">
+                          Explore {item.year}
+                          <ArrowUpRight
+                            size={18}
+                            className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                          />
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                </NavLink>
-              ))}
+                  </NavLink>
+                );
+              })}
             </div>
           </section>
 

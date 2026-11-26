@@ -176,6 +176,11 @@ export const WINNER_VIDEO_BY_PROFILE = Object.fromEntries(
 // Newest upload first, matching https://www.youtube.com/@BritFinTechAwardsUK/videos
 const channelVideos = [
   {
+    id: "BoTixDYmw4w",
+    category: "event",
+    title: "The BFA26 Rewind | Brit FinTech Awards 2026",
+  },
+  {
     id: "jXwyVPmdhAk",
     category: "event",
     title: "Celebrating 26 Outstanding Winners | Brit FinTech Awards 2026",

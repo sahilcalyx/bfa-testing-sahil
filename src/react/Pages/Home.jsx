@@ -522,7 +522,7 @@ Brit Fintech Awards 2026."
 
         {/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ Get Supprt Section ++++++++++++++++++++++++++++++++++++++++ */}
         {/* <div className="cs-height_100 cs-height_lg_50" bis_skin_checked={1} /> */}
-        <div className="cs-accent_color_2_bg cs-parallax" bis_skin_checked={1}>
+        <div className="bfa-royal-2027 cs-accent_color_2_bg cs-parallax" bis_skin_checked={1}>
           <div
             className="cs-bg_parallax"
             bis_skin_checked={1}

@@ -14,6 +14,8 @@ import React, { useLayoutEffect, useEffect, Suspense, lazy } from "react";
 const Awards = lazy(() => import("./Pages/Awards"));
 const ContactUs = lazy(() => import("./Pages/ContactUs"));
 const RegisterInterest2027 = lazy(() => import("./Pages/2027/RegisterInterest2027"));
+const ThemePrototype2027 = lazy(() => import("./Pages/2027/ThemePrototype2027"));
+const ThemePrototype2027Part2 = lazy(() => import("./Pages/2027/ThemePrototype2027Part2"));
 const PaymentAcquireroftheYear = lazy(() => import("./Pages/PaymentAcquireroftheYear"));
 const Bank2BankPaymentProcessoroftheYear = lazy(() => import("./Pages/Bank2BankPaymentProcessoroftheYear"));
 const PaymentInnovatoroftheYear = lazy(() => import("./Pages/PaymentInnovatoroftheYear"));
@@ -262,7 +264,7 @@ function App() {
 
   const location = useLocation();
 
-  // Hide Header and Footer on profile page
+  // The profile page hides the shared chrome.
   const hideHeaderFooter = location.pathname === "/profile";
   return (
     <div className="App">
@@ -472,6 +474,8 @@ function App() {
 
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/register-interest-2027" element={<RegisterInterest2027 />} />
+        <Route path="/theme-prototype-2027" element={<ThemePrototype2027 />} />
+        <Route path="/theme-prototype-2027-part2" element={<ThemePrototype2027Part2 />} />
         <Route path="/judges" element={<Judges />} />
         <Route path="/faqs" element={<Faq />} />
         <Route path="/nominate-now" element={<RegisterNow />} />

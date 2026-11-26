@@ -463,7 +463,7 @@ const RegisterInterest2027 = () => {
         };
 
   return (
-    <Page>
+    <Page className="bfa-royal-2027">
       <Helmet>
         <title>Register Interest for BFA27 | Brit FinTech Awards 2027</title>
         <meta
@@ -473,7 +473,7 @@ const RegisterInterest2027 = () => {
       </Helmet>
 
       <link
-        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&display=swap"
         rel="stylesheet"
       />
 
@@ -891,14 +891,15 @@ const Page = styled.div`
   width: 100%;
   background: var(--bg);
   color: var(--ink);
-  font-family: "Outfit", system-ui, -apple-system, sans-serif;
+  font-family: "Manrope", "Segoe UI", sans-serif;
   overflow-x: clip;
 
-  /* Theme CSS paints every heading #070707 in Montserrat !important; this page is dark and uses Outfit. */
+  /* Theme CSS paints every heading in Montserrat !important. Playfair Display keeps these titles in sentence case. */
   h1, h2, h3 {
     margin: 0;
     color: var(--ink);
-    font-family: "Outfit", system-ui, -apple-system, sans-serif !important;
+    font-family: "Playfair Display", "Palatino Linotype", serif !important;
+    text-transform: none !important;
   }
   p { margin: 0; }
   em { font-style: normal; }
@@ -1041,11 +1042,12 @@ const SectionLabel = styled.p`
 `;
 
 const SectionTitle = styled.h2`
-  max-width: 20ch;
-  font-weight: 700;
+  max-width: 22ch;
+  font-weight: 600;
   font-size: clamp(1.9rem, 4vw, 3.2rem);
-  line-height: 1.05;
-  letter-spacing: -0.03em;
+  line-height: 1.25;
+  letter-spacing: 0;
+  text-transform: none;
   color: var(--ink);
 `;
 

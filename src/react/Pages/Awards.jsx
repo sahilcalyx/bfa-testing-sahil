@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet";
 import { NavLink } from "react-router-dom";
 const Awards = () => {
   return (
-    <>
+    <div className="bfa-royal-2027">
       <Helmet>
         <title> Fintech Awards UK 2024 | Financial Awards UK </title>
         <meta name="description"
@@ -25,7 +25,7 @@ const Awards = () => {
           animationName: "fadeInDown",
         }}>
           <div className="cs-hero_text text-left">
-            <h1 className="cs-hero_title cs-extra_bold cs-white text-uppercase pb-3 mb-0"
+            <h1 className="cs-hero_title cs-extra_bold cs-white pb-3 mb-0"
               style={{ marginTop: "40px !important" }}>
               Awards Category
             </h1>
@@ -61,7 +61,7 @@ const Awards = () => {
                 {/* <div className="cs-text_box_subtitle cs-medium cs-accent_color">
               OUR CATEGORIES
             </div> */}
-                <h2 className="cs-text_box_title text-uppercase cs-bold">
+                <h2 className="cs-text_box_title cs-bold">
                   Fintech Awards
                 </h2>
                 <div className="cs-height_35 cs-height_lg_35" />
@@ -355,7 +355,7 @@ const Awards = () => {
                 {/* <div className="cs-text_box_subtitle cs-medium cs-accent_color">
               OUR CATEGORIES
             </div> */}
-                <h2 className="cs-text_box_title text-uppercase cs-bold">
+                <h2 className="cs-text_box_title cs-bold">
                   MSB Awards
                 </h2>
                 <div className="cs-height_10 cs-height_lg_10" />
@@ -581,8 +581,8 @@ const Awards = () => {
                 {/* <div className="cs-text_box_subtitle cs-medium cs-accent_color">
               OUR CATEGORIES
             </div> */}
-                <h2 className="cs-text_box_title text-uppercase cs-bold">
-                  GLOBAL AWARDS
+                <h2 className="cs-text_box_title cs-bold">
+                  Global Awards
                 </h2>
                 <div className="cs-height_35 cs-height_lg_35" />
                 <div className="cs-text_box_text mb-3">
@@ -634,7 +634,7 @@ const Awards = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

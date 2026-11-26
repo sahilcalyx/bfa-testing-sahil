@@ -35,7 +35,7 @@ export const schedule2026 = [
       {
         name: "Stephen Simmons",
         role: "Host",
-        designation: "Event Host, Brit FinTech Awards 2026",
+        designation: "Brit FinTech Awards 2026",
         img: "/assets/img/stephen-simmons-host-new.png",
         slug: "/host/stephen-simmons",
       },

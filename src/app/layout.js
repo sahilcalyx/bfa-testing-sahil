@@ -1,6 +1,7 @@
 import { defaultSeo } from "../seo/seo.config";
 import "./globals.css";
 import "../react/index.css";
+import "../react/styles/royal2027.css";
 import Script from "next/script";
 
 export const metadata = {

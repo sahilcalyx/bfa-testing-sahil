@@ -12,7 +12,7 @@ const WhoAttendsBfaPage = () => {
   }, []);
 
   return (
-    <div className="bg-white min-h-screen">
+    <div className="bfa-royal-2027 bg-white min-h-screen">
       <Helmet>
         <title>{PAGE_TITLE}</title>
         <meta name="description" content={PAGE_DESCRIPTION} />

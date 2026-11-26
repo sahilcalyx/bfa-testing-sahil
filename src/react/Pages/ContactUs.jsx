@@ -251,7 +251,7 @@ const ContactUs = () => {
     }
   };
   return (
-    <div>
+    <div className="bfa-royal-2027">
       <Helmet>
         <title>Brit Fintech Awards Inquiry | Fintech Award UK</title>
         <meta
@@ -305,7 +305,7 @@ const ContactUs = () => {
         >
           <div className="cs-hero_text text-left">
             <h1
-              className="cs-hero_title cs-extra_bold cs-white text-uppercase pb-3 mb-0"
+              className="cs-hero_title cs-extra_bold cs-white pb-3 mb-0"
               style={{ marginTop: "40px !important" }}
             >
               Contact Us

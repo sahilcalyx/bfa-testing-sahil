@@ -5,7 +5,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import { ArrowRight, X } from "lucide-react";
 
 const STORAGE_KEY = "ri27-bar-dismissed";
-const HIDDEN_PREFIXES = ["/register-interest-2027", "/admin", "/jury", "/profile"];
+const HIDDEN_PREFIXES = ["/register-interest-2027", "/theme-prototype-2027", "/admin", "/jury", "/profile"];
 
 // Dismissal lives in sessionStorage; exposed as an external store so the first
 // client render already knows the answer (no flash, no setState-in-effect).
