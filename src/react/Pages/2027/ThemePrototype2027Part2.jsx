@@ -11,11 +11,9 @@ import Lightfall from "./Lightfall";
 const EASE = [0.16, 1, 0.3, 1];
 
 const PANEL = [
-  { n: "01", name: "Amira Cole", title: "Chief Executive Officer", company: "Northline", role: "Moderator" },
-  { n: "02", name: "Jonah Adeyemi", title: "Co-Founder & CEO", company: "Harbour Pay", role: "Panelist" },
-  { n: "03", name: "Priya Raman", title: "Head of Compliance", company: "Ledger & Co", role: "Panelist" },
-  { n: "04", name: "Elias March", title: "Director, Risk", company: "Meridian", role: "Panelist" },
-  { n: "05", name: "Sofia Keller", title: "Founder & CEO", company: "Vale", role: "Panelist" },
+  { name: "John Doe", company: "Northline" },
+  { name: "Jane Doe", company: "Harbour" },
+  { name: "James Doe", company: "Meridian" },
 ];
 
 const ThemePrototype2027Part2 = () => {
@@ -98,31 +96,38 @@ const ThemePrototype2027Part2 = () => {
       <Panel aria-labelledby="bfa27-panel-title">
         <PanelInner>
           <PanelHead>
-            <motion.h2 id="bfa27-panel-title" {...rise(0)}>
-              Can Fintechs and MSBs Afford to <em>Ignore AI?</em>
-            </motion.h2>
+            <div>
+              <p className="eyebrow">Discussion panel</p>
+              <motion.h2 id="bfa27-panel-title" {...rise(0)}>
+                Can Fintechs and MSBs afford to <em>ignore AI?</em>
+              </motion.h2>
+            </div>
             <motion.div {...rise(0.08)}>
               <p>
-                A demo line for the panel: how firms are weighing automation, customer trust, and the people who still have to sign off.
+                How firms are weighing automation, customer trust, and the people who still have to sign off.
               </p>
               <Link to="/discussion-panel-2026">
                 Discussion panel page
-                <ArrowUpRight size={16} strokeWidth={2.4} />
+                <ArrowUpRight size={15} strokeWidth={2} />
               </Link>
             </motion.div>
           </PanelHead>
 
           <Cards>
             {PANEL.map((person) => (
-              <Card key={person.n}>
+              <Card key={person.name}>
                 <Portrait aria-hidden="true">
-                  <PersonMark />
-                  <Badge>{person.n}</Badge>
+                  <Mark>
+                    {person.name
+                      .split(" ")
+                      .map((part) => part[0])
+                      .join("")}
+                  </Mark>
                 </Portrait>
-                <CardName>{person.name}</CardName>
-                <CardTitle>{person.title}</CardTitle>
-                <Company>{person.company}</Company>
-                <Role>{person.role}</Role>
+                <CardBody>
+                  <CardName>{person.name}</CardName>
+                  <Company>{person.company}</Company>
+                </CardBody>
               </Card>
             ))}
           </Cards>
@@ -131,13 +136,6 @@ const ThemePrototype2027Part2 = () => {
     </Page>
   );
 };
-
-const PersonMark = () => (
-  <svg viewBox="0 0 80 96" aria-hidden="true">
-    <circle cx="40" cy="30" r="16" />
-    <path d="M14 86c2-18 12-28 26-28s24 10 26 28" />
-  </svg>
-);
 
 const Page = styled.div`
   position: relative;
@@ -323,26 +321,8 @@ const Content = styled.div`
 `;
 
 const Panel = styled.section`
-  position: relative;
-  background:
-    radial-gradient(circle at 12% 18%, rgba(224, 180, 90, 0.16), transparent 28%),
-    radial-gradient(circle at 88% 80%, rgba(154, 105, 41, 0.1), transparent 26%),
-    #f6f3ea;
-  color: #090a11;
-  overflow: hidden;
-
-  &::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    opacity: 0.45;
-    background-image:
-      linear-gradient(rgba(154, 105, 41, 0.16) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(154, 105, 41, 0.16) 1px, transparent 1px);
-    background-size: 72px 72px;
-    mask-image: radial-gradient(circle at 70% 30%, #000 0%, transparent 72%);
-  }
+  background: #f7f6f2;
+  color: #12141c;
 `;
 
 const PanelInner = styled.div`
@@ -359,26 +339,38 @@ const PanelInner = styled.div`
 
 const PanelHead = styled.div`
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-  gap: 36px 48px;
+  grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.7fr);
+  gap: 28px 64px;
   align-items: end;
-  margin-bottom: 48px;
+  padding-bottom: 36px;
+  border-bottom: 1px solid rgba(18, 20, 28, 0.1);
+  margin-bottom: 36px;
 
   @media (max-width: 860px) {
     grid-template-columns: 1fr;
-    gap: 22px;
+    gap: 18px;
+  }
+
+  .eyebrow {
+    margin: 0 0 14px;
+    font-family: "Manrope", "Segoe UI", sans-serif !important;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #8d6a2f;
   }
 
   && h2 {
     margin: 0;
-    max-width: 12ch;
-    color: #090a11;
+    max-width: 14ch;
+    color: #12141c;
     font-family: "GoudyOldStyle", "Palatino Linotype", serif !important;
     font-weight: 400 !important;
     font-style: normal !important;
     font-synthesis: none !important;
-    font-size: clamp(2.5rem, 4.6vw, 4.35rem);
-    line-height: 0.96 !important;
+    font-size: clamp(2.15rem, 3.5vw, 3.35rem);
+    line-height: 1.05 !important;
     letter-spacing: 0 !important;
     text-transform: none !important;
   }
@@ -388,143 +380,104 @@ const PanelHead = styled.div`
     font-style: normal !important;
     font-weight: 400 !important;
     font-synthesis: none !important;
-    color: #9a6929;
+    color: #8d6a2f;
   }
 
   p {
     margin: 0;
-    max-width: 42ch;
+    max-width: 36ch;
     font-family: "Manrope", "Segoe UI", sans-serif !important;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 500;
-    line-height: 1.55;
-    color: rgba(9, 10, 17, 0.72);
+    line-height: 1.6;
+    color: rgba(18, 20, 28, 0.62);
   }
 
   a {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    margin-top: 22px;
+    gap: 6px;
+    margin-top: 18px;
     font-family: "Manrope", "Segoe UI", sans-serif !important;
-    font-size: 15px;
-    font-weight: 700;
-    color: #090a11;
+    font-size: 14px;
+    font-weight: 600;
+    color: #12141c;
     text-decoration: none;
-    border-bottom: 1px solid #090a11;
-    padding-bottom: 2px;
   }
 
   a:hover {
-    color: #9a6929;
-    border-bottom-color: #9a6929;
+    color: #8d6a2f;
   }
 `;
 
 const Cards = styled.ul`
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 18px;
-  margin: 0;
-  padding: 0;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 8px 0 0;
   list-style: none;
 
-  @media (max-width: 1100px) {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  @media (max-width: 700px) {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  @media (max-width: 460px) {
+  @media (max-width: 760px) {
     grid-template-columns: 1fr;
+    max-width: 340px;
   }
 `;
 
 const Card = styled.li`
   min-width: 0;
+  background: #fff;
+  text-align: center;
+  border: 1px solid rgba(141, 106, 47, 0.28);
+  overflow: hidden;
 `;
 
 const Portrait = styled.div`
-  position: relative;
-  aspect-ratio: 4 / 5;
-  margin-bottom: 16px;
+  aspect-ratio: 5 / 4;
   display: grid;
   place-items: center;
-  background:
-    linear-gradient(180deg, rgba(250, 245, 169, 0.18), transparent 42%),
-    linear-gradient(160deg, #1a2148 0%, #090a11 72%);
-  border-radius: 2px;
-  overflow: hidden;
+  background: #12141c;
+  border-bottom: 1px solid #e0b45a;
+`;
 
-  svg {
-    width: 46%;
-    height: auto;
-    fill: none;
-    stroke: rgba(250, 245, 169, 0.72);
-    stroke-width: 2.4;
+const Mark = styled.span`
+  && {
+    font-family: "GoudyOldStyle", "Palatino Linotype", serif !important;
+    font-size: clamp(2.4rem, 3vw, 3.25rem);
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    color: #f7f6f2;
   }
 `;
 
-const Badge = styled.span`
-  position: absolute;
-  left: 10px;
-  bottom: 10px;
-  display: grid;
-  place-items: center;
-  min-width: 42px;
-  height: 32px;
-  padding: 0 8px;
-  background: linear-gradient(180deg, #faf5a9 0%, #e0b45a 55%, #9a6929 100%);
-  color: #090a11;
-  font-family: "Manrope", "Segoe UI", sans-serif !important;
-  font-size: 13px;
-  font-weight: 800;
-  letter-spacing: 0.04em;
+const CardBody = styled.div`
+  padding: 22px 16px 26px;
 `;
 
 const CardName = styled.p`
   margin: 0;
-  font-family: "Manrope", "Segoe UI", sans-serif !important;
-  font-size: 14px;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: #090a11;
-`;
-
-const CardTitle = styled.p`
-  margin: 4px 0 0;
-  font-family: "Manrope", "Segoe UI", sans-serif !important;
-  font-size: 13px;
-  font-weight: 500;
-  line-height: 1.35;
-  color: rgba(9, 10, 17, 0.62);
+  && {
+    font-family: "GoudyOldStyle", "Palatino Linotype", serif !important;
+  }
+  font-size: 1.75rem;
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: 0;
+  text-transform: none;
+  color: #12141c;
 `;
 
 const Company = styled.p`
-  display: inline-flex;
-  margin: 12px 0 0;
-  padding: 6px 10px;
-  border: 1px solid rgba(9, 10, 17, 0.16);
-  border-radius: 4px;
-  font-family: "Manrope", "Segoe UI", sans-serif !important;
-  font-size: 13px;
-  font-weight: 800;
-  letter-spacing: 0.04em;
+  margin: 8px 0 0;
+  && {
+    font-family: "Manrope", "Segoe UI", sans-serif !important;
+  }
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #090a11;
-`;
-
-const Role = styled.p`
-  margin: 14px 0 0;
-  font-family: "Manrope", "Segoe UI", sans-serif !important;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: #9a6929;
+  color: #8d6a2f;
 `;
 
 export default ThemePrototype2027Part2;
