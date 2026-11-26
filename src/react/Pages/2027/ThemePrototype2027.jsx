@@ -27,6 +27,8 @@ import { INTEREST_2027_FORM_OPTIONS } from "../../../lib/interest2027Options";
 import { DIAL_CODE_OPTIONS } from "../../../lib/dialCodes";
 import { RECAPTCHA_SITE_KEY } from "../../../lib/recaptchaSiteKey";
 import HeroSpotlight2027 from "./HeroSpotlight2027";
+import ThemeShadeLab from "./ThemeShadeLab";
+import { readThemeHex } from "./themeShades";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -113,14 +115,24 @@ const PERKS = [
 // Only needed after a submit, so they stay out of the initial bundle.
 const showError = async (text) => {
   const { default: Swal } = await import("sweetalert2");
-  Swal.fire({ title: "Something went wrong", text, icon: "error", confirmButtonColor: "#0e103d" });
+  Swal.fire({
+    title: "Something went wrong",
+    text,
+    icon: "error",
+    confirmButtonColor: readThemeHex("--bfa-navy", "#0e103d"),
+  });
 };
 
 const celebrate = async () => {
   const { default: confetti } = await import("canvas-confetti");
   const fire = (x, angle) =>
     confetti({
-      colors: ["#0e103d", "#ffffff", "#c9a227", "#090a11"],
+      colors: [
+        readThemeHex("--bfa-navy", "#0e103d"),
+        "#ffffff",
+        readThemeHex("--bfa-gold-mid", "#e0b45a"),
+        readThemeHex("--bfa-navy-deep", "#090a11"),
+      ],
       particleCount: 70,
       angle,
       spread: 62,
@@ -199,7 +211,7 @@ const SearchSelect = ({
         aria-haspopup="listbox"
         aria-expanded={open}
       >
-        <span style={{ color: selected ? "#0e103d" : "rgba(14,16,61,0.45)" }}>
+        <span style={{ color: selected ? "var(--bfa-navy, #0e103d)" : "rgba(var(--bfa-navy-rgb, 14, 16, 61),0.45)" }}>
           {triggerLabel}
         </span>
         <ChevronDown size={16} style={{ opacity: 0.6, flexShrink: 0 }} />
@@ -208,7 +220,7 @@ const SearchSelect = ({
       {open && (
         <SelectMenu role="listbox" $minWidth={menuMinWidth}>
           <SelectSearchRow>
-            <Search size={15} style={{ color: "rgba(14,16,61,0.5)", flexShrink: 0 }} />
+            <Search size={15} style={{ color: "rgba(var(--bfa-navy-rgb, 14, 16, 61),0.5)", flexShrink: 0 }} />
             <SelectSearchInput
               ref={searchRef}
               type="text"
@@ -868,6 +880,7 @@ const ThemePrototype2027 = () => {
         </Container>
         <ClosingYear aria-hidden="true">BFA27</ClosingYear>
       </Closing>
+      <ThemeShadeLab />
     </Page>
   );
 };
@@ -879,14 +892,14 @@ const ThemePrototype2027 = () => {
 const Page = styled.div`
   --bg: #ffffff;
   --bg-raised: #f6f3ea;
-  --ink: #0e103d;
-  --mute: rgba(14, 16, 61, 0.68);
-  --faint: rgba(14, 16, 61, 0.46);
-  --line: rgba(14, 16, 61, 0.12);
-  --crimson: #0e103d;
-  --crimson-deep: #090a11;
-  --gold: #9a6929;
-  --gold-bright: #faf5a9;
+  --ink: var(--bfa-navy, #0e103d);
+  --mute: rgba(var(--bfa-navy-rgb, 14, 16, 61), 0.68);
+  --faint: rgba(var(--bfa-navy-rgb, 14, 16, 61), 0.46);
+  --line: rgba(var(--bfa-navy-rgb, 14, 16, 61), 0.12);
+  --crimson: var(--bfa-navy, #0e103d);
+  --crimson-deep: var(--bfa-navy-deep, #090a11);
+  --gold: var(--bfa-gold-deep, #9a6929);
+  --gold-bright: var(--bfa-gold-light, #faf5a9);
 
   position: relative;
   width: 100%;
@@ -943,7 +956,7 @@ const Eyebrow = styled.p`
   font-weight: 700;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  background: linear-gradient(100deg, #9a6929 0%, #e0b45a 42%, #faf5a9 52%, #9a6929 100%);
+  background: linear-gradient(100deg, var(--bfa-gold-deep, #9a6929) 0%, var(--bfa-gold-mid, #e0b45a) 42%, var(--bfa-gold-light, #faf5a9) 52%, var(--bfa-gold-deep, #9a6929) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -961,7 +974,7 @@ const EyebrowDot = styled.span`
   height: 8px;
   border-radius: 50%;
   background: var(--crimson);
-  box-shadow: 0 0 0 4px rgba(201, 162, 39, 0.28);
+  box-shadow: 0 0 0 4px rgba(var(--bfa-gold-mid-rgb, 224, 180, 90), 0.28);
   animation: ${pulse} 2.4s ease-in-out infinite;
 
   @media (prefers-reduced-motion: reduce) { animation: none; }
@@ -1000,8 +1013,8 @@ const Marquee = styled.div`
   overflow: hidden;
   background: var(--crimson);
   color: #fff;
-  border-top: 1px solid rgba(201, 162, 39, 0.55);
-  border-bottom: 1px solid rgba(201, 162, 39, 0.55);
+  border-top: 1px solid rgba(var(--bfa-gold-mid-rgb, 224, 180, 90), 0.55);
+  border-bottom: 1px solid rgba(var(--bfa-gold-mid-rgb, 224, 180, 90), 0.55);
 
   .track {
     display: flex;
@@ -1016,7 +1029,7 @@ const Marquee = styled.div`
     letter-spacing: 0.3em;
     text-transform: uppercase;
     white-space: nowrap;
-    background: linear-gradient(90deg, #faf5a9 0%, #e0b45a 50%, #9a6929 100%);
+    background: linear-gradient(90deg, var(--bfa-gold-light, #faf5a9) 0%, var(--bfa-gold-mid, #e0b45a) 50%, var(--bfa-gold-deep, #9a6929) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -1028,7 +1041,7 @@ const Marquee = styled.div`
     height: 6px;
     margin: 0 28px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #faf5a9, #9a6929);
+    background: linear-gradient(135deg, var(--bfa-gold-light, #faf5a9), var(--bfa-gold-deep, #9a6929));
   }
 `;
 
@@ -1043,7 +1056,7 @@ const Section = styled.section`
     p.$tone === "raised"
       ? "var(--bg-raised)"
       : p.$tone === "form"
-        ? "radial-gradient(70% 60% at 100% 0%, rgba(201, 162, 39, 0.22), transparent 60%), var(--bg)"
+        ? "radial-gradient(70% 60% at 100% 0%, rgba(var(--bfa-gold-mid-rgb, 224, 180, 90), 0.22), transparent 60%), var(--bg)"
         : "var(--bg)"};
   ${(p) => p.$tone === "raised" && css`border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);`}
 
@@ -1245,7 +1258,7 @@ const OpportunityCard = styled(motion.button)`
   .media .tint {
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(14, 16, 61, 0.2) 0%, rgba(14, 16, 61, 0.05) 30%, rgba(9, 10, 17, 0.78) 62%, rgba(9, 10, 17, 0.94) 100%);
+    background: linear-gradient(180deg, rgba(var(--bfa-navy-rgb, 14, 16, 61), 0.2) 0%, rgba(var(--bfa-navy-rgb, 14, 16, 61), 0.05) 30%, rgba(var(--bfa-navy-deep-rgb, 9, 10, 17), 0.78) 62%, rgba(var(--bfa-navy-deep-rgb, 9, 10, 17), 0.94) 100%);
     transition: background 0.6s ease;
   }
 
@@ -1260,7 +1273,7 @@ const OpportunityCard = styled(motion.button)`
     padding: 7px 11px;
     border: 1px solid rgba(242, 216, 172, 0.5);
     border-radius: 999px;
-    background: rgba(9, 10, 17, 0.88);
+    background: rgba(var(--bfa-navy-deep-rgb, 9, 10, 17), 0.88);
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(8px);
     font-size: 11px;
@@ -1268,7 +1281,7 @@ const OpportunityCard = styled(motion.button)`
     letter-spacing: 0.22em;
     line-height: 1.3;
     text-transform: uppercase;
-    color: #faf5a9;
+    color: var(--bfa-gold-light, #faf5a9);
     text-shadow: 0 1px 5px rgba(0, 0, 0, 0.9);
   }
   h3 {
@@ -1292,8 +1305,8 @@ const OpportunityCard = styled(motion.button)`
     margin-top: 22px;
     padding: 11px 16px;
     border-radius: 999px;
-    border: 1px solid rgba(201, 162, 39, 0.7);
-    background: rgba(9, 10, 17, 0.55);
+    border: 1px solid rgba(var(--bfa-gold-mid-rgb, 224, 180, 90), 0.7);
+    background: rgba(var(--bfa-navy-deep-rgb, 9, 10, 17), 0.55);
     font-size: 11.5px;
     font-weight: 700;
     letter-spacing: 0.16em;
@@ -1307,7 +1320,7 @@ const OpportunityCard = styled(motion.button)`
   &:focus-visible {
     transform: translateY(-8px);
     border-color: var(--gold);
-    box-shadow: 0 30px 70px rgba(14, 16, 61, 0.22), 0 0 0 1px rgba(201, 162, 39, 0.45);
+    box-shadow: 0 30px 70px rgba(var(--bfa-navy-rgb, 14, 16, 61), 0.22), 0 0 0 1px rgba(var(--bfa-gold-mid-rgb, 224, 180, 90), 0.45);
     outline: none;
   }
   &:hover .media img,
@@ -1318,14 +1331,14 @@ const OpportunityCard = styled(motion.button)`
   &:hover .media .tint,
   &:focus-visible .media .tint {
     background:
-      linear-gradient(180deg, rgba(14, 16, 61, 0.25) 0%, rgba(14, 16, 61, 0.05) 30%, rgba(9, 10, 17, 0.82) 62%, rgba(9, 10, 17, 0.96) 100%),
-      linear-gradient(180deg, rgba(201, 162, 39, 0) 40%, rgba(201, 162, 39, 0.4) 100%);
+      linear-gradient(180deg, rgba(var(--bfa-navy-rgb, 14, 16, 61), 0.25) 0%, rgba(var(--bfa-navy-rgb, 14, 16, 61), 0.05) 30%, rgba(var(--bfa-navy-deep-rgb, 9, 10, 17), 0.82) 62%, rgba(var(--bfa-navy-deep-rgb, 9, 10, 17), 0.96) 100%),
+      linear-gradient(180deg, rgba(var(--bfa-gold-mid-rgb, 224, 180, 90), 0) 40%, rgba(var(--bfa-gold-mid-rgb, 224, 180, 90), 0.4) 100%);
   }
   &:hover .cta,
   &:focus-visible .cta {
-    background: linear-gradient(135deg, #faf5a9 0%, #e0b45a 46%, #9a6929 100%);
-    border-color: #9a6929;
-    color: #090a11;
+    background: linear-gradient(135deg, var(--bfa-gold-light, #faf5a9) 0%, var(--bfa-gold-mid, #e0b45a) 46%, var(--bfa-gold-deep, #9a6929) 100%);
+    border-color: var(--bfa-gold-deep, #9a6929);
+    color: var(--bfa-navy-deep, #090a11);
     gap: 12px;
   }
 
@@ -1387,10 +1400,10 @@ const FormCopy = styled.div`
 const cardSurface = css`
   position: relative;
   padding: 32px 28px 30px;
-  border: 1px solid rgba(14, 16, 61, 0.12);
+  border: 1px solid rgba(var(--bfa-navy-rgb, 14, 16, 61), 0.12);
   border-radius: 14px;
   background: #ffffff;
-  box-shadow: 0 24px 60px rgba(14, 16, 61, 0.08);
+  box-shadow: 0 24px 60px rgba(var(--bfa-navy-rgb, 14, 16, 61), 0.08);
   box-sizing: border-box;
 
   &::before {
@@ -1399,7 +1412,7 @@ const cardSurface = css`
     inset: 0 0 auto 0;
     height: 3px;
     border-radius: 14px 14px 0 0;
-    background: linear-gradient(90deg, #faf5a9, #9a6929);
+    background: linear-gradient(90deg, var(--bfa-gold-light, #faf5a9), var(--bfa-gold-deep, #9a6929));
   }
 
   @media (max-width: 640px) { padding: 24px 18px 24px; }
@@ -1485,19 +1498,19 @@ const fieldSurface = css`
 
 const Input = styled.input`
   ${fieldSurface}
-  box-shadow: inset 0 0 0 1px ${(p) => (p.$error ? "var(--gold)" : "rgba(14,16,61,0.18)")};
+  box-shadow: inset 0 0 0 1px ${(p) => (p.$error ? "var(--gold)" : "rgba(var(--bfa-navy-rgb, 14, 16, 61),0.18)")};
 
-  &::placeholder { color: rgba(14, 16, 61, 0.4); }
-  &:hover { box-shadow: inset 0 0 0 1px rgba(14, 16, 61, 0.36); }
+  &::placeholder { color: rgba(var(--bfa-navy-rgb, 14, 16, 61), 0.4); }
+  &:hover { box-shadow: inset 0 0 0 1px rgba(var(--bfa-navy-rgb, 14, 16, 61), 0.36); }
   &:focus {
     background: #fff !important;
     box-shadow: inset 0 0 0 1.5px var(--gold) !important;
   }
   &:-webkit-autofill,
   &:-webkit-autofill:focus {
-    -webkit-text-fill-color: #0e103d;
-    -webkit-box-shadow: 0 0 0 1000px #ffffff inset, inset 0 0 0 1px rgba(14, 16, 61, 0.18);
-    caret-color: #0e103d;
+    -webkit-text-fill-color: var(--bfa-navy, #0e103d);
+    -webkit-box-shadow: 0 0 0 1000px #ffffff inset, inset 0 0 0 1px rgba(var(--bfa-navy-rgb, 14, 16, 61), 0.18);
+    caret-color: var(--bfa-navy, #0e103d);
   }
 `;
 
@@ -1524,9 +1537,9 @@ const SelectTrigger = styled.button`
   text-align: left;
   cursor: pointer;
   box-shadow: inset 0 0 0 1px
-    ${(p) => (p.$invalid ? "var(--gold)" : p.$open ? "var(--gold)" : "rgba(14,16,61,0.18)")};
+    ${(p) => (p.$invalid ? "var(--gold)" : p.$open ? "var(--gold)" : "rgba(var(--bfa-navy-rgb, 14, 16, 61),0.18)")};
 
-  &:hover { box-shadow: inset 0 0 0 1px rgba(14, 16, 61, 0.36); }
+  &:hover { box-shadow: inset 0 0 0 1px rgba(var(--bfa-navy-rgb, 14, 16, 61), 0.36); }
 `;
 
 const SelectMenu = styled.div`
@@ -1539,8 +1552,8 @@ const SelectMenu = styled.div`
   overflow: hidden;
   border-radius: 10px;
   background: #ffffff;
-  border: 1px solid rgba(14, 16, 61, 0.14);
-  box-shadow: 0 24px 60px rgba(14, 16, 61, 0.12);
+  border: 1px solid rgba(var(--bfa-navy-rgb, 14, 16, 61), 0.14);
+  box-shadow: 0 24px 60px rgba(var(--bfa-navy-rgb, 14, 16, 61), 0.12);
 `;
 
 const SelectSearchRow = styled.div`
@@ -1565,14 +1578,14 @@ const SelectSearchInput = styled.input`
   font-size: 14px;
   color: var(--ink) !important;
 
-  &::placeholder { color: rgba(14, 16, 61, 0.4); }
+  &::placeholder { color: rgba(var(--bfa-navy-rgb, 14, 16, 61), 0.4); }
 `;
 
 const SelectList = styled.div`
   max-height: 240px;
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: rgba(14, 16, 61, 0.25) transparent;
+  scrollbar-color: rgba(var(--bfa-navy-rgb, 14, 16, 61), 0.25) transparent;
 `;
 
 const SelectOption = styled.button`
@@ -1588,7 +1601,7 @@ const SelectOption = styled.button`
   cursor: pointer;
 
   &:hover {
-    background: ${(p) => (p.$active ? "var(--crimson)" : "rgba(14,16,61,0.06)")} !important;
+    background: ${(p) => (p.$active ? "var(--crimson)" : "rgba(var(--bfa-navy-rgb, 14, 16, 61),0.06)")} !important;
   }
 `;
 
@@ -1625,7 +1638,7 @@ const Pill = styled.button`
   gap: 10px;
   padding: 11px 16px 11px 12px;
   border-radius: 999px;
-  border: 1px solid ${(p) => (p.$active ? "var(--gold)" : "rgba(14,16,61,0.16)")};
+  border: 1px solid ${(p) => (p.$active ? "var(--gold)" : "rgba(var(--bfa-navy-rgb, 14, 16, 61),0.16)")};
   background: ${(p) => (p.$active ? "rgba(201,162,39,0.16)" : "#ffffff")};
   color: var(--ink);
   font-family: inherit;
@@ -1643,15 +1656,15 @@ const Pill = styled.button`
     width: 18px;
     height: 18px;
     border-radius: 5px;
-    border: 1px solid ${(p) => (p.$active ? "var(--crimson)" : "rgba(14,16,61,0.28)")};
+    border: 1px solid ${(p) => (p.$active ? "var(--crimson)" : "rgba(var(--bfa-navy-rgb, 14, 16, 61),0.28)")};
     background: ${(p) => (p.$active ? "var(--crimson)" : "transparent")};
-    color: ${(p) => (p.$active ? "#faf5a9" : "transparent")};
+    color: ${(p) => (p.$active ? "var(--bfa-gold-light, #faf5a9)" : "transparent")};
     transition: background 0.2s ease, border-color 0.2s ease;
   }
   .box svg { opacity: ${(p) => (p.$active ? 1 : 0)}; transition: opacity 0.15s ease; }
   .option-label { min-width: 0; }
 
-  &:hover { border-color: ${(p) => (p.$active ? "var(--gold)" : "rgba(14,16,61,0.4)")}; transform: translateY(-1px); }
+  &:hover { border-color: ${(p) => (p.$active ? "var(--gold)" : "rgba(var(--bfa-navy-rgb, 14, 16, 61),0.4)")}; transform: translateY(-1px); }
   &:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
 `;
 
@@ -1706,12 +1719,12 @@ const SubmitButton = styled.button`
   border: 1px solid var(--crimson);
   background: var(--crimson);
   color: #fff;
-  box-shadow: 0 14px 40px rgba(14, 16, 61, 0.18);
+  box-shadow: 0 14px 40px rgba(var(--bfa-navy-rgb, 14, 16, 61), 0.18);
 
   &:hover:not(:disabled) {
-    background: linear-gradient(135deg, #faf5a9 0%, #e0b45a 46%, #9a6929 100%);
-    border-color: #9a6929;
-    color: #090a11;
+    background: linear-gradient(135deg, var(--bfa-gold-light, #faf5a9) 0%, var(--bfa-gold-mid, #e0b45a) 46%, var(--bfa-gold-deep, #9a6929) 100%);
+    border-color: var(--bfa-gold-deep, #9a6929);
+    color: var(--bfa-navy-deep, #090a11);
     transform: translateY(-2px);
   }
   &:disabled {
@@ -1734,7 +1747,7 @@ const SuccessCard = styled(motion.div)`
     border-radius: 50%;
     background: var(--crimson);
     color: #fff;
-    box-shadow: 0 14px 40px rgba(14, 16, 61, 0.22);
+    box-shadow: 0 14px 40px rgba(var(--bfa-navy-rgb, 14, 16, 61), 0.22);
   }
   h3 {
     font-size: clamp(1.6rem, 3vw, 2.3rem);
@@ -1760,7 +1773,7 @@ const Closing = styled.footer`
   padding: 110px 0 120px;
   text-align: center;
   background:
-    radial-gradient(60% 80% at 50% 100%, rgba(201, 162, 39, 0.28), transparent 70%),
+    radial-gradient(60% 80% at 50% 100%, rgba(var(--bfa-gold-mid-rgb, 224, 180, 90), 0.28), transparent 70%),
     #ffffff;
   border-top: 1px solid var(--line);
 
@@ -1785,7 +1798,7 @@ const ClosingYear = styled.span`
   line-height: 1;
   letter-spacing: -0.06em;
   color: transparent;
-  -webkit-text-stroke: 1.5px rgba(14, 16, 61, 0.12);
+  -webkit-text-stroke: 1.5px rgba(var(--bfa-navy-rgb, 14, 16, 61), 0.12);
   pointer-events: none;
   user-select: none;
 `;

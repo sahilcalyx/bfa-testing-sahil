@@ -7,8 +7,13 @@ import styled from "styled-components";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import Lightfall from "./Lightfall";
+import ThemeShadeLab, { useThemeShades } from "./ThemeShadeLab";
+import { DEFAULT_NAVY } from "./themeShades";
 
 const EASE = [0.16, 1, 0.3, 1];
+
+const LOREM =
+  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
 
 const PANEL = [
   { name: "John Doe", company: "Northline" },
@@ -18,6 +23,7 @@ const PANEL = [
 
 const ThemePrototype2027Part2 = () => {
   const reduceMotion = useReducedMotion();
+  const { palette, navy } = useThemeShades();
 
   const rise = (delay) =>
     reduceMotion
@@ -45,8 +51,8 @@ const ThemePrototype2027Part2 = () => {
       <Stage aria-labelledby="bfa27-part2-title">
         <Field aria-hidden="true">
           <Lightfall
-            colors={["#faf5a9", "#e0b45a", "#9a6929"]}
-            backgroundColor="#090a11"
+            colors={[palette.light, palette.mid, palette.deep]}
+            backgroundColor={navy === DEFAULT_NAVY ? palette.navyDeep : navy}
             speed={0.3}
             streakCount={2}
             streakWidth={0.8}
@@ -96,43 +102,29 @@ const ThemePrototype2027Part2 = () => {
       <Panel aria-labelledby="bfa27-panel-title">
         <PanelInner>
           <PanelHead>
-            <div>
-              <p className="eyebrow">Discussion panel</p>
-              <motion.h2 id="bfa27-panel-title" {...rise(0)}>
-                Can Fintechs and MSBs afford to <em>ignore AI?</em>
-              </motion.h2>
-            </div>
-            <motion.div {...rise(0.08)}>
-              <p>
-                How firms are weighing automation, customer trust, and the people who still have to sign off.
-              </p>
-              <Link to="/discussion-panel-2026">
-                Discussion panel page
-                <ArrowUpRight size={15} strokeWidth={2} />
-              </Link>
-            </motion.div>
+            <p className="eyebrow">Discussion panel</p>
+            <h2 id="bfa27-panel-title">Guests of the evening</h2>
           </PanelHead>
-
           <Cards>
-            {PANEL.map((person) => (
+            {PANEL.map((person, index) => (
               <Card key={person.name}>
-                <Portrait aria-hidden="true">
-                  <Mark>
-                    {person.name
-                      .split(" ")
-                      .map((part) => part[0])
-                      .join("")}
-                  </Mark>
-                </Portrait>
+                <Shot aria-hidden="true" $tone={index}>
+                  <svg viewBox="0 0 80 96">
+                    <circle cx="40" cy="30" r="14" />
+                    <path d="M16 84c2-16 11-26 24-26s22 10 24 26" />
+                  </svg>
+                </Shot>
                 <CardBody>
-                  <CardName>{person.name}</CardName>
+                  <PersonName>{person.name}</PersonName>
                   <Company>{person.company}</Company>
+                  <Blurb>{LOREM}</Blurb>
                 </CardBody>
               </Card>
             ))}
           </Cards>
         </PanelInner>
       </Panel>
+      <ThemeShadeLab />
     </Page>
   );
 };
@@ -140,7 +132,7 @@ const ThemePrototype2027Part2 = () => {
 const Page = styled.div`
   position: relative;
   width: 100%;
-  background: #07133f;
+  background: var(--bfa-stage, #07133f);
   color: #f6f3ea;
   font-family: "Manrope", "Segoe UI", sans-serif;
   overflow-x: clip;
@@ -154,7 +146,7 @@ const Stage = styled.header`
   place-items: center;
   padding: 128px 22px 72px;
   overflow: hidden;
-  background: #07133f;
+  background: var(--bfa-stage, #07133f);
   box-sizing: border-box;
 
   @media (min-width: 1024px) {
@@ -179,8 +171,8 @@ const Scrim = styled.div`
   z-index: 1;
   pointer-events: none;
   background:
-    radial-gradient(ellipse 62% 48% at 50% 54%, rgba(7, 19, 63, 0.72) 0%, rgba(7, 19, 63, 0.28) 58%, transparent 100%),
-    linear-gradient(180deg, rgba(7, 19, 63, 0.35) 0%, transparent 22%, transparent 70%, rgba(7, 19, 63, 0.55) 100%);
+    radial-gradient(ellipse 62% 48% at 50% 54%, rgba(var(--bfa-stage-rgb, 7, 19, 63), 0.72) 0%, rgba(var(--bfa-stage-rgb, 7, 19, 63), 0.28) 58%, transparent 100%),
+    linear-gradient(180deg, rgba(var(--bfa-stage-rgb, 7, 19, 63), 0.35) 0%, transparent 22%, transparent 70%, rgba(var(--bfa-stage-rgb, 7, 19, 63), 0.55) 100%);
 `;
 
 const Content = styled.div`
@@ -227,12 +219,12 @@ const Content = styled.div`
     font-size: clamp(5.4rem, min(18vw, 24vh), 12.5rem);
     line-height: 0.82;
     letter-spacing: -0.02em;
-    background: linear-gradient(180deg, #faf5a9 0%, #e0b45a 42%, #9a6929 100%);
+    background: linear-gradient(180deg, var(--bfa-gold-light, #faf5a9) 0%, var(--bfa-gold-mid, #e0b45a) 42%, var(--bfa-gold-deep, #9a6929) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
     -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 10px 28px rgba(154, 105, 41, 0.35));
+    filter: drop-shadow(0 10px 28px rgba(var(--bfa-gold-deep-rgb, 154, 105, 41), 0.35));
   }
 
   .line {
@@ -274,7 +266,7 @@ const Content = styled.div`
       transform: translateY(-2px);
     }
     &:focus-visible {
-      outline: 2px solid #faf5a9;
+      outline: 2px solid var(--bfa-gold-light, #faf5a9);
       outline-offset: 3px;
     }
   }
@@ -282,8 +274,8 @@ const Content = styled.div`
   .primary {
     padding: 8px 8px 8px 26px;
     border: 0;
-    background: linear-gradient(135deg, #faf5a9 0%, #e0b45a 46%, #9a6929 100%);
-    color: #090a11;
+    background: linear-gradient(135deg, var(--bfa-gold-light, #faf5a9) 0%, var(--bfa-gold-mid, #e0b45a) 46%, var(--bfa-gold-deep, #9a6929) 100%);
+    color: var(--bfa-navy-deep, #090a11);
   }
 
   .primary .ico {
@@ -292,14 +284,14 @@ const Content = styled.div`
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: #090a11;
-    color: #faf5a9;
+    background: var(--bfa-navy-deep, #090a11);
+    color: var(--bfa-gold-light, #faf5a9);
     transition: transform 0.35s ease;
   }
 
   .primary:hover {
-    background: linear-gradient(135deg, #fffceb 0%, #faf5a9 42%, #c9953a 100%);
-    color: #090a11;
+    background: linear-gradient(135deg, var(--bfa-gold-pale, #fffceb) 0%, var(--bfa-gold-light, #faf5a9) 42%, var(--bfa-gold-warm, #c9953a) 100%);
+    color: var(--bfa-navy-deep, #090a11);
   }
 
   .primary:hover .ico {
@@ -310,161 +302,117 @@ const Content = styled.div`
     padding: 0 26px;
     min-height: 56px;
     border: 1px solid rgba(246, 243, 234, 0.38);
-    background: rgba(7, 19, 63, 0.35);
+    background: rgba(var(--bfa-stage-rgb, 7, 19, 63), 0.35);
     color: #f6f3ea;
   }
 
   .ghost:hover {
-    border-color: #faf5a9;
-    color: #faf5a9;
+    border-color: var(--bfa-gold-light, #faf5a9);
+    color: var(--bfa-gold-light, #faf5a9);
   }
 `;
 
 const Panel = styled.section`
-  background: #f7f6f2;
+  background: #f6f3ea;
   color: #12141c;
+  padding: 88px 0 104px;
+
+  @media (max-width: 700px) {
+    padding: 64px 0 80px;
+  }
 `;
 
 const PanelInner = styled.div`
-  position: relative;
-  width: min(1180px, calc(100% - 40px));
+  width: min(1080px, calc(100% - 48px));
   margin: 0 auto;
-  padding: 88px 0 96px;
 
   @media (max-width: 700px) {
-    width: min(1180px, calc(100% - 32px));
-    padding: 64px 0 72px;
+    width: min(1080px, calc(100% - 32px));
   }
 `;
 
 const PanelHead = styled.div`
-  display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.7fr);
-  gap: 28px 64px;
-  align-items: end;
-  padding-bottom: 36px;
-  border-bottom: 1px solid rgba(18, 20, 28, 0.1);
-  margin-bottom: 36px;
-
-  @media (max-width: 860px) {
-    grid-template-columns: 1fr;
-    gap: 18px;
-  }
+  max-width: 640px;
+  margin: 0 0 40px;
 
   .eyebrow {
-    margin: 0 0 14px;
+    margin: 0 0 12px;
     font-family: "Manrope", "Segoe UI", sans-serif !important;
     font-size: 12px;
     font-weight: 600;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: #8d6a2f;
+    color: var(--bfa-gold-deep, #9a6929);
   }
 
   && h2 {
     margin: 0;
-    max-width: 14ch;
     color: #12141c;
     font-family: "GoudyOldStyle", "Palatino Linotype", serif !important;
     font-weight: 400 !important;
     font-style: normal !important;
     font-synthesis: none !important;
-    font-size: clamp(2.15rem, 3.5vw, 3.35rem);
-    line-height: 1.05 !important;
+    font-size: clamp(2.4rem, 4vw, 3.4rem);
+    line-height: 1.08 !important;
     letter-spacing: 0 !important;
     text-transform: none !important;
-  }
-
-  && h2 em {
-    font-family: "GoudyOldStyle", "Palatino Linotype", serif !important;
-    font-style: normal !important;
-    font-weight: 400 !important;
-    font-synthesis: none !important;
-    color: #8d6a2f;
-  }
-
-  p {
-    margin: 0;
-    max-width: 36ch;
-    font-family: "Manrope", "Segoe UI", sans-serif !important;
-    font-size: 15px;
-    font-weight: 500;
-    line-height: 1.6;
-    color: rgba(18, 20, 28, 0.62);
-  }
-
-  a {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    margin-top: 18px;
-    font-family: "Manrope", "Segoe UI", sans-serif !important;
-    font-size: 14px;
-    font-weight: 600;
-    color: #12141c;
-    text-decoration: none;
-  }
-
-  a:hover {
-    color: #8d6a2f;
   }
 `;
 
 const Cards = styled.ul`
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 28px;
-  max-width: 920px;
-  margin: 0 auto;
-  padding: 8px 0 0;
+  gap: 24px;
+  margin: 0;
+  padding: 0;
   list-style: none;
 
-  @media (max-width: 760px) {
+  @media (max-width: 800px) {
     grid-template-columns: 1fr;
-    max-width: 340px;
+    max-width: 380px;
   }
 `;
 
 const Card = styled.li`
   min-width: 0;
-  background: #fff;
-  text-align: center;
-  border: 1px solid rgba(141, 106, 47, 0.28);
+  background: #fbf9f4;
+  border: 1px solid rgba(var(--bfa-gold-deep-rgb, 154, 105, 41), 0.35);
   overflow: hidden;
 `;
 
-const Portrait = styled.div`
-  aspect-ratio: 5 / 4;
+const Shot = styled.div`
+  aspect-ratio: 4 / 5;
   display: grid;
   place-items: center;
-  background: #12141c;
-  border-bottom: 1px solid #e0b45a;
-`;
+  background: ${(p) =>
+    [
+      "radial-gradient(90% 60% at 50% 0%, rgba(var(--bfa-gold-light-rgb, 250, 245, 169), 0.42), transparent 58%), linear-gradient(180deg, #1c2748 0%, var(--bfa-stage, #07133f) 100%)",
+      "radial-gradient(90% 60% at 50% 0%, rgba(var(--bfa-gold-mid-rgb, 224, 180, 90), 0.38), transparent 58%), linear-gradient(180deg, #243056 0%, #12141c 100%)",
+      "radial-gradient(90% 60% at 50% 0%, rgba(var(--bfa-gold-light-rgb, 250, 245, 169), 0.28), transparent 55%), linear-gradient(180deg, #3a301c 0%, #12141c 100%)",
+    ][p.$tone % 3]};
+  box-shadow: inset 0 -3px 0 var(--bfa-gold-mid, #e0b45a);
 
-const Mark = styled.span`
-  && {
-    font-family: "GoudyOldStyle", "Palatino Linotype", serif !important;
-    font-size: clamp(2.4rem, 3vw, 3.25rem);
-    font-weight: 400;
-    letter-spacing: 0.06em;
-    color: #f7f6f2;
+  svg {
+    width: 28%;
+    height: auto;
+    fill: none;
+    stroke: var(--bfa-gold-mid, #e0b45a);
+    stroke-width: 2.2;
   }
 `;
 
 const CardBody = styled.div`
-  padding: 22px 16px 26px;
+  padding: 22px 22px 26px;
 `;
 
-const CardName = styled.p`
+const PersonName = styled.p`
   margin: 0;
   && {
     font-family: "GoudyOldStyle", "Palatino Linotype", serif !important;
   }
-  font-size: 1.75rem;
+  font-size: 1.7rem;
   font-weight: 400;
   line-height: 1.1;
-  letter-spacing: 0;
-  text-transform: none;
   color: #12141c;
 `;
 
@@ -477,7 +425,18 @@ const Company = styled.p`
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #8d6a2f;
+  color: var(--bfa-gold-deep, #9a6929);
+`;
+
+const Blurb = styled.p`
+  margin: 14px 0 0;
+  && {
+    font-family: "Manrope", "Segoe UI", sans-serif !important;
+  }
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.6;
+  color: rgba(18, 20, 28, 0.68);
 `;
 
 export default ThemePrototype2027Part2;
