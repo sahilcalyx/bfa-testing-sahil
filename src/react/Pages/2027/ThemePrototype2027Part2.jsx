@@ -124,6 +124,7 @@ const ThemePrototype2027Part2 = () => {
           </Cards>
         </PanelInner>
       </Panel>
+
       <ThemeShadeLab />
     </Page>
   );

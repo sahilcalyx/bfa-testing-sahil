@@ -588,6 +588,47 @@ const ThemePrototype2027 = () => {
         </Container>
       </Section>
 
+      <Offers aria-labelledby="bfa27-blue-offers-title">
+        <OffersInner>
+          <OffersHead>
+            <p className="label">Be part of what comes next</p>
+            <h2 id="bfa27-blue-offers-title">
+              Whether you build it, back it or celebrate it, BFA27 has a place for you
+            </h2>
+          </OffersHead>
+          <p className="explore">Explore the opportunities ahead</p>
+          <OfferGrid>
+            {OPPORTUNITIES.map((item) => (
+              <OfferCard
+                key={item.id}
+                type="button"
+                onClick={() => chooseOpportunity(item.interest)}
+                aria-label={`${item.title}: ${item.cta}`}
+              >
+                <span className="media" aria-hidden="true">
+                  <img
+                    src={item.image}
+                    alt=""
+                    loading="lazy"
+                    style={item.imagePosition ? { objectPosition: item.imagePosition } : undefined}
+                  />
+                  <span className="tint" />
+                </span>
+                <span className="kicker">{item.kicker}</span>
+                <span className="body">
+                  <h3>{item.title}</h3>
+                  <p>{item.copy}</p>
+                  <span className="cta">
+                    {item.cta}
+                    <ArrowUpRight size={16} strokeWidth={2.4} />
+                  </span>
+                </span>
+              </OfferCard>
+            ))}
+          </OfferGrid>
+        </OffersInner>
+      </Offers>
+
       {/* ------------------------------------------------------------ Form */}
       <Section id="register-form" ref={formRef} $tone="form">
         <Container>
@@ -1801,6 +1842,208 @@ const ClosingYear = styled.span`
   -webkit-text-stroke: 1.5px rgba(var(--bfa-navy-rgb, 14, 16, 61), 0.12);
   pointer-events: none;
   user-select: none;
+`;
+
+const Offers = styled.section`
+  background: linear-gradient(90deg, var(--bfa-navy, #0e103d) 0%, var(--bfa-navy, #0e103d) 34%, var(--bfa-navy-deep, #090a11) 100%);
+  color: var(--bfa-gold-light, #faf5a9);
+  padding: 96px 0 108px;
+  border-top: 1px solid rgba(var(--bfa-gold-mid-rgb, 224, 180, 90), 0.45);
+  border-bottom: 1px solid rgba(var(--bfa-gold-mid-rgb, 224, 180, 90), 0.45);
+
+  @media (min-width: 1024px) {
+    padding: 120px 0 128px;
+  }
+`;
+
+const OffersInner = styled.div`
+  width: min(1180px, calc(100% - 48px));
+  margin: 0 auto;
+
+  .explore {
+    margin: 48px 0 28px;
+    font-family: "Manrope", "Segoe UI", sans-serif !important;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--bfa-gold-mid, #e0b45a);
+  }
+
+  @media (max-width: 700px) {
+    width: min(1180px, calc(100% - 32px));
+  }
+`;
+
+const OffersHead = styled.div`
+  max-width: 760px;
+
+  .label {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0 0 18px;
+    font-family: "Manrope", "Segoe UI", sans-serif !important;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: var(--bfa-gold-light, #faf5a9);
+  }
+
+  .label::before {
+    content: "";
+    width: 28px;
+    height: 2px;
+    flex-shrink: 0;
+    background: var(--bfa-gold-mid, #e0b45a);
+  }
+
+  && h2 {
+    margin: 0;
+    max-width: 28ch;
+    font-family: "GoudyOldStyle", "Palatino Linotype", serif !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
+    font-synthesis: none !important;
+    font-size: clamp(2.1rem, 4.2vw, 3.35rem);
+    line-height: 1.12 !important;
+    letter-spacing: 0 !important;
+    text-transform: none !important;
+    background-image: linear-gradient(90deg, var(--bfa-gold-pale, #fffceb) 0%, var(--bfa-gold-light, #faf5a9) 42%, var(--bfa-gold-mid, #e0b45a) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+`;
+
+const OfferGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+
+  @media (min-width: 820px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+`;
+
+const OfferCard = styled.button`
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 460px;
+  padding: 24px;
+  border: 1px solid rgba(250, 245, 169, 0.18);
+  border-radius: 16px;
+  background: #07133f;
+  color: #f6f1e4;
+  text-align: left;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+
+  .media {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+  }
+  .media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.02);
+    filter: saturate(0.75) brightness(0.9);
+    transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+  }
+  .media .tint {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(12, 31, 110, 0.25) 0%, rgba(7, 19, 63, 0.08) 30%, rgba(7, 19, 63, 0.78) 62%, rgba(7, 19, 63, 0.94) 100%);
+  }
+
+  .kicker {
+    display: inline-flex;
+    align-self: flex-start;
+    margin-bottom: 12px;
+    padding: 7px 11px;
+    border: 1px solid rgba(250, 245, 169, 0.5);
+    border-radius: 999px;
+    background: rgba(7, 19, 63, 0.88);
+    font-family: "Manrope", "Segoe UI", sans-serif !important;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #faf5a9;
+  }
+
+  && h3 {
+    margin: 0;
+    font-family: "GoudyOldStyle", "Palatino Linotype", serif !important;
+    font-size: clamp(1.5rem, 2.1vw, 1.85rem);
+    font-weight: 400 !important;
+    font-style: normal !important;
+    font-synthesis: none !important;
+    line-height: 1.1 !important;
+    letter-spacing: 0 !important;
+    text-transform: none !important;
+    color: #ffffff;
+  }
+
+  p {
+    margin: 12px 0 0;
+    max-width: 34ch;
+    font-family: "Manrope", "Segoe UI", sans-serif !important;
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: rgba(246, 241, 228, 0.84);
+  }
+
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 22px;
+    padding: 11px 16px;
+    border-radius: 999px;
+    border: 1px solid rgba(224, 180, 90, 0.7);
+    background: rgba(7, 19, 63, 0.55);
+    font-family: "Manrope", "Segoe UI", sans-serif !important;
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #ffffff;
+    transition: background 0.35s ease, color 0.35s ease, gap 0.35s ease;
+  }
+
+  &:hover,
+  &:focus-visible {
+    transform: translateY(-8px);
+    border-color: #e0b45a;
+    box-shadow: 0 30px 70px rgba(7, 19, 63, 0.35);
+    outline: none;
+  }
+  &:hover .media img,
+  &:focus-visible .media img {
+    transform: scale(1.1);
+    filter: saturate(1) brightness(1);
+  }
+  &:hover .cta,
+  &:focus-visible .cta {
+    background: linear-gradient(135deg, #faf5a9 0%, #e0b45a 46%, #9a6929 100%);
+    color: #07133f;
+    gap: 12px;
+  }
+
+  @media (max-width: 819px) {
+    min-height: 400px;
+  }
 `;
 
 export default ThemePrototype2027;
